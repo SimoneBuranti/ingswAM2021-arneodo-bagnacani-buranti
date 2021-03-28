@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="MaestriDelRinascimento_AM7" />
+        <module name="AM7" />
       </profile>
     </annotationProcessing>
   </component>
