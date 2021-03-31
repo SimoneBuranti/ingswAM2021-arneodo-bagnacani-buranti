@@ -1,6 +1,6 @@
 package it.polimi.ingsw;
 
-public class Marble {
+public class RedMarble extends Marble{
     public void giveResource() {
     }
 }

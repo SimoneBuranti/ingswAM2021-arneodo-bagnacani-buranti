@@ -1,8 +1,7 @@
 package it.polimi.ingsw;
 
-public class WhiteMarble implements Marble{
-    public Resource giveResource() {
-        return null;
+public class WhiteMarble extends Marble{
+    public void giveResource() {
     }
 
 }
