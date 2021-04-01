@@ -6,14 +6,9 @@ import org.junit.jupiter.api.*;
 
 class ReserveTest {
 
-
-    /**
-     * Correct initialisation values check
-     */
     @Test
     @DisplayName("Constructor Test")
     public void constructorTest() {
-        Reserve reserve = new Reserve();
 
         assertEquals(Reserve.getAmountOf(Resource.COIN),28);
         assertEquals(Reserve.getAmountOf(Resource.ROCK),28);
@@ -21,13 +16,9 @@ class ReserveTest {
         assertEquals(Reserve.getAmountOf(Resource.SERVANT),28);
     }
 
-    /**
-     * Correct add for each resource type check
-     */
     @Test
     @DisplayName("addResource Test: simple test")
     public void addResourceTest() {
-        Reserve reserve = new Reserve();
 
         Reserve.addResource(Resource.COIN);
         Reserve.addResource(Resource.COIN);
@@ -44,14 +35,9 @@ class ReserveTest {
         assertEquals(Reserve.getAmountOf(Resource.SERVANT),28);
     }
 
-    /**
-     * Correct get resource behaviour check for each resource type either with
-     * available or unavailable resources
-     */
     @Test
     @DisplayName("getResourceTest: complete test")
     public void getResource() {
-        Reserve reserve = new Reserve();
 
         for (int i = 0; i<28 ; i++) {
             try{

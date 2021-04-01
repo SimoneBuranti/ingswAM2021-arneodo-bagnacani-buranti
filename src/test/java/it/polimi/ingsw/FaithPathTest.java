@@ -6,9 +6,6 @@ import org.junit.jupiter.api.*;
 
 class FaithPathTest {
 
-    /**
-     * Correct standard construction check
-     */
     @Test
     @DisplayName("defaultConstructorTest")
     public void defaultConstructorTest() {
@@ -20,9 +17,6 @@ class FaithPathTest {
 
     }
 
-    /**
-     * Correct initialised construction check
-     */
     @Test
     @DisplayName("initialisedtConstructorTest")
     public void initialisedConstructorTest() {
@@ -34,19 +28,23 @@ class FaithPathTest {
 
     }
 
-    /**
-     * Correct position counter increase check (within path limits)
-     */
     @Test
     @DisplayName("moveTest")
     public void moveTest() {
 
         FaithPath faithPath = new FaithPath ();
 
-        for (int i = 0; i<24 ; i++){
+        try {
+            faithPath.move();
+        } catch (CallForCouncilException c) {
+            System.out.println("CallForCouncilException Thrown");
+        }
+        assertEquals(faithPath.getIndicator(), 1);
+
+        for (int i = 0; i<23 ; i++){
             try {
                 faithPath.move();
-                assertEquals(faithPath.getIndicator(), i+1);
+                assertEquals(faithPath.getIndicator(), i+2);
             } catch (CallForCouncilException c) {
                 System.out.println("CallForCouncilException Thrown");
             }
@@ -55,9 +53,6 @@ class FaithPathTest {
     }
 
 
-    /**
-     * Test for papal card assignment in case of papal event caller
-     */
     @Test
     @DisplayName("setPapalTest : only caller settings")
     public void setPapalTest1() {
@@ -81,9 +76,6 @@ class FaithPathTest {
 
     }
 
-    /**
-     * Papal card assignment test in case of only valid position within vatican spaces
-     */
     @Test
     @DisplayName("setPapalTest : only valid settings")
     public void setPapalTest2() {
@@ -153,9 +145,7 @@ class FaithPathTest {
 
     }
 
-    /**
-     * Correct papal card assignment test in a general game situation
-     */
+
     @Test
     @DisplayName("setPapalTest : mixed settings")
     public void setPapalTest3() {
@@ -225,9 +215,7 @@ class FaithPathTest {
 
     }
 
-    /**
-     * Test for best faithPath score evaluation
-     */
+
     @Test
     @DisplayName("faithScoreTest : all papalCards and last position")
     public void faithScoreTest1() {
@@ -254,9 +242,6 @@ class FaithPathTest {
 
     }
 
-    /**
-     * No points evaluation test
-     */
     @Test
     @DisplayName("faithScoreTest : unusual game")
     public void faithScoreTest2() {
@@ -270,9 +255,6 @@ class FaithPathTest {
 
     }
 
-    /**
-     * Score evaluation in case of only a movement
-     */
     @Test
     @DisplayName("faithScoreTest : only position - 1")
     public void faithScoreTest3() {
@@ -294,9 +276,6 @@ class FaithPathTest {
 
     }
 
-    /**
-     * Score evaluation in case of only two movements
-     */
     @Test
     @DisplayName("faithScoreTest : only position - 2")
     public void faithScoreTest5() {
@@ -320,9 +299,6 @@ class FaithPathTest {
 
     }
 
-    /**
-     * Score evaluation check in every possible position without papal card points
-     */
     @Test
     @DisplayName("faithScoreTest : only position - 0 .. 24")
     public void faithScoreTest6() {
@@ -432,9 +408,6 @@ class FaithPathTest {
 
     }
 
-    /**
-     * Score evaluation check in every possible position with a common papal card assignment
-     */
     @Test
     @DisplayName("faithScoreTest : papalCards and position - 0 .. 24")
     public void faithScoreTest7() {
