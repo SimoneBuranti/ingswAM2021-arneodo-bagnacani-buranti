@@ -14,7 +14,7 @@ public class Storage {
     private final Map<Resource,Integer> storageResource = new HashMap<>();
 
     /**
-     *The constructor initialises the map with every type of resources
+     *The constructor initialises the map with every type of resources to zero
      */
     public Storage(){
         storageResource.put(Resource.COIN, 0);
@@ -24,9 +24,18 @@ public class Storage {
     }
 
     /**
+     * The constructor initialises the map by copying all the values of the map passed as a parameter
+     * @param map : the map to be copied
+     */
+    public Storage(Map<Resource, Integer> map){
+        storageResource.putAll(map);
+    }
+
+    /**
      *This method removes a resource type from the reserve if available by adding it to the map,
      * it does nothing otherwise
      * @param resource :type of resource to add
+     * @throws UnavailableResourceException
      */
     public void addResource(Resource resource) throws UnavailableResourceException{
         int value;
@@ -44,6 +53,7 @@ public class Storage {
      *This method removes a resource type from the map if available and adds it to the reserve,
      * throws an exception otherwise
      * @param resource: type of resource to remove
+     * @throws UnavailableResourceException
      */
     public void useResource(Resource resource) throws UnavailableResourceException {
         int value;
@@ -59,6 +69,7 @@ public class Storage {
     /**
      * This method check that there are at most 3 resources of a first type, 2 of a second type and 1 of a third type
      * and that there are not 4 different type of resources at the same time
+     * @param list : a list of resources to check before adding
      * @return boolean : if it checks the conditions returns true, false otherwise
      */
     public boolean check(ArrayList<Resource> list){
@@ -93,6 +104,7 @@ public class Storage {
 
     /**
      * This method discards the surplus resources by placing them in the reserve and throws an exception
+     * @throws DiscardException
      */
     public void discard(Resource resource) throws DiscardException{
         Reserve.addResource(resource);
