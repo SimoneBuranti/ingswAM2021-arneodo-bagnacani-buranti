@@ -94,10 +94,10 @@ public class Storage {
     /**
      * This method discards the surplus resources by placing them in the reserve and throws an exception
      */
-    public void discard(Resource resource) throws discardException{
+    public void discard(Resource resource) throws DiscardException{
         Reserve.addResource(resource);
 
-        throw new discardException();
+        throw new DiscardException();
     }
 
     /**

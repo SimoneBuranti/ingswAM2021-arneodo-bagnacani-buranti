@@ -517,24 +517,24 @@ class StorageTest {
 
         try {
             storage.discard(Resource.COIN);
-        } catch (discardException e) {
+        } catch (DiscardException e) {
             e.printStackTrace();
         }
         assertEquals(29, Reserve.getAmountOf(Resource.COIN));
 
         try {
             storage.discard(Resource.ROCK);
-        } catch (discardException e) {
+        } catch (DiscardException e) {
             e.printStackTrace();
         }
         try {
             storage.discard(Resource.SERVANT);
-        } catch (discardException e) {
+        } catch (DiscardException e) {
             e.printStackTrace();
         }
         try {
             storage.discard(Resource.SHIELD);
-        } catch (discardException e) {
+        } catch (DiscardException e) {
             e.printStackTrace();
         }
         assertEquals(29, Reserve.getAmountOf(Resource.ROCK));
@@ -543,17 +543,17 @@ class StorageTest {
 
         try {
             storage.discard(Resource.COIN);
-        } catch (discardException e) {
+        } catch (DiscardException e) {
             e.printStackTrace();
         }
         try {
             storage.discard(Resource.COIN);
-        } catch (discardException e) {
+        } catch (DiscardException e) {
             e.printStackTrace();
         }
         try {
             storage.discard(Resource.COIN);
-        } catch (discardException e) {
+        } catch (DiscardException e) {
             e.printStackTrace();
         }
         assertEquals(32, Reserve.getAmountOf(Resource.COIN));
@@ -728,7 +728,7 @@ class StorageTest {
     public void getStorageResourceTest(){
         Storage storage = new Storage();
         Reserve reserve = new Reserve();
-        Map<Resource,Integer> map = new HashMap<Resource, Integer>();
+        Map<Resource,Integer> map = new HashMap<>();
 
         map.put(Resource.COIN, 0);
         map.put(Resource.ROCK, 0);

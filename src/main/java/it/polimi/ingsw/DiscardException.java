@@ -1,6 +1,6 @@
 package it.polimi.ingsw;
 
-public class discardException extends Exception {
+public class DiscardException extends Exception {
     private Player player;
 
     public Player getPlayer() {
