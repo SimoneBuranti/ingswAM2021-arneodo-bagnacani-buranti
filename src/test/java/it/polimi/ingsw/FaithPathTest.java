@@ -1,8 +1,9 @@
 package it.polimi.ingsw;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
-import org.junit.jupiter.api.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class FaithPathTest {
 
@@ -557,5 +558,44 @@ class FaithPathTest {
         }
 
     }
+
+    /**
+     * test for control the functionality and the correcteness of move in faithpath and red marble call
+     */
+    @Test
+    @DisplayName("faithScoreTest : only position - 2")
+    public void faithWithUseOfRedMarble() {
+
+        Player player = new Player();
+        RedMarble redMarble = new RedMarble();
+
+        assertEquals(player.getIndicator(), 0);
+        redMarble.giveResource(player);
+        assertEquals(player.getIndicator(), 1);
+        redMarble.giveResource(player);
+        redMarble.giveResource(player);
+        assertEquals(player.getIndicator(), 3);
+        redMarble.giveResource(player);
+        redMarble.giveResource(player);
+        assertEquals(player.getIndicator(), 5);
+        redMarble.giveResource(player);
+        redMarble.giveResource(player);
+        redMarble.giveResource(player);
+        assertEquals(player.getIndicator(), 8); }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }

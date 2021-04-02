@@ -1,6 +1,7 @@
 package it.polimi.ingsw;
 
 public class RedMarble extends Marble{
-    public void giveResource() {
+    public void giveResource(Player player) {
+        player.faithMove();
     }
 }

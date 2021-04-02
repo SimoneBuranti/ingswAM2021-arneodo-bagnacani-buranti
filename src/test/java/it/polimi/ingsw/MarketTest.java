@@ -14,6 +14,7 @@ public class MarketTest {
 
 
         Market VariableMarket= new Market();
+        Player player = new Player();
 
         assertTrue(!( VariableMarket.getCellGrid(0, 0) instanceof RedMarble) ||
         !(VariableMarket.getCellGrid(0, 1) instanceof YellowMarble)||
@@ -38,6 +39,7 @@ public class MarketTest {
     public void InizializationOfExtraMarket()
     {
         Market VariableMarket= new Market();
+        Player player = new Player();
 
         assertTrue(!( VariableMarket.getExtra() instanceof RedMarble) ||
                 (VariableMarket.getExtra() instanceof YellowMarble)||
@@ -61,6 +63,7 @@ public class MarketTest {
     public void PushRowsOfMarket()
     {
         Market VariableMarket= new Market();
+        Player player = new Player();
 
 
         assertTrue(( VariableMarket.getCellGrid(0, 0) instanceof RedMarble) ||
@@ -81,7 +84,7 @@ public class MarketTest {
         assertTrue(VariableMarket.getCellGrid(0, 2).equals(VariableMarket.getCellInitialMarbleList(2)));
         assertTrue(VariableMarket.getCellGrid(0, 3).equals(VariableMarket.getCellInitialMarbleList(3)));
         assertTrue(VariableMarket.getExtra().equals(VariableMarket.getCellInitialMarbleList(12)));
-        VariableMarket.PushRow(0);
+        VariableMarket.PushRow(0,player);
         assertTrue(VariableMarket.getCellGrid(0, 0).equals(VariableMarket.getCellInitialMarbleList(1)));
         assertTrue(VariableMarket.getCellGrid(0, 1).equals(VariableMarket.getCellInitialMarbleList(2)));
         assertTrue(VariableMarket.getCellGrid(0, 2).equals(VariableMarket.getCellInitialMarbleList(3)));
@@ -101,35 +104,36 @@ public class MarketTest {
     @Test
 public void PushRowsOfMarketCycling()
    {Market VariableMarket= new Market();
-       VariableMarket.PushRow(0);
+       Player player = new Player();
+       VariableMarket.PushRow(0,player);
        assertTrue(VariableMarket.getCellGrid(0, 0).equals(VariableMarket.getCellInitialMarbleList(1)));
        assertTrue(VariableMarket.getCellGrid(0, 1).equals(VariableMarket.getCellInitialMarbleList(2)));
        assertTrue(VariableMarket.getCellGrid(0, 2).equals(VariableMarket.getCellInitialMarbleList(3)));
        assertTrue(VariableMarket.getCellGrid(0, 3).equals(VariableMarket.getCellInitialMarbleList(12)));
        assertTrue(VariableMarket.getExtra().equals(VariableMarket.getCellInitialMarbleList(0)));
 
-       VariableMarket.PushRow(0);
+       VariableMarket.PushRow(0,player);
        assertTrue(VariableMarket.getCellGrid(0, 0).equals(VariableMarket.getCellInitialMarbleList(2)));
        assertTrue(VariableMarket.getCellGrid(0, 1).equals(VariableMarket.getCellInitialMarbleList(3)));
        assertTrue(VariableMarket.getCellGrid(0, 2).equals(VariableMarket.getCellInitialMarbleList(12)));
        assertTrue(VariableMarket.getCellGrid(0, 3).equals(VariableMarket.getCellInitialMarbleList(0)));
        assertTrue(VariableMarket.getExtra().equals(VariableMarket.getCellInitialMarbleList(1)));
 
-       VariableMarket.PushRow(0);
+       VariableMarket.PushRow(0,player);
        assertTrue(VariableMarket.getCellGrid(0, 0).equals(VariableMarket.getCellInitialMarbleList(3)));
        assertTrue(VariableMarket.getCellGrid(0, 1).equals(VariableMarket.getCellInitialMarbleList(12)));
        assertTrue(VariableMarket.getCellGrid(0, 2).equals(VariableMarket.getCellInitialMarbleList(0)));
        assertTrue(VariableMarket.getCellGrid(0, 3).equals(VariableMarket.getCellInitialMarbleList(1)));
        assertTrue(VariableMarket.getExtra().equals(VariableMarket.getCellInitialMarbleList(2)));
 
-       VariableMarket.PushRow(0);
+       VariableMarket.PushRow(0,player);
        assertTrue(VariableMarket.getCellGrid(0, 0).equals(VariableMarket.getCellInitialMarbleList(12)));
        assertTrue(VariableMarket.getCellGrid(0, 1).equals(VariableMarket.getCellInitialMarbleList(0)));
        assertTrue(VariableMarket.getCellGrid(0, 2).equals(VariableMarket.getCellInitialMarbleList(1)));
        assertTrue(VariableMarket.getCellGrid(0, 3).equals(VariableMarket.getCellInitialMarbleList(2)));
        assertTrue(VariableMarket.getExtra().equals(VariableMarket.getCellInitialMarbleList(3)));
 
-       VariableMarket.PushRow(0);
+       VariableMarket.PushRow(0,player);
        assertTrue(VariableMarket.getCellGrid(0, 0).equals(VariableMarket.getCellInitialMarbleList(0)));
        assertTrue(VariableMarket.getCellGrid(0, 1).equals(VariableMarket.getCellInitialMarbleList(1)));
        assertTrue(VariableMarket.getCellGrid(0, 2).equals(VariableMarket.getCellInitialMarbleList(2)));
@@ -145,6 +149,7 @@ public void PushRowsOfMarketCycling()
     public void PushColumnsOfMarket()
     {
         Market VariableMarket= new Market();
+        Player player = new Player();
 
 
         assertTrue(( VariableMarket.getCellGrid(0, 0) instanceof RedMarble) ||
@@ -164,7 +169,7 @@ public void PushRowsOfMarketCycling()
         assertTrue(VariableMarket.getCellGrid(1, 0).equals(VariableMarket.getCellInitialMarbleList(4)));
         assertTrue(VariableMarket.getCellGrid(2, 0).equals(VariableMarket.getCellInitialMarbleList(8)));
         assertTrue(VariableMarket.getExtra().equals(VariableMarket.getCellInitialMarbleList(12)));
-        VariableMarket.PushColumn(0);
+        VariableMarket.PushColumn(0,player);
         assertTrue(VariableMarket.getCellGrid(0, 0).equals(VariableMarket.getCellInitialMarbleList(4)));
         assertTrue(VariableMarket.getCellGrid(1, 0).equals(VariableMarket.getCellInitialMarbleList(8)));
         assertTrue(VariableMarket.getCellGrid(2, 0).equals(VariableMarket.getCellInitialMarbleList(12)));
@@ -181,30 +186,31 @@ public void PushRowsOfMarketCycling()
     @Test
     public void PushColumnsOfMarketCycling()
     {Market VariableMarket= new Market();
+    Player player = new Player();
 
         assertTrue(VariableMarket.getCellGrid(0, 0).equals(VariableMarket.getCellInitialMarbleList(0)));
         assertTrue(VariableMarket.getCellGrid(1, 0).equals(VariableMarket.getCellInitialMarbleList(4)));
         assertTrue(VariableMarket.getCellGrid(2, 0).equals(VariableMarket.getCellInitialMarbleList(8)));
         assertTrue(VariableMarket.getExtra().equals(VariableMarket.getCellInitialMarbleList(12)));
-        VariableMarket.PushColumn(0);
+        VariableMarket.PushColumn(0,player);
         assertTrue(VariableMarket.getCellGrid(0, 0).equals(VariableMarket.getCellInitialMarbleList(4)));
         assertTrue(VariableMarket.getCellGrid(1, 0).equals(VariableMarket.getCellInitialMarbleList(8)));
         assertTrue(VariableMarket.getCellGrid(2, 0).equals(VariableMarket.getCellInitialMarbleList(12)));
         assertTrue(VariableMarket.getExtra().equals(VariableMarket.getCellInitialMarbleList(0)));
 
-        VariableMarket.PushColumn(0);
+        VariableMarket.PushColumn(0,player);
         assertTrue(VariableMarket.getCellGrid(0, 0).equals(VariableMarket.getCellInitialMarbleList(8)));
         assertTrue(VariableMarket.getCellGrid(1, 0).equals(VariableMarket.getCellInitialMarbleList(12)));
         assertTrue(VariableMarket.getCellGrid(2, 0).equals(VariableMarket.getCellInitialMarbleList(0)));
         assertTrue(VariableMarket.getExtra().equals(VariableMarket.getCellInitialMarbleList(4)));
 
-        VariableMarket.PushColumn(0);
+        VariableMarket.PushColumn(0,player);
         assertTrue(VariableMarket.getCellGrid(0, 0).equals(VariableMarket.getCellInitialMarbleList(12)));
         assertTrue(VariableMarket.getCellGrid(1, 0).equals(VariableMarket.getCellInitialMarbleList(0)));
         assertTrue(VariableMarket.getCellGrid(2, 0).equals(VariableMarket.getCellInitialMarbleList(4)));
         assertTrue(VariableMarket.getExtra().equals(VariableMarket.getCellInitialMarbleList(8)));
 
-        VariableMarket.PushColumn(0);
+        VariableMarket.PushColumn(0,player);
         assertTrue(VariableMarket.getCellGrid(0, 0).equals(VariableMarket.getCellInitialMarbleList(0)));
         assertTrue(VariableMarket.getCellGrid(1, 0).equals(VariableMarket.getCellInitialMarbleList(4)));
         assertTrue(VariableMarket.getCellGrid(2, 0).equals(VariableMarket.getCellInitialMarbleList(8)));

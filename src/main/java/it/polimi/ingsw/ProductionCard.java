@@ -3,6 +3,7 @@ package it.polimi.ingsw;
 import java.util.*;
 
 public class ProductionCard {
+    private final int faithPoint;
 
     /**
      * costProductionCard represents the card cost as a map containing resources and their quantities
@@ -38,14 +39,21 @@ public class ProductionCard {
     /**
      * Base Constructor of the class: every attribute is needed as a constructor parameter
      */
-    public ProductionCard(Map<Resource,Integer> cost, Map<Resource,Integer> in, Map<Resource,Integer> out, int points, int level, Colour colour) {
+    public ProductionCard(Map<Resource,Integer> cost, Map<Resource,Integer> in, Map<Resource,Integer> out, int points, int level, Colour colour, int faithpoint) {
         this.costProductionCard = cost;
         this.inputResources = in;
         this.outputResources = out;
         this.points = points;
         this.level = level;
         this.colour = colour;
+        this.faithPoint = faithpoint;
     }
+
+
+
+
+
+
 
 
     /**
@@ -105,4 +113,12 @@ public class ProductionCard {
      */
     public void productionOn() {}
 
+
+
+    /**
+     * getter method for activqte or not move on faithPath
+     */
+    public int isFaithPoint() {
+        return faithPoint;
+    }
 }

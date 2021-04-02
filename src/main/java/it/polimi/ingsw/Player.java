@@ -1,10 +1,17 @@
 package it.polimi.ingsw;
 
 public class Player {
-    private Gameboard MyGameBoard = new Gameboard();
-
+    private Gameboard gameBoardOfPlayer ;
+    public Player(){
+       gameBoardOfPlayer = new Gameboard();};
     public void addToBuffer(Resource resource){
-        MyGameBoard.addToBuffer(resource);
+        gameBoardOfPlayer.addToBuffer(resource);
+    }
+    public void faithMove(){
+        gameBoardOfPlayer.faithMove();
+    }
+    public int getIndicator(){
+        return gameBoardOfPlayer.getIndicator();
     }
 
 }
