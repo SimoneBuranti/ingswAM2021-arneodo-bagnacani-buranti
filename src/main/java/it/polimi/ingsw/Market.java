@@ -6,7 +6,7 @@ import java.util.ArrayList;
  */
 public class Market {
     private Marble[][] Grid= new Marble[3][4];
-    private Marble extra= new Marble();
+    private Marble extra=new Marble();
     private ArrayList<Marble> InitialMarbleList = new ArrayList<Marble>(13);
 
 
@@ -83,12 +83,11 @@ public class Market {
  * then it reactives the grid and the extra marble
  */
 
-    public void PushRow(int ChosenRow){
+    public void PushRow(int ChosenRow, Player player){
         int j;
         Marble temp;
         for(j=0; j<4; j++)
-            Grid[ChosenRow][j].giveResource();
-
+            Grid[ChosenRow][j].giveResource(player);
         temp=extra;
         extra=Grid[ChosenRow][0];
         for(j=1; j<4; j++)
@@ -104,11 +103,11 @@ public class Market {
      *  * then it reactives the grid and the extra marble
      */
 
-    public void PushColumn(int ChosenColumn){
+    public void PushColumn(int ChosenColumn,Player player){
         int i;
         Marble temp;
         for(i=0; i<3; i++)
-            Grid[i][ChosenColumn].giveResource();
+            Grid[i][ChosenColumn].giveResource(player);
 
         temp=extra;
         extra=Grid[0][ChosenColumn];
