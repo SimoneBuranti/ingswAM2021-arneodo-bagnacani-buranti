@@ -60,8 +60,7 @@ public class MarketTest {
      * test about the pushRow
      */
     @Test
-    public void PushRowsOfMarket()
-    {
+    public void PushRowsOfMarket() throws CallForCouncilException {
         Market VariableMarket= new Market();
         Player player = new Player();
 
@@ -102,8 +101,7 @@ public class MarketTest {
      *
      */
     @Test
-public void PushRowsOfMarketCycling()
-   {Market VariableMarket= new Market();
+public void PushRowsOfMarketCycling() throws CallForCouncilException {Market VariableMarket= new Market();
        Player player = new Player();
        VariableMarket.PushRow(0,player);
        assertTrue(VariableMarket.getCellGrid(0, 0).equals(VariableMarket.getCellInitialMarbleList(1)));
@@ -146,8 +144,7 @@ public void PushRowsOfMarketCycling()
      * test about the PushColumn
      */
     @Test
-    public void PushColumnsOfMarket()
-    {
+    public void PushColumnsOfMarket() throws CallForCouncilException {
         Market VariableMarket= new Market();
         Player player = new Player();
 
@@ -184,8 +181,7 @@ public void PushRowsOfMarketCycling()
      *
      */
     @Test
-    public void PushColumnsOfMarketCycling()
-    {Market VariableMarket= new Market();
+    public void PushColumnsOfMarketCycling() throws CallForCouncilException {Market VariableMarket= new Market();
     Player player = new Player();
 
         assertTrue(VariableMarket.getCellGrid(0, 0).equals(VariableMarket.getCellInitialMarbleList(0)));
