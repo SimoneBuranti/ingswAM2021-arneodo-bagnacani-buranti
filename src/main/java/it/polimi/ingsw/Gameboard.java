@@ -43,7 +43,7 @@ public class Gameboard {
     }
 
     public void addToBuffer(Resource resource){
-        buffer .add(resource);
+        buffer.add(resource);
     }
 
     public void getFromBuffer(int index){buffer.get(index);

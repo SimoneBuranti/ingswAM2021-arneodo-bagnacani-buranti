@@ -89,8 +89,7 @@ public class DeckProductionCardThreeViolet extends DeckProductionCard {
         public void PickUpFirstCard(Player player , int choosenColumns) throws LevelException, EmptyException {
                 if(!deckVioletThree.isEmpty()){
                         player.GivePlayerCard(deckVioletThree.get(0),choosenColumns);
-                        deckVioletThree.remove(0);
-                        for(int i=0; i<deckVioletThree.size(); i++)
+                        for(int i=0; i<deckVioletThree.size()-1; i++)
                                 deckVioletThree.set(i,deckVioletThree.get(i+1));
                         deckVioletThree.remove(deckVioletThree.size()-1);}
                 else

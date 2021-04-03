@@ -1,6 +1,7 @@
 package it.polimi.ingsw;
 
 public class Player {
+
     private Gameboard gameBoardOfPlayer ;
 
 
@@ -13,6 +14,11 @@ public class Player {
     public void faithMove() throws CallForCouncilException {
         gameBoardOfPlayer.faithMove();
     }
+
+    public Gameboard getGameBoardOfPlayer() {
+        return gameBoardOfPlayer;
+    }
+
     public int getIndicator(){
         return gameBoardOfPlayer.getIndicator();
     }

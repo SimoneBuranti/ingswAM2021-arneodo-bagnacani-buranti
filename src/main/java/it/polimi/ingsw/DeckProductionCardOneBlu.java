@@ -90,8 +90,7 @@ public class DeckProductionCardOneBlu extends DeckProductionCard {
 
      if(!deckBlueOne.isEmpty()){
      player.GivePlayerCard(deckBlueOne.get(0),choosenColumns);
-     deckBlueOne.remove(0);
-     for(int i=0; i<deckBlueOne.size(); i++)
+     for(int i=0; i<deckBlueOne.size()-1; i++)
         deckBlueOne.set(i,deckBlueOne.get(i+1));
      deckBlueOne.remove(deckBlueOne.size()-1);}
      else

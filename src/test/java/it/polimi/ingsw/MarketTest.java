@@ -181,7 +181,8 @@ public void PushRowsOfMarketCycling() throws CallForCouncilException {Market Var
      *
      */
     @Test
-    public void PushColumnsOfMarketCycling() throws CallForCouncilException {Market VariableMarket= new Market();
+    public void PushColumnsOfMarketCycling() throws CallForCouncilException {
+        Market VariableMarket= new Market();
     Player player = new Player();
 
         assertTrue(VariableMarket.getCellGrid(0, 0).equals(VariableMarket.getCellInitialMarbleList(0)));

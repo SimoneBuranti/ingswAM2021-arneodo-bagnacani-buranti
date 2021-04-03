@@ -91,8 +91,7 @@ public class DeckProductionCardTwoBlu extends DeckProductionCard {
     public void PickUpFirstCard(Player player , int choosenColumns) throws LevelException, EmptyException {
         if(!deckBlueTwo.isEmpty()){
             player.GivePlayerCard(deckBlueTwo.get(0),choosenColumns);
-            deckBlueTwo.remove(0);
-            for(int i=0; i<deckBlueTwo.size(); i++)
+            for(int i=0; i<deckBlueTwo.size()-1; i++)
                 deckBlueTwo.set(i,deckBlueTwo.get(i+1));
             deckBlueTwo.remove(deckBlueTwo.size()-1);}
         else
