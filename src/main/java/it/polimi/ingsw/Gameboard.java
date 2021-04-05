@@ -69,4 +69,10 @@ public class Gameboard {
                 return i+1;}
         return i+1;
     }
+
+    public void addResourceToStorage(Resource resource) throws UnavailableResourceException {
+        storageOfGameboard.addResource(resource);
+    }
+
+
 }

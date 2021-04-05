@@ -4,7 +4,10 @@ public class Game {
 
     Market market;
     Reserve reserve;
-    Player player;
+    Player playerFirst;
+    Player playerSecond;
+    Player playerThird;
+    Player playerFourth;
     DeckProductionCard deckProductionCardOneBlu ;
     DeckProductionCard deckProductionCardTwoBlu ;
     DeckProductionCard deckProductionCardThreeBlu ;
@@ -24,7 +27,6 @@ public class Game {
     public Game(){
         market = new Market();
         reserve = new Reserve();
-        player = new Player();
         deckProductionCardOneBlu = new DeckProductionCardOneBlu();
         deckProductionCardTwoBlu = new DeckProductionCardTwoBlu();
         deckProductionCardThreeBlu = new DeckProductionCardThreeBlu();
@@ -39,7 +41,7 @@ public class Game {
 
         deckProductionCardOneViolet = new DeckProductionCardOneViolet();
         deckProductionCardTwoViolet = new DeckProductionCardTwoViolet();
-         deckProductionCardThreeViolet = new DeckProductionCardThreeViolet();
+        deckProductionCardThreeViolet = new DeckProductionCardThreeViolet();
     }
 
 
@@ -57,6 +59,7 @@ public class Game {
     public int deckSize(DeckProductionCard deck){
         return deck.size();
     }
+
 
 
 

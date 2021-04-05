@@ -11,37 +11,37 @@ class DoActionMarketTest {
      */
     @Test
     public void correctionOfCall() throws LevelException, EmptyException {
-        Game game= new Game();
+        Game game= new GameMultiPlayer(1);
 
-        Game.DoActionMarket(game.player,game.deckProductionCardOneBlu,1);
-        assertTrue(game.player.getGameBoardOfPlayer().getCellDevelopmentBoard(0,1 ) instanceof ProductionCard);
+        Game.DoActionMarket(((GameMultiPlayer) game).playerFirst,game.deckProductionCardOneBlu,1);
+        assertTrue(((GameMultiPlayer)game).playerFirst.getGameBoardOfPlayer().getCellDevelopmentBoard(0,1 ) instanceof ProductionCard);
         try {
-            Game.DoActionMarket(game.player,game.deckProductionCardOneBlu,1);
+            Game.DoActionMarket(((GameMultiPlayer) game).playerFirst,game.deckProductionCardOneBlu,1);
         } catch (LevelException e)
         {
             System.out.println();
         }
-        Game.DoActionMarket(game.player,game.deckProductionCardTwoBlu,1);
-        Game.DoActionMarket(game.player,game.deckProductionCardThreeBlu,1);
+        Game.DoActionMarket(((GameMultiPlayer) game).playerFirst,game.deckProductionCardTwoBlu,1);
+        Game.DoActionMarket(((GameMultiPlayer) game).playerFirst,game.deckProductionCardThreeBlu,1);
 
 
         try {
-            Game.DoActionMarket(game.player,game.deckProductionCardOneBlu,1);
-        } catch (LevelException e)
-        {
-            System.out.println();
-        }
-
-        try {
-            Game.DoActionMarket(game.player,game.deckProductionCardThreeBlu,1);
+            Game.DoActionMarket(((GameMultiPlayer) game).playerFirst,game.deckProductionCardOneBlu,1);
         } catch (LevelException e)
         {
             System.out.println();
         }
 
+        try {
+            Game.DoActionMarket(((GameMultiPlayer) game).playerFirst,game.deckProductionCardThreeBlu,1);
+        } catch (LevelException e)
+        {
+            System.out.println();
+        }
+
 
         try {
-            Game.DoActionMarket(game.player,game.deckProductionCardTwoBlu,1);
+            Game.DoActionMarket(((GameMultiPlayer) game).playerFirst,game.deckProductionCardTwoBlu,1);
         } catch (LevelException e)
         {
             System.out.println();
@@ -60,37 +60,29 @@ class DoActionMarketTest {
      */
     @Test
     public void correctionOfCallMoreDeck() throws LevelException, EmptyException {
-        Game game= new Game();
+        Game game= new GameMultiPlayer(1);
 
-        Game.DoActionMarket(game.player,game.deckProductionCardOneBlu,1);
-        assertTrue(game.player.getGameBoardOfPlayer().getCellDevelopmentBoard(0,1 ) instanceof ProductionCard);
+        Game.DoActionMarket(((GameMultiPlayer) game).playerFirst,game.deckProductionCardOneBlu,1);
+        assertTrue(((GameMultiPlayer) game).playerFirst.getGameBoardOfPlayer().getCellDevelopmentBoard(0,1 ) instanceof ProductionCard);
         try {
-            Game.DoActionMarket(game.player,game.deckProductionCardOneBlu,1);
+            Game.DoActionMarket(((GameMultiPlayer) game).playerFirst,game.deckProductionCardOneBlu,1);
         } catch (LevelException e)
         {
             System.out.println();
         }
-        Game.DoActionMarket(game.player,game.deckProductionCardTwoBlu,1);
-        Game.DoActionMarket(game.player,game.deckProductionCardThreeBlu,1);
+        Game.DoActionMarket(((GameMultiPlayer) game).playerFirst,game.deckProductionCardTwoBlu,1);
+        Game.DoActionMarket(((GameMultiPlayer) game).playerFirst,game.deckProductionCardThreeBlu,1);
 
 
         try {
-            Game.DoActionMarket(game.player,game.deckProductionCardOneBlu,1);
-        } catch (LevelException e)
-        {
-            System.out.println();
-        }
-
-        try {
-            Game.DoActionMarket(game.player,game.deckProductionCardThreeBlu,1);
+            Game.DoActionMarket(((GameMultiPlayer) game).playerFirst,game.deckProductionCardOneBlu,1);
         } catch (LevelException e)
         {
             System.out.println();
         }
 
-
         try {
-            Game.DoActionMarket(game.player,game.deckProductionCardTwoBlu,1);
+            Game.DoActionMarket(((GameMultiPlayer) game).playerFirst,game.deckProductionCardThreeBlu,1);
         } catch (LevelException e)
         {
             System.out.println();
@@ -98,7 +90,7 @@ class DoActionMarketTest {
 
 
         try {
-            Game.DoActionMarket(game.player,game.deckProductionCardTwoGreen,0);
+            Game.DoActionMarket(((GameMultiPlayer) game).playerFirst,game.deckProductionCardTwoBlu,1);
         } catch (LevelException e)
         {
             System.out.println();
@@ -106,45 +98,200 @@ class DoActionMarketTest {
 
 
         try {
-            Game.DoActionMarket(game.player,game.deckProductionCardOneGreen,0);
+            Game.DoActionMarket(((GameMultiPlayer) game).playerFirst,game.deckProductionCardTwoGreen,0);
         } catch (LevelException e)
         {
             System.out.println();
         }
-        assertTrue(game.player.getGameBoardOfPlayer().getCellDevelopmentBoard(0,0 ).getLevel()==1);
+
 
         try {
-            Game.DoActionMarket(game.player,game.deckProductionCardTwoGreen,0);
+            Game.DoActionMarket(((GameMultiPlayer) game).playerFirst,game.deckProductionCardOneGreen,0);
         } catch (LevelException e)
         {
             System.out.println();
         }
-
-        assertTrue(game.player.getGameBoardOfPlayer().getCellDevelopmentBoard(1,0 ).getLevel()==2);
+        assertTrue(((GameMultiPlayer) game).playerFirst.getGameBoardOfPlayer().getCellDevelopmentBoard(0,0 ).getLevel()==1);
 
         try {
-            Game.DoActionMarket(game.player,game.deckProductionCardThreeGreen,0);
+            Game.DoActionMarket(((GameMultiPlayer) game).playerFirst,game.deckProductionCardTwoGreen,0);
         } catch (LevelException e)
         {
             System.out.println();
         }
 
-        assertTrue(game.player.getGameBoardOfPlayer().getCellDevelopmentBoard(2,1 ) .getLevel()==3);
+        assertTrue(((GameMultiPlayer) game).playerFirst.getGameBoardOfPlayer().getCellDevelopmentBoard(1,0 ).getLevel()==2);
+
+        try {
+            Game.DoActionMarket(((GameMultiPlayer) game).playerFirst,game.deckProductionCardThreeGreen,0);
+        } catch (LevelException e)
+        {
+            System.out.println();
+        }
+
+        assertTrue(((GameMultiPlayer) game).playerFirst.getGameBoardOfPlayer().getCellDevelopmentBoard(2,1 ) .getLevel()==3);
+}
 
 
 
 
 
 
+    /**
+     * calls from different players(2)
+     */
+    @Test
+    public void twoPlayersOfCallMoreDeck() throws LevelException, EmptyException {
+        Game game= new GameMultiPlayer(2);
+
+        Game.DoActionMarket(((GameMultiPlayer) game).playerFirst,game.deckProductionCardOneBlu,1);
+        assertTrue(((GameMultiPlayer) game).playerFirst.getGameBoardOfPlayer().getCellDevelopmentBoard(0,1 ) instanceof ProductionCard);
+        try {
+            Game.DoActionMarket(((GameMultiPlayer) game).playerFirst,game.deckProductionCardOneBlu,1);
+        } catch (LevelException e)
+        {
+            System.out.println();
+        }
+        Game.DoActionMarket(((GameMultiPlayer) game).playerFirst,game.deckProductionCardTwoBlu,1);
+        Game.DoActionMarket(((GameMultiPlayer) game).playerFirst,game.deckProductionCardThreeBlu,1);
+
+
+        try {
+            Game.DoActionMarket(((GameMultiPlayer) game).playerFirst,game.deckProductionCardOneBlu,1);
+        } catch (LevelException e)
+        {
+            System.out.println();
+        }
+
+        try {
+            Game.DoActionMarket(((GameMultiPlayer) game).playerFirst,game.deckProductionCardThreeBlu,1);
+        } catch (LevelException e)
+        {
+            System.out.println();
+        }
+
+
+        try {
+            Game.DoActionMarket(((GameMultiPlayer) game).playerFirst,game.deckProductionCardTwoBlu,1);
+        } catch (LevelException e)
+        {
+            System.out.println();
+        }
+
+
+        try {
+            Game.DoActionMarket(((GameMultiPlayer) game).playerFirst,game.deckProductionCardTwoGreen,0);
+        } catch (LevelException e)
+        {
+            System.out.println();
+        }
+
+
+        try {
+            Game.DoActionMarket(((GameMultiPlayer) game).playerFirst,game.deckProductionCardOneGreen,0);
+        } catch (LevelException e)
+        {
+            System.out.println();
+        }
+        assertTrue(((GameMultiPlayer) game).playerFirst.getGameBoardOfPlayer().getCellDevelopmentBoard(0,0 ).getLevel()==1);
+
+        try {
+            Game.DoActionMarket(((GameMultiPlayer) game).playerFirst,game.deckProductionCardTwoGreen,0);
+        } catch (LevelException e)
+        {
+            System.out.println();
+        }
+
+        assertTrue(((GameMultiPlayer) game).playerFirst.getGameBoardOfPlayer().getCellDevelopmentBoard(1,0 ).getLevel()==2);
+
+        try {
+            Game.DoActionMarket(((GameMultiPlayer) game).playerFirst,game.deckProductionCardThreeGreen,0);
+        } catch (LevelException e)
+        {
+            System.out.println();
+        }
+
+        assertTrue(((GameMultiPlayer) game).playerFirst.getGameBoardOfPlayer().getCellDevelopmentBoard(2,1 ) .getLevel()==3);
 
 
 
 
 
+        Game.DoActionMarket(((GameMultiPlayer) game).playerSecond,game.deckProductionCardOneBlu,1);
+        assertTrue(((GameMultiPlayer) game).playerSecond.getGameBoardOfPlayer().getCellDevelopmentBoard(0,1 ) instanceof ProductionCard);
+        try {
+            Game.DoActionMarket(((GameMultiPlayer) game).playerSecond,game.deckProductionCardOneBlu,1);
+        } catch (LevelException e)
+        {
+            System.out.println();
+        }
+        Game.DoActionMarket(((GameMultiPlayer) game).playerSecond,game.deckProductionCardTwoBlu,1);
+        Game.DoActionMarket(((GameMultiPlayer) game).playerSecond,game.deckProductionCardThreeBlu,1);
 
 
+        try {
+            Game.DoActionMarket(((GameMultiPlayer) game).playerSecond,game.deckProductionCardOneBlu,1);
+        } catch (LevelException e)
+        {
+            System.out.println();
+        }
+
+        try {
+            Game.DoActionMarket(((GameMultiPlayer) game).playerSecond,game.deckProductionCardThreeBlu,1);
+        } catch (LevelException e)
+        {
+            System.out.println();
+        }
 
 
+        try {
+            Game.DoActionMarket(((GameMultiPlayer) game).playerSecond,game.deckProductionCardTwoBlu,1);
+        } catch (LevelException e)
+        {
+            System.out.println();
+        }
 
 
+        try {
+            Game.DoActionMarket(((GameMultiPlayer) game).playerSecond,game.deckProductionCardTwoGreen,0);
+        } catch (LevelException e)
+        {
+            System.out.println();
+        }
+
+
+        try {
+            Game.DoActionMarket(((GameMultiPlayer) game).playerSecond,game.deckProductionCardOneGreen,0);
+        } catch (LevelException e)
+        {
+            System.out.println();
+        }
+        assertTrue(((GameMultiPlayer) game).playerSecond.getGameBoardOfPlayer().getCellDevelopmentBoard(0,0 ).getLevel()==1);
+
+        try {
+            Game.DoActionMarket(((GameMultiPlayer) game).playerSecond,game.deckProductionCardTwoGreen,0);
+        } catch (LevelException e)
+        {
+            System.out.println();
+        }
+
+        assertTrue(((GameMultiPlayer) game).playerSecond.getGameBoardOfPlayer().getCellDevelopmentBoard(1,0 ).getLevel()==2);
+
+        try {
+            Game.DoActionMarket(((GameMultiPlayer) game).playerSecond,game.deckProductionCardThreeGreen,0);
+        } catch (LevelException e)
+        {
+            System.out.println();
+        }
+
+        assertTrue(((GameMultiPlayer) game).playerSecond.getGameBoardOfPlayer().getCellDevelopmentBoard(2,1 ) .getLevel()==3);
+    
+    
+    
+    
+    
+    
+    
+    
+    
     }}
