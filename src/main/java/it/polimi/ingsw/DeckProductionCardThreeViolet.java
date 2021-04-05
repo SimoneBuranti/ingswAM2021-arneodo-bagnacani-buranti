@@ -96,4 +96,27 @@ public class DeckProductionCardThreeViolet extends DeckProductionCard {
                         throw new EmptyException();
 
         }
+
+        /**
+         * this method removes the first card from the deck,
+         * if the deck is empty it throws the EndOfSolitaireGame exception
+         * @throws EndOfSolitaireGame : exception thrown if there are no more cards available of a certain colour
+         */
+        public static void removeOneCard() throws EndOfSolitaireGame{
+
+                for (int i = 0; i < deckVioletThree.size() - 1; i++)
+                        deckVioletThree.set(i, deckVioletThree.get(i + 1));
+                deckVioletThree.remove(deckVioletThree.size() - 1);
+
+                if(deckVioletThree.isEmpty())
+                        throw new EndOfSolitaireGame();
+        }
+
+        /**
+         * this method has been implemented to do the tests and returns the size of the deck
+         * @return int: the number of cards in the deck
+         */
+        public int size(){
+                return deckVioletThree.size();
+        }
 }

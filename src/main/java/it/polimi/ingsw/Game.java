@@ -49,8 +49,14 @@ public class Game {
     }
 
 
-
-
+    /**
+     * this method is implemented for testing and returns the number of production cards in the deck passed as parameter
+     * @param deck : deck of production cards
+     * @return int : the size of the deck
+     */
+    public int deckSize(DeckProductionCard deck){
+        return deck.size();
+    }
 
 
 

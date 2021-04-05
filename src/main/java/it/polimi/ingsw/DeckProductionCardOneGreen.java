@@ -95,5 +95,28 @@ public class DeckProductionCardOneGreen extends DeckProductionCard {
         else
             throw new EmptyException();
     }
+
+    /**
+     * this method removes the first card from the deck,
+     * if the deck is empty it calls the level two deck method of the same colour
+     * @throws EndOfSolitaireGame : exception thrown if there are no more cards available of a certain colour
+     */
+    public static void removeOneCard() throws EndOfSolitaireGame{
+        if(deckGreenOne.isEmpty())
+            DeckProductionCardTwoGreen.removeOneCard();
+        else {
+            for (int i = 0; i < deckGreenOne.size() - 1; i++)
+                deckGreenOne.set(i, deckGreenOne.get(i + 1));
+            deckGreenOne.remove(deckGreenOne.size() - 1);
+        }
+    }
+
+    /**
+     * this method has been implemented to do the tests and returns the size of the deck
+     * @return int: the number of cards in the deck
+     */
+    public int size(){
+        return deckGreenOne.size();
+    }
 }
 
