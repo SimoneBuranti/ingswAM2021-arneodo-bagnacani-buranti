@@ -1,7 +1,15 @@
 package it.polimi.ingsw;
 
+import java.util.ArrayList;
+
 public class PlayerFourth extends Player {
 
+    private ArrayList<LeaderCard> personalLeaderCard = new ArrayList<LeaderCard>(4);
+
+    public PlayerFourth(String nickName){
+        super(nickName);
+
+    }
 
 
     /**
@@ -28,4 +36,6 @@ public class PlayerFourth extends Player {
         getGameBoardOfPlayer().faithMove();
 
     }
+
+
 }

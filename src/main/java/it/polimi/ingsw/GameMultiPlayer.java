@@ -7,7 +7,16 @@ import java.util.ArrayList;
 
 public class GameMultiPlayer extends Game {
     private int numberOfPlayer;
-    Player currentPlayer;
+    private Player currentPlayer;
+    PlayerFirst firstPlayer;
+    PlayerSecond secondPlayer;
+    PlayerThird thirdPlayer;
+    PlayerFourth fourthPlayer;
+    private int calamaio;
+    private ArrayList<String> nickNameInOrder= new ArrayList<>();
+
+
+
 
     private ArrayList<Player> playerList;
 
@@ -15,11 +24,16 @@ public class GameMultiPlayer extends Game {
      * this is the constructor for the class
      * @param numberOfPlayer
      */
-    public GameMultiPlayer(int numberOfPlayer){
-
+    public GameMultiPlayer(int numberOfPlayer, ArrayList<String> nickName){
+        super();
+        this.playerList= new ArrayList<Player>();
         this.numberOfPlayer=numberOfPlayer;
-        playerList = new ArrayList<Player>();
-        createPlayer(numberOfPlayer); }
+        calamaio=createRandomNumber(numberOfPlayer);
+        nickNameInOrder=correctOrder(nickName,calamaio);
+        createPlayer(numberOfPlayer,nickNameInOrder);
+
+    }
+
     /**
      * method which return number of participant in game
      */
@@ -33,45 +47,78 @@ public class GameMultiPlayer extends Game {
      *
      */
 
-    private void createPlayer(int numberOfPlayer){
-        if (numberOfPlayer==1) {
-            playerFirst = new PlayerFirst();
-            playerList.add(playerFirst);
-
-        }
-        else if (numberOfPlayer==2)
+    private void createPlayer(int numberOfPlayer,ArrayList<String> nickNameInOrder){
+       if (numberOfPlayer==2)
         {
-            playerFirst= new PlayerFirst();
-            playerSecond=new PlayerSecond();
-            playerList.add(playerFirst);
-            playerList.add(playerSecond);
+            firstPlayer=new PlayerFirst(nickNameInOrder.get(0));
+            secondPlayer= new PlayerSecond(nickNameInOrder.get(1));
+            playerList.add(firstPlayer);
+            playerList.add(secondPlayer);
         }
+
         else if (numberOfPlayer==3)
         {
-            playerFirst= new PlayerFirst();
-            playerSecond=new PlayerSecond();
-            playerThird= new PlayerThird();
-            playerList.add(playerFirst);
-            playerList.add(playerSecond);
-            playerList.add(playerThird);
+            firstPlayer=new PlayerFirst(nickNameInOrder.get(0));
+            secondPlayer= new PlayerSecond(nickNameInOrder.get(1));
+            thirdPlayer= new PlayerThird(nickNameInOrder.get(2));
+            playerList.add(firstPlayer);
+            playerList.add(secondPlayer);
+            playerList.add(thirdPlayer);
+
+
 
         }
-        else
+       else if (numberOfPlayer==4)
         {
-            playerFirst= new PlayerFirst();
-            playerSecond=new PlayerSecond();
-            playerThird= new PlayerThird();
-            playerFourth= new PlayerFourth();
-            playerList.add(playerFirst);
-            playerList.add(playerSecond);
-            playerList.add(playerThird);
-            playerList.add(playerFourth);
-        }}
+            firstPlayer=new PlayerFirst(nickNameInOrder.get(0));
+            secondPlayer= new PlayerSecond(nickNameInOrder.get(1));
+            thirdPlayer= new PlayerThird(nickNameInOrder.get(2));
+            fourthPlayer=new PlayerFourth(nickNameInOrder.get(3));
+            playerList.add(firstPlayer);
+            playerList.add(secondPlayer);
+            playerList.add(thirdPlayer);
+            playerList.add(fourthPlayer);
+
+        }
+
+    }
 
 
 
+    /**
+     * @return currentPlayer
+     */
+    public Player getCurrentPlayer() {
+        return currentPlayer;
+    }
+
+    /**
+     * @param currentPlayer
+     */
+    public void setCurrentPlayer(Player currentPlayer) {
+        this.currentPlayer = currentPlayer;
+    }
 
 
+    public Player getPlayerFromList(int index){
+        return playerList.get(index);
+    }
+
+
+    public int createRandomNumber(int numberOfPlayer){
+        int n = (int) (Math.random() * (numberOfPlayer));
+        return n;
+    }
+
+
+    private ArrayList<String> correctOrder(ArrayList<String> nickName,int calamaio){
+
+        for(int i=calamaio; i<nickName.size();i++)
+                nickNameInOrder.add(nickName.get(i));
+        for(int i=0; i<calamaio;i++)
+            nickNameInOrder.add(nickName.get(i));
+
+        return  nickNameInOrder;}
 
 
 

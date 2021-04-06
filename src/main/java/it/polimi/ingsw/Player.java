@@ -1,13 +1,27 @@
 package it.polimi.ingsw;
 
+import java.util.ArrayList;
+
 public class Player {
     private boolean connected;
     private Gameboard gameBoardOfPlayer ;
     private String nickName;
     private int score;
+    private ArrayList<LeaderCard> personalLeaderCard;
 
 
-    public Player(){ gameBoardOfPlayer = new Gameboard();};
+
+
+    public Player(String nickName){
+        gameBoardOfPlayer = new Gameboard();
+        personalLeaderCard=new ArrayList<LeaderCard>(4);
+        personalLeaderCard.add(DeckLeaderCard.arrangeDeckLeaderCards());
+        personalLeaderCard.add(DeckLeaderCard.arrangeDeckLeaderCards());
+        personalLeaderCard.add(DeckLeaderCard.arrangeDeckLeaderCards());
+        personalLeaderCard.add(DeckLeaderCard.arrangeDeckLeaderCards());
+        setNickName(nickName);
+
+    };
 
 
     public void addToBuffer(Resource resource){
@@ -42,7 +56,7 @@ public class Player {
         return nickName;
     }
 
-    public void setNickName(String nickName) {
+    private void setNickName(String nickName) {
         this.nickName = nickName;
     }
 
@@ -70,5 +84,10 @@ public class Player {
 
     }
 
+
+    public LeaderCard getCardFromPersonalLeaderCard(int index){
+
+        return  personalLeaderCard.get(index);
+    }
 
 }

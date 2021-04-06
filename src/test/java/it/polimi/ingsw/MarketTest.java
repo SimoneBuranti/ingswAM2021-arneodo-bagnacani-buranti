@@ -14,7 +14,7 @@ public class MarketTest {
 
 
         Market VariableMarket= new Market();
-        Player player = new Player();
+        Player player = new Player("ale");
 
         assertTrue(!( VariableMarket.getCellGrid(0, 0) instanceof RedMarble) ||
         !(VariableMarket.getCellGrid(0, 1) instanceof YellowMarble)||
@@ -39,7 +39,7 @@ public class MarketTest {
     public void InizializationOfExtraMarket()
     {
         Market VariableMarket= new Market();
-        Player player = new Player();
+        Player player = new Player("ale");
 
         assertTrue(!( VariableMarket.getExtra() instanceof RedMarble) ||
                 (VariableMarket.getExtra() instanceof YellowMarble)||
@@ -62,7 +62,7 @@ public class MarketTest {
     @Test
     public void PushRowsOfMarket() throws CallForCouncilException {
         Market VariableMarket= new Market();
-        Player player = new Player();
+        Player player = new Player("ale");
 
 
         assertTrue(( VariableMarket.getCellGrid(0, 0) instanceof RedMarble) ||
@@ -102,7 +102,7 @@ public class MarketTest {
      */
     @Test
 public void PushRowsOfMarketCycling() throws CallForCouncilException {Market VariableMarket= new Market();
-       Player player = new Player();
+       Player player = new Player("ale");
        VariableMarket.PushRow(0,player);
        assertTrue(VariableMarket.getCellGrid(0, 0).equals(VariableMarket.getCellInitialMarbleList(1)));
        assertTrue(VariableMarket.getCellGrid(0, 1).equals(VariableMarket.getCellInitialMarbleList(2)));
@@ -146,7 +146,7 @@ public void PushRowsOfMarketCycling() throws CallForCouncilException {Market Var
     @Test
     public void PushColumnsOfMarket() throws CallForCouncilException {
         Market VariableMarket= new Market();
-        Player player = new Player();
+        Player player = new Player("ale");
 
 
         assertTrue(( VariableMarket.getCellGrid(0, 0) instanceof RedMarble) ||
@@ -183,7 +183,7 @@ public void PushRowsOfMarketCycling() throws CallForCouncilException {Market Var
     @Test
     public void PushColumnsOfMarketCycling() throws CallForCouncilException {
         Market VariableMarket= new Market();
-    Player player = new Player();
+    Player player = new Player("ale");
 
         assertTrue(VariableMarket.getCellGrid(0, 0).equals(VariableMarket.getCellInitialMarbleList(0)));
         assertTrue(VariableMarket.getCellGrid(1, 0).equals(VariableMarket.getCellInitialMarbleList(4)));

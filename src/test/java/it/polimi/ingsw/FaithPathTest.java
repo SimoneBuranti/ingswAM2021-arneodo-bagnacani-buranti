@@ -566,7 +566,7 @@ class FaithPathTest {
     @DisplayName("faithScoreTest : only position - 2")
     public void faithWithUseOfRedMarble() throws CallForCouncilException {
 
-        Player player = new Player();
+        Player player = new Player("ale");
         RedMarble redMarble = new RedMarble();
 
         assertEquals(player.getIndicator(), 0);

@@ -1,6 +1,11 @@
 package it.polimi.ingsw;
 
 public class ThreeFlagsTwoColourRequirement extends Requirements{
-    private static Colour  colourFirstRequirement;
-    private static Colour  colourSecondRequirement;
+    private  Colour  colourDoubleRequirement;
+    private  Colour colourSingolRequirement;
+    public ThreeFlagsTwoColourRequirement(Colour colourDoubleRequirement, Colour colourSecondRequirement){
+        this.colourDoubleRequirement=colourDoubleRequirement;
+        this.colourSingolRequirement =colourSecondRequirement;
+    }
+
 }

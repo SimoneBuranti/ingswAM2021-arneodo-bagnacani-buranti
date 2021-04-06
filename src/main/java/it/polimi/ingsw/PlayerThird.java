@@ -1,6 +1,17 @@
 package it.polimi.ingsw;
 
+import java.util.ArrayList;
+
 public class PlayerThird extends Player {
+
+    private ArrayList<LeaderCard> personalLeaderCard = new ArrayList<LeaderCard>(4);
+
+
+
+    public PlayerThird(String nickName){
+        super(nickName);
+
+    }
 
 
 
@@ -21,4 +32,5 @@ public class PlayerThird extends Player {
 
     public void initResource(Resource resourceOne,Resource resourceTwo){}
     public void initResource(){}
+
 }

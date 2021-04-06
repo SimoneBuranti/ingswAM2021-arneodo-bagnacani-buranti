@@ -4,6 +4,7 @@ package it.polimi.ingsw;
  * this class represents the game in solitary
  */
 public class SolitaireGame extends Game{
+
     /**
      * this attribute represents the action marker deck of the game
      */
@@ -104,4 +105,5 @@ public class SolitaireGame extends Game{
     public int getLorenzoFaithIndicator(){
         return lorenzoTheMagnificent.getFaithIndicator();
     }
+
 }
