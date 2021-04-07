@@ -60,7 +60,7 @@ public class MarketTest {
      * test about the pushRow
      */
     @Test
-    public void PushRowsOfMarket() throws CallForCouncilException {
+    public void PushRowsOfMarket() throws CallForCouncilException, LastSpaceReachedException {
         Market VariableMarket= new Market();
         Player player = new Player("ale");
 
@@ -101,7 +101,8 @@ public class MarketTest {
      *
      */
     @Test
-public void PushRowsOfMarketCycling() throws CallForCouncilException {Market VariableMarket= new Market();
+public void PushRowsOfMarketCycling() throws CallForCouncilException, LastSpaceReachedException {
+        Market VariableMarket= new Market();
        Player player = new Player("ale");
        VariableMarket.PushRow(0,player);
        assertTrue(VariableMarket.getCellGrid(0, 0).equals(VariableMarket.getCellInitialMarbleList(1)));
@@ -144,7 +145,7 @@ public void PushRowsOfMarketCycling() throws CallForCouncilException {Market Var
      * test about the PushColumn
      */
     @Test
-    public void PushColumnsOfMarket() throws CallForCouncilException {
+    public void PushColumnsOfMarket() throws CallForCouncilException, LastSpaceReachedException {
         Market VariableMarket= new Market();
         Player player = new Player("ale");
 
@@ -181,7 +182,7 @@ public void PushRowsOfMarketCycling() throws CallForCouncilException {Market Var
      *
      */
     @Test
-    public void PushColumnsOfMarketCycling() throws CallForCouncilException {
+    public void PushColumnsOfMarketCycling() throws CallForCouncilException, LastSpaceReachedException {
         Market VariableMarket= new Market();
     Player player = new Player("ale");
 

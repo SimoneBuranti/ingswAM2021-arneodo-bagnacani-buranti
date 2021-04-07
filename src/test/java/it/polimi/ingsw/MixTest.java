@@ -3,6 +3,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MixTest {
@@ -131,6 +132,28 @@ public class MixTest {
                 List.get(1).equals(4) ||
                 List.get(2).equals(4) ||
                 List.get(3).equals(4));
+
+        List.add(5);
+        assertTrue( List.get(4).equals(5));
+
+
+        Mix.MIXED(List);
+        assertNotEquals(5, List.get(4));
+
+        Mix.MIXED(List);
+        List.add(6);
+        assertTrue( List.get(5).equals(6));
+        assertNotEquals(5, List.get(4));
+
+
+
+
+
+
+
+
+
+
 
 
 

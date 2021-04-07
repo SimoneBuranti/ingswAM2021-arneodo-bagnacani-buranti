@@ -22,6 +22,8 @@ public class Game {
     protected final DeckProductionCard deckProductionCardTwoViolet ;
     protected final DeckProductionCard deckProductionCardThreeViolet ;
 
+    protected final DeckLeaderCard deckLeaderCard;
+
     public Game(){
         market = new Market();
         reserve = new Reserve();
@@ -43,6 +45,9 @@ public class Game {
         deckProductionCardOneViolet = new DeckProductionCardOneViolet();
         deckProductionCardTwoViolet = new DeckProductionCardTwoViolet();
         deckProductionCardThreeViolet = new DeckProductionCardThreeViolet();
+
+        deckLeaderCard= new DeckLeaderCard();
+
     }
 
     public void buyProductionCard(DeckProductionCard deck, int choosenColumn) throws LevelException, NotEnoughResourcesException, EmptyException, FullColumnException, EndGameException {
@@ -97,6 +102,36 @@ public class Game {
     private void exceptionHandler(ImpossibleProductionException e) {
         //...
     }
+
+
+
+    /**
+     * @param player
+     * @param chosenRow
+     * @throws CallForCouncilException thrown from player faithPath  if match finished
+     */
+    public void pushRowInMarket(Player player, int chosenRow) throws CallForCouncilException, LastSpaceReachedException {
+        market.PushRow(chosenRow,player);
+    }
+
+
+    /**
+     * @param player
+     * @param chosenColumn
+     * @throws CallForCouncilException thrown from player faithPath  if match finished
+     */
+    public void pushColumnInMarket(Player player, int chosenColumn) throws CallForCouncilException, LastSpaceReachedException {
+        market.PushColumn(chosenColumn,player);
+    }
+
+
+    /**
+     * @return deckLeaderCard.size()
+     */
+    public int leaderDeckSize(){
+        return deckLeaderCard.size();
+    }
+
 
 
 

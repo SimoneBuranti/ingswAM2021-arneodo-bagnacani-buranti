@@ -4,6 +4,7 @@ import java.util.*;
 
 public class Gameboard implements GameboardInterface{
 
+
     /**
      * developmentBoard references the production card set of the player
      */
@@ -53,6 +54,11 @@ public class Gameboard implements GameboardInterface{
         this.productionBuffer = new ArrayList<>();
 
     }
+
+
+
+
+
 
     /**
      * This method add all the resources contained in the production buffer in the gameboard's strongbox
@@ -401,6 +407,39 @@ public class Gameboard implements GameboardInterface{
 
         developmentBoard[r][choosenColumn] = card;
     }
+
+
+    /**
+     * this method add LeaderCard to Gameboard's folder of LeaderCards
+     * @param leaderCard
+     *
+     */
+    public void addLeaderCardToGameboard(LeaderCard leaderCard){
+        leaderCards.add(leaderCard);
+    }
+
+
+    /**
+     * method only for testing
+     * @return leaderCards.size()
+     */
+    public int leaderCardsSize(){
+        return leaderCards.size();
+
+    }
+
+
+    /**
+     * @param index
+     * @return leaderCards.get(index)
+     */
+    public LeaderCard reportLeaderCardToGameboard(int index){
+        return leaderCards.get(index);
+    }
+
+
+
+
 
 
 }

@@ -50,4 +50,10 @@ public interface GameboardInterface {
 
     void setProductionCard(ProductionCard card,int choosenColumn);
 
+    void addLeaderCardToGameboard(LeaderCard leaderCard);
+
+   int leaderCardsSize();
+
+   LeaderCard reportLeaderCardToGameboard(int index);
+
 }

@@ -34,4 +34,21 @@ public class ReductionGameboard extends GameboardDecorator{
 
         seventhCardCheck();
     }
+
+    @Override
+    public LeaderCard reportLeaderCardToGameboard(int index){
+        return null;
+    }
+
+    @Override
+    public void addLeaderCardToGameboard(LeaderCard leaderCard){
+        return;
+    }
+
+    @Override
+    public int leaderCardsSize(){
+        return 0;
+
+    }
 }
+

@@ -31,6 +31,22 @@ public class ProductionGameboard extends GameboardDecorator {
         addToProductionBuffer(output);
         addToFaithPathBuffer(1);
     }
+    @Override
+    public LeaderCard reportLeaderCardToGameboard(int index){
+        return null;
+    }
+
+
+    @Override
+    public void addLeaderCardToGameboard(LeaderCard leaderCard){
+        return;
+    }
+
+    @Override
+    public int leaderCardsSize(){
+        return 0;
+
+    }
 
 
 

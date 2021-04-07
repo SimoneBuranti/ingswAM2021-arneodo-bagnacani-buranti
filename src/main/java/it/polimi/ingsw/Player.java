@@ -39,6 +39,18 @@ public class Player {
 
 
     /**
+     * method which  add the chosen to leaderCards in gameboard
+     * @param firstIndex
+     * @param secondIndex
+     */
+    public void discardLeaderCard(int firstIndex, int secondIndex){
+        for (int i=0; i<4;i++) {
+            if (i == firstIndex || i == secondIndex)
+                gameBoardOfPlayer.addLeaderCardToGameboard(personalLeaderCard.get(i));
+        }}
+
+
+    /**
      * @throws CallForCouncilException from faithPath, match is finished
      */
     public void faithMove() throws CallForCouncilException, LastSpaceReachedException {
@@ -101,6 +113,15 @@ public class Player {
      */
     public int getScore(){
         return score;
+    }
+
+
+    /**
+     * method for testing
+     * @return return personalLeaderCard.size()
+     */
+    public int personalLeaderCardsize(){
+         return personalLeaderCard.size();
     }
 
 

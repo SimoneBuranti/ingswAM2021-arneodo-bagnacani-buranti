@@ -19,4 +19,16 @@ public class WhiteMarbleGameboard extends GameboardDecorator{
 
         return this.resourceTypeFirst;
     }
+
+
+    @Override
+    public void addLeaderCardToGameboard(LeaderCard leaderCard){
+        return;
+    }
+
+    @Override
+    public int leaderCardsSize(){
+        return 0;
+
+    }
 }
