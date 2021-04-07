@@ -53,6 +53,18 @@ public class StorageExtraFirst extends Storage{
         }
     }
 
+
+    public ArrayList<Resource> availableResources() {
+        ArrayList<Resource> storageExtraFirstResources = new ArrayList<>();
+
+        for(int i=0;i<2;i++)
+            if (storageExtraFirst[i]==1)
+                storageExtraFirstResources.add(firstResourceType);
+        storageExtraFirstResources.addAll(super.availableResources());
+
+        return storageExtraFirstResources;
+    }
+
     /**
      * this method a resource type from the reserve if available and
      * adds it to the first extra storage if it can, otherwise

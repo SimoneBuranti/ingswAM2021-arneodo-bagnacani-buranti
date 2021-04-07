@@ -2,6 +2,7 @@ package it.polimi.ingsw;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
 
 /**
@@ -30,6 +31,46 @@ public class Storage {
     public Storage(Map<Resource, Integer> map){
         storageResource.putAll(map);
     }
+
+
+    /**
+     * This method returns an ArrayList containing the whole available resources
+     * inside the storage
+     * @return
+     */
+    public ArrayList<Resource> availableResources() {
+        ArrayList<Resource> storageResources = new ArrayList<>();
+
+        for(Resource key : storageResource.keySet()) {
+            for(int i=0;i<storageResource.get(key);i++)
+                storageResources.add(key);
+        }
+
+        return storageResources;
+    }
+
+    /**
+     * This method gets as an input the resource ArrayList containing the cost and return the unpaid resources.
+     * @param cost
+     * @return
+     */
+    public ArrayList<Resource> payResources(ArrayList<Resource> cost) {
+
+        ArrayList<Resource> unpaid = new ArrayList<>();
+
+        for(Resource resource : cost){
+            try {
+                useResource(resource);
+            } catch (UnavailableResourceException e) {
+                unpaid.add(resource);
+            }
+        }
+
+        return unpaid;
+    }
+
+
+
 
     /**
      *This method removes a resource type from the reserve if available by adding it to the map,
@@ -102,15 +143,6 @@ public class Storage {
         return true;
     }
 
-    /**
-     * This method discards the surplus resources by placing them in the reserve and throws an exception
-     * @throws DiscardException
-     */
-    public void discard(Resource resource) throws DiscardException{
-        Reserve.addResource(resource);
-
-        throw new DiscardException();
-    }
 
     /**
      *This method returns the current number of a resource type
@@ -151,4 +183,15 @@ public class Storage {
         map.putAll(storageResource);
         return map;
     }
+
+    /*
+    This method discards the surplus resources by placing them in the reserve and throws an exception
+    @throws DiscardException
+
+    public void discard(Resource resource) throws DiscardException{
+        Reserve.addResource(resource);
+
+        throw new DiscardException();
+    }
+    */
 }

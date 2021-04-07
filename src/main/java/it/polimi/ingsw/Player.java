@@ -4,10 +4,12 @@ import java.util.ArrayList;
 
 public class Player {
     private boolean connected;
-    private Gameboard gameBoardOfPlayer ;
+    private GameboardInterface gameBoardOfPlayer ;
     private String nickName;
     private int score;
     private ArrayList<LeaderCard> personalLeaderCard;
+    private ArrayList<Resource> buffer;
+    private Game game;
 
 
 
@@ -23,20 +25,23 @@ public class Player {
 
     };
 
+    public Player(Game game){
+        this.game = game;
+        gameBoardOfPlayer = new Gameboard();
+        personalLeaderCard=new ArrayList<LeaderCard>(4);
+        personalLeaderCard.add(DeckLeaderCard.arrangeDeckLeaderCards());
+        personalLeaderCard.add(DeckLeaderCard.arrangeDeckLeaderCards());
+        personalLeaderCard.add(DeckLeaderCard.arrangeDeckLeaderCards());
+        personalLeaderCard.add(DeckLeaderCard.arrangeDeckLeaderCards());
+        setNickName(nickName);
 
-    /**
-     * @param resource
-     * method which add resource to buffer from market
-     */
-    public void addToBuffer(Resource resource){
-        gameBoardOfPlayer.addToBuffer(resource);
-    }
+    };
 
 
     /**
      * @throws CallForCouncilException from faithPath, match is finished
      */
-    public void faithMove() throws CallForCouncilException {
+    public void faithMove() throws CallForCouncilException, LastSpaceReachedException {
         gameBoardOfPlayer.faithMove();
     }
 
@@ -45,7 +50,7 @@ public class Player {
      * from gameboard
      * @return gameBoardOfPlayer
      */
-    public Gameboard getGameBoardOfPlayer() {
+    public GameboardInterface getGameBoardOfPlayer() {
         return gameBoardOfPlayer;
     }
 
@@ -58,15 +63,10 @@ public class Player {
     }
 
 
-    /**
-     * method which receives card from deckcardprodcution and pass it to Gameboard
-     * @param productioncard
-     * @param choosenColumns
-     * @throws LevelException fromm gameboard, player can't take this level of card, or place it in choosencolumns
-     */
-    public void GivePlayerCard(ProductionCard productioncard, int choosenColumns) throws LevelException {
-
-        gameBoardOfPlayer.addCardToDevelopmentBoard(productioncard,choosenColumns);
+    public void addResourceToStorage(Resource resource){
+        try {
+            gameBoardOfPlayer.addToStorage(resource);
+        } catch (UnavailableResourceException ignored) {}
     }
 
     public boolean isConnected() {
@@ -111,8 +111,8 @@ public class Player {
      *
      */
     public void initResource(){}
-    public void initResource(Resource resource) throws UnavailableResourceException, CallForCouncilException {}
-    public void initResource(Resource resourceOne,Resource resourceTwo) throws UnavailableResourceException, CallForCouncilException {}
+    public void initResource(Resource resource) throws UnavailableResourceException, CallForCouncilException, LastSpaceReachedException {}
+    public void initResource(Resource resourceOne,Resource resourceTwo) throws UnavailableResourceException, CallForCouncilException, LastSpaceReachedException {}
 
     public void EndOfTurn(){
 
@@ -128,5 +128,71 @@ public class Player {
 
         return  personalLeaderCard.get(index);
     }
+
+    public void buyProductionCard(DeckProductionCard deck, int choosenColumn) throws LevelException, NotEnoughResourcesException, EmptyException, FullColumnException, EndGameException {
+        gameBoardOfPlayer.buyProductionCard(deck,choosenColumn);
+    }
+
+    public void setPapal(){
+        gameBoardOfPlayer.setPapal();
+    }
+
+    public void discardResource(Resource resource){
+        Reserve.addResource(resource);
+        game.moveEveryoneExcept(this);
+    }
+
+
+    public void takeFromMarket() {
+        Resource resource;
+
+        try {
+            gameBoardOfPlayer.takeFromMarket((ArrayList<Resource>) buffer.clone());
+            buffer = new ArrayList<>();
+        } catch (NotEnoughSpeceInStorageException e) {
+            //discardResource(buffer.remove(resource));
+            takeFromMarket();
+        }
+    }
+
+    public void productionOn(int choosenColumn) throws ImpossibleProductionException, EmptyColumnException {
+        gameBoardOfPlayer.productionOn(choosenColumn);
+    }
+
+    public void baseProductionOn(Resource i1,Resource i2,Resource o) throws ImpossibleProductionException {
+        gameBoardOfPlayer.baseProductionOn(i1,i2,o);
+    }
+
+    public int playerScore(){
+        return gameBoardOfPlayer.score();
+    }
+
+    public Resource whiteExchange() throws BlockedWhiteMarbleEffectException, UnavailableResourceException {
+        return gameBoardOfPlayer.whiteExchange();
+    }
+
+
+    public void addToBuffer(Resource resource){
+        buffer.add(resource);
+    }
+
+    /*
+     * method which receives card from deckcardprodcution and pass it to Gameboard
+     * @param productioncard
+     * @param choosenColumns
+     * @throws LevelException fromm gameboard, player can't take this level of card, or place it in choosencolumns
+
+    public void GivePlayerCard(ProductionCard productioncard, int choosenColumns) throws LevelException {
+        gameBoardOfPlayer.addCardToDevelopmentBoard(productioncard,choosenColumns);
+    }*/
+
+    /*
+      @param resource
+      method which add resource to buffer from market
+
+    public void addToBuffer(Resource resource){
+        gameBoardOfPlayer.addToBuffer(resource);
+    }*/
+
 
 }

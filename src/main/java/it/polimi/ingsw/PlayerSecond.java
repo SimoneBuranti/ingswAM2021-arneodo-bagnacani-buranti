@@ -19,7 +19,7 @@ public class PlayerSecond extends Player{
      *
      */
     public void initResource(Resource resourceOne) throws UnavailableResourceException {
-        getGameBoardOfPlayer().addResourceToStorage(resourceOne);
+        getGameBoardOfPlayer().addToStorage(resourceOne);
     }
 
     /**

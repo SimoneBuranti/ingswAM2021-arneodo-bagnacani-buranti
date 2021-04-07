@@ -2,29 +2,32 @@ package it.polimi.ingsw;
 
 public class Game {
 
-    Market market;
-    Reserve reserve;
+    private Market market;
+    private Reserve reserve;
+    private static Player[] players;
+    private Player currentPlayer;
+    protected final DeckProductionCard deckProductionCardOneBlu ;
+    protected final DeckProductionCard deckProductionCardTwoBlu ;
+    protected final DeckProductionCard deckProductionCardThreeBlu ;
 
-    DeckLeaderCard deckLeaderCard;
-    DeckProductionCard deckProductionCardOneBlu ;
-    DeckProductionCard deckProductionCardTwoBlu ;
-    DeckProductionCard deckProductionCardThreeBlu ;
+    protected final DeckProductionCard deckProductionCardOneGreen ;
+    protected final DeckProductionCard deckProductionCardTwoGreen;
+    protected final DeckProductionCard deckProductionCardThreeGreen ;
 
-    DeckProductionCard deckProductionCardOneGreen ;
-    DeckProductionCard deckProductionCardTwoGreen;
-    DeckProductionCard deckProductionCardThreeGreen ;
+    protected final DeckProductionCard deckProductionCardOneYellow ;
+    protected final DeckProductionCard deckProductionCardTwoYellow ;
+    protected final DeckProductionCard deckProductionCardThreeYellow;
 
-    DeckProductionCard deckProductionCardOneYellow ;
-    DeckProductionCard deckProductionCardTwoYellow ;
-    DeckProductionCard deckProductionCardThreeYellow;
-
-    DeckProductionCard deckProductionCardOneViolet ;
-    DeckProductionCard deckProductionCardTwoViolet ;
-    DeckProductionCard  deckProductionCardThreeViolet ;
+    protected final DeckProductionCard deckProductionCardOneViolet ;
+    protected final DeckProductionCard deckProductionCardTwoViolet ;
+    protected final DeckProductionCard deckProductionCardThreeViolet ;
 
     public Game(){
         market = new Market();
         reserve = new Reserve();
+        //this.players = players;
+        //currentPlayer = players[0];
+
         deckProductionCardOneBlu = new DeckProductionCardOneBlu();
         deckProductionCardTwoBlu = new DeckProductionCardTwoBlu();
         deckProductionCardThreeBlu = new DeckProductionCardThreeBlu();
@@ -40,35 +43,60 @@ public class Game {
         deckProductionCardOneViolet = new DeckProductionCardOneViolet();
         deckProductionCardTwoViolet = new DeckProductionCardTwoViolet();
         deckProductionCardThreeViolet = new DeckProductionCardThreeViolet();
-        deckLeaderCard= new DeckLeaderCard();
-
-
     }
 
-
-
-    public static void DoActionMarket(Player player, DeckProductionCard deckProductionCard, int choosenColumns) throws LevelException, EmptyException {
-        deckProductionCard.PickUpFirstCard(player, choosenColumns);
+    public void buyProductionCard(DeckProductionCard deck, int choosenColumn) throws LevelException, NotEnoughResourcesException, EmptyException, FullColumnException, EndGameException {
+        currentPlayer.buyProductionCard(deck,choosenColumn);
     }
 
-
-    /**
-     * this method is implemented for testing and returns the number of production cards in the deck passed as parameter
-     * @param deck : deck of production cards
-     * @return int : the size of the deck
-     */
-    public int deckSize(DeckProductionCard deck){
-        return deck.size();
+    public void moveEveryoneExcept(Player player){
+        for(Player p : players){
+            if (p != player) {
+                try {
+                    p.faithMove();
+                } catch (CallForCouncilException e1) {
+                    exceptionHandler(e1);
+                } catch (LastSpaceReachedException e2) {
+                    exceptionHandler(e2);
+                }
+            }
+        }
     }
 
-
-
-
-
-    public int deckSize(){
-        return deckLeaderCard.size();
+    public void productionOn(int choosenColumn){
+        try {
+            currentPlayer.productionOn(choosenColumn);
+        } catch (ImpossibleProductionException e) {
+            exceptionHandler(e);
+        } catch (EmptyColumnException e) {
+            exceptionHandler(e);
+        }
     }
 
+// Exceptions Handlers:
+
+
+    private void exceptionHandler(EmptyColumnException e) {
+        //...
+    }
+
+    private void exceptionHandler(CallForCouncilException e) {
+        for(Player p : players){
+            p.setPapal();
+        }
+    }
+
+    private void exceptionHandler(LastSpaceReachedException e) {
+        for(Player p : players){
+            p.setPapal();
+        }
+
+        //...
+    }
+
+    private void exceptionHandler(ImpossibleProductionException e) {
+        //...
+    }
 
 
 

@@ -24,37 +24,61 @@ public class ActionMarkerTest {
         assertEquals(4, game.deckSize(deckProductionCardTwoBlu));
         assertEquals(4, game.deckSize(deckProductionCardThreeBlu));
 
-        game.activateActionMarker(actionMarker);
+        try {
+            game.activateActionMarker(actionMarker);
+        } catch (EmptyException | EndOfSolitaireGame e) {
+            e.printStackTrace();
+        }
 
         assertEquals(2, game.deckSize(deckProductionCardOneBlu));
         assertEquals(4, game.deckSize(deckProductionCardTwoBlu));
         assertEquals(4, game.deckSize(deckProductionCardThreeBlu));
 
-        game.activateActionMarker(actionMarker);
+        try {
+            game.activateActionMarker(actionMarker);
+        } catch (EmptyException | EndOfSolitaireGame e) {
+            e.printStackTrace();
+        }
 
         assertEquals(0, game.deckSize(deckProductionCardOneBlu));
         assertEquals(4, game.deckSize(deckProductionCardTwoBlu));
         assertEquals(4, game.deckSize(deckProductionCardThreeBlu));
 
-        game.activateActionMarker(actionMarker);
+        try {
+            game.activateActionMarker(actionMarker);
+        } catch (EmptyException | EndOfSolitaireGame e) {
+            e.printStackTrace();
+        }
 
         assertEquals(0, game.deckSize(deckProductionCardOneBlu));
         assertEquals(2, game.deckSize(deckProductionCardTwoBlu));
         assertEquals(4, game.deckSize(deckProductionCardThreeBlu));
 
-        game.activateActionMarker(actionMarker);
+        try {
+            game.activateActionMarker(actionMarker);
+        } catch (EmptyException | EndOfSolitaireGame e) {
+            e.printStackTrace();
+        }
 
         assertEquals(0, game.deckSize(deckProductionCardOneBlu));
         assertEquals(0, game.deckSize(deckProductionCardTwoBlu));
         assertEquals(4, game.deckSize(deckProductionCardThreeBlu));
 
-        game.activateActionMarker(actionMarker);
+        try {
+            game.activateActionMarker(actionMarker);
+        } catch (EmptyException | EndOfSolitaireGame e) {
+            e.printStackTrace();
+        }
 
         assertEquals(0, game.deckSize(deckProductionCardOneBlu));
         assertEquals(0, game.deckSize(deckProductionCardTwoBlu));
         assertEquals(2, game.deckSize(deckProductionCardThreeBlu));
 
-        game.activateActionMarker(actionMarker);
+        try {
+            game.activateActionMarker(actionMarker);
+        } catch (EmptyException | EndOfSolitaireGame e) {
+            e.printStackTrace();
+        }
 
         assertEquals(0, game.deckSize(deckProductionCardOneBlu));
         assertEquals(0, game.deckSize(deckProductionCardTwoBlu));
@@ -78,26 +102,46 @@ public class ActionMarkerTest {
         assertEquals(4, game.deckSize(deckProductionCardTwoBlu));
         assertEquals(4, game.deckSize(deckProductionCardThreeBlu));
 
-        game.activateActionMarker(actionMarker);
+        try {
+            game.activateActionMarker(actionMarker);
+        } catch (EmptyException | EndOfSolitaireGame e) {
+            e.printStackTrace();
+        }
 
         assertEquals(2, game.deckSize(deckProductionCardOneBlu));
         assertEquals(4, game.deckSize(deckProductionCardTwoBlu));
         assertEquals(4, game.deckSize(deckProductionCardThreeBlu));
 
-        DeckProductionCardOneBlu.removeOneCard();
+        try {
+            deckProductionCardOneBlu.removeOneCard();
+        } catch (EmptyException e) {
+            e.printStackTrace();
+        }
 
         assertEquals(1, game.deckSize(deckProductionCardOneBlu));
         assertEquals(4, game.deckSize(deckProductionCardTwoBlu));
         assertEquals(4, game.deckSize(deckProductionCardThreeBlu));
 
-        game.activateActionMarker(actionMarker);
+        try {
+            game.activateActionMarker(actionMarker);
+        } catch (EmptyException | EndOfSolitaireGame e) {
+            e.printStackTrace();
+        }
 
         assertEquals(0, game.deckSize(deckProductionCardOneBlu));
         assertEquals(3, game.deckSize(deckProductionCardTwoBlu));
         assertEquals(4, game.deckSize(deckProductionCardThreeBlu));
 
-        DeckProductionCardOneBlu.removeOneCard();
-        game.activateActionMarker(actionMarker);
+        try {
+            deckProductionCardOneBlu.removeOneCard();
+        } catch (EmptyException e) {
+            e.printStackTrace();
+        }
+        try {
+            game.activateActionMarker(actionMarker);
+        } catch (EmptyException | EndOfSolitaireGame e) {
+            e.printStackTrace();
+        }
 
         assertEquals(0, game.deckSize(deckProductionCardOneBlu));
         assertEquals(0, game.deckSize(deckProductionCardTwoBlu));
@@ -117,46 +161,142 @@ public class ActionMarkerTest {
         ActionMarker actionMarker1 = game.showFirst();
         assertEquals(0, game.getLorenzoFaithIndicator());
 
-        game.activateActionMarker(actionMarker);
+        try {
+            game.activateActionMarker(actionMarker);
+        } catch (EmptyException | EndOfSolitaireGame e) {
+            e.printStackTrace();
+        }
         assertEquals(1, game.getLorenzoFaithIndicator());
         assertNotEquals(actionMarker1, game.showFirst());
 
         actionMarker1 = game.showFirst();
-        game.activateActionMarker(actionMarker);
+        try {
+            game.activateActionMarker(actionMarker);
+        } catch (EmptyException | EndOfSolitaireGame e) {
+            e.printStackTrace();
+        }
         assertEquals(2, game.getLorenzoFaithIndicator());
         assertNotEquals(actionMarker1, game.showFirst());
 
-        game.activateActionMarker(actionMarker);
-        game.activateActionMarker(actionMarker);
-        game.activateActionMarker(actionMarker);
-        game.activateActionMarker(actionMarker);
-        game.activateActionMarker(actionMarker);
+        try {
+            game.activateActionMarker(actionMarker);
+        } catch (EmptyException | EndOfSolitaireGame e) {
+            e.printStackTrace();
+        }
+        try {
+            game.activateActionMarker(actionMarker);
+        } catch (EmptyException | EndOfSolitaireGame e) {
+            e.printStackTrace();
+        }
+        try {
+            game.activateActionMarker(actionMarker);
+        } catch (EmptyException | EndOfSolitaireGame e) {
+            e.printStackTrace();
+        }
+        try {
+            game.activateActionMarker(actionMarker);
+        } catch (EmptyException | EndOfSolitaireGame e) {
+            e.printStackTrace();
+        }
+        try {
+            game.activateActionMarker(actionMarker);
+        } catch (EmptyException | EndOfSolitaireGame e) {
+            e.printStackTrace();
+        }
         actionMarker1 = game.showFirst();
-        game.activateActionMarker(actionMarker);
+        try {
+            game.activateActionMarker(actionMarker);
+        } catch (EmptyException | EndOfSolitaireGame e) {
+            e.printStackTrace();
+        }
         assertEquals(8, game.getLorenzoFaithIndicator());
         assertNotEquals(actionMarker1, game.showFirst());
 
-        game.activateActionMarker(actionMarker);
-        game.activateActionMarker(actionMarker);
-        game.activateActionMarker(actionMarker);
-        game.activateActionMarker(actionMarker);
-        game.activateActionMarker(actionMarker);
-        game.activateActionMarker(actionMarker);
-        game.activateActionMarker(actionMarker);
+        try {
+            game.activateActionMarker(actionMarker);
+        } catch (EmptyException | EndOfSolitaireGame e) {
+            e.printStackTrace();
+        }
+        try {
+            game.activateActionMarker(actionMarker);
+        } catch (EmptyException | EndOfSolitaireGame e) {
+            e.printStackTrace();
+        }
+        try {
+            game.activateActionMarker(actionMarker);
+        } catch (EmptyException | EndOfSolitaireGame e) {
+            e.printStackTrace();
+        }
+        try {
+            game.activateActionMarker(actionMarker);
+        } catch (EmptyException | EndOfSolitaireGame e) {
+            e.printStackTrace();
+        }
+        try {
+            game.activateActionMarker(actionMarker);
+        } catch (EmptyException | EndOfSolitaireGame e) {
+            e.printStackTrace();
+        }
+        try {
+            game.activateActionMarker(actionMarker);
+        } catch (EmptyException | EndOfSolitaireGame e) {
+            e.printStackTrace();
+        }
+        try {
+            game.activateActionMarker(actionMarker);
+        } catch (EmptyException | EndOfSolitaireGame e) {
+            e.printStackTrace();
+        }
         actionMarker1 = game.showFirst();
-        game.activateActionMarker(actionMarker);
+        try {
+            game.activateActionMarker(actionMarker);
+        } catch (EmptyException | EndOfSolitaireGame e) {
+            e.printStackTrace();
+        }
         assertEquals(16, game.getLorenzoFaithIndicator());
         assertNotEquals(actionMarker1, game.showFirst());
 
-        game.activateActionMarker(actionMarker);
-        game.activateActionMarker(actionMarker);
-        game.activateActionMarker(actionMarker);
-        game.activateActionMarker(actionMarker);
-        game.activateActionMarker(actionMarker);
-        game.activateActionMarker(actionMarker);
-        game.activateActionMarker(actionMarker);
+        try {
+            game.activateActionMarker(actionMarker);
+        } catch (EmptyException | EndOfSolitaireGame e) {
+            e.printStackTrace();
+        }
+        try {
+            game.activateActionMarker(actionMarker);
+        } catch (EmptyException | EndOfSolitaireGame e) {
+            e.printStackTrace();
+        }
+        try {
+            game.activateActionMarker(actionMarker);
+        } catch (EmptyException | EndOfSolitaireGame e) {
+            e.printStackTrace();
+        }
+        try {
+            game.activateActionMarker(actionMarker);
+        } catch (EmptyException | EndOfSolitaireGame e) {
+            e.printStackTrace();
+        }
+        try {
+            game.activateActionMarker(actionMarker);
+        } catch (EmptyException | EndOfSolitaireGame e) {
+            e.printStackTrace();
+        }
+        try {
+            game.activateActionMarker(actionMarker);
+        } catch (EmptyException | EndOfSolitaireGame e) {
+            e.printStackTrace();
+        }
+        try {
+            game.activateActionMarker(actionMarker);
+        } catch (EmptyException | EndOfSolitaireGame e) {
+            e.printStackTrace();
+        }
         actionMarker1 = game.showFirst();
-        game.activateActionMarker(actionMarker);
+        try {
+            game.activateActionMarker(actionMarker);
+        } catch (EmptyException | EndOfSolitaireGame e) {
+            e.printStackTrace();
+        }
         assertEquals(24, game.getLorenzoFaithIndicator());
         assertNotEquals(actionMarker1, game.showFirst());
 
@@ -175,34 +315,82 @@ public class ActionMarkerTest {
         actionMarker1 = game.showFirst();
         assertEquals(0, game.getLorenzoFaithIndicator());
 
-        game.activateActionMarker(actionMarker);
+        try {
+            game.activateActionMarker(actionMarker);
+        } catch (EmptyException | EndOfSolitaireGame e) {
+            e.printStackTrace();
+        }
         assertEquals(2, game.getLorenzoFaithIndicator());
         assertEquals(actionMarker1, game.showFirst());
 
         actionMarker1 = game.showFirst();
-        game.activateActionMarker(actionMarker);
+        try {
+            game.activateActionMarker(actionMarker);
+        } catch (EmptyException | EndOfSolitaireGame e) {
+            e.printStackTrace();
+        }
         assertEquals(4, game.getLorenzoFaithIndicator());
         assertEquals(actionMarker1, game.showFirst());
 
-        game.activateActionMarker(actionMarker);
+        try {
+            game.activateActionMarker(actionMarker);
+        } catch (EmptyException | EndOfSolitaireGame e) {
+            e.printStackTrace();
+        }
         actionMarker1 = game.showFirst();
-        game.activateActionMarker(actionMarker);
+        try {
+            game.activateActionMarker(actionMarker);
+        } catch (EmptyException | EndOfSolitaireGame e) {
+            e.printStackTrace();
+        }
         assertEquals(8, game.getLorenzoFaithIndicator());
         assertEquals(actionMarker1, game.showFirst());
 
-        game.activateActionMarker(actionMarker);
-        game.activateActionMarker(actionMarker);
-        game.activateActionMarker(actionMarker);
+        try {
+            game.activateActionMarker(actionMarker);
+        } catch (EmptyException | EndOfSolitaireGame e) {
+            e.printStackTrace();
+        }
+        try {
+            game.activateActionMarker(actionMarker);
+        } catch (EmptyException | EndOfSolitaireGame e) {
+            e.printStackTrace();
+        }
+        try {
+            game.activateActionMarker(actionMarker);
+        } catch (EmptyException | EndOfSolitaireGame e) {
+            e.printStackTrace();
+        }
         actionMarker1 = game.showFirst();
-        game.activateActionMarker(actionMarker);
+        try {
+            game.activateActionMarker(actionMarker);
+        } catch (EmptyException | EndOfSolitaireGame e) {
+            e.printStackTrace();
+        }
         assertEquals(16, game.getLorenzoFaithIndicator());
         assertEquals(actionMarker1, game.showFirst());
 
-        game.activateActionMarker(actionMarker);
-        game.activateActionMarker(actionMarker);
-        game.activateActionMarker(actionMarker);
+        try {
+            game.activateActionMarker(actionMarker);
+        } catch (EmptyException | EndOfSolitaireGame e) {
+            e.printStackTrace();
+        }
+        try {
+            game.activateActionMarker(actionMarker);
+        } catch (EmptyException | EndOfSolitaireGame e) {
+            e.printStackTrace();
+        }
+        try {
+            game.activateActionMarker(actionMarker);
+        } catch (EmptyException | EndOfSolitaireGame e) {
+            e.printStackTrace();
+        }
         actionMarker1 = game.showFirst();
-        game.activateActionMarker(actionMarker);
+        try {
+            game.activateActionMarker(actionMarker);
+        } catch (EmptyException | EndOfSolitaireGame e) {
+            e.printStackTrace();
+        }
         assertEquals(24, game.getLorenzoFaithIndicator());
         assertEquals(actionMarker1, game.showFirst());
 

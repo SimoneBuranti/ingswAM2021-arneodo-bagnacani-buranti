@@ -17,7 +17,6 @@ public class BluMarble extends Marble{
         }
         player.addToBuffer(Resource.SHIELD);
 
-
         }
     }
 

@@ -97,14 +97,15 @@ public class FaithPath {
      * If the player moves on a papal event checkpoint position a CallForCouncilException is thrown
      * and it will be handled by Game which will manage papal cards of each player
      */
-    public void move() throws CallForCouncilException {
+    public void move() throws CallForCouncilException, LastSpaceReachedException {
 
         if (faithIndicator < PAPAL_POS[PAPAL_N-1])
             faithIndicator++;
 
-        if (currCall < PAPAL_N && faithIndicator == PAPAL_POS[currCall])
+        if (currCall < (PAPAL_N-1) && faithIndicator == PAPAL_POS[currCall])
             throw new CallForCouncilException();
-
+        else if ( currCall == PAPAL_N-1 && faithIndicator == PAPAL_POS[currCall])
+            throw new LastSpaceReachedException();
     }
 
 

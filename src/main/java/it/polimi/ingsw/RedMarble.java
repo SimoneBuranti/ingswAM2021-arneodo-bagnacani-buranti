@@ -8,7 +8,7 @@ public class RedMarble extends Marble{
      *  player FaithIndicator move of one position
      * @throws CallForCouncilException, exception thrown from Faithpath, game is finished
      */
-    public void giveResource(Player player) throws CallForCouncilException {
+    public void giveResource(Player player) throws CallForCouncilException, LastSpaceReachedException {
         player.faithMove();
     }
 }

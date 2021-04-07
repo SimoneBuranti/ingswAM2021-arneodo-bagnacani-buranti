@@ -21,22 +21,60 @@ public class Strongbox {
         storageStrongBox.put(Resource.SHIELD, 0);
     }
 
+
+    /**
+     * This method returns an ArrayList containing the whole available resources
+     * inside the storage
+     * @return
+     */
+    public ArrayList<Resource> availableResources() {
+        ArrayList<Resource> strongboxResources = new ArrayList<>();
+
+        for(Resource key : storageStrongBox.keySet()) {
+            for(int i=0;i<storageStrongBox.get(key);i++)
+                strongboxResources.add(key);
+        }
+        return strongboxResources;
+    }
+
+
+    /**
+     * This method gets as an input the resource ArrayList containing the cost and return the unpaid resources.
+     * @param cost
+     * @return
+     */
+    public ArrayList<Resource> payResources(ArrayList<Resource> cost) {
+
+        ArrayList<Resource> unpaid = new ArrayList<>();
+
+        for(Resource resource : cost){
+            try {
+                useResource(resource);
+            } catch (UnavailableResourceException e) {
+                unpaid.add(resource);
+            }
+        }
+
+        return unpaid;
+    }
+
+
     /**
      * This method removes a resource type from the reserve if available by adding it to the map,
      * it does nothing otherwise
      * @param resource :type of resource to add
      */
-    public void addResource(Resource resource) throws UnavailableResourceException{
+    public void addResource(Resource resource) {
         int value;
 
-        Reserve.getResource(resource);
-
-        if(storageStrongBox.containsKey(resource))
-            value = storageStrongBox.get(resource) + 1;
-        else
-            value = 1;
-        storageStrongBox.put(resource, value);
-
+        try {
+            Reserve.getResource(resource);
+            if(storageStrongBox.containsKey(resource))
+                value = storageStrongBox.get(resource) + 1;
+            else
+                value = 1;
+            storageStrongBox.put(resource, value);
+        } catch (UnavailableResourceException ignored) {}
     }
 
     /**

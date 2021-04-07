@@ -17,16 +17,8 @@ public class ActionMarkerProductionBlue implements ActionMarker{
      * and makes the catch of the EndOfSolitaireGame exception if all blue production cards are no longer available
      * @param game : the instantiated solitaire game a player is playing
      */
-    public void actionMarkerEffect(GameSolitaire game) {
-        try {
-            DeckProductionCardOneBlu.removeOneCard();
-        } catch (EndOfSolitaireGame endOfSolitaireGame) {
-            System.out.println("End of Solitaire Game, the blue production cards are finished and Lorenzo wins");
-        }
-        try {
-            DeckProductionCardOneBlu.removeOneCard();
-        } catch (EndOfSolitaireGame endOfSolitaireGame) {
-            System.out.println("End of Solitaire Game, the blue production cards are finished and Lorenzo wins");
-        }
+    public void actionMarkerEffect(GameSolitaire game) throws EmptyException, EndOfSolitaireGame {
+        game.removeProductionCard(new Blue());
+        game.removeProductionCard(new Blue());
     }
 }

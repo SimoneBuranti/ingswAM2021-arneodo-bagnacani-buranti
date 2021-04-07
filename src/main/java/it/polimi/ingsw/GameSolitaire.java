@@ -30,7 +30,7 @@ public class GameSolitaire extends Game{
     /**
      * this method takes the first action marker of the deck and applies its effect
      */
-    public void revealAndActivateActionMarker(){
+    public void revealAndActivateActionMarker() throws EmptyException, EndOfSolitaireGame {
         deckActionMarker.pickUpFirstCard().actionMarkerEffect(this);
     }
 
@@ -38,7 +38,7 @@ public class GameSolitaire extends Game{
      * this method has been implemented for testing and applies the effect of the action marker passed as a parameter
      * @param actionMarker
      */
-    public void activateActionMarker(ActionMarker actionMarker){
+    public void activateActionMarker(ActionMarker actionMarker) throws EmptyException, EndOfSolitaireGame {
         actionMarker.actionMarkerEffect(this);
     }
 
@@ -108,6 +108,66 @@ public class GameSolitaire extends Game{
      */
     public int getLorenzoFaithIndicator(){
         return lorenzoTheMagnificent.getFaithIndicator();
+    }
+
+
+    public void removeProductionCard(Blue blue) throws EndOfSolitaireGame, EmptyException {
+
+        try {
+            deckProductionCardOneBlu.removeOneCard();
+        } catch (EmptyException e) {
+            try {
+                deckProductionCardTwoBlu.removeOneCard();
+            } catch (EmptyException emptyException) {
+                deckProductionCardThreeBlu.removeOneCard();
+            }
+        }
+    }
+
+    public void removeProductionCard(Yellow yellow) throws EndOfSolitaireGame, EmptyException {
+        try {
+            deckProductionCardOneYellow.removeOneCard();
+        } catch (EmptyException e) {
+            try {
+                deckProductionCardTwoYellow.removeOneCard();
+            } catch (EmptyException emptyException) {
+                deckProductionCardThreeYellow.removeOneCard();
+            }
+        }
+
+
+    }
+
+    public void removeProductionCard(Green green) throws EndOfSolitaireGame, EmptyException {
+        try {
+            deckProductionCardOneGreen.removeOneCard();
+        } catch (EmptyException e) {
+            try {
+                deckProductionCardTwoGreen.removeOneCard();
+            } catch (EmptyException emptyException) {
+                deckProductionCardThreeGreen.removeOneCard();
+            }
+        }
+
+
+    }
+
+    public void removeProductionCard(Violet violet) throws EndOfSolitaireGame, EmptyException {
+        try {
+            deckProductionCardOneViolet.removeOneCard();
+        } catch (EmptyException e) {
+            try {
+                deckProductionCardTwoViolet.removeOneCard();
+            } catch (EmptyException emptyException) {
+                deckProductionCardThreeViolet.removeOneCard();
+            }
+        }
+
+    }
+
+
+    public int deckSize(DeckProductionCard deck){
+        return deck.size();
     }
 
 }

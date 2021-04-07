@@ -20,9 +20,10 @@ public class PlayerThird extends Player {
      * during the pregame playerSecond can choose one type of resource, with a move on faithpath
      *
      */
-    public void initResource(Resource resourceOne) throws UnavailableResourceException, CallForCouncilException {
-        getGameBoardOfPlayer().addResourceToStorage(resourceOne);
+    public void initResource(Resource resourceOne) throws UnavailableResourceException, CallForCouncilException, LastSpaceReachedException {
+        getGameBoardOfPlayer().addToStorage(resourceOne);
         getGameBoardOfPlayer().faithMove();
+
     }
 
     /**

@@ -33,6 +33,17 @@ public class StorageExtraSecond extends StorageExtraFirst {
         storageExtraSecond[1] = 0;
     }
 
+    public ArrayList<Resource> availableResources() {
+        ArrayList<Resource> storageExtraSecondResources = new ArrayList<>();
+
+        for(int i=0;i<2;i++)
+            if (storageExtraSecond[i]==1)
+                storageExtraSecondResources.add(secondResourceType);
+        storageExtraSecondResources.addAll(super.availableResources());
+
+        return storageExtraSecondResources;
+    }
+
     /**
      * this method removes a resource type from the reserve if available and
      * adds it to the second extra storage if it can, otherwise

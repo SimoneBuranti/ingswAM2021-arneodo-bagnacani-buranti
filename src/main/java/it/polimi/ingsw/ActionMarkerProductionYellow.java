@@ -17,16 +17,8 @@ public class ActionMarkerProductionYellow implements ActionMarker{
      * and makes the catch of the EndOfSolitaireGame exception if all yellow production cards are no longer available
      * @param game : the instantiated solitaire game a player is playing
      */
-    public void actionMarkerEffect(GameSolitaire game) {
-        try {
-            DeckProductionCardOneYellow.removeOneCard();
-        } catch (EndOfSolitaireGame endOfSolitaireGame) {
-            System.out.println("End of Solitaire Game, the yellow production cards are finished and Lorenzo wins");
-        }
-        try {
-            DeckProductionCardOneYellow.removeOneCard();
-        } catch (EndOfSolitaireGame endOfSolitaireGame) {
-            System.out.println("End of Solitaire Game, the yellow production cards are finished and Lorenzo wins");
-        }
+    public void actionMarkerEffect(GameSolitaire game) throws EmptyException, EndOfSolitaireGame {
+        game.removeProductionCard(new Yellow());
+        game.removeProductionCard(new Yellow());
     }
 }

@@ -5,10 +5,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class DeckProductionCardOneBlu extends DeckProductionCard {
-    public static ArrayList<ProductionCard> deckBlueOne ;
+
+
     public DeckProductionCardOneBlu(){
         Blue blue= new Blue();
-        deckBlueOne = new ArrayList<ProductionCard>(4);
+        deck = new ArrayList<ProductionCard>(4);
         Map<Resource,Integer> blueOne =new HashMap<>();
         blueOne.put(Resource.COIN, 2);
         blueOne.put(Resource.ROCK, 0);
@@ -25,7 +26,7 @@ public class DeckProductionCardOneBlu extends DeckProductionCard {
         blueOneOut.put(Resource.SERVANT, 0);
         blueOneOut.put(Resource.SHIELD, 0);
         ProductionCard cardThirtyseven=new ProductionCard(blueOne, blueOneIn, blueOneOut, 1, 1, blue ,1);
-        deckBlueOne.add(cardThirtyseven);
+        deck.add(cardThirtyseven);
 
         Map<Resource,Integer> blueTwo =new HashMap<>();
         blueTwo.put(Resource.COIN, 1);
@@ -43,7 +44,7 @@ public class DeckProductionCardOneBlu extends DeckProductionCard {
         blueTwoOut.put(Resource.SERVANT, 0);
         blueTwoOut.put(Resource.SHIELD, 0);
         ProductionCard cardThirtyeight =new ProductionCard(blueTwo, blueTwoIn,blueTwoOut, 2, 1, blue, 0);
-        deckBlueOne.add(cardThirtyeight);
+        deck.add(cardThirtyeight);
 
 
 
@@ -63,7 +64,7 @@ public class DeckProductionCardOneBlu extends DeckProductionCard {
         blueThreeOut.put(Resource.SERVANT, 1);
         blueThreeOut.put(Resource.SHIELD, 1);
         ProductionCard cardThirtynine =new ProductionCard(blueThree, blueThreeIn, blueThreeOut, 3, 1, blue, 0);
-        deckBlueOne.add(cardThirtynine);
+        deck.add(cardThirtynine);
 
 
         Map<Resource,Integer> blueFour =new HashMap<>();
@@ -82,43 +83,10 @@ public class DeckProductionCardOneBlu extends DeckProductionCard {
         blueFourOut.put(Resource.SERVANT, 2);
         blueFourOut.put(Resource.SHIELD, 0);
         ProductionCard cardFourty =new ProductionCard(blueFour, blueFourIn,blueFourOut, 4, 1,blue, 1);
-        deckBlueOne.add(cardFourty);
+        deck.add(cardFourty);
 
-        Mix.MIXED(deckBlueOne);
-    }
-    public void PickUpFirstCard(Player player , int choosenColumns) throws LevelException,EmptyException {
-
-     if(!deckBlueOne.isEmpty()){
-     player.GivePlayerCard(deckBlueOne.get(0),choosenColumns);
-     for(int i=0; i<deckBlueOne.size()-1; i++)
-        deckBlueOne.set(i,deckBlueOne.get(i+1));
-     deckBlueOne.remove(deckBlueOne.size()-1);}
-     else
-         throw new EmptyException();
-
+        Mix.MIXED(deck);
     }
 
-    /**
-     * this method removes the first card from the deck,
-     * if the deck is empty it calls the level two deck method of the same colour
-     * @throws EndOfSolitaireGame : exception thrown if there are no more cards available of a certain colour
-     */
-    public static void removeOneCard() throws EndOfSolitaireGame{
-        if(deckBlueOne.isEmpty())
-            DeckProductionCardTwoBlu.removeOneCard();
-        else {
-            for (int i = 0; i < deckBlueOne.size() - 1; i++)
-                deckBlueOne.set(i, deckBlueOne.get(i + 1));
-            deckBlueOne.remove(deckBlueOne.size() - 1);
-        }
-    }
-
-    /**
-     * this method has been implemented to do the tests and returns the size of the deck
-     * @return int: the number of cards in the deck
-     */
-    public int size(){
-        return deckBlueOne.size();
-    }
 
 }

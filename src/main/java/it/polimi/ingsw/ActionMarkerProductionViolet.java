@@ -18,16 +18,8 @@ public class ActionMarkerProductionViolet implements ActionMarker{
      * and makes the catch of the EndOfSolitaireGame exception if all violet production cards are no longer available
      * @param game : the instantiated solitaire game a player is playing
      */
-    public void actionMarkerEffect(GameSolitaire game) {
-        try {
-            DeckProductionCardOneViolet.removeOneCard();
-        } catch (EndOfSolitaireGame endOfSolitaireGame) {
-            System.out.println("End of Solitaire Game, the violet production cards are finished and Lorenzo wins");
-        }
-        try {
-            DeckProductionCardOneViolet.removeOneCard();
-        } catch (EndOfSolitaireGame endOfSolitaireGame) {
-            System.out.println("End of Solitaire Game, the violet production cards are finished and Lorenzo wins");
-        }
+    public void actionMarkerEffect(GameSolitaire game) throws EmptyException, EndOfSolitaireGame {
+        game.removeProductionCard(new Violet());
+        game.removeProductionCard(new Violet());
     }
 }

@@ -83,7 +83,7 @@ public class Market {
  * then it reactives the grid and the extra marble
  */
 
-    public void PushRow(int ChosenRow, Player player) throws CallForCouncilException {
+    public void PushRow(int ChosenRow, Player player) throws CallForCouncilException, LastSpaceReachedException {
         int j;
         Marble temp;
         for(j=0; j<4; j++)
@@ -93,6 +93,8 @@ public class Market {
         for(j=1; j<4; j++)
             Grid[ChosenRow][j-1]=Grid[ChosenRow][j];
         Grid[ChosenRow][3]=temp;
+
+        player.takeFromMarket();
       }
 
 
@@ -103,7 +105,7 @@ public class Market {
      *  * then it reactives the grid and the extra marble
      */
 
-    public void PushColumn(int ChosenColumn,Player player) throws CallForCouncilException {
+    public void PushColumn(int ChosenColumn,Player player) throws CallForCouncilException, LastSpaceReachedException {
         int i;
         Marble temp;
         for(i=0; i<3; i++)
@@ -114,6 +116,8 @@ public class Market {
         for(i=1; i<3; i++)
             Grid[i-1][ChosenColumn]=Grid[i][ChosenColumn];
         Grid[2][ChosenColumn]=temp;
+
+        player.takeFromMarket();
     }
 
 

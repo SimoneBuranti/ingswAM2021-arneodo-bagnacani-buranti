@@ -506,58 +506,6 @@ class StorageTest {
 
     }
 
-    /**
-     * Check of the correct behavior of the method discard
-     */
-    @Test
-    @DisplayName("discard Test")
-    public void discardTest(){
-        Storage storage = new Storage();
-        Reserve reserve = new Reserve();
-
-        try {
-            storage.discard(Resource.COIN);
-        } catch (DiscardException e) {
-            e.printStackTrace();
-        }
-        assertEquals(29, Reserve.getAmountOf(Resource.COIN));
-
-        try {
-            storage.discard(Resource.ROCK);
-        } catch (DiscardException e) {
-            e.printStackTrace();
-        }
-        try {
-            storage.discard(Resource.SERVANT);
-        } catch (DiscardException e) {
-            e.printStackTrace();
-        }
-        try {
-            storage.discard(Resource.SHIELD);
-        } catch (DiscardException e) {
-            e.printStackTrace();
-        }
-        assertEquals(29, Reserve.getAmountOf(Resource.ROCK));
-        assertEquals(29, Reserve.getAmountOf(Resource.SERVANT));
-        assertEquals(29, Reserve.getAmountOf(Resource.SHIELD));
-
-        try {
-            storage.discard(Resource.COIN);
-        } catch (DiscardException e) {
-            e.printStackTrace();
-        }
-        try {
-            storage.discard(Resource.COIN);
-        } catch (DiscardException e) {
-            e.printStackTrace();
-        }
-        try {
-            storage.discard(Resource.COIN);
-        } catch (DiscardException e) {
-            e.printStackTrace();
-        }
-        assertEquals(32, Reserve.getAmountOf(Resource.COIN));
-    }
 
 
     /**
@@ -841,4 +789,814 @@ class StorageTest {
 
 
     }
+
+    @Test
+    @DisplayName("availableResourcesTest 0")
+    public void availableResourcesTest0(){
+        Storage storage = new Storage();
+        Reserve reserve = new Reserve();
+
+        Map<Resource,Integer> map = new HashMap<>();
+        Map<Resource,Integer> availableMap = new HashMap<>();
+
+        ArrayList<Resource> available;
+
+        map.put(Resource.COIN, 3);
+        map.put(Resource.ROCK, 3);
+        map.put(Resource.SHIELD, 3);
+        map.put(Resource.SERVANT, 3);
+
+        for(Resource key : map.keySet()){
+            for (int i = 0; i<map.get(key); i++){
+                try {
+                    storage.addResource(key);
+                } catch (UnavailableResourceException e) {
+                    System.out.println("Non ho potuto aggiungere " + key + " perche era finita\n");
+                }
+            }
+        }
+
+        available = storage.availableResources();
+
+        for(Resource resource : available){
+            if (availableMap.get(resource) == null){
+                availableMap.put(resource,1);
+            } else
+                availableMap.put(resource, availableMap.remove(resource)+1);
+        }
+
+        assertTrue(map.equals(availableMap));
+    }
+
+
+    @Test
+    @DisplayName("availableResourcesTest2")
+    public void availableResourcesTest2(){
+        Reserve reserve = new Reserve();
+        Storage storage = new Storage();
+
+        Resource[] resource = {Resource.COIN,Resource.ROCK,Resource.SHIELD,Resource.SERVANT};
+        int[] cont = {0,0,0,0};
+        int[] returned = {0,0,0,0};
+
+        int[] expected = {0,0,0,0};
+        ArrayList<Resource> available;
+
+        for (int i = 0 ; i<4; i++){
+            for (int j = 0 ; j < cont[i]; j++){
+                try {
+                    storage.addResource(resource[i]);
+                } catch (UnavailableResourceException ignored) {}
+            }
+        }
+
+        available = storage.availableResources();
+
+        for(Resource r : available){
+            for (int i = 0;i<4;i++) {
+                if (resource[i] == r)
+                    returned[i]++;
+            }
+        }
+
+        for(Resource r : available){
+            System.out.println(" "+ r +" ");
+        }
+
+        for(Resource r : available){
+            for (int i = 0;i<4;i++) {
+                assertEquals(expected[i],returned[i]);
+            }
+        }
+
+
+    }
+
+    @Test
+    @DisplayName("availableResourcesTest3")
+    public void availableResourcesTest3(){
+        Storage storage = new Storage();
+        Reserve reserve = new Reserve();
+
+        Map<Resource,Integer> map = new HashMap<>();
+        Map<Resource,Integer> availableMap = new HashMap<>();
+
+        ArrayList<Resource> available;
+
+        map.put(Resource.COIN, 0);
+        map.put(Resource.ROCK, 0);
+        map.put(Resource.SHIELD, 0);
+        map.put(Resource.SERVANT, 0);
+
+        availableMap.put(Resource.COIN, 0);
+        availableMap.put(Resource.ROCK, 0);
+        availableMap.put(Resource.SHIELD, 0);
+        availableMap.put(Resource.SERVANT, 0);
+
+        for(Resource key : map.keySet()){
+            for (int i = 0; i<map.get(key); i++){
+                try {
+                    storage.addResource(key);
+                } catch (UnavailableResourceException e) {
+                    System.out.println("Non ho potuto aggiungere " + key + " perche era finita\n");
+                }
+            }
+        }
+
+        available = storage.availableResources();
+
+        for (Resource r : available) {
+            availableMap.put(r,availableMap.remove(r)+1);
+        }
+
+        assertEquals(availableMap.get(Resource.COIN),0);
+        assertEquals(availableMap.get(Resource.ROCK),0);
+        assertEquals(availableMap.get(Resource.SHIELD),0);
+        assertEquals(availableMap.get(Resource.SERVANT),0);
+    }
+
+    @Test
+    @DisplayName("availableResourcesTest4 : available only resources")
+    public void availableResourcesTest4(){
+        Storage storage = new Storage();
+        Reserve reserve = new Reserve();
+
+        Map<Resource,Integer> map = new HashMap<>();
+        Map<Resource,Integer> availableMap = new HashMap<>();
+
+        ArrayList<Resource> available;
+
+        map.put(Resource.COIN, 10);
+        map.put(Resource.ROCK, 1);
+        map.put(Resource.SHIELD, 2);
+        map.put(Resource.SERVANT, 3);
+
+        availableMap.put(Resource.COIN, 0);
+        availableMap.put(Resource.ROCK, 0);
+        availableMap.put(Resource.SHIELD, 0);
+        availableMap.put(Resource.SERVANT, 0);
+
+        for(Resource key : map.keySet()){
+            for (int i = 0; i<map.get(key); i++){
+                try {
+                    storage.addResource(key);
+                } catch (UnavailableResourceException e) {
+                    System.out.println("Non ho potuto aggiungere " + key + " perche era finita\n");
+                }
+            }
+        }
+
+        available = storage.availableResources();
+
+        for (Resource r : available) {
+            availableMap.put(r,availableMap.remove(r)+1);
+        }
+
+        assertEquals(availableMap.get(Resource.COIN),10);
+        assertEquals(availableMap.get(Resource.ROCK),1);
+        assertEquals(availableMap.get(Resource.SHIELD),2);
+        assertEquals(availableMap.get(Resource.SERVANT),3);
+    }
+
+
+    @Test
+    @DisplayName("availableResourcesTest5 : one unavailable reseource type")
+    public void availableResourcesTest5(){
+        Storage storage = new Storage();
+        Reserve reserve = new Reserve();
+
+        Map<Resource,Integer> map = new HashMap<>();
+        Map<Resource,Integer> availableMap = new HashMap<>();
+
+        ArrayList<Resource> available;
+
+        map.put(Resource.COIN, 0);
+        map.put(Resource.ROCK, 0);
+        map.put(Resource.SHIELD, 0);
+        map.put(Resource.SERVANT, 29);
+
+        availableMap.put(Resource.COIN, 0);
+        availableMap.put(Resource.ROCK, 0);
+        availableMap.put(Resource.SHIELD, 0);
+        availableMap.put(Resource.SERVANT, 0);
+
+        for(Resource key : map.keySet()){
+            for (int i = 0; i<map.get(key); i++){
+                try {
+                    storage.addResource(key);
+                } catch (UnavailableResourceException e) {
+                    System.out.println("Non ho potuto aggiungere " + key + " perche era finita\n");
+                }
+            }
+        }
+
+        available = storage.availableResources();
+
+        for (Resource r : available) {
+            availableMap.put(r,availableMap.remove(r)+1);
+        }
+
+        assertEquals(availableMap.get(Resource.COIN),0);
+        assertEquals(availableMap.get(Resource.ROCK),0);
+        assertEquals(availableMap.get(Resource.SHIELD),0);
+        assertEquals(availableMap.get(Resource.SERVANT),28);
+    }
+
+
+    @Test
+    @DisplayName("availableResourcesTest6 : all to limits")
+    public void availableResourcesTest6(){
+        Storage storage = new Storage();
+        Reserve reserve = new Reserve();
+
+        Map<Resource,Integer> map = new HashMap<>();
+        Map<Resource,Integer> availableMap = new HashMap<>();
+
+        ArrayList<Resource> available;
+
+        map.put(Resource.COIN, 28);
+        map.put(Resource.ROCK, 28);
+        map.put(Resource.SHIELD, 28);
+        map.put(Resource.SERVANT, 28);
+
+        availableMap.put(Resource.COIN, 0);
+        availableMap.put(Resource.ROCK, 0);
+        availableMap.put(Resource.SHIELD, 0);
+        availableMap.put(Resource.SERVANT, 0);
+
+        for(Resource key : map.keySet()){
+            for (int i = 0; i<map.get(key); i++){
+                try {
+                    storage.addResource(key);
+                } catch (UnavailableResourceException e) {
+                    System.out.println("Non ho potuto aggiungere " + key + " perche era finita\n");
+                }
+            }
+        }
+
+        available = storage.availableResources();
+
+        for (Resource r : available) {
+            availableMap.put(r,availableMap.remove(r)+1);
+        }
+
+        assertEquals(availableMap.get(Resource.COIN),28);
+        assertEquals(availableMap.get(Resource.ROCK),28);
+        assertEquals(availableMap.get(Resource.SHIELD),28);
+        assertEquals(availableMap.get(Resource.SERVANT),28);
+    }
+
+    @Test
+    @DisplayName("availableResourcesTest7 : all out of limit")
+    public void availableResourcesTest7(){
+        Storage storage = new Storage();
+        Reserve reserve = new Reserve();
+
+        Map<Resource,Integer> map = new HashMap<>();
+        Map<Resource,Integer> availableMap = new HashMap<>();
+
+        ArrayList<Resource> available;
+
+        map.put(Resource.COIN, 100);
+        map.put(Resource.ROCK, 74);
+        map.put(Resource.SHIELD, 55);
+        map.put(Resource.SERVANT, 53);
+
+        availableMap.put(Resource.COIN, 0);
+        availableMap.put(Resource.ROCK, 0);
+        availableMap.put(Resource.SHIELD, 0);
+        availableMap.put(Resource.SERVANT, 0);
+
+        for(Resource key : map.keySet()){
+            for (int i = 0; i<map.get(key); i++){
+                try {
+                    storage.addResource(key);
+                } catch (UnavailableResourceException e) {
+                    System.out.println("Non ho potuto aggiungere " + key + " perche era finita\n");
+                }
+            }
+        }
+
+        available = storage.availableResources();
+
+        for (Resource r : available) {
+            availableMap.put(r,availableMap.remove(r)+1);
+        }
+
+        assertEquals(availableMap.get(Resource.COIN),28);
+        assertEquals(availableMap.get(Resource.ROCK),28);
+        assertEquals(availableMap.get(Resource.SHIELD),28);
+        assertEquals(availableMap.get(Resource.SERVANT),28);
+    }
+
+
+
+
+    @Test
+    @DisplayName("PayResources Test - simple test")
+    public void payResourcesTest0(){
+        Storage storage = new Storage();
+        Reserve reserve = new Reserve();
+
+        Map<Resource,Integer> map = new HashMap<>();
+        Map<Resource,Integer> availableMap = new HashMap<>();
+        Map<Resource,Integer> costMap = new HashMap<>();
+        Map<Resource,Integer> unpaidMap = new HashMap<>();
+
+        ArrayList<Resource> available;
+        ArrayList<Resource> unpaid;
+
+        ArrayList<Resource> cost = new ArrayList<>();
+
+        map.put(Resource.COIN, 0);
+        map.put(Resource.ROCK, 0);
+        map.put(Resource.SHIELD, 0);
+        map.put(Resource.SERVANT, 0);
+
+        availableMap.put(Resource.COIN, 0);
+        availableMap.put(Resource.ROCK, 0);
+        availableMap.put(Resource.SHIELD, 0);
+        availableMap.put(Resource.SERVANT, 0);
+
+        costMap.put(Resource.COIN, 1);
+        costMap.put(Resource.ROCK, 1);
+        costMap.put(Resource.SHIELD, 1);
+        costMap.put(Resource.SERVANT, 1);
+
+        unpaidMap.put(Resource.COIN, 0);
+        unpaidMap.put(Resource.ROCK, 0);
+        unpaidMap.put(Resource.SHIELD, 0);
+        unpaidMap.put(Resource.SERVANT, 0);
+
+        for(Resource key : map.keySet()){
+            for (int i = 0; i<map.get(key); i++){
+                try {
+                    storage.addResource(key);
+                } catch (UnavailableResourceException e) {
+                    System.out.println("Non ho potuto aggiungere " + key + " perche era finita\n");
+                }
+            }
+        }
+
+        for(Resource key : costMap.keySet()){
+            for (int i = 0; i<costMap.get(key); i++){
+                cost.add(key);
+            }
+        }
+        unpaid = storage.payResources(cost);
+        available = storage.availableResources();
+
+        for (Resource r : available) {
+            availableMap.put(r,availableMap.remove(r)+1);
+        }
+
+        for (Resource r : unpaid) {
+            unpaidMap.put(r,unpaidMap.remove(r)+1);
+        }
+
+        assertEquals(unpaidMap.get(Resource.COIN),1);
+        assertEquals(unpaidMap.get(Resource.ROCK),1);
+        assertEquals(unpaidMap.get(Resource.SHIELD),1);
+        assertEquals(unpaidMap.get(Resource.SERVANT),1);
+
+        assertEquals(availableMap.get(Resource.COIN),0);
+        assertEquals(availableMap.get(Resource.ROCK),0);
+        assertEquals(availableMap.get(Resource.SHIELD),0);
+        assertEquals(availableMap.get(Resource.SERVANT),0);
+
+    }
+
+    @Test
+    @DisplayName("PayResources Test 1- affordable cost")
+    public void payResourcesTest1(){
+        Storage storage = new Storage();
+        Reserve reserve = new Reserve();
+
+        Map<Resource,Integer> map = new HashMap<>();
+        Map<Resource,Integer> availableMap = new HashMap<>();
+        Map<Resource,Integer> costMap = new HashMap<>();
+        Map<Resource,Integer> unpaidMap = new HashMap<>();
+
+        ArrayList<Resource> available;
+        ArrayList<Resource> unpaid;
+
+        ArrayList<Resource> cost = new ArrayList<>();
+
+        map.put(Resource.COIN, 8);
+        map.put(Resource.ROCK, 8);
+        map.put(Resource.SHIELD, 8);
+        map.put(Resource.SERVANT, 8);
+
+        availableMap.put(Resource.COIN, 0);
+        availableMap.put(Resource.ROCK, 0);
+        availableMap.put(Resource.SHIELD, 0);
+        availableMap.put(Resource.SERVANT, 0);
+
+        costMap.put(Resource.COIN, 1);
+        costMap.put(Resource.ROCK, 1);
+        costMap.put(Resource.SHIELD, 1);
+        costMap.put(Resource.SERVANT, 1);
+
+        unpaidMap.put(Resource.COIN, 0);
+        unpaidMap.put(Resource.ROCK, 0);
+        unpaidMap.put(Resource.SHIELD, 0);
+        unpaidMap.put(Resource.SERVANT, 0);
+
+        for(Resource key : map.keySet()){
+            for (int i = 0; i<map.get(key); i++){
+                try {
+                    storage.addResource(key);
+                } catch (UnavailableResourceException e) {
+                    System.out.println("Non ho potuto aggiungere " + key + " perche era finita\n");
+                }
+            }
+        }
+
+        for(Resource key : costMap.keySet()){
+            for (int i = 0; i<costMap.get(key); i++){
+                cost.add(key);
+            }
+        }
+
+        unpaid = storage.payResources(cost);
+        available = storage.availableResources();
+
+        for (Resource r : available) {
+            availableMap.put(r,availableMap.remove(r)+1);
+        }
+
+        for (Resource r : unpaid) {
+            unpaidMap.put(r,unpaidMap.remove(r)+1);
+        }
+
+        assertEquals(unpaidMap.get(Resource.COIN),0);
+        assertEquals(unpaidMap.get(Resource.ROCK),0);
+        assertEquals(unpaidMap.get(Resource.SHIELD),0);
+        assertEquals(unpaidMap.get(Resource.SERVANT),0);
+
+        assertEquals(availableMap.get(Resource.COIN),7);
+        assertEquals(availableMap.get(Resource.ROCK),7);
+        assertEquals(availableMap.get(Resource.SHIELD),7);
+        assertEquals(availableMap.get(Resource.SERVANT),7);
+
+    }
+
+    @Test
+    @DisplayName("PayResources Test 2- affordable cost")
+    public void payResourcesTest2(){
+        Storage storage = new Storage();
+        Reserve reserve = new Reserve();
+
+        Map<Resource,Integer> map = new HashMap<>();
+        Map<Resource,Integer> availableMap = new HashMap<>();
+        Map<Resource,Integer> costMap = new HashMap<>();
+        Map<Resource,Integer> unpaidMap = new HashMap<>();
+
+        ArrayList<Resource> available;
+        ArrayList<Resource> unpaid;
+
+        ArrayList<Resource> cost = new ArrayList<>();
+
+        map.put(Resource.COIN, 1);
+        map.put(Resource.ROCK, 0);
+        map.put(Resource.SHIELD, 2);
+        map.put(Resource.SERVANT, 3);
+
+        availableMap.put(Resource.COIN, 0);
+        availableMap.put(Resource.ROCK, 0);
+        availableMap.put(Resource.SHIELD, 0);
+        availableMap.put(Resource.SERVANT, 0);
+
+        costMap.put(Resource.COIN, 1);
+        costMap.put(Resource.ROCK, 1);
+        costMap.put(Resource.SHIELD, 1);
+        costMap.put(Resource.SERVANT, 1);
+
+        unpaidMap.put(Resource.COIN, 0);
+        unpaidMap.put(Resource.ROCK, 0);
+        unpaidMap.put(Resource.SHIELD, 0);
+        unpaidMap.put(Resource.SERVANT, 0);
+
+        for(Resource key : map.keySet()){
+            for (int i = 0; i<map.get(key); i++){
+                try {
+                    storage.addResource(key);
+                } catch (UnavailableResourceException e) {
+                    System.out.println("Non ho potuto aggiungere " + key + " perche era finita\n");
+                }
+            }
+        }
+
+        for(Resource key : costMap.keySet()){
+            for (int i = 0; i<costMap.get(key); i++){
+                cost.add(key);
+            }
+        }
+
+        unpaid = storage.payResources(cost);
+        available = storage.availableResources();
+
+        for (Resource r : available) {
+            availableMap.put(r,availableMap.remove(r)+1);
+        }
+
+        for (Resource r : unpaid) {
+            unpaidMap.put(r,unpaidMap.remove(r)+1);
+        }
+
+        assertEquals(unpaidMap.get(Resource.COIN),0);
+        assertEquals(unpaidMap.get(Resource.ROCK),1);
+        assertEquals(unpaidMap.get(Resource.SHIELD),0);
+        assertEquals(unpaidMap.get(Resource.SERVANT),0);
+
+        assertEquals(availableMap.get(Resource.COIN),0);
+        assertEquals(availableMap.get(Resource.ROCK),0);
+        assertEquals(availableMap.get(Resource.SHIELD),1);
+        assertEquals(availableMap.get(Resource.SERVANT),2);
+
+    }
+
+    @Test
+    @DisplayName("PayResources Test 3 ")
+    public void payResourcesTest3(){
+        Storage storage = new Storage();
+        Reserve reserve = new Reserve();
+
+        Map<Resource,Integer> map = new HashMap<>();
+        Map<Resource,Integer> availableMap = new HashMap<>();
+        Map<Resource,Integer> costMap = new HashMap<>();
+        Map<Resource,Integer> unpaidMap = new HashMap<>();
+
+        ArrayList<Resource> available;
+        ArrayList<Resource> unpaid;
+
+        ArrayList<Resource> cost = new ArrayList<>();
+
+        map.put(Resource.COIN, 0);
+        map.put(Resource.ROCK, 0);
+        map.put(Resource.SHIELD, 0);
+        map.put(Resource.SERVANT, 0);
+
+        availableMap.put(Resource.COIN, 0);
+        availableMap.put(Resource.ROCK, 0);
+        availableMap.put(Resource.SHIELD, 0);
+        availableMap.put(Resource.SERVANT, 0);
+
+        costMap.put(Resource.COIN, 4);
+        costMap.put(Resource.ROCK, 15);
+        costMap.put(Resource.SHIELD, 9);
+        costMap.put(Resource.SERVANT, 1);
+
+        unpaidMap.put(Resource.COIN, 0);
+        unpaidMap.put(Resource.ROCK, 0);
+        unpaidMap.put(Resource.SHIELD, 0);
+        unpaidMap.put(Resource.SERVANT, 0);
+
+        for(Resource key : map.keySet()){
+            for (int i = 0; i<map.get(key); i++){
+                try {
+                    storage.addResource(key);
+                } catch (UnavailableResourceException e) {
+                    System.out.println("Non ho potuto aggiungere " + key + " perche era finita\n");
+                }
+            }
+        }
+
+        for(Resource key : costMap.keySet()){
+            for (int i = 0; i<costMap.get(key); i++){
+                cost.add(key);
+            }
+        }
+
+        unpaid = storage.payResources(cost);
+        available = storage.availableResources();
+
+        for (Resource r : available) {
+            availableMap.put(r,availableMap.remove(r)+1);
+        }
+
+        for (Resource r : unpaid) {
+            unpaidMap.put(r,unpaidMap.remove(r)+1);
+        }
+
+        assertEquals(unpaidMap.get(Resource.COIN),4);
+        assertEquals(unpaidMap.get(Resource.ROCK),15);
+        assertEquals(unpaidMap.get(Resource.SHIELD),9);
+        assertEquals(unpaidMap.get(Resource.SERVANT),1);
+
+        assertEquals(availableMap.get(Resource.COIN),0);
+        assertEquals(availableMap.get(Resource.ROCK),0);
+        assertEquals(availableMap.get(Resource.SHIELD),0);
+        assertEquals(availableMap.get(Resource.SERVANT),0);
+
+    }
+
+    @Test
+    @DisplayName("PayResources Test 4 ")
+    public void payResourcesTest4(){
+        Storage storage = new Storage();
+        Reserve reserve = new Reserve();
+
+        Map<Resource,Integer> map = new HashMap<>();
+        Map<Resource,Integer> availableMap = new HashMap<>();
+        Map<Resource,Integer> costMap = new HashMap<>();
+        Map<Resource,Integer> unpaidMap = new HashMap<>();
+
+        ArrayList<Resource> available;
+        ArrayList<Resource> unpaid;
+
+        ArrayList<Resource> cost = new ArrayList<>();
+
+        map.put(Resource.COIN, 10);
+        map.put(Resource.ROCK, 10);
+        map.put(Resource.SHIELD, 10);
+        map.put(Resource.SERVANT, 10);
+
+        availableMap.put(Resource.COIN, 0);
+        availableMap.put(Resource.ROCK, 0);
+        availableMap.put(Resource.SHIELD, 0);
+        availableMap.put(Resource.SERVANT, 0);
+
+        costMap.put(Resource.COIN, 4);
+        costMap.put(Resource.ROCK, 15);
+        costMap.put(Resource.SHIELD, 9);
+        costMap.put(Resource.SERVANT, 1);
+
+        unpaidMap.put(Resource.COIN, 0);
+        unpaidMap.put(Resource.ROCK, 0);
+        unpaidMap.put(Resource.SHIELD, 0);
+        unpaidMap.put(Resource.SERVANT, 0);
+
+        for(Resource key : map.keySet()){
+            for (int i = 0; i<map.get(key); i++){
+                try {
+                    storage.addResource(key);
+                } catch (UnavailableResourceException e) {
+                    System.out.println("Non ho potuto aggiungere " + key + " perche era finita\n");
+                }
+            }
+        }
+
+        for(Resource key : costMap.keySet()){
+            for (int i = 0; i<costMap.get(key); i++){
+                cost.add(key);
+            }
+        }
+
+        unpaid = storage.payResources(cost);
+        available = storage.availableResources();
+
+        for (Resource r : available) {
+            availableMap.put(r,availableMap.remove(r)+1);
+        }
+
+        for (Resource r : unpaid) {
+            unpaidMap.put(r,unpaidMap.remove(r)+1);
+        }
+
+        assertEquals(unpaidMap.get(Resource.COIN),0);
+        assertEquals(unpaidMap.get(Resource.ROCK),5);
+        assertEquals(unpaidMap.get(Resource.SHIELD),0);
+        assertEquals(unpaidMap.get(Resource.SERVANT),0);
+
+        assertEquals(availableMap.get(Resource.COIN),6);
+        assertEquals(availableMap.get(Resource.ROCK),0);
+        assertEquals(availableMap.get(Resource.SHIELD),1);
+        assertEquals(availableMap.get(Resource.SERVANT),9);
+
+    }
+
+    @Test
+    @DisplayName("PayResources Test 5 ")
+    public void payResourcesTest5(){
+        Storage storage = new Storage();
+        Reserve reserve = new Reserve();
+
+        Map<Resource,Integer> map = new HashMap<>();
+        Map<Resource,Integer> availableMap = new HashMap<>();
+        Map<Resource,Integer> costMap = new HashMap<>();
+        Map<Resource,Integer> unpaidMap = new HashMap<>();
+
+        ArrayList<Resource> available;
+        ArrayList<Resource> unpaid;
+
+        ArrayList<Resource> cost = new ArrayList<>();
+
+        map.put(Resource.COIN, 10);
+        map.put(Resource.ROCK, 10);
+        map.put(Resource.SHIELD, 10);
+        map.put(Resource.SERVANT, 10);
+
+        availableMap.put(Resource.COIN, 0);
+        availableMap.put(Resource.ROCK, 0);
+        availableMap.put(Resource.SHIELD, 0);
+        availableMap.put(Resource.SERVANT, 0);
+
+        costMap.put(Resource.COIN, 20);
+        costMap.put(Resource.ROCK, 15);
+        costMap.put(Resource.SHIELD, 4);
+        costMap.put(Resource.SERVANT, 0);
+
+        unpaidMap.put(Resource.COIN, 0);
+        unpaidMap.put(Resource.ROCK, 0);
+        unpaidMap.put(Resource.SHIELD, 0);
+        unpaidMap.put(Resource.SERVANT, 0);
+
+        for(Resource key : map.keySet()){
+            for (int i = 0; i<map.get(key); i++){
+                try {
+                    storage.addResource(key);
+                } catch (UnavailableResourceException e) {
+                    System.out.println("Non ho potuto aggiungere " + key + " perche era finita\n");
+                }
+            }
+        }
+
+        for(Resource key : costMap.keySet()){
+            for (int i = 0; i<costMap.get(key); i++){
+                cost.add(key);
+            }
+        }
+
+        unpaid = storage.payResources(cost);
+        available = storage.availableResources();
+
+        for (Resource r : available) {
+            availableMap.put(r,availableMap.remove(r)+1);
+        }
+
+        for (Resource r : unpaid) {
+            unpaidMap.put(r,unpaidMap.remove(r)+1);
+        }
+
+        assertEquals(unpaidMap.get(Resource.COIN),10);
+        assertEquals(unpaidMap.get(Resource.ROCK),5);
+        assertEquals(unpaidMap.get(Resource.SHIELD),0);
+        assertEquals(unpaidMap.get(Resource.SERVANT),0);
+
+        assertEquals(availableMap.get(Resource.COIN),0);
+        assertEquals(availableMap.get(Resource.ROCK),0);
+        assertEquals(availableMap.get(Resource.SHIELD),6);
+        assertEquals(availableMap.get(Resource.SERVANT),10);
+
+    }
+
+
+
+
+
+//----------------------------------------------------------------------------------------------------------
+
+    /*
+    @Test
+    @DisplayName("discard Test")
+    public void discardTest(){
+        Storage storage = new Storage();
+        Reserve reserve = new Reserve();
+
+        try {
+            storage.discard(Resource.COIN);
+        } catch (DiscardException e) {
+            e.printStackTrace();
+        }
+        assertEquals(29, Reserve.getAmountOf(Resource.COIN));
+
+        try {
+            storage.discard(Resource.ROCK);
+        } catch (DiscardException e) {
+            e.printStackTrace();
+        }
+        try {
+            storage.discard(Resource.SERVANT);
+        } catch (DiscardException e) {
+            e.printStackTrace();
+        }
+        try {
+            storage.discard(Resource.SHIELD);
+        } catch (DiscardException e) {
+            e.printStackTrace();
+        }
+        assertEquals(29, Reserve.getAmountOf(Resource.ROCK));
+        assertEquals(29, Reserve.getAmountOf(Resource.SERVANT));
+        assertEquals(29, Reserve.getAmountOf(Resource.SHIELD));
+
+        try {
+            storage.discard(Resource.COIN);
+        } catch (DiscardException e) {
+            e.printStackTrace();
+        }
+        try {
+            storage.discard(Resource.COIN);
+        } catch (DiscardException e) {
+            e.printStackTrace();
+        }
+        try {
+            storage.discard(Resource.COIN);
+        } catch (DiscardException e) {
+            e.printStackTrace();
+        }
+        assertEquals(32, Reserve.getAmountOf(Resource.COIN));
+    }
+    */
+
 }

@@ -51,18 +51,13 @@ public class ProductionCard {
 
 
 
-
-
-
-
-
     /**
      * Getter method for the card cost
      * It returns a copy of the private attribute
      */
     public Map<Resource,Integer> getCost() {
         Map<Resource,Integer> m = new HashMap<>();
-        costProductionCard.putAll(m);
+        m.putAll(costProductionCard);
         return m;
     }
 
@@ -70,20 +65,24 @@ public class ProductionCard {
      * getter method for the card input resources which are required for production effect
      * It returns a copy of the private attribute
      */
-    public Map<Resource,Integer> getIn() {
-        Map<Resource,Integer> m = new HashMap<>();
-        inputResources.putAll(m);
-        return m;
+    public ArrayList<Resource> getIn() {
+        ArrayList<Resource>  input= new ArrayList<>();
+        for (Resource key : inputResources.keySet())
+            for(int i=0;i<inputResources.get(key);i++)
+                input.add(key);
+        return input;
     }
 
     /**
      *getter method for the card output resources which are produced by production effect
      * It returns a copy of the private attribute
      */
-    public Map<Resource,Integer> getOut() {
-        Map<Resource,Integer> m = new HashMap<>();
-        outputResources.putAll(m);
-        return m;
+    public ArrayList<Resource> getOut() {
+        ArrayList<Resource>  output = new ArrayList<>();
+        for (Resource key : outputResources.keySet())
+            for(int i=0;i<outputResources.get(key);i++)
+                output.add(key);
+        return output;
     }
 
     /**
@@ -106,12 +105,6 @@ public class ProductionCard {
     public Integer getPoints() {
         return this.points;
     }
-
-    /**
-     * productionOn activates the card production effect paying the required resources and providing
-     * the ones specified in the attribute. All the exchanges are made with the Reserve.
-     */
-    public void productionOn() {}
 
 
 
