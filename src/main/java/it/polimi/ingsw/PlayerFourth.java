@@ -13,7 +13,7 @@ public class PlayerFourth extends Player {
 
 
     /**
-     * methods null for the first player
+     * methods null for the fourth player, fourthPlayer can't do these actions
      *
      */
 

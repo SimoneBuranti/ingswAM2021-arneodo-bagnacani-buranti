@@ -26,10 +26,9 @@ public class PlayerThird extends Player {
     }
 
     /**
-     * methods null for the first player
+     * methods null for the third player, ThirdPlayer can't do these actions
      *
      */
-
     public void initResource(Resource resourceOne,Resource resourceTwo){}
     public void initResource(){}
 

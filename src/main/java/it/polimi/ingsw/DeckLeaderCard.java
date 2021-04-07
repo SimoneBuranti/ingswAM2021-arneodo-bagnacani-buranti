@@ -2,13 +2,25 @@ package it.polimi.ingsw;
 
 import java.util.ArrayList;
 
+
+/**
+ * class of Leader Card deck, only 1 object instantiated
+ */
 public class DeckLeaderCard {
+
+
+    /**
+     * it represents deck
+     */
     private static  ArrayList<LeaderCard> deckLeaderCard;
     private Colour blue =new  Blue();
     private Colour green =new  Green();
     private Colour yellow =new  Yellow();
     private Colour violet =new  Violet();
 
+    /**
+     * constructor of deck
+     */
     public DeckLeaderCard(){
 
         deckLeaderCard= new ArrayList<LeaderCard>(16);
@@ -100,17 +112,28 @@ public class DeckLeaderCard {
     }
 
 
+    /**
+     * @return deckLeaderCard.size()
+     */
     public int size(){
         return deckLeaderCard.size();
     }
 
+
+    /**
+     * method which return card at index position
+     * @param index
+     * @return deckLeaderCard.get(index)
+     */
     public LeaderCard getCardDeck(int index){
         return deckLeaderCard.get(index);
     }
 
 
-
-    
+    /**
+     * method which return the first deck card and shift all other cards of one position
+     * @return deckLeaderCard.get(0)
+     */
     public static LeaderCard arrangeDeckLeaderCards(){
         LeaderCard tempLeadercard=deckLeaderCard.get(0);
         for(int i=0; i<deckLeaderCard.size()-1; i++)

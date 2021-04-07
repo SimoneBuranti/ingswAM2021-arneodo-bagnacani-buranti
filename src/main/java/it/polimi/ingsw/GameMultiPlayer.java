@@ -100,17 +100,32 @@ public class GameMultiPlayer extends Game {
     }
 
 
+    /**
+     * method which return the player at index position
+     * @param index
+     * @return playerList.get(index)
+     */
     public Player getPlayerFromList(int index){
         return playerList.get(index);
     }
 
 
+    /**
+     * @param numberOfPlayer
+     * @return n = (int) (Math.random() * (numberOfPlayer) a random number from 0 to numberOfPlayer -1
+     */
     public int createRandomNumber(int numberOfPlayer){
         int n = (int) (Math.random() * (numberOfPlayer));
         return n;
     }
 
 
+    /**
+     * method which return the nicknameList of player in order
+     * @param nickName
+     * @param calamaio
+     * @return nickNameInOrder
+     */
     private ArrayList<String> correctOrder(ArrayList<String> nickName,int calamaio){
 
         for(int i=calamaio; i<nickName.size();i++)

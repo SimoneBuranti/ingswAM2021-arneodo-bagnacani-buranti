@@ -5,18 +5,13 @@ import java.util.ArrayList;
 public class PlayerFirst extends Player{
     private ArrayList<LeaderCard> personalLeaderCard = new ArrayList<LeaderCard>(4);
 
-
-
-
-
-
     public PlayerFirst(String nickName){
         super(nickName);
 
     }
 
     /**
-     * methods null for the first player
+     * methods null for the first player, firstPlayer can't do these actions
      *
      */
     public void initResource(){}

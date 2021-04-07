@@ -24,21 +24,46 @@ public class Player {
     };
 
 
+    /**
+     * @param resource
+     * method which add resource to buffer from market
+     */
     public void addToBuffer(Resource resource){
         gameBoardOfPlayer.addToBuffer(resource);
     }
+
+
+    /**
+     * @throws CallForCouncilException from faithPath, match is finished
+     */
     public void faithMove() throws CallForCouncilException {
         gameBoardOfPlayer.faithMove();
     }
 
+
+    /**
+     * from gameboard
+     * @return gameBoardOfPlayer
+     */
     public Gameboard getGameBoardOfPlayer() {
         return gameBoardOfPlayer;
     }
 
+    /**
+     * from faithPath
+     * @return gameBoardOfPlayer.getIndicator()
+     */
     public int getIndicator(){
         return gameBoardOfPlayer.getIndicator();
     }
 
+
+    /**
+     * method which receives card from deckcardprodcution and pass it to Gameboard
+     * @param productioncard
+     * @param choosenColumns
+     * @throws LevelException fromm gameboard, player can't take this level of card, or place it in choosencolumns
+     */
     public void GivePlayerCard(ProductionCard productioncard, int choosenColumns) throws LevelException {
 
         gameBoardOfPlayer.addCardToDevelopmentBoard(productioncard,choosenColumns);
@@ -52,10 +77,19 @@ public class Player {
         this.connected = connected;
     }
 
+
+
+    /**
+     * @return nickName of player
+     */
     public String getNickName() {
         return nickName;
     }
 
+    /**
+     * set nickname to player
+     * @param nickName
+     */
     private void setNickName(String nickName) {
         this.nickName = nickName;
     }
@@ -73,7 +107,7 @@ public class Player {
 
 
     /**
-     * methods null for the first player
+     * methods null, specified only in child classes
      *
      */
     public void initResource(){}
@@ -85,6 +119,11 @@ public class Player {
     }
 
 
+    /**
+     * method which returns leader card at index position of personalLeaderCard, just for test
+     * @param index
+     * @return personalLeaderCard.get(index)
+     */
     public LeaderCard getCardFromPersonalLeaderCard(int index){
 
         return  personalLeaderCard.get(index);

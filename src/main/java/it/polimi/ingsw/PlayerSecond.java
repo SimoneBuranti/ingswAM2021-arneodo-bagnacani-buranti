@@ -23,7 +23,7 @@ public class PlayerSecond extends Player{
     }
 
     /**
-     * methods null for the first player
+     * methods null for thesecond player,secondPlayer can't do these actions
      *
      */
 
