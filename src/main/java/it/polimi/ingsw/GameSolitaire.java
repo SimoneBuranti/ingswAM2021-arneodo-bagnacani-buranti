@@ -3,7 +3,7 @@ package it.polimi.ingsw;
 /**
  * this class represents the game in solitary
  */
-public class SolitaireGame extends Game{
+public class GameSolitaire extends Game{
 
     /**
      * this attribute represents the action marker deck of the game
@@ -13,14 +13,18 @@ public class SolitaireGame extends Game{
      * this attribute represents the opponent of the player Lorenzo the magnificent
      */
     LorenzoTheMagnificent lorenzoTheMagnificent;
-
+    /**
+     * this attribute represents the player of the game
+     */
+    Player player;
     /**
      * the constructor calls the super class constructor and instantiates the attributes of the solitaire game
      */
-    public SolitaireGame() {
+    public GameSolitaire(String nickName) {
         super();
         deckActionMarker = new DeckActionMarker();
         lorenzoTheMagnificent = new LorenzoTheMagnificent();
+        player = new Player(nickName);
     }
 
     /**

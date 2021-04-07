@@ -15,7 +15,7 @@ public class ActionMarkerTest {
     @DisplayName("Action Marker Production Cards Test")
     public void actionMarkerBlueTest(){
         ActionMarkerProductionBlue actionMarker = new ActionMarkerProductionBlue();
-        SolitaireGame game = new SolitaireGame();
+        GameSolitaire game = new GameSolitaire("Ali");
         DeckProductionCardOneBlu deckProductionCardOneBlu = new DeckProductionCardOneBlu();
         DeckProductionCardTwoBlu deckProductionCardTwoBlu = new DeckProductionCardTwoBlu();
         DeckProductionCardThreeBlu deckProductionCardThreeBlu = new DeckProductionCardThreeBlu();
@@ -69,7 +69,7 @@ public class ActionMarkerTest {
     @DisplayName("Action Marker Production Cards Complete Test")
     public void actionMarkerBlueCompleteTest() throws EndOfSolitaireGame {
         ActionMarkerProductionBlue actionMarker = new ActionMarkerProductionBlue();
-        SolitaireGame game = new SolitaireGame();
+        GameSolitaire game = new GameSolitaire("Ali");
         DeckProductionCardOneBlu deckProductionCardOneBlu = new DeckProductionCardOneBlu();
         DeckProductionCardTwoBlu deckProductionCardTwoBlu = new DeckProductionCardTwoBlu();
         DeckProductionCardThreeBlu deckProductionCardThreeBlu = new DeckProductionCardThreeBlu();
@@ -112,7 +112,7 @@ public class ActionMarkerTest {
     @DisplayName("Action Marker Black Cross Once Test")
     public void ActionMarkerCrossOnceTest(){
         ActionMarkerForCrossOnce actionMarker = new ActionMarkerForCrossOnce();
-        SolitaireGame game = new SolitaireGame();
+        GameSolitaire game = new GameSolitaire("Ali");
 
         ActionMarker actionMarker1 = game.showFirst();
         assertEquals(0, game.getLorenzoFaithIndicator());
@@ -169,7 +169,7 @@ public class ActionMarkerTest {
     @DisplayName("Action Marker Black Cross Double Test")
     public void ActionMarkerCrossDoubleTest(){
         ActionMarkerForCrossDouble actionMarker = new ActionMarkerForCrossDouble();
-        SolitaireGame game = new SolitaireGame();
+        GameSolitaire game = new GameSolitaire("Ali");
 
         ActionMarker actionMarker1;
         actionMarker1 = game.showFirst();

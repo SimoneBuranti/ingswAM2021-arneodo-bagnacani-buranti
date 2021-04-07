@@ -16,7 +16,7 @@ public class ActionMarkerForCrossOnce implements ActionMarker{
      * moveBlackCrossOnce and mixDeckActionMarker
      * @param game : the instantiated solitaire game a player is playing
      */
-    public void actionMarkerEffect(SolitaireGame game) {
+    public void actionMarkerEffect(GameSolitaire game) {
         game.moveBlackCrossOnce();
         game.mixDeckActionMarker();
     }

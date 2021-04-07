@@ -15,7 +15,7 @@ public class ActionMarkerForCrossDouble implements ActionMarker{
      * the implemented method of the interface that calls a SolitaireGame method: moveBlackCrossDouble
      * @param game : the instantiated solitaire game a player is playing
      */
-    public void actionMarkerEffect(SolitaireGame game) {
+    public void actionMarkerEffect(GameSolitaire game) {
         game.moveBlackCrossDouble();
     }
 }
