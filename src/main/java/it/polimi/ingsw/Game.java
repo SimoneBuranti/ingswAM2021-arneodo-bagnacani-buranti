@@ -133,7 +133,40 @@ public class Game {
     }
 
 
+    /**
+     * method which returns cell in MarketGrid
+     * used in test
+     * @param i
+     * @param j
+     * @return market.getCellGrid(i,j)
+     */
+    public Marble getCellGridMarket(int i, int j){
 
+        return market.getCellGrid(i,j);
+    }
+
+
+
+    /**
+     * method which returns extraMarble in market
+     * used in test
+     * @return market.getExtra()
+     */
+    public Marble getExtraMarket(){
+
+        return market.getExtra();}
+
+
+
+    /**
+     * method which returns cell in InitialMarbleListMarket
+     * used in test
+     * @param index
+     * @return market.getCellGrid(index)
+     */
+    public Marble getInitialMarbleListMarket(int index){
+
+        return market.getCellInitialMarbleList(index);}
 
 
 }

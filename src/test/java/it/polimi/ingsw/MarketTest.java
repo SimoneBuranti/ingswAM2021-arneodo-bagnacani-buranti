@@ -2,6 +2,8 @@ package it.polimi.ingsw;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MarketTest {
@@ -13,21 +15,24 @@ public class MarketTest {
     {
 
 
-        Market VariableMarket= new Market();
-        Player player = new Player("ale");
+        ArrayList<String> nickname =new ArrayList<String>(2);
+        nickname.add("ale");
+        nickname.add("ali");
+        GameMultiPlayer game= new GameMultiPlayer(2,nickname);
 
-        assertTrue(!( VariableMarket.getCellGrid(0, 0) instanceof RedMarble) ||
-        !(VariableMarket.getCellGrid(0, 1) instanceof YellowMarble)||
-        !( VariableMarket.getCellGrid(0, 2) instanceof YellowMarble)||
-        !( VariableMarket.getCellGrid(0, 3) instanceof BluMarble)||
-        !( VariableMarket.getCellGrid(1, 0) instanceof BluMarble)||
-        !( VariableMarket.getCellGrid(1, 1) instanceof GreyMarble)||
-        !( VariableMarket.getCellGrid(1, 2) instanceof GreyMarble)||
-        !( VariableMarket.getCellGrid(1, 3) instanceof PurpleMarble)||
-        !( VariableMarket.getCellGrid(2, 0) instanceof PurpleMarble)||
-        !( VariableMarket.getCellGrid(2, 1) instanceof WhiteMarble)||
-        !( VariableMarket.getCellGrid(2, 2) instanceof WhiteMarble)||
-        !( VariableMarket.getCellGrid(2, 3) instanceof WhiteMarble));
+
+        assertTrue(!( game.getCellGridMarket(0, 0) instanceof RedMarble) ||
+        !(game.getCellGridMarket(0, 1) instanceof YellowMarble)||
+        !( game.getCellGridMarket(0, 2) instanceof YellowMarble)||
+        !( game.getCellGridMarket(0, 3) instanceof BluMarble)||
+        !( game.getCellGridMarket(1, 0) instanceof BluMarble)||
+        !( game.getCellGridMarket(1, 1) instanceof GreyMarble)||
+        !( game.getCellGridMarket(1, 2) instanceof GreyMarble)||
+        !( game.getCellGridMarket(1, 3) instanceof PurpleMarble)||
+        !( game.getCellGridMarket(2, 0) instanceof PurpleMarble)||
+        !( game.getCellGridMarket(2, 1) instanceof WhiteMarble)||
+        !( game.getCellGridMarket(2, 2) instanceof WhiteMarble)||
+        !( game.getCellGridMarket(2, 3) instanceof WhiteMarble));
     }
 
 
@@ -38,21 +43,24 @@ public class MarketTest {
     @Test
     public void InizializationOfExtraMarket()
     {
-        Market VariableMarket= new Market();
-        Player player = new Player("ale");
 
-        assertTrue(!( VariableMarket.getExtra() instanceof RedMarble) ||
-                (VariableMarket.getExtra() instanceof YellowMarble)||
-                ( VariableMarket.getExtra() instanceof YellowMarble)||
-                ( VariableMarket.getExtra() instanceof BluMarble)||
-                ( VariableMarket.getExtra() instanceof BluMarble)||
-                ( VariableMarket.getExtra() instanceof GreyMarble)||
-                ( VariableMarket.getExtra() instanceof GreyMarble)||
-                ( VariableMarket.getExtra() instanceof PurpleMarble)||
-                ( VariableMarket.getExtra() instanceof PurpleMarble)||
-                ( VariableMarket.getExtra() instanceof WhiteMarble)||
-                ( VariableMarket.getExtra() instanceof WhiteMarble)||
-                ( VariableMarket.getExtra() instanceof WhiteMarble));
+        ArrayList<String> nickname =new ArrayList<String>(2);
+        nickname.add("ale");
+        nickname.add("ali");
+        GameMultiPlayer game= new GameMultiPlayer(2,nickname);
+
+        assertTrue(!( game.getExtraMarket() instanceof RedMarble) ||
+                (game.getExtraMarket() instanceof YellowMarble)||
+                ( game.getExtraMarket() instanceof YellowMarble)||
+                ( game.getExtraMarket() instanceof BluMarble)||
+                ( game.getExtraMarket() instanceof BluMarble)||
+                ( game.getExtraMarket() instanceof GreyMarble)||
+                ( game.getExtraMarket() instanceof GreyMarble)||
+                ( game.getExtraMarket() instanceof PurpleMarble)||
+                ( game.getExtraMarket() instanceof PurpleMarble)||
+                ( game.getExtraMarket() instanceof WhiteMarble)||
+                ( game.getExtraMarket() instanceof WhiteMarble)||
+                ( game.getExtraMarket() instanceof WhiteMarble));
     }
 
 
@@ -61,34 +69,37 @@ public class MarketTest {
      */
     @Test
     public void PushRowsOfMarket() throws CallForCouncilException, LastSpaceReachedException {
-        Market VariableMarket= new Market();
-        Player player = new Player("ale");
+
+        ArrayList<String> nickname =new ArrayList<String>(2);
+        nickname.add("ale");
+        nickname.add("ali");
+        GameMultiPlayer game= new GameMultiPlayer(2,nickname);
 
 
-        assertTrue(( VariableMarket.getCellGrid(0, 0) instanceof RedMarble) ||
-                (VariableMarket.getCellGrid(0, 0) instanceof YellowMarble)||
-                ( VariableMarket.getCellGrid(0, 0) instanceof YellowMarble)||
-                ( VariableMarket.getCellGrid(0, 0) instanceof BluMarble)||
-                ( VariableMarket.getCellGrid(0, 0) instanceof BluMarble)||
-                ( VariableMarket.getCellGrid(0, 0) instanceof GreyMarble)||
-                ( VariableMarket.getCellGrid(0, 0) instanceof GreyMarble)||
-                ( VariableMarket.getCellGrid(0, 0) instanceof PurpleMarble)||
-                ( VariableMarket.getCellGrid(0, 0) instanceof PurpleMarble)||
-                ( VariableMarket.getCellGrid(0, 0) instanceof WhiteMarble)||
-                ( VariableMarket.getCellGrid(0, 0) instanceof WhiteMarble)||
-                ( VariableMarket.getCellGrid(0, 0) instanceof WhiteMarble));
+        assertTrue(( game.getCellGridMarket(0, 0) instanceof RedMarble) ||
+                (game.getCellGridMarket(0, 0) instanceof YellowMarble)||
+                ( game.getCellGridMarket(0, 0) instanceof YellowMarble)||
+                ( game.getCellGridMarket(0, 0) instanceof BluMarble)||
+                ( game.getCellGridMarket(0, 0) instanceof BluMarble)||
+                ( game.getCellGridMarket(0, 0) instanceof GreyMarble)||
+                ( game.getCellGridMarket(0, 0) instanceof GreyMarble)||
+                ( game.getCellGridMarket(0, 0) instanceof PurpleMarble)||
+                ( game.getCellGridMarket(0, 0) instanceof PurpleMarble)||
+                ( game.getCellGridMarket(0, 0) instanceof WhiteMarble)||
+                (game.getCellGridMarket(0, 0) instanceof WhiteMarble)||
+                ( game.getCellGridMarket(0, 0) instanceof WhiteMarble));
 
-        assertTrue(VariableMarket.getCellGrid(0, 0).equals(VariableMarket.getCellInitialMarbleList(0)));
-        assertTrue(VariableMarket.getCellGrid(0, 1).equals(VariableMarket.getCellInitialMarbleList(1)));
-        assertTrue(VariableMarket.getCellGrid(0, 2).equals(VariableMarket.getCellInitialMarbleList(2)));
-        assertTrue(VariableMarket.getCellGrid(0, 3).equals(VariableMarket.getCellInitialMarbleList(3)));
-        assertTrue(VariableMarket.getExtra().equals(VariableMarket.getCellInitialMarbleList(12)));
-        VariableMarket.PushRow(0,player);
-        assertTrue(VariableMarket.getCellGrid(0, 0).equals(VariableMarket.getCellInitialMarbleList(1)));
-        assertTrue(VariableMarket.getCellGrid(0, 1).equals(VariableMarket.getCellInitialMarbleList(2)));
-        assertTrue(VariableMarket.getCellGrid(0, 2).equals(VariableMarket.getCellInitialMarbleList(3)));
-        assertTrue(VariableMarket.getCellGrid(0, 3).equals(VariableMarket.getCellInitialMarbleList(12)));
-        assertTrue(VariableMarket.getExtra().equals(VariableMarket.getCellInitialMarbleList(0)));
+        assertTrue(game.getCellGridMarket(0, 0).equals(game.getInitialMarbleListMarket(0)));
+        assertTrue(game.getCellGridMarket(0, 1).equals(game.getInitialMarbleListMarket(1)));
+        assertTrue(game.getCellGridMarket(0, 2).equals(game.getInitialMarbleListMarket(2)));
+        assertTrue(game.getCellGridMarket(0, 3).equals(game.getInitialMarbleListMarket(3)));
+        assertTrue(game.getExtraMarket().equals(game.getInitialMarbleListMarket(12)));
+        game.pushRowInMarket(game.getPlayerFromList(0),0);
+        assertTrue(game.getCellGridMarket(0, 0).equals(game.getInitialMarbleListMarket(1)));
+        assertTrue(game.getCellGridMarket(0, 1).equals(game.getInitialMarbleListMarket(2)));
+        assertTrue(game.getCellGridMarket(0, 2).equals(game.getInitialMarbleListMarket(3)));
+        assertTrue(game.getCellGridMarket(0, 3).equals(game.getInitialMarbleListMarket(12)));
+        assertTrue(game.getExtraMarket().equals(game.getInitialMarbleListMarket(0)));
 
 
     }
@@ -102,42 +113,45 @@ public class MarketTest {
      */
     @Test
 public void PushRowsOfMarketCycling() throws CallForCouncilException, LastSpaceReachedException {
-        Market VariableMarket= new Market();
-       Player player = new Player("ale");
-       VariableMarket.PushRow(0,player);
-       assertTrue(VariableMarket.getCellGrid(0, 0).equals(VariableMarket.getCellInitialMarbleList(1)));
-       assertTrue(VariableMarket.getCellGrid(0, 1).equals(VariableMarket.getCellInitialMarbleList(2)));
-       assertTrue(VariableMarket.getCellGrid(0, 2).equals(VariableMarket.getCellInitialMarbleList(3)));
-       assertTrue(VariableMarket.getCellGrid(0, 3).equals(VariableMarket.getCellInitialMarbleList(12)));
-       assertTrue(VariableMarket.getExtra().equals(VariableMarket.getCellInitialMarbleList(0)));
 
-       VariableMarket.PushRow(0,player);
-       assertTrue(VariableMarket.getCellGrid(0, 0).equals(VariableMarket.getCellInitialMarbleList(2)));
-       assertTrue(VariableMarket.getCellGrid(0, 1).equals(VariableMarket.getCellInitialMarbleList(3)));
-       assertTrue(VariableMarket.getCellGrid(0, 2).equals(VariableMarket.getCellInitialMarbleList(12)));
-       assertTrue(VariableMarket.getCellGrid(0, 3).equals(VariableMarket.getCellInitialMarbleList(0)));
-       assertTrue(VariableMarket.getExtra().equals(VariableMarket.getCellInitialMarbleList(1)));
+        ArrayList<String> nickname =new ArrayList<String>(2);
+        nickname.add("ale");
+        nickname.add("ali");
+        GameMultiPlayer game= new GameMultiPlayer(2,nickname);
+        game.pushRowInMarket(game.getPlayerFromList(0),0);
+       assertTrue(game.getCellGridMarket(0, 0).equals(game.getInitialMarbleListMarket(1)));
+       assertTrue(game.getCellGridMarket(0, 1).equals(game.getInitialMarbleListMarket(2)));
+       assertTrue(game.getCellGridMarket(0, 2).equals(game.getInitialMarbleListMarket(3)));
+       assertTrue(game.getCellGridMarket(0, 3).equals(game.getInitialMarbleListMarket(12)));
+       assertTrue(game.getExtraMarket().equals(game.getInitialMarbleListMarket(0)));
 
-       VariableMarket.PushRow(0,player);
-       assertTrue(VariableMarket.getCellGrid(0, 0).equals(VariableMarket.getCellInitialMarbleList(3)));
-       assertTrue(VariableMarket.getCellGrid(0, 1).equals(VariableMarket.getCellInitialMarbleList(12)));
-       assertTrue(VariableMarket.getCellGrid(0, 2).equals(VariableMarket.getCellInitialMarbleList(0)));
-       assertTrue(VariableMarket.getCellGrid(0, 3).equals(VariableMarket.getCellInitialMarbleList(1)));
-       assertTrue(VariableMarket.getExtra().equals(VariableMarket.getCellInitialMarbleList(2)));
+        game.pushRowInMarket(game.getPlayerFromList(0),0);
+       assertTrue(game.getCellGridMarket(0, 0).equals(game.getInitialMarbleListMarket(2)));
+       assertTrue(game.getCellGridMarket(0, 1).equals(game.getInitialMarbleListMarket(3)));
+       assertTrue(game.getCellGridMarket(0, 2).equals(game.getInitialMarbleListMarket(12)));
+       assertTrue(game.getCellGridMarket(0, 3).equals(game.getInitialMarbleListMarket(0)));
+       assertTrue(game.getExtraMarket().equals(game.getInitialMarbleListMarket(1)));
 
-       VariableMarket.PushRow(0,player);
-       assertTrue(VariableMarket.getCellGrid(0, 0).equals(VariableMarket.getCellInitialMarbleList(12)));
-       assertTrue(VariableMarket.getCellGrid(0, 1).equals(VariableMarket.getCellInitialMarbleList(0)));
-       assertTrue(VariableMarket.getCellGrid(0, 2).equals(VariableMarket.getCellInitialMarbleList(1)));
-       assertTrue(VariableMarket.getCellGrid(0, 3).equals(VariableMarket.getCellInitialMarbleList(2)));
-       assertTrue(VariableMarket.getExtra().equals(VariableMarket.getCellInitialMarbleList(3)));
+        game.pushRowInMarket(game.getPlayerFromList(1),0);
+       assertTrue(game.getCellGridMarket(0, 0).equals(game.getInitialMarbleListMarket(3)));
+       assertTrue(game.getCellGridMarket(0, 1).equals(game.getInitialMarbleListMarket(12)));
+       assertTrue(game.getCellGridMarket(0, 2).equals(game.getInitialMarbleListMarket(0)));
+       assertTrue(game.getCellGridMarket(0, 3).equals(game.getInitialMarbleListMarket(1)));
+       assertTrue(game.getExtraMarket().equals(game.getInitialMarbleListMarket(2)));
 
-       VariableMarket.PushRow(0,player);
-       assertTrue(VariableMarket.getCellGrid(0, 0).equals(VariableMarket.getCellInitialMarbleList(0)));
-       assertTrue(VariableMarket.getCellGrid(0, 1).equals(VariableMarket.getCellInitialMarbleList(1)));
-       assertTrue(VariableMarket.getCellGrid(0, 2).equals(VariableMarket.getCellInitialMarbleList(2)));
-       assertTrue(VariableMarket.getCellGrid(0, 3).equals(VariableMarket.getCellInitialMarbleList(3)));
-       assertTrue(VariableMarket.getExtra().equals(VariableMarket.getCellInitialMarbleList(12)));
+        game.pushRowInMarket(game.getPlayerFromList(1),0);
+       assertTrue(game.getCellGridMarket(0, 0).equals(game.getInitialMarbleListMarket(12)));
+       assertTrue(game.getCellGridMarket(0, 1).equals(game.getInitialMarbleListMarket(0)));
+       assertTrue(game.getCellGridMarket(0, 2).equals(game.getInitialMarbleListMarket(1)));
+       assertTrue(game.getCellGridMarket(0, 3).equals(game.getInitialMarbleListMarket(2)));
+       assertTrue(game.getExtraMarket().equals(game.getInitialMarbleListMarket(3)));
+
+        game.pushRowInMarket(game.getPlayerFromList(0),0);
+       assertTrue(game.getCellGridMarket(0, 0).equals(game.getInitialMarbleListMarket(0)));
+       assertTrue(game.getCellGridMarket(0, 1).equals(game.getInitialMarbleListMarket(1)));
+       assertTrue(game.getCellGridMarket(0, 2).equals(game.getInitialMarbleListMarket(2)));
+       assertTrue(game.getCellGridMarket(0, 3).equals(game.getInitialMarbleListMarket(3)));
+       assertTrue(game.getExtraMarket().equals(game.getInitialMarbleListMarket(12)));
     }
 
 
@@ -146,32 +160,35 @@ public void PushRowsOfMarketCycling() throws CallForCouncilException, LastSpaceR
      */
     @Test
     public void PushColumnsOfMarket() throws CallForCouncilException, LastSpaceReachedException {
-        Market VariableMarket= new Market();
-        Player player = new Player("ale");
+
+        ArrayList<String> nickname =new ArrayList<String>(2);
+        nickname.add("ale");
+        nickname.add("ali");
+        GameMultiPlayer game= new GameMultiPlayer(2,nickname);
 
 
-        assertTrue(( VariableMarket.getCellGrid(0, 0) instanceof RedMarble) ||
-                (VariableMarket.getCellGrid(0, 0) instanceof YellowMarble)||
-                ( VariableMarket.getCellGrid(0, 0) instanceof YellowMarble)||
-                ( VariableMarket.getCellGrid(0, 0) instanceof BluMarble)||
-                ( VariableMarket.getCellGrid(0, 0) instanceof BluMarble)||
-                ( VariableMarket.getCellGrid(0, 0) instanceof GreyMarble)||
-                ( VariableMarket.getCellGrid(0, 0) instanceof GreyMarble)||
-                ( VariableMarket.getCellGrid(0, 0) instanceof PurpleMarble)||
-                ( VariableMarket.getCellGrid(0, 0) instanceof PurpleMarble)||
-                ( VariableMarket.getCellGrid(0, 0) instanceof WhiteMarble)||
-                ( VariableMarket.getCellGrid(0, 0) instanceof WhiteMarble)||
-                ( VariableMarket.getCellGrid(0, 0) instanceof WhiteMarble));
+        assertTrue(( game.getCellGridMarket(0, 0) instanceof RedMarble) ||
+                (game.getCellGridMarket(0, 0) instanceof YellowMarble)||
+                ( game.getCellGridMarket(0, 0) instanceof YellowMarble)||
+                ( game.getCellGridMarket(0, 0) instanceof BluMarble)||
+                ( game.getCellGridMarket(0, 0) instanceof BluMarble)||
+                ( game.getCellGridMarket(0, 0) instanceof GreyMarble)||
+                ( game.getCellGridMarket(0, 0) instanceof GreyMarble)||
+                ( game.getCellGridMarket(0, 0) instanceof PurpleMarble)||
+                ( game.getCellGridMarket(0, 0) instanceof PurpleMarble)||
+                ( game.getCellGridMarket(0, 0) instanceof WhiteMarble)||
+                ( game.getCellGridMarket(0, 0) instanceof WhiteMarble)||
+                ( game.getCellGridMarket(0, 0) instanceof WhiteMarble));
 
-        assertTrue(VariableMarket.getCellGrid(0, 0).equals(VariableMarket.getCellInitialMarbleList(0)));
-        assertTrue(VariableMarket.getCellGrid(1, 0).equals(VariableMarket.getCellInitialMarbleList(4)));
-        assertTrue(VariableMarket.getCellGrid(2, 0).equals(VariableMarket.getCellInitialMarbleList(8)));
-        assertTrue(VariableMarket.getExtra().equals(VariableMarket.getCellInitialMarbleList(12)));
-        VariableMarket.PushColumn(0,player);
-        assertTrue(VariableMarket.getCellGrid(0, 0).equals(VariableMarket.getCellInitialMarbleList(4)));
-        assertTrue(VariableMarket.getCellGrid(1, 0).equals(VariableMarket.getCellInitialMarbleList(8)));
-        assertTrue(VariableMarket.getCellGrid(2, 0).equals(VariableMarket.getCellInitialMarbleList(12)));
-        assertTrue(VariableMarket.getExtra().equals(VariableMarket.getCellInitialMarbleList(0)));
+        assertTrue(game.getCellGridMarket(0, 0).equals(game.getInitialMarbleListMarket(0)));
+        assertTrue(game.getCellGridMarket(1, 0).equals(game.getInitialMarbleListMarket(4)));
+        assertTrue(game.getCellGridMarket(2, 0).equals(game.getInitialMarbleListMarket(8)));
+        assertTrue(game.getExtraMarket().equals(game.getInitialMarbleListMarket(12)));
+        game.pushColumnInMarket(game.getPlayerFromList(0),0);
+        assertTrue(game.getCellGridMarket(0, 0).equals(game.getInitialMarbleListMarket(4)));
+        assertTrue(game.getCellGridMarket(1, 0).equals(game.getInitialMarbleListMarket(8)));
+        assertTrue(game.getCellGridMarket(2, 0).equals(game.getInitialMarbleListMarket(12)));
+        assertTrue(game.getExtraMarket().equals(game.getInitialMarbleListMarket(0)));
 
 
     }
@@ -183,36 +200,39 @@ public void PushRowsOfMarketCycling() throws CallForCouncilException, LastSpaceR
      */
     @Test
     public void PushColumnsOfMarketCycling() throws CallForCouncilException, LastSpaceReachedException {
-        Market VariableMarket= new Market();
-    Player player = new Player("ale");
 
-        assertTrue(VariableMarket.getCellGrid(0, 0).equals(VariableMarket.getCellInitialMarbleList(0)));
-        assertTrue(VariableMarket.getCellGrid(1, 0).equals(VariableMarket.getCellInitialMarbleList(4)));
-        assertTrue(VariableMarket.getCellGrid(2, 0).equals(VariableMarket.getCellInitialMarbleList(8)));
-        assertTrue(VariableMarket.getExtra().equals(VariableMarket.getCellInitialMarbleList(12)));
-        VariableMarket.PushColumn(0,player);
-        assertTrue(VariableMarket.getCellGrid(0, 0).equals(VariableMarket.getCellInitialMarbleList(4)));
-        assertTrue(VariableMarket.getCellGrid(1, 0).equals(VariableMarket.getCellInitialMarbleList(8)));
-        assertTrue(VariableMarket.getCellGrid(2, 0).equals(VariableMarket.getCellInitialMarbleList(12)));
-        assertTrue(VariableMarket.getExtra().equals(VariableMarket.getCellInitialMarbleList(0)));
+        ArrayList<String> nickname =new ArrayList<String>(2);
+        nickname.add("ale");
+        nickname.add("ali");
+        GameMultiPlayer game= new GameMultiPlayer(2,nickname);
 
-        VariableMarket.PushColumn(0,player);
-        assertTrue(VariableMarket.getCellGrid(0, 0).equals(VariableMarket.getCellInitialMarbleList(8)));
-        assertTrue(VariableMarket.getCellGrid(1, 0).equals(VariableMarket.getCellInitialMarbleList(12)));
-        assertTrue(VariableMarket.getCellGrid(2, 0).equals(VariableMarket.getCellInitialMarbleList(0)));
-        assertTrue(VariableMarket.getExtra().equals(VariableMarket.getCellInitialMarbleList(4)));
+        assertTrue(game.getCellGridMarket(0, 0).equals(game.getInitialMarbleListMarket(0)));
+        assertTrue(game.getCellGridMarket(1, 0).equals(game.getInitialMarbleListMarket(4)));
+        assertTrue(game.getCellGridMarket(2, 0).equals(game.getInitialMarbleListMarket(8)));
+        assertTrue(game.getExtraMarket().equals(game.getInitialMarbleListMarket(12)));
+        game.pushColumnInMarket(game.getPlayerFromList(0),0);
+        assertTrue(game.getCellGridMarket(0, 0).equals(game.getInitialMarbleListMarket(4)));
+        assertTrue(game.getCellGridMarket(1, 0).equals(game.getInitialMarbleListMarket(8)));
+        assertTrue(game.getCellGridMarket(2, 0).equals(game.getInitialMarbleListMarket(12)));
+        assertTrue(game.getExtraMarket().equals(game.getInitialMarbleListMarket(0)));
 
-        VariableMarket.PushColumn(0,player);
-        assertTrue(VariableMarket.getCellGrid(0, 0).equals(VariableMarket.getCellInitialMarbleList(12)));
-        assertTrue(VariableMarket.getCellGrid(1, 0).equals(VariableMarket.getCellInitialMarbleList(0)));
-        assertTrue(VariableMarket.getCellGrid(2, 0).equals(VariableMarket.getCellInitialMarbleList(4)));
-        assertTrue(VariableMarket.getExtra().equals(VariableMarket.getCellInitialMarbleList(8)));
+        game.pushColumnInMarket(game.getPlayerFromList(1),0);
+        assertTrue(game.getCellGridMarket(0, 0).equals(game.getInitialMarbleListMarket(8)));
+        assertTrue(game.getCellGridMarket(1, 0).equals(game.getInitialMarbleListMarket(12)));
+        assertTrue(game.getCellGridMarket(2, 0).equals(game.getInitialMarbleListMarket(0)));
+        assertTrue(game.getExtraMarket().equals(game.getInitialMarbleListMarket(4)));
 
-        VariableMarket.PushColumn(0,player);
-        assertTrue(VariableMarket.getCellGrid(0, 0).equals(VariableMarket.getCellInitialMarbleList(0)));
-        assertTrue(VariableMarket.getCellGrid(1, 0).equals(VariableMarket.getCellInitialMarbleList(4)));
-        assertTrue(VariableMarket.getCellGrid(2, 0).equals(VariableMarket.getCellInitialMarbleList(8)));
-        assertTrue(VariableMarket.getExtra().equals(VariableMarket.getCellInitialMarbleList(12)));
+        game.pushColumnInMarket(game.getPlayerFromList(0),0);
+        assertTrue(game.getCellGridMarket(0, 0).equals(game.getInitialMarbleListMarket(12)));
+        assertTrue(game.getCellGridMarket(1, 0).equals(game.getInitialMarbleListMarket(0)));
+        assertTrue(game.getCellGridMarket(2, 0).equals(game.getInitialMarbleListMarket(4)));
+        assertTrue(game.getExtraMarket().equals(game.getInitialMarbleListMarket(8)));
+
+        game.pushColumnInMarket(game.getPlayerFromList(1),0);
+        assertTrue(game.getCellGridMarket(0, 0).equals(game.getInitialMarbleListMarket(0)));
+        assertTrue(game.getCellGridMarket(1, 0).equals(game.getInitialMarbleListMarket(4)));
+        assertTrue(game.getCellGridMarket(2, 0).equals(game.getInitialMarbleListMarket(8)));
+        assertTrue(game.getExtraMarket().equals(game.getInitialMarbleListMarket(12)));
 
     }}
 

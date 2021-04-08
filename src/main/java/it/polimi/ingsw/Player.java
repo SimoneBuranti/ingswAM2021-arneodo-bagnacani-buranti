@@ -15,6 +15,7 @@ public class Player {
 
 
     public Player(String nickName){
+        buffer= new ArrayList<Resource>();
         gameBoardOfPlayer = new Gameboard();
         personalLeaderCard=new ArrayList<LeaderCard>(4);
         personalLeaderCard.add(DeckLeaderCard.arrangeDeckLeaderCards());
@@ -27,6 +28,7 @@ public class Player {
 
     public Player(Game game){
         this.game = game;
+        buffer= new ArrayList<Resource>();
         gameBoardOfPlayer = new Gameboard();
         personalLeaderCard=new ArrayList<LeaderCard>(4);
         personalLeaderCard.add(DeckLeaderCard.arrangeDeckLeaderCards());
@@ -187,11 +189,11 @@ public class Player {
         Resource resource;
 
         try {
-            gameBoardOfPlayer.takeFromMarket((ArrayList<Resource>) buffer.clone());
+            gameBoardOfPlayer.takeFromMarket((ArrayList<Resource>)buffer.clone());
             buffer = new ArrayList<>();
         } catch (NotEnoughSpeceInStorageException e) {
             //discardResource(buffer.remove(resource));
-            takeFromMarket();
+            
         }
     }
 
