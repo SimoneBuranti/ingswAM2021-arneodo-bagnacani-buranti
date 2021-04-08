@@ -129,4 +129,10 @@ public abstract class GameboardDecorator implements GameboardInterface {
     public LeaderCard reportLeaderCardToGameboard(int index) {
         return null;
     }
+
+
+    @Override
+    public  void removeLeaderCardToGameboard(int index){
+
+    }
 }

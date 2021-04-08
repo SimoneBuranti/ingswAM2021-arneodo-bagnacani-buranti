@@ -49,5 +49,11 @@ public class ProductionGameboard extends GameboardDecorator {
     }
 
 
+    @Override
+    public  void removeLeaderCardToGameboard(int index){
+
+    }
+
+
 
 }

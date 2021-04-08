@@ -31,4 +31,9 @@ public class WhiteMarbleGameboard extends GameboardDecorator{
         return 0;
 
     }
+
+    @Override
+    public  void removeLeaderCardToGameboard(int index){
+
+    }
 }

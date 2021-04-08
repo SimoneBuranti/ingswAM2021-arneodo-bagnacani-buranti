@@ -56,4 +56,10 @@ public interface GameboardInterface {
 
    LeaderCard reportLeaderCardToGameboard(int index);
 
+
+    void removeLeaderCardToGameboard(int index);
+
+
+
+
 }

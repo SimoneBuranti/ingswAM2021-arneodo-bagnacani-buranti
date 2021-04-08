@@ -58,6 +58,11 @@ public class Gameboard implements GameboardInterface{
 
 
 
+    
+
+
+
+
 
 
     /**
@@ -436,6 +441,18 @@ public class Gameboard implements GameboardInterface{
     public LeaderCard reportLeaderCardToGameboard(int index){
         return leaderCards.get(index);
     }
+
+
+    /**
+     * this method need  when the player discard a leaderCard
+     * @param index
+     */
+    public  void removeLeaderCardToGameboard(int index){
+        leaderCards.remove(index);
+    }
+
+
+
 
 
 

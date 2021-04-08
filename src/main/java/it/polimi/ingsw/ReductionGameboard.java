@@ -48,7 +48,14 @@ public class ReductionGameboard extends GameboardDecorator{
     @Override
     public int leaderCardsSize(){
         return 0;
+    }
+    @Override
+    public  void removeLeaderCardToGameboard(int index){
 
     }
+
+
+
+
 }
 

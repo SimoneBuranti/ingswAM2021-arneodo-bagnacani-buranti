@@ -43,7 +43,7 @@ public class Player {
      * @param firstIndex
      * @param secondIndex
      */
-    public void discardLeaderCard(int firstIndex, int secondIndex){
+    public void saveLeaderCard(int firstIndex, int secondIndex){
         for (int i=0; i<4;i++) {
             if (i == firstIndex || i == secondIndex)
                 gameBoardOfPlayer.addLeaderCardToGameboard(personalLeaderCard.get(i));
@@ -150,6 +150,25 @@ public class Player {
         return  personalLeaderCard.get(index);
     }
 
+
+    /**
+     * this method need  when the player discard a leaderCard, and give player one faithPoint
+     * @param index
+     */
+   public void discardLeaderCard(int index) throws CallForCouncilException, LastSpaceReachedException, LeaderCardsGameboardEmptyException {
+        if(getGameBoardOfPlayer().leaderCardsSize()==1){
+            getGameBoardOfPlayer().removeLeaderCardToGameboard(0);
+            getGameBoardOfPlayer().faithMove();}
+
+        else if (getGameBoardOfPlayer().leaderCardsSize()==2)
+        {getGameBoardOfPlayer().removeLeaderCardToGameboard(1);
+        getGameBoardOfPlayer().faithMove();
+        }
+        else
+           throw new LeaderCardsGameboardEmptyException();
+
+   }
+
     public void buyProductionCard(DeckProductionCard deck, int choosenColumn) throws LevelException, NotEnoughResourcesException, EmptyException, FullColumnException, EndGameException {
         gameBoardOfPlayer.buyProductionCard(deck,choosenColumn);
     }
@@ -197,23 +216,11 @@ public class Player {
         buffer.add(resource);
     }
 
-    /*
-     * method which receives card from deckcardprodcution and pass it to Gameboard
-     * @param productioncard
-     * @param choosenColumns
-     * @throws LevelException fromm gameboard, player can't take this level of card, or place it in choosencolumns
 
-    public void GivePlayerCard(ProductionCard productioncard, int choosenColumns) throws LevelException {
-        gameBoardOfPlayer.addCardToDevelopmentBoard(productioncard,choosenColumns);
-    }*/
 
-    /*
-      @param resource
-      method which add resource to buffer from market
 
-    public void addToBuffer(Resource resource){
-        gameBoardOfPlayer.addToBuffer(resource);
-    }*/
+
+
 
 
 }
