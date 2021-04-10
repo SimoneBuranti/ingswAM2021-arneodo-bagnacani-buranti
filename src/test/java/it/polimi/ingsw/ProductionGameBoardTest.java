@@ -2407,5 +2407,219 @@ class ProductionGameBoardTest {
         assertEquals(5-input1Map.get(Resource.SERVANT)+output1Map.get(Resource.SERVANT)-input2Map.get(Resource.SERVANT)+output2Map.get(Resource.SERVANT),availableMap.get(Resource.SERVANT));
     }
 
+    @Test
+    @DisplayName("extraProductionOnTest0 - simple test")
+    public void extraProductionOnTest0() {
+        GameBoardInterface gameBoard = new GameBoard();
+        gameBoard = new ProductionGameBoard(gameBoard,Resource.COIN);
+        Reserve reserve = new Reserve();
+        int init ;
+
+        Map<Resource,Integer> storageMap = new HashMap<>();
+        Map<Resource,Integer> strongboxMap = new HashMap<>();
+        Map<Resource,Integer> availableMap = new HashMap<>();
+
+        availableMap.put(Resource.COIN, 0);
+        availableMap.put(Resource.ROCK, 0);
+        availableMap.put(Resource.SHIELD, 0);
+        availableMap.put(Resource.SERVANT, 0);
+
+        storageMap.put(Resource.COIN, 0);
+        storageMap.put(Resource.ROCK, 0);
+        storageMap.put(Resource.SHIELD, 0);
+        storageMap.put(Resource.SERVANT, 0);
+
+        strongboxMap.put(Resource.COIN, 1);
+        strongboxMap.put(Resource.ROCK, 1);
+        strongboxMap.put(Resource.SHIELD, 1);
+        strongboxMap.put(Resource.SERVANT, 1);
+
+        init = gameBoard.getIndicator();
+
+        ArrayList<Resource> available;
+
+        for(Resource key : storageMap.keySet()){
+            for (int i = 0; i<storageMap.get(key); i++){
+                try {
+                    gameBoard.addToStorage(key);
+                } catch (UnavailableResourceException ignored){}
+            }
+        }
+
+        for(Resource key : strongboxMap.keySet()){
+            for (int i = 0; i<strongboxMap.get(key); i++){
+                gameBoard.addToStrongbox(key);
+            }
+        }
+
+
+        try {
+            gameBoard.extraProductionOn(Resource.COIN);
+        } catch (ImpossibleProductionException | LastSpaceReachedException | CallForCouncilException e) {
+            e.printStackTrace();
+        }
+        try {
+            gameBoard.endOfProduction();
+        } catch (CallForCouncilException | LastSpaceReachedException e) {
+            e.printStackTrace();
+        }
+
+        available = gameBoard.availableResources();
+        for(Resource r : available){
+            availableMap.put(r,availableMap.remove(r)+1);
+        }
+
+        assertEquals(init+1,gameBoard.getIndicator());
+
+        assertEquals(strongboxMap.get(Resource.COIN),availableMap.get(Resource.COIN));
+        assertEquals(strongboxMap.get(Resource.ROCK),availableMap.get(Resource.ROCK));
+        assertEquals(strongboxMap.get(Resource.SHIELD),availableMap.get(Resource.SHIELD));
+        assertEquals(strongboxMap.get(Resource.SERVANT),availableMap.get(Resource.SERVANT));
+
+    }
+
+    @Test
+    @DisplayName("extraProductionOnTest1 - simple test")
+    public void extraProductionOnTest1() {
+        GameBoardInterface gameBoard = new GameBoard();
+        gameBoard = new ProductionGameBoard(gameBoard,Resource.COIN);
+        Reserve reserve = new Reserve();
+        int init ;
+
+        Map<Resource,Integer> storageMap = new HashMap<>();
+        Map<Resource,Integer> strongboxMap = new HashMap<>();
+        Map<Resource,Integer> availableMap = new HashMap<>();
+
+        availableMap.put(Resource.COIN, 0);
+        availableMap.put(Resource.ROCK, 0);
+        availableMap.put(Resource.SHIELD, 0);
+        availableMap.put(Resource.SERVANT, 0);
+
+        storageMap.put(Resource.COIN, 0);
+        storageMap.put(Resource.ROCK, 0);
+        storageMap.put(Resource.SHIELD, 0);
+        storageMap.put(Resource.SERVANT, 0);
+
+        strongboxMap.put(Resource.COIN, 1);
+        strongboxMap.put(Resource.ROCK, 1);
+        strongboxMap.put(Resource.SHIELD, 1);
+        strongboxMap.put(Resource.SERVANT, 1);
+
+        DeckProductionCardOneGreen deck = new DeckProductionCardOneGreen();
+        init = gameBoard.getIndicator();
+
+        ArrayList<Resource> available;
+
+        for(Resource key : storageMap.keySet()){
+            for (int i = 0; i<storageMap.get(key); i++){
+                try {
+                    gameBoard.addToStorage(key);
+                } catch (UnavailableResourceException ignored){}
+            }
+        }
+
+        for(Resource key : strongboxMap.keySet()){
+            for (int i = 0; i<strongboxMap.get(key); i++){
+                gameBoard.addToStrongbox(key);
+            }
+        }
+
+
+        try {
+            gameBoard.extraProductionOn(Resource.SHIELD);
+        } catch (ImpossibleProductionException | LastSpaceReachedException | CallForCouncilException e) {
+            e.printStackTrace();
+        }
+        try {
+            gameBoard.endOfProduction();
+        } catch (CallForCouncilException | LastSpaceReachedException e) {
+            e.printStackTrace();
+        }
+
+        available = gameBoard.availableResources();
+        for(Resource r : available){
+            availableMap.put(r,availableMap.remove(r)+1);
+        }
+        assertEquals(init+1,gameBoard.getIndicator());
+
+        assertEquals(strongboxMap.get(Resource.COIN)-1,availableMap.get(Resource.COIN));
+        assertEquals(strongboxMap.get(Resource.ROCK),availableMap.get(Resource.ROCK));
+        assertEquals(strongboxMap.get(Resource.SHIELD)+1,availableMap.get(Resource.SHIELD));
+        assertEquals(strongboxMap.get(Resource.SERVANT),availableMap.get(Resource.SERVANT));
+
+    }
+
+    @Test
+    @DisplayName("extraProductionOnTest2 - simple test")
+    public void extraProductionOnTest2() {
+        GameBoardInterface gameBoard = new GameBoard();
+        gameBoard = new ProductionGameBoard(gameBoard,Resource.SERVANT);
+        Reserve reserve = new Reserve();
+        int init ;
+
+        Map<Resource,Integer> storageMap = new HashMap<>();
+        Map<Resource,Integer> strongboxMap = new HashMap<>();
+        Map<Resource,Integer> availableMap = new HashMap<>();
+
+        availableMap.put(Resource.COIN, 0);
+        availableMap.put(Resource.ROCK, 0);
+        availableMap.put(Resource.SHIELD, 0);
+        availableMap.put(Resource.SERVANT, 0);
+
+        storageMap.put(Resource.COIN, 0);
+        storageMap.put(Resource.ROCK, 0);
+        storageMap.put(Resource.SHIELD, 0);
+        storageMap.put(Resource.SERVANT, 0);
+
+        strongboxMap.put(Resource.COIN, 1);
+        strongboxMap.put(Resource.ROCK, 1);
+        strongboxMap.put(Resource.SHIELD, 1);
+        strongboxMap.put(Resource.SERVANT, 1);
+
+        DeckProductionCardOneGreen deck = new DeckProductionCardOneGreen();
+        init = gameBoard.getIndicator();
+
+        ArrayList<Resource> available;
+
+        for(Resource key : storageMap.keySet()){
+            for (int i = 0; i<storageMap.get(key); i++){
+                try {
+                    gameBoard.addToStorage(key);
+                } catch (UnavailableResourceException ignored){}
+            }
+        }
+
+        for(Resource key : strongboxMap.keySet()){
+            for (int i = 0; i<strongboxMap.get(key); i++){
+                gameBoard.addToStrongbox(key);
+            }
+        }
+
+
+        try {
+            gameBoard.extraProductionOn(Resource.COIN);
+        } catch (ImpossibleProductionException | LastSpaceReachedException | CallForCouncilException e) {
+            e.printStackTrace();
+        }
+        try {
+            gameBoard.endOfProduction();
+        } catch (CallForCouncilException | LastSpaceReachedException e) {
+            e.printStackTrace();
+        }
+
+        available = gameBoard.availableResources();
+        for(Resource r : available){
+            availableMap.put(r,availableMap.remove(r)+1);
+        }
+        assertEquals(init+1,gameBoard.getIndicator());
+
+        assertEquals(strongboxMap.get(Resource.COIN)+1,availableMap.get(Resource.COIN));
+        assertEquals(strongboxMap.get(Resource.ROCK),availableMap.get(Resource.ROCK));
+        assertEquals(strongboxMap.get(Resource.SHIELD),availableMap.get(Resource.SHIELD));
+        assertEquals(strongboxMap.get(Resource.SERVANT)-1,availableMap.get(Resource.SERVANT));
+
+    }
+
+
 
 }
