@@ -149,7 +149,6 @@ public abstract class GameBoardDecorator implements GameBoardInterface {
     @Override
     public int leaderCardsSize(){
         return gameBoard.leaderCardsSize();
-
     }
 
     @Override

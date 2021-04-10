@@ -22,7 +22,7 @@ public class ReductionGameBoard extends GameBoardDecorator{
         ArrayList<Resource> availableResources = availableResources();
         ArrayList<Resource> requiredResources = costReduction(deck.requiredResources());
 
-        if(deck.getLevel()!=firstRowFree(chosenColumn))
+        if(deck.getLevel()!=firstRowFree(chosenColumn)+1)
             throw new LevelException();
         for(Resource resource : requiredResources)
             if (!availableResources.remove(resource))

@@ -64,32 +64,6 @@ public class Game {
         }
     }
 
-// Exceptions Handlers:
-
-
-    protected void exceptionHandler(EmptyColumnException e) {
-        //...
-    }
-
-    protected void exceptionHandler(CallForCouncilException e) {
-    }
-
-    protected void exceptionHandler(LastSpaceReachedException e) {
-    }
-
-    protected void exceptionHandler(EndOfSolitaireGame e) {
-    }
-
-    protected void exceptionHandler(ImpossibleProductionException e) {
-        //...
-    }
-
-    protected void exceptionHandler(WhiteMarbleException e){
-        //...
-    }
-
-
-
     /**
      * @param player
      * @param chosenRow
@@ -179,6 +153,36 @@ public class Game {
     public Reserve getReserve() {
         return reserve;
     }
+
+
+
+// Exceptions Handlers:
+
+
+    protected void exceptionHandler(EmptyColumnException e) {
+        //...
+    }
+
+    protected void exceptionHandler(CallForCouncilException e) {
+    }
+
+    protected void exceptionHandler(LastSpaceReachedException e) {
+    }
+
+    protected void exceptionHandler(EndOfSolitaireGame e) {
+    }
+
+    protected void exceptionHandler(ImpossibleProductionException e) {
+        //...
+    }
+
+    protected void exceptionHandler(WhiteMarbleException e){
+        //...
+    }
+
+
+
+
 }
 
 
