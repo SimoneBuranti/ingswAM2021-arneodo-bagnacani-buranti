@@ -8,6 +8,7 @@ public class DeckProductionCardOneYellow extends DeckProductionCard {
 
 
     public DeckProductionCardOneYellow (){
+
         Yellow yellow= new Yellow();
         deck = new ArrayList<>(4);
         Map<Resource,Integer> yellowOne =new HashMap<>();
@@ -87,4 +88,6 @@ public class DeckProductionCardOneYellow extends DeckProductionCard {
 
         Mix.MIXED(deck);
     }
+
+
 }

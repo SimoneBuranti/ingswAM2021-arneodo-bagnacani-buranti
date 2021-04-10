@@ -158,9 +158,6 @@ public class GameSolitaire extends Game{
     }
 
 
-    public int deckSize(DeckProductionCard deck){
-        return deck.size();
-    }
 
     @Override
     public void moveEveryoneExcept(Player player){

@@ -8,7 +8,9 @@ public class DeckProductionCardTwoYellow extends DeckProductionCard {
 
 
 
+
     public DeckProductionCardTwoYellow (){
+
         Yellow yellow= new Yellow();
         deck = new ArrayList<>(4);
 
@@ -89,4 +91,6 @@ public class DeckProductionCardTwoYellow extends DeckProductionCard {
 
         Mix.MIXED(deck);
     }
+
+
 }

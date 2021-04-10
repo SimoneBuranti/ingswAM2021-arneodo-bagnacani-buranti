@@ -7,6 +7,7 @@ public abstract class DeckProductionCard {
     protected ArrayList<ProductionCard> deck ;
 
 
+
     public ArrayList<Resource> requiredResources() {
         ArrayList<Resource> cost = new ArrayList<>();
 
@@ -20,9 +21,6 @@ public abstract class DeckProductionCard {
         return cost;
     }
 
-    public int getLevel() {
-        return deck.get(0).getLevel();
-    }
 
     public ProductionCard pickUpFirstCard() throws EmptyException {
         if(!deck.isEmpty())
@@ -40,6 +38,13 @@ public abstract class DeckProductionCard {
     }
 
 
+    public int getLevel(){
+        return deck.get(0).getLevel();
+    }
+
+
+
+
 
     /**
      * this method removes the first card from the deck,
@@ -48,15 +53,14 @@ public abstract class DeckProductionCard {
      */
     public void removeOneCard() throws EmptyException, EndOfSolitaireGame {
         if(deck.isEmpty()) {
-            if (getLevel() == 3) {
-                throw new EndOfSolitaireGame();
-            } else{
-                throw new EmptyException();
-            }
-        }
-        else {
+            throw new EmptyException();
+        } else {
+            int level= getLevel();
             deck.remove(0);
+            if (deck.isEmpty() && level ==3)
+                throw new EndOfSolitaireGame();
         }
+
     }
 
     /**
@@ -66,6 +70,9 @@ public abstract class DeckProductionCard {
     public int size(){
         return deck.size();
     }
+
+
+
 }
 
 

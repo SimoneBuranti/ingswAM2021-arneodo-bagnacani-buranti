@@ -2,26 +2,26 @@ package it.polimi.ingsw;
 
 public class Game {
 
-    private final  Market market;
-    private final Reserve reserve;
+    private  Market market;
+    private Reserve reserve;
     protected Player currentPlayer;
-    protected final DeckProductionCard deckProductionCardOneBlu ;
-    protected final DeckProductionCard deckProductionCardTwoBlu ;
-    protected final DeckProductionCard deckProductionCardThreeBlu ;
+    protected DeckProductionCard deckProductionCardOneBlu ;
+    protected DeckProductionCard deckProductionCardTwoBlu ;
+    protected  DeckProductionCard deckProductionCardThreeBlu ;
 
-    protected final DeckProductionCard deckProductionCardOneGreen ;
-    protected final DeckProductionCard deckProductionCardTwoGreen;
-    protected final DeckProductionCard deckProductionCardThreeGreen ;
+    protected DeckProductionCard deckProductionCardOneGreen ;
+    protected DeckProductionCard deckProductionCardTwoGreen;
+    protected DeckProductionCard deckProductionCardThreeGreen ;
 
-    protected final DeckProductionCard deckProductionCardOneYellow ;
-    protected final DeckProductionCard deckProductionCardTwoYellow ;
-    protected final DeckProductionCard deckProductionCardThreeYellow;
+    protected DeckProductionCard deckProductionCardOneYellow ;
+    protected DeckProductionCard deckProductionCardTwoYellow ;
+    protected DeckProductionCard deckProductionCardThreeYellow;
 
-    protected final DeckProductionCard deckProductionCardOneViolet ;
-    protected final DeckProductionCard deckProductionCardTwoViolet ;
-    protected final DeckProductionCard deckProductionCardThreeViolet ;
+    protected DeckProductionCard deckProductionCardOneViolet ;
+    protected DeckProductionCard deckProductionCardTwoViolet ;
+    protected DeckProductionCard deckProductionCardThreeViolet ;
 
-    protected final DeckLeaderCard deckLeaderCard;
+    protected DeckLeaderCard deckLeaderCard;
 
     public Game(){
         market = new Market();
@@ -162,4 +162,25 @@ public class Game {
         return market.getCellInitialMarbleList(index);}
 
 
+
+    public int deckSize(DeckProductionCard deck){
+        return deck.size();
+    }
+
+
+
+
+    public Market getMarket() {
+        return market;
+    }
+
+
+
+    public Reserve getReserve() {
+        return reserve;
+    }
 }
+
+
+
+

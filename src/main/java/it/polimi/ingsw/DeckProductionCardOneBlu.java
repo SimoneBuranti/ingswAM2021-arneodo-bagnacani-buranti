@@ -7,7 +7,9 @@ import java.util.Map;
 public class DeckProductionCardOneBlu extends DeckProductionCard {
 
 
+
     public DeckProductionCardOneBlu(){
+
         Blue blue= new Blue();
         deck = new ArrayList<>(4);
         Map<Resource,Integer> blueOne =new HashMap<>();
@@ -87,6 +89,9 @@ public class DeckProductionCardOneBlu extends DeckProductionCard {
 
         Mix.MIXED(deck);
     }
+
+
+
 
 
 }

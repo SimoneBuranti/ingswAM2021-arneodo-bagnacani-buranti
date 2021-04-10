@@ -1,9 +1,10 @@
 package it.polimi.ingsw;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class ActionMarkerTest {
 
@@ -14,25 +15,13 @@ public class ActionMarkerTest {
     @Test
     @DisplayName("Action Marker Production Cards Test")
     public void actionMarkerBlueTest(){
-        ActionMarkerProductionBlue actionMarker = new ActionMarkerProductionBlue();
         GameSolitaire game = new GameSolitaire("Ali");
-        DeckProductionCardOneBlu deckProductionCardOneBlu = new DeckProductionCardOneBlu();
-        DeckProductionCardTwoBlu deckProductionCardTwoBlu = new DeckProductionCardTwoBlu();
-        DeckProductionCardThreeBlu deckProductionCardThreeBlu = new DeckProductionCardThreeBlu();
+        ActionMarker actionMarker= new ActionMarkerProductionBlue();
 
-        assertEquals(4, game.deckSize(deckProductionCardOneBlu));
-        assertEquals(4, game.deckSize(deckProductionCardTwoBlu));
-        assertEquals(4, game.deckSize(deckProductionCardThreeBlu));
 
-        try {
-            game.activateActionMarker(actionMarker);
-        } catch (EmptyException | EndOfSolitaireGame e) {
-            e.printStackTrace();
-        }
-
-        assertEquals(2, game.deckSize(deckProductionCardOneBlu));
-        assertEquals(4, game.deckSize(deckProductionCardTwoBlu));
-        assertEquals(4, game.deckSize(deckProductionCardThreeBlu));
+        assertEquals(4, game.deckSize(game.deckProductionCardOneBlu));
+        assertEquals(4, game.deckSize(game.deckProductionCardTwoBlu));
+        assertEquals(4, game.deckSize(game.deckProductionCardThreeBlu));
 
         try {
             game.activateActionMarker(actionMarker);
@@ -40,9 +29,19 @@ public class ActionMarkerTest {
             e.printStackTrace();
         }
 
-        assertEquals(0, game.deckSize(deckProductionCardOneBlu));
-        assertEquals(4, game.deckSize(deckProductionCardTwoBlu));
-        assertEquals(4, game.deckSize(deckProductionCardThreeBlu));
+        assertEquals(2, game.deckSize(game.deckProductionCardOneBlu));
+        assertEquals(4, game.deckSize(game.deckProductionCardTwoBlu));
+        assertEquals(4, game.deckSize(game.deckProductionCardThreeBlu));
+        try {
+            game.activateActionMarker(actionMarker);
+        } catch (EmptyException | EndOfSolitaireGame e) {
+            e.printStackTrace();
+        }
+
+
+        assertEquals(0, game.deckSize(game.deckProductionCardOneBlu));
+        assertEquals(4, game.deckSize(game.deckProductionCardTwoBlu));
+        assertEquals(4, game.deckSize(game.deckProductionCardThreeBlu));
 
         try {
             game.activateActionMarker(actionMarker);
@@ -50,9 +49,20 @@ public class ActionMarkerTest {
             e.printStackTrace();
         }
 
-        assertEquals(0, game.deckSize(deckProductionCardOneBlu));
-        assertEquals(2, game.deckSize(deckProductionCardTwoBlu));
-        assertEquals(4, game.deckSize(deckProductionCardThreeBlu));
+
+        assertEquals(0, game.deckSize(game.deckProductionCardOneBlu));
+        assertEquals(2, game.deckSize(game.deckProductionCardTwoBlu));
+        assertEquals(4, game.deckSize(game.deckProductionCardThreeBlu));
+        try {
+            game.activateActionMarker(actionMarker);
+        } catch (EmptyException | EndOfSolitaireGame e) {
+            e.printStackTrace();
+        }
+
+
+        assertEquals(0, game.deckSize(game.deckProductionCardOneBlu));
+        assertEquals(0, game.deckSize(game.deckProductionCardTwoBlu));
+        assertEquals(4, game.deckSize(game.deckProductionCardThreeBlu));
 
         try {
             game.activateActionMarker(actionMarker);
@@ -60,9 +70,10 @@ public class ActionMarkerTest {
             e.printStackTrace();
         }
 
-        assertEquals(0, game.deckSize(deckProductionCardOneBlu));
-        assertEquals(0, game.deckSize(deckProductionCardTwoBlu));
-        assertEquals(4, game.deckSize(deckProductionCardThreeBlu));
+
+        assertEquals(0, game.deckSize(game.deckProductionCardOneBlu));
+        assertEquals(0, game.deckSize(game.deckProductionCardTwoBlu));
+        assertEquals(2, game.deckSize(game.deckProductionCardThreeBlu));
 
         try {
             game.activateActionMarker(actionMarker);
@@ -70,19 +81,10 @@ public class ActionMarkerTest {
             e.printStackTrace();
         }
 
-        assertEquals(0, game.deckSize(deckProductionCardOneBlu));
-        assertEquals(0, game.deckSize(deckProductionCardTwoBlu));
-        assertEquals(2, game.deckSize(deckProductionCardThreeBlu));
 
-        try {
-            game.activateActionMarker(actionMarker);
-        } catch (EmptyException | EndOfSolitaireGame e) {
-            e.printStackTrace();
-        }
-
-        assertEquals(0, game.deckSize(deckProductionCardOneBlu));
-        assertEquals(0, game.deckSize(deckProductionCardTwoBlu));
-        assertEquals(0, game.deckSize(deckProductionCardThreeBlu));
+        assertEquals(0, game.deckSize(game.deckProductionCardOneBlu));
+        assertEquals(0, game.deckSize(game.deckProductionCardTwoBlu));
+        assertEquals(0, game.deckSize(game.deckProductionCardThreeBlu));
     }
 
     /**
@@ -92,15 +94,15 @@ public class ActionMarkerTest {
     @Test
     @DisplayName("Action Marker Production Cards Complete Test")
     public void actionMarkerBlueCompleteTest() throws EndOfSolitaireGame {
-        ActionMarkerProductionBlue actionMarker = new ActionMarkerProductionBlue();
+
         GameSolitaire game = new GameSolitaire("Ali");
-        DeckProductionCardOneBlu deckProductionCardOneBlu = new DeckProductionCardOneBlu();
-        DeckProductionCardTwoBlu deckProductionCardTwoBlu = new DeckProductionCardTwoBlu();
-        DeckProductionCardThreeBlu deckProductionCardThreeBlu = new DeckProductionCardThreeBlu();
+        ActionMarker actionMarker= new ActionMarkerProductionBlue();
 
-        assertEquals(4, game.deckSize(deckProductionCardOneBlu));
-        assertEquals(4, game.deckSize(deckProductionCardTwoBlu));
-        assertEquals(4, game.deckSize(deckProductionCardThreeBlu));
+
+
+        assertEquals(4, game.deckSize(game.deckProductionCardOneBlu));
+        assertEquals(4, game.deckSize(game.deckProductionCardTwoBlu));
+        assertEquals(4, game.deckSize(game.deckProductionCardThreeBlu));
 
         try {
             game.activateActionMarker(actionMarker);
@@ -108,32 +110,32 @@ public class ActionMarkerTest {
             e.printStackTrace();
         }
 
-        assertEquals(2, game.deckSize(deckProductionCardOneBlu));
-        assertEquals(4, game.deckSize(deckProductionCardTwoBlu));
-        assertEquals(4, game.deckSize(deckProductionCardThreeBlu));
+        assertEquals(2, game.deckSize(game.deckProductionCardOneBlu));
+        assertEquals(4, game.deckSize(game.deckProductionCardTwoBlu));
+        assertEquals(4, game.deckSize(game.deckProductionCardThreeBlu));
+
 
         try {
-            deckProductionCardOneBlu.removeOneCard();
+            game.deckProductionCardOneBlu.removeOneCard();
         } catch (EmptyException e) {
             e.printStackTrace();
         }
 
-        assertEquals(1, game.deckSize(deckProductionCardOneBlu));
-        assertEquals(4, game.deckSize(deckProductionCardTwoBlu));
-        assertEquals(4, game.deckSize(deckProductionCardThreeBlu));
+        assertEquals(1, game.deckSize(game.deckProductionCardOneBlu));
+        assertEquals(4, game.deckSize(game.deckProductionCardTwoBlu));
+        assertEquals(4, game.deckSize(game.deckProductionCardThreeBlu));
 
         try {
             game.activateActionMarker(actionMarker);
         } catch (EmptyException | EndOfSolitaireGame e) {
             e.printStackTrace();
         }
-
-        assertEquals(0, game.deckSize(deckProductionCardOneBlu));
-        assertEquals(3, game.deckSize(deckProductionCardTwoBlu));
-        assertEquals(4, game.deckSize(deckProductionCardThreeBlu));
+        assertEquals(0, game.deckSize(game.deckProductionCardOneBlu));
+        assertEquals(3, game.deckSize(game.deckProductionCardTwoBlu));
+        assertEquals(4, game.deckSize(game.deckProductionCardThreeBlu));
 
         try {
-            deckProductionCardOneBlu.removeOneCard();
+            game.deckProductionCardTwoBlu.removeOneCard();
         } catch (EmptyException e) {
             e.printStackTrace();
         }
@@ -143,9 +145,9 @@ public class ActionMarkerTest {
             e.printStackTrace();
         }
 
-        assertEquals(0, game.deckSize(deckProductionCardOneBlu));
-        assertEquals(0, game.deckSize(deckProductionCardTwoBlu));
-        assertEquals(4, game.deckSize(deckProductionCardThreeBlu));
+        assertEquals(0, game.deckSize(game.deckProductionCardOneBlu));
+        assertEquals(0, game.deckSize(game.deckProductionCardTwoBlu));
+        assertEquals(4, game.deckSize(game.deckProductionCardThreeBlu));
     }
 
 

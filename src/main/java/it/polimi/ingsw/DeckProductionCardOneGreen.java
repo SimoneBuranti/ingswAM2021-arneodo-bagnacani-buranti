@@ -8,6 +8,7 @@ public class DeckProductionCardOneGreen extends DeckProductionCard {
 
 
     public   DeckProductionCardOneGreen (){
+
         Green green= new Green();
         deck = new ArrayList<>(4);
         Map<Resource,Integer> greenOne =new HashMap<>();
@@ -87,6 +88,10 @@ public class DeckProductionCardOneGreen extends DeckProductionCard {
 
         Mix.MIXED(deck);
     }
+    /**
+     * this method has been implemented to do the tests and returns the size of the deck
+     * @return int: the number of cards in the deck
+     */
 
 }
 

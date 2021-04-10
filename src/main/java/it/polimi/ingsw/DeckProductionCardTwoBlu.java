@@ -90,6 +90,7 @@ public class DeckProductionCardTwoBlu extends DeckProductionCard {
 
         Mix.MIXED(deck);
     }
+
 }
 
 
