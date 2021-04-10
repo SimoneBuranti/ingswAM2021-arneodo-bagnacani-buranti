@@ -415,12 +415,12 @@ class GameBoardTest {
         availableMap.put(Resource.SHIELD, 0);
         availableMap.put(Resource.SERVANT, 0);
 
-        storageMap.put(Resource.COIN, 30);
+        storageMap.put(Resource.COIN, 102);
         storageMap.put(Resource.ROCK, 0);
         storageMap.put(Resource.SHIELD, 2);
         storageMap.put(Resource.SERVANT, 0);
 
-        strongboxMap.put(Resource.COIN, 30);
+        strongboxMap.put(Resource.COIN, 102);
         strongboxMap.put(Resource.ROCK, 2);
         strongboxMap.put(Resource.SHIELD, 0);
         strongboxMap.put(Resource.SERVANT, 2);
@@ -449,7 +449,7 @@ class GameBoardTest {
             availableMap.put(r,availableMap.remove(r)+1);
         }
 
-        assertEquals(28,availableMap.get(Resource.COIN));
+        assertEquals(100,availableMap.get(Resource.COIN));
         assertEquals(2,availableMap.get(Resource.ROCK));
         assertEquals(2,availableMap.get(Resource.SHIELD));
         assertEquals(2,availableMap.get(Resource.SERVANT));
@@ -630,20 +630,20 @@ class GameBoardTest {
         availableMap.put(Resource.SHIELD, 0);
         availableMap.put(Resource.SERVANT, 0);
 
-        storageMap.put(Resource.COIN, 15);
-        storageMap.put(Resource.ROCK, 15);
-        storageMap.put(Resource.SHIELD, 15);
-        storageMap.put(Resource.SERVANT, 15);
+        storageMap.put(Resource.COIN, 51);
+        storageMap.put(Resource.ROCK, 51);
+        storageMap.put(Resource.SHIELD, 51);
+        storageMap.put(Resource.SERVANT, 51);
 
-        strongboxMap.put(Resource.COIN, 15);
-        strongboxMap.put(Resource.ROCK, 15);
-        strongboxMap.put(Resource.SHIELD, 15);
-        strongboxMap.put(Resource.SERVANT, 15);
+        strongboxMap.put(Resource.COIN, 51);
+        strongboxMap.put(Resource.ROCK, 51);
+        strongboxMap.put(Resource.SHIELD, 51);
+        strongboxMap.put(Resource.SERVANT, 51);
 
-        costMap.put(Resource.COIN, 28);
-        costMap.put(Resource.ROCK, 28);
-        costMap.put(Resource.SHIELD, 28);
-        costMap.put(Resource.SERVANT, 28);
+        costMap.put(Resource.COIN, 100);
+        costMap.put(Resource.ROCK, 100);
+        costMap.put(Resource.SHIELD, 100);
+        costMap.put(Resource.SERVANT, 100);
 
 
         for(Resource key : storageMap.keySet()){

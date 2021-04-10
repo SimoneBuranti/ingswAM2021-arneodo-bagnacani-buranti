@@ -47,7 +47,7 @@ class StorageTest {
         }
 
         assertEquals(1,storage.getResource(Resource.COIN));
-        assertEquals(27, Reserve.getAmountOf(Resource.COIN));
+        assertEquals(99, Reserve.getAmountOf(Resource.COIN));
 
         try {
             storage.addResource(Resource.ROCK);
@@ -61,7 +61,7 @@ class StorageTest {
         }
 
         assertEquals(2,storage.getResource(Resource.ROCK));
-        assertEquals(26, Reserve.getAmountOf(Resource.ROCK));
+        assertEquals(98, Reserve.getAmountOf(Resource.ROCK));
 
         try {
             storage.addResource(Resource.SHIELD);
@@ -80,7 +80,7 @@ class StorageTest {
         }
 
         assertEquals(3,storage.getResource(Resource.SHIELD));
-        assertEquals(25, Reserve.getAmountOf(Resource.SHIELD));
+        assertEquals(97, Reserve.getAmountOf(Resource.SHIELD));
 
         try {
             storage.addResource(Resource.SERVANT);
@@ -104,7 +104,7 @@ class StorageTest {
         }
 
         assertEquals(4,storage.getResource(Resource.SERVANT));
-        assertEquals(24, Reserve.getAmountOf(Resource.SERVANT));
+        assertEquals(96, Reserve.getAmountOf(Resource.SERVANT));
     }
 
     /**
@@ -117,7 +117,7 @@ class StorageTest {
         Storage storage = new Storage();
         Reserve reserve = new Reserve();
 
-        for (int i = 0; i < 28 ; i++){
+        for (int i = 0; i < 100 ; i++){
             try {
                 storage.addResource(Resource.COIN);
             } catch (UnavailableResourceException e) {
@@ -125,7 +125,7 @@ class StorageTest {
             }
 
             assertEquals(1+i,storage.getResource(Resource.COIN));
-            assertEquals(27-i, Reserve.getAmountOf(Resource.COIN));
+            assertEquals(99-i, Reserve.getAmountOf(Resource.COIN));
 
             try {
                 storage.addResource(Resource.ROCK);
@@ -134,7 +134,7 @@ class StorageTest {
             }
 
             assertEquals(1+i,storage.getResource(Resource.ROCK));
-            assertEquals(27-i, Reserve.getAmountOf(Resource.ROCK));
+            assertEquals(99-i, Reserve.getAmountOf(Resource.ROCK));
 
             try {
                 storage.addResource(Resource.SHIELD);
@@ -143,7 +143,7 @@ class StorageTest {
             }
 
             assertEquals(1+i,storage.getResource(Resource.SHIELD));
-            assertEquals(27-i, Reserve.getAmountOf(Resource.SHIELD));
+            assertEquals(99-i, Reserve.getAmountOf(Resource.SHIELD));
 
             try {
                 storage.addResource(Resource.SERVANT);
@@ -152,7 +152,7 @@ class StorageTest {
             }
 
             assertEquals(1+i,storage.getResource(Resource.SERVANT));
-            assertEquals(27-i, Reserve.getAmountOf(Resource.SERVANT));
+            assertEquals(99-i, Reserve.getAmountOf(Resource.SERVANT));
 
         }
         try {
@@ -161,7 +161,7 @@ class StorageTest {
             e.printStackTrace();
         }
 
-        assertEquals(28,storage.getResource(Resource.COIN));
+        assertEquals(100,storage.getResource(Resource.COIN));
         assertEquals(0, Reserve.getAmountOf(Resource.COIN));
 
         try {
@@ -170,7 +170,7 @@ class StorageTest {
             e.printStackTrace();
         }
 
-        assertEquals(28,storage.getResource(Resource.ROCK));
+        assertEquals(100,storage.getResource(Resource.ROCK));
         assertEquals(0, Reserve.getAmountOf(Resource.ROCK));
 
         try {
@@ -179,7 +179,7 @@ class StorageTest {
             e.printStackTrace();
         }
 
-        assertEquals(28,storage.getResource(Resource.SERVANT));
+        assertEquals(100,storage.getResource(Resource.SERVANT));
         assertEquals(0, Reserve.getAmountOf(Resource.SERVANT));
 
         try {
@@ -188,7 +188,7 @@ class StorageTest {
             e.printStackTrace();
         }
 
-        assertEquals(28,storage.getResource(Resource.SHIELD));
+        assertEquals(100,storage.getResource(Resource.SHIELD));
         assertEquals(0, Reserve.getAmountOf(Resource.SHIELD));
 
     }
@@ -215,7 +215,7 @@ class StorageTest {
         }
 
         assertEquals(2,storage.getResource(Resource.COIN));
-        assertEquals(26, Reserve.getAmountOf(Resource.COIN));
+        assertEquals(98, Reserve.getAmountOf(Resource.COIN));
 
         try{
             storage.useResource(Resource.COIN);
@@ -224,7 +224,7 @@ class StorageTest {
         }
 
         assertEquals(1,storage.getResource(Resource.COIN));
-        assertEquals(27, Reserve.getAmountOf(Resource.COIN));
+        assertEquals(99, Reserve.getAmountOf(Resource.COIN));
 
         try{
             storage.useResource(Resource.COIN);
@@ -233,7 +233,7 @@ class StorageTest {
         }
 
         assertEquals(0,storage.getResource(Resource.COIN));
-        assertEquals(28, Reserve.getAmountOf(Resource.COIN));
+        assertEquals(100, Reserve.getAmountOf(Resource.COIN));
 
         try{
             storage.useResource(Resource.COIN);
@@ -242,7 +242,7 @@ class StorageTest {
         }
 
         assertEquals(0,storage.getResource(Resource.COIN));
-        assertEquals(28, Reserve.getAmountOf(Resource.COIN));
+        assertEquals(100, Reserve.getAmountOf(Resource.COIN));
 
         try {
             storage.addResource(Resource.ROCK);
@@ -256,7 +256,7 @@ class StorageTest {
         }
 
         assertEquals(2,storage.getResource(Resource.ROCK));
-        assertEquals(26, Reserve.getAmountOf(Resource.ROCK));
+        assertEquals(98, Reserve.getAmountOf(Resource.ROCK));
 
         try{
             storage.useResource(Resource.ROCK);
@@ -271,7 +271,7 @@ class StorageTest {
         }
 
         assertEquals(0,storage.getResource(Resource.ROCK));
-        assertEquals(28, Reserve.getAmountOf(Resource.ROCK));
+        assertEquals(100, Reserve.getAmountOf(Resource.ROCK));
 
         try{
             storage.useResource(Resource.ROCK);
@@ -280,7 +280,7 @@ class StorageTest {
         }
 
         assertEquals(0,storage.getResource(Resource.ROCK));
-        assertEquals(28, Reserve.getAmountOf(Resource.ROCK));
+        assertEquals(100, Reserve.getAmountOf(Resource.ROCK));
 
         try {
             storage.addResource(Resource.SHIELD);
@@ -317,7 +317,7 @@ class StorageTest {
         }
 
         assertEquals(0,storage.getResource(Resource.SHIELD));
-        assertEquals(28, Reserve.getAmountOf(Resource.SHIELD));
+        assertEquals(100, Reserve.getAmountOf(Resource.SHIELD));
 
         try{
             storage.useResource(Resource.SHIELD);
@@ -326,7 +326,7 @@ class StorageTest {
         }
 
         assertEquals(0,storage.getResource(Resource.SHIELD));
-        assertEquals(28, Reserve.getAmountOf(Resource.SHIELD));
+        assertEquals(100, Reserve.getAmountOf(Resource.SHIELD));
 
         try {
             storage.addResource(Resource.SERVANT);
@@ -350,7 +350,7 @@ class StorageTest {
         }
 
         assertEquals(4,storage.getResource(Resource.SERVANT));
-        assertEquals(24, Reserve.getAmountOf(Resource.SERVANT));
+        assertEquals(96, Reserve.getAmountOf(Resource.SERVANT));
 
         try{
             storage.useResource(Resource.SERVANT);
@@ -377,7 +377,7 @@ class StorageTest {
         }
 
         assertEquals(0,storage.getResource(Resource.SERVANT));
-        assertEquals(28, Reserve.getAmountOf(Resource.SERVANT));
+        assertEquals(100, Reserve.getAmountOf(Resource.SERVANT));
 
         try{
             storage.useResource(Resource.SERVANT);
@@ -386,7 +386,7 @@ class StorageTest {
         }
 
         assertEquals(0,storage.getResource(Resource.SERVANT));
-        assertEquals(28, Reserve.getAmountOf(Resource.SERVANT));
+        assertEquals(100, Reserve.getAmountOf(Resource.SERVANT));
     }
 
 
@@ -960,7 +960,7 @@ class StorageTest {
 
 
     @Test
-    @DisplayName("availableResourcesTest5 : one unavailable reseource type")
+    @DisplayName("availableResourcesTest5 : one unavailable resource type")
     public void availableResourcesTest5(){
         Storage storage = new Storage();
         Reserve reserve = new Reserve();
@@ -973,7 +973,7 @@ class StorageTest {
         map.put(Resource.COIN, 0);
         map.put(Resource.ROCK, 0);
         map.put(Resource.SHIELD, 0);
-        map.put(Resource.SERVANT, 29);
+        map.put(Resource.SERVANT, 101);
 
         availableMap.put(Resource.COIN, 0);
         availableMap.put(Resource.ROCK, 0);
@@ -999,7 +999,7 @@ class StorageTest {
         assertEquals(availableMap.get(Resource.COIN),0);
         assertEquals(availableMap.get(Resource.ROCK),0);
         assertEquals(availableMap.get(Resource.SHIELD),0);
-        assertEquals(availableMap.get(Resource.SERVANT),28);
+        assertEquals(availableMap.get(Resource.SERVANT),100);
     }
 
 
@@ -1014,10 +1014,10 @@ class StorageTest {
 
         ArrayList<Resource> available;
 
-        map.put(Resource.COIN, 28);
-        map.put(Resource.ROCK, 28);
-        map.put(Resource.SHIELD, 28);
-        map.put(Resource.SERVANT, 28);
+        map.put(Resource.COIN, 100);
+        map.put(Resource.ROCK, 100);
+        map.put(Resource.SHIELD, 100);
+        map.put(Resource.SERVANT, 100);
 
         availableMap.put(Resource.COIN, 0);
         availableMap.put(Resource.ROCK, 0);
@@ -1040,10 +1040,10 @@ class StorageTest {
             availableMap.put(r,availableMap.remove(r)+1);
         }
 
-        assertEquals(availableMap.get(Resource.COIN),28);
-        assertEquals(availableMap.get(Resource.ROCK),28);
-        assertEquals(availableMap.get(Resource.SHIELD),28);
-        assertEquals(availableMap.get(Resource.SERVANT),28);
+        assertEquals(availableMap.get(Resource.COIN),100);
+        assertEquals(availableMap.get(Resource.ROCK),100);
+        assertEquals(availableMap.get(Resource.SHIELD),100);
+        assertEquals(availableMap.get(Resource.SERVANT),100);
     }
 
     @Test
@@ -1057,10 +1057,10 @@ class StorageTest {
 
         ArrayList<Resource> available;
 
-        map.put(Resource.COIN, 100);
-        map.put(Resource.ROCK, 74);
-        map.put(Resource.SHIELD, 55);
-        map.put(Resource.SERVANT, 53);
+        map.put(Resource.COIN, 103);
+        map.put(Resource.ROCK, 120);
+        map.put(Resource.SHIELD, 114);
+        map.put(Resource.SERVANT, 150);
 
         availableMap.put(Resource.COIN, 0);
         availableMap.put(Resource.ROCK, 0);
@@ -1083,10 +1083,10 @@ class StorageTest {
             availableMap.put(r,availableMap.remove(r)+1);
         }
 
-        assertEquals(availableMap.get(Resource.COIN),28);
-        assertEquals(availableMap.get(Resource.ROCK),28);
-        assertEquals(availableMap.get(Resource.SHIELD),28);
-        assertEquals(availableMap.get(Resource.SERVANT),28);
+        assertEquals(availableMap.get(Resource.COIN),100);
+        assertEquals(availableMap.get(Resource.ROCK),100);
+        assertEquals(availableMap.get(Resource.SHIELD),100);
+        assertEquals(availableMap.get(Resource.SERVANT),100);
     }
 
 

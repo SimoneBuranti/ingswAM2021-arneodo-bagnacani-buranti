@@ -15,10 +15,10 @@ class ReserveTest {
     public void constructorTest() {
         Reserve reserve = new Reserve();
 
-        assertEquals(Reserve.getAmountOf(Resource.COIN),28);
-        assertEquals(Reserve.getAmountOf(Resource.ROCK),28);
-        assertEquals(Reserve.getAmountOf(Resource.SHIELD),28);
-        assertEquals(Reserve.getAmountOf(Resource.SERVANT),28);
+        assertEquals(Reserve.getAmountOf(Resource.COIN),100);
+        assertEquals(Reserve.getAmountOf(Resource.ROCK),100);
+        assertEquals(Reserve.getAmountOf(Resource.SHIELD),100);
+        assertEquals(Reserve.getAmountOf(Resource.SERVANT),100);
     }
 
     /**
@@ -32,16 +32,16 @@ class ReserveTest {
         Reserve.addResource(Resource.COIN);
         Reserve.addResource(Resource.COIN);
         Reserve.addResource(Resource.COIN);
-        assertEquals(Reserve.getAmountOf(Resource.COIN),31);
+        assertEquals(Reserve.getAmountOf(Resource.COIN),103);
 
         Reserve.addResource(Resource.ROCK);
         Reserve.addResource(Resource.ROCK);
-        assertEquals(Reserve.getAmountOf(Resource.ROCK),30);
+        assertEquals(Reserve.getAmountOf(Resource.ROCK),102);
 
         Reserve.addResource(Resource.SHIELD);
-        assertEquals(Reserve.getAmountOf(Resource.SHIELD),29);
+        assertEquals(Reserve.getAmountOf(Resource.SHIELD),101);
 
-        assertEquals(Reserve.getAmountOf(Resource.SERVANT),28);
+        assertEquals(Reserve.getAmountOf(Resource.SERVANT),100);
     }
 
     /**
@@ -53,34 +53,34 @@ class ReserveTest {
     public void getResource() {
         Reserve reserve = new Reserve();
 
-        for (int i = 0; i<28 ; i++) {
+        for (int i = 0; i<100 ; i++) {
             try{
                 Reserve.getResource(Resource.COIN);
             } catch (UnavailableResourceException e) {
                 e.printStackTrace();
             }
-            assertEquals(Reserve.getAmountOf(Resource.COIN),27-i);
+            assertEquals(Reserve.getAmountOf(Resource.COIN),99-i);
 
             try{
                 Reserve.getResource(Resource.ROCK);
             } catch (UnavailableResourceException e) {
                 e.printStackTrace();
             }
-            assertEquals(Reserve.getAmountOf(Resource.ROCK),27-i);
+            assertEquals(Reserve.getAmountOf(Resource.ROCK),99-i);
 
             try{
                 Reserve.getResource(Resource.SHIELD);
             } catch (UnavailableResourceException e) {
                 e.printStackTrace();
             }
-            assertEquals(Reserve.getAmountOf(Resource.SHIELD),27-i);
+            assertEquals(Reserve.getAmountOf(Resource.SHIELD),99-i);
 
             try{
                 Reserve.getResource(Resource.SERVANT);
             } catch (UnavailableResourceException e) {
                 e.printStackTrace();
             }
-            assertEquals(Reserve.getAmountOf(Resource.SERVANT),27-i);
+            assertEquals(Reserve.getAmountOf(Resource.SERVANT),99-i);
 
         }
 

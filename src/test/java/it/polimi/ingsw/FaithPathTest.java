@@ -272,6 +272,10 @@ class FaithPathTest {
                 assertEquals(faithPath.getCurrCall(), ++j);
 
             } catch (LastSpaceReachedException e) {
+                assertEquals(faithPath.getCurrCall(), j);
+                faithPath.setPapal();
+                assertEquals(faithPath.getPapalCard(j), 1);
+                assertEquals(faithPath.getCurrCall(), ++j);
                 System.out.println("Partita Terminata");
             }
         }

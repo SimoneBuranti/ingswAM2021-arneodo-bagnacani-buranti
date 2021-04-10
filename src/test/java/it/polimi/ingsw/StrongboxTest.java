@@ -42,20 +42,20 @@ public class StrongboxTest {
         strongbox.addResource(Resource.COIN);
 
         assertEquals(1,strongbox.getResource(Resource.COIN));
-        assertEquals(27, Reserve.getAmountOf(Resource.COIN));
+        assertEquals(99, Reserve.getAmountOf(Resource.COIN));
 
         strongbox.addResource(Resource.ROCK);
         strongbox.addResource(Resource.ROCK);
 
         assertEquals(2,strongbox.getResource(Resource.ROCK));
-        assertEquals(26, Reserve.getAmountOf(Resource.ROCK));
+        assertEquals(98, Reserve.getAmountOf(Resource.ROCK));
 
         strongbox.addResource(Resource.SHIELD);
         strongbox.addResource(Resource.SHIELD);
         strongbox.addResource(Resource.SHIELD);
 
         assertEquals(3,strongbox.getResource(Resource.SHIELD));
-        assertEquals(25, Reserve.getAmountOf(Resource.SHIELD));
+        assertEquals(97, Reserve.getAmountOf(Resource.SHIELD));
 
         strongbox.addResource(Resource.SERVANT);
         strongbox.addResource(Resource.SERVANT);
@@ -63,7 +63,7 @@ public class StrongboxTest {
         strongbox.addResource(Resource.SERVANT);
 
         assertEquals(4,strongbox.getResource(Resource.SERVANT));
-        assertEquals(24, Reserve.getAmountOf(Resource.SERVANT));
+        assertEquals(96, Reserve.getAmountOf(Resource.SERVANT));
     }
 
     /**
@@ -76,46 +76,46 @@ public class StrongboxTest {
         Strongbox strongbox = new Strongbox();
         Reserve reserve = new Reserve();
 
-        for (int i = 0; i < 28 ; i++){
+        for (int i = 0; i < 100 ; i++){
             strongbox.addResource(Resource.COIN);
 
             assertEquals(1+i,strongbox.getResource(Resource.COIN));
-            assertEquals(27-i, Reserve.getAmountOf(Resource.COIN));
+            assertEquals(99-i, Reserve.getAmountOf(Resource.COIN));
 
             strongbox.addResource(Resource.ROCK);
 
             assertEquals(1+i,strongbox.getResource(Resource.ROCK));
-            assertEquals(27-i, Reserve.getAmountOf(Resource.ROCK));
+            assertEquals(99-i, Reserve.getAmountOf(Resource.ROCK));
 
             strongbox.addResource(Resource.SHIELD);
 
             assertEquals(1+i,strongbox.getResource(Resource.SHIELD));
-            assertEquals(27-i, Reserve.getAmountOf(Resource.SHIELD));
+            assertEquals(99-i, Reserve.getAmountOf(Resource.SHIELD));
 
             strongbox.addResource(Resource.SERVANT);
 
             assertEquals(1+i,strongbox.getResource(Resource.SERVANT));
-            assertEquals(27-i, Reserve.getAmountOf(Resource.SERVANT));
+            assertEquals(99-i, Reserve.getAmountOf(Resource.SERVANT));
 
         }
         strongbox.addResource(Resource.COIN);
 
-        assertEquals(28,strongbox.getResource(Resource.COIN));
+        assertEquals(100,strongbox.getResource(Resource.COIN));
         assertEquals(0, Reserve.getAmountOf(Resource.COIN));
 
         strongbox.addResource(Resource.ROCK);
 
-        assertEquals(28,strongbox.getResource(Resource.ROCK));
+        assertEquals(100,strongbox.getResource(Resource.ROCK));
         assertEquals(0, Reserve.getAmountOf(Resource.ROCK));
 
         strongbox.addResource(Resource.SERVANT);
 
-        assertEquals(28,strongbox.getResource(Resource.SERVANT));
+        assertEquals(100,strongbox.getResource(Resource.SERVANT));
         assertEquals(0, Reserve.getAmountOf(Resource.SERVANT));
 
         strongbox.addResource(Resource.SHIELD);
 
-        assertEquals(28,strongbox.getResource(Resource.SHIELD));
+        assertEquals(100,strongbox.getResource(Resource.SHIELD));
         assertEquals(0, Reserve.getAmountOf(Resource.SHIELD));
 
     }
@@ -134,7 +134,7 @@ public class StrongboxTest {
         strongbox.addResource(Resource.COIN);
 
         assertEquals(2,strongbox.getResource(Resource.COIN));
-        assertEquals(26, Reserve.getAmountOf(Resource.COIN));
+        assertEquals(98, Reserve.getAmountOf(Resource.COIN));
 
         try{
             strongbox.useResource(Resource.COIN);
@@ -143,7 +143,7 @@ public class StrongboxTest {
         }
 
         assertEquals(1,strongbox.getResource(Resource.COIN));
-        assertEquals(27, Reserve.getAmountOf(Resource.COIN));
+        assertEquals(99, Reserve.getAmountOf(Resource.COIN));
 
         try{
             strongbox.useResource(Resource.COIN);
@@ -152,7 +152,7 @@ public class StrongboxTest {
         }
 
         assertEquals(0,strongbox.getResource(Resource.COIN));
-        assertEquals(28, Reserve.getAmountOf(Resource.COIN));
+        assertEquals(100, Reserve.getAmountOf(Resource.COIN));
 
         try{
             strongbox.useResource(Resource.COIN);
@@ -161,13 +161,13 @@ public class StrongboxTest {
         }
 
         assertEquals(0,strongbox.getResource(Resource.COIN));
-        assertEquals(28, Reserve.getAmountOf(Resource.COIN));
+        assertEquals(100, Reserve.getAmountOf(Resource.COIN));
 
         strongbox.addResource(Resource.ROCK);
         strongbox.addResource(Resource.ROCK);
 
         assertEquals(2,strongbox.getResource(Resource.ROCK));
-        assertEquals(26, Reserve.getAmountOf(Resource.ROCK));
+        assertEquals(98, Reserve.getAmountOf(Resource.ROCK));
 
         try{
             strongbox.useResource(Resource.ROCK);
@@ -182,7 +182,7 @@ public class StrongboxTest {
         }
 
         assertEquals(0,strongbox.getResource(Resource.ROCK));
-        assertEquals(28, Reserve.getAmountOf(Resource.ROCK));
+        assertEquals(100, Reserve.getAmountOf(Resource.ROCK));
 
         try{
             strongbox.useResource(Resource.ROCK);
@@ -191,7 +191,7 @@ public class StrongboxTest {
         }
 
         assertEquals(0,strongbox.getResource(Resource.ROCK));
-        assertEquals(28, Reserve.getAmountOf(Resource.ROCK));
+        assertEquals(100, Reserve.getAmountOf(Resource.ROCK));
 
         strongbox.addResource(Resource.SHIELD);
         strongbox.addResource(Resource.SHIELD);
@@ -216,7 +216,7 @@ public class StrongboxTest {
         }
 
         assertEquals(0,strongbox.getResource(Resource.SHIELD));
-        assertEquals(28, Reserve.getAmountOf(Resource.SHIELD));
+        assertEquals(100, Reserve.getAmountOf(Resource.SHIELD));
 
         try{
             strongbox.useResource(Resource.SHIELD);
@@ -225,7 +225,7 @@ public class StrongboxTest {
         }
 
         assertEquals(0,strongbox.getResource(Resource.SHIELD));
-        assertEquals(28, Reserve.getAmountOf(Resource.SHIELD));
+        assertEquals(100, Reserve.getAmountOf(Resource.SHIELD));
 
         strongbox.addResource(Resource.SERVANT);
         strongbox.addResource(Resource.SERVANT);
@@ -233,7 +233,7 @@ public class StrongboxTest {
         strongbox.addResource(Resource.SERVANT);
 
         assertEquals(4,strongbox.getResource(Resource.SERVANT));
-        assertEquals(24, Reserve.getAmountOf(Resource.SERVANT));
+        assertEquals(96, Reserve.getAmountOf(Resource.SERVANT));
 
         try{
             strongbox.useResource(Resource.SERVANT);
@@ -260,7 +260,7 @@ public class StrongboxTest {
         }
 
         assertEquals(0,strongbox.getResource(Resource.SERVANT));
-        assertEquals(28, Reserve.getAmountOf(Resource.SERVANT));
+        assertEquals(100, Reserve.getAmountOf(Resource.SERVANT));
 
         try{
             strongbox.useResource(Resource.SERVANT);
@@ -269,7 +269,7 @@ public class StrongboxTest {
         }
 
         assertEquals(0,strongbox.getResource(Resource.SERVANT));
-        assertEquals(28, Reserve.getAmountOf(Resource.SERVANT));
+        assertEquals(100, Reserve.getAmountOf(Resource.SERVANT));
     }
 
     /**
@@ -520,7 +520,7 @@ public class StrongboxTest {
         map.put(Resource.COIN, 0);
         map.put(Resource.ROCK, 0);
         map.put(Resource.SHIELD, 0);
-        map.put(Resource.SERVANT, 29);
+        map.put(Resource.SERVANT, 101);
 
         availableMap.put(Resource.COIN, 0);
         availableMap.put(Resource.ROCK, 0);
@@ -542,7 +542,7 @@ public class StrongboxTest {
         assertEquals(availableMap.get(Resource.COIN),0);
         assertEquals(availableMap.get(Resource.ROCK),0);
         assertEquals(availableMap.get(Resource.SHIELD),0);
-        assertEquals(availableMap.get(Resource.SERVANT),28);
+        assertEquals(availableMap.get(Resource.SERVANT),100);
     }
 
 
@@ -557,10 +557,10 @@ public class StrongboxTest {
 
         ArrayList<Resource> available;
 
-        map.put(Resource.COIN, 28);
-        map.put(Resource.ROCK, 28);
-        map.put(Resource.SHIELD, 28);
-        map.put(Resource.SERVANT, 28);
+        map.put(Resource.COIN, 100);
+        map.put(Resource.ROCK, 100);
+        map.put(Resource.SHIELD, 100);
+        map.put(Resource.SERVANT, 100);
 
         availableMap.put(Resource.COIN, 0);
         availableMap.put(Resource.ROCK, 0);
@@ -579,10 +579,10 @@ public class StrongboxTest {
             availableMap.put(r,availableMap.remove(r)+1);
         }
 
-        assertEquals(availableMap.get(Resource.COIN),28);
-        assertEquals(availableMap.get(Resource.ROCK),28);
-        assertEquals(availableMap.get(Resource.SHIELD),28);
-        assertEquals(availableMap.get(Resource.SERVANT),28);
+        assertEquals(availableMap.get(Resource.COIN),100);
+        assertEquals(availableMap.get(Resource.ROCK),100);
+        assertEquals(availableMap.get(Resource.SHIELD),100);
+        assertEquals(availableMap.get(Resource.SERVANT),100);
     }
 
     @Test
@@ -596,10 +596,10 @@ public class StrongboxTest {
 
         ArrayList<Resource> available;
 
-        map.put(Resource.COIN, 100);
-        map.put(Resource.ROCK, 74);
-        map.put(Resource.SHIELD, 55);
-        map.put(Resource.SERVANT, 53);
+        map.put(Resource.COIN, 109);
+        map.put(Resource.ROCK, 154);
+        map.put(Resource.SHIELD, 139);
+        map.put(Resource.SERVANT, 117);
 
         availableMap.put(Resource.COIN, 0);
         availableMap.put(Resource.ROCK, 0);
@@ -618,10 +618,10 @@ public class StrongboxTest {
             availableMap.put(r,availableMap.remove(r)+1);
         }
 
-        assertEquals(availableMap.get(Resource.COIN),28);
-        assertEquals(availableMap.get(Resource.ROCK),28);
-        assertEquals(availableMap.get(Resource.SHIELD),28);
-        assertEquals(availableMap.get(Resource.SERVANT),28);
+        assertEquals(availableMap.get(Resource.COIN),100);
+        assertEquals(availableMap.get(Resource.ROCK),100);
+        assertEquals(availableMap.get(Resource.SHIELD),100);
+        assertEquals(availableMap.get(Resource.SERVANT),100);
     }
 
     @Test
