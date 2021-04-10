@@ -15,11 +15,9 @@ public class WhiteMarbleGameBoardDouble extends WhiteMarbleGameBoard{
     }
 
     @Override
-    public Resource whiteExchange() throws WhiteMarbleException{
+    public Resource whiteExchange() throws WhiteMarbleException {
 
         throw new WhiteMarbleException(1);
 
     }
-
-
 }

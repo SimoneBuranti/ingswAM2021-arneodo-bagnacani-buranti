@@ -142,6 +142,8 @@ public class Player {
 
    }
 
+
+
    public void activationLeaderCard(int index){
        getGameBoardOfPlayer().activationLeaderCard(index);
    }
