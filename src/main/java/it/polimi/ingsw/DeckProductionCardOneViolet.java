@@ -9,7 +9,7 @@ public class DeckProductionCardOneViolet extends DeckProductionCard {
 
     public  DeckProductionCardOneViolet (){
         Violet violet= new Violet();
-        deck = new ArrayList<ProductionCard>(4);
+        deck = new ArrayList<>(4);
         Map<Resource,Integer> violetOne =new HashMap<>();
         violetOne.put(Resource.COIN, 0);
         violetOne.put(Resource.ROCK, 0);

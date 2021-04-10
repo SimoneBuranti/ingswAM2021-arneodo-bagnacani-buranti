@@ -2,8 +2,8 @@ package it.polimi.ingsw;
 
 public class LeaderCard {
 
-    private int points;
-    private Requirements requirements;
+    protected int points;
+    protected Requirements requirements;
 
 
     public LeaderCard(Requirements requirements,int points) {
@@ -13,5 +13,9 @@ public class LeaderCard {
 
     public int getPoints() {
         return points;
+    }
+
+    public boolean abilityActivation(GameBoardInterface gameBoard){
+        return false;
     }
 }

@@ -10,7 +10,7 @@ public class DeckProductionCardTwoGreen extends DeckProductionCard {
 
     public DeckProductionCardTwoGreen (){
         Green green= new Green();
-        deck  = new ArrayList<ProductionCard>(4);
+        deck  = new ArrayList<>(4);
 
         Map<Resource,Integer> greenFive =new HashMap<>();
         greenFive.put(Resource.COIN, 0);

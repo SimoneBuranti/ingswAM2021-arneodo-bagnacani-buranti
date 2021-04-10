@@ -1,11 +1,40 @@
 package it.polimi.ingsw;
 
 public class ThreeFlagsTwoColourRequirement extends Requirements{
-    private  Colour  colourDoubleRequirement;
-    private  Colour colourSingolRequirement;
+    private final Colour  colourDoubleRequirement;
+    private final Colour colourSingleRequirement;
     public ThreeFlagsTwoColourRequirement(Colour colourDoubleRequirement, Colour colourSecondRequirement){
         this.colourDoubleRequirement=colourDoubleRequirement;
-        this.colourSingolRequirement =colourSecondRequirement;
+        this.colourSingleRequirement =colourSecondRequirement;
     }
 
+    @Override
+    public Colour getColourDoubleRequirement() {
+        return colourDoubleRequirement;
+    }
+
+    @Override
+    public Colour getColourSingleRequirement() {
+        return colourSingleRequirement;
+    }
+
+    @Override
+    public Colour getColourRequirement() {
+        return null;
+    }
+
+    @Override
+    public Resource getResourceRequirement() {
+        return null;
+    }
+
+    @Override
+    public Colour getColourFirstRequirement() {
+        return null;
+    }
+
+    @Override
+    public Colour getColourSecondRequirement() {
+        return null;
+    }
 }

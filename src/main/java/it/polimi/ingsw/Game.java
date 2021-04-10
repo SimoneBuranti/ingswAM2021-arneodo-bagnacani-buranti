@@ -2,10 +2,9 @@ package it.polimi.ingsw;
 
 public class Game {
 
-    private Market market;
-    private Reserve reserve;
-    private static Player[] players;
-    private Player currentPlayer;
+    private final  Market market;
+    private final Reserve reserve;
+    protected Player currentPlayer;
     protected final DeckProductionCard deckProductionCardOneBlu ;
     protected final DeckProductionCard deckProductionCardTwoBlu ;
     protected final DeckProductionCard deckProductionCardThreeBlu ;
@@ -27,8 +26,6 @@ public class Game {
     public Game(){
         market = new Market();
         reserve = new Reserve();
-        //this.players = players;
-        //currentPlayer = players[0];
 
         deckProductionCardOneBlu = new DeckProductionCardOneBlu();
         deckProductionCardTwoBlu = new DeckProductionCardTwoBlu();
@@ -50,27 +47,16 @@ public class Game {
 
     }
 
-    public void buyProductionCard(DeckProductionCard deck, int choosenColumn) throws LevelException, NotEnoughResourcesException, EmptyException, FullColumnException, EndGameException {
-        currentPlayer.buyProductionCard(deck,choosenColumn);
+    public void buyProductionCard(DeckProductionCard deck, int chosenColumn) throws LevelException, NotEnoughResourcesException, EmptyException, FullColumnException, EndGameException {
+        currentPlayer.buyProductionCard(deck,chosenColumn);
     }
 
     public void moveEveryoneExcept(Player player){
-        for(Player p : players){
-            if (p != player) {
-                try {
-                    p.faithMove();
-                } catch (CallForCouncilException e1) {
-                    exceptionHandler(e1);
-                } catch (LastSpaceReachedException e2) {
-                    exceptionHandler(e2);
-                }
-            }
-        }
     }
 
-    public void productionOn(int choosenColumn){
+    public void productionOn(int chosenColumn){
         try {
-            currentPlayer.productionOn(choosenColumn);
+            currentPlayer.productionOn(chosenColumn);
         } catch (ImpossibleProductionException e) {
             exceptionHandler(e);
         } catch (EmptyColumnException e) {
@@ -81,25 +67,24 @@ public class Game {
 // Exceptions Handlers:
 
 
-    private void exceptionHandler(EmptyColumnException e) {
+    protected void exceptionHandler(EmptyColumnException e) {
         //...
     }
 
-    private void exceptionHandler(CallForCouncilException e) {
-        for(Player p : players){
-            p.setPapal();
-        }
+    protected void exceptionHandler(CallForCouncilException e) {
     }
 
-    private void exceptionHandler(LastSpaceReachedException e) {
-        for(Player p : players){
-            p.setPapal();
-        }
+    protected void exceptionHandler(LastSpaceReachedException e) {
+    }
 
+    protected void exceptionHandler(EndOfSolitaireGame e) {
+    }
+
+    protected void exceptionHandler(ImpossibleProductionException e) {
         //...
     }
 
-    private void exceptionHandler(ImpossibleProductionException e) {
+    protected void exceptionHandler(WhiteMarbleException e){
         //...
     }
 
@@ -111,7 +96,11 @@ public class Game {
      * @throws CallForCouncilException thrown from player faithPath  if match finished
      */
     public void pushRowInMarket(Player player, int chosenRow) throws CallForCouncilException, LastSpaceReachedException {
-        market.PushRow(chosenRow,player);
+        try {
+            market.PushRow(chosenRow,player);
+        } catch (WhiteMarbleException e) {
+            exceptionHandler(e);
+        }
     }
 
 
@@ -121,7 +110,11 @@ public class Game {
      * @throws CallForCouncilException thrown from player faithPath  if match finished
      */
     public void pushColumnInMarket(Player player, int chosenColumn) throws CallForCouncilException, LastSpaceReachedException {
-        market.PushColumn(chosenColumn,player);
+        try {
+            market.PushColumn(chosenColumn,player);
+        } catch (WhiteMarbleException e) {
+            exceptionHandler(e);
+        }
     }
 
 

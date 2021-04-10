@@ -1,15 +1,13 @@
 package it.polimi.ingsw;
 
-import java.util.ArrayList;
 
 public class PlayerSecond extends Player{
 
-    private ArrayList<LeaderCard> personalLeaderCard = new ArrayList<LeaderCard>(4);
 
 
 
-    public PlayerSecond(String nickName){
-        super(nickName);
+    public PlayerSecond(String nickName, Game game){
+        super(nickName, game);
     }
 
 
@@ -18,16 +16,11 @@ public class PlayerSecond extends Player{
      * during the pregame playerSecond can choose one type of resource
      *
      */
+    @Override
     public void initResource(Resource resourceOne) throws UnavailableResourceException {
         getGameBoardOfPlayer().addToStorage(resourceOne);
     }
 
-    /**
-     * methods null for thesecond player,secondPlayer can't do these actions
-     *
-     */
 
-    public void initResource(){}
-    public void initResource(Resource resourceOne,Resource resourceTwo){}
 
 }

@@ -11,11 +11,11 @@ public class MarketTest {
      * test on creation of Market(Grid) with mixed functionality
      */
     @Test
-    public void InizializationOfGridMarket()
+    public void initializationOfGridMarket()
     {
 
 
-        ArrayList<String> nickname =new ArrayList<String>(2);
+        ArrayList<String> nickname =new ArrayList<>(2);
         nickname.add("ale");
         nickname.add("ali");
         GameMultiPlayer game= new GameMultiPlayer(2,nickname);
@@ -41,10 +41,10 @@ public class MarketTest {
      * test on creation of Market(Extra) with mixed functionality
      */
     @Test
-    public void InizializationOfExtraMarket()
+    public void initializationOfExtraMarket()
     {
 
-        ArrayList<String> nickname =new ArrayList<String>(2);
+        ArrayList<String> nickname =new ArrayList<>(2);
         nickname.add("ale");
         nickname.add("ali");
         GameMultiPlayer game= new GameMultiPlayer(2,nickname);
@@ -70,7 +70,7 @@ public class MarketTest {
     @Test
     public void PushRowsOfMarket() throws CallForCouncilException, LastSpaceReachedException {
 
-        ArrayList<String> nickname =new ArrayList<String>(2);
+        ArrayList<String> nickname =new ArrayList<>(2);
         nickname.add("ale");
         nickname.add("ali");
         GameMultiPlayer game= new GameMultiPlayer(2,nickname);
@@ -114,7 +114,7 @@ public class MarketTest {
     @Test
 public void PushRowsOfMarketCycling() throws CallForCouncilException, LastSpaceReachedException {
 
-        ArrayList<String> nickname =new ArrayList<String>(2);
+        ArrayList<String> nickname =new ArrayList<>(2);
         nickname.add("ale");
         nickname.add("ali");
         GameMultiPlayer game= new GameMultiPlayer(2,nickname);
@@ -161,7 +161,7 @@ public void PushRowsOfMarketCycling() throws CallForCouncilException, LastSpaceR
     @Test
     public void PushColumnsOfMarket() throws CallForCouncilException, LastSpaceReachedException {
 
-        ArrayList<String> nickname =new ArrayList<String>(2);
+        ArrayList<String> nickname =new ArrayList<>(2);
         nickname.add("ale");
         nickname.add("ali");
         GameMultiPlayer game= new GameMultiPlayer(2,nickname);
@@ -201,7 +201,7 @@ public void PushRowsOfMarketCycling() throws CallForCouncilException, LastSpaceR
     @Test
     public void PushColumnsOfMarketCycling() throws CallForCouncilException, LastSpaceReachedException {
 
-        ArrayList<String> nickname =new ArrayList<String>(2);
+        ArrayList<String> nickname =new ArrayList<>(2);
         nickname.add("ale");
         nickname.add("ali");
         GameMultiPlayer game= new GameMultiPlayer(2,nickname);

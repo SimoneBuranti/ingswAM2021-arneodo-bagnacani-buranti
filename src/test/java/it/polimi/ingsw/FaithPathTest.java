@@ -25,7 +25,7 @@ class FaithPathTest {
      * Correct initialised construction check
      */
     @Test
-    @DisplayName("initialisedtConstructorTest")
+    @DisplayName("initialisedConstructorTest")
     public void initialisedConstructorTest() {
 
         FaithPath faithPath = new FaithPath (4);
@@ -633,7 +633,7 @@ class FaithPathTest {
     public void faithWithUseOfRedMarble() throws CallForCouncilException {
 
         Game game = new Game();
-        Player player = new Player(game);
+        Player player = new Player("simo", game);
         RedMarble redMarble = new RedMarble();
 
         assertEquals(player.getIndicator(), 0);
@@ -698,19 +698,6 @@ class FaithPathTest {
         }
         assertEquals(player.getIndicator(), 8);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

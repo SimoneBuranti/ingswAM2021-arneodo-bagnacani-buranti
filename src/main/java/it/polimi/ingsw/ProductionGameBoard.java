@@ -2,12 +2,12 @@ package it.polimi.ingsw;
 
 import java.util.ArrayList;
 
-public class ProductionGameboard extends GameboardDecorator {
+public class ProductionGameBoard extends GameBoardDecorator {
 
     private final Resource resourceTypeFirst;
 
-    public ProductionGameboard(GameboardInterface gameboard, Resource resourceTypeFirst) {
-        super(gameboard);
+    public ProductionGameBoard(GameBoardInterface gameBoard, Resource resourceTypeFirst) {
+        super(gameBoard);
         this.resourceTypeFirst = resourceTypeFirst;
     }
 
@@ -31,29 +31,11 @@ public class ProductionGameboard extends GameboardDecorator {
         addToProductionBuffer(output);
         addToFaithPathBuffer(1);
     }
-    @Override
-    public LeaderCard reportLeaderCardToGameboard(int index){
-        return null;
-    }
-
 
     @Override
-    public void addLeaderCardToGameboard(LeaderCard leaderCard){
-        return;
+    public Resource getResourceTypeFirst(){
+        return resourceTypeFirst;
     }
-
-    @Override
-    public int leaderCardsSize(){
-        return 0;
-
-    }
-
-
-    @Override
-    public  void removeLeaderCardToGameboard(int index){
-
-    }
-
 
 
 }

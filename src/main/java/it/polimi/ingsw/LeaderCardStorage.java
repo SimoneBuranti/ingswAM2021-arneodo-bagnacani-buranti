@@ -11,11 +11,23 @@ public class LeaderCardStorage extends LeaderCard {
     /**
      * method  on abilityActivation of the decorator
      */
-    public void abilityActivation(){}
+    @Override
+    public boolean abilityActivation(GameBoardInterface gameBoard){
+        if(check(gameBoard)){
+            gameBoard.setStorageExtra(specialStorage);
+            gameBoard.setReductionCardActivated();
+            return true;
+        }else
+            return false;
+    }
 
     /**
      * method check for the possibility of activate leader card
      * the ability is about extraStorage on resource
      */
-    public void check(){}
+    public boolean check(GameBoardInterface gameBoard){
+        if(gameBoard.resourceQuantity(requirements.getResourceRequirement()) < 5)
+            return false;
+        return true;
+    }
 }

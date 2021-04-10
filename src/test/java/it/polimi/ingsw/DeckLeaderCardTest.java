@@ -12,11 +12,11 @@ class DeckLeaderCardTest {
      * Rigorous Test :-)
      */
     @Test
-    public void testAboutThesizeLeaderCardsDeck()
+    public void testAboutTheSizeLeaderCardsDeck()
     {
-        ArrayList<String> nickname =new ArrayList<String>(2);
+        ArrayList<String> nickname =new ArrayList<>(2);
         GameMultiPlayer game= new GameMultiPlayer(0,nickname);
-        //assertEquals(16,game.deckSize());
+        assertEquals(16,game.leaderDeckSize());
     }
 
 
@@ -28,11 +28,11 @@ class DeckLeaderCardTest {
     @Test
     public void testAboutDrawLeaderCards()
     {
-        ArrayList<String> nickname =new ArrayList<String>(2);
+        ArrayList<String> nickname =new ArrayList<>(2);
         nickname.add("ale");
         nickname.add("ali");
         GameMultiPlayer game= new GameMultiPlayer(2,nickname);
-        //assertEquals(8,game.deckSize());
+        assertEquals(8,game.leaderDeckSize());
     }
 
 
@@ -44,11 +44,11 @@ class DeckLeaderCardTest {
     public void testAboutEqualsOfPersonalLeaderCards()
     {
 
-        ArrayList<String> nickname =new ArrayList<String>(2);
+        ArrayList<String> nickname =new ArrayList<>(2);
         nickname.add("ale");
         nickname.add("ali");
         GameMultiPlayer game= new GameMultiPlayer(2,nickname);
-        //assertEquals(8,game.deckSize());
+        assertEquals(8,game.leaderDeckSize());
         assertNotEquals(game.getPlayerFromList(0).getCardFromPersonalLeaderCard(0),(game.getPlayerFromList(1).getCardFromPersonalLeaderCard(0)));
         assertNotEquals(game.getPlayerFromList(0).getCardFromPersonalLeaderCard(0),(game.getPlayerFromList(1).getCardFromPersonalLeaderCard(1)));
         assertNotEquals(game.getPlayerFromList(0).getCardFromPersonalLeaderCard(0),(game.getPlayerFromList(1).getCardFromPersonalLeaderCard(2)));
@@ -83,18 +83,14 @@ class DeckLeaderCardTest {
      * Rigorous Test :-)
      */
     @Test
-    public void testAboutTypeAndNicknameOfPlayers()
+    public void testAboutTypeOfPlayers()
     {
-        ArrayList<String> nickname =new ArrayList<String>(2);
+        ArrayList<String> nickname =new ArrayList<>(2);
         nickname.add("ale");
         nickname.add("ali");
         GameMultiPlayer game= new GameMultiPlayer(2,nickname);
         assertTrue(game.getPlayerFromList(0) instanceof PlayerFirst);
         assertTrue(game.getPlayerFromList(1) instanceof PlayerSecond);
-
-        assertEquals(game.getPlayerFromList(0).getNickName(),"ale");
-
-        assertEquals(game.getPlayerFromList(1).getNickName(),"ali");
 
 
     }

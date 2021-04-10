@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class Market {
     private Marble[][] Grid = new Marble[3][4];
     private Marble extra=new Marble();
-    private ArrayList<Marble> InitialMarbleList = new ArrayList<Marble>(13);
+    private ArrayList<Marble> InitialMarbleList = new ArrayList<>(13);
 
 
 
@@ -80,21 +80,29 @@ public class Market {
  *action called by ActionMarket, when the player choose  row instead of column
  * @param ChosenRow
  * it activates methods of marble belonging to chosenRow
- * then it reactives the grid and the extra marble
+ * then it reactive the grid and the extra marble
  */
 
-    public void PushRow(int ChosenRow, Player player) throws CallForCouncilException, LastSpaceReachedException {
+    public void PushRow(int ChosenRow, Player player) throws CallForCouncilException, LastSpaceReachedException, WhiteMarbleException {
         int j;
+        WhiteMarbleException exception = new WhiteMarbleException(0);
         Marble temp;
         for(j=0; j<4; j++)
-            Grid[ChosenRow][j].giveResource(player);
+            try {
+                Grid[ChosenRow][j].giveResource(player);
+            }catch(WhiteMarbleException e){
+                exception.increase();
+        }
         temp=extra;
         extra=Grid[ChosenRow][0];
         for(j=1; j<4; j++)
             Grid[ChosenRow][j-1]=Grid[ChosenRow][j];
         Grid[ChosenRow][3]=temp;
 
-        player.takeFromMarket();
+        if(exception.getN() == 0)
+            player.takeFromMarket();
+        else
+            throw exception;
       }
 
 
@@ -102,10 +110,10 @@ public class Market {
      *action called by ActionMarket, when the player choose column instead of row
      * @param ChosenColumn
      *  * it activates methods of marble belonging to chosenColumn
-     *  * then it reactives the grid and the extra marble
+     *  * then it reactive the grid and the extra marble
      */
 
-    public void PushColumn(int ChosenColumn,Player player) throws CallForCouncilException, LastSpaceReachedException {
+    public void PushColumn(int ChosenColumn,Player player) throws CallForCouncilException, LastSpaceReachedException, WhiteMarbleException {
         int i;
         Marble temp;
         for(i=0; i<3; i++)

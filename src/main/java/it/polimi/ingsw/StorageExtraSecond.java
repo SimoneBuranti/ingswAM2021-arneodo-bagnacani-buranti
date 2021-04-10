@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 /**
- * this class represents the storage of the gameboard with an extra storage activated by a second leaderCard
+ * this class represents the storage of the gameBoard with an extra storage activated by a second leaderCard
  */
 
 public class StorageExtraSecond extends StorageExtraFirst {
@@ -33,6 +33,7 @@ public class StorageExtraSecond extends StorageExtraFirst {
         storageExtraSecond[1] = 0;
     }
 
+    @Override
     public ArrayList<Resource> availableResources() {
         ArrayList<Resource> storageExtraSecondResources = new ArrayList<>();
 
@@ -145,22 +146,22 @@ public class StorageExtraSecond extends StorageExtraFirst {
      * this method returns true if the second extra storage is full, false otherwise
      * @return boolean
      */
+    @Override
     public boolean isStorageExtraSecondFull(){
-        if (storageExtraSecond[0] == 1 && storageExtraSecond[1] == 1) {
+        if (storageExtraSecond[0] == 1 && storageExtraSecond[1] == 1)
             return true;
-        }else
-            return false;
+        return false;
     }
 
     /**
      * this method returns true if the second extra storage is empty, false otherwise
      * @return boolean
      */
+    @Override
     public boolean isStorageExtraSecondEmpty(){
-        if (storageExtraSecond[0] == 0 && storageExtraSecond[1] == 0) {
+        if (storageExtraSecond[0] == 0 && storageExtraSecond[1] == 0)
             return true;
-        }else
-            return false;
+        return false;
     }
 
 
@@ -168,6 +169,7 @@ public class StorageExtraSecond extends StorageExtraFirst {
      * this method return the type of resources of the second extra storage
      * @return Resource
      */
+    @Override
     public Resource getSecondResourceType() {
         return secondResourceType;
     }
@@ -177,6 +179,7 @@ public class StorageExtraSecond extends StorageExtraFirst {
      * this method return the amount of places available in the second extra storage
      * @return int
      */
+    @Override
     public int getNUmExtraSecondAvailable(){
         int numResourceExtra;
         if(storageExtraSecond[0] == 0 && storageExtraSecond[1] == 0)

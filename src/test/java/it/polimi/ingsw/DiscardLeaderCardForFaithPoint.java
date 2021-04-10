@@ -6,14 +6,14 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class DiscardleaderCardForFaithPoint {
+class DiscardLeaderCardForFaithPoint {
 
 
     /**
-     * test about discard one or two leadercard, from 0ne to two players, monitoring call on method moveTo of Faithpath
+     * test about discard one or two leaderCard, from 0ne to two players, monitoring call on method moveTo of FaithPath
      */
     @Test
-    public void TestOnDiscardOneCArd() throws LeaderCardsGameboardEmptyException, CallForCouncilException, LastSpaceReachedException {
+    public void testOnDiscardOneCard() throws LeaderCardsGameBoardEmptyException, CallForCouncilException, LastSpaceReachedException {
         ArrayList<String> nickname = new ArrayList<>();
         nickname.add("ale");
         nickname.add("ali");
@@ -25,7 +25,7 @@ class DiscardleaderCardForFaithPoint {
         assertNotEquals(game.getPlayerFromList(0).getCardFromPersonalLeaderCard(0),(game.getPlayerFromList(1).getCardFromPersonalLeaderCard(3)));
 
         game.getPlayerFromList(0).saveLeaderCard(1,2);
-        assertTrue(game.getPlayerFromList(0).personalLeaderCardsize()==4);
+        assertTrue(game.getPlayerFromList(0).personalLeaderCardSize()==4);
         assertTrue(game.getPlayerFromList(0).getGameBoardOfPlayer().leaderCardsSize()==2);
 
 
@@ -42,7 +42,7 @@ class DiscardleaderCardForFaithPoint {
 
 
         game.getPlayerFromList(1).saveLeaderCard(1,2);
-        assertTrue(game.getPlayerFromList(1).personalLeaderCardsize()==4);
+        assertTrue(game.getPlayerFromList(1).personalLeaderCardSize()==4);
         assertTrue(game.getPlayerFromList(1).getGameBoardOfPlayer().leaderCardsSize()==2);
 
 

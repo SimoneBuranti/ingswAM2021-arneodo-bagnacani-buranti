@@ -2,12 +2,12 @@ package it.polimi.ingsw;
 
 import java.util.ArrayList;
 
-public class ReductionGameboardDouble extends ReductionGameboard{
+public class ReductionGameBoardDouble extends ReductionGameBoard{
 
     private final Resource resourceTypeSecond;
 
-    public ReductionGameboardDouble(GameboardInterface gameboard, Resource resourceTypeFirst, Resource resourceTypeSecond) {
-        super(gameboard, resourceTypeFirst);
+    public ReductionGameBoardDouble(GameBoardInterface gameBoard, Resource resourceTypeFirst, Resource resourceTypeSecond) {
+        super(gameBoard, resourceTypeFirst);
         this.resourceTypeSecond = resourceTypeSecond;
     }
 

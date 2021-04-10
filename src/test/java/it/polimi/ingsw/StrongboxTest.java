@@ -507,7 +507,7 @@ public class StrongboxTest {
 
 
     @Test
-    @DisplayName("availableResourcesTest5 : one unavailable reseource type")
+    @DisplayName("availableResourcesTest5 : one unavailable resource type")
     public void availableResourcesTest5(){
         Strongbox strongbox = new Strongbox();
         Reserve reserve = new Reserve();

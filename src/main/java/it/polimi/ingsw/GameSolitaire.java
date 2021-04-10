@@ -24,7 +24,8 @@ public class GameSolitaire extends Game{
         super();
         deckActionMarker = new DeckActionMarker();
         lorenzoTheMagnificent = new LorenzoTheMagnificent();
-        player = new Player(nickName);
+        player = new Player(nickName, this);
+        currentPlayer = player;
     }
 
     /**
@@ -51,12 +52,9 @@ public class GameSolitaire extends Game{
         try {
             lorenzoTheMagnificent.moveBlackCross();
         } catch (CallForCouncilException e) {
-            System.out.println("Call for Council");
-            try {
-                lorenzoTheMagnificent.setCurrCall();
-            } catch (EndOfSolitaireGame endOfSolitaireGame) {
-                System.out.println("End of solitaire game, Lorenzo has reached the last space of Faith Path and wins");
-            }
+            exceptionHandler(e);
+        }catch(EndOfSolitaireGame endOfSolitaireGame){
+            exceptionHandler(endOfSolitaireGame);
         }
     }
 
@@ -68,22 +66,17 @@ public class GameSolitaire extends Game{
         try {
             lorenzoTheMagnificent.moveBlackCross();
         } catch (CallForCouncilException e) {
-            System.out.println("Call for Council");
-            try {
-                lorenzoTheMagnificent.setCurrCall();
-            } catch (EndOfSolitaireGame endOfSolitaireGame) {
-                System.out.println("End of solitaire game, Lorenzo has reached the last space of Faith Path and wins");
-            }
+            exceptionHandler(e);
+        }catch(EndOfSolitaireGame endOfSolitaireGame){
+            exceptionHandler(endOfSolitaireGame);
         }
+
         try {
             lorenzoTheMagnificent.moveBlackCross();
         } catch (CallForCouncilException e) {
-            System.out.println("Call for Council");
-            try {
-                lorenzoTheMagnificent.setCurrCall();
-            } catch (EndOfSolitaireGame endOfSolitaireGame) {
-                System.out.println("End of solitaire game, Lorenzo has reached the last space of Faith Path and wins");
-            }
+            exceptionHandler(e);
+        }catch(EndOfSolitaireGame endOfSolitaireGame){
+            exceptionHandler(endOfSolitaireGame);
         }
     }
 
@@ -112,7 +105,6 @@ public class GameSolitaire extends Game{
 
 
     public void removeProductionCard(Blue blue) throws EndOfSolitaireGame, EmptyException {
-
         try {
             deckProductionCardOneBlu.removeOneCard();
         } catch (EmptyException e) {
@@ -169,5 +161,35 @@ public class GameSolitaire extends Game{
     public int deckSize(DeckProductionCard deck){
         return deck.size();
     }
+
+    @Override
+    public void moveEveryoneExcept(Player player){
+        try {
+            lorenzoTheMagnificent.moveBlackCross();
+        } catch (CallForCouncilException e1) {
+            exceptionHandler(e1);
+        }catch (EndOfSolitaireGame e2) {
+            exceptionHandler(e2);
+        }
+    }
+
+    @Override
+    protected void exceptionHandler(CallForCouncilException e) {
+        player.setPapal();
+        lorenzoTheMagnificent.setCurrCall();
+    }
+
+    @Override
+    protected void exceptionHandler(LastSpaceReachedException e) {
+        player.setPapal();
+        //...fine partita, calcolo punteggio
+    }
+
+    @Override
+    protected void exceptionHandler(EndOfSolitaireGame e) {
+        System.out.println("Lorenzo the Magnificent WIN");
+    }
+
+
 
 }

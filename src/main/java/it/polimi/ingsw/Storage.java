@@ -2,11 +2,10 @@ package it.polimi.ingsw;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.Map;
 
 /**
- * This class represents the storage of the gameboard
+ * This class represents the storage of the gameBoard
  */
 public class Storage {
     /**
@@ -184,14 +183,31 @@ public class Storage {
         return map;
     }
 
-    /*
-    This method discards the surplus resources by placing them in the reserve and throws an exception
-    @throws DiscardException
-
-    public void discard(Resource resource) throws DiscardException{
-        Reserve.addResource(resource);
-
-        throw new DiscardException();
+    public boolean isStorageExtraFirstFull(){
+        return false;
     }
-    */
+    public boolean isStorageExtraFirstEmpty(){
+        return false;
+    }
+    public Resource getFirstResourceType() {
+        return null;
+    }
+
+    public int getNumExtraFirstAvailable(){return 0;}
+
+    public boolean isStorageExtraSecondFull(){
+        return false;
+    }
+
+    public boolean isStorageExtraSecondEmpty(){
+        return false;
+    }
+
+    public Resource getSecondResourceType() {
+        return null;
+    }
+
+    public int getNUmExtraSecondAvailable(){
+        return 0;
+    }
 }

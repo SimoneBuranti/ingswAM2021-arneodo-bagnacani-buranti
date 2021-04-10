@@ -4,39 +4,39 @@ import org.junit.jupiter.api.*;
 import java.util.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-class ProductionGameboardTest {
+class ProductionGameBoardTest {
 
     /**
      * This test checks the correct behaviour of both the methods firstRowFree and setProductionCard
      */
     @Test
-    @DisplayName("FirstRowFree and setProductioncardtest - first column")
-    public void firstRowFreeandSetProductionCard(){
-        GameboardInterface gameboard = new Gameboard();
-        gameboard = new ProductionGameboard(gameboard,Resource.SHIELD);
+    @DisplayName("FirstRowFree and setProductionCardTest - first column")
+    public void firstRowFreeAndSetProductionCard(){
+        GameBoardInterface gameBoard = new GameBoard();
+        gameBoard = new ProductionGameBoard(gameBoard,Resource.SHIELD);
 
         DeckProductionCardOneBlu deck = new DeckProductionCardOneBlu();
         DeckProductionCardOneGreen deck2 = new DeckProductionCardOneGreen();
         DeckProductionCardOneViolet deck3 = new DeckProductionCardOneViolet();
 
         try {
-            assertEquals(0,gameboard.firstRowFree(0));
+            assertEquals(0,gameBoard.firstRowFree(0));
         } catch (FullColumnException e) {
             e.printStackTrace();
         }
         try {
-            assertEquals(0,gameboard.firstRowFree(1));
+            assertEquals(0,gameBoard.firstRowFree(1));
         } catch (FullColumnException e) {
             System.out.println("FullColumnException\n");
         }
         try {
-            assertEquals(0,gameboard.firstRowFree(2));
+            assertEquals(0,gameBoard.firstRowFree(2));
         } catch (FullColumnException e) {
             System.out.println("FullColumnException\n");
         }
 
         try {
-            gameboard.setNewProductionCard(deck,0);
+            gameBoard.setNewProductionCard(deck,0);
         } catch (EmptyException e) {
             System.out.println("EmptyException\n");
         } catch (FullColumnException e) {
@@ -44,14 +44,14 @@ class ProductionGameboardTest {
         }
 
         try {
-            assertEquals(1,gameboard.firstRowFree(0));
+            assertEquals(1,gameBoard.firstRowFree(0));
         } catch (FullColumnException e) {
             System.out.println("FullColumnException\n");
         }
 
 
         try {
-            gameboard.setNewProductionCard(deck,0);
+            gameBoard.setNewProductionCard(deck,0);
         } catch (EmptyException e) {
             System.out.println("EmptyException\n");
         } catch (FullColumnException e) {
@@ -59,14 +59,14 @@ class ProductionGameboardTest {
         }
 
         try {
-            assertEquals(2,gameboard.firstRowFree(0));
+            assertEquals(2,gameBoard.firstRowFree(0));
         } catch (FullColumnException e) {
             System.out.println("FullColumnException\n");
         }
 
 
         try {
-            gameboard.setNewProductionCard(deck,0);
+            gameBoard.setNewProductionCard(deck,0);
         } catch (EmptyException e) {
             System.out.println("EmptyException\n");
         } catch (FullColumnException e) {
@@ -74,7 +74,7 @@ class ProductionGameboardTest {
         }
 
         try {
-            assertEquals(2,gameboard.firstRowFree(0));
+            assertEquals(2,gameBoard.firstRowFree(0));
         } catch (FullColumnException e) {
             System.out.println("FullColumnException\n");
         }
@@ -82,7 +82,7 @@ class ProductionGameboardTest {
 
 
         try {
-            gameboard.setNewProductionCard(deck,1);
+            gameBoard.setNewProductionCard(deck,1);
         } catch (EmptyException e) {
             System.out.println("EmptyException\n");
         } catch (FullColumnException e) {
@@ -90,7 +90,7 @@ class ProductionGameboardTest {
         }
 
         try {
-            assertEquals(1,gameboard.firstRowFree(1));
+            assertEquals(1,gameBoard.firstRowFree(1));
         } catch (FullColumnException e) {
             System.out.println("FullColumnException\n");
         }
@@ -99,7 +99,7 @@ class ProductionGameboardTest {
 
 
         try {
-            gameboard.setNewProductionCard(deck,1);
+            gameBoard.setNewProductionCard(deck,1);
         } catch (EmptyException e) {
             System.out.println("EmptyException\n");
         } catch (FullColumnException e) {
@@ -107,14 +107,14 @@ class ProductionGameboardTest {
         }
 
         try {
-            assertEquals(1,gameboard.firstRowFree(1));
+            assertEquals(1,gameBoard.firstRowFree(1));
         } catch (FullColumnException e) {
             System.out.println("FullColumnException\n");
         }
 
 
         try {
-            gameboard.setNewProductionCard(deck2,1);
+            gameBoard.setNewProductionCard(deck2,1);
         } catch (EmptyException e) {
             System.out.println("EmptyException\n");
         } catch (FullColumnException e) {
@@ -122,13 +122,13 @@ class ProductionGameboardTest {
         }
 
         try {
-            assertEquals(2,gameboard.firstRowFree(1));
+            assertEquals(2,gameBoard.firstRowFree(1));
         } catch (FullColumnException e) {
             System.out.println("FullColumnException\n");
         }
 
         try {
-            gameboard.setNewProductionCard(deck2,1);
+            gameBoard.setNewProductionCard(deck2,1);
         } catch (EmptyException e) {
             System.out.println("EmptyException\n");
         } catch (FullColumnException e) {
@@ -136,19 +136,19 @@ class ProductionGameboardTest {
         }
 
         try {
-            assertEquals(3,gameboard.firstRowFree(1));
+            assertEquals(3,gameBoard.firstRowFree(1));
         } catch (FullColumnException e) {
             System.out.println("FullColumnException\n");
         }
 
         try {
-            assertEquals(0,gameboard.firstRowFree(2));
+            assertEquals(0,gameBoard.firstRowFree(2));
         } catch (FullColumnException e) {
             System.out.println("FullColumnException\n");
         }
 
         try {
-            gameboard.setNewProductionCard(deck2,2);
+            gameBoard.setNewProductionCard(deck2,2);
         } catch (EmptyException e) {
             System.out.println("EmptyException\n");
         } catch (FullColumnException e) {
@@ -156,13 +156,13 @@ class ProductionGameboardTest {
         }
 
         try {
-            assertEquals(1,gameboard.firstRowFree(2));
+            assertEquals(1,gameBoard.firstRowFree(2));
         } catch (FullColumnException e) {
             System.out.println("FullColumnException\n");
         }
 
         try {
-            gameboard.setNewProductionCard(deck2,2);
+            gameBoard.setNewProductionCard(deck2,2);
         } catch (EmptyException e) {
             System.out.println("EmptyException\n");
         } catch (FullColumnException e) {
@@ -170,13 +170,13 @@ class ProductionGameboardTest {
         }
 
         try {
-            assertEquals(2,gameboard.firstRowFree(2));
+            assertEquals(2,gameBoard.firstRowFree(2));
         } catch (FullColumnException e) {
             System.out.println("FullColumnException\n");
         }
 
         try {
-            gameboard.setNewProductionCard(deck2,2);
+            gameBoard.setNewProductionCard(deck2,2);
         } catch (EmptyException e) {
             System.out.println("EmptyException\n");
         } catch (FullColumnException e) {
@@ -184,13 +184,13 @@ class ProductionGameboardTest {
         }
 
         try {
-            assertEquals(2,gameboard.firstRowFree(2));
+            assertEquals(2,gameBoard.firstRowFree(2));
         } catch (FullColumnException e) {
             System.out.println("FullColumnException\n");
         }
 
         try {
-            gameboard.setNewProductionCard(deck3,2);
+            gameBoard.setNewProductionCard(deck3,2);
         } catch (EmptyException e) {
             System.out.println("EmptyException\n");
         } catch (FullColumnException e) {
@@ -198,7 +198,7 @@ class ProductionGameboardTest {
         }
 
         try {
-            assertEquals(2,gameboard.firstRowFree(2));
+            assertEquals(2,gameBoard.firstRowFree(2));
         } catch (FullColumnException e) {
             System.out.println("FullColumnException\n");
         }
@@ -213,8 +213,8 @@ class ProductionGameboardTest {
     @Test
     @DisplayName("Available resources test - Empty storage and Strongbox")
     public void availableResourcesTest(){
-        GameboardInterface gameboard = new Gameboard();
-        gameboard = new ProductionGameboard(gameboard,Resource.SHIELD);
+        GameBoardInterface gameBoard = new GameBoard();
+        gameBoard = new ProductionGameBoard(gameBoard,Resource.SHIELD);
         Reserve reserve = new Reserve();
 
         Map<Resource,Integer> storageMap = new HashMap<>();
@@ -243,7 +243,7 @@ class ProductionGameboardTest {
         for(Resource key : storageMap.keySet()){
             for (int i = 0; i<storageMap.get(key); i++){
                 try {
-                    gameboard.addToStorage(key);
+                    gameBoard.addToStorage(key);
                 } catch (UnavailableResourceException e) {
                     System.out.println("UnavailableResourceException: couldn't add " + key +"\n");
                 }
@@ -252,11 +252,11 @@ class ProductionGameboardTest {
 
         for(Resource key : strongboxMap.keySet()){
             for (int i = 0; i<strongboxMap.get(key); i++){
-                gameboard.addToStrongbox(key);
+                gameBoard.addToStrongbox(key);
             }
         }
 
-        available = gameboard.availableResources();
+        available = gameBoard.availableResources();
 
         for (Resource r : available) {
             availableMap.put(r,availableMap.remove(r)+1);
@@ -277,8 +277,8 @@ class ProductionGameboardTest {
     @Test
     @DisplayName("Available resources test 1 - simple")
     public void availableResourcesTest1(){
-        GameboardInterface gameboard = new Gameboard();
-        gameboard = new ProductionGameboard(gameboard,Resource.SHIELD);
+        GameBoardInterface gameBoard = new GameBoard();
+        gameBoard = new ProductionGameBoard(gameBoard,Resource.SHIELD);
         Reserve reserve = new Reserve();
 
         Map<Resource,Integer> storageMap = new HashMap<>();
@@ -307,7 +307,7 @@ class ProductionGameboardTest {
         for(Resource key : storageMap.keySet()){
             for (int i = 0; i<storageMap.get(key); i++){
                 try {
-                    gameboard.addToStorage(key);
+                    gameBoard.addToStorage(key);
                 } catch (UnavailableResourceException e) {
                     System.out.println("UnavailableResourceException: couldn't add " + key +"\n");
                 }
@@ -316,11 +316,11 @@ class ProductionGameboardTest {
 
         for(Resource key : strongboxMap.keySet()){
             for (int i = 0; i<strongboxMap.get(key); i++){
-                gameboard.addToStrongbox(key);
+                gameBoard.addToStrongbox(key);
             }
         }
 
-        available = gameboard.availableResources();
+        available = gameBoard.availableResources();
 
         for (Resource r : available) {
             availableMap.put(r,availableMap.remove(r)+1);
@@ -341,8 +341,8 @@ class ProductionGameboardTest {
     @Test
     @DisplayName("Available resources test 2 - simple")
     public void availableResourcesTest2(){
-        GameboardInterface gameboard = new Gameboard();
-        gameboard = new ProductionGameboard(gameboard,Resource.SHIELD);
+        GameBoardInterface gameBoard = new GameBoard();
+        gameBoard = new ProductionGameBoard(gameBoard,Resource.SHIELD);
         Reserve reserve = new Reserve();
 
         Map<Resource,Integer> storageMap = new HashMap<>();
@@ -371,7 +371,7 @@ class ProductionGameboardTest {
         for(Resource key : storageMap.keySet()){
             for (int i = 0; i<storageMap.get(key); i++){
                 try {
-                    gameboard.addToStorage(key);
+                    gameBoard.addToStorage(key);
                 } catch (UnavailableResourceException e) {
                     System.out.println("UnavailableResourceException: couldn't add " + key +"\n");
                 }
@@ -380,11 +380,11 @@ class ProductionGameboardTest {
 
         for(Resource key : strongboxMap.keySet()){
             for (int i = 0; i<strongboxMap.get(key); i++){
-                gameboard.addToStrongbox(key);
+                gameBoard.addToStrongbox(key);
             }
         }
 
-        available = gameboard.availableResources();
+        available = gameBoard.availableResources();
 
         for (Resource r : available) {
             availableMap.put(r,availableMap.remove(r)+1);
@@ -404,10 +404,10 @@ class ProductionGameboardTest {
      * This test checks the correct behaviour of availableResources() method in case of unavailable resources
      */
     @Test
-    @DisplayName("Available resources test 3 - unavailalble resources")
+    @DisplayName("Available resources test 3 - unavailable resources")
     public void availableResourcesTest3(){
-        GameboardInterface gameboard = new Gameboard();
-        gameboard = new ProductionGameboard(gameboard,Resource.SHIELD);
+        GameBoardInterface gameBoard = new GameBoard();
+        gameBoard = new ProductionGameBoard(gameBoard,Resource.SHIELD);
         Reserve reserve = new Reserve();
 
         Map<Resource,Integer> storageMap = new HashMap<>();
@@ -436,7 +436,7 @@ class ProductionGameboardTest {
         for(Resource key : storageMap.keySet()){
             for (int i = 0; i<storageMap.get(key); i++){
                 try {
-                    gameboard.addToStorage(key);
+                    gameBoard.addToStorage(key);
                 } catch (UnavailableResourceException e) {
                     System.out.println("UnavailableResourceException: couldn't add " + key +"\n");
                 }
@@ -445,11 +445,11 @@ class ProductionGameboardTest {
 
         for(Resource key : strongboxMap.keySet()){
             for (int i = 0; i<strongboxMap.get(key); i++){
-                gameboard.addToStrongbox(key);
+                gameBoard.addToStrongbox(key);
             }
         }
 
-        available = gameboard.availableResources();
+        available = gameBoard.availableResources();
 
         for (Resource r : available) {
             availableMap.put(r,availableMap.remove(r)+1);
@@ -470,8 +470,8 @@ class ProductionGameboardTest {
     @Test
     @DisplayName("PayResources Test - simple test")
     public void payResourcesTest0(){
-        GameboardInterface gameboard = new Gameboard();
-        gameboard = new ProductionGameboard(gameboard,Resource.SHIELD);
+        GameBoardInterface gameBoard = new GameBoard();
+        gameBoard = new ProductionGameBoard(gameBoard,Resource.SHIELD);
         Reserve reserve = new Reserve();
 
         Map<Resource,Integer> costMap = new HashMap<>();
@@ -506,7 +506,7 @@ class ProductionGameboardTest {
         for(Resource key : storageMap.keySet()){
             for (int i = 0; i<storageMap.get(key); i++){
                 try {
-                    gameboard.addToStorage(key);
+                    gameBoard.addToStorage(key);
                 } catch (UnavailableResourceException e) {
                     System.out.println("UnavailableResourceException: couldn't add " + key +"\n");
                 }
@@ -515,7 +515,7 @@ class ProductionGameboardTest {
 
         for(Resource key : strongboxMap.keySet()){
             for (int i = 0; i<strongboxMap.get(key); i++){
-                gameboard.addToStrongbox(key);
+                gameBoard.addToStrongbox(key);
             }
         }
 
@@ -525,9 +525,9 @@ class ProductionGameboardTest {
             }
         }
 
-        gameboard.payResources(cost);
+        gameBoard.payResources(cost);
 
-        available = gameboard.availableResources();
+        available = gameBoard.availableResources();
 
         for (Resource r : available) {
             availableMap.put(r,availableMap.remove(r)+1);
@@ -546,8 +546,8 @@ class ProductionGameboardTest {
     @Test
     @DisplayName("PayResources Test 1 - simple test")
     public void payResourcesTest1(){
-        GameboardInterface gameboard = new Gameboard();
-        gameboard = new ProductionGameboard(gameboard,Resource.SHIELD);
+        GameBoardInterface gameBoard = new GameBoard();
+        gameBoard = new ProductionGameBoard(gameBoard,Resource.SHIELD);
         Reserve reserve = new Reserve();
 
         Map<Resource,Integer> costMap = new HashMap<>();
@@ -582,7 +582,7 @@ class ProductionGameboardTest {
         for(Resource key : storageMap.keySet()){
             for (int i = 0; i<storageMap.get(key); i++){
                 try {
-                    gameboard.addToStorage(key);
+                    gameBoard.addToStorage(key);
                 } catch (UnavailableResourceException e) {
                     System.out.println("UnavailableResourceException: couldn't add " + key +"\n");
                 }
@@ -591,7 +591,7 @@ class ProductionGameboardTest {
 
         for(Resource key : strongboxMap.keySet()){
             for (int i = 0; i<strongboxMap.get(key); i++){
-                gameboard.addToStrongbox(key);
+                gameBoard.addToStrongbox(key);
             }
         }
 
@@ -601,9 +601,9 @@ class ProductionGameboardTest {
             }
         }
 
-        gameboard.payResources(cost);
+        gameBoard.payResources(cost);
 
-        available = gameboard.availableResources();
+        available = gameBoard.availableResources();
 
         for (Resource r : available) {
             availableMap.put(r,availableMap.remove(r)+1);
@@ -616,14 +616,14 @@ class ProductionGameboardTest {
     }
 
     /**
-     * This test checks the correct behaviour in case of resource payment all the reources needed and all the resources
+     * This test checks the correct behaviour in case of resource payment all the resources needed and all the resources
      * paid
      */
     @Test
-    @DisplayName("PayResources Test 2 - all the reources needed and all the resources payed")
+    @DisplayName("PayResources Test 2 - all the resources needed and all the resources payed")
     public void payResourcesTest2(){
-        GameboardInterface gameboard = new Gameboard();
-        gameboard = new ProductionGameboard(gameboard,Resource.SHIELD);
+        GameBoardInterface gameBoard = new GameBoard();
+        gameBoard = new ProductionGameBoard(gameBoard,Resource.SHIELD);
         Reserve reserve = new Reserve();
 
         Map<Resource,Integer> costMap = new HashMap<>();
@@ -658,7 +658,7 @@ class ProductionGameboardTest {
         for(Resource key : storageMap.keySet()){
             for (int i = 0; i<storageMap.get(key); i++){
                 try {
-                    gameboard.addToStorage(key);
+                    gameBoard.addToStorage(key);
                 } catch (UnavailableResourceException e) {
                     System.out.println("UnavailableResourceException: couldn't add " + key +"\n");
                 }
@@ -667,7 +667,7 @@ class ProductionGameboardTest {
 
         for(Resource key : strongboxMap.keySet()){
             for (int i = 0; i<strongboxMap.get(key); i++){
-                gameboard.addToStrongbox(key);
+                gameBoard.addToStrongbox(key);
             }
         }
 
@@ -677,9 +677,9 @@ class ProductionGameboardTest {
             }
         }
 
-        gameboard.payResources(cost);
+        gameBoard.payResources(cost);
 
-        available = gameboard.availableResources();
+        available = gameBoard.availableResources();
 
         for (Resource r : available) {
             availableMap.put(r,availableMap.remove(r)+1);
@@ -699,120 +699,120 @@ class ProductionGameboardTest {
     @Test
     @DisplayName("seventhCardCheck() test ")
     public void seventhCardCheck(){
-        Gameboard gameboard = new Gameboard() ;
+        GameBoard gameBoard = new GameBoard() ;
         DeckProductionCardOneBlu blueDeck = new DeckProductionCardOneBlu();
         DeckProductionCardOneGreen greenDeck = new DeckProductionCardOneGreen();
         DeckProductionCardOneYellow yellowDeck = new DeckProductionCardOneYellow();
 
         try {
-            gameboard.setNewProductionCard(blueDeck,0);
+            gameBoard.setNewProductionCard(blueDeck,0);
         } catch (EmptyException | FullColumnException e) {
             e.printStackTrace();
         }
 
         try {
-            gameboard.seventhCardCheck();
+            gameBoard.seventhCardCheck();
         } catch (EndGameException e) {
             e.printStackTrace();
         }
 
         try {
-            gameboard.setNewProductionCard(blueDeck,0);
+            gameBoard.setNewProductionCard(blueDeck,0);
         } catch (EmptyException | FullColumnException e) {
             e.printStackTrace();
         }
 
         try {
-            gameboard.seventhCardCheck();
+            gameBoard.seventhCardCheck();
         } catch (EndGameException e) {
             e.printStackTrace();
         }
 
         try {
-            gameboard.setNewProductionCard(blueDeck,0);
+            gameBoard.setNewProductionCard(blueDeck,0);
         } catch (EmptyException | FullColumnException e) {
             e.printStackTrace();
         }
 
         try {
-            gameboard.seventhCardCheck();
+            gameBoard.seventhCardCheck();
         } catch (EndGameException e) {
             e.printStackTrace();
         }
 
         try {
-            gameboard.setNewProductionCard(blueDeck,1);
+            gameBoard.setNewProductionCard(blueDeck,1);
         } catch (EmptyException | FullColumnException e) {
             e.printStackTrace();
         }
 
 
         try {
-            gameboard.seventhCardCheck();
+            gameBoard.seventhCardCheck();
         } catch (EndGameException e) {
             e.printStackTrace();
         }
 
         try {
-            gameboard.setNewProductionCard(greenDeck,1);
+            gameBoard.setNewProductionCard(greenDeck,1);
         } catch (EmptyException | FullColumnException e) {
             e.printStackTrace();
         }
 
         try {
-            gameboard.seventhCardCheck();
-        } catch (EndGameException e) {
-            e.printStackTrace();
-        }
-
-
-        try {
-            gameboard.setNewProductionCard(greenDeck,1);
-        } catch (EmptyException | FullColumnException e) {
-            e.printStackTrace();
-        }
-
-
-        try {
-            gameboard.seventhCardCheck();
-        } catch (EndGameException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            gameboard.setNewProductionCard(greenDeck,2);
-        } catch (EmptyException | FullColumnException e) {
-            e.printStackTrace();
-        }
-
-
-        try {
-            gameboard.seventhCardCheck();
-        } catch (EndGameException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            gameboard.setNewProductionCard(greenDeck,2);
-        } catch (EmptyException | FullColumnException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            gameboard.seventhCardCheck();
+            gameBoard.seventhCardCheck();
         } catch (EndGameException e) {
             e.printStackTrace();
         }
 
 
         try {
-            gameboard.setNewProductionCard(yellowDeck,2);
+            gameBoard.setNewProductionCard(greenDeck,1);
+        } catch (EmptyException | FullColumnException e) {
+            e.printStackTrace();
+        }
+
+
+        try {
+            gameBoard.seventhCardCheck();
+        } catch (EndGameException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            gameBoard.setNewProductionCard(greenDeck,2);
+        } catch (EmptyException | FullColumnException e) {
+            e.printStackTrace();
+        }
+
+
+        try {
+            gameBoard.seventhCardCheck();
+        } catch (EndGameException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            gameBoard.setNewProductionCard(greenDeck,2);
         } catch (EmptyException | FullColumnException e) {
             e.printStackTrace();
         }
 
         try {
-            gameboard.seventhCardCheck();
+            gameBoard.seventhCardCheck();
+        } catch (EndGameException e) {
+            e.printStackTrace();
+        }
+
+
+        try {
+            gameBoard.setNewProductionCard(yellowDeck,2);
+        } catch (EmptyException | FullColumnException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            gameBoard.seventhCardCheck();
         } catch (EndGameException e) {
             e.printStackTrace();
         }
@@ -825,7 +825,7 @@ class ProductionGameboardTest {
     @Test
     @DisplayName("buyProductionCard() test - affordable card")
     public void buyProductionCardTest0(){
-        Gameboard gameboard = new Gameboard() ;
+        GameBoard gameBoard = new GameBoard() ;
         Reserve reserve = new Reserve();
         DeckProductionCardOneBlu blueDeck = new DeckProductionCardOneBlu();
         DeckProductionCardOneGreen greenDeck = new DeckProductionCardOneGreen();
@@ -848,7 +848,7 @@ class ProductionGameboardTest {
         for(Resource key : storageMap.keySet()){
             for (int i = 0; i<storageMap.get(key); i++){
                 try {
-                    gameboard.addToStorage(key);
+                    gameBoard.addToStorage(key);
                 } catch (UnavailableResourceException e) {
                     System.out.println("UnavailableResourceException: couldn't add " + key +"\n");
                 }
@@ -857,12 +857,12 @@ class ProductionGameboardTest {
 
         for(Resource key : strongboxMap.keySet()){
             for (int i = 0; i<strongboxMap.get(key); i++){
-                gameboard.addToStrongbox(key);
+                gameBoard.addToStrongbox(key);
             }
         }
 
         try {
-            gameboard.buyProductionCard(blueDeck,0);
+            gameBoard.buyProductionCard(blueDeck,0);
         } catch (LevelException | NotEnoughResourcesException | EmptyException | FullColumnException | EndGameException e) {
             e.printStackTrace();
         }
@@ -876,7 +876,7 @@ class ProductionGameboardTest {
     @Test
     @DisplayName("buyProductionCard() test - too expensive")
     public void buyProductionCardTest1(){
-        Gameboard gameboard = new Gameboard() ;
+        GameBoard gameBoard = new GameBoard() ;
         Reserve reserve = new Reserve();
         DeckProductionCardOneBlu blueDeck = new DeckProductionCardOneBlu();
         DeckProductionCardTwoBlu blueDeckTwo = new DeckProductionCardTwoBlu();
@@ -900,7 +900,7 @@ class ProductionGameboardTest {
         for(Resource key : storageMap.keySet()){
             for (int i = 0; i<storageMap.get(key); i++){
                 try {
-                    gameboard.addToStorage(key);
+                    gameBoard.addToStorage(key);
                 } catch (UnavailableResourceException e) {
                     System.out.println("UnavailableResourceException: couldn't add " + key +"\n");
                 }
@@ -909,12 +909,12 @@ class ProductionGameboardTest {
 
         for(Resource key : strongboxMap.keySet()){
             for (int i = 0; i<strongboxMap.get(key); i++){
-                gameboard.addToStrongbox(key);
+                gameBoard.addToStrongbox(key);
             }
         }
 
         try {
-            gameboard.buyProductionCard(blueDeck,0);
+            gameBoard.buyProductionCard(blueDeck,0);
         } catch (LevelException | NotEnoughResourcesException | EmptyException | FullColumnException | EndGameException e) {
             e.printStackTrace();
         }
@@ -927,7 +927,7 @@ class ProductionGameboardTest {
     @Test
     @DisplayName("buyProductionCard() test - wrong level")
     public void buyProductionCardTest2(){
-        Gameboard gameboard = new Gameboard() ;
+        GameBoard gameBoard = new GameBoard() ;
         Reserve reserve = new Reserve();
         DeckProductionCardOneBlu blueDeck = new DeckProductionCardOneBlu();
         DeckProductionCardTwoBlu blueDeckTwo = new DeckProductionCardTwoBlu();
@@ -952,7 +952,7 @@ class ProductionGameboardTest {
         for(Resource key : storageMap.keySet()){
             for (int i = 0; i<storageMap.get(key); i++){
                 try {
-                    gameboard.addToStorage(key);
+                    gameBoard.addToStorage(key);
                 } catch (UnavailableResourceException e) {
                     System.out.println("UnavailableResourceException: couldn't add " + key +"\n");
                 }
@@ -961,12 +961,12 @@ class ProductionGameboardTest {
 
         for(Resource key : strongboxMap.keySet()){
             for (int i = 0; i<strongboxMap.get(key); i++){
-                gameboard.addToStrongbox(key);
+                gameBoard.addToStrongbox(key);
             }
         }
 
         try {
-            gameboard.buyProductionCard(blueDeckThree,0);
+            gameBoard.buyProductionCard(blueDeckThree,0);
         } catch (LevelException | NotEnoughResourcesException | EmptyException | FullColumnException | EndGameException e) {
             e.printStackTrace();
         }
@@ -979,7 +979,7 @@ class ProductionGameboardTest {
     @Test
     @DisplayName("buyProductionCard() test - all level text and recharge available resources")
     public void buyProductionCardTest3(){
-        Gameboard gameboard = new Gameboard() ;
+        GameBoard gameBoard = new GameBoard() ;
         Reserve reserve = new Reserve();
         DeckProductionCardOneBlu blueDeck = new DeckProductionCardOneBlu();
         DeckProductionCardTwoBlu blueDeckTwo = new DeckProductionCardTwoBlu();
@@ -1002,7 +1002,7 @@ class ProductionGameboardTest {
         for(Resource key : storageMap.keySet()){
             for (int i = 0; i<storageMap.get(key); i++){
                 try {
-                    gameboard.addToStorage(key);
+                    gameBoard.addToStorage(key);
                 } catch (UnavailableResourceException e) {
                     System.out.println("UnavailableResourceException: couldn't add " + key +"\n");
                 }
@@ -1011,102 +1011,102 @@ class ProductionGameboardTest {
 
         for(Resource key : strongboxMap.keySet()){
             for (int i = 0; i<strongboxMap.get(key); i++){
-                gameboard.addToStrongbox(key);
+                gameBoard.addToStrongbox(key);
             }
         }
 
         try {
-            gameboard.buyProductionCard(blueDeck,0);
+            gameBoard.buyProductionCard(blueDeck,0);
         } catch (LevelException | NotEnoughResourcesException | EmptyException | FullColumnException | EndGameException e) {
             e.printStackTrace();
         }
 
         try {
-            assertEquals(1,gameboard.firstRowFree(0));
+            assertEquals(1,gameBoard.firstRowFree(0));
         } catch (FullColumnException e) {
             e.printStackTrace();
         }
 
         try {
-            gameboard.buyProductionCard(blueDeckTwo,0);
+            gameBoard.buyProductionCard(blueDeckTwo,0);
         } catch (LevelException | NotEnoughResourcesException | EmptyException | FullColumnException | EndGameException e) {
             e.printStackTrace();
         }
 
         try {
-            assertEquals(2,gameboard.firstRowFree(0));
+            assertEquals(2,gameBoard.firstRowFree(0));
         } catch (FullColumnException e) {
             e.printStackTrace();
         }
 
         try {
-            gameboard.buyProductionCard(blueDeckThree,0);
+            gameBoard.buyProductionCard(blueDeckThree,0);
         } catch (LevelException | NotEnoughResourcesException | EmptyException | FullColumnException | EndGameException e) {
             e.printStackTrace();
         }
 
         try {
-            assertEquals(3,gameboard.firstRowFree(0));
+            assertEquals(3,gameBoard.firstRowFree(0));
         } catch (FullColumnException e) {
             e.printStackTrace();
         }
 
         try {
-            gameboard.buyProductionCard(blueDeck,1);
+            gameBoard.buyProductionCard(blueDeck,1);
         } catch (LevelException | NotEnoughResourcesException | EmptyException | FullColumnException | EndGameException e) {
             e.printStackTrace();
         }
 
         try {
-            assertEquals(1,gameboard.firstRowFree(1));
+            assertEquals(1,gameBoard.firstRowFree(1));
         } catch (FullColumnException e) {
             e.printStackTrace();
         }
 
         try {
-            gameboard.buyProductionCard(blueDeckTwo,1);
+            gameBoard.buyProductionCard(blueDeckTwo,1);
         } catch (LevelException | NotEnoughResourcesException | EmptyException | FullColumnException | EndGameException e) {
             e.printStackTrace();
         }
 
         try {
-            assertEquals(2,gameboard.firstRowFree(1));
+            assertEquals(2,gameBoard.firstRowFree(1));
         } catch (FullColumnException e) {
             e.printStackTrace();
         }
 
         try {
-            gameboard.buyProductionCard(blueDeckThree,1);
+            gameBoard.buyProductionCard(blueDeckThree,1);
         } catch (LevelException | NotEnoughResourcesException | EmptyException | FullColumnException | EndGameException e) {
             e.printStackTrace();
         }
 
         try {
-            assertEquals(3,gameboard.firstRowFree(1));
+            assertEquals(3,gameBoard.firstRowFree(1));
         } catch (FullColumnException e) {
             e.printStackTrace();
         }
 
         try {
-            gameboard.buyProductionCard(blueDeck,2);
+            gameBoard.buyProductionCard(blueDeck,2);
         } catch (LevelException | NotEnoughResourcesException | EmptyException | FullColumnException | EndGameException e) {
             e.printStackTrace();
         }
 
         try {
-            assertEquals(1,gameboard.firstRowFree(2));
+            assertEquals(1,gameBoard.firstRowFree(2));
         } catch (FullColumnException e) {
             e.printStackTrace();
         }
 
         try {
-            gameboard.buyProductionCard(blueDeckTwo,2);
+            gameBoard.buyProductionCard(blueDeckTwo,2);
         } catch (LevelException | NotEnoughResourcesException | EmptyException | FullColumnException | EndGameException e) {
             e.printStackTrace();
         }
 
         try {
-            assertEquals(2,gameboard.firstRowFree(2));
+            assertEquals(2,gameBoard.firstRowFree(2));
         } catch (FullColumnException e) {
             e.printStackTrace();
         }
@@ -1114,7 +1114,7 @@ class ProductionGameboardTest {
         for(Resource key : storageMap.keySet()){
             for (int i = 0; i<storageMap.get(key); i++){
                 try {
-                    gameboard.addToStorage(key);
+                    gameBoard.addToStorage(key);
                 } catch (UnavailableResourceException e) {
                     System.out.println("UnavailableResourceException: couldn't add " + key +"\n");
                 }
@@ -1123,19 +1123,19 @@ class ProductionGameboardTest {
 
         for(Resource key : strongboxMap.keySet()){
             for (int i = 0; i<strongboxMap.get(key); i++){
-                gameboard.addToStrongbox(key);
+                gameBoard.addToStrongbox(key);
             }
         }
 
         try {
-            gameboard.buyProductionCard(blueDeckThree,2);
+            gameBoard.buyProductionCard(blueDeckThree,2);
         } catch (LevelException | NotEnoughResourcesException | EmptyException | FullColumnException | EndGameException e) {
             e.printStackTrace();
         }
 
 
         try {
-            assertEquals(3,gameboard.firstRowFree(2));
+            assertEquals(3,gameBoard.firstRowFree(2));
         } catch (FullColumnException e) {
             e.printStackTrace();
         }
@@ -1147,7 +1147,7 @@ class ProductionGameboardTest {
     @Test
     @DisplayName("productionScoreTest() test - complete test")
     public void productionScoreTest(){
-        Gameboard gameboard = new Gameboard() ;
+        GameBoard gameBoard = new GameBoard() ;
         Reserve reserve = new Reserve();
         DeckProductionCardOneBlu blueDeck = new DeckProductionCardOneBlu();
         DeckProductionCardTwoBlu blueDeckTwo = new DeckProductionCardTwoBlu();
@@ -1171,7 +1171,7 @@ class ProductionGameboardTest {
         for(Resource key : storageMap.keySet()){
             for (int i = 0; i<storageMap.get(key); i++){
                 try {
-                    gameboard.addToStorage(key);
+                    gameBoard.addToStorage(key);
                 } catch (UnavailableResourceException e) {
                     System.out.println("UnavailableResourceException: couldn't add " + key +"\n");
                 }
@@ -1180,73 +1180,73 @@ class ProductionGameboardTest {
 
         for(Resource key : strongboxMap.keySet()){
             for (int i = 0; i<strongboxMap.get(key); i++){
-                gameboard.addToStrongbox(key);
+                gameBoard.addToStrongbox(key);
             }
         }
 
-        assertEquals(0,gameboard.productionScore());
+        assertEquals(0,gameBoard.productionScore());
 
         try {
             score+=blueDeck.getPoints();
-            gameboard.buyProductionCard(blueDeck,0);
+            gameBoard.buyProductionCard(blueDeck,0);
         } catch (LevelException | NotEnoughResourcesException | EmptyException | FullColumnException | EndGameException e) {
             e.printStackTrace();
         }
-        assertEquals(score,gameboard.productionScore());
+        assertEquals(score,gameBoard.productionScore());
         try {
             score+=blueDeckTwo.getPoints();
-            gameboard.buyProductionCard(blueDeckTwo,0);
+            gameBoard.buyProductionCard(blueDeckTwo,0);
         } catch (LevelException | NotEnoughResourcesException | EmptyException | FullColumnException | EndGameException e) {
             e.printStackTrace();
         }
-        assertEquals(score,gameboard.productionScore());
+        assertEquals(score,gameBoard.productionScore());
         try {
             score+=blueDeckThree.getPoints();
-            gameboard.buyProductionCard(blueDeckThree,0);
+            gameBoard.buyProductionCard(blueDeckThree,0);
         } catch (LevelException | NotEnoughResourcesException | EmptyException | FullColumnException | EndGameException e) {
             e.printStackTrace();
         }
-        assertEquals(score,gameboard.productionScore());
+        assertEquals(score,gameBoard.productionScore());
         try {
             score+=blueDeck.getPoints();
-            gameboard.buyProductionCard(blueDeck,1);
+            gameBoard.buyProductionCard(blueDeck,1);
         } catch (LevelException | NotEnoughResourcesException | EmptyException | FullColumnException | EndGameException e) {
             e.printStackTrace();
         }
-        assertEquals(score,gameboard.productionScore());
+        assertEquals(score,gameBoard.productionScore());
         try {
             score+=blueDeckTwo.getPoints();
-            gameboard.buyProductionCard(blueDeckTwo,1);
+            gameBoard.buyProductionCard(blueDeckTwo,1);
         } catch (LevelException | NotEnoughResourcesException | EmptyException | FullColumnException | EndGameException e) {
             e.printStackTrace();
         }
-        assertEquals(score,gameboard.productionScore());
+        assertEquals(score,gameBoard.productionScore());
         try {
             score+=blueDeckThree.getPoints();
-            gameboard.buyProductionCard(blueDeckThree,1);
+            gameBoard.buyProductionCard(blueDeckThree,1);
         } catch (LevelException | NotEnoughResourcesException | EmptyException | FullColumnException | EndGameException e) {
             e.printStackTrace();
         }
-        assertEquals(score,gameboard.productionScore());
+        assertEquals(score,gameBoard.productionScore());
         try {
             score+=blueDeck.getPoints();
-            gameboard.buyProductionCard(blueDeck,2);
+            gameBoard.buyProductionCard(blueDeck,2);
         } catch (LevelException | NotEnoughResourcesException | EmptyException | FullColumnException | EndGameException e) {
             e.printStackTrace();
         }
-        assertEquals(score,gameboard.productionScore());
+        assertEquals(score,gameBoard.productionScore());
 
         try {
             score+=blueDeckTwo.getPoints();
-            gameboard.buyProductionCard(blueDeckTwo,2);
+            gameBoard.buyProductionCard(blueDeckTwo,2);
         } catch (LevelException | NotEnoughResourcesException | EmptyException | FullColumnException | EndGameException e) {
             e.printStackTrace();
         }
-        assertEquals(score,gameboard.productionScore());
+        assertEquals(score,gameBoard.productionScore());
         for(Resource key : storageMap.keySet()){
             for (int i = 0; i<storageMap.get(key); i++){
                 try {
-                    gameboard.addToStorage(key);
+                    gameBoard.addToStorage(key);
                 } catch (UnavailableResourceException e) {
                     System.out.println("UnavailableResourceException: couldn't add " + key +"\n");
                 }
@@ -1254,18 +1254,18 @@ class ProductionGameboardTest {
         }
         for(Resource key : strongboxMap.keySet()){
             for (int i = 0; i<strongboxMap.get(key); i++){
-                gameboard.addToStrongbox(key);
+                gameBoard.addToStrongbox(key);
             }
         }
 
         try {
             score+=blueDeckThree.getPoints();
-            gameboard.buyProductionCard(blueDeckThree,2);
+            gameBoard.buyProductionCard(blueDeckThree,2);
         } catch (LevelException | NotEnoughResourcesException | EmptyException | FullColumnException | EndGameException e) {
             e.printStackTrace();
         }
 
-        assertEquals(score,gameboard.productionScore());
+        assertEquals(score,gameBoard.productionScore());
 
     }
 
@@ -1275,8 +1275,8 @@ class ProductionGameboardTest {
     @Test
     @DisplayName("takeFromMarketTest() - ")
     public void takeFromMarketTest(){
-        GameboardInterface gameboard = new Gameboard();
-        gameboard = new ProductionGameboard(gameboard,Resource.SHIELD);
+        GameBoardInterface gameBoard = new GameBoard();
+        gameBoard = new ProductionGameBoard(gameBoard,Resource.SHIELD);
         Reserve reserve = new Reserve();
 
         Map<Resource,Integer> storageMap = new HashMap<>();
@@ -1284,7 +1284,7 @@ class ProductionGameboardTest {
         Map<Resource,Integer> availableMap = new HashMap<>();
         Map<Resource,Integer> newResourcesMap = new HashMap<>();
         ArrayList<Resource> newResourcesList = new ArrayList<>();
-        ArrayList<Resource> available = new ArrayList<>();
+        ArrayList<Resource> available;
 
         availableMap.put(Resource.COIN, 0);
         availableMap.put(Resource.ROCK, 0);
@@ -1309,7 +1309,7 @@ class ProductionGameboardTest {
         for(Resource key : storageMap.keySet()){
             for (int i = 0; i<storageMap.get(key); i++){
                 try {
-                    gameboard.addToStorage(key);
+                    gameBoard.addToStorage(key);
                 } catch (UnavailableResourceException e) {
                     System.out.println("UnavailableResourceException: couldn't add " + key +"\n");
                 }
@@ -1318,7 +1318,7 @@ class ProductionGameboardTest {
 
         for(Resource key : strongboxMap.keySet()){
             for (int i = 0; i<strongboxMap.get(key); i++){
-                gameboard.addToStrongbox(key);
+                gameBoard.addToStrongbox(key);
             }
         }
 
@@ -1329,12 +1329,12 @@ class ProductionGameboardTest {
         }
 
         try {
-            gameboard.takeFromMarket(newResourcesList);
-        } catch (NotEnoughSpeceInStorageException e) {
+            gameBoard.takeFromMarket(newResourcesList);
+        } catch (NotEnoughSpaceInStorageException e) {
             e.printStackTrace();
         }
 
-        available = gameboard.availableResources();
+        available = gameBoard.availableResources();
 
         for(Resource r : available){
             availableMap.put(r,availableMap.remove(r)+1);
@@ -1361,8 +1361,8 @@ class ProductionGameboardTest {
     @Test
     @DisplayName("takeFromMarketTest1() - too many resources in buffer")
     public void takeFromMarketTest1() {
-        GameboardInterface gameboard = new Gameboard();
-        gameboard = new ProductionGameboard(gameboard,Resource.SHIELD);
+        GameBoardInterface gameBoard = new GameBoard();
+        gameBoard = new ProductionGameBoard(gameBoard,Resource.SHIELD);
         Reserve reserve = new Reserve();
 
         Map<Resource,Integer> storageMap = new HashMap<>();
@@ -1395,7 +1395,7 @@ class ProductionGameboardTest {
         for(Resource key : storageMap.keySet()){
             for (int i = 0; i<storageMap.get(key); i++){
                 try {
-                    gameboard.addToStorage(key);
+                    gameBoard.addToStorage(key);
                 } catch (UnavailableResourceException e) {
                     System.out.println("UnavailableResourceException: couldn't add " + key +"\n");
                 }
@@ -1404,7 +1404,7 @@ class ProductionGameboardTest {
 
         for(Resource key : strongboxMap.keySet()){
             for (int i = 0; i<strongboxMap.get(key); i++){
-                gameboard.addToStrongbox(key);
+                gameBoard.addToStrongbox(key);
             }
         }
 
@@ -1415,8 +1415,8 @@ class ProductionGameboardTest {
         }
 
         try {
-            gameboard.takeFromMarket(newResourcesList);
-        } catch (NotEnoughSpeceInStorageException e) {
+            gameBoard.takeFromMarket(newResourcesList);
+        } catch (NotEnoughSpaceInStorageException e) {
             e.printStackTrace();
         }
 
@@ -1429,8 +1429,8 @@ class ProductionGameboardTest {
     @Test
     @DisplayName("takeFromMarketTest2() - too many resources in buffer")
     public void takeFromMarketTest2() {
-        GameboardInterface gameboard = new Gameboard();
-        gameboard = new ProductionGameboard(gameboard,Resource.SHIELD);
+        GameBoardInterface gameBoard = new GameBoard();
+        gameBoard = new ProductionGameBoard(gameBoard,Resource.SHIELD);
         Reserve reserve = new Reserve();
 
         Map<Resource,Integer> storageMap = new HashMap<>();
@@ -1463,7 +1463,7 @@ class ProductionGameboardTest {
         for(Resource key : storageMap.keySet()){
             for (int i = 0; i<storageMap.get(key); i++){
                 try {
-                    gameboard.addToStorage(key);
+                    gameBoard.addToStorage(key);
                 } catch (UnavailableResourceException e) {
                     System.out.println("UnavailableResourceException: couldn't add " + key +"\n");
                 }
@@ -1472,7 +1472,7 @@ class ProductionGameboardTest {
 
         for(Resource key : strongboxMap.keySet()){
             for (int i = 0; i<strongboxMap.get(key); i++){
-                gameboard.addToStrongbox(key);
+                gameBoard.addToStrongbox(key);
             }
         }
 
@@ -1483,8 +1483,8 @@ class ProductionGameboardTest {
         }
 
         try {
-            gameboard.takeFromMarket(newResourcesList);
-        } catch (NotEnoughSpeceInStorageException e) {
+            gameBoard.takeFromMarket(newResourcesList);
+        } catch (NotEnoughSpaceInStorageException e) {
             e.printStackTrace();
         }
     }
@@ -1496,15 +1496,15 @@ class ProductionGameboardTest {
     @Test
     @DisplayName("productionOn() test - correct production attempt")
     public void baseProductionOnTest0() {
-        GameboardInterface gameboard = new Gameboard();
-        gameboard = new ProductionGameboard(gameboard,Resource.SHIELD);
+        GameBoardInterface gameBoard = new GameBoard();
+        gameBoard = new ProductionGameBoard(gameBoard,Resource.SHIELD);
         Reserve reserve = new Reserve();
 
         Map<Resource,Integer> storageMap = new HashMap<>();
         Map<Resource,Integer> strongboxMap = new HashMap<>();
         Map<Resource,Integer> availableMap = new HashMap<>();
 
-        ArrayList<Resource> available = new ArrayList<>();
+        ArrayList<Resource> available;
 
         availableMap.put(Resource.COIN, 0);
         availableMap.put(Resource.ROCK, 0);
@@ -1524,7 +1524,7 @@ class ProductionGameboardTest {
         for(Resource key : storageMap.keySet()){
             for (int i = 0; i<storageMap.get(key); i++){
                 try {
-                    gameboard.addToStorage(key);
+                    gameBoard.addToStorage(key);
                 } catch (UnavailableResourceException e) {
                     System.out.println("UnavailableResourceException: couldn't add " + key +"\n");
                 }
@@ -1532,18 +1532,18 @@ class ProductionGameboardTest {
         }
 
         try {
-            gameboard.baseProductionOn(Resource.COIN,Resource.COIN,Resource.SHIELD);
+            gameBoard.baseProductionOn(Resource.COIN,Resource.COIN,Resource.SHIELD);
         } catch (ImpossibleProductionException e) {
             e.printStackTrace();
         }
 
         try {
-            gameboard.endOfProduction();
+            gameBoard.endOfProduction();
         } catch (CallForCouncilException | LastSpaceReachedException e) {
             e.printStackTrace();
         }
 
-        available = gameboard.availableResources();
+        available = gameBoard.availableResources();
 
         for(Resource r : available){
             availableMap.put(r,availableMap.remove(r)+1);
@@ -1563,8 +1563,8 @@ class ProductionGameboardTest {
     @Test
     @DisplayName("productionOn1() test - wrong production attempt")
     public void baseProductionOnTest1() {
-        GameboardInterface gameboard = new Gameboard();
-        gameboard = new ProductionGameboard(gameboard,Resource.SHIELD);
+        GameBoardInterface gameBoard = new GameBoard();
+        gameBoard = new ProductionGameBoard(gameBoard,Resource.SHIELD);
         Reserve reserve = new Reserve();
 
         Map<Resource,Integer> storageMap = new HashMap<>();
@@ -1591,7 +1591,7 @@ class ProductionGameboardTest {
         for(Resource key : storageMap.keySet()){
             for (int i = 0; i<storageMap.get(key); i++){
                 try {
-                    gameboard.addToStorage(key);
+                    gameBoard.addToStorage(key);
                 } catch (UnavailableResourceException e) {
                     System.out.println("UnavailableResourceException: couldn't add " + key +"\n");
                 }
@@ -1599,18 +1599,18 @@ class ProductionGameboardTest {
         }
 
         try {
-            gameboard.baseProductionOn(Resource.COIN,Resource.COIN,Resource.SHIELD);
+            gameBoard.baseProductionOn(Resource.COIN,Resource.COIN,Resource.SHIELD);
         } catch (ImpossibleProductionException e) {
             e.printStackTrace();
         }
 
         try {
-            gameboard.endOfProduction();
+            gameBoard.endOfProduction();
         } catch (CallForCouncilException | LastSpaceReachedException e) {
             e.printStackTrace();
         }
 
-    /*available = gameboard.availableResources();
+    /*available = gameBoard.availableResources();
 
     for(Resource r : available){
         availableMap.put(r,availableMap.remove(r)+1);
@@ -1629,15 +1629,15 @@ class ProductionGameboardTest {
     @Test
     @DisplayName("productionOn2() test - correct production attempt")
     public void baseProductionOnTest2() {
-        GameboardInterface gameboard = new Gameboard();
-        gameboard = new ProductionGameboard(gameboard,Resource.SHIELD);
+        GameBoardInterface gameBoard = new GameBoard();
+        gameBoard = new ProductionGameBoard(gameBoard,Resource.SHIELD);
         Reserve reserve = new Reserve();
 
         Map<Resource,Integer> storageMap = new HashMap<>();
         Map<Resource,Integer> strongboxMap = new HashMap<>();
         Map<Resource,Integer> availableMap = new HashMap<>();
 
-        ArrayList<Resource> available = new ArrayList<>();
+        ArrayList<Resource> available;
 
         availableMap.put(Resource.COIN, 0);
         availableMap.put(Resource.ROCK, 0);
@@ -1657,7 +1657,7 @@ class ProductionGameboardTest {
         for(Resource key : storageMap.keySet()){
             for (int i = 0; i<storageMap.get(key); i++){
                 try {
-                    gameboard.addToStorage(key);
+                    gameBoard.addToStorage(key);
                 } catch (UnavailableResourceException e) {
                     System.out.println("UnavailableResourceException: couldn't add " + key +"\n");
                 }
@@ -1665,18 +1665,18 @@ class ProductionGameboardTest {
         }
 
         try {
-            gameboard.baseProductionOn(Resource.COIN,Resource.ROCK,Resource.SERVANT);
+            gameBoard.baseProductionOn(Resource.COIN,Resource.ROCK,Resource.SERVANT);
         } catch (ImpossibleProductionException e) {
             e.printStackTrace();
         }
 
         try {
-            gameboard.endOfProduction();
+            gameBoard.endOfProduction();
         } catch (CallForCouncilException | LastSpaceReachedException e) {
             e.printStackTrace();
         }
 
-        available = gameboard.availableResources();
+        available = gameBoard.availableResources();
 
         for(Resource r : available){
             availableMap.put(r,availableMap.remove(r)+1);
@@ -1695,8 +1695,8 @@ class ProductionGameboardTest {
     @Test
     @DisplayName("productionOn0() test - correct production attempt")
     public void productionOnTest0() {
-        GameboardInterface gameboard = new Gameboard();
-        gameboard = new ProductionGameboard(gameboard,Resource.SHIELD);
+        GameBoardInterface gameBoard = new GameBoard();
+        gameBoard = new ProductionGameBoard(gameBoard,Resource.SHIELD);
         Reserve reserve = new Reserve();
         ProductionCard card;
         Map<Resource,Integer> storageMap = new HashMap<>();
@@ -1732,7 +1732,7 @@ class ProductionGameboardTest {
         strongboxMap.put(Resource.SERVANT, 1);
 
         DeckProductionCardOneBlu deck = new DeckProductionCardOneBlu();
-        init = gameboard.getIndicator();
+        init = gameBoard.getIndicator();
         try {
             card = deck.pickUpFirstCard();
         } catch (EmptyException e) {
@@ -1740,7 +1740,7 @@ class ProductionGameboardTest {
             return;
         }
 
-        gameboard.setProductionCard(card,0);
+        gameBoard.setProductionCard(card,0);
 
         outputList = card.getOut();
         inputList = card.getIn();
@@ -1753,12 +1753,12 @@ class ProductionGameboardTest {
             inputMap.put(r,inputMap.remove(r)+1);
         }
 
-        ArrayList<Resource> available = new ArrayList<>();
+        ArrayList<Resource> available;
 
         for(Resource key : storageMap.keySet()){
             for (int i = 0; i<storageMap.get(key); i++){
                 try {
-                    gameboard.addToStorage(key);
+                    gameBoard.addToStorage(key);
                 } catch (UnavailableResourceException e) {
                     System.out.println("UnavailableResourceException: couldn't add " + key +"\n");
                 }
@@ -1767,29 +1767,29 @@ class ProductionGameboardTest {
 
         for(Resource key : strongboxMap.keySet()){
             for (int i = 0; i<strongboxMap.get(key); i++){
-                gameboard.addToStrongbox(key);
+                gameBoard.addToStrongbox(key);
             }
         }
 
         try {
-            gameboard.productionOn(0);
+            gameBoard.productionOn(0);
         } catch (ImpossibleProductionException | EmptyColumnException e) {
             e.printStackTrace();
         }
 
         try {
-            gameboard.endOfProduction();
+            gameBoard.endOfProduction();
         } catch (CallForCouncilException | LastSpaceReachedException e) {
             e.printStackTrace();
         }
 
-        available = gameboard.availableResources();
+        available = gameBoard.availableResources();
 
         for(Resource r : available){
             availableMap.put(r,availableMap.remove(r)+1);
         }
 
-        assertEquals(init+card.isFaithPoint(),gameboard.getIndicator());
+        assertEquals(init+card.isFaithPoint(),gameBoard.getIndicator());
         assertEquals(4-inputMap.get(Resource.COIN)+outputMap.get(Resource.COIN),availableMap.get(Resource.COIN));
         assertEquals(2-inputMap.get(Resource.ROCK)+outputMap.get(Resource.ROCK),availableMap.get(Resource.ROCK));
         assertEquals(3-inputMap.get(Resource.SHIELD)+outputMap.get(Resource.SHIELD),availableMap.get(Resource.SHIELD));
@@ -1802,8 +1802,8 @@ class ProductionGameboardTest {
     @Test
     @DisplayName("productionOn3() test - correct production attempt")
     public void productionOnTest3() {
-        GameboardInterface gameboard = new Gameboard();
-        gameboard = new ProductionGameboard(gameboard,Resource.SHIELD);
+        GameBoardInterface gameBoard = new GameBoard();
+        gameBoard = new ProductionGameBoard(gameBoard,Resource.SHIELD);
         Reserve reserve = new Reserve();
         ProductionCard card;
         Map<Resource,Integer> storageMap = new HashMap<>();
@@ -1839,7 +1839,7 @@ class ProductionGameboardTest {
         strongboxMap.put(Resource.SERVANT, 10);
 
         DeckProductionCardThreeBlu deck = new DeckProductionCardThreeBlu();
-        init = gameboard.getIndicator();
+        init = gameBoard.getIndicator();
         try {
             card = deck.pickUpFirstCard();
         } catch (EmptyException e) {
@@ -1847,7 +1847,7 @@ class ProductionGameboardTest {
             return;
         }
 
-        gameboard.setProductionCard(card,0);
+        gameBoard.setProductionCard(card,0);
 
         outputList = card.getOut();
         inputList = card.getIn();
@@ -1868,7 +1868,7 @@ class ProductionGameboardTest {
         for(Resource key : storageMap.keySet()){
             for (int i = 0; i<storageMap.get(key); i++){
                 try {
-                    gameboard.addToStorage(key);
+                    gameBoard.addToStorage(key);
                 } catch (UnavailableResourceException e) {
                     System.out.println("UnavailableResourceException: couldn't add " + key +"\n");
                 }
@@ -1877,23 +1877,23 @@ class ProductionGameboardTest {
 
         for(Resource key : strongboxMap.keySet()){
             for (int i = 0; i<strongboxMap.get(key); i++){
-                gameboard.addToStrongbox(key);
+                gameBoard.addToStrongbox(key);
             }
         }
 
         try {
-            gameboard.productionOn(0);
+            gameBoard.productionOn(0);
         } catch (ImpossibleProductionException | EmptyColumnException e) {
             e.printStackTrace();
         }
 
         try {
-            gameboard.endOfProduction();
+            gameBoard.endOfProduction();
         } catch (CallForCouncilException | LastSpaceReachedException e) {
             e.printStackTrace();
         }
 
-        available = gameboard.availableResources();
+        available = gameBoard.availableResources();
 
 
         //System.out.println("Available after production:\n");
@@ -1901,10 +1901,10 @@ class ProductionGameboardTest {
             availableMap.put(r,availableMap.remove(r)+1);
             //System.out.println(r +" ");
         }
-        //System.out.println("FaithPath:\nInit: " + init + ", isFaithPath: "+card.isFaithPoint()+", final: "+gameboard.getIndicator()+"\n");
+        //System.out.println("FaithPath:\nInit: " + init + ", isFaithPath: "+card.isFaithPoint()+", final: "+gameBoard.getIndicator()+"\n");
 
 
-        assertEquals(init+card.isFaithPoint(),gameboard.getIndicator());
+        assertEquals(init+card.isFaithPoint(),gameBoard.getIndicator());
         assertEquals(10-inputMap.get(Resource.COIN)+outputMap.get(Resource.COIN),availableMap.get(Resource.COIN));
         assertEquals(10-inputMap.get(Resource.ROCK)+outputMap.get(Resource.ROCK),availableMap.get(Resource.ROCK));
         assertEquals(10-inputMap.get(Resource.SHIELD)+outputMap.get(Resource.SHIELD),availableMap.get(Resource.SHIELD));
@@ -1917,8 +1917,8 @@ class ProductionGameboardTest {
     @Test
     @DisplayName("productionOn2() test - correct production attempt")
     public void productionOnTest2() {
-        GameboardInterface gameboard = new Gameboard();
-        gameboard = new ProductionGameboard(gameboard,Resource.SHIELD);
+        GameBoardInterface gameBoard = new GameBoard();
+        gameBoard = new ProductionGameBoard(gameBoard,Resource.SHIELD);
         Reserve reserve = new Reserve();
         ProductionCard card;
         Map<Resource,Integer> storageMap = new HashMap<>();
@@ -1954,7 +1954,7 @@ class ProductionGameboardTest {
         strongboxMap.put(Resource.SERVANT, 4);
 
         DeckProductionCardOneGreen deck = new DeckProductionCardOneGreen();
-        init = gameboard.getIndicator();
+        init = gameBoard.getIndicator();
         try {
             card = deck.pickUpFirstCard();
         } catch (EmptyException e) {
@@ -1962,7 +1962,7 @@ class ProductionGameboardTest {
             return;
         }
 
-        gameboard.setProductionCard(card,0);
+        gameBoard.setProductionCard(card,0);
 
         outputList = card.getOut();
         inputList = card.getIn();
@@ -1983,7 +1983,7 @@ class ProductionGameboardTest {
         for(Resource key : storageMap.keySet()){
             for (int i = 0; i<storageMap.get(key); i++){
                 try {
-                    gameboard.addToStorage(key);
+                    gameBoard.addToStorage(key);
                 } catch (UnavailableResourceException e) {
                     //System.out.println("UnavailableResourceException: couldn't add " + key +"\n");
                 }
@@ -1992,24 +1992,24 @@ class ProductionGameboardTest {
 
         for(Resource key : strongboxMap.keySet()){
             for (int i = 0; i<strongboxMap.get(key); i++){
-                gameboard.addToStrongbox(key);
+                gameBoard.addToStrongbox(key);
             }
         }
 
 
         try {
-            gameboard.productionOn(0);
+            gameBoard.productionOn(0);
         } catch (ImpossibleProductionException | EmptyColumnException e) {
             e.printStackTrace();
         }
 
         try {
-            gameboard.endOfProduction();
+            gameBoard.endOfProduction();
         } catch (CallForCouncilException | LastSpaceReachedException e) {
             e.printStackTrace();
         }
 
-        available = gameboard.availableResources();
+        available = gameBoard.availableResources();
 
 
         //System.out.println("Available after production:\n");
@@ -2017,10 +2017,10 @@ class ProductionGameboardTest {
             availableMap.put(r,availableMap.remove(r)+1);
             //System.out.println(r +" ");
         }
-        //System.out.println("FaithPath:\nInit: " + init + ", isFaithPath: "+card.isFaithPoint()+", final: "+gameboard.getIndicator()+"\n");
+        //System.out.println("FaithPath:\nInit: " + init + ", isFaithPath: "+card.isFaithPoint()+", final: "+gameBoard.getIndicator()+"\n");
 
 
-        assertEquals(init+card.isFaithPoint(),gameboard.getIndicator());
+        assertEquals(init+card.isFaithPoint(),gameBoard.getIndicator());
         assertEquals(4-inputMap.get(Resource.COIN)+outputMap.get(Resource.COIN),availableMap.get(Resource.COIN));
         assertEquals(4-inputMap.get(Resource.ROCK)+outputMap.get(Resource.ROCK),availableMap.get(Resource.ROCK));
         assertEquals(4-inputMap.get(Resource.SHIELD)+outputMap.get(Resource.SHIELD),availableMap.get(Resource.SHIELD));
@@ -2034,8 +2034,8 @@ class ProductionGameboardTest {
     @Test
     @DisplayName("productionOn1() test - wrong production attempt not enough resources")
     public void productionOnTest1() {
-        GameboardInterface gameboard = new Gameboard();
-        gameboard = new ProductionGameboard(gameboard,Resource.SHIELD);
+        GameBoardInterface gameBoard = new GameBoard();
+        gameBoard = new ProductionGameBoard(gameBoard,Resource.SHIELD);
         Reserve reserve = new Reserve();
         ProductionCard card;
         Map<Resource,Integer> storageMap = new HashMap<>();
@@ -2071,7 +2071,7 @@ class ProductionGameboardTest {
         strongboxMap.put(Resource.SERVANT, 0);
 
         DeckProductionCardOneGreen deck = new DeckProductionCardOneGreen();
-        init = gameboard.getIndicator();
+        init = gameBoard.getIndicator();
         try {
             card = deck.pickUpFirstCard();
         } catch (EmptyException e) {
@@ -2079,7 +2079,7 @@ class ProductionGameboardTest {
             return;
         }
 
-        gameboard.setProductionCard(card,0);
+        gameBoard.setProductionCard(card,0);
 
         outputList = card.getOut();
         inputList = card.getIn();
@@ -2100,7 +2100,7 @@ class ProductionGameboardTest {
         for(Resource key : storageMap.keySet()){
             for (int i = 0; i<storageMap.get(key); i++){
                 try {
-                    gameboard.addToStorage(key);
+                    gameBoard.addToStorage(key);
                 } catch (UnavailableResourceException e) {
                     //System.out.println("UnavailableResourceException: couldn't add " + key +"\n");
                 }
@@ -2109,24 +2109,24 @@ class ProductionGameboardTest {
 
         for(Resource key : strongboxMap.keySet()){
             for (int i = 0; i<strongboxMap.get(key); i++){
-                gameboard.addToStrongbox(key);
+                gameBoard.addToStrongbox(key);
             }
         }
 
 
         try {
-            gameboard.productionOn(0);
+            gameBoard.productionOn(0);
         } catch (ImpossibleProductionException | EmptyColumnException e) {
             e.printStackTrace();
         }
 
         try {
-            gameboard.endOfProduction();
+            gameBoard.endOfProduction();
         } catch (CallForCouncilException | LastSpaceReachedException e) {
             e.printStackTrace();
         }
 
-        available = gameboard.availableResources();
+        available = gameBoard.availableResources();
 
 
         //System.out.println("Available after production:\n");
@@ -2134,10 +2134,10 @@ class ProductionGameboardTest {
             availableMap.put(r,availableMap.remove(r)+1);
             //System.out.println(r +" ");
         }
-        //System.out.println("FaithPath:\nInit: " + init + ", isFaithPath: "+card.isFaithPoint()+", final: "+gameboard.getIndicator()+"\n");
+        //System.out.println("FaithPath:\nInit: " + init + ", isFaithPath: "+card.isFaithPoint()+", final: "+gameBoard.getIndicator()+"\n");
 
 
-    /*assertEquals(init+card.isFaithPoint(),gameboard.getIndicator());
+    /*assertEquals(init+card.isFaithPoint(),gameBoard.getIndicator());
     assertEquals(4-inputMap.get(Resource.COIN)+outputMap.get(Resource.COIN),availableMap.get(Resource.COIN));
     assertEquals(4-inputMap.get(Resource.ROCK)+outputMap.get(Resource.ROCK),availableMap.get(Resource.ROCK));
     assertEquals(4-inputMap.get(Resource.SHIELD)+outputMap.get(Resource.SHIELD),availableMap.get(Resource.SHIELD));
@@ -2150,8 +2150,8 @@ class ProductionGameboardTest {
     @Test
     @DisplayName("productionOn4() test - wrong production attempt empty column")
     public void productionOnTest4() {
-        GameboardInterface gameboard = new Gameboard();
-        gameboard = new ProductionGameboard(gameboard,Resource.SHIELD);
+        GameBoardInterface gameBoard = new GameBoard();
+        gameBoard = new ProductionGameBoard(gameBoard,Resource.SHIELD);
         Reserve reserve = new Reserve();
         ProductionCard card;
         Map<Resource,Integer> storageMap = new HashMap<>();
@@ -2187,7 +2187,7 @@ class ProductionGameboardTest {
         strongboxMap.put(Resource.SERVANT, 0);
 
         DeckProductionCardOneGreen deck = new DeckProductionCardOneGreen();
-        init = gameboard.getIndicator();
+        init = gameBoard.getIndicator();
         try {
             card = deck.pickUpFirstCard();
         } catch (EmptyException e) {
@@ -2195,7 +2195,7 @@ class ProductionGameboardTest {
             return;
         }
 
-        //gameboard.setProductionCard(card,0);
+        //gameBoard.setProductionCard(card,0);
 
         outputList = card.getOut();
         inputList = card.getIn();
@@ -2216,7 +2216,7 @@ class ProductionGameboardTest {
         for(Resource key : storageMap.keySet()){
             for (int i = 0; i<storageMap.get(key); i++){
                 try {
-                    gameboard.addToStorage(key);
+                    gameBoard.addToStorage(key);
                 } catch (UnavailableResourceException e) {
                     //System.out.println("UnavailableResourceException: couldn't add " + key +"\n");
                 }
@@ -2225,24 +2225,24 @@ class ProductionGameboardTest {
 
         for(Resource key : strongboxMap.keySet()){
             for (int i = 0; i<strongboxMap.get(key); i++){
-                gameboard.addToStrongbox(key);
+                gameBoard.addToStrongbox(key);
             }
         }
 
 
         try {
-            gameboard.productionOn(0);
+            gameBoard.productionOn(0);
         } catch (ImpossibleProductionException | EmptyColumnException e) {
             e.printStackTrace();
         }
 
         try {
-            gameboard.endOfProduction();
+            gameBoard.endOfProduction();
         } catch (CallForCouncilException | LastSpaceReachedException e) {
             e.printStackTrace();
         }
 
-        available = gameboard.availableResources();
+        available = gameBoard.availableResources();
 
 
         //System.out.println("Available after production:\n");
@@ -2250,10 +2250,10 @@ class ProductionGameboardTest {
             availableMap.put(r,availableMap.remove(r)+1);
             //System.out.println(r +" ");
         }
-        //System.out.println("FaithPath:\nInit: " + init + ", isFaithPath: "+card.isFaithPoint()+", final: "+gameboard.getIndicator()+"\n");
+        //System.out.println("FaithPath:\nInit: " + init + ", isFaithPath: "+card.isFaithPoint()+", final: "+gameBoard.getIndicator()+"\n");
 
 
-    /*assertEquals(init+card.isFaithPoint(),gameboard.getIndicator());
+    /*assertEquals(init+card.isFaithPoint(),gameBoard.getIndicator());
     assertEquals(4-inputMap.get(Resource.COIN)+outputMap.get(Resource.COIN),availableMap.get(Resource.COIN));
     assertEquals(4-inputMap.get(Resource.ROCK)+outputMap.get(Resource.ROCK),availableMap.get(Resource.ROCK));
     assertEquals(4-inputMap.get(Resource.SHIELD)+outputMap.get(Resource.SHIELD),availableMap.get(Resource.SHIELD));
@@ -2266,8 +2266,8 @@ class ProductionGameboardTest {
     @Test
     @DisplayName("productionOn5() test - correct multiple production attempt ")
     public void productionOnTest5() {
-        GameboardInterface gameboard = new Gameboard();
-        gameboard = new ProductionGameboard(gameboard,Resource.SHIELD);
+        GameBoardInterface gameBoard = new GameBoard();
+        gameBoard = new ProductionGameBoard(gameBoard,Resource.SHIELD);
         Reserve reserve = new Reserve();
         ProductionCard card,card2;
         Map<Resource,Integer> storageMap = new HashMap<>();
@@ -2315,7 +2315,7 @@ class ProductionGameboardTest {
         strongboxMap.put(Resource.SERVANT, 5);
 
         DeckProductionCardOneGreen deck = new DeckProductionCardOneGreen();
-        init = gameboard.getIndicator();
+        init = gameBoard.getIndicator();
         try {
             card = deck.pickUpFirstCard();
             card2 = deck.pickUpFirstCard();
@@ -2324,8 +2324,8 @@ class ProductionGameboardTest {
             return;
         }
 
-        gameboard.setProductionCard(card,0);
-        gameboard.setProductionCard(card2,1);
+        gameBoard.setProductionCard(card,0);
+        gameBoard.setProductionCard(card2,1);
 
         output1List = card.getOut();
         input1List = card.getIn();
@@ -2358,7 +2358,7 @@ class ProductionGameboardTest {
         for(Resource key : storageMap.keySet()){
             for (int i = 0; i<storageMap.get(key); i++){
                 try {
-                    gameboard.addToStorage(key);
+                    gameBoard.addToStorage(key);
                 } catch (UnavailableResourceException e) {
                     //System.out.println("UnavailableResourceException: couldn't add " + key +"\n");
                 }
@@ -2367,29 +2367,29 @@ class ProductionGameboardTest {
 
         for(Resource key : strongboxMap.keySet()){
             for (int i = 0; i<strongboxMap.get(key); i++){
-                gameboard.addToStrongbox(key);
+                gameBoard.addToStrongbox(key);
             }
         }
 
 
         try {
-            gameboard.productionOn(0);
+            gameBoard.productionOn(0);
         } catch (ImpossibleProductionException | EmptyColumnException e) {
             e.printStackTrace();
         }
         try {
-            gameboard.productionOn(1);
+            gameBoard.productionOn(1);
         } catch (ImpossibleProductionException | EmptyColumnException e) {
             e.printStackTrace();
         }
 
         try {
-            gameboard.endOfProduction();
+            gameBoard.endOfProduction();
         } catch (CallForCouncilException | LastSpaceReachedException e) {
             e.printStackTrace();
         }
 
-        available = gameboard.availableResources();
+        available = gameBoard.availableResources();
 
 
         //System.out.println("Available after production:\n");
@@ -2397,10 +2397,10 @@ class ProductionGameboardTest {
             availableMap.put(r,availableMap.remove(r)+1);
             //System.out.println(r +" ");
         }
-        //System.out.println("FaithPath:\nInit: " + init + ", isFaithPath: "+card.isFaithPoint()+", final: "+gameboard.getIndicator()+"\n");
+        //System.out.println("FaithPath:\nInit: " + init + ", isFaithPath: "+card.isFaithPoint()+", final: "+gameBoard.getIndicator()+"\n");
 
 
-        assertEquals(init+card.isFaithPoint()+ card2.isFaithPoint(),gameboard.getIndicator());
+        assertEquals(init+card.isFaithPoint()+ card2.isFaithPoint(),gameBoard.getIndicator());
         assertEquals(5-input1Map.get(Resource.COIN)+output1Map.get(Resource.COIN)-input2Map.get(Resource.COIN)+output2Map.get(Resource.COIN),availableMap.get(Resource.COIN));
         assertEquals(5-input1Map.get(Resource.ROCK)+output1Map.get(Resource.ROCK)-input2Map.get(Resource.ROCK)+output2Map.get(Resource.ROCK),availableMap.get(Resource.ROCK));
         assertEquals(5-input1Map.get(Resource.SHIELD)+output1Map.get(Resource.SHIELD)-input2Map.get(Resource.SHIELD)+output2Map.get(Resource.SHIELD),availableMap.get(Resource.SHIELD));

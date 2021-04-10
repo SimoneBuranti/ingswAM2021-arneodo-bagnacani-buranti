@@ -7,7 +7,7 @@ public class Reserve {
     /**
      * AMOUNT indicates the finite initial amount per resource type
      */
-    private static final int AMOUNT = 28;
+    private static final int AMOUNT = 100;
 
     /**
      * A static final map reservePools collects the current resource amount of the reserve

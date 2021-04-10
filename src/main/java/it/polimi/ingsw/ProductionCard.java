@@ -39,14 +39,14 @@ public class ProductionCard {
     /**
      * Base Constructor of the class: every attribute is needed as a constructor parameter
      */
-    public ProductionCard(Map<Resource,Integer> cost, Map<Resource,Integer> in, Map<Resource,Integer> out, int points, int level, Colour colour, int faithpoint) {
+    public ProductionCard(Map<Resource,Integer> cost, Map<Resource,Integer> in, Map<Resource,Integer> out, int points, int level, Colour colour, int faithPoint) {
         this.costProductionCard = cost;
         this.inputResources = in;
         this.outputResources = out;
         this.points = points;
         this.level = level;
         this.colour = colour;
-        this.faithPoint = faithpoint;
+        this.faithPoint = faithPoint;
     }
 
 
@@ -109,7 +109,7 @@ public class ProductionCard {
 
 
     /**
-     * getter method for activqte or not move on faithPath
+     * getter method for activate or not move on faithPath
      */
     public int isFaithPoint() {
         return faithPoint;

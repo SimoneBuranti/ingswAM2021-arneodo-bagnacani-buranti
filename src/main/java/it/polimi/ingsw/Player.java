@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Player {
     private boolean connected;
-    private GameboardInterface gameBoardOfPlayer ;
+    private GameBoardInterface gameBoardOfPlayer ;
     private String nickName;
     private int score;
     private ArrayList<LeaderCard> personalLeaderCard;
@@ -14,41 +14,28 @@ public class Player {
 
 
 
-    public Player(String nickName){
-        buffer= new ArrayList<Resource>();
-        gameBoardOfPlayer = new Gameboard();
-        personalLeaderCard=new ArrayList<LeaderCard>(4);
+    public Player(String nickName, Game game){
+        buffer= new ArrayList<>();
+        gameBoardOfPlayer = new GameBoard();
+        personalLeaderCard=new ArrayList<>(4);
         personalLeaderCard.add(DeckLeaderCard.arrangeDeckLeaderCards());
         personalLeaderCard.add(DeckLeaderCard.arrangeDeckLeaderCards());
         personalLeaderCard.add(DeckLeaderCard.arrangeDeckLeaderCards());
         personalLeaderCard.add(DeckLeaderCard.arrangeDeckLeaderCards());
-        setNickName(nickName);
-
-    };
-
-    public Player(Game game){
+        this.nickName = nickName;
         this.game = game;
-        buffer= new ArrayList<Resource>();
-        gameBoardOfPlayer = new Gameboard();
-        personalLeaderCard=new ArrayList<LeaderCard>(4);
-        personalLeaderCard.add(DeckLeaderCard.arrangeDeckLeaderCards());
-        personalLeaderCard.add(DeckLeaderCard.arrangeDeckLeaderCards());
-        personalLeaderCard.add(DeckLeaderCard.arrangeDeckLeaderCards());
-        personalLeaderCard.add(DeckLeaderCard.arrangeDeckLeaderCards());
-        setNickName(nickName);
-
     };
 
 
     /**
-     * method which  add the chosen to leaderCards in gameboard
+     * method which  add the chosen to leaderCards in gameBoard
      * @param firstIndex
      * @param secondIndex
      */
     public void saveLeaderCard(int firstIndex, int secondIndex){
         for (int i=0; i<4;i++) {
             if (i == firstIndex || i == secondIndex)
-                gameBoardOfPlayer.addLeaderCardToGameboard(personalLeaderCard.get(i));
+                gameBoardOfPlayer.addLeaderCardToGameBoard(personalLeaderCard.get(i));
         }}
 
 
@@ -61,10 +48,10 @@ public class Player {
 
 
     /**
-     * from gameboard
+     * from gameBoard
      * @return gameBoardOfPlayer
      */
-    public GameboardInterface getGameBoardOfPlayer() {
+    public GameBoardInterface getGameBoardOfPlayer() {
         return gameBoardOfPlayer;
     }
 
@@ -76,12 +63,6 @@ public class Player {
         return gameBoardOfPlayer.getIndicator();
     }
 
-
-    public void addResourceToStorage(Resource resource){
-        try {
-            gameBoardOfPlayer.addToStorage(resource);
-        } catch (UnavailableResourceException ignored) {}
-    }
 
     public boolean isConnected() {
         return connected;
@@ -100,13 +81,6 @@ public class Player {
         return nickName;
     }
 
-    /**
-     * set nickname to player
-     * @param nickName
-     */
-    private void setNickName(String nickName) {
-        this.nickName = nickName;
-    }
 
 
     /**
@@ -122,7 +96,7 @@ public class Player {
      * method for testing
      * @return return personalLeaderCard.size()
      */
-    public int personalLeaderCardsize(){
+    public int personalLeaderCardSize(){
          return personalLeaderCard.size();
     }
 
@@ -133,13 +107,10 @@ public class Player {
      * methods null, specified only in child classes
      *
      */
-    public void initResource(){}
     public void initResource(Resource resource) throws UnavailableResourceException, CallForCouncilException, LastSpaceReachedException {}
     public void initResource(Resource resourceOne,Resource resourceTwo) throws UnavailableResourceException, CallForCouncilException, LastSpaceReachedException {}
 
-    public void EndOfTurn(){
-
-    }
+    //public void EndOfTurn(){}
 
 
     /**
@@ -157,22 +128,26 @@ public class Player {
      * this method need  when the player discard a leaderCard, and give player one faithPoint
      * @param index
      */
-   public void discardLeaderCard(int index) throws CallForCouncilException, LastSpaceReachedException, LeaderCardsGameboardEmptyException {
+   public void discardLeaderCard(int index) throws CallForCouncilException, LastSpaceReachedException, LeaderCardsGameBoardEmptyException {
         if(getGameBoardOfPlayer().leaderCardsSize()==1){
-            getGameBoardOfPlayer().removeLeaderCardToGameboard(0);
+            getGameBoardOfPlayer().removeLeaderCardToGameBoard(0);
             getGameBoardOfPlayer().faithMove();}
 
         else if (getGameBoardOfPlayer().leaderCardsSize()==2)
-        {getGameBoardOfPlayer().removeLeaderCardToGameboard(1);
+        {getGameBoardOfPlayer().removeLeaderCardToGameBoard(index);
         getGameBoardOfPlayer().faithMove();
         }
         else
-           throw new LeaderCardsGameboardEmptyException();
+           throw new LeaderCardsGameBoardEmptyException();
 
    }
 
-    public void buyProductionCard(DeckProductionCard deck, int choosenColumn) throws LevelException, NotEnoughResourcesException, EmptyException, FullColumnException, EndGameException {
-        gameBoardOfPlayer.buyProductionCard(deck,choosenColumn);
+   public void activationLeaderCard(int index){
+       getGameBoardOfPlayer().activationLeaderCard(index);
+   }
+
+    public void buyProductionCard(DeckProductionCard deck, int chosenColumn) throws LevelException, NotEnoughResourcesException, EmptyException, FullColumnException, EndGameException {
+        gameBoardOfPlayer.buyProductionCard(deck,chosenColumn);
     }
 
     public void setPapal(){
@@ -191,14 +166,14 @@ public class Player {
         try {
             gameBoardOfPlayer.takeFromMarket((ArrayList<Resource>)buffer.clone());
             buffer = new ArrayList<>();
-        } catch (NotEnoughSpeceInStorageException e) {
+        } catch (NotEnoughSpaceInStorageException e) {
             //discardResource(buffer.remove(resource));
             
         }
     }
 
-    public void productionOn(int choosenColumn) throws ImpossibleProductionException, EmptyColumnException {
-        gameBoardOfPlayer.productionOn(choosenColumn);
+    public void productionOn(int chosenColumn) throws ImpossibleProductionException, EmptyColumnException {
+        gameBoardOfPlayer.productionOn(chosenColumn);
     }
 
     public void baseProductionOn(Resource i1,Resource i2,Resource o) throws ImpossibleProductionException {
@@ -209,13 +184,13 @@ public class Player {
         return gameBoardOfPlayer.score();
     }
 
-    public Resource whiteExchange() throws BlockedWhiteMarbleEffectException, UnavailableResourceException {
+    public Resource whiteExchange() throws BlockedWhiteMarbleEffectException, UnavailableResourceException, WhiteMarbleException {
         return gameBoardOfPlayer.whiteExchange();
     }
 
 
     public void addToBuffer(Resource resource){
-        buffer.add(resource);
+            buffer.add(resource);
     }
 
 

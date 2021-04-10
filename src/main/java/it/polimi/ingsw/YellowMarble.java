@@ -5,14 +5,13 @@ package it.polimi.ingsw;
 public class YellowMarble extends Marble{
     /**
      * @param player
-     * addresource.coin to player
+     * addResource.coin to player
      */
 
     public void giveResource(Player player) {
         try {
             Reserve.getResource(Resource.COIN);
         } catch (UnavailableResourceException e) {
-            e.printStackTrace();
         }
         player.addToBuffer(Resource.COIN);
 

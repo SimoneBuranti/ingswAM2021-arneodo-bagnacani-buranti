@@ -10,7 +10,7 @@ public class DeckProductionCardThreeYellow extends DeckProductionCard {
 
     public DeckProductionCardThreeYellow(){
         Yellow yellow= new Yellow();
-        deck = new ArrayList<ProductionCard>(4);
+        deck = new ArrayList<>(4);
         Map<Resource,Integer> yellowNine =new HashMap<>();
         yellowNine.put(Resource.COIN, 0);
         yellowNine.put(Resource.ROCK, 6);
@@ -26,8 +26,8 @@ public class DeckProductionCardThreeYellow extends DeckProductionCard {
         yellowNineOut.put(Resource.ROCK, 0);
         yellowNineOut.put(Resource.SERVANT, 3);
         yellowNineOut.put(Resource.SHIELD, 0);
-        ProductionCard cardThirtythree =new ProductionCard(yellowNine, yellowNineIn, yellowNineOut, 9, 3, yellow,2);
-        deck.add(cardThirtythree);
+        ProductionCard cardThirtyThree =new ProductionCard(yellowNine, yellowNineIn, yellowNineOut, 9, 3, yellow,2);
+        deck.add(cardThirtyThree);
 
         Map<Resource,Integer> yellowTen =new HashMap<>();
         yellowTen.put(Resource.COIN, 0);
@@ -44,8 +44,8 @@ public class DeckProductionCardThreeYellow extends DeckProductionCard {
         yellowTenOut.put(Resource.ROCK, 0);
         yellowTenOut.put(Resource.SERVANT, 0);
         yellowTenOut.put(Resource.SHIELD, 2);
-        ProductionCard cardThirtyfour =new ProductionCard(yellowTen, yellowTenIn, yellowTenOut, 10, 3, yellow, 1);
-        deck.add(cardThirtyfour);
+        ProductionCard cardThirtyFour =new ProductionCard(yellowTen, yellowTenIn, yellowTenOut, 10, 3, yellow, 1);
+        deck.add(cardThirtyFour);
 
 
 
@@ -64,8 +64,8 @@ public class DeckProductionCardThreeYellow extends DeckProductionCard {
         yellowElevenOut.put(Resource.ROCK, 0);
         yellowElevenOut.put(Resource.SERVANT, 1);
         yellowElevenOut.put(Resource.SHIELD, 0);
-        ProductionCard cardThirtyfive =new ProductionCard(yellowEleven, yellowElevenIn, yellowElevenOut, 11, 3, yellow, 3);
-        deck.add(cardThirtyfive);
+        ProductionCard cardThirtyFive =new ProductionCard(yellowEleven, yellowElevenIn, yellowElevenOut, 11, 3, yellow, 3);
+        deck.add(cardThirtyFive);
 
 
         Map<Resource,Integer> yellowTwelve =new HashMap<>();
@@ -83,8 +83,8 @@ public class DeckProductionCardThreeYellow extends DeckProductionCard {
         yellowTwEightOut.put(Resource.ROCK, 1);
         yellowTwEightOut.put(Resource.SERVANT, 3);
         yellowTwEightOut.put(Resource.SHIELD, 0);
-        ProductionCard cardThirtysix =new ProductionCard(yellowTwelve, yellowTwelveIn, yellowTwEightOut, 12, 3, yellow, 0);
-        deck.add(cardThirtysix);
+        ProductionCard cardThirtySix =new ProductionCard(yellowTwelve, yellowTwelveIn, yellowTwEightOut, 12, 3, yellow, 0);
+        deck.add(cardThirtySix);
 
         Mix.MIXED(deck);
     }

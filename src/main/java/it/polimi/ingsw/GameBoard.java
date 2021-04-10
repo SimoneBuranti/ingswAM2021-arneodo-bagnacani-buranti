@@ -2,7 +2,7 @@ package it.polimi.ingsw;
 
 import java.util.*;
 
-public class Gameboard implements GameboardInterface{
+public class GameBoard implements GameBoardInterface{
 
 
     /**
@@ -15,20 +15,22 @@ public class Gameboard implements GameboardInterface{
      */
     private final ArrayList<LeaderCard> leaderCards = new ArrayList<>();
 
+    private final ArrayList<LeaderCard> leaderCardsActivated = new ArrayList<>();
+
     /**
      * faithPath is the private reference to the player's faith path
      */
-    private final FaithPath faithPathOfGameboard;
+    private final FaithPath faithPathOfGameBoard;
 
     /**
-     * storageOfGameboard is the private reference to the player's storage
+     * storageOfGameBoard is the private reference to the player's storage
      */
-    private final Storage storageOfGameboard;
+    private Storage storageOfGameBoard;
 
     /**
-     * strongboxOfGameboard is the private reference to the player's strongbox
+     * strongboxOfGameBoard is the private reference to the player's strongbox
      */
-    private final Strongbox strongboxOfGameboard;
+    private final Strongbox strongboxOfGameBoard;
 
 
     /**
@@ -41,38 +43,48 @@ public class Gameboard implements GameboardInterface{
      */
     private int faithPathBuffer;
 
+    private int whiteMarbleCardActivated = 0;
+    private int productionCardActivated = 0;
+    private int reductionCardActivated = 0;
+    private int storageCardActivated = 0;
 
     /**
-     * Gameboard() is the standard initialising constructor
+     * GameBoard() is the standard initialising constructor
      *
      */
-    public Gameboard() {
+    public GameBoard() {
         developmentBoard = new ProductionCard[3][3];
-        faithPathOfGameboard = new FaithPath();
-        strongboxOfGameboard = new Strongbox();
-        storageOfGameboard = new Storage();
+        faithPathOfGameBoard = new FaithPath();
+        strongboxOfGameBoard = new Strongbox();
+        storageOfGameBoard = new Storage();
         this.productionBuffer = new ArrayList<>();
 
     }
 
 
-
-
-    
-
-
+    @Override
+    public void setStorageExtra(Resource resource){
+        Map<Resource, Integer> map = storageOfGameBoard.getStorageResource();
+        if(getStorageCardActivated() == 0)
+            this.storageOfGameBoard = new StorageExtraFirst(resource, map);
+        else{
+            Resource firstResource = storageOfGameBoard.getFirstResourceType();
+            int numFirst = storageOfGameBoard.getNumExtraFirstAvailable();
+            this.storageOfGameBoard = new StorageExtraSecond(firstResource, resource, map, numFirst);
+        }
+    }
 
 
 
 
     /**
-     * This method add all the resources contained in the production buffer in the gameboard's strongbox
+     * This method add all the resources contained in the production buffer in the gameBoard's strongbox
      * @throws CallForCouncilException
      * @throws LastSpaceReachedException
      */
     public void endOfProduction() throws CallForCouncilException, LastSpaceReachedException {
         for(Resource r : productionBuffer){
-            strongboxOfGameboard.addResource(r);
+            strongboxOfGameBoard.addResource(r);
         }
         productionBuffer = new ArrayList<>();
 
@@ -89,7 +101,7 @@ public class Gameboard implements GameboardInterface{
      * @return int
      */
     public int getIndicator() {
-        return faithPathOfGameboard.getIndicator();
+        return faithPathOfGameBoard.getIndicator();
     }
 
     /**
@@ -98,7 +110,7 @@ public class Gameboard implements GameboardInterface{
      * @throws LastSpaceReachedException
      */
     public void  faithMove () throws CallForCouncilException, LastSpaceReachedException {
-        faithPathOfGameboard.move();
+        faithPathOfGameBoard.move();
     }
 
 
@@ -106,7 +118,7 @@ public class Gameboard implements GameboardInterface{
      * This method represents a higher level interface method for setPapal of the related player's faithPath
      */
     public void setPapal(){
-        faithPathOfGameboard.setPapal();
+        faithPathOfGameBoard.setPapal();
     }
 
     /**
@@ -116,7 +128,7 @@ public class Gameboard implements GameboardInterface{
      * @return
      * @throws BlockedWhiteMarbleEffectException
      */
-    public Resource whiteExchange() throws BlockedWhiteMarbleEffectException{
+    public Resource whiteExchange() throws BlockedWhiteMarbleEffectException, WhiteMarbleException{
         throw new BlockedWhiteMarbleEffectException();
     }
 
@@ -131,7 +143,7 @@ public class Gameboard implements GameboardInterface{
     /**
      * This method represents the second extra production upgrade of the respective leader card. When it is not upgraded yet
      * a null reaction is needed. The method throws the BlockedWhiteMarbleEffectException which will be handled by
-     * the caller mehod.
+     * the caller method.
      */
     public void anotherExtraProductionOn(Resource resource){}
 
@@ -140,7 +152,7 @@ public class Gameboard implements GameboardInterface{
      * @param resource
      */
     public void addToStrongbox(Resource resource) {
-        strongboxOfGameboard.addResource(resource);
+        strongboxOfGameBoard.addResource(resource);
     }
 
     /**
@@ -148,53 +160,53 @@ public class Gameboard implements GameboardInterface{
      * @param resource
      */
     public void addToStorage(Resource resource) throws UnavailableResourceException {
-        storageOfGameboard.addResource(resource);
+        storageOfGameBoard.addResource(resource);
     }
 
     /**
-     * firstRowFree method return the first available position in the choosen column received as a parameter
+     * firstRowFree method return the first available position in the chosen column received as a parameter
      * if present; it throws the FullColumnException otherwise
-     * @param choosenColumn
+     * @param chosenColumn
      * @return int
      * @throws FullColumnException
      */
-    public int firstRowFree(int choosenColumn) throws FullColumnException {
+    public int firstRowFree(int chosenColumn) throws FullColumnException {
         int i;
         for(i=0; i<3; i++)
-            if(developmentBoard[i][choosenColumn]==null)
+            if(developmentBoard[i][chosenColumn]==null)
                 return i;
         throw new FullColumnException();
     }
 
     /**
-     * lastRowOccupied method return the top card position in the choosen column received as a parameter
-     * @param choosenColumn
+     * lastRowOccupied method return the top card position in the chosen column received as a parameter
+     * @param chosenColumn
      * @return int
      * @throws EmptyColumnException
      */
-    public int lastRowOccupied(int choosenColumn) throws EmptyColumnException{
+    public int lastRowOccupied(int chosenColumn) throws EmptyColumnException{
         int i=0;
 
-        if(developmentBoard[i++][choosenColumn]==null)
+        if(developmentBoard[i++][chosenColumn]==null)
             throw new EmptyColumnException();
         for(; i<3; i++)
-            if(developmentBoard[i][choosenColumn]==null)
+            if(developmentBoard[i][chosenColumn]==null)
                 return i-1;
 
         return 2;
     }
 
     /**
-     * setnewProductionCard method receives as parameters the choosen deck and the choosen column and sets the
+     * setNewProductionCard method receives as parameters the chosen deck and the chosen column and sets the
      * related production card in the firs available position if present; it throws the FullColumnException in the
-     * choosen column is full or the Empty exception if the choosen deck is empty
+     * chosen column is full or the Empty exception if the chosen deck is empty
      * @param deck
-     * @param choosenColumn
+     * @param chosenColumn
      * @throws EmptyException
      * @throws FullColumnException
      */
-    public void setNewProductionCard(DeckProductionCard deck, int choosenColumn) throws EmptyException, FullColumnException {
-        developmentBoard[firstRowFree(choosenColumn)][choosenColumn]= deck.pickUpFirstCard();
+    public void setNewProductionCard(DeckProductionCard deck, int chosenColumn) throws EmptyException, FullColumnException {
+        developmentBoard[firstRowFree(chosenColumn)][chosenColumn]= deck.pickUpFirstCard();
     }
 
     /**
@@ -202,7 +214,7 @@ public class Gameboard implements GameboardInterface{
      * @param cost
      */
     public void payResources(ArrayList<Resource> cost) {
-        strongboxOfGameboard.payResources(storageOfGameboard.payResources(cost));
+        strongboxOfGameBoard.payResources(storageOfGameBoard.payResources(cost));
     }
 
     /**
@@ -211,14 +223,14 @@ public class Gameboard implements GameboardInterface{
      */
     public ArrayList<Resource> availableResources() {
         ArrayList<Resource> overallResources = new ArrayList<>();
-        overallResources.addAll(storageOfGameboard.availableResources());
-        overallResources.addAll(strongboxOfGameboard.availableResources());
+        overallResources.addAll(storageOfGameBoard.availableResources());
+        overallResources.addAll(strongboxOfGameBoard.availableResources());
         return overallResources;
     }
 
     /**
      * This method check the total amount of production Card in the player's development board and throws a
-     * EndGameException if the seventh production card sale has been succesfully completed.
+     * EndGameException if the seventh production card sale has been successfully completed.
      * @throws EndGameException
      */
     public void seventhCardCheck() throws EndGameException {
@@ -240,17 +252,17 @@ public class Gameboard implements GameboardInterface{
      * It throws a NotEnoughResourcesException if the player cannot afford that card. Moreover, it spreads
      * EmptyException and FullColumnException.
      * @param deck
-     * @param choosenColumn
+     * @param chosenColumn
      * @throws LevelException
      * @throws NotEnoughResourcesException
      * @throws EmptyException
      * @throws FullColumnException
      */
-    public void buyProductionCard(DeckProductionCard deck, int choosenColumn) throws LevelException, NotEnoughResourcesException, EmptyException, FullColumnException, EndGameException {
+    public void buyProductionCard(DeckProductionCard deck, int chosenColumn) throws LevelException, NotEnoughResourcesException, EmptyException, FullColumnException, EndGameException {
         ArrayList<Resource> availableResources = availableResources();
         ArrayList<Resource> requiredResources = deck.requiredResources();
 
-        if(deck.getLevel()!=firstRowFree(choosenColumn)+1)
+        if(deck.getLevel()!=firstRowFree(chosenColumn)+1)
             throw new LevelException();
 
         for(Resource resource : requiredResources)
@@ -259,7 +271,7 @@ public class Gameboard implements GameboardInterface{
 
         payResources(requiredResources);
 
-        setNewProductionCard(deck,choosenColumn);
+        setNewProductionCard(deck,chosenColumn);
 
         seventhCardCheck();
     }
@@ -289,7 +301,7 @@ public class Gameboard implements GameboardInterface{
     public int leaderScore(){
         int points = 0;
 
-        for(LeaderCard lc : leaderCards)
+        for(LeaderCard lc : leaderCardsActivated)
             points+= lc.getPoints();
         return points;
     }
@@ -299,9 +311,9 @@ public class Gameboard implements GameboardInterface{
      * @return int
      */
     public int score(){
-        return  ((storageOfGameboard.resourceScore() +
-                strongboxOfGameboard.resourceScore()) /5) +
-                faithPathOfGameboard.faithScore() +
+        return  ((storageOfGameBoard.resourceScore() +
+                strongboxOfGameBoard.resourceScore()) /5) +
+                faithPathOfGameBoard.faithScore() +
                 productionScore() +
                 leaderScore();
     }
@@ -309,18 +321,18 @@ public class Gameboard implements GameboardInterface{
 
     /**
      * takeFromMarket() method receives a resource ArrayList as a parameter and puts them in the storage if possible; it
-     * throws the NotEnoughSpeceInStorageException otherwise.
+     * throws the NotEnoughSpaceInStorageException otherwise.
      * @param newResources
-     * @throws NotEnoughSpeceInStorageException
+     * @throws NotEnoughSpaceInStorageException
      */
-    public void takeFromMarket(ArrayList<Resource> newResources) throws NotEnoughSpeceInStorageException {
+    public void takeFromMarket(ArrayList<Resource> newResources) throws NotEnoughSpaceInStorageException {
 
-        if (!storageOfGameboard.check((ArrayList<Resource>) newResources.clone())){
-            throw new NotEnoughSpeceInStorageException();
+        if (!storageOfGameBoard.check((ArrayList<Resource>) newResources.clone())){
+            throw new NotEnoughSpaceInStorageException();
         } else {
             for (Resource r : newResources) {
                 try {
-                    storageOfGameboard.addResource(r);
+                    storageOfGameBoard.addResource(r);
                 } catch (UnavailableResourceException ignored) {}
             }
         }
@@ -328,8 +340,8 @@ public class Gameboard implements GameboardInterface{
 
 
     /**
-     * baseProductionOn() method represents the gameboard's function of standard production. It receives three
-     * resource types as parameters in order to defin the two choosen inputs and the choosen output. In case of lack
+     * baseProductionOn() method represents the gameBoard's function of standard production. It receives three
+     * resource types as parameters in order to define the two chosen inputs and the chosen output. In case of lack
      * in available resources an ImpossibleProductionException is thrown.
      * @param i1
      * @param i2
@@ -348,27 +360,26 @@ public class Gameboard implements GameboardInterface{
                 throw new ImpossibleProductionException();
         }
 
-        strongboxOfGameboard.payResources(storageOfGameboard.payResources(requiredInput));
+        strongboxOfGameBoard.payResources(storageOfGameBoard.payResources(requiredInput));
         output.add(o);
 
         addToProductionBuffer(output);
-        //addToFaithPathBuffer(1);
     }
 
     /**
-     * productionOn method receives as parameter the choosen column and produces all the resources according to the
+     * productionOn method receives as parameter the chosen column and produces all the resources according to the
      * production card output. They are put in the production card buffer if the production attempt is correct;
      * ImpossibleProductionException or EmptyColumnException are thrown otherwise.
-     * @param choosenColumn
+     * @param chosenColumn
      * @throws ImpossibleProductionException
      * @throws EmptyColumnException
      */
-    public void productionOn(int choosenColumn) throws ImpossibleProductionException, EmptyColumnException {
+    public void productionOn(int chosenColumn) throws ImpossibleProductionException, EmptyColumnException {
         ArrayList<Resource> available = availableResources();
         ArrayList<Resource> requiredInput;
         ArrayList<Resource> output;
 
-        ProductionCard card = developmentBoard[lastRowOccupied(choosenColumn)][choosenColumn];
+        ProductionCard card = developmentBoard[lastRowOccupied(chosenColumn)][chosenColumn];
 
         requiredInput = card.getIn();
         output = card.getOut();
@@ -384,14 +395,14 @@ public class Gameboard implements GameboardInterface{
     }
 
     /**
-     * This method add produced resources to gameboard's production buffer
+     * This method add produced resources to gameBoard's production buffer
      */
     public void addToProductionBuffer(ArrayList<Resource> output){
         productionBuffer.addAll(output);
     }
 
     /**
-     * This method add produced resources to gameboard's faith path buffer
+     * This method add produced resources to gameBoard's faith path buffer
      */
     public void addToFaithPathBuffer(int n){
         faithPathBuffer+=n;
@@ -400,26 +411,26 @@ public class Gameboard implements GameboardInterface{
     /**
      * Test only method : set a production card in the development board without payment
      */
-    public void setProductionCard(ProductionCard card,int choosenColumn){
+    public void setProductionCard(ProductionCard card,int chosenColumn){
         int r;
 
         try {
-            r = firstRowFree(choosenColumn);
+            r = firstRowFree(chosenColumn);
         } catch (FullColumnException e) {
             e.printStackTrace();
             return;
         }
 
-        developmentBoard[r][choosenColumn] = card;
+        developmentBoard[r][chosenColumn] = card;
     }
 
 
     /**
-     * this method add LeaderCard to Gameboard's folder of LeaderCards
+     * this method add LeaderCard to GameBoard's folder of LeaderCards
      * @param leaderCard
      *
      */
-    public void addLeaderCardToGameboard(LeaderCard leaderCard){
+    public void addLeaderCardToGameBoard(LeaderCard leaderCard){
         leaderCards.add(leaderCard);
     }
 
@@ -438,7 +449,7 @@ public class Gameboard implements GameboardInterface{
      * @param index
      * @return leaderCards.get(index)
      */
-    public LeaderCard reportLeaderCardToGameboard(int index){
+    public LeaderCard reportLeaderCardToGameBoard(int index){
         return leaderCards.get(index);
     }
 
@@ -447,16 +458,85 @@ public class Gameboard implements GameboardInterface{
      * this method need  when the player discard a leaderCard
      * @param index
      */
-    public  void removeLeaderCardToGameboard(int index){
+    public  void removeLeaderCardToGameBoard(int index){
         leaderCards.remove(index);
     }
 
+    public void activationLeaderCard(int index){
+        if(leaderCards.get(index).abilityActivation(this)){
+            leaderCardsActivated.add(leaderCards.get(index));
+            leaderCards.remove(index);
+        }
 
+    }
 
+    @Override
+    public int colourQuantity(Colour colour){
+        int quantity = 0;
 
+        for(int i=0;i<3;i++){
+            for(int j = 0; j<3;j++){
+                if (developmentBoard[i][j]!=null && developmentBoard[i][j].getColour() == colour){
+                    quantity++;
+                }
+            }
+        }
 
+        return quantity;
+    }
+    @Override
+    public int levelAndColourQuantity(Colour colour, int level){
+        int quantity = 0;
 
+        for(int i = 0; i < 3; i++){
+            if(developmentBoard[level-1][i]!=null && developmentBoard[level-1][i].getColour() == colour)
+                quantity++;
+        }
 
+        return quantity;
+    }
 
+    @Override
+    public int resourceQuantity(Resource resource){
+        return storageOfGameBoard.getResource(resource) + strongboxOfGameBoard.getResource(resource);
+    }
 
+    @Override
+    public int getWhiteMarbleCardActivated() {
+        return whiteMarbleCardActivated;
+    }
+    @Override
+    public void setWhiteMarbleCardActivated() {
+        whiteMarbleCardActivated = 1;
+    }
+    @Override
+    public int getProductionCardActivated() {
+        return productionCardActivated;
+    }
+    @Override
+    public void setProductionCardActivated() {
+        productionCardActivated = 1;
+    }
+    @Override
+    public int getReductionCardActivated() {
+        return reductionCardActivated;
+    }
+    @Override
+    public void setReductionCardActivated() {
+        reductionCardActivated = 1;
+    }
+
+    @Override
+    public int getStorageCardActivated() {
+        return storageCardActivated;
+    }
+    @Override
+    public void setStorageCardActivated() {
+        storageCardActivated = 1;
+    }
+
+    @Override
+    public Resource getResourceTypeFirst() {
+        return null;
+    }
 }

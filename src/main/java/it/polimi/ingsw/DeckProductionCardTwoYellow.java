@@ -10,7 +10,7 @@ public class DeckProductionCardTwoYellow extends DeckProductionCard {
 
     public DeckProductionCardTwoYellow (){
         Yellow yellow= new Yellow();
-        deck = new ArrayList<ProductionCard>(4);
+        deck = new ArrayList<>(4);
 
         Map<Resource,Integer> yellowFive =new HashMap<>();
         yellowFive.put(Resource.COIN, 0);
@@ -27,8 +27,8 @@ public class DeckProductionCardTwoYellow extends DeckProductionCard {
         yellowFiveOut.put(Resource.ROCK, 0);
         yellowFiveOut.put(Resource.SERVANT, 0);
         yellowFiveOut.put(Resource.SHIELD, 0);
-        ProductionCard cardTwentynine =new ProductionCard(yellowFive, yellowFiveIn, yellowFiveOut, 5, 2, yellow,2);
-        deck.add(cardTwentynine);
+        ProductionCard cardTwentyNine =new ProductionCard(yellowFive, yellowFiveIn, yellowFiveOut, 5, 2, yellow,2);
+        deck.add(cardTwentyNine);
 
         Map<Resource,Integer> yellowSix =new HashMap<>();
         yellowSix.put(Resource.COIN, 0);
@@ -65,8 +65,8 @@ public class DeckProductionCardTwoYellow extends DeckProductionCard {
         yellowSevenOut.put(Resource.ROCK, 0);
         yellowSevenOut.put(Resource.SERVANT, 2);
         yellowSevenOut.put(Resource.SHIELD, 0);
-        ProductionCard cardThirtyone =new ProductionCard(yellowSeven, yellowSevenIn, yellowSevenOut, 7, 2, yellow, 2);
-        deck.add(cardThirtyone);
+        ProductionCard cardThirtyOne =new ProductionCard(yellowSeven, yellowSevenIn, yellowSevenOut, 7, 2, yellow, 2);
+        deck.add(cardThirtyOne);
 
 
         Map<Resource,Integer> yellowEight =new HashMap<>();
@@ -84,8 +84,8 @@ public class DeckProductionCardTwoYellow extends DeckProductionCard {
         yellowEightOut.put(Resource.ROCK, 0);
         yellowEightOut.put(Resource.SERVANT, 0);
         yellowEightOut.put(Resource.SHIELD, 0);
-        ProductionCard cardcardThirtytwo =new ProductionCard(yellowEight, yellowEightIn, yellowEightOut, 8, 2, yellow, 1);
-        deck.add(cardcardThirtytwo);
+        ProductionCard cardThirtyTwo =new ProductionCard(yellowEight, yellowEightIn, yellowEightOut, 8, 2, yellow, 1);
+        deck.add(cardThirtyTwo);
 
         Mix.MIXED(deck);
     }

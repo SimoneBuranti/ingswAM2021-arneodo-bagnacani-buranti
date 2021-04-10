@@ -49,7 +49,7 @@ public class StorageExtraSecondTest {
 
         assertEquals(Resource.COIN, storageExtra.getFirstResourceType());
         assertEquals(Resource.ROCK, storageExtra.getSecondResourceType());
-        assertEquals(2, storageExtra.getNUmExtraFirstAvailable());
+        assertEquals(2, storageExtra.getNumExtraFirstAvailable());
         assertEquals(2, storageExtra.getNUmExtraSecondAvailable());
         assertEquals(2,storageExtra.getResource(Resource.COIN));
         assertEquals(2,storageExtra.getResource(Resource.ROCK));
@@ -63,13 +63,13 @@ public class StorageExtraSecondTest {
         } catch (UnavailableResourceException e) {
             e.printStackTrace();
         }
-        assertEquals(1, storageExtra1.getNUmExtraFirstAvailable());
+        assertEquals(1, storageExtra1.getNumExtraFirstAvailable());
 
         StorageExtraSecond storageExtra2 = new StorageExtraSecond(Resource.SHIELD, Resource.SERVANT, storage.getStorageResource(), 1);
 
         assertEquals(Resource.SHIELD, storageExtra2.getFirstResourceType());
         assertEquals(Resource.SERVANT, storageExtra2.getSecondResourceType());
-        assertEquals(1, storageExtra2.getNUmExtraFirstAvailable());
+        assertEquals(1, storageExtra2.getNumExtraFirstAvailable());
         assertEquals(2, storageExtra2.getNUmExtraSecondAvailable());
         assertEquals(2,storageExtra2.getResource(Resource.COIN));
         assertEquals(2,storageExtra2.getResource(Resource.ROCK));
@@ -81,14 +81,14 @@ public class StorageExtraSecondTest {
         } catch (UnavailableResourceException e) {
             e.printStackTrace();
         }
-        assertEquals(0, storageExtra1.getNUmExtraFirstAvailable());
+        assertEquals(0, storageExtra1.getNumExtraFirstAvailable());
 
 
         StorageExtraSecond storageExtra3 = new StorageExtraSecond(Resource.SHIELD, Resource.SERVANT, storage.getStorageResource(), 0);
 
         assertEquals(Resource.SHIELD, storageExtra3.getFirstResourceType());
         assertEquals(Resource.SERVANT, storageExtra3.getSecondResourceType());
-        assertEquals(0, storageExtra3.getNUmExtraFirstAvailable());
+        assertEquals(0, storageExtra3.getNumExtraFirstAvailable());
         assertEquals(2, storageExtra3.getNUmExtraSecondAvailable());
         assertEquals(2,storageExtra3.getResource(Resource.COIN));
         assertEquals(2,storageExtra3.getResource(Resource.ROCK));
@@ -130,7 +130,7 @@ public class StorageExtraSecondTest {
             e.printStackTrace();
         }
 
-        assertEquals(2, storageExtra.getNUmExtraFirstAvailable());
+        assertEquals(2, storageExtra.getNumExtraFirstAvailable());
         assertEquals(2, storageExtra.getNUmExtraSecondAvailable());
         assertEquals(1,storageExtra.getResource(Resource.COIN));
         assertEquals(1,storageExtra.getResource(Resource.ROCK));
@@ -143,7 +143,7 @@ public class StorageExtraSecondTest {
             e.printStackTrace();
         }
 
-        assertEquals(1, storageExtra.getNUmExtraFirstAvailable());
+        assertEquals(1, storageExtra.getNumExtraFirstAvailable());
         assertEquals(2, storageExtra.getNUmExtraSecondAvailable());
         assertEquals(2,storageExtra.getResource(Resource.COIN));
         assertEquals(1,storageExtra.getResource(Resource.ROCK));
@@ -156,7 +156,7 @@ public class StorageExtraSecondTest {
             e.printStackTrace();
         }
 
-        assertEquals(0, storageExtra.getNUmExtraFirstAvailable());
+        assertEquals(0, storageExtra.getNumExtraFirstAvailable());
         assertEquals(2, storageExtra.getNUmExtraSecondAvailable());
         assertEquals(3,storageExtra.getResource(Resource.COIN));
         assertEquals(1,storageExtra.getResource(Resource.ROCK));
@@ -169,7 +169,7 @@ public class StorageExtraSecondTest {
             e.printStackTrace();
         }
 
-        assertEquals(0, storageExtra.getNUmExtraFirstAvailable());
+        assertEquals(0, storageExtra.getNumExtraFirstAvailable());
         assertEquals(2, storageExtra.getNUmExtraSecondAvailable());
         assertEquals(4,storageExtra.getResource(Resource.COIN));
         assertEquals(1,storageExtra.getResource(Resource.ROCK));
@@ -182,7 +182,7 @@ public class StorageExtraSecondTest {
             e.printStackTrace();
         }
 
-        assertEquals(0, storageExtra.getNUmExtraFirstAvailable());
+        assertEquals(0, storageExtra.getNumExtraFirstAvailable());
         assertEquals(1, storageExtra.getNUmExtraSecondAvailable());
         assertEquals(4,storageExtra.getResource(Resource.COIN));
         assertEquals(2,storageExtra.getResource(Resource.ROCK));
@@ -195,7 +195,7 @@ public class StorageExtraSecondTest {
             e.printStackTrace();
         }
 
-        assertEquals(0, storageExtra.getNUmExtraFirstAvailable());
+        assertEquals(0, storageExtra.getNumExtraFirstAvailable());
         assertEquals(0, storageExtra.getNUmExtraSecondAvailable());
         assertEquals(4,storageExtra.getResource(Resource.COIN));
         assertEquals(3,storageExtra.getResource(Resource.ROCK));
@@ -208,7 +208,7 @@ public class StorageExtraSecondTest {
             e.printStackTrace();
         }
 
-        assertEquals(0, storageExtra.getNUmExtraFirstAvailable());
+        assertEquals(0, storageExtra.getNumExtraFirstAvailable());
         assertEquals(0, storageExtra.getNUmExtraSecondAvailable());
         assertEquals(4,storageExtra.getResource(Resource.COIN));
         assertEquals(4,storageExtra.getResource(Resource.ROCK));
@@ -248,7 +248,7 @@ public class StorageExtraSecondTest {
         } catch (UnavailableResourceException e) {
             e.printStackTrace();
         }
-        assertEquals(2, storageExtra.getNUmExtraFirstAvailable());
+        assertEquals(2, storageExtra.getNumExtraFirstAvailable());
         assertEquals(2, storageExtra.getNUmExtraSecondAvailable());
         assertEquals(0,storageExtra.getResource(Resource.COIN));
         assertEquals(1,storageExtra.getResource(Resource.ROCK));
@@ -260,7 +260,7 @@ public class StorageExtraSecondTest {
         } catch (UnavailableResourceException e) {
             e.printStackTrace();
         }
-        assertEquals(2, storageExtra.getNUmExtraFirstAvailable());
+        assertEquals(2, storageExtra.getNumExtraFirstAvailable());
         assertEquals(2, storageExtra.getNUmExtraSecondAvailable());
         assertEquals(0,storageExtra.getResource(Resource.COIN));
         assertEquals(1,storageExtra.getResource(Resource.ROCK));
@@ -272,7 +272,7 @@ public class StorageExtraSecondTest {
         } catch (UnavailableResourceException e) {
             e.printStackTrace();
         }
-        assertEquals(2, storageExtra.getNUmExtraFirstAvailable());
+        assertEquals(2, storageExtra.getNumExtraFirstAvailable());
         assertEquals(2, storageExtra.getNUmExtraSecondAvailable());
         assertEquals(0,storageExtra.getResource(Resource.COIN));
         assertEquals(0,storageExtra.getResource(Resource.ROCK));
@@ -284,7 +284,7 @@ public class StorageExtraSecondTest {
         } catch (UnavailableResourceException e) {
             e.printStackTrace();
         }
-        assertEquals(2, storageExtra.getNUmExtraFirstAvailable());
+        assertEquals(2, storageExtra.getNumExtraFirstAvailable());
         assertEquals(2, storageExtra.getNUmExtraSecondAvailable());
         assertEquals(0,storageExtra.getResource(Resource.COIN));
         assertEquals(0,storageExtra.getResource(Resource.ROCK));
@@ -321,7 +321,7 @@ public class StorageExtraSecondTest {
         } catch (UnavailableResourceException e) {
             e.printStackTrace();
         }
-        assertEquals(0, storageExtra.getNUmExtraFirstAvailable());
+        assertEquals(0, storageExtra.getNumExtraFirstAvailable());
         assertEquals(0, storageExtra.getNUmExtraSecondAvailable());
         assertEquals(3,storageExtra.getResource(Resource.COIN));
         assertEquals(3,storageExtra.getResource(Resource.ROCK));
@@ -333,7 +333,7 @@ public class StorageExtraSecondTest {
         } catch (UnavailableResourceException e) {
             e.printStackTrace();
         }
-        assertEquals(1, storageExtra.getNUmExtraFirstAvailable());
+        assertEquals(1, storageExtra.getNumExtraFirstAvailable());
         assertEquals(0, storageExtra.getNUmExtraSecondAvailable());
         assertEquals(2,storageExtra.getResource(Resource.COIN));
         assertEquals(3,storageExtra.getResource(Resource.ROCK));
@@ -345,7 +345,7 @@ public class StorageExtraSecondTest {
         } catch (UnavailableResourceException e) {
             e.printStackTrace();
         }
-        assertEquals(2, storageExtra.getNUmExtraFirstAvailable());
+        assertEquals(2, storageExtra.getNumExtraFirstAvailable());
         assertEquals(0, storageExtra.getNUmExtraSecondAvailable());
         assertEquals(1,storageExtra.getResource(Resource.COIN));
         assertEquals(3,storageExtra.getResource(Resource.ROCK));
@@ -357,7 +357,7 @@ public class StorageExtraSecondTest {
         } catch (UnavailableResourceException e) {
             e.printStackTrace();
         }
-        assertEquals(2, storageExtra.getNUmExtraFirstAvailable());
+        assertEquals(2, storageExtra.getNumExtraFirstAvailable());
         assertEquals(0, storageExtra.getNUmExtraSecondAvailable());
         assertEquals(0,storageExtra.getResource(Resource.COIN));
         assertEquals(3,storageExtra.getResource(Resource.ROCK));
@@ -369,7 +369,7 @@ public class StorageExtraSecondTest {
         } catch (UnavailableResourceException e) {
             e.printStackTrace();
         }
-        assertEquals(2, storageExtra.getNUmExtraFirstAvailable());
+        assertEquals(2, storageExtra.getNumExtraFirstAvailable());
         assertEquals(1, storageExtra.getNUmExtraSecondAvailable());
         assertEquals(0,storageExtra.getResource(Resource.COIN));
         assertEquals(2,storageExtra.getResource(Resource.ROCK));
@@ -381,7 +381,7 @@ public class StorageExtraSecondTest {
         } catch (UnavailableResourceException e) {
             e.printStackTrace();
         }
-        assertEquals(2, storageExtra.getNUmExtraFirstAvailable());
+        assertEquals(2, storageExtra.getNumExtraFirstAvailable());
         assertEquals(2, storageExtra.getNUmExtraSecondAvailable());
         assertEquals(0,storageExtra.getResource(Resource.COIN));
         assertEquals(1,storageExtra.getResource(Resource.ROCK));
@@ -393,7 +393,7 @@ public class StorageExtraSecondTest {
         } catch (UnavailableResourceException e) {
             e.printStackTrace();
         }
-        assertEquals(2, storageExtra.getNUmExtraFirstAvailable());
+        assertEquals(2, storageExtra.getNumExtraFirstAvailable());
         assertEquals(2, storageExtra.getNUmExtraSecondAvailable());
         assertEquals(0,storageExtra.getResource(Resource.COIN));
         assertEquals(0,storageExtra.getResource(Resource.ROCK));
@@ -405,7 +405,7 @@ public class StorageExtraSecondTest {
         } catch (UnavailableResourceException e) {
             e.printStackTrace();
         }
-        assertEquals(2, storageExtra.getNUmExtraFirstAvailable());
+        assertEquals(2, storageExtra.getNumExtraFirstAvailable());
         assertEquals(2, storageExtra.getNUmExtraSecondAvailable());
         assertEquals(0,storageExtra.getResource(Resource.COIN));
         assertEquals(0,storageExtra.getResource(Resource.ROCK));
@@ -417,7 +417,7 @@ public class StorageExtraSecondTest {
         } catch (UnavailableResourceException e) {
             e.printStackTrace();
         }
-        assertEquals(2, storageExtra.getNUmExtraFirstAvailable());
+        assertEquals(2, storageExtra.getNumExtraFirstAvailable());
         assertEquals(2, storageExtra.getNUmExtraSecondAvailable());
         assertEquals(0,storageExtra.getResource(Resource.COIN));
         assertEquals(0,storageExtra.getResource(Resource.ROCK));
@@ -545,76 +545,6 @@ public class StorageExtraSecondTest {
         assertFalse(storageExtra1.check(list1));
     }
 
-    /**
-     * Check of the correct behavior of the method discard
-     */
-    @Test
-    @DisplayName("discard Test")
-    public void discardTest(){
-        /*Storage storage = new Storage();
-        Reserve reserve = new Reserve();
-        try {
-            storage.addResource(Resource.COIN);
-        } catch (UnavailableResourceException e) {
-            e.printStackTrace();
-        }
-        try {
-            storage.addResource(Resource.ROCK);
-        } catch (UnavailableResourceException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            storage.addResource(Resource.SERVANT);
-        } catch (UnavailableResourceException e) {
-            e.printStackTrace();
-        }
-
-        StorageExtraSecond storageExtra = new StorageExtraSecond(Resource.COIN, Resource.ROCK, storage.getStorageResource(), 2);
-
-        try {
-            storageExtra.discard(Resource.COIN);
-        } catch (DiscardException e) {
-            e.printStackTrace();
-        }
-        assertEquals(28, Reserve.getAmountOf(Resource.COIN));
-
-        try {
-            storageExtra.discard(Resource.ROCK);
-        } catch (DiscardException e) {
-            e.printStackTrace();
-        }
-        try {
-            storageExtra.discard(Resource.SERVANT);
-        } catch (DiscardException e) {
-            e.printStackTrace();
-        }
-        try {
-            storageExtra.discard(Resource.SHIELD);
-        } catch (DiscardException e) {
-            e.printStackTrace();
-        }
-        assertEquals(28, Reserve.getAmountOf(Resource.ROCK));
-        assertEquals(28, Reserve.getAmountOf(Resource.SERVANT));
-        assertEquals(29, Reserve.getAmountOf(Resource.SHIELD));
-
-        try {
-            storageExtra.discard(Resource.COIN);
-        } catch (DiscardException e) {
-            e.printStackTrace();
-        }
-        try {
-            storageExtra.discard(Resource.COIN);
-        } catch (DiscardException e) {
-            e.printStackTrace();
-        }
-        try {
-            storageExtra.discard(Resource.COIN);
-        } catch (DiscardException e) {
-            e.printStackTrace();
-        }
-        assertEquals(31, Reserve.getAmountOf(Resource.COIN));*/
-    }
 
     /**
      * Check of the correct return of the method getResource
@@ -643,7 +573,7 @@ public class StorageExtraSecondTest {
 
         StorageExtraSecond storageExtra = new StorageExtraSecond(Resource.COIN, Resource.ROCK, storage.getStorageResource(), 2);
 
-        assertEquals(2, storageExtra.getNUmExtraFirstAvailable());
+        assertEquals(2, storageExtra.getNumExtraFirstAvailable());
         assertEquals(2, storageExtra.getNUmExtraSecondAvailable());
         assertEquals(1, storageExtra.getResource(Resource.COIN));
         assertEquals(1, storageExtra.getResource(Resource.ROCK));
@@ -676,7 +606,7 @@ public class StorageExtraSecondTest {
             e.printStackTrace();
         }
 
-        assertEquals(0, storageExtra.getNUmExtraFirstAvailable());
+        assertEquals(0, storageExtra.getNumExtraFirstAvailable());
         assertEquals(0, storageExtra.getNUmExtraSecondAvailable());
         assertEquals(3, storageExtra.getResource(Resource.COIN));
         assertEquals(3, storageExtra.getResource(Resource.ROCK));
@@ -704,7 +634,7 @@ public class StorageExtraSecondTest {
             e.printStackTrace();
         }
 
-        assertEquals(0, storageExtra.getNUmExtraFirstAvailable());
+        assertEquals(0, storageExtra.getNumExtraFirstAvailable());
         assertEquals(0, storageExtra.getNUmExtraSecondAvailable());
         assertEquals(4, storageExtra.getResource(Resource.COIN));
         assertEquals(4, storageExtra.getResource(Resource.ROCK));
@@ -721,7 +651,7 @@ public class StorageExtraSecondTest {
         } catch (UnavailableResourceException e) {
             e.printStackTrace();
         }
-        assertEquals(1, storageExtra.getNUmExtraFirstAvailable());
+        assertEquals(1, storageExtra.getNumExtraFirstAvailable());
         assertEquals(1, storageExtra.getNUmExtraSecondAvailable());
         assertEquals(3, storageExtra.getResource(Resource.COIN));
         assertEquals(3, storageExtra.getResource(Resource.ROCK));
@@ -738,7 +668,7 @@ public class StorageExtraSecondTest {
         } catch (UnavailableResourceException e) {
             e.printStackTrace();
         }
-        assertEquals(2, storageExtra.getNUmExtraFirstAvailable());
+        assertEquals(2, storageExtra.getNumExtraFirstAvailable());
         assertEquals(2, storageExtra.getNUmExtraSecondAvailable());
         assertEquals(2, storageExtra.getResource(Resource.COIN));
         assertEquals(2, storageExtra.getResource(Resource.ROCK));
@@ -755,7 +685,7 @@ public class StorageExtraSecondTest {
         } catch (UnavailableResourceException e) {
             e.printStackTrace();
         }
-        assertEquals(2, storageExtra.getNUmExtraFirstAvailable());
+        assertEquals(2, storageExtra.getNumExtraFirstAvailable());
         assertEquals(2, storageExtra.getNUmExtraSecondAvailable());
         assertEquals(1, storageExtra.getResource(Resource.COIN));
         assertEquals(1, storageExtra.getResource(Resource.ROCK));
@@ -791,7 +721,7 @@ public class StorageExtraSecondTest {
         StorageExtraSecond storageExtra = new StorageExtraSecond(Resource.COIN, Resource.ROCK, storage.getStorageResource(), 2);
 
         assertEquals(3, storageExtra.resourceScore());
-        assertEquals(2, storageExtra.getNUmExtraFirstAvailable());
+        assertEquals(2, storageExtra.getNumExtraFirstAvailable());
         assertEquals(2, storageExtra.getNUmExtraSecondAvailable());
 
         try {
@@ -800,7 +730,7 @@ public class StorageExtraSecondTest {
             e.printStackTrace();
         }
         assertEquals(4, storageExtra.resourceScore());
-        assertEquals(2, storageExtra.getNUmExtraFirstAvailable());
+        assertEquals(2, storageExtra.getNumExtraFirstAvailable());
         assertEquals(2, storageExtra.getNUmExtraSecondAvailable());
 
         try {
@@ -819,7 +749,7 @@ public class StorageExtraSecondTest {
             e.printStackTrace();
         }
         assertEquals(7, storageExtra.resourceScore());
-        assertEquals(1, storageExtra.getNUmExtraFirstAvailable());
+        assertEquals(1, storageExtra.getNumExtraFirstAvailable());
         assertEquals(1, storageExtra.getNUmExtraSecondAvailable());
 
         try {
@@ -833,7 +763,7 @@ public class StorageExtraSecondTest {
             e.printStackTrace();
         }
         assertEquals(9, storageExtra.resourceScore());
-        assertEquals(0, storageExtra.getNUmExtraFirstAvailable());
+        assertEquals(0, storageExtra.getNumExtraFirstAvailable());
         assertEquals(0, storageExtra.getNUmExtraSecondAvailable());
 
         try {
@@ -858,7 +788,7 @@ public class StorageExtraSecondTest {
         }
 
         assertEquals(13, storageExtra.resourceScore());
-        assertEquals(0, storageExtra.getNUmExtraFirstAvailable());
+        assertEquals(0, storageExtra.getNumExtraFirstAvailable());
         assertEquals(0, storageExtra.getNUmExtraSecondAvailable());
 
         try {
@@ -872,7 +802,7 @@ public class StorageExtraSecondTest {
             e.printStackTrace();
         }
         assertEquals(11, storageExtra.resourceScore());
-        assertEquals(1, storageExtra.getNUmExtraFirstAvailable());
+        assertEquals(1, storageExtra.getNumExtraFirstAvailable());
         assertEquals(1, storageExtra.getNUmExtraSecondAvailable());
 
         try {
@@ -886,7 +816,7 @@ public class StorageExtraSecondTest {
             e.printStackTrace();
         }
         assertEquals(9, storageExtra.resourceScore());
-        assertEquals(2, storageExtra.getNUmExtraFirstAvailable());
+        assertEquals(2, storageExtra.getNumExtraFirstAvailable());
         assertEquals(2, storageExtra.getNUmExtraSecondAvailable());
 
         try {
@@ -910,7 +840,7 @@ public class StorageExtraSecondTest {
             e.printStackTrace();
         }
         assertEquals(5, storageExtra.resourceScore());
-        assertEquals(2, storageExtra.getNUmExtraFirstAvailable());
+        assertEquals(2, storageExtra.getNumExtraFirstAvailable());
         assertEquals(2, storageExtra.getNUmExtraSecondAvailable());
 
         try {
@@ -924,7 +854,7 @@ public class StorageExtraSecondTest {
             e.printStackTrace();
         }
         assertEquals(5, storageExtra.resourceScore());
-        assertEquals(2, storageExtra.getNUmExtraFirstAvailable());
+        assertEquals(2, storageExtra.getNumExtraFirstAvailable());
         assertEquals(2, storageExtra.getNUmExtraSecondAvailable());
 
         try {

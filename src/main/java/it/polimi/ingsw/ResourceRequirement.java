@@ -2,7 +2,7 @@ package it.polimi.ingsw;
 
 
 /**
- * class for ResourceRequirement, playera need five of resourceRequirement
+ * class for ResourceRequirement, player need five of resourceRequirement
  */
 
 public class ResourceRequirement extends Requirements{
@@ -10,5 +10,35 @@ public class ResourceRequirement extends Requirements{
     public ResourceRequirement(Resource resourceRequirement){
 
         this.resourceRequirement=resourceRequirement;
+    }
+
+    @Override
+    public Colour getColourDoubleRequirement() {
+        return null;
+    }
+
+    @Override
+    public Colour getColourSingleRequirement() {
+        return null;
+    }
+
+    @Override
+    public Colour getColourRequirement() {
+        return null;
+    }
+
+    @Override
+    public Resource getResourceRequirement() {
+        return resourceRequirement;
+    }
+
+    @Override
+    public Colour getColourFirstRequirement() {
+        return null;
+    }
+
+    @Override
+    public Colour getColourSecondRequirement() {
+        return null;
     }
 }

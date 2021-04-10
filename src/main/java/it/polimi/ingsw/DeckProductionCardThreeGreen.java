@@ -10,7 +10,7 @@ public class DeckProductionCardThreeGreen extends DeckProductionCard {
 
     public  DeckProductionCardThreeGreen (){
         Green green = new Green();
-        deck = new ArrayList<ProductionCard>(4);
+        deck = new ArrayList<>(4);
         Map<Resource,Integer> greenNine =new HashMap<>();
         greenNine.put(Resource.COIN, 0);
         greenNine.put(Resource.ROCK, 0);
@@ -26,8 +26,8 @@ public class DeckProductionCardThreeGreen extends DeckProductionCard {
         greenNineOut.put(Resource.ROCK, 3);
         greenNineOut.put(Resource.SERVANT, 0);
         greenNineOut.put(Resource.SHIELD, 0);
-        ProductionCard cardTwentyone =new ProductionCard(greenNine, greenNineIn, greenNineOut, 9, 3, green,2);
-        deck.add(cardTwentyone);
+        ProductionCard cardTwentyOne =new ProductionCard(greenNine, greenNineIn, greenNineOut, 9, 3, green,2);
+        deck.add(cardTwentyOne);
 
         Map<Resource,Integer> greenTen =new HashMap<>();
         greenTen.put(Resource.COIN, 0);
@@ -44,8 +44,8 @@ public class DeckProductionCardThreeGreen extends DeckProductionCard {
         greenTenOut.put(Resource.ROCK, 2);
         greenTenOut.put(Resource.SERVANT, 0);
         greenTenOut.put(Resource.SHIELD, 2);
-        ProductionCard cardTwentytwo =new ProductionCard(greenTen, greenTenIn, greenTenOut, 10, 3, green, 1);
-        deck.add(cardTwentytwo);
+        ProductionCard cardTwentyTwo =new ProductionCard(greenTen, greenTenIn, greenTenOut, 10, 3, green, 1);
+        deck.add(cardTwentyTwo);
 
 
 
@@ -64,8 +64,8 @@ public class DeckProductionCardThreeGreen extends DeckProductionCard {
         greenElevenOut.put(Resource.ROCK, 0);
         greenElevenOut.put(Resource.SERVANT, 0);
         greenElevenOut.put(Resource.SHIELD, 0);
-        ProductionCard cardTwentythree =new ProductionCard(greenEleven, greenElevenIn, greenElevenOut, 11, 3, green, 3);
-        deck.add(cardTwentythree);
+        ProductionCard cardTwentyThree =new ProductionCard(greenEleven, greenElevenIn, greenElevenOut, 11, 3, green, 3);
+        deck.add(cardTwentyThree);
 
 
         Map<Resource,Integer> greenTwelve =new HashMap<>();
@@ -83,8 +83,8 @@ public class DeckProductionCardThreeGreen extends DeckProductionCard {
         greenTwEightOut.put(Resource.ROCK, 0);
         greenTwEightOut.put(Resource.SERVANT, 0);
         greenTwEightOut.put(Resource.SHIELD, 1);
-        ProductionCard cardTwentyfour =new ProductionCard(greenTwelve, greenTwelveIn, greenTwEightOut, 12, 3, green, 0);
-        deck.add(cardTwentyfour);
+        ProductionCard cardTwentyFour =new ProductionCard(greenTwelve, greenTwelveIn, greenTwEightOut, 12, 3, green, 0);
+        deck.add(cardTwentyFour);
 
         Mix.MIXED(deck);
     }

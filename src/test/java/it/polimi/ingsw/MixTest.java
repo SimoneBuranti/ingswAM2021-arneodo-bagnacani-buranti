@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MixTest {
     /**
-     * test about the functioality of marble list
+     * test about the functionality of marble list
      */
     @Test
     public void TestAboutOnlyListMarble()

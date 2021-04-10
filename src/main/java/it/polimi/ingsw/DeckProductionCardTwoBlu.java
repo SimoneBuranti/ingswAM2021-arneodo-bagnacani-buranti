@@ -11,7 +11,7 @@ public class DeckProductionCardTwoBlu extends DeckProductionCard {
 
     public DeckProductionCardTwoBlu(){
         Blue blue= new Blue();
-        deck = new ArrayList<ProductionCard>(4);
+        deck = new ArrayList<>(4);
 
         Map<Resource,Integer> blueFive =new HashMap<>();
         blueFive.put(Resource.COIN, 4);
@@ -28,8 +28,8 @@ public class DeckProductionCardTwoBlu extends DeckProductionCard {
         blueFiveOut.put(Resource.ROCK, 0);
         blueFiveOut.put(Resource.SERVANT, 0);
         blueFiveOut.put(Resource.SHIELD, 0);
-        ProductionCard cardFourtyone =new ProductionCard(blueFive, blueFiveIn, blueFiveOut, 5, 2, blue,2);
-        deck.add(cardFourtyone);
+        ProductionCard cardFortyOne =new ProductionCard(blueFive, blueFiveIn, blueFiveOut, 5, 2, blue,2);
+        deck.add(cardFortyOne);
 
         Map<Resource,Integer> blueSix =new HashMap<>();
         blueSix.put(Resource.COIN, 3);
@@ -46,8 +46,8 @@ public class DeckProductionCardTwoBlu extends DeckProductionCard {
         blueSixOut.put(Resource.ROCK, 0);
         blueSixOut.put(Resource.SERVANT, 3);
         blueSixOut.put(Resource.SHIELD, 0);
-        ProductionCard cardFourtyTwo =new ProductionCard(blueSix, blueSixIn, blueSixOut, 6, 2, blue, 0);
-        deck.add(cardFourtyTwo);
+        ProductionCard cardFortyTwo =new ProductionCard(blueSix, blueSixIn, blueSixOut, 6, 2, blue, 0);
+        deck.add(cardFortyTwo);
 
 
 
@@ -66,8 +66,8 @@ public class DeckProductionCardTwoBlu extends DeckProductionCard {
         blueSevenOut.put(Resource.ROCK, 0);
         blueSevenOut.put(Resource.SERVANT, 0);
         blueSevenOut.put(Resource.SHIELD, 2);
-        ProductionCard cardFourtyThree =new ProductionCard(blueSeven, blueSevenIn, blueSevenOut, 7, 2, blue, 2);
-        deck.add(cardFourtyThree);
+        ProductionCard cardFortyThree =new ProductionCard(blueSeven, blueSevenIn, blueSevenOut, 7, 2, blue, 2);
+        deck.add(cardFortyThree);
 
 
         Map<Resource,Integer> blueEight =new HashMap<>();
@@ -85,8 +85,8 @@ public class DeckProductionCardTwoBlu extends DeckProductionCard {
         blueEightOut.put(Resource.ROCK, 2);
         blueEightOut.put(Resource.SERVANT, 0);
         blueEightOut.put(Resource.SHIELD, 0);
-        ProductionCard cardFourtyfour =new ProductionCard(blueEight, blueEightIn, blueEightOut, 8, 2, blue, 1);
-        deck.add(cardFourtyfour);
+        ProductionCard cardFortyFour =new ProductionCard(blueEight, blueEightIn, blueEightOut, 8, 2, blue, 1);
+        deck.add(cardFortyFour);
 
         Mix.MIXED(deck);
     }

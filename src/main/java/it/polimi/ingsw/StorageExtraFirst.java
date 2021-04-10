@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 /**
- * this class represents the storage of the gameboard with an extra storage activated by a first leaderCard
+ * this class represents the storage of the gameBoard with an extra storage activated by a first leaderCard
  */
 public class StorageExtraFirst extends Storage{
     /**
@@ -115,7 +115,7 @@ public class StorageExtraFirst extends Storage{
     @Override
     public boolean check(ArrayList<Resource> list) {
         ArrayList<Resource> listWithoutExtra = new ArrayList<>();
-        int cont = getNUmExtraFirstAvailable();
+        int cont = getNumExtraFirstAvailable();
         listWithoutExtra.addAll(list);
 
         if(cont != 0 && listWithoutExtra.contains(firstResourceType)){
@@ -123,7 +123,7 @@ public class StorageExtraFirst extends Storage{
                 if(cont != 0 && resource.equals(firstResourceType)){
                     cont--;
                 }
-            while(cont != getNUmExtraFirstAvailable()){
+            while(cont != getNumExtraFirstAvailable()){
                 listWithoutExtra.remove(firstResourceType);
                 cont++;
             }
@@ -144,7 +144,7 @@ public class StorageExtraFirst extends Storage{
         int numFirstResourceType = 0;
 
         if(resource.equals(firstResourceType))
-            numFirstResourceType = 2 - getNUmExtraFirstAvailable();
+            numFirstResourceType = 2 - getNumExtraFirstAvailable();
 
         return numFirstResourceType + super.getResource(resource);
     }
@@ -157,7 +157,7 @@ public class StorageExtraFirst extends Storage{
      */
     @Override
     public int resourceScore() {
-        int numFirstResourceType = 2 - getNUmExtraFirstAvailable();
+        int numFirstResourceType = 2 - getNumExtraFirstAvailable();
 
         return numFirstResourceType + super.resourceScore();
     }
@@ -166,22 +166,22 @@ public class StorageExtraFirst extends Storage{
      * this method returns true if the first extra storage is full, false otherwise
      * @return boolean
      */
+    @Override
     public boolean isStorageExtraFirstFull(){
-        if (storageExtraFirst[0] == 1 && storageExtraFirst[1] == 1) {
+        if (storageExtraFirst[0] == 1 && storageExtraFirst[1] == 1)
             return true;
-        }else
-            return false;
+        return false;
     }
 
     /**
      * this method returns true if the first extra storage is empty, false otherwise
      * @return boolean
      */
+    @Override
     public boolean isStorageExtraFirstEmpty(){
-        if (storageExtraFirst[0] == 0 && storageExtraFirst[1] == 0) {
+        if (storageExtraFirst[0] == 0 && storageExtraFirst[1] == 0)
             return true;
-        }else
-            return false;
+        return false;
     }
 
 
@@ -189,6 +189,7 @@ public class StorageExtraFirst extends Storage{
      * this method return the type of resources of the first extra storage
      * @return Resource
      */
+    @Override
     public Resource getFirstResourceType() {
         return firstResourceType;
     }
@@ -198,7 +199,8 @@ public class StorageExtraFirst extends Storage{
      * this method return the amount of places available in the second extra storage
      * @return int
      */
-    public int getNUmExtraFirstAvailable(){
+    @Override
+    public int getNumExtraFirstAvailable(){
         int numResourceExtra;
         if(storageExtraFirst[0] == 0 && storageExtraFirst[1] == 0)
             numResourceExtra = 2;

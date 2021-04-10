@@ -36,21 +36,20 @@ public class LorenzoTheMagnificent{
      * if the counter is located on the current papal space the method throws an CallForCouncilException
      * @throws CallForCouncilException
      */
-    public void moveBlackCross() throws CallForCouncilException{
+    public void moveBlackCross() throws CallForCouncilException, EndOfSolitaireGame{
         faithIndicator++;
-        if (currCall < PAPAL_N && faithIndicator == PAPAL_POS[currCall])
+        if (currCall < PAPAL_N-1 && faithIndicator == PAPAL_POS[currCall])
             throw new CallForCouncilException();
+        else if(currCall == PAPAL_N-1 && faithIndicator == PAPAL_POS[currCall])
+            throw new EndOfSolitaireGame();
     }
 
     /**
      * this method increases the currCall counter by one and
      * if the counter is equal to the PAPAL_N attribute the method throws an EndOfSolitaireGame exception
-     * @throws EndOfSolitaireGame
      */
-    public void setCurrCall() throws EndOfSolitaireGame {
+    public void setCurrCall(){
         currCall++;
-        if(currCall == PAPAL_N)
-            throw new EndOfSolitaireGame();
     }
 
     /**

@@ -9,7 +9,7 @@ public class DeckProductionCardOneGreen extends DeckProductionCard {
 
     public   DeckProductionCardOneGreen (){
         Green green= new Green();
-        deck = new ArrayList<ProductionCard>(4);
+        deck = new ArrayList<>(4);
         Map<Resource,Integer> greenOne =new HashMap<>();
         greenOne.put(Resource.COIN, 0);
         greenOne.put(Resource.ROCK, 0);
@@ -63,8 +63,8 @@ public class DeckProductionCardOneGreen extends DeckProductionCard {
         greenThreeOut.put(Resource.ROCK, 1);
         greenThreeOut.put(Resource.SERVANT, 0);
         greenThreeOut.put(Resource.SHIELD, 1);
-        ProductionCard cardFiveteen =new ProductionCard(greenThree, greenThreeIn, greenThreeOut, 3, 1, green, 0);
-        deck.add(cardFiveteen);
+        ProductionCard cardFifteen =new ProductionCard(greenThree, greenThreeIn, greenThreeOut, 3, 1, green, 0);
+        deck.add(cardFifteen);
 
 
         Map<Resource,Integer> greenFour =new HashMap<>();

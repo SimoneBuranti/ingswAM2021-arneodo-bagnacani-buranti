@@ -23,7 +23,7 @@ public class DeckLeaderCard {
      */
     public DeckLeaderCard(){
 
-        deckLeaderCard= new ArrayList<LeaderCard>(16);
+        deckLeaderCard= new ArrayList<>(16);
 
 
         Requirements requirementsOne= new ResourceRequirement(Resource.COIN);
@@ -82,8 +82,8 @@ public class DeckLeaderCard {
         Requirements requirementsFourteen= new TwoFlagsTwoColourRequirement(yellow,green);
         LeaderCard leaderCardFourteen= new LeaderCardStorage(requirementsFourteen,3, Resource.SERVANT);
 
-        Requirements requirementsFiveteen= new TwoFlagsTwoColourRequirement(yellow,violet);
-        LeaderCard leaderCardFiveteen= new LeaderCardStorage(requirementsFiveteen,3, Resource.COIN);
+        Requirements requirementsFifteen= new TwoFlagsTwoColourRequirement(yellow,violet);
+        LeaderCard leaderCardFifteen= new LeaderCardStorage(requirementsFifteen,3, Resource.COIN);
 
         Requirements requirementsSixteen= new TwoFlagsTwoColourRequirement(green,blue);
         LeaderCard leaderCardSixteen= new LeaderCardStorage(requirementsSixteen,3, Resource.ROCK);
@@ -103,7 +103,7 @@ public class DeckLeaderCard {
         deckLeaderCard.add(leaderCardTwelve);
         deckLeaderCard.add(leaderCardThirteen);
         deckLeaderCard.add(leaderCardFourteen);
-        deckLeaderCard.add(leaderCardFiveteen);
+        deckLeaderCard.add(leaderCardFifteen);
         deckLeaderCard.add(leaderCardSixteen);
 
 
@@ -135,11 +135,11 @@ public class DeckLeaderCard {
      * @return deckLeaderCard.get(0)
      */
     public static LeaderCard arrangeDeckLeaderCards(){
-        LeaderCard tempLeadercard=deckLeaderCard.get(0);
+        LeaderCard tempLeaderCard=deckLeaderCard.get(0);
         for(int i=0; i<deckLeaderCard.size()-1; i++)
                 deckLeaderCard.set(i,deckLeaderCard.get(i+1));
         deckLeaderCard.remove(deckLeaderCard.size()-1);
-        return tempLeadercard;
+        return tempLeaderCard;
     }
     }
 

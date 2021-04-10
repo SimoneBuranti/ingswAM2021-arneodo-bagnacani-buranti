@@ -10,11 +10,27 @@ public class LeaderCardProduction extends LeaderCard {
     /**
      * method  on abilityActivation of the decorator
      */
-    public void abilityActivation(){}
+    @Override
+    public boolean abilityActivation(GameBoardInterface gameBoard){
+        if(check(gameBoard)){
+            if(gameBoard.getProductionCardActivated() == 0) {
+                gameBoard = new ProductionGameBoard(gameBoard, resourceProduction);
+                gameBoard.setProductionCardActivated();
+            }else
+                gameBoard = new ProductionGameBoardDouble(gameBoard, gameBoard.getResourceTypeFirst(), resourceProduction);
+            return true;
+        }else
+            return false;
+    }
 
     /**
      * method check for the possibility of activate leader card
-     * the ability is improving on Prodction on resource
+     * the ability is improving on Production on resource
      */
-    public void check(){}
+    public boolean check(GameBoardInterface gameBoard){
+        if(gameBoard.levelAndColourQuantity(requirements.getColourRequirement(), 2) < 1)
+            return false;
+        else
+            return true;
+    }
 }

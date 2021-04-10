@@ -2,7 +2,7 @@ package it.polimi.ingsw;
 import java.util.*;
 
 /**
- * This class represents the strongbox of the gameboard
+ * This class represents the strongbox of the gameBoard
  */
 public class Strongbox {
 

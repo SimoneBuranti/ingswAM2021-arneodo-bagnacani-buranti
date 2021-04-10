@@ -55,10 +55,6 @@ public abstract class DeckProductionCard {
             }
         }
         else {
-            /*for (int i = 0; i < deck.size() - 1; i++)
-                deck.set(i, deck.get(i + 1));
-            deck.remove(deck.size() - 1);*/
-
             deck.remove(0);
         }
     }
