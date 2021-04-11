@@ -39,8 +39,14 @@ public class GameSolitaire extends Game{
      * this method has been implemented for testing and applies the effect of the action marker passed as a parameter
      * @param actionMarker
      */
-    public void activateActionMarker(ActionMarker actionMarker) throws EmptyException, EndOfSolitaireGame {
-        actionMarker.actionMarkerEffect(this);
+    public void activateActionMarker(ActionMarker actionMarker)  {
+        try {
+            actionMarker.actionMarkerEffect(this);
+        } catch (EmptyException e) {
+            exceptionHandler(e);
+        } catch (EndOfSolitaireGame endOfSolitaireGame) {
+            exceptionHandler(endOfSolitaireGame);
+        }
     }
 
 

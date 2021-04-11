@@ -36,7 +36,7 @@ public abstract class GameBoardDecorator implements GameBoardInterface {
     }
 
     @Override
-    public Resource whiteExchange() throws BlockedWhiteMarbleEffectException, UnavailableResourceException, WhiteMarbleException {
+    public Resource whiteExchange() throws BlockedWhiteMarbleEffectException, WhiteMarbleException {
         return gameBoard.whiteExchange();
     }
 

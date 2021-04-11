@@ -9,10 +9,6 @@ public class PurpleMarble extends Marble{
      * addResource.servant to player
      */
     public void giveResource(Player player) {
-        try {
-            Reserve.getResource(Resource.SERVANT);
-            player.addToBuffer(Resource.SERVANT);
-        } catch (UnavailableResourceException ignored) {}
-
+        player.addToBuffer(Resource.SERVANT);
     }
 }

@@ -262,6 +262,8 @@ public class GameBoard implements GameBoardInterface{
         ArrayList<Resource> availableResources = availableResources();
         ArrayList<Resource> requiredResources = deck.requiredResources();
 
+        if(deck.size() == 0)
+            throw new EmptyException();
         if(deck.getLevel()!=firstRowFree(chosenColumn)+1)
             throw new LevelException();
 

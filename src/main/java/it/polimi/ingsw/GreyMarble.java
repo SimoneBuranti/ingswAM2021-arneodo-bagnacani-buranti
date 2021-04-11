@@ -5,16 +5,13 @@ package it.polimi.ingsw;
  */
 public class GreyMarble extends Marble{
 
-
+    /**
+     * @param player
+     * addResource.Rock to player
+     */
     public void giveResource(Player player)  {
-        /**
-         * @param player
-         * addResource.Rock to player
-         */
-        try {
-            Reserve.getResource(Resource.ROCK);
-            player.addToBuffer(Resource.ROCK);
-        } catch (UnavailableResourceException ignored) {}
+
+        player.addToBuffer(Resource.ROCK);
 
     }
 }

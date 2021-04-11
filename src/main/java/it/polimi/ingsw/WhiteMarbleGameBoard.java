@@ -15,9 +15,7 @@ public class WhiteMarbleGameBoard extends GameBoardDecorator{
     }
 
     @Override
-    public Resource whiteExchange() throws UnavailableResourceException, WhiteMarbleException {
-        Reserve.getResource(resourceTypeFirst);
-
+    public Resource whiteExchange() throws WhiteMarbleException {
         return this.resourceTypeFirst;
     }
 

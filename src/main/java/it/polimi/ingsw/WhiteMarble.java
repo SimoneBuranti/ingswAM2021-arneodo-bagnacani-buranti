@@ -8,7 +8,7 @@ public class WhiteMarble extends Marble{
     public void giveResource(Player player) throws WhiteMarbleException {
         try{
             player.addToBuffer(player.whiteExchange());
-        } catch (BlockedWhiteMarbleEffectException | UnavailableResourceException ignored) {}
+        } catch (BlockedWhiteMarbleEffectException ignored) {}
 
     }
 

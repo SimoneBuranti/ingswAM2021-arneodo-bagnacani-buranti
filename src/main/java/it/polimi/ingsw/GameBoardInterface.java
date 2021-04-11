@@ -13,7 +13,7 @@ public interface GameBoardInterface {
 
     void setPapal();
 
-    Resource whiteExchange() throws BlockedWhiteMarbleEffectException, UnavailableResourceException, WhiteMarbleException;
+    Resource whiteExchange() throws BlockedWhiteMarbleEffectException, WhiteMarbleException;
 
     void extraProductionOn(Resource resource) throws ImpossibleProductionException, CallForCouncilException, LastSpaceReachedException;
 

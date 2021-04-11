@@ -12,6 +12,7 @@ public class GameMultiPlayer extends Game {
     PlayerThird thirdPlayer;
     PlayerFourth fourthPlayer;
     private final int inkwell;
+    private boolean lastTurn = false;
     private ArrayList<String> nickNameInOrder = new ArrayList<>();
     private ArrayList<Player> playerList = new ArrayList<>();
 
@@ -157,7 +158,12 @@ public class GameMultiPlayer extends Game {
             p.setPapal();
         }
 
-        //...
+        lastTurn = true;
+    }
+
+    @Override
+    protected void exceptionHandler(EndGameException e) {
+        lastTurn = true;
     }
 
 }

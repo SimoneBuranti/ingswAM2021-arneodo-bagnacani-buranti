@@ -9,10 +9,6 @@ public class YellowMarble extends Marble{
      */
 
     public void giveResource(Player player) {
-        try {
-            Reserve.getResource(Resource.COIN);
-            player.addToBuffer(Resource.COIN);
-        } catch (UnavailableResourceException ignored) {}
-
+        player.addToBuffer(Resource.COIN);
     }
 }

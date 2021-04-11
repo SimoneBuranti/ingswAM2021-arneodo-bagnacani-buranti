@@ -68,8 +68,20 @@ public class Game {
 
     }
 
-    public void buyProductionCard(Player player, DeckProductionCard deck, int chosenColumn) throws LevelException, NotEnoughResourcesException, EmptyException, FullColumnException, EndGameException {
-        player.buyProductionCard(deck,chosenColumn);
+    public void buyProductionCard(Player player, DeckProductionCard deck, int chosenColumn){
+        try {
+            player.buyProductionCard(deck,chosenColumn);
+        } catch (LevelException e) {
+            exceptionHandler(e);
+        } catch (NotEnoughResourcesException e) {
+            exceptionHandler(e);
+        } catch (EmptyException e) {
+            exceptionHandler(e);
+        } catch (FullColumnException e) {
+            exceptionHandler(e);
+        } catch (EndGameException e) {
+            exceptionHandler(e);
+        }
     }
 
     public void moveEveryoneExcept(Player player){
@@ -247,7 +259,21 @@ public class Game {
 
 
     protected void exceptionHandler(EmptyColumnException e) {
-        //...
+    }
+
+    protected void exceptionHandler(LevelException e) {
+    }
+
+    protected void exceptionHandler(EmptyException e) {
+    }
+
+    protected void exceptionHandler(NotEnoughResourcesException e) {
+    }
+
+    protected void exceptionHandler(FullColumnException e) {
+    }
+
+    protected void exceptionHandler(EndGameException e) {
     }
 
     protected void exceptionHandler(CallForCouncilException e) {

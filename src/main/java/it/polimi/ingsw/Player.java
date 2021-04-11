@@ -198,7 +198,7 @@ public class Player {
         return gameBoardOfPlayer.score();
     }
 
-    public Resource whiteExchange() throws BlockedWhiteMarbleEffectException, UnavailableResourceException, WhiteMarbleException {
+    public Resource whiteExchange() throws BlockedWhiteMarbleEffectException, WhiteMarbleException {
         return gameBoardOfPlayer.whiteExchange();
     }
 
