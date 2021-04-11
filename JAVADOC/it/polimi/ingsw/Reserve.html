@@ -76,7 +76,7 @@ loadScripts(document, 'script');</script>
 <h1 title="Class Reserve" class="title">Class Reserve</h1>
 </div>
 <div class="inheritance" title="Inheritance Tree">java.lang.Object
-<div class="inheritance">it.polimi.ingsw.Reserve</div>
+<div class="inheritance">it.polimi.ingsw.model.Reserve</div>
 </div>
 <section class="description">
 <hr>
@@ -128,7 +128,7 @@ extends java.lang.Object</pre>
 <tbody>
 <tr class="alt-color" id="i0">
 <td class="col-first"><code>static void</code></td>
-<th class="col-second" scope="row"><code><span class="member-name-link"><a href="#addResource(it.polimi.ingsw.Resource)">addResource</a></span>&#8203;(<a href="Resource.html" title="enum in it.polimi.ingsw">Resource</a>&nbsp;resource)</code></th>
+<th class="col-second" scope="row"><code><span class="member-name-link"><a href="#addResource(it.polimi.ingsw.model.Resource)">addResource</a></span>&#8203;(<a href="Resource.html" title="enum in it.polimi.ingsw">Resource</a>&nbsp;resource)</code></th>
 <td class="col-last">
 <div class="block">Static method
 addResource(Resource) adds a resource type one at a time without restrictions</div>
@@ -136,14 +136,14 @@ addResource(Resource) adds a resource type one at a time without restrictions</d
 </tr>
 <tr class="row-color" id="i1">
 <td class="col-first"><code>static java.lang.Integer</code></td>
-<th class="col-second" scope="row"><code><span class="member-name-link"><a href="#getAmountOf(it.polimi.ingsw.Resource)">getAmountOf</a></span>&#8203;(<a href="Resource.html" title="enum in it.polimi.ingsw">Resource</a>&nbsp;resource)</code></th>
+<th class="col-second" scope="row"><code><span class="member-name-link"><a href="#getAmountOf(it.polimi.ingsw.model.Resource)">getAmountOf</a></span>&#8203;(<a href="Resource.html" title="enum in it.polimi.ingsw">Resource</a>&nbsp;resource)</code></th>
 <td class="col-last">
 <div class="block">Getter for tests</div>
 </td>
 </tr>
 <tr class="alt-color" id="i2">
 <td class="col-first"><code>static void</code></td>
-<th class="col-second" scope="row"><code><span class="member-name-link"><a href="#getResource(it.polimi.ingsw.Resource)">getResource</a></span>&#8203;(<a href="Resource.html" title="enum in it.polimi.ingsw">Resource</a>&nbsp;resource)</code></th>
+<th class="col-second" scope="row"><code><span class="member-name-link"><a href="#getResource(it.polimi.ingsw.model.Resource)">getResource</a></span>&#8203;(<a href="Resource.html" title="enum in it.polimi.ingsw">Resource</a>&nbsp;resource)</code></th>
 <td class="col-last">
 <div class="block">Static method
 getResource(Resource) decrease a resource type counter one at a time only if
@@ -184,7 +184,7 @@ getResource(Resource) decrease a resource type counter one at a time only if
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="getAmountOf(it.polimi.ingsw.Resource)">
+<section class="detail" id="getAmountOf(it.polimi.ingsw.model.Resource)">
 <h3>getAmountOf</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">java.lang.Integer</span>&nbsp;<span class="member-name">getAmountOf</span>&#8203;(<span class="parameters"><a href="Resource.html" title="enum in it.polimi.ingsw">Resource</a>&nbsp;resource)</span></div>
 <div class="block">Getter for tests</div>
@@ -197,7 +197,7 @@ getResource(Resource) decrease a resource type counter one at a time only if
 </section>
 </li>
 <li>
-<section class="detail" id="addResource(it.polimi.ingsw.Resource)">
+<section class="detail" id="addResource(it.polimi.ingsw.model.Resource)">
 <h3>addResource</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="member-name">addResource</span>&#8203;(<span class="parameters"><a href="Resource.html" title="enum in it.polimi.ingsw">Resource</a>&nbsp;resource)</span></div>
 <div class="block">Static method
@@ -209,7 +209,7 @@ addResource(Resource) adds a resource type one at a time without restrictions</d
 </section>
 </li>
 <li>
-<section class="detail" id="getResource(it.polimi.ingsw.Resource)">
+<section class="detail" id="getResource(it.polimi.ingsw.model.Resource)">
 <h3>getResource</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="member-name">getResource</span>&#8203;(<span class="parameters"><a href="Resource.html" title="enum in it.polimi.ingsw">Resource</a>&nbsp;resource)</span>
                         throws <span class="exceptions"><a href="UnavailableResourceException.html" title="class in it.polimi.ingsw">UnavailableResourceException</a></span></div>
