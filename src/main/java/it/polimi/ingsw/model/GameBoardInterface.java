@@ -39,6 +39,8 @@ public interface GameBoardInterface {
 
     int score();
 
+    int faithScore();
+
     void takeFromMarket(ArrayList<Resource> newResources) throws NotEnoughSpaceInStorageException;
 
     void baseProductionOn(Resource i1, Resource i2, Resource o) throws ImpossibleProductionException;

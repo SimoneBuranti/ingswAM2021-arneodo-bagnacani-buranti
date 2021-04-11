@@ -115,7 +115,7 @@ public class FaithPath {
      */
     public void setPapal() {
 
-        if (VATICAN_POS[currCall] <= faithIndicator && faithIndicator <= PAPAL_POS[currCall]) {
+        if (VATICAN_POS[currCall] <= faithIndicator) {
             papalCards[currCall] = 1;
         } else
             papalCards[currCall] = 0;

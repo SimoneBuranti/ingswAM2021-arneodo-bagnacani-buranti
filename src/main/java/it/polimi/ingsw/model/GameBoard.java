@@ -297,6 +297,10 @@ public class GameBoard implements GameBoardInterface{
         return points;
     }
 
+    public int faithScore(){
+        return faithPathOfGameBoard.faithScore();
+    }
+
     /**
      * This method return the int value of the total player's victory points
      * @return int

@@ -92,6 +92,11 @@ public abstract class GameBoardDecorator implements GameBoardInterface {
     }
 
     @Override
+    public int faithScore() {
+        return gameBoard.faithScore();
+    }
+
+    @Override
     public int score() {
         return gameBoard.score();
     }
