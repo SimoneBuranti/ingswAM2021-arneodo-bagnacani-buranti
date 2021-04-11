@@ -94,6 +94,10 @@ public class Game {
             exceptionHandler(e);
         } catch (EmptyColumnException e) {
             exceptionHandler(e);
+        } catch (CallForCouncilException e) {
+            exceptionHandler(e);
+        } catch (LastSpaceReachedException e) {
+            exceptionHandler(e);
         }
     }
 

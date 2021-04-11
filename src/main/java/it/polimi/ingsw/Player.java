@@ -174,7 +174,7 @@ public class Player {
         }
     }
 
-    public void productionOn(int chosenColumn) throws ImpossibleProductionException, EmptyColumnException {
+    public void productionOn(int chosenColumn) throws ImpossibleProductionException, EmptyColumnException, CallForCouncilException, LastSpaceReachedException {
         gameBoardOfPlayer.productionOn(chosenColumn);
     }
 

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public interface GameBoardInterface {
     void setStorageExtra(Resource resource);
 
-    void endOfProduction() throws CallForCouncilException, LastSpaceReachedException;
+    void endOfProduction();
 
     int getIndicator();
 
@@ -43,11 +43,9 @@ public interface GameBoardInterface {
 
     void baseProductionOn(Resource i1, Resource i2, Resource o) throws ImpossibleProductionException;
 
-    void productionOn(int chosenColumn) throws ImpossibleProductionException, EmptyColumnException;
+    void productionOn(int chosenColumn) throws ImpossibleProductionException, EmptyColumnException, CallForCouncilException, LastSpaceReachedException;
 
     void addToProductionBuffer(ArrayList<Resource> output);
-
-    void addToFaithPathBuffer(int n);
 
     void setProductionCard(ProductionCard card,int chosenColumn);
 

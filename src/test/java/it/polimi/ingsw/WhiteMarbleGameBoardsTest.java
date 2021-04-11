@@ -44,7 +44,7 @@ class WhiteMarbleGameBoardsTest {
 
         try {
             resource = gameBoard.whiteExchange();
-        } catch (WhiteMarbleException | BlockedWhiteMarbleEffectException | UnavailableResourceException e) {
+        } catch (WhiteMarbleException | BlockedWhiteMarbleEffectException e) {
             e.printStackTrace();
             return;
         }
@@ -62,7 +62,7 @@ class WhiteMarbleGameBoardsTest {
 
         try {
             gameBoard.whiteExchange();
-        } catch (WhiteMarbleException | BlockedWhiteMarbleEffectException | UnavailableResourceException e) {
+        } catch (WhiteMarbleException | BlockedWhiteMarbleEffectException e) {
             e.printStackTrace();
         }
 

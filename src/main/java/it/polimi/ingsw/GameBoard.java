@@ -38,10 +38,6 @@ public class GameBoard implements GameBoardInterface{
      */
     private ArrayList<Resource> productionBuffer;
 
-    /**
-     * faithPathBuffer contains all the faithPath's movements produced by production activations
-     */
-    private int faithPathBuffer;
 
     private int whiteMarbleCardActivated = 0;
     private int productionCardActivated = 0;
@@ -79,20 +75,13 @@ public class GameBoard implements GameBoardInterface{
 
     /**
      * This method add all the resources contained in the production buffer in the gameBoard's strongbox
-     * @throws CallForCouncilException
-     * @throws LastSpaceReachedException
      */
-    public void endOfProduction() throws CallForCouncilException, LastSpaceReachedException {
+    public void endOfProduction() {
+
         for(Resource r : productionBuffer){
             strongboxOfGameBoard.addResource(r);
         }
         productionBuffer = new ArrayList<>();
-
-        for(int i = 0 ; i<faithPathBuffer; i++){
-            faithMove();
-        }
-
-        faithPathBuffer = 0;
     }
 
 
@@ -374,10 +363,12 @@ public class GameBoard implements GameBoardInterface{
      * @throws ImpossibleProductionException
      * @throws EmptyColumnException
      */
-    public void productionOn(int chosenColumn) throws ImpossibleProductionException, EmptyColumnException {
+    public void productionOn(int chosenColumn) throws ImpossibleProductionException, EmptyColumnException, CallForCouncilException, LastSpaceReachedException {
         ArrayList<Resource> available = availableResources();
         ArrayList<Resource> requiredInput;
         ArrayList<Resource> output;
+        int callForCouncil = 0;
+        int lastSpaceReached = 0;
 
         ProductionCard card = developmentBoard[lastRowOccupied(chosenColumn)][chosenColumn];
 
@@ -391,7 +382,20 @@ public class GameBoard implements GameBoardInterface{
         payResources(requiredInput);
 
         addToProductionBuffer(output);
-        addToFaithPathBuffer(card.isFaithPoint());
+        for(int i = 0; i < card.isFaithPoint(); i++) {
+            try {
+                faithMove();
+            } catch (CallForCouncilException e) {
+                callForCouncil = 1;
+            } catch (LastSpaceReachedException e) {
+                lastSpaceReached = 1;
+            }
+        }
+
+        if(callForCouncil == 1)
+            throw new CallForCouncilException();
+        else if(lastSpaceReached == 1)
+            throw new LastSpaceReachedException();
     }
 
     /**
@@ -401,12 +405,6 @@ public class GameBoard implements GameBoardInterface{
         productionBuffer.addAll(output);
     }
 
-    /**
-     * This method add produced resources to gameBoard's faith path buffer
-     */
-    public void addToFaithPathBuffer(int n){
-        faithPathBuffer+=n;
-    }
 
     /**
      * Test only method : set a production card in the development board without payment
@@ -417,7 +415,7 @@ public class GameBoard implements GameBoardInterface{
         try {
             r = firstRowFree(chosenColumn);
         } catch (FullColumnException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
             return;
         }
 

@@ -1452,11 +1452,7 @@ class GameBoardTest {
             e.printStackTrace();
         }
 
-        try {
-            gameBoard.endOfProduction();
-        } catch (CallForCouncilException | LastSpaceReachedException e) {
-            e.printStackTrace();
-        }
+        gameBoard.endOfProduction();
 
         available = gameBoard.availableResources();
 
@@ -1514,11 +1510,7 @@ class GameBoardTest {
             e.printStackTrace();
         }
 
-        try {
-            gameBoard.endOfProduction();
-        } catch (CallForCouncilException | LastSpaceReachedException e) {
-            e.printStackTrace();
-        }
+        gameBoard.endOfProduction();
 
     /*available = gameBoard.availableResources();
 
@@ -1575,11 +1567,7 @@ class GameBoardTest {
             e.printStackTrace();
         }
 
-        try {
-            gameBoard.endOfProduction();
-        } catch (CallForCouncilException | LastSpaceReachedException e) {
-            e.printStackTrace();
-        }
+        gameBoard.endOfProduction();
 
         available = gameBoard.availableResources();
 
@@ -1673,15 +1661,11 @@ class GameBoardTest {
 
         try {
             gameBoard.productionOn(0);
-        } catch (ImpossibleProductionException | EmptyColumnException e) {
+        } catch (ImpossibleProductionException | EmptyColumnException | CallForCouncilException | LastSpaceReachedException e) {
             e.printStackTrace();
         }
 
-        try {
-            gameBoard.endOfProduction();
-        } catch (CallForCouncilException | LastSpaceReachedException e) {
-            e.printStackTrace();
-        }
+        gameBoard.endOfProduction();
 
         available = gameBoard.availableResources();
 
@@ -1778,15 +1762,11 @@ class GameBoardTest {
 
         try {
             gameBoard.productionOn(0);
-        } catch (ImpossibleProductionException | EmptyColumnException e) {
+        } catch (ImpossibleProductionException | EmptyColumnException | CallForCouncilException | LastSpaceReachedException e) {
             e.printStackTrace();
         }
 
-        try {
-            gameBoard.endOfProduction();
-        } catch (CallForCouncilException | LastSpaceReachedException e) {
-            e.printStackTrace();
-        }
+        gameBoard.endOfProduction();
 
         available = gameBoard.availableResources();
 
@@ -1889,15 +1869,11 @@ class GameBoardTest {
 
         try {
             gameBoard.productionOn(0);
-        } catch (ImpossibleProductionException | EmptyColumnException e) {
+        } catch (ImpossibleProductionException | EmptyColumnException | CallForCouncilException | LastSpaceReachedException e) {
             e.printStackTrace();
         }
 
-        try {
-            gameBoard.endOfProduction();
-        } catch (CallForCouncilException | LastSpaceReachedException e) {
-            e.printStackTrace();
-        }
+        gameBoard.endOfProduction();
 
         available = gameBoard.availableResources();
 
@@ -2001,15 +1977,11 @@ class GameBoardTest {
 
         try {
             gameBoard.productionOn(0);
-        } catch (ImpossibleProductionException | EmptyColumnException e) {
+        } catch (ImpossibleProductionException | EmptyColumnException | CallForCouncilException | LastSpaceReachedException e) {
             e.printStackTrace();
         }
 
-        try {
-            gameBoard.endOfProduction();
-        } catch (CallForCouncilException | LastSpaceReachedException e) {
-            e.printStackTrace();
-        }
+        gameBoard.endOfProduction();
 
         available = gameBoard.availableResources();
 
@@ -2112,15 +2084,11 @@ class GameBoardTest {
 
         try {
             gameBoard.productionOn(0);
-        } catch (ImpossibleProductionException | EmptyColumnException e) {
+        } catch (ImpossibleProductionException | EmptyColumnException | CallForCouncilException | LastSpaceReachedException e) {
             e.printStackTrace();
         }
 
-        try {
-            gameBoard.endOfProduction();
-        } catch (CallForCouncilException | LastSpaceReachedException e) {
-            e.printStackTrace();
-        }
+        gameBoard.endOfProduction();
 
         available = gameBoard.availableResources();
 
@@ -2249,20 +2217,16 @@ class GameBoardTest {
 
         try {
             gameBoard.productionOn(0);
-        } catch (ImpossibleProductionException | EmptyColumnException e) {
+        } catch (ImpossibleProductionException | EmptyColumnException | CallForCouncilException | LastSpaceReachedException e) {
             e.printStackTrace();
         }
         try {
             gameBoard.productionOn(1);
-        } catch (ImpossibleProductionException | EmptyColumnException e) {
+        } catch (ImpossibleProductionException | EmptyColumnException | CallForCouncilException | LastSpaceReachedException e) {
             e.printStackTrace();
         }
 
-        try {
-            gameBoard.endOfProduction();
-        } catch (CallForCouncilException | LastSpaceReachedException e) {
-            e.printStackTrace();
-        }
+        gameBoard.endOfProduction();
 
         available = gameBoard.availableResources();
 

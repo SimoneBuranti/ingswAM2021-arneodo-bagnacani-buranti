@@ -1648,11 +1648,7 @@ class ReductionGameBoardDoubleTest {
             e.printStackTrace();
         }
 
-        try {
-            gameBoard.endOfProduction();
-        } catch (CallForCouncilException | LastSpaceReachedException e) {
-            e.printStackTrace();
-        }
+        gameBoard.endOfProduction();
 
         available = gameBoard.availableResources();
 
@@ -1712,11 +1708,7 @@ class ReductionGameBoardDoubleTest {
             e.printStackTrace();
         }
 
-        try {
-            gameBoard.endOfProduction();
-        } catch (CallForCouncilException | LastSpaceReachedException e) {
-            e.printStackTrace();
-        }
+        gameBoard.endOfProduction();
 
 /*available = gameBoard.availableResources();
 
@@ -1775,11 +1767,7 @@ assertEquals(0,availableMap.get(Resource.SERVANT));*/
             e.printStackTrace();
         }
 
-        try {
-            gameBoard.endOfProduction();
-        } catch (CallForCouncilException | LastSpaceReachedException e) {
-            e.printStackTrace();
-        }
+        gameBoard.endOfProduction();
 
         available = gameBoard.availableResources();
 
@@ -1875,15 +1863,11 @@ assertEquals(0,availableMap.get(Resource.SERVANT));*/
 
         try {
             gameBoard.productionOn(0);
-        } catch (ImpossibleProductionException | EmptyColumnException e) {
+        } catch (ImpossibleProductionException | EmptyColumnException | CallForCouncilException | LastSpaceReachedException e) {
             e.printStackTrace();
         }
 
-        try {
-            gameBoard.endOfProduction();
-        } catch (CallForCouncilException | LastSpaceReachedException e) {
-            e.printStackTrace();
-        }
+        gameBoard.endOfProduction();
 
         available = gameBoard.availableResources();
 
@@ -1982,15 +1966,11 @@ assertEquals(0,availableMap.get(Resource.SERVANT));*/
 
         try {
             gameBoard.productionOn(0);
-        } catch (ImpossibleProductionException | EmptyColumnException e) {
+        } catch (ImpossibleProductionException | EmptyColumnException | CallForCouncilException | LastSpaceReachedException e) {
             e.printStackTrace();
         }
 
-        try {
-            gameBoard.endOfProduction();
-        } catch (CallForCouncilException | LastSpaceReachedException e) {
-            e.printStackTrace();
-        }
+        gameBoard.endOfProduction();
 
         available = gameBoard.availableResources();
 
@@ -2095,15 +2075,11 @@ assertEquals(0,availableMap.get(Resource.SERVANT));*/
 
         try {
             gameBoard.productionOn(0);
-        } catch (ImpossibleProductionException | EmptyColumnException e) {
+        } catch (ImpossibleProductionException | EmptyColumnException | CallForCouncilException | LastSpaceReachedException e) {
             e.printStackTrace();
         }
 
-        try {
-            gameBoard.endOfProduction();
-        } catch (CallForCouncilException | LastSpaceReachedException e) {
-            e.printStackTrace();
-        }
+        gameBoard.endOfProduction();
 
         available = gameBoard.availableResources();
 
@@ -2209,15 +2185,11 @@ assertEquals(0,availableMap.get(Resource.SERVANT));*/
 
         try {
             gameBoard.productionOn(0);
-        } catch (ImpossibleProductionException | EmptyColumnException e) {
+        } catch (ImpossibleProductionException | EmptyColumnException | CallForCouncilException | LastSpaceReachedException e) {
             e.printStackTrace();
         }
 
-        try {
-            gameBoard.endOfProduction();
-        } catch (CallForCouncilException | LastSpaceReachedException e) {
-            e.printStackTrace();
-        }
+        gameBoard.endOfProduction();
 
         available = gameBoard.availableResources();
 
@@ -2322,15 +2294,11 @@ assertEquals(4-inputMap.get(Resource.SERVANT)+outputMap.get(Resource.SERVANT),av
 
         try {
             gameBoard.productionOn(0);
-        } catch (ImpossibleProductionException | EmptyColumnException e) {
+        } catch (ImpossibleProductionException | EmptyColumnException | CallForCouncilException | LastSpaceReachedException e) {
             e.printStackTrace();
         }
 
-        try {
-            gameBoard.endOfProduction();
-        } catch (CallForCouncilException | LastSpaceReachedException e) {
-            e.printStackTrace();
-        }
+        gameBoard.endOfProduction();
 
         available = gameBoard.availableResources();
 
@@ -2461,20 +2429,16 @@ assertEquals(4-inputMap.get(Resource.SERVANT)+outputMap.get(Resource.SERVANT),av
 
         try {
             gameBoard.productionOn(0);
-        } catch (ImpossibleProductionException | EmptyColumnException e) {
+        } catch (ImpossibleProductionException | EmptyColumnException | CallForCouncilException | LastSpaceReachedException e) {
             e.printStackTrace();
         }
         try {
             gameBoard.productionOn(1);
-        } catch (ImpossibleProductionException | EmptyColumnException e) {
+        } catch (ImpossibleProductionException | EmptyColumnException | CallForCouncilException | LastSpaceReachedException e) {
             e.printStackTrace();
         }
 
-        try {
-            gameBoard.endOfProduction();
-        } catch (CallForCouncilException | LastSpaceReachedException e) {
-            e.printStackTrace();
-        }
+        gameBoard.endOfProduction();
 
         available = gameBoard.availableResources();
 

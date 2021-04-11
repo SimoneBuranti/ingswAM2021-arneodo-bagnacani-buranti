@@ -31,8 +31,14 @@ public class GameSolitaire extends Game{
     /**
      * this method takes the first action marker of the deck and applies its effect
      */
-    public void revealAndActivateActionMarker() throws EmptyException, EndOfSolitaireGame {
-        deckActionMarker.pickUpFirstCard().actionMarkerEffect(this);
+    public void revealAndActivateActionMarker() {
+        try {
+            deckActionMarker.pickUpFirstCard().actionMarkerEffect(this);
+        } catch (EmptyException e) {
+            exceptionHandler(e);
+        } catch (EndOfSolitaireGame endOfSolitaireGame) {
+            exceptionHandler(endOfSolitaireGame);
+        }
     }
 
     /**

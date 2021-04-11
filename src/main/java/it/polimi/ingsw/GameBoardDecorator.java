@@ -16,7 +16,7 @@ public abstract class GameBoardDecorator implements GameBoardInterface {
     }
 
     @Override
-    public void endOfProduction() throws CallForCouncilException, LastSpaceReachedException {
+    public void endOfProduction() {
         gameBoard.endOfProduction();
     }
 
@@ -107,18 +107,13 @@ public abstract class GameBoardDecorator implements GameBoardInterface {
     }
 
     @Override
-    public void productionOn(int chosenColumn) throws ImpossibleProductionException, EmptyColumnException {
+    public void productionOn(int chosenColumn) throws ImpossibleProductionException, EmptyColumnException, CallForCouncilException, LastSpaceReachedException {
         gameBoard.productionOn(chosenColumn);
     }
 
     @Override
     public void addToProductionBuffer(ArrayList<Resource> output) {
         gameBoard.addToProductionBuffer(output);
-    }
-
-    @Override
-    public void addToFaithPathBuffer(int n) {
-        gameBoard.addToFaithPathBuffer(n);
     }
 
     @Override

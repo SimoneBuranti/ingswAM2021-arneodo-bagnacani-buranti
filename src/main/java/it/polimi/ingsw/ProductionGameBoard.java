@@ -29,7 +29,8 @@ public class ProductionGameBoard extends GameBoardDecorator {
         output.add(resource);
 
         addToProductionBuffer(output);
-        addToFaithPathBuffer(1);
+
+        faithMove();
     }
 
     @Override
