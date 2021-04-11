@@ -12,9 +12,8 @@ public class BluMarble extends Marble{
     public void giveResource(Player player) {
         try {
             Reserve.getResource(Resource.SHIELD);
-        } catch (UnavailableResourceException e) {
-        }
-        player.addToBuffer(Resource.SHIELD);
+            player.addToBuffer(Resource.SHIELD);
+        } catch (UnavailableResourceException ignored) {}
 
         }
     }

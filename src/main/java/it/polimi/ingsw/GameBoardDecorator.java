@@ -47,7 +47,7 @@ public abstract class GameBoardDecorator implements GameBoardInterface {
     public void anotherExtraProductionOn(Resource resource) throws ImpossibleProductionException, CallForCouncilException, LastSpaceReachedException {}
 
     @Override
-    public void addToStorage(Resource resource) throws UnavailableResourceException {
+    public void addToStorage(Resource resource){
         gameBoard.addToStorage(resource);
     }
 

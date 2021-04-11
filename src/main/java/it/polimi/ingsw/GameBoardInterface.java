@@ -19,7 +19,7 @@ public interface GameBoardInterface {
 
     void anotherExtraProductionOn(Resource resource) throws ImpossibleProductionException, CallForCouncilException, LastSpaceReachedException;
 
-    void addToStorage(Resource resource) throws UnavailableResourceException;
+    void addToStorage(Resource resource);
 
     void addToStrongbox(Resource resource);
 

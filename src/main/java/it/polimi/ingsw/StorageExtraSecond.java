@@ -50,17 +50,18 @@ public class StorageExtraSecond extends StorageExtraFirst {
      * adds it to the second extra storage if it can, otherwise
      * it adds it in the map by calling the method of the super class
      * @param resource :type of resource to add
-     * @throws UnavailableResourceException
      */
     @Override
-    public void addResource(Resource resource) throws UnavailableResourceException {
+    public void addResource(Resource resource) {
 
         if(resource.equals(secondResourceType) && !isStorageExtraSecondFull()){
-            Reserve.getResource(resource);
-            if(storageExtraSecond[0] == 0)
-                storageExtraSecond[0] = 1;
-            else
-                storageExtraSecond[1] = 1;
+            try {
+                Reserve.getResource(resource);
+                if(storageExtraSecond[0] == 0)
+                    storageExtraSecond[0] = 1;
+                else
+                    storageExtraSecond[1] = 1;
+            } catch (UnavailableResourceException ignored) {}
         }else
             super.addResource(resource);
 

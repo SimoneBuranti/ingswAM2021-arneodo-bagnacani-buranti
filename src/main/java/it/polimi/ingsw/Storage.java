@@ -75,18 +75,18 @@ public class Storage {
      *This method removes a resource type from the reserve if available by adding it to the map,
      * it does nothing otherwise
      * @param resource :type of resource to add
-     * @throws UnavailableResourceException
      */
-    public void addResource(Resource resource) throws UnavailableResourceException{
+    public void addResource(Resource resource){
         int value;
 
-        Reserve.getResource(resource);
-
-        if(storageResource.containsKey(resource))
-            value = storageResource.get(resource) + 1;
-        else
-            value = 1;
-        storageResource.put(resource, value);
+        try {
+            Reserve.getResource(resource);
+            if(storageResource.containsKey(resource))
+                value = storageResource.get(resource) + 1;
+            else
+                value = 1;
+            storageResource.put(resource, value);
+        } catch (UnavailableResourceException ignored) {}
     }
 
     /**

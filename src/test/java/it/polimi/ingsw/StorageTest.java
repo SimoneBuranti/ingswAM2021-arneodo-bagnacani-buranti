@@ -40,68 +40,28 @@ class StorageTest {
         assertEquals(0, storage.getResource(Resource.SERVANT));
         assertEquals(0, storage.getResource(Resource.SHIELD));
 
-        try {
-            storage.addResource(Resource.COIN);
-        } catch (UnavailableResourceException e) {
-            e.printStackTrace();
-        }
+        storage.addResource(Resource.COIN);
 
         assertEquals(1,storage.getResource(Resource.COIN));
         assertEquals(99, Reserve.getAmountOf(Resource.COIN));
 
-        try {
-            storage.addResource(Resource.ROCK);
-        } catch (UnavailableResourceException e) {
-            e.printStackTrace();
-        }
-        try {
-            storage.addResource(Resource.ROCK);
-        } catch (UnavailableResourceException e) {
-            e.printStackTrace();
-        }
+        storage.addResource(Resource.ROCK);
+        storage.addResource(Resource.ROCK);
 
         assertEquals(2,storage.getResource(Resource.ROCK));
         assertEquals(98, Reserve.getAmountOf(Resource.ROCK));
 
-        try {
-            storage.addResource(Resource.SHIELD);
-        } catch (UnavailableResourceException e) {
-            e.printStackTrace();
-        }
-        try {
-            storage.addResource(Resource.SHIELD);
-        } catch (UnavailableResourceException e) {
-            e.printStackTrace();
-        }
-        try {
-            storage.addResource(Resource.SHIELD);
-        } catch (UnavailableResourceException e) {
-            e.printStackTrace();
-        }
+        storage.addResource(Resource.SHIELD);
+        storage.addResource(Resource.SHIELD);
+        storage.addResource(Resource.SHIELD);
 
         assertEquals(3,storage.getResource(Resource.SHIELD));
         assertEquals(97, Reserve.getAmountOf(Resource.SHIELD));
 
-        try {
-            storage.addResource(Resource.SERVANT);
-        } catch (UnavailableResourceException e) {
-            e.printStackTrace();
-        }
-        try {
-            storage.addResource(Resource.SERVANT);
-        } catch (UnavailableResourceException e) {
-            e.printStackTrace();
-        }
-        try {
-            storage.addResource(Resource.SERVANT);
-        } catch (UnavailableResourceException e) {
-            e.printStackTrace();
-        }
-        try {
-            storage.addResource(Resource.SERVANT);
-        } catch (UnavailableResourceException e) {
-            e.printStackTrace();
-        }
+        storage.addResource(Resource.SERVANT);
+        storage.addResource(Resource.SERVANT);
+        storage.addResource(Resource.SERVANT);
+        storage.addResource(Resource.SERVANT);
 
         assertEquals(4,storage.getResource(Resource.SERVANT));
         assertEquals(96, Reserve.getAmountOf(Resource.SERVANT));
@@ -118,78 +78,46 @@ class StorageTest {
         Reserve reserve = new Reserve();
 
         for (int i = 0; i < 100 ; i++){
-            try {
-                storage.addResource(Resource.COIN);
-            } catch (UnavailableResourceException e) {
-                e.printStackTrace();
-            }
+            storage.addResource(Resource.COIN);
 
             assertEquals(1+i,storage.getResource(Resource.COIN));
             assertEquals(99-i, Reserve.getAmountOf(Resource.COIN));
 
-            try {
-                storage.addResource(Resource.ROCK);
-            } catch (UnavailableResourceException e) {
-                e.printStackTrace();
-            }
+            storage.addResource(Resource.ROCK);
 
             assertEquals(1+i,storage.getResource(Resource.ROCK));
             assertEquals(99-i, Reserve.getAmountOf(Resource.ROCK));
 
-            try {
-                storage.addResource(Resource.SHIELD);
-            } catch (UnavailableResourceException e) {
-                e.printStackTrace();
-            }
+            storage.addResource(Resource.SHIELD);
 
             assertEquals(1+i,storage.getResource(Resource.SHIELD));
             assertEquals(99-i, Reserve.getAmountOf(Resource.SHIELD));
 
-            try {
-                storage.addResource(Resource.SERVANT);
-            } catch (UnavailableResourceException e) {
-                e.printStackTrace();
-            }
+            storage.addResource(Resource.SERVANT);
 
             assertEquals(1+i,storage.getResource(Resource.SERVANT));
             assertEquals(99-i, Reserve.getAmountOf(Resource.SERVANT));
 
         }
-        try {
-            storage.addResource(Resource.COIN);
-        } catch (UnavailableResourceException e) {
-            e.printStackTrace();
-        }
+        storage.addResource(Resource.COIN);
 
         assertEquals(100,storage.getResource(Resource.COIN));
         assertEquals(0, Reserve.getAmountOf(Resource.COIN));
 
-        try {
-            storage.addResource(Resource.ROCK);
-        } catch (UnavailableResourceException e) {
-            e.printStackTrace();
-        }
+        storage.addResource(Resource.ROCK);
 
         assertEquals(100,storage.getResource(Resource.ROCK));
         assertEquals(0, Reserve.getAmountOf(Resource.ROCK));
 
-        try {
-            storage.addResource(Resource.SERVANT);
-        } catch (UnavailableResourceException e) {
-            e.printStackTrace();
-        }
-
-        assertEquals(100,storage.getResource(Resource.SERVANT));
-        assertEquals(0, Reserve.getAmountOf(Resource.SERVANT));
-
-        try {
-            storage.addResource(Resource.SHIELD);
-        } catch (UnavailableResourceException e) {
-            e.printStackTrace();
-        }
+        storage.addResource(Resource.SHIELD);
 
         assertEquals(100,storage.getResource(Resource.SHIELD));
         assertEquals(0, Reserve.getAmountOf(Resource.SHIELD));
+
+        storage.addResource(Resource.SERVANT);
+
+        assertEquals(100,storage.getResource(Resource.SERVANT));
+        assertEquals(0, Reserve.getAmountOf(Resource.SERVANT));
 
     }
 
@@ -203,16 +131,8 @@ class StorageTest {
         Storage storage = new Storage();
         Reserve reserve = new Reserve();
 
-        try {
-            storage.addResource(Resource.COIN);
-        } catch (UnavailableResourceException e) {
-            e.printStackTrace();
-        }
-        try {
-            storage.addResource(Resource.COIN);
-        } catch (UnavailableResourceException e) {
-            e.printStackTrace();
-        }
+        storage.addResource(Resource.COIN);
+        storage.addResource(Resource.COIN);
 
         assertEquals(2,storage.getResource(Resource.COIN));
         assertEquals(98, Reserve.getAmountOf(Resource.COIN));
@@ -244,16 +164,8 @@ class StorageTest {
         assertEquals(0,storage.getResource(Resource.COIN));
         assertEquals(100, Reserve.getAmountOf(Resource.COIN));
 
-        try {
-            storage.addResource(Resource.ROCK);
-        } catch (UnavailableResourceException e) {
-            e.printStackTrace();
-        }
-        try {
-            storage.addResource(Resource.ROCK);
-        } catch (UnavailableResourceException e) {
-            e.printStackTrace();
-        }
+        storage.addResource(Resource.ROCK);
+        storage.addResource(Resource.ROCK);
 
         assertEquals(2,storage.getResource(Resource.ROCK));
         assertEquals(98, Reserve.getAmountOf(Resource.ROCK));
@@ -282,21 +194,9 @@ class StorageTest {
         assertEquals(0,storage.getResource(Resource.ROCK));
         assertEquals(100, Reserve.getAmountOf(Resource.ROCK));
 
-        try {
-            storage.addResource(Resource.SHIELD);
-        } catch (UnavailableResourceException e) {
-            e.printStackTrace();
-        }
-        try {
-            storage.addResource(Resource.SHIELD);
-        } catch (UnavailableResourceException e) {
-            e.printStackTrace();
-        }
-        try {
-            storage.addResource(Resource.SHIELD);
-        } catch (UnavailableResourceException e) {
-            e.printStackTrace();
-        }
+        storage.addResource(Resource.SHIELD);
+        storage.addResource(Resource.SHIELD);
+        storage.addResource(Resource.SHIELD);
 
         try{
             storage.useResource(Resource.SHIELD);
@@ -328,26 +228,10 @@ class StorageTest {
         assertEquals(0,storage.getResource(Resource.SHIELD));
         assertEquals(100, Reserve.getAmountOf(Resource.SHIELD));
 
-        try {
-            storage.addResource(Resource.SERVANT);
-        } catch (UnavailableResourceException e) {
-            e.printStackTrace();
-        }
-        try {
-            storage.addResource(Resource.SERVANT);
-        } catch (UnavailableResourceException e) {
-            e.printStackTrace();
-        }
-        try {
-            storage.addResource(Resource.SERVANT);
-        } catch (UnavailableResourceException e) {
-            e.printStackTrace();
-        }
-        try {
-            storage.addResource(Resource.SERVANT);
-        } catch (UnavailableResourceException e) {
-            e.printStackTrace();
-        }
+        storage.addResource(Resource.SERVANT);
+        storage.addResource(Resource.SERVANT);
+        storage.addResource(Resource.SERVANT);
+        storage.addResource(Resource.SERVANT);
 
         assertEquals(4,storage.getResource(Resource.SERVANT));
         assertEquals(96, Reserve.getAmountOf(Resource.SERVANT));
@@ -403,21 +287,9 @@ class StorageTest {
 
         assertTrue(storage.check(list));
 
-        try {
-            storage.addResource(Resource.COIN);
-        } catch (UnavailableResourceException e) {
-            e.printStackTrace();
-        }
-        try {
-            storage.addResource(Resource.ROCK);
-        } catch (UnavailableResourceException e) {
-            e.printStackTrace();
-        }
-        try {
-            storage.addResource(Resource.SERVANT);
-        } catch (UnavailableResourceException e) {
-            e.printStackTrace();
-        }
+        storage.addResource(Resource.COIN);
+        storage.addResource(Resource.ROCK);
+        storage.addResource(Resource.SERVANT);
         list.add(Resource.SHIELD);
         assertFalse(storage.check(list));
 
@@ -427,22 +299,14 @@ class StorageTest {
         list.add(Resource.SERVANT);
         assertTrue(storage.check(list));
 
-        try {
-            storage.addResource(Resource.COIN);
-        } catch (UnavailableResourceException e) {
-            e.printStackTrace();
-        }
+        storage.addResource(Resource.COIN);
         assertTrue(storage.check(list));
 
         list.add(Resource.SHIELD);
         assertFalse(storage.check(list));
 
         list.remove(Resource.SHIELD);
-        try {
-            storage.addResource(Resource.ROCK);
-        } catch (UnavailableResourceException e) {
-            e.printStackTrace();
-        }
+        storage.addResource(Resource.ROCK);
         assertFalse(storage.check(list));
 
         list.remove(Resource.SERVANT);
@@ -453,11 +317,7 @@ class StorageTest {
         assertFalse(storage.check(list));
 
         list.remove(Resource.ROCK);
-        try {
-            storage.addResource(Resource.COIN);
-        } catch (UnavailableResourceException e) {
-            e.printStackTrace();
-        }
+        storage.addResource(Resource.COIN);
         assertFalse(storage.check(list));
 
         list.remove(Resource.COIN);
@@ -519,24 +379,12 @@ class StorageTest {
 
         assertEquals(0, storage.resourceScore());
 
-        try {
-            storage.addResource(Resource.COIN);
-        } catch (UnavailableResourceException e) {
-            e.printStackTrace();
-        }
+        storage.addResource(Resource.COIN);
 
         assertEquals(1, storage.resourceScore());
 
-        try {
-            storage.addResource(Resource.ROCK);
-        } catch (UnavailableResourceException e) {
-            e.printStackTrace();
-        }
-        try {
-            storage.addResource(Resource.ROCK);
-        } catch (UnavailableResourceException e) {
-            e.printStackTrace();
-        }
+        storage.addResource(Resource.ROCK);
+        storage.addResource(Resource.ROCK);
 
         assertEquals(3, storage.resourceScore());
 
@@ -548,21 +396,9 @@ class StorageTest {
 
         assertEquals(2, storage.resourceScore());
 
-        try {
-            storage.addResource(Resource.SHIELD);
-        } catch (UnavailableResourceException e) {
-            e.printStackTrace();
-        }
-        try {
-            storage.addResource(Resource.SHIELD);
-        } catch (UnavailableResourceException e) {
-            e.printStackTrace();
-        }
-        try {
-            storage.addResource(Resource.SHIELD);
-        } catch (UnavailableResourceException e) {
-            e.printStackTrace();
-        }
+        storage.addResource(Resource.SHIELD);
+        storage.addResource(Resource.SHIELD);
+        storage.addResource(Resource.SHIELD);
 
         assertEquals(5, storage.resourceScore());
 
@@ -580,26 +416,11 @@ class StorageTest {
 
         assertEquals(3, storage.resourceScore());
 
-        try {
-            storage.addResource(Resource.SERVANT);
-        } catch (UnavailableResourceException e) {
-            e.printStackTrace();
-        }
-        try {
-            storage.addResource(Resource.SERVANT);
-        } catch (UnavailableResourceException e) {
-            e.printStackTrace();
-        }
-        try {
-            storage.addResource(Resource.SERVANT);
-        } catch (UnavailableResourceException e) {
-            e.printStackTrace();
-        }
-        try {
-            storage.addResource(Resource.SERVANT);
-        } catch (UnavailableResourceException e) {
-            e.printStackTrace();
-        }
+        storage.addResource(Resource.SERVANT);
+        storage.addResource(Resource.SERVANT);
+        storage.addResource(Resource.SERVANT);
+        storage.addResource(Resource.SERVANT);
+
 
         assertEquals(7, storage.resourceScore());
 
@@ -684,49 +505,17 @@ class StorageTest {
         map.put(Resource.SERVANT, 0);
         assertEquals(map,storage.getStorageResource());
 
-        try {
-            storage.addResource(Resource.SHIELD);
-        } catch (UnavailableResourceException e) {
-            e.printStackTrace();
-        }
+        storage.addResource(Resource.SHIELD);
         map.put(Resource.SHIELD, 1);
         assertEquals(map,storage.getStorageResource());
 
-        try {
-            storage.addResource(Resource.SHIELD);
-        } catch (UnavailableResourceException e) {
-            e.printStackTrace();
-        }
-        try {
-            storage.addResource(Resource.COIN);
-        } catch (UnavailableResourceException e) {
-            e.printStackTrace();
-        }
-        try {
-            storage.addResource(Resource.COIN);
-        } catch (UnavailableResourceException e) {
-            e.printStackTrace();
-        }
-        try {
-            storage.addResource(Resource.COIN);
-        } catch (UnavailableResourceException e) {
-            e.printStackTrace();
-        }
-        try {
-            storage.addResource(Resource.ROCK);
-        } catch (UnavailableResourceException e) {
-            e.printStackTrace();
-        }
-        try {
-            storage.addResource(Resource.ROCK);
-        } catch (UnavailableResourceException e) {
-            e.printStackTrace();
-        }
-        try {
-            storage.addResource(Resource.SERVANT);
-        } catch (UnavailableResourceException e) {
-            e.printStackTrace();
-        }
+        storage.addResource(Resource.SHIELD);
+        storage.addResource(Resource.COIN);
+        storage.addResource(Resource.COIN);
+        storage.addResource(Resource.COIN);
+        storage.addResource(Resource.ROCK);
+        storage.addResource(Resource.ROCK);
+        storage.addResource(Resource.SERVANT);
         map.put(Resource.COIN, 3);
         map.put(Resource.ROCK,2);
         map.put(Resource.SHIELD,2);
@@ -808,11 +597,7 @@ class StorageTest {
 
         for(Resource key : map.keySet()){
             for (int i = 0; i<map.get(key); i++){
-                try {
-                    storage.addResource(key);
-                } catch (UnavailableResourceException e) {
-                    System.out.println("Non ho potuto aggiungere " + key + " perche era finita\n");
-                }
+                storage.addResource(key);
             }
         }
 
@@ -844,9 +629,7 @@ class StorageTest {
 
         for (int i = 0 ; i<4; i++){
             for (int j = 0 ; j < cont[i]; j++){
-                try {
-                    storage.addResource(resource[i]);
-                } catch (UnavailableResourceException ignored) {}
+                storage.addResource(resource[i]);
             }
         }
 
@@ -895,11 +678,7 @@ class StorageTest {
 
         for(Resource key : map.keySet()){
             for (int i = 0; i<map.get(key); i++){
-                try {
-                    storage.addResource(key);
-                } catch (UnavailableResourceException e) {
-                    System.out.println("Non ho potuto aggiungere " + key + " perche era finita\n");
-                }
+                storage.addResource(key);
             }
         }
 
@@ -938,11 +717,7 @@ class StorageTest {
 
         for(Resource key : map.keySet()){
             for (int i = 0; i<map.get(key); i++){
-                try {
-                    storage.addResource(key);
-                } catch (UnavailableResourceException e) {
-                    System.out.println("Non ho potuto aggiungere " + key + " perche era finita\n");
-                }
+                storage.addResource(key);
             }
         }
 
@@ -982,11 +757,7 @@ class StorageTest {
 
         for(Resource key : map.keySet()){
             for (int i = 0; i<map.get(key); i++){
-                try {
-                    storage.addResource(key);
-                } catch (UnavailableResourceException e) {
-                    System.out.println("Non ho potuto aggiungere " + key + " perche era finita\n");
-                }
+                storage.addResource(key);
             }
         }
 
@@ -1026,11 +797,7 @@ class StorageTest {
 
         for(Resource key : map.keySet()){
             for (int i = 0; i<map.get(key); i++){
-                try {
-                    storage.addResource(key);
-                } catch (UnavailableResourceException e) {
-                    System.out.println("Non ho potuto aggiungere " + key + " perche era finita\n");
-                }
+                storage.addResource(key);
             }
         }
 
@@ -1069,11 +836,7 @@ class StorageTest {
 
         for(Resource key : map.keySet()){
             for (int i = 0; i<map.get(key); i++){
-                try {
-                    storage.addResource(key);
-                } catch (UnavailableResourceException e) {
-                    System.out.println("Non ho potuto aggiungere " + key + " perche era finita\n");
-                }
+                storage.addResource(key);
             }
         }
 
@@ -1130,11 +893,7 @@ class StorageTest {
 
         for(Resource key : map.keySet()){
             for (int i = 0; i<map.get(key); i++){
-                try {
-                    storage.addResource(key);
-                } catch (UnavailableResourceException e) {
-                    System.out.println("Non ho potuto aggiungere " + key + " perche era finita\n");
-                }
+                storage.addResource(key);
             }
         }
 
@@ -1204,11 +963,7 @@ class StorageTest {
 
         for(Resource key : map.keySet()){
             for (int i = 0; i<map.get(key); i++){
-                try {
-                    storage.addResource(key);
-                } catch (UnavailableResourceException e) {
-                    System.out.println("Non ho potuto aggiungere " + key + " perche era finita\n");
-                }
+                storage.addResource(key);
             }
         }
 
@@ -1279,11 +1034,7 @@ class StorageTest {
 
         for(Resource key : map.keySet()){
             for (int i = 0; i<map.get(key); i++){
-                try {
-                    storage.addResource(key);
-                } catch (UnavailableResourceException e) {
-                    System.out.println("Non ho potuto aggiungere " + key + " perche era finita\n");
-                }
+                storage.addResource(key);
             }
         }
 
@@ -1354,11 +1105,7 @@ class StorageTest {
 
         for(Resource key : map.keySet()){
             for (int i = 0; i<map.get(key); i++){
-                try {
-                    storage.addResource(key);
-                } catch (UnavailableResourceException e) {
-                    System.out.println("Non ho potuto aggiungere " + key + " perche era finita\n");
-                }
+                storage.addResource(key);
             }
         }
 
@@ -1429,11 +1176,7 @@ class StorageTest {
 
         for(Resource key : map.keySet()){
             for (int i = 0; i<map.get(key); i++){
-                try {
-                    storage.addResource(key);
-                } catch (UnavailableResourceException e) {
-                    System.out.println("Non ho potuto aggiungere " + key + " perche era finita\n");
-                }
+                storage.addResource(key);
             }
         }
 
@@ -1504,11 +1247,7 @@ class StorageTest {
 
         for(Resource key : map.keySet()){
             for (int i = 0; i<map.get(key); i++){
-                try {
                     storage.addResource(key);
-                } catch (UnavailableResourceException e) {
-                    System.out.println("Non ho potuto aggiungere " + key + " perche era finita\n");
-                }
             }
         }
 

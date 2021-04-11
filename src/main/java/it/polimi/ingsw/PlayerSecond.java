@@ -17,7 +17,7 @@ public class PlayerSecond extends Player{
      *
      */
     @Override
-    public void initResource(Resource resourceOne) throws UnavailableResourceException {
+    public void initResource(Resource resourceOne){
         getGameBoardOfPlayer().addToStorage(resourceOne);
     }
 

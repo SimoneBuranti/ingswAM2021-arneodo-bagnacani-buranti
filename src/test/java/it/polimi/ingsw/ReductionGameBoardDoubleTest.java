@@ -151,11 +151,7 @@ class ReductionGameBoardDoubleTest {
 
         for(Resource key : storageMap.keySet()){
             for (int i = 0; i<storageMap.get(key); i++){
-                try {
-                    gameBoard.addToStorage(key);
-                } catch (UnavailableResourceException e) {
-                    System.out.println("UnavailableResourceException: couldn't add " + key +"\n");
-                }
+                gameBoard.addToStorage(key);
             }
         }
 
@@ -253,11 +249,7 @@ class ReductionGameBoardDoubleTest {
 
         for(Resource key : storageMap.keySet()){
             for (int i = 0; i<storageMap.get(key); i++){
-                try {
-                    gameBoard.addToStorage(key);
-                } catch (UnavailableResourceException e) {
-                    System.out.println("UnavailableResourceException: couldn't add " + key +"\n");
-                }
+                gameBoard.addToStorage(key);
             }
         }
 
@@ -453,11 +445,7 @@ class ReductionGameBoardDoubleTest {
 
         for(Resource key : storageMap.keySet()){
             for (int i = 0; i<storageMap.get(key); i++){
-                try {
-                    gameBoard.addToStorage(key);
-                } catch (UnavailableResourceException e) {
-                    System.out.println("UnavailableResourceException: couldn't add " + key +"\n");
-                }
+                gameBoard.addToStorage(key);
             }
         }
 
@@ -728,11 +716,7 @@ class ReductionGameBoardDoubleTest {
 
         for(Resource key : storageMap.keySet()){
             for (int i = 0; i<storageMap.get(key); i++){
-                try {
-                    gameBoard.addToStorage(key);
-                } catch (UnavailableResourceException e) {
-                    System.out.println("UnavailableResourceException: couldn't add " + key +"\n");
-                }
+                gameBoard.addToStorage(key);
             }
         }
 
@@ -793,11 +777,7 @@ class ReductionGameBoardDoubleTest {
 
         for(Resource key : storageMap.keySet()){
             for (int i = 0; i<storageMap.get(key); i++){
-                try {
-                    gameBoard.addToStorage(key);
-                } catch (UnavailableResourceException e) {
-                    System.out.println("UnavailableResourceException: couldn't add " + key +"\n");
-                }
+                gameBoard.addToStorage(key);
             }
         }
 
@@ -858,11 +838,7 @@ class ReductionGameBoardDoubleTest {
 
         for(Resource key : storageMap.keySet()){
             for (int i = 0; i<storageMap.get(key); i++){
-                try {
-                    gameBoard.addToStorage(key);
-                } catch (UnavailableResourceException e) {
-                    System.out.println("UnavailableResourceException: couldn't add " + key +"\n");
-                }
+                gameBoard.addToStorage(key);
             }
         }
 
@@ -924,11 +900,7 @@ class ReductionGameBoardDoubleTest {
 
         for(Resource key : storageMap.keySet()){
             for (int i = 0; i<storageMap.get(key); i++){
-                try {
-                    gameBoard.addToStorage(key);
-                } catch (UnavailableResourceException e) {
-                    System.out.println("UnavailableResourceException: couldn't add " + key +"\n");
-                }
+                gameBoard.addToStorage(key);
             }
         }
 
@@ -995,11 +967,7 @@ class ReductionGameBoardDoubleTest {
 
         for(Resource key : storageMap.keySet()){
             for (int i = 0; i<storageMap.get(key); i++){
-                try {
-                    gameBoard.addToStorage(key);
-                } catch (UnavailableResourceException e) {
-                    System.out.println("UnavailableResourceException: couldn't add " + key +"\n");
-                }
+                gameBoard.addToStorage(key);
             }
         }
 
@@ -1072,11 +1040,7 @@ class ReductionGameBoardDoubleTest {
 
         for(Resource key : storageMap.keySet()){
             for (int i = 0; i<storageMap.get(key); i++){
-                try {
-                    gameBoard.addToStorage(key);
-                } catch (UnavailableResourceException e) {
-                    System.out.println("UnavailableResourceException: couldn't add " + key +"\n");
-                }
+                gameBoard.addToStorage(key);
             }
         }
 
@@ -1149,11 +1113,7 @@ class ReductionGameBoardDoubleTest {
 
         for(Resource key : storageMap.keySet()){
             for (int i = 0; i<storageMap.get(key); i++){
-                try {
-                    gameBoard.addToStorage(key);
-                } catch (UnavailableResourceException e) {
-                    System.out.println("UnavailableResourceException: couldn't add " + key +"\n");
-                }
+                gameBoard.addToStorage(key);
             }
         }
 
@@ -1341,11 +1301,7 @@ class ReductionGameBoardDoubleTest {
 
         for(Resource key : storageMap.keySet()){
             for (int i = 0; i<storageMap.get(key); i++){
-                try {
-                    gameBoard.addToStorage(key);
-                } catch (UnavailableResourceException e) {
-                    System.out.println("UnavailableResourceException: couldn't add " + key +"\n");
-                }
+                gameBoard.addToStorage(key);
             }
         }
 
@@ -1416,11 +1372,7 @@ class ReductionGameBoardDoubleTest {
         assertEquals(score,gameBoard.productionScore());
         for(Resource key : storageMap.keySet()){
             for (int i = 0; i<storageMap.get(key); i++){
-                try {
-                    gameBoard.addToStorage(key);
-                } catch (UnavailableResourceException e) {
-                    System.out.println("UnavailableResourceException: couldn't add " + key +"\n");
-                }
+                gameBoard.addToStorage(key);
             }
         }
         for(Resource key : strongboxMap.keySet()){
@@ -1480,11 +1432,7 @@ class ReductionGameBoardDoubleTest {
 
         for(Resource key : storageMap.keySet()){
             for (int i = 0; i<storageMap.get(key); i++){
-                try {
-                    gameBoard.addToStorage(key);
-                } catch (UnavailableResourceException e) {
-                    System.out.println("UnavailableResourceException: couldn't add " + key +"\n");
-                }
+                gameBoard.addToStorage(key);
             }
         }
 
@@ -1567,11 +1515,7 @@ class ReductionGameBoardDoubleTest {
 
         for(Resource key : storageMap.keySet()){
             for (int i = 0; i<storageMap.get(key); i++){
-                try {
-                    gameBoard.addToStorage(key);
-                } catch (UnavailableResourceException e) {
-                    System.out.println("UnavailableResourceException: couldn't add " + key +"\n");
-                }
+                gameBoard.addToStorage(key);
             }
         }
 
@@ -1636,11 +1580,7 @@ class ReductionGameBoardDoubleTest {
 
         for(Resource key : storageMap.keySet()){
             for (int i = 0; i<storageMap.get(key); i++){
-                try {
-                    gameBoard.addToStorage(key);
-                } catch (UnavailableResourceException e) {
-                    System.out.println("UnavailableResourceException: couldn't add " + key +"\n");
-                }
+                gameBoard.addToStorage(key);
             }
         }
 
@@ -1698,11 +1638,7 @@ class ReductionGameBoardDoubleTest {
 
         for(Resource key : storageMap.keySet()){
             for (int i = 0; i<storageMap.get(key); i++){
-                try {
-                    gameBoard.addToStorage(key);
-                } catch (UnavailableResourceException e) {
-                    System.out.println("UnavailableResourceException: couldn't add " + key +"\n");
-                }
+                gameBoard.addToStorage(key);
             }
         }
 
@@ -1766,11 +1702,7 @@ class ReductionGameBoardDoubleTest {
 
         for(Resource key : storageMap.keySet()){
             for (int i = 0; i<storageMap.get(key); i++){
-                try {
-                    gameBoard.addToStorage(key);
-                } catch (UnavailableResourceException e) {
-                    System.out.println("UnavailableResourceException: couldn't add " + key +"\n");
-                }
+                gameBoard.addToStorage(key);
             }
         }
 
@@ -1833,11 +1765,7 @@ assertEquals(0,availableMap.get(Resource.SERVANT));*/
 
         for(Resource key : storageMap.keySet()){
             for (int i = 0; i<storageMap.get(key); i++){
-                try {
-                    gameBoard.addToStorage(key);
-                } catch (UnavailableResourceException e) {
-                    System.out.println("UnavailableResourceException: couldn't add " + key +"\n");
-                }
+                gameBoard.addToStorage(key);
             }
         }
 
@@ -1935,11 +1863,7 @@ assertEquals(0,availableMap.get(Resource.SERVANT));*/
 
         for(Resource key : storageMap.keySet()){
             for (int i = 0; i<storageMap.get(key); i++){
-                try {
-                    gameBoard.addToStorage(key);
-                } catch (UnavailableResourceException e) {
-                    System.out.println("UnavailableResourceException: couldn't add " + key +"\n");
-                }
+                gameBoard.addToStorage(key);
             }
         }
 
@@ -2046,11 +1970,7 @@ assertEquals(0,availableMap.get(Resource.SERVANT));*/
 
         for(Resource key : storageMap.keySet()){
             for (int i = 0; i<storageMap.get(key); i++){
-                try {
-                    gameBoard.addToStorage(key);
-                } catch (UnavailableResourceException e) {
-                    System.out.println("UnavailableResourceException: couldn't add " + key +"\n");
-                }
+                gameBoard.addToStorage(key);
             }
         }
 
@@ -2162,11 +2082,7 @@ assertEquals(0,availableMap.get(Resource.SERVANT));*/
 
         for(Resource key : storageMap.keySet()){
             for (int i = 0; i<storageMap.get(key); i++){
-                try {
-                    gameBoard.addToStorage(key);
-                } catch (UnavailableResourceException e) {
-                    //System.out.println("UnavailableResourceException: couldn't add " + key +"\n");
-                }
+                gameBoard.addToStorage(key);
             }
         }
 
@@ -2280,11 +2196,7 @@ assertEquals(0,availableMap.get(Resource.SERVANT));*/
 
         for(Resource key : storageMap.keySet()){
             for (int i = 0; i<storageMap.get(key); i++){
-                try {
-                    gameBoard.addToStorage(key);
-                } catch (UnavailableResourceException e) {
-                    //System.out.println("UnavailableResourceException: couldn't add " + key +"\n");
-                }
+                gameBoard.addToStorage(key);
             }
         }
 
@@ -2397,11 +2309,7 @@ assertEquals(4-inputMap.get(Resource.SERVANT)+outputMap.get(Resource.SERVANT),av
 
         for(Resource key : storageMap.keySet()){
             for (int i = 0; i<storageMap.get(key); i++){
-                try {
-                    gameBoard.addToStorage(key);
-                } catch (UnavailableResourceException e) {
-                    //System.out.println("UnavailableResourceException: couldn't add " + key +"\n");
-                }
+                gameBoard.addToStorage(key);
             }
         }
 
@@ -2540,11 +2448,7 @@ assertEquals(4-inputMap.get(Resource.SERVANT)+outputMap.get(Resource.SERVANT),av
 
         for(Resource key : storageMap.keySet()){
             for (int i = 0; i<storageMap.get(key); i++){
-                try {
-                    gameBoard.addToStorage(key);
-                } catch (UnavailableResourceException e) {
-                    //System.out.println("UnavailableResourceException: couldn't add " + key +"\n");
-                }
+                gameBoard.addToStorage(key);
             }
         }
 

@@ -13,10 +13,8 @@ public class GreyMarble extends Marble{
          */
         try {
             Reserve.getResource(Resource.ROCK);
-        } catch (UnavailableResourceException e) {
-        }
-        player.addToBuffer(Resource.ROCK);
-
+            player.addToBuffer(Resource.ROCK);
+        } catch (UnavailableResourceException ignored) {}
 
     }
 }

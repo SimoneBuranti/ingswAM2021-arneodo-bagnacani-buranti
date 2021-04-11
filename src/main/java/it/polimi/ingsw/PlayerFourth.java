@@ -17,7 +17,7 @@ public class PlayerFourth extends Player {
      *
      */
     @Override
-    public void initResource(Resource resourceOne,Resource resourceTwo) throws UnavailableResourceException, CallForCouncilException, LastSpaceReachedException {
+    public void initResource(Resource resourceOne,Resource resourceTwo) throws CallForCouncilException, LastSpaceReachedException {
         getGameBoardOfPlayer().addToStorage(resourceOne);
         getGameBoardOfPlayer().addToStorage(resourceTwo);
         getGameBoardOfPlayer().faithMove();

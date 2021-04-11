@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public class Player {
     private boolean connected;
-    private GameBoardInterface gameBoardOfPlayer ;
-    private String nickName;
+    private final GameBoardInterface gameBoardOfPlayer ;
+    private final String nickName;
     private int score;
     private ArrayList<LeaderCard> personalLeaderCard;
     private ArrayList<Resource> buffer;
@@ -24,7 +24,7 @@ public class Player {
         personalLeaderCard.add(DeckLeaderCard.arrangeDeckLeaderCards());
         this.nickName = nickName;
         this.game = game;
-    };
+    }
 
 
     /**
@@ -107,8 +107,8 @@ public class Player {
      * methods null, specified only in child classes
      *
      */
-    public void initResource(Resource resource) throws UnavailableResourceException, CallForCouncilException, LastSpaceReachedException {}
-    public void initResource(Resource resourceOne,Resource resourceTwo) throws UnavailableResourceException, CallForCouncilException, LastSpaceReachedException {}
+    public void initResource(Resource resource) throws CallForCouncilException, LastSpaceReachedException {}
+    public void initResource(Resource resourceOne,Resource resourceTwo) throws CallForCouncilException, LastSpaceReachedException {}
 
     //public void EndOfTurn(){}
 
@@ -182,6 +182,18 @@ public class Player {
         gameBoardOfPlayer.baseProductionOn(i1,i2,o);
     }
 
+    public void extraProductionOn(Resource resource) throws LastSpaceReachedException, CallForCouncilException, ImpossibleProductionException {
+       gameBoardOfPlayer.extraProductionOn(resource);
+    }
+
+    public void anotherExtraProductionOn(Resource resource) throws LastSpaceReachedException, CallForCouncilException, ImpossibleProductionException {
+       gameBoardOfPlayer.anotherExtraProductionOn(resource);
+    }
+
+    public void endOfProduction() throws CallForCouncilException, LastSpaceReachedException {
+       gameBoardOfPlayer.endOfProduction();
+    }
+
     public int playerScore(){
         return gameBoardOfPlayer.score();
     }
@@ -194,12 +206,6 @@ public class Player {
     public void addToBuffer(Resource resource){
             buffer.add(resource);
     }
-
-
-
-
-
-
 
 
 }

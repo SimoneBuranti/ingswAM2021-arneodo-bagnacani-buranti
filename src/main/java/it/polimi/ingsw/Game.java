@@ -47,21 +47,104 @@ public class Game {
 
     }
 
-    public void buyProductionCard(DeckProductionCard deck, int chosenColumn) throws LevelException, NotEnoughResourcesException, EmptyException, FullColumnException, EndGameException {
-        currentPlayer.buyProductionCard(deck,chosenColumn);
+    public void initResourceOfPlayer(Player player, Resource resource){
+        try {
+            player.initResource(resource);
+        } catch (CallForCouncilException e) {
+            exceptionHandler(e);
+        } catch (LastSpaceReachedException e) {
+            exceptionHandler(e);
+        }
+    }
+
+    public void initResourceOfPlayer(Player player, Resource resourceOne, Resource resourceTwo){
+        try {
+            player.initResource(resourceOne, resourceTwo);
+        } catch (CallForCouncilException e) {
+            exceptionHandler(e);
+        } catch (LastSpaceReachedException e) {
+            exceptionHandler(e);
+        }
+
+    }
+
+    public void buyProductionCard(Player player, DeckProductionCard deck, int chosenColumn) throws LevelException, NotEnoughResourcesException, EmptyException, FullColumnException, EndGameException {
+        player.buyProductionCard(deck,chosenColumn);
     }
 
     public void moveEveryoneExcept(Player player){
     }
 
-    public void productionOn(int chosenColumn){
+    public void productionOn(Player player,int chosenColumn){
         try {
-            currentPlayer.productionOn(chosenColumn);
+            player.productionOn(chosenColumn);
         } catch (ImpossibleProductionException e) {
             exceptionHandler(e);
         } catch (EmptyColumnException e) {
             exceptionHandler(e);
         }
+    }
+
+    public void baseProductionOn(Player player, Resource i1, Resource i2, Resource output){
+        try {
+            player.baseProductionOn(i1, i2, output);
+        } catch (ImpossibleProductionException e) {
+            exceptionHandler(e);
+        }
+    }
+
+    public void extraProductionOn(Player player, Resource resource){
+        try {
+            player.extraProductionOn(resource);
+        } catch (LastSpaceReachedException e) {
+            exceptionHandler(e);
+        } catch (CallForCouncilException e) {
+            exceptionHandler(e);
+        } catch (ImpossibleProductionException e) {
+            exceptionHandler(e);
+        }
+    }
+
+    public void anotherExtraProductionOn(Player player, Resource resource){
+        try {
+            player.anotherExtraProductionOn(resource);
+        } catch (LastSpaceReachedException e) {
+            exceptionHandler(e);
+        } catch (CallForCouncilException e) {
+            exceptionHandler(e);
+        } catch (ImpossibleProductionException e) {
+            exceptionHandler(e);
+        }
+    }
+
+    public void endOfProduction(Player player){
+        try {
+            player.endOfProduction();
+        } catch (CallForCouncilException e) {
+            exceptionHandler(e);
+        } catch (LastSpaceReachedException e) {
+            exceptionHandler(e);
+        }
+    }
+
+    public void saveLeaderCardChosen(Player player, int index1, int index2){
+        player.saveLeaderCard(index1,index2);
+    }
+
+    public void discardLeaderCard(Player player, int index){
+        try {
+            player.discardLeaderCard(index);
+        } catch (CallForCouncilException e) {
+            exceptionHandler(e);
+        } catch (LastSpaceReachedException e) {
+            exceptionHandler(e);
+        } catch (LeaderCardsGameBoardEmptyException e) {
+            exceptionHandler(e);
+        }
+    }
+
+    public void activateLeaderCard(Player player, int index){
+        player.activationLeaderCard(index);
     }
 
     /**
@@ -89,6 +172,10 @@ public class Game {
         } catch (WhiteMarbleException e) {
             exceptionHandler(e);
         }
+    }
+
+    public int scoreOfPlayerP(Player p){
+        return p.playerScore();
     }
 
 
@@ -181,6 +268,8 @@ public class Game {
     }
 
 
+    protected void exceptionHandler(LeaderCardsGameBoardEmptyException e) {
+    }
 
 
 }

@@ -159,7 +159,7 @@ public class GameBoard implements GameBoardInterface{
      * Test only method: this method adds a resource to its own storage.
      * @param resource
      */
-    public void addToStorage(Resource resource) throws UnavailableResourceException {
+    public void addToStorage(Resource resource){
         storageOfGameBoard.addResource(resource);
     }
 
@@ -331,9 +331,7 @@ public class GameBoard implements GameBoardInterface{
             throw new NotEnoughSpaceInStorageException();
         } else {
             for (Resource r : newResources) {
-                try {
-                    storageOfGameBoard.addResource(r);
-                } catch (UnavailableResourceException ignored) {}
+                storageOfGameBoard.addResource(r);
             }
         }
     }

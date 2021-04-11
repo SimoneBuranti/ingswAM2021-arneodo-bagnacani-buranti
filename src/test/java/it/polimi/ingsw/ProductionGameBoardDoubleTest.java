@@ -46,9 +46,7 @@ class ProductionGameBoardDoubleTest {
 
         for(Resource key : storageMap.keySet()){
             for (int i = 0; i<storageMap.get(key); i++){
-                try {
-                    gameBoard.addToStorage(key);
-                } catch (UnavailableResourceException ignored){}
+                gameBoard.addToStorage(key);
             }
         }
 
@@ -120,9 +118,7 @@ class ProductionGameBoardDoubleTest {
 
         for(Resource key : storageMap.keySet()){
             for (int i = 0; i<storageMap.get(key); i++){
-                try {
-                    gameBoard.addToStorage(key);
-                } catch (UnavailableResourceException ignored){}
+                gameBoard.addToStorage(key);
             }
         }
 
@@ -193,9 +189,7 @@ class ProductionGameBoardDoubleTest {
 
         for(Resource key : storageMap.keySet()){
             for (int i = 0; i<storageMap.get(key); i++){
-                try {
-                    gameBoard.addToStorage(key);
-                } catch (UnavailableResourceException ignored){}
+                gameBoard.addToStorage(key);
             }
         }
 
@@ -267,9 +261,7 @@ class ProductionGameBoardDoubleTest {
 
         for(Resource key : storageMap.keySet()){
             for (int i = 0; i<storageMap.get(key); i++){
-                try {
-                    gameBoard.addToStorage(key);
-                } catch (UnavailableResourceException ignored){}
+                gameBoard.addToStorage(key);
             }
         }
 
@@ -341,9 +333,7 @@ class ProductionGameBoardDoubleTest {
 
         for(Resource key : storageMap.keySet()){
             for (int i = 0; i<storageMap.get(key); i++){
-                try {
-                    gameBoard.addToStorage(key);
-                } catch (UnavailableResourceException ignored){}
+                gameBoard.addToStorage(key);
             }
         }
 
@@ -414,9 +404,7 @@ class ProductionGameBoardDoubleTest {
 
         for(Resource key : storageMap.keySet()){
             for (int i = 0; i<storageMap.get(key); i++){
-                try {
-                    gameBoard.addToStorage(key);
-                } catch (UnavailableResourceException ignored){}
+                gameBoard.addToStorage(key);
             }
         }
 

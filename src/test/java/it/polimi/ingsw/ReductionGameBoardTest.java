@@ -139,11 +139,7 @@ class ReductionGameBoardTest {
 
         for(Resource key : storageMap.keySet()){
             for (int i = 0; i<storageMap.get(key); i++){
-                try {
-                    gameBoard.addToStorage(key);
-                } catch (UnavailableResourceException e) {
-                    System.out.println("UnavailableResourceException: couldn't add " + key +"\n");
-                }
+                gameBoard.addToStorage(key);
             }
         }
 
@@ -240,11 +236,7 @@ class ReductionGameBoardTest {
 
         for(Resource key : storageMap.keySet()){
             for (int i = 0; i<storageMap.get(key); i++){
-                try {
-                    gameBoard.addToStorage(key);
-                } catch (UnavailableResourceException e) {
-                    System.out.println("UnavailableResourceException: couldn't add " + key +"\n");
-                }
+                gameBoard.addToStorage(key);
             }
         }
 
@@ -456,11 +448,7 @@ class ReductionGameBoardTest {
 
         for(Resource key : storageMap.keySet()){
             for (int i = 0; i<storageMap.get(key); i++){
-                try {
-                    gameBoard.addToStorage(key);
-                } catch (UnavailableResourceException e) {
-                    System.out.println("UnavailableResourceException: couldn't add " + key +"\n");
-                }
+                gameBoard.addToStorage(key);
             }
         }
 
