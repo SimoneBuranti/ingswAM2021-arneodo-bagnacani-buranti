@@ -130,6 +130,11 @@ public class GameMultiPlayer extends Game {
 
         return  nickNameInOrder;}
 
+    /**
+     * method called when one of the players discard Resources
+     * @param player
+     *
+     */
     @Override
     public void moveEveryoneExcept(Player player){
         for(Player p : playerList){
@@ -164,6 +169,23 @@ public class GameMultiPlayer extends Game {
     @Override
     protected void exceptionHandler(EndGameException e) {
         lastTurn = true;
+    }
+
+
+    /**
+     * method called when game is finished
+     * @return playerWinner
+     */
+    public Player theWinnerIs(){
+        Player playerWinner;
+        playerWinner=playerList.get(0);
+        for(Player p : playerList){
+            if(p.getScore()>playerWinner.getScore() && !p.equals(playerList.get(0)))
+                playerWinner=p;
+            else if(p.getScore()==playerWinner.getScore() && p.getGameBoardOfPlayer().scoreResource()>playerWinner.getGameBoardOfPlayer().scoreResource() && !p.equals(playerList.get(0)))
+                playerWinner=p;
+        }
+        return playerWinner;
     }
 
 }

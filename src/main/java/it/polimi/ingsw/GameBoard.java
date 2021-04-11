@@ -539,4 +539,10 @@ public class GameBoard implements GameBoardInterface{
     public Resource getResourceTypeFirst() {
         return null;
     }
+
+
+    public int scoreResource(){
+        return  (int)((storageOfGameBoard.resourceScore() +
+                strongboxOfGameBoard.resourceScore()) /5);
+    }
 }

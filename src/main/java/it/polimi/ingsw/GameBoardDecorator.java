@@ -207,4 +207,10 @@ public abstract class GameBoardDecorator implements GameBoardInterface {
     public Resource getResourceTypeFirst() {
         return null;
     }
+
+    @Override
+    public int scoreResource(){
+        return gameBoard.scoreResource();
+    }
+
 }

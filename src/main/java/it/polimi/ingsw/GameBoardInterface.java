@@ -85,4 +85,6 @@ public interface GameBoardInterface {
     void setStorageCardActivated();
 
     Resource getResourceTypeFirst();
+
+    public int scoreResource();
 }
