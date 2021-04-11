@@ -657,7 +657,7 @@ public class ProductionOnTest {
         assertEquals(2, gameBoard.resourceQuantity(Resource.SHIELD));
         assertEquals(0, gameBoard.resourceQuantity(Resource.SERVANT));
         assertEquals(9, gameBoard.getIndicator());
-        assertEquals(4, gameBoard.faithScore());
+        assertEquals(6, gameBoard.faithScore());
     }
 
     @Test
