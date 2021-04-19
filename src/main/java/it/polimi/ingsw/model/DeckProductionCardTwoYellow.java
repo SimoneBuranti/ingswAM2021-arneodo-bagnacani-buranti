@@ -1,12 +1,14 @@
 package it.polimi.ingsw.model;
 
 import java.util.*;
-
+/**
+ * this class represents the second level yellow production card deck
+ */
 public class DeckProductionCardTwoYellow extends DeckProductionCard {
 
-
-
-
+    /**
+     * this constructor creates all the production cards and adds them to the list and shuffles the newly created deck
+     */
     public DeckProductionCardTwoYellow (){
 
         Yellow yellow= new Yellow();

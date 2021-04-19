@@ -2,10 +2,6 @@ package it.polimi.ingsw.model;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import it.polimi.ingsw.model.Reserve;
-import it.polimi.ingsw.model.Resource;
-import it.polimi.ingsw.model.Strongbox;
-import it.polimi.ingsw.model.UnavailableResourceException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -36,7 +32,7 @@ public class StrongboxTest {
     @DisplayName("addResource Test")
     public void addResourceTest() {
         Strongbox strongbox = new Strongbox();
-        Reserve reserve = new Reserve();
+        new Reserve();
 
         assertEquals(0, strongbox.getResource(Resource.COIN));
         assertEquals(0, strongbox.getResource(Resource.ROCK));
@@ -78,7 +74,7 @@ public class StrongboxTest {
     @DisplayName("addResource with unavailable resource Test")
     public void addResourceUnavailableTest() {
         Strongbox strongbox = new Strongbox();
-        Reserve reserve = new Reserve();
+        new Reserve();
 
         for (int i = 0; i < 100 ; i++){
             strongbox.addResource(Resource.COIN);
@@ -132,7 +128,7 @@ public class StrongboxTest {
     @DisplayName("useResource Test")
     public void useResourceTest() {
         Strongbox strongbox = new Strongbox();
-        Reserve reserve = new Reserve();
+        new Reserve();
 
         strongbox.addResource(Resource.COIN);
         strongbox.addResource(Resource.COIN);
@@ -283,7 +279,7 @@ public class StrongboxTest {
     @DisplayName("resourceScore Test")
     public void resourceScoreTest(){
         Strongbox strongbox = new Strongbox();
-        Reserve reserve = new Reserve();
+        new Reserve();
 
         assertEquals(0, strongbox.resourceScore());
 
@@ -401,7 +397,7 @@ public class StrongboxTest {
     @DisplayName("availableResourcesTest 0")
     public void availableResourcesTest0(){
         Strongbox strongbox = new Strongbox();
-        Reserve reserve = new Reserve();
+        new Reserve();
 
         Map<Resource,Integer> map = new HashMap<>();
         Map<Resource,Integer> availableMap = new HashMap<>();
@@ -428,14 +424,14 @@ public class StrongboxTest {
                 availableMap.put(resource, availableMap.remove(resource)+1);
         }
 
-        assertTrue(map.equals(availableMap));
+        assertEquals(map, availableMap);
     }
 
     @Test
     @DisplayName("availableResourcesTest3")
     public void availableResourcesTest3(){
         Strongbox strongbox = new Strongbox();
-        Reserve reserve = new Reserve();
+        new Reserve();
 
         Map<Resource,Integer> map = new HashMap<>();
         Map<Resource,Integer> availableMap = new HashMap<>();
@@ -474,7 +470,7 @@ public class StrongboxTest {
     @DisplayName("availableResourcesTest4 : available only resources")
     public void availableResourcesTest4(){
         Strongbox strongbox = new Strongbox();
-        Reserve reserve = new Reserve();
+        new Reserve();
 
         Map<Resource,Integer> map = new HashMap<>();
         Map<Resource,Integer> availableMap = new HashMap<>();
@@ -514,7 +510,7 @@ public class StrongboxTest {
     @DisplayName("availableResourcesTest5 : one unavailable resource type")
     public void availableResourcesTest5(){
         Strongbox strongbox = new Strongbox();
-        Reserve reserve = new Reserve();
+        new Reserve();
 
         Map<Resource,Integer> map = new HashMap<>();
         Map<Resource,Integer> availableMap = new HashMap<>();
@@ -554,7 +550,7 @@ public class StrongboxTest {
     @DisplayName("availableResourcesTest6 : all to limits")
     public void availableResourcesTest6(){
         Strongbox strongbox = new Strongbox();
-        Reserve reserve = new Reserve();
+        new Reserve();
 
         Map<Resource,Integer> map = new HashMap<>();
         Map<Resource,Integer> availableMap = new HashMap<>();
@@ -593,7 +589,7 @@ public class StrongboxTest {
     @DisplayName("availableResourcesTest7 : all out of limit")
     public void availableResourcesTest7(){
         Strongbox strongbox = new Strongbox();
-        Reserve reserve = new Reserve();
+        new Reserve();
 
         Map<Resource,Integer> map = new HashMap<>();
         Map<Resource,Integer> availableMap = new HashMap<>();
@@ -632,7 +628,7 @@ public class StrongboxTest {
     @DisplayName("PayResources Test - simple test")
     public void payResourcesTest0(){
         Strongbox strongbox = new Strongbox();
-        Reserve reserve = new Reserve();
+        new Reserve();
 
         Map<Resource,Integer> map = new HashMap<>();
         Map<Resource,Integer> availableMap = new HashMap<>();
@@ -702,7 +698,7 @@ public class StrongboxTest {
     @DisplayName("PayResources Test 1- affordable cost")
     public void payResourcesTest1(){
         Strongbox strongbox = new Strongbox();
-        Reserve reserve = new Reserve();
+        new Reserve();
 
         Map<Resource,Integer> map = new HashMap<>();
         Map<Resource,Integer> availableMap = new HashMap<>();
@@ -773,7 +769,7 @@ public class StrongboxTest {
     @DisplayName("PayResources Test 2- affordable cost")
     public void payResourcesTest2(){
         Strongbox strongbox = new Strongbox();
-        Reserve reserve = new Reserve();
+        new Reserve();
 
         Map<Resource,Integer> map = new HashMap<>();
         Map<Resource,Integer> availableMap = new HashMap<>();
@@ -844,7 +840,7 @@ public class StrongboxTest {
     @DisplayName("PayResources Test 3 ")
     public void payResourcesTest3(){
         Strongbox strongbox = new Strongbox();
-        Reserve reserve = new Reserve();
+        new Reserve();
 
         Map<Resource,Integer> map = new HashMap<>();
         Map<Resource,Integer> availableMap = new HashMap<>();
@@ -915,7 +911,7 @@ public class StrongboxTest {
     @DisplayName("PayResources Test 4 ")
     public void payResourcesTest4(){
         Strongbox strongbox = new Strongbox();
-        Reserve reserve = new Reserve();
+        new Reserve();
 
         Map<Resource,Integer> map = new HashMap<>();
         Map<Resource,Integer> availableMap = new HashMap<>();
@@ -986,7 +982,7 @@ public class StrongboxTest {
     @DisplayName("PayResources Test 5 ")
     public void payResourcesTest5(){
         Strongbox strongbox = new Strongbox();
-        Reserve reserve = new Reserve();
+        new Reserve();
 
         Map<Resource,Integer> map = new HashMap<>();
         Map<Resource,Integer> availableMap = new HashMap<>();

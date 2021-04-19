@@ -1,9 +1,5 @@
 package it.polimi.ingsw.model;
 
-import it.polimi.ingsw.model.CallForCouncilException;
-import it.polimi.ingsw.model.GameMultiPlayer;
-import it.polimi.ingsw.model.LastSpaceReachedException;
-import it.polimi.ingsw.model.LeaderCardsGameBoardEmptyException;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -29,42 +25,35 @@ class DiscardLeaderCardForFaithPoint {
         assertNotEquals(game.getPlayerFromList(0).getCardFromPersonalLeaderCard(0),(game.getPlayerFromList(1).getCardFromPersonalLeaderCard(3)));
 
         game.getPlayerFromList(0).saveLeaderCard(1,2);
-        assertTrue(game.getPlayerFromList(0).personalLeaderCardSize()==4);
-        assertTrue(game.getPlayerFromList(0).getGameBoardOfPlayer().leaderCardsSize()==2);
+        assertEquals(4, game.getPlayerFromList(0).personalLeaderCardSize());
+        assertEquals(2, game.getPlayerFromList(0).getGameBoardOfPlayer().leaderCardsSize());
 
 
         game.getPlayerFromList(0).discardLeaderCard(1);
-        assertTrue(game.getPlayerFromList(0).getIndicator()==1);
-        assertTrue(game.getPlayerFromList(0).getGameBoardOfPlayer().leaderCardsSize()==1);
+        assertEquals(1, game.getPlayerFromList(0).getIndicator());
+        assertEquals(1, game.getPlayerFromList(0).getGameBoardOfPlayer().leaderCardsSize());
 
         game.getPlayerFromList(0).discardLeaderCard(0);
-        assertTrue(game.getPlayerFromList(0).getIndicator()==2);
-        assertTrue(game.getPlayerFromList(0).getGameBoardOfPlayer().leaderCardsSize()==0);
+        assertEquals(2, game.getPlayerFromList(0).getIndicator());
+        assertEquals(0, game.getPlayerFromList(0).getGameBoardOfPlayer().leaderCardsSize());
 
 
 
 
 
         game.getPlayerFromList(1).saveLeaderCard(1,2);
-        assertTrue(game.getPlayerFromList(1).personalLeaderCardSize()==4);
-        assertTrue(game.getPlayerFromList(1).getGameBoardOfPlayer().leaderCardsSize()==2);
+        assertEquals(4, game.getPlayerFromList(1).personalLeaderCardSize());
+        assertEquals(2, game.getPlayerFromList(1).getGameBoardOfPlayer().leaderCardsSize());
 
 
         game.getPlayerFromList(1).discardLeaderCard(0);
-        assertTrue(game.getPlayerFromList(1).getIndicator()==1);
-        assertTrue(game.getPlayerFromList(1).getGameBoardOfPlayer().leaderCardsSize()==1);
+        assertEquals(1, game.getPlayerFromList(1).getIndicator());
+        assertEquals(1, game.getPlayerFromList(1).getGameBoardOfPlayer().leaderCardsSize());
 
         game.getPlayerFromList(1).discardLeaderCard(0);
-        assertTrue(game.getPlayerFromList(1).getIndicator()==2);
-        assertTrue(game.getPlayerFromList(1).getGameBoardOfPlayer().leaderCardsSize()==0);
+        assertEquals(2, game.getPlayerFromList(1).getIndicator());
+        assertEquals(0, game.getPlayerFromList(1).getGameBoardOfPlayer().leaderCardsSize());
 
-
-
-
-
-
-
-        assertTrue( true );
     }
 
 }

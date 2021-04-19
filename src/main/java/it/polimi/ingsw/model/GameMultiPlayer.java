@@ -15,6 +15,7 @@ public class GameMultiPlayer extends Game {
     private boolean lastTurn = false;
     private ArrayList<String> nickNameInOrder = new ArrayList<>();
     private ArrayList<Player> playerList = new ArrayList<>();
+    private int currentPLayerPosition = 0;
 
     /**
      * this is the constructor for the class
@@ -27,7 +28,7 @@ public class GameMultiPlayer extends Game {
         inkwell=createRandomNumber(numberOfPlayer);
         nickNameInOrder=correctOrder(nickName,inkwell);
         createPlayer(numberOfPlayer,nickNameInOrder);
-
+        currentPlayer = playerList.get(currentPLayerPosition);
     }
 
     /**
@@ -80,19 +81,14 @@ public class GameMultiPlayer extends Game {
     }
 
 
+    //AGGIUNGERE CONTROLLO CONNESSIONE
+    public void setCurrentPlayer() {
+        if(currentPLayerPosition == numberOfPlayer-1)
+            currentPLayerPosition = 0;
+        else
+            currentPLayerPosition += 1;
 
-    /**
-     * @return currentPlayer
-     */
-    public Player getCurrentPlayer() {
-        return currentPlayer;
-    }
-
-    /**
-     * @param currentPlayer
-     */
-    public void setCurrentPlayer(Player currentPlayer) {
-        this.currentPlayer = currentPlayer;
+        currentPlayer = playerList.get(currentPLayerPosition);
     }
 
 

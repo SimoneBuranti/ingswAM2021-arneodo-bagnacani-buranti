@@ -1,5 +1,8 @@
 package it.polimi.ingsw.model;
 
+/**
+ * This class represents the faith track of a player's personal board
+ */
 public class FaithPath {
 
     /**
@@ -49,7 +52,6 @@ public class FaithPath {
 
     /**
      * Constructor for standard faithPath state
-     *@return FaithPath
      */
     public FaithPath() {
         this.faithIndicator = 0;
@@ -58,44 +60,12 @@ public class FaithPath {
     }
 
     /**
-     * Specific constructor for third and fourth players
-     *@return FaithPath
-     */
-    public FaithPath(int initPosition) {
-        this.faithIndicator = initPosition;
-        this.papalCards = new int[]{UNDEFINED, UNDEFINED, UNDEFINED};
-        this.currCall = 0;
-    }
-
-    /**
-     * getter for tests
-     * @return int
-     */
-    public int getIndicator() {
-        return this.faithIndicator;
-    }
-
-    /**
-     * getter for tests
-     * @return int
-     */
-    public int getCurrCall() {
-        return this.currCall;
-    }
-
-    /**
-     * getter for tests
-     * @return int
-     */
-    public int getPapalCard(int papalCardNumber){
-        return papalCards[papalCardNumber];
-    }
-
-
-    /**
-     * move() method increases faithIndicator counter one at a time within faithPath length restrictions
+     * This method increases faithIndicator counter one at a time within faithPath length restrictions
      * If the player moves on a papal event checkpoint position a CallForCouncilException is thrown
      * and it will be handled by Game which will manage papal cards of each player
+     * If the papal event checkpoint reached is the last a LastSpaceReachedException is thrown
+     * @throws CallForCouncilException : the exception which is thrown when the faith indicator has reached the current papal space
+     * @throws LastSpaceReachedException : the exception which is thrown when the faith indicator has reached the last papal space
      */
     public void move() throws CallForCouncilException, LastSpaceReachedException {
 
@@ -110,8 +80,9 @@ public class FaithPath {
 
 
     /**
-     * setPapal() checks the current position compared with the current vatican space
+     * This method checks the current position compared with the current vatican space
      * and the related papal cards will be assigned or not depending on player position
+     * It also increases the currCall attribute
      */
     public void setPapal() {
 
@@ -124,8 +95,8 @@ public class FaithPath {
     }
 
     /**
-     * faithScore() returns the overall faithPath score (at any time of the game)
-     * @return int
+     * This method returns the overall faithPath score (at any time of the game)
+     * @return int : the overall faithPath score
      */
     public int faithScore() {
         int cont = 0;
@@ -137,5 +108,29 @@ public class FaithPath {
         return cont + POSITION_SCORES[faithIndicator];
     }
 
+    /**
+     * Test only method: getter method for the current position of the faithIndicator
+     * @return int : current position of the faithIndicator
+     */
+    public int getIndicator() {
+        return this.faithIndicator;
+    }
+
+    /**
+     * Test only method: getter method for the currCall attribute
+     * @return int : the current value of the currCall attribute
+     */
+    public int getCurrCall() {
+        return this.currCall;
+    }
+
+    /**
+     * Test only method: getter method to show if the papal card in papalCardNumber position has been gained or not
+     * @param papalCardNumber : the position of the papal card
+     * @return int : 1 if the card has been gained, 0 if the card has not been gained, -1 if no player has reached the papal space
+     */
+    public int getPapalCard(int papalCardNumber){
+        return papalCards[papalCardNumber];
+    }
 
 }

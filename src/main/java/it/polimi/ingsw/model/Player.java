@@ -144,8 +144,11 @@ public class Player {
 
 
 
-   public void activationLeaderCard(int index){
-       getGameBoardOfPlayer().activationLeaderCard(index);
+   public void activationLeaderCard(int index) throws LeaderCardsGameBoardEmptyException {
+       if(getGameBoardOfPlayer().leaderCardsSize() > 0)
+           getGameBoardOfPlayer().activationLeaderCard(index);
+       else
+           throw new LeaderCardsGameBoardEmptyException();
    }
 
     public void buyProductionCard(DeckProductionCard deck, int chosenColumn) throws LevelException, NotEnoughResourcesException, EmptyException, FullColumnException, EndGameException {

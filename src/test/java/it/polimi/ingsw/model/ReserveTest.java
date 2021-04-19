@@ -2,9 +2,6 @@ package it.polimi.ingsw.model;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import it.polimi.ingsw.model.Reserve;
-import it.polimi.ingsw.model.Resource;
-import it.polimi.ingsw.model.UnavailableResourceException;
 import org.junit.jupiter.api.*;
 
 class ReserveTest {
@@ -16,7 +13,7 @@ class ReserveTest {
     @Test
     @DisplayName("Constructor Test")
     public void constructorTest() {
-        Reserve reserve = new Reserve();
+        new Reserve();
 
         assertEquals(Reserve.getAmountOf(Resource.COIN),100);
         assertEquals(Reserve.getAmountOf(Resource.ROCK),100);
@@ -30,7 +27,7 @@ class ReserveTest {
     @Test
     @DisplayName("addResource Test: simple test")
     public void addResourceTest() {
-        Reserve reserve = new Reserve();
+        new Reserve();
 
         Reserve.addResource(Resource.COIN);
         Reserve.addResource(Resource.COIN);
@@ -54,7 +51,7 @@ class ReserveTest {
     @Test
     @DisplayName("getResourceTest: complete test")
     public void getResource() {
-        Reserve reserve = new Reserve();
+        new Reserve();
 
         for (int i = 0; i<100 ; i++) {
             try{

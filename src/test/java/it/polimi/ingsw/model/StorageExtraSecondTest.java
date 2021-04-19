@@ -1,6 +1,5 @@
 package it.polimi.ingsw.model;
 
-import it.polimi.ingsw.model.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -17,7 +16,7 @@ public class StorageExtraSecondTest {
     @DisplayName("Constructor Test")
     public void constructorTest(){
         Storage storage = new Storage();
-        Reserve reserve = new Reserve();
+        new Reserve();
 
         storage.addResource(Resource.COIN);
         storage.addResource(Resource.COIN);
@@ -77,7 +76,7 @@ public class StorageExtraSecondTest {
     @DisplayName("addResource Test")
     public void addResourceTest(){
         Storage storage = new Storage();
-        Reserve reserve = new Reserve();
+        new Reserve();
 
 
         storage.addResource(Resource.COIN);
@@ -157,7 +156,7 @@ public class StorageExtraSecondTest {
     @DisplayName("useResource Test")
     public void useResourceTest(){
         Storage storage = new Storage();
-        Reserve reserve = new Reserve();
+        new Reserve();
 
         storage.addResource(Resource.COIN);
         storage.addResource(Resource.ROCK);
@@ -331,7 +330,7 @@ public class StorageExtraSecondTest {
     @DisplayName("check Test")
     public void checkTest(){
         Storage storage = new Storage();
-        Reserve reserve = new Reserve();
+        new Reserve();
         ArrayList<Resource> list = new ArrayList<>();
         ArrayList<Resource> list1 = new ArrayList<>();
 
@@ -426,7 +425,7 @@ public class StorageExtraSecondTest {
     @DisplayName("getResource Test")
     public void getResourceTest(){
         Storage storage = new Storage();
-        Reserve reserve = new Reserve();
+        new Reserve();
 
         storage.addResource(Resource.COIN);
         storage.addResource(Resource.ROCK);
@@ -525,7 +524,7 @@ public class StorageExtraSecondTest {
     @DisplayName("resourceScore Test")
     public void resourceScoreTest(){
         Storage storage = new Storage();
-        Reserve reserve = new Reserve();
+        new Reserve();
 
         storage.addResource(Resource.COIN);
         storage.addResource(Resource.ROCK);

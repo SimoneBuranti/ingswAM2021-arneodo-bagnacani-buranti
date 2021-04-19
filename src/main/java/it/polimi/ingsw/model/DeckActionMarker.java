@@ -12,7 +12,7 @@ public class DeckActionMarker {
     private final ArrayList<ActionMarker> actionMarkerDeck;
 
     /**
-     * this constructor create all action markers and add them to the list and shuffle the newly created deck
+     * this constructor creates all the action markers and adds them to the list and shuffles the newly created deck
      */
     public DeckActionMarker(){
         actionMarkerDeck = new ArrayList<>(7);
@@ -36,7 +36,7 @@ public class DeckActionMarker {
 
     /**
      * this method returns the first action marker of the deck after putting it in the last place of the list and
-     * after moving all the action markers of the deck forward one position in the list
+     * moving all the action markers of the deck forward one position in the list
      * @return ActionMarker: the first action marker of the deck
      */
     public ActionMarker pickUpFirstCard(){
@@ -58,8 +58,7 @@ public class DeckActionMarker {
     }
 
     /**
-     * this method show the first action marker of the deck by returning it
-     * this method has been implemented for testing
+     * Test only method: this method show the first action marker of the deck by returning it
      * @return ActionMarker: the action marker in zero position in the list
      */
     public ActionMarker showFirst(){

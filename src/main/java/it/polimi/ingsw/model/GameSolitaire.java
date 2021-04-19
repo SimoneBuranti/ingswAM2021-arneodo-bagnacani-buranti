@@ -1,7 +1,6 @@
 package it.polimi.ingsw.model;
 
 
-
 /**
  * this class represents the game in solitary
  */
@@ -29,6 +28,7 @@ public class GameSolitaire extends Game{
         player = new Player(nickName, this);
         currentPlayer = player;
     }
+
 
     /**
      * this method takes the first action marker of the deck and applies its effect

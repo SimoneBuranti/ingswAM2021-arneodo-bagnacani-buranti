@@ -2,8 +2,10 @@ package it.polimi.ingsw.model;
 
 import java.util.*;
 
+/**
+ * This class represents a player's personal board
+ */
 public class GameBoard implements GameBoardInterface{
-
 
     /**
      * developmentBoard references the production card set of the player
@@ -11,10 +13,13 @@ public class GameBoard implements GameBoardInterface{
     private final ProductionCard[][] developmentBoard;
 
     /**
-     * leaderCards references the ArrayList containing the leader card set of the player
+     * leaderCards references the ArrayList containing the player's set of leader cards to activate or discard
      */
     private final ArrayList<LeaderCard> leaderCards = new ArrayList<>();
 
+    /**
+     * leaderCardsActivated references the ArrayList containing the activated leader card set of the player
+     */
     private final ArrayList<LeaderCard> leaderCardsActivated = new ArrayList<>();
 
     /**
@@ -32,21 +37,30 @@ public class GameBoard implements GameBoardInterface{
      */
     private final Strongbox strongboxOfGameBoard;
 
-
     /**
      * productionBuffer contains all the resources produced by production activations
      */
     private ArrayList<Resource> productionBuffer;
 
-
+    /**
+     * whiteMarbleCardActivated specifies whether or not a white marble-type leader card has been activated
+     */
     private int whiteMarbleCardActivated = 0;
+    /**
+     * productionCardActivated specifies whether or not a production-type leader card has been activated
+     */
     private int productionCardActivated = 0;
+    /**
+     * reductionCardActivated specifies whether or not a reduction-type leader card has been activated
+     */
     private int reductionCardActivated = 0;
+    /**
+     * storageCardActivated specifies whether or not a storage-type leader card has been activated
+     */
     private int storageCardActivated = 0;
 
     /**
-     * GameBoard() is the standard initialising constructor
-     *
+     * The standard initialising constructor
      */
     public GameBoard() {
         developmentBoard = new ProductionCard[3][3];
@@ -58,6 +72,11 @@ public class GameBoard implements GameBoardInterface{
     }
 
 
+    /**
+     * this method changes the board storage to StorageExtraFirst if the first storage-type leader card has been activated,
+     * to StorageExtraSecond if the second storage-type leader card has been activated
+     * @param resource : the resource type of the first or second extra storage
+     */
     @Override
     public void setStorageExtra(Resource resource){
         Map<Resource, Integer> map = storageOfGameBoard.getStorageResource();
@@ -70,11 +89,8 @@ public class GameBoard implements GameBoardInterface{
         }
     }
 
-
-
-
     /**
-     * This method add all the resources contained in the production buffer in the gameBoard's strongbox
+     * This method adds all the resources contained in the production buffer in the gameBoard's strongbox
      */
     public void endOfProduction() {
 
@@ -87,7 +103,7 @@ public class GameBoard implements GameBoardInterface{
 
     /**
      * This method returns the player's faithPath position
-     * @return int
+     * @return int : the current position of player's faith indicator
      */
     public int getIndicator() {
         return faithPathOfGameBoard.getIndicator();
@@ -95,8 +111,8 @@ public class GameBoard implements GameBoardInterface{
 
     /**
      * This method represents a higher level interface method for faithPath move of the related player's faithPath
-     * @throws CallForCouncilException
-     * @throws LastSpaceReachedException
+     * @throws CallForCouncilException : the exception which is thrown when the faith indicator has reached the current papal space
+     * @throws LastSpaceReachedException : the exception which is thrown when the faith indicator has reached the last papal space
      */
     public void  faithMove () throws CallForCouncilException, LastSpaceReachedException {
         faithPathOfGameBoard.move();
@@ -114,50 +130,32 @@ public class GameBoard implements GameBoardInterface{
      * This method represents the white marble upgrade due to the respective leader card activation. When it is not
      * upgraded yet a null reaction is needed. The method throws the BlockedWhiteMarbleEffectException which will be
      * handled by the caller method.
-     * @return
-     * @throws BlockedWhiteMarbleEffectException
+     * @return Resource : the type of resource to take with the white marble
+     * @throws BlockedWhiteMarbleEffectException : the exception which is thrown when there are no white marble-type leader cards activated
      */
-    public Resource whiteExchange() throws BlockedWhiteMarbleEffectException, WhiteMarbleException{
+    public Resource whiteExchange() throws BlockedWhiteMarbleEffectException{
         throw new BlockedWhiteMarbleEffectException();
     }
 
     /**
-     * This method represents the first extra production upgrade due to the respective leader card activation. When it is not
-     * upgraded yet a null reaction is needed. The method throws the BlockedWhiteMarbleEffectException which will be
-     * handled by the caller method.
+     * This method represents the first extra production upgrade due to the respective leader card activation.
+     * When it is not upgraded yet a null reaction is needed.
      */
     public void extraProductionOn(Resource resource){}
 
 
     /**
-     * This method represents the second extra production upgrade of the respective leader card. When it is not upgraded yet
-     * a null reaction is needed. The method throws the BlockedWhiteMarbleEffectException which will be handled by
-     * the caller method.
+     * This method represents the second extra production upgrade of the respective leader card activation.
+     * When it is not upgraded yet a null reaction is needed.
      */
     public void anotherExtraProductionOn(Resource resource){}
 
     /**
-     * Test only method: this method adds a resource to its own storage.
-     * @param resource
-     */
-    public void addToStrongbox(Resource resource) {
-        strongboxOfGameBoard.addResource(resource);
-    }
-
-    /**
-     * Test only method: this method adds a resource to its own storage.
-     * @param resource
-     */
-    public void addToStorage(Resource resource){
-        storageOfGameBoard.addResource(resource);
-    }
-
-    /**
-     * firstRowFree method return the first available position in the chosen column received as a parameter
-     * if present; it throws the FullColumnException otherwise
-     * @param chosenColumn
-     * @return int
-     * @throws FullColumnException
+     * This method returns the first available position in the chosen column received as a parameter if present,
+     *  otherwise it throws the FullColumnException
+     * @param chosenColumn : the column to check
+     * @return int : the first available position in the chosen column
+     * @throws FullColumnException : the exception which is thrown when all the rows of the chosen column are occupied
      */
     public int firstRowFree(int chosenColumn) throws FullColumnException {
         int i;
@@ -168,10 +166,10 @@ public class GameBoard implements GameBoardInterface{
     }
 
     /**
-     * lastRowOccupied method return the top card position in the chosen column received as a parameter
-     * @param chosenColumn
-     * @return int
-     * @throws EmptyColumnException
+     * This method returns the top card position in the chosen column received as a parameter
+     * @param chosenColumn : the column to check
+     * @return int : the top card position in the chosen column
+     * @throws EmptyColumnException : the exception which is thrown when there are no cards in the chosen column
      */
     public int lastRowOccupied(int chosenColumn) throws EmptyColumnException{
         int i=0;
@@ -186,13 +184,13 @@ public class GameBoard implements GameBoardInterface{
     }
 
     /**
-     * setNewProductionCard method receives as parameters the chosen deck and the chosen column and sets the
-     * related production card in the firs available position if present; it throws the FullColumnException in the
-     * chosen column is full or the Empty exception if the chosen deck is empty
-     * @param deck
-     * @param chosenColumn
-     * @throws EmptyException
-     * @throws FullColumnException
+     * This method receives as parameters the chosen deck and the chosen column and sets the top production card
+     * of the chosen deck in the first available position in the chosen column if present;
+     * it throws the FullColumnException if the chosen column is full or the EmptyException if the chosen deck is empty
+     * @param deck : the deck from which to draw the card
+     * @param chosenColumn : the column in which to put the card
+     * @throws EmptyException : the exception which is thrown when there are no cards in the deck
+     * @throws FullColumnException : the exception which is thrown when all the rows of the chosen column are occupied
      */
     public void setNewProductionCard(DeckProductionCard deck, int chosenColumn) throws EmptyException, FullColumnException {
         developmentBoard[firstRowFree(chosenColumn)][chosenColumn]= deck.pickUpFirstCard();
@@ -200,15 +198,15 @@ public class GameBoard implements GameBoardInterface{
 
     /**
      * This method pays the resources needed for any action after a check on the available resources has been done
-     * @param cost
+     * @param cost : the resources to be paid
      */
     public void payResources(ArrayList<Resource> cost) {
         strongboxOfGameBoard.payResources(storageOfGameBoard.payResources(cost));
     }
 
     /**
-     * this method returns an ArrayList of resources containing the resources of both the storage and the strongbox
-     * @return ArrayList
+     * This method returns an ArrayList of resources containing the resources of both the storage and the strongbox
+     * @return ArrayList : collection of all the resources contained in the storage and in the strongbox
      */
     public ArrayList<Resource> availableResources() {
         ArrayList<Resource> overallResources = new ArrayList<>();
@@ -218,9 +216,9 @@ public class GameBoard implements GameBoardInterface{
     }
 
     /**
-     * This method check the total amount of production Card in the player's development board and throws a
+     * This method checks the total amount of production Card in the player's development board and throws a
      * EndGameException if the seventh production card sale has been successfully completed.
-     * @throws EndGameException
+     * @throws EndGameException : the exception which is thrown when there are seven card in the player's development board
      */
     public void seventhCardCheck() throws EndGameException {
         int cont=0;
@@ -236,16 +234,17 @@ public class GameBoard implements GameBoardInterface{
     }
 
     /**
-     * buyProductionCard method receives as parameters a specific production card deck and the column in which the card
+     * This method receives as parameters a specific production card deck and the column in which the card
      * will be placed. It throws a LevelException if the deck level doesn't match the available position in the column.
      * It throws a NotEnoughResourcesException if the player cannot afford that card. Moreover, it spreads
-     * EmptyException and FullColumnException.
-     * @param deck
-     * @param chosenColumn
-     * @throws LevelException
-     * @throws NotEnoughResourcesException
-     * @throws EmptyException
-     * @throws FullColumnException
+     * EmptyException,FullColumnException and EndGameException.
+     * @param deck : the deck from which to draw the card
+     * @param chosenColumn : the column in which to put the card
+     * @throws LevelException : the exception which is thrown when the deck level doesn't match the available position in the column
+     * @throws NotEnoughResourcesException : the exception which is thrown when the player cannot afford that card
+     * @throws EmptyException : the exception which is thrown when there are no cards in the deck
+     * @throws FullColumnException : the exception which is thrown when all the rows of the chosen column are occupied
+     * @throws EndGameException : the exception which is thrown when there are seven card in the player's development board
      */
     public void buyProductionCard(DeckProductionCard deck, int chosenColumn) throws LevelException, NotEnoughResourcesException, EmptyException, FullColumnException, EndGameException {
         ArrayList<Resource> availableResources = availableResources();
@@ -269,8 +268,8 @@ public class GameBoard implements GameBoardInterface{
 
 
     /**
-     * This method return the int value of the total production card victory points
-     * @return int
+     * This method returns the int value of the total production card victory points
+     * @return int : the total production card victory points
      */
     public int productionScore(){
         int points = 0;
@@ -286,8 +285,8 @@ public class GameBoard implements GameBoardInterface{
     }
 
     /**
-     * This method return the int value of the total leader card victory points
-     * @return int
+     * This method returns the int value of the total leader card victory points
+     * @return int : the total leader card victory points
      */
     public int leaderScore(){
         int points = 0;
@@ -297,13 +296,9 @@ public class GameBoard implements GameBoardInterface{
         return points;
     }
 
-    public int faithScore(){
-        return faithPathOfGameBoard.faithScore();
-    }
-
     /**
-     * This method return the int value of the total player's victory points
-     * @return int
+     * This method returns the int value of the total player's victory points
+     * @return int : the total player's victory points
      */
     public int score(){
         return  ((storageOfGameBoard.resourceScore() +
@@ -315,10 +310,10 @@ public class GameBoard implements GameBoardInterface{
 
 
     /**
-     * takeFromMarket() method receives a resource ArrayList as a parameter and puts them in the storage if possible; it
-     * throws the NotEnoughSpaceInStorageException otherwise.
-     * @param newResources
-     * @throws NotEnoughSpaceInStorageException
+     * this method receives a resource ArrayList as a parameter and puts them in the storage if possible;
+     * otherwise it throws the NotEnoughSpaceInStorageException.
+     * @param newResources : collection of all resources obtained from the market
+     * @throws NotEnoughSpaceInStorageException : the exception which is thrown when there is no space for all the resources in the storage
      */
     public void takeFromMarket(ArrayList<Resource> newResources) throws NotEnoughSpaceInStorageException {
 
@@ -333,13 +328,13 @@ public class GameBoard implements GameBoardInterface{
 
 
     /**
-     * baseProductionOn() method represents the gameBoard's function of standard production. It receives three
+     * This method represents the gameBoard's function of standard production. It receives three
      * resource types as parameters in order to define the two chosen inputs and the chosen output. In case of lack
      * in available resources an ImpossibleProductionException is thrown.
-     * @param i1
-     * @param i2
-     * @param o
-     * @throws ImpossibleProductionException
+     * @param i1 : the first resource type of the base production input
+     * @param i2 : the second resource type of the base production input
+     * @param o : the resource type of the base production output
+     * @throws ImpossibleProductionException : the exception which is thrown when not all input resources are available
      */
     public void baseProductionOn(Resource i1, Resource i2, Resource o) throws ImpossibleProductionException {
         ArrayList<Resource> available = availableResources();
@@ -360,12 +355,15 @@ public class GameBoard implements GameBoardInterface{
     }
 
     /**
-     * productionOn method receives as parameter the chosen column and produces all the resources according to the
+     * This method receives as parameter the chosen column and produces all the resources according to the
      * production card output. They are put in the production card buffer if the production attempt is correct;
-     * ImpossibleProductionException or EmptyColumnException are thrown otherwise.
-     * @param chosenColumn
-     * @throws ImpossibleProductionException
-     * @throws EmptyColumnException
+     * otherwise ImpossibleProductionException or EmptyColumnException are thrown.
+     * Moreover, it spreads CallForCouncilException and LastSpaceReachedException.
+     * @param chosenColumn : the column containing the card whose production the player wants to activate
+     * @throws ImpossibleProductionException : the exception which is thrown when not all input resources are available
+     * @throws EmptyColumnException : the exception which is thrown when there are no cards in the deck
+     * @throws CallForCouncilException : the exception which is thrown when the faith indicator has reached the current papal space
+     * @throws LastSpaceReachedException : the exception which is thrown when the faith indicator has reached the last papal space
      */
     public void productionOn(int chosenColumn) throws ImpossibleProductionException, EmptyColumnException, CallForCouncilException, LastSpaceReachedException {
         ArrayList<Resource> available = availableResources();
@@ -403,33 +401,16 @@ public class GameBoard implements GameBoardInterface{
     }
 
     /**
-     * This method add produced resources to gameBoard's production buffer
+     * This method adds produced resources to gameBoard's production buffer
+     * @param output : the collection of resources to add to the buffer
      */
     public void addToProductionBuffer(ArrayList<Resource> output){
         productionBuffer.addAll(output);
     }
 
-
     /**
-     * Test only method : set a production card in the development board without payment
-     */
-    public void setProductionCard(ProductionCard card,int chosenColumn){
-        int r;
-
-        try {
-            r = firstRowFree(chosenColumn);
-        } catch (FullColumnException e) {
-            //e.printStackTrace();
-            return;
-        }
-
-        developmentBoard[r][chosenColumn] = card;
-    }
-
-
-    /**
-     * this method add LeaderCard to GameBoard's folder of LeaderCards
-     * @param leaderCard
+     * this method adds leaderCard to GameBoard's folder of LeaderCards
+     * @param leaderCard : the card to add to the list
      *
      */
     public void addLeaderCardToGameBoard(LeaderCard leaderCard){
@@ -438,18 +419,9 @@ public class GameBoard implements GameBoardInterface{
 
 
     /**
-     * method only for testing
-     * @return leaderCards.size()
-     */
-    public int leaderCardsSize(){
-        return leaderCards.size();
-
-    }
-
-
-    /**
-     * @param index
-     * @return leaderCards.get(index)
+     * This method returns the leader card in index position in the leaderCards list
+     * @param index : the position of the leader card in the list
+     * @return LeaderCard : the leader card to position index in the leaderCards list
      */
     public LeaderCard reportLeaderCardToGameBoard(int index){
         return leaderCards.get(index);
@@ -457,13 +429,18 @@ public class GameBoard implements GameBoardInterface{
 
 
     /**
-     * this method need  when the player discard a leaderCard
-     * @param index
+     * This method removes the leader card in index position from the leaderCards list
+     * @param index : the position of the leader card in the list
      */
     public  void removeLeaderCardToGameBoard(int index){
         leaderCards.remove(index);
     }
 
+    /**
+     * This method activates the leader card in index position in the leaderCards list and
+     * after adding it to the leaderCardsActivated list removes it from the leaderCards list
+     * @param index : the position of the leader card in the list
+     */
     public void activationLeaderCard(int index){
         if(leaderCards.get(index).abilityActivation(this)){
             leaderCardsActivated.add(leaderCards.get(index));
@@ -472,6 +449,11 @@ public class GameBoard implements GameBoardInterface{
 
     }
 
+    /**
+     * This method returns the number of cards in the developmentBoard of the color passed as a parameter
+     * @param colour : the colour of the production card
+     * @return : the number of cards of the colour passed as a parameter
+     */
     @Override
     public int colourQuantity(Colour colour){
         int quantity = 0;
@@ -486,6 +468,13 @@ public class GameBoard implements GameBoardInterface{
 
         return quantity;
     }
+
+    /**
+     * This method returns the number of cards in developmentBoard of the color and level passed as a parameter
+     * @param colour : the colour of the production card
+     * @param level : the level of the production card
+     * @return int : the number of cards of the colour and level passed as a parameter
+     */
     @Override
     public int levelAndColourQuantity(Colour colour, int level){
         int quantity = 0;
@@ -498,53 +487,153 @@ public class GameBoard implements GameBoardInterface{
         return quantity;
     }
 
+    /**
+     * This method returns the number of resources of the resource type passed as a parameter
+     * that the board has in the storage and in the strongbox
+     * @param resource : the resource type
+     * @return int : the number of resources in the storage and in the strongbox
+     */
     @Override
     public int resourceQuantity(Resource resource){
         return storageOfGameBoard.getResource(resource) + strongboxOfGameBoard.getResource(resource);
     }
 
+    /**
+     * Getter method for whiteMarbleCardActivated attribute
+     * @return int : the value of whiteMarbleCardActivated
+     */
     @Override
     public int getWhiteMarbleCardActivated() {
         return whiteMarbleCardActivated;
     }
+
+    /**
+     * This method sets whiteMarbleCardActivated attribute to 1 when
+     * the first white marble-type leader card has been activated
+     */
     @Override
     public void setWhiteMarbleCardActivated() {
         whiteMarbleCardActivated = 1;
     }
+
+    /**
+     * Getter method for productionCardActivated attribute
+     * @return int : the value of productionCardActivated
+     */
     @Override
     public int getProductionCardActivated() {
         return productionCardActivated;
     }
+
+    /**
+     * This method sets productionCardActivated attribute to 1 when
+     * the first production-type leader card has been activated
+     */
     @Override
     public void setProductionCardActivated() {
         productionCardActivated = 1;
     }
+
+    /**
+     * Getter method for reductionCardActivated attribute
+     * @return int : the value of reductionCardActivated
+     */
     @Override
     public int getReductionCardActivated() {
         return reductionCardActivated;
     }
+
+    /**
+     * This method sets reductionCardActivated attribute to 1 when
+     * the first reduction-type leader card has been activated
+     */
     @Override
     public void setReductionCardActivated() {
         reductionCardActivated = 1;
     }
 
+    /**
+     * Getter method for storageCardActivated attribute
+     * @return int : the value of storageCardActivated
+     */
     @Override
     public int getStorageCardActivated() {
         return storageCardActivated;
     }
+
+    /**
+     * This method sets storageCardActivated attribute to 1 when
+     * the first storage-type leader card has been activated
+     */
     @Override
     public void setStorageCardActivated() {
         storageCardActivated = 1;
     }
 
+    /**
+     * This method returns the resource type of the first activated leader card
+     * When no leader cards have been activated yet a null reaction is needed.
+     * @return Resource : the resource type of the first activated leader card
+     */
     @Override
     public Resource getResourceTypeFirst() {
         return null;
     }
 
-
+    /**
+     * this method returns the total score of the storage and strongbox
+     * @return int : the total score of the storage and strongbox
+     */
     public int scoreResource(){
-        return  (int)((storageOfGameBoard.resourceScore() +
+        return  ((storageOfGameBoard.resourceScore() +
                 strongboxOfGameBoard.resourceScore()) /5);
+    }
+
+
+    /**
+     * Test only method: this method adds a resource to its own storage.
+     * @param resource : the resource to add in the strongbox
+     */
+    public void addToStrongbox(Resource resource) {
+        strongboxOfGameBoard.addResource(resource);
+    }
+
+    /**
+     * Test only method: this method adds a resource to its own storage.
+     * @param resource : the resource to add in the storage
+     */
+    public void addToStorage(Resource resource){
+        storageOfGameBoard.addResource(resource);
+    }
+
+    /**
+     * Test only method: getter method for the total score of the faith path.
+     * @return int : the overall faithPath score
+     */
+    public int faithScore(){
+        return faithPathOfGameBoard.faithScore();
+    }
+
+    /**
+     * Test only method : set a production card in the development board without payment
+     */
+    public void setProductionCard(ProductionCard card,int chosenColumn){
+        int r;
+
+        try {
+            r = firstRowFree(chosenColumn);
+        } catch (FullColumnException e) {
+            return;
+        }
+
+        developmentBoard[r][chosenColumn] = card;
+    }
+
+    /**
+     * Test only method : getter method for the leaderCards list size
+     * @return int : the size of the leaderCards list
+     */
+    public int leaderCardsSize(){
+        return leaderCards.size();
     }
 }

@@ -2,11 +2,14 @@ package it.polimi.ingsw.model;
 
 import java.util.*;
 
+/**
+ * this class represents the third level green production card deck
+ */
 public class DeckProductionCardThreeGreen extends DeckProductionCard {
 
-
-
-
+    /**
+     * this constructor creates all the production cards and adds them to the list and shuffles the newly created deck
+     */
     public  DeckProductionCardThreeGreen (){
 
         Green green = new Green();

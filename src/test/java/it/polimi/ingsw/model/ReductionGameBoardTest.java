@@ -2,7 +2,6 @@ package it.polimi.ingsw.model;
 
 import java.util.*;
 
-import it.polimi.ingsw.model.*;
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -96,14 +95,12 @@ class ReductionGameBoardTest {
     @Test
     @DisplayName("buyProductionCard() test - affordable card")
     public void buyProductionCardTest0(){
-        Reserve reserve = new Reserve();
+        new Reserve();
         Resource parameter = Resource.SERVANT;
         GameBoardInterface gameBoard = new GameBoard() ;
         gameBoard = new ReductionGameBoard(gameBoard,parameter);
 
         DeckProductionCardOneBlu blueDeck = new DeckProductionCardOneBlu();
-        DeckProductionCardOneGreen greenDeck = new DeckProductionCardOneGreen();
-        DeckProductionCardOneYellow yellowDeck = new DeckProductionCardOneYellow();
 
         ArrayList<Resource> available ;
         ArrayList<Resource> cost ;
@@ -193,14 +190,13 @@ class ReductionGameBoardTest {
     @Test
     @DisplayName("buyProductionCard() test - 3 affordable card")
     public void buyProductionCardTest1(){
-        Reserve reserve = new Reserve();
+        new Reserve();
         Resource parameter = Resource.ROCK;
         GameBoardInterface gameBoard = new GameBoard() ;
         gameBoard = new ReductionGameBoard(gameBoard,parameter);
 
         DeckProductionCardOneBlu blueDeck = new DeckProductionCardOneBlu();
         DeckProductionCardOneGreen greenDeck = new DeckProductionCardOneGreen();
-        DeckProductionCardOneYellow yellowDeck = new DeckProductionCardOneYellow();
 
         ArrayList<Resource> available ;
         ArrayList<Resource> cost ;
@@ -297,9 +293,7 @@ class ReductionGameBoardTest {
             costMap.put(r,costMap.remove(r)+1);
         }
 
-        for(Resource key : strongboxMap.keySet()){
-            strongboxMap.put(key,availableMap.get(key));
-        }
+        strongboxMap.replaceAll((k, v) -> availableMap.get(k));
 
         try {
             gameBoard.buyProductionCard(greenDeck,1);
@@ -355,9 +349,7 @@ class ReductionGameBoardTest {
             costMap.put(r,costMap.remove(r)+1);
         }
 
-        for(Resource key : strongboxMap.keySet()){
-            strongboxMap.put(key,availableMap.get(key));
-        }
+        strongboxMap.replaceAll((k, v) -> availableMap.get(k));
 
         try {
             gameBoard.buyProductionCard(greenDeck,2);
@@ -405,14 +397,12 @@ class ReductionGameBoardTest {
     @Test
     @DisplayName("buyProductionCard() test - not affordable card")
     public void buyProductionCardTest2(){
-        Reserve reserve = new Reserve();
+        new Reserve();
         Resource parameter = Resource.COIN;
         GameBoardInterface gameBoard = new GameBoard() ;
         gameBoard = new ReductionGameBoard(gameBoard,parameter);
 
         DeckProductionCardOneBlu blueDeck = new DeckProductionCardOneBlu();
-        DeckProductionCardOneGreen greenDeck = new DeckProductionCardOneGreen();
-        DeckProductionCardOneYellow yellowDeck = new DeckProductionCardOneYellow();
 
         ArrayList<Resource> available ;
         ArrayList<Resource> cost ;

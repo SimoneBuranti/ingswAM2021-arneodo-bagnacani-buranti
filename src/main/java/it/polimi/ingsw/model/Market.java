@@ -6,7 +6,7 @@ import java.util.ArrayList;
  */
 public class Market {
     private Marble[][] Grid = new Marble[3][4];
-    private Marble extra=new Marble();
+    private Marble extra= new Marble();
     private ArrayList<Marble> InitialMarbleList = new ArrayList<>(13);
 
 
@@ -83,7 +83,7 @@ public class Market {
  * then it reactive the grid and the extra marble
  */
 
-    public void PushRow(int ChosenRow, Player player) throws CallForCouncilException, LastSpaceReachedException, WhiteMarbleException {
+    public void pushRow(int ChosenRow, Player player) throws CallForCouncilException, LastSpaceReachedException, WhiteMarbleException {
         int j;
         WhiteMarbleException exception = new WhiteMarbleException(0);
         Marble temp;
@@ -113,7 +113,7 @@ public class Market {
      *  * then it reactive the grid and the extra marble
      */
 
-    public void PushColumn(int ChosenColumn,Player player) throws CallForCouncilException, LastSpaceReachedException, WhiteMarbleException {
+    public void pushColumn(int ChosenColumn,Player player) throws CallForCouncilException, LastSpaceReachedException, WhiteMarbleException {
         int i;
         Marble temp;
         for(i=0; i<3; i++)

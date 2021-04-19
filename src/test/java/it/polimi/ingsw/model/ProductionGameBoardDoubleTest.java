@@ -1,6 +1,5 @@
 package it.polimi.ingsw.model;
 
-import it.polimi.ingsw.model.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -19,7 +18,7 @@ class ProductionGameBoardDoubleTest {
         gameBoard = new ProductionGameBoard(gameBoard,Resource.COIN);
         gameBoard = new ProductionGameBoardDouble(gameBoard,gameBoard.getResourceTypeFirst(),Resource.ROCK);
 
-        Reserve reserve = new Reserve();
+        new Reserve();
         int init ;
 
         Map<Resource,Integer> storageMap = new HashMap<>();
@@ -86,7 +85,7 @@ class ProductionGameBoardDoubleTest {
         gameBoard = new ProductionGameBoard(gameBoard,Resource.COIN);
         gameBoard = new ProductionGameBoardDouble(gameBoard,gameBoard.getResourceTypeFirst(),Resource.ROCK);
 
-        Reserve reserve = new Reserve();
+        new Reserve();
         int init ;
 
         Map<Resource,Integer> storageMap = new HashMap<>();
@@ -108,7 +107,6 @@ class ProductionGameBoardDoubleTest {
         strongboxMap.put(Resource.SHIELD, 1);
         strongboxMap.put(Resource.SERVANT, 1);
 
-        DeckProductionCardOneGreen deck = new DeckProductionCardOneGreen();
         init = gameBoard.getIndicator();
 
         ArrayList<Resource> available;
@@ -153,7 +151,7 @@ class ProductionGameBoardDoubleTest {
         gameBoard = new ProductionGameBoard(gameBoard,Resource.COIN);
         gameBoard = new ProductionGameBoardDouble(gameBoard,gameBoard.getResourceTypeFirst(),Resource.ROCK);
 
-        Reserve reserve = new Reserve();
+        new Reserve();
         int init ;
 
         Map<Resource,Integer> storageMap = new HashMap<>();
@@ -175,7 +173,6 @@ class ProductionGameBoardDoubleTest {
         strongboxMap.put(Resource.SHIELD, 1);
         strongboxMap.put(Resource.SERVANT, 1);
 
-        DeckProductionCardOneGreen deck = new DeckProductionCardOneGreen();
         init = gameBoard.getIndicator();
 
         ArrayList<Resource> available;
@@ -222,7 +219,7 @@ class ProductionGameBoardDoubleTest {
         gameBoard = new ProductionGameBoard(gameBoard,Resource.COIN);
         gameBoard = new ProductionGameBoardDouble(gameBoard,gameBoard.getResourceTypeFirst(),Resource.ROCK);
 
-        Reserve reserve = new Reserve();
+        new Reserve();
         int init ;
 
         Map<Resource,Integer> storageMap = new HashMap<>();
@@ -289,7 +286,7 @@ class ProductionGameBoardDoubleTest {
         gameBoard = new ProductionGameBoard(gameBoard,Resource.COIN);
         gameBoard = new ProductionGameBoardDouble(gameBoard,gameBoard.getResourceTypeFirst(),Resource.ROCK);
 
-        Reserve reserve = new Reserve();
+        new Reserve();
         int init ;
 
         Map<Resource,Integer> storageMap = new HashMap<>();
@@ -311,7 +308,6 @@ class ProductionGameBoardDoubleTest {
         strongboxMap.put(Resource.SHIELD, 1);
         strongboxMap.put(Resource.SERVANT, 1);
 
-        DeckProductionCardOneGreen deck = new DeckProductionCardOneGreen();
         init = gameBoard.getIndicator();
 
         ArrayList<Resource> available;
@@ -356,7 +352,7 @@ class ProductionGameBoardDoubleTest {
         gameBoard = new ProductionGameBoard(gameBoard, Resource.COIN);
         gameBoard = new ProductionGameBoardDouble(gameBoard,gameBoard.getResourceTypeFirst(),Resource.ROCK);
 
-        Reserve reserve = new Reserve();
+        new Reserve();
         int init ;
 
         Map<Resource,Integer> storageMap = new HashMap<>();
@@ -378,7 +374,6 @@ class ProductionGameBoardDoubleTest {
         strongboxMap.put(Resource.SHIELD, 1);
         strongboxMap.put(Resource.SERVANT, 1);
 
-        DeckProductionCardOneGreen deck = new DeckProductionCardOneGreen();
         init = gameBoard.getIndicator();
 
         ArrayList<Resource> available;

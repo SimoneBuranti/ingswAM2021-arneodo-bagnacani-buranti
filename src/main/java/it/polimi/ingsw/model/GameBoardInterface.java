@@ -86,5 +86,5 @@ public interface GameBoardInterface {
 
     Resource getResourceTypeFirst();
 
-    public int scoreResource();
+    int scoreResource();
 }

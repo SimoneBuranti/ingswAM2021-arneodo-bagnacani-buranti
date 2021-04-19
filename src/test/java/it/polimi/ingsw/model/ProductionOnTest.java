@@ -2,7 +2,6 @@ package it.polimi.ingsw.model;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import it.polimi.ingsw.model.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +15,7 @@ public class ProductionOnTest {
     @DisplayName("baseProductionOn test: input resources only from storage")
     public void baseProductionOnTest() {
         GameBoardInterface gameBoard = new GameBoard();
-        Reserve reserve = new Reserve();
+        new Reserve();
         ArrayList<Resource> list = new ArrayList<>();
         list.add(Resource.COIN);
         list.add(Resource.COIN);
@@ -102,7 +101,7 @@ public class ProductionOnTest {
     @DisplayName("baseProductionOn test: input resources from storage and strongbox")
     public void baseProductionOnSecondTest() {
         GameBoardInterface gameBoard = new GameBoard();
-        Reserve reserve = new Reserve();
+        new Reserve();
         ArrayList<Resource> list = new ArrayList<>();
         list.add(Resource.COIN);
         list.add(Resource.COIN);
@@ -260,7 +259,7 @@ public class ProductionOnTest {
     @DisplayName("baseProductionOn test: not enough resources in reserve")
     public void baseProductionOnThirdTest() {
         GameBoardInterface gameBoard = new GameBoard();
-        Reserve reserve = new Reserve();
+        new Reserve();
 
         for(int i = 0; i < 99; i++){
             gameBoard.addToStrongbox(Resource.ROCK);
@@ -304,7 +303,7 @@ public class ProductionOnTest {
     @DisplayName("productionOn test: no production card in the gameBoard")
     public void productionOnTest0() {
         GameBoardInterface gameBoard = new GameBoard();
-        Reserve reserve = new Reserve();
+        new Reserve();
 
         try {
             gameBoard.productionOn(0);
@@ -325,7 +324,7 @@ public class ProductionOnTest {
     @DisplayName("productionOn test: first level production card")
     public void productionOnTest1() {
         GameBoardInterface gameBoard = new GameBoard();
-        Reserve reserve = new Reserve();
+        new Reserve();
         ArrayList<Resource> list = new ArrayList<>();
         list.add(Resource.COIN);
         list.add(Resource.SHIELD);
@@ -393,7 +392,7 @@ public class ProductionOnTest {
     @DisplayName("productionOn test: second level production card")
     public void productionOnTest2() {
         GameBoardInterface gameBoard = new GameBoard();
-        Reserve reserve = new Reserve();
+        new Reserve();
         ArrayList<Resource> list = new ArrayList<>();
         list.add(Resource.COIN);
         list.add(Resource.SHIELD);
@@ -480,7 +479,7 @@ public class ProductionOnTest {
     @DisplayName("productionOn test: third level production card")
     public void productionOnTest3() {
         GameBoardInterface gameBoard = new GameBoard();
-        Reserve reserve = new Reserve();
+        new Reserve();
 
         gameBoard.addToStrongbox(Resource.SERVANT);
         gameBoard.addToStrongbox(Resource.COIN);
@@ -577,7 +576,7 @@ public class ProductionOnTest {
     @DisplayName("productionOn test: callForCouncilException")
     public void productionOnTest4() {
         GameBoardInterface gameBoard = new GameBoard();
-        Reserve reserve = new Reserve();
+        new Reserve();
 
         gameBoard.addToStrongbox(Resource.SERVANT);
         gameBoard.addToStrongbox(Resource.SERVANT);
@@ -664,7 +663,7 @@ public class ProductionOnTest {
     @DisplayName("productionOn test: lastSpaceReachedException")
     public void productionOnTest5() {
         GameBoardInterface gameBoard = new GameBoard();
-        Reserve reserve = new Reserve();
+        new Reserve();
 
         gameBoard.addToStrongbox(Resource.SERVANT);
         gameBoard.addToStrongbox(Resource.SERVANT);
@@ -673,7 +672,7 @@ public class ProductionOnTest {
             try{
                 gameBoard.faithMove();
             }catch(CallForCouncilException e){
-                gameBoard.setPapal();;
+                gameBoard.setPapal();
             }catch(LastSpaceReachedException ignored){}
 
 
@@ -753,7 +752,7 @@ public class ProductionOnTest {
     @DisplayName("extraProductionOn test: without ProductionGameBoard")
     public void extraProductionOnTest0() {
         GameBoardInterface gameBoard = new GameBoard();
-        Reserve reserve = new Reserve();
+        new Reserve();
 
         gameBoard.addToStrongbox(Resource.SERVANT);
         gameBoard.addToStrongbox(Resource.COIN);
@@ -781,7 +780,7 @@ public class ProductionOnTest {
     @DisplayName("extraProductionOn test: with ProductionGameBoard")
     public void extraProductionOnTest1() {
         GameBoardInterface gameBoard = new GameBoard();
-        Reserve reserve = new Reserve();
+        new Reserve();
         gameBoard = new ProductionGameBoard(gameBoard, Resource.COIN);
 
         gameBoard.addToStrongbox(Resource.SERVANT);
@@ -818,7 +817,7 @@ public class ProductionOnTest {
     @DisplayName("extraProductionOn test: call for council exception")
     public void extraProductionOnTest2() {
         GameBoardInterface gameBoard = new GameBoard();
-        Reserve reserve = new Reserve();
+        new Reserve();
         gameBoard = new ProductionGameBoard(gameBoard, Resource.COIN);
 
         gameBoard.addToStrongbox(Resource.SERVANT);
@@ -860,7 +859,7 @@ public class ProductionOnTest {
     @DisplayName("extraProductionOn test: last space reached exception")
     public void extraProductionOnTest3() {
         GameBoardInterface gameBoard = new GameBoard();
-        Reserve reserve = new Reserve();
+        new Reserve();
         gameBoard = new ProductionGameBoard(gameBoard, Resource.COIN);
 
         gameBoard.addToStrongbox(Resource.SERVANT);
@@ -870,7 +869,7 @@ public class ProductionOnTest {
             try{
                 gameBoard.faithMove();
             }catch(CallForCouncilException e){
-                gameBoard.setPapal();;
+                gameBoard.setPapal();
             }catch(LastSpaceReachedException ignored){}
 
         try {
@@ -905,7 +904,7 @@ public class ProductionOnTest {
     @DisplayName("anotherExtraProductionOn test: without ProductionGameBoardDouble")
     public void anotherExtraProductionOnTest0() {
         GameBoardInterface gameBoard = new GameBoard();
-        Reserve reserve = new Reserve();
+        new Reserve();
 
         gameBoard.addToStrongbox(Resource.SERVANT);
         gameBoard.addToStrongbox(Resource.COIN);
@@ -933,7 +932,7 @@ public class ProductionOnTest {
     @DisplayName("anotherExtraProductionOn test: with ProductionGameBoardDouble")
     public void anotherExtraProductionOnTest1() {
         GameBoardInterface gameBoard = new GameBoard();
-        Reserve reserve = new Reserve();
+        new Reserve();
         gameBoard = new ProductionGameBoardDouble(gameBoard, Resource.COIN, Resource.SERVANT);
 
         gameBoard.addToStrongbox(Resource.SERVANT);
@@ -989,7 +988,7 @@ public class ProductionOnTest {
     @DisplayName("anotherExtraProductionOn test: call for council exception")
     public void anotherExtraProductionOnTest2() {
         GameBoardInterface gameBoard = new GameBoard();
-        Reserve reserve = new Reserve();
+        new Reserve();
         gameBoard = new ProductionGameBoardDouble(gameBoard, Resource.COIN, Resource.SERVANT);
 
         gameBoard.addToStrongbox(Resource.SERVANT);
@@ -1031,7 +1030,7 @@ public class ProductionOnTest {
     @DisplayName("anotherExtraProductionOn test: last space reached exception")
     public void anotherExtraProductionOnTest3() {
         GameBoardInterface gameBoard = new GameBoard();
-        Reserve reserve = new Reserve();
+        new Reserve();
         gameBoard = new ProductionGameBoardDouble(gameBoard, Resource.COIN, Resource.SERVANT);
 
         gameBoard.addToStrongbox(Resource.SERVANT);
@@ -1041,7 +1040,7 @@ public class ProductionOnTest {
             try{
                 gameBoard.faithMove();
             }catch(CallForCouncilException e){
-                gameBoard.setPapal();;
+                gameBoard.setPapal();
             }catch(LastSpaceReachedException ignored){}
 
         try {
@@ -1075,7 +1074,7 @@ public class ProductionOnTest {
     @DisplayName("All productions")
     public void allProductionTest(){
         GameBoardInterface gameBoard = new GameBoard();
-        Reserve reserve = new Reserve();
+        new Reserve();
         gameBoard = new ProductionGameBoardDouble(gameBoard, Resource.COIN, Resource.SERVANT);
         ArrayList<Resource> list = new ArrayList<>();
         list.add(Resource.COIN);

@@ -1,11 +1,10 @@
 package it.polimi.ingsw.model;
-import it.polimi.ingsw.model.*;
+
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class MixTest {
     /**
@@ -14,7 +13,7 @@ public class MixTest {
     @Test
     public void TestAboutOnlyListMarble()
     {
-        ArrayList<Marble> List = new ArrayList<Marble>(13);
+        ArrayList<Marble> List = new ArrayList<>(13);
 
         RedMarble redOne = new RedMarble();
         List.add(redOne);
@@ -42,11 +41,11 @@ public class MixTest {
         List.add(whiteThird);
         WhiteMarble whiteFourth = new WhiteMarble();
         List.add(whiteFourth);
-        assertTrue( List.get(0).equals(redOne));
-        assertTrue( List.get(1).equals(yellowFirst));
-        assertTrue( List.get(2).equals(yellowSecond));
-        assertTrue( List.get(3).equals(bluFirst));
-        assertTrue( List.get(4).equals(bluSecond));
+        assertEquals(List.get(0), redOne);
+        assertEquals(List.get(1), yellowFirst);
+        assertEquals(List.get(2), yellowSecond);
+        assertEquals(List.get(3), bluFirst);
+        assertEquals(List.get(4), bluSecond);
     }
 
     /**
@@ -55,7 +54,7 @@ public class MixTest {
     @Test
     public void FindElement()
     {
-        ArrayList<Marble> List = new ArrayList<Marble>(4);
+        ArrayList<Marble> List = new ArrayList<>(4);
 
         RedMarble redOne = new RedMarble();
         List.add(redOne);
@@ -99,17 +98,17 @@ public class MixTest {
     @Test
     public void TryWhitAnotherType()
     {
-        ArrayList<Integer> List = new ArrayList<Integer>(4);
+        ArrayList<Integer> List = new ArrayList<>(4);
 
         List.add(1);
         List.add(2);
         List.add(3);
         List.add(4);
 
-        assertTrue( List.get(0).equals(1));
-        assertTrue( List.get(1).equals(2));
-        assertTrue( List.get(2).equals(3));
-        assertTrue( List.get(3).equals(4));
+        assertEquals(1, (int) List.get(0));
+        assertEquals(2, (int) List.get(1));
+        assertEquals(3, (int) List.get(2));
+        assertEquals(4, (int) List.get(3));
 
         Mix.MIXED(List);
 
@@ -135,7 +134,7 @@ public class MixTest {
                 List.get(3).equals(4));
 
         List.add(5);
-        assertTrue( List.get(4).equals(5));
+        assertEquals(5, (int) List.get(4));
 
 
         Mix.MIXED(List);
@@ -143,7 +142,7 @@ public class MixTest {
 
         Mix.MIXED(List);
         List.add(6);
-        assertTrue( List.get(5).equals(6));
+        assertEquals(6, (int) List.get(5));
         assertNotEquals(5, List.get(4));
 
 

@@ -1,10 +1,10 @@
 package it.polimi.ingsw.model;
-import it.polimi.ingsw.model.GameMultiPlayer;
+
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class DiscardTest {
 
@@ -25,16 +25,16 @@ class DiscardTest {
     nickname.add("simo");
 
     GameMultiPlayer gameMultiPlayer = new GameMultiPlayer(3,nickname);
-    assertTrue(gameMultiPlayer.leaderDeckSize()==4);
-    assertTrue(gameMultiPlayer.getPlayerFromList(0).personalLeaderCardSize()==4);
-    assertTrue(gameMultiPlayer.getPlayerFromList(0).getGameBoardOfPlayer().leaderCardsSize()==0);
+    assertEquals(4, gameMultiPlayer.leaderDeckSize());
+    assertEquals(4, gameMultiPlayer.getPlayerFromList(0).personalLeaderCardSize());
+    assertEquals(0, gameMultiPlayer.getPlayerFromList(0).getGameBoardOfPlayer().leaderCardsSize());
     gameMultiPlayer.getPlayerFromList(0).saveLeaderCard(1,2);
-    assertTrue(gameMultiPlayer.getPlayerFromList(0).personalLeaderCardSize()==4);
-    assertTrue(gameMultiPlayer.getPlayerFromList(0).getGameBoardOfPlayer().leaderCardsSize()==2);
+    assertEquals(4, gameMultiPlayer.getPlayerFromList(0).personalLeaderCardSize());
+    assertEquals(2, gameMultiPlayer.getPlayerFromList(0).getGameBoardOfPlayer().leaderCardsSize());
 
     gameMultiPlayer.getPlayerFromList(1).saveLeaderCard(0,3);
-    assertTrue(gameMultiPlayer.getPlayerFromList(1).personalLeaderCardSize()==4);
-    assertTrue(gameMultiPlayer.getPlayerFromList(1).getGameBoardOfPlayer().leaderCardsSize()==2);
+    assertEquals(4, gameMultiPlayer.getPlayerFromList(1).personalLeaderCardSize());
+    assertEquals(2, gameMultiPlayer.getPlayerFromList(1).getGameBoardOfPlayer().leaderCardsSize());
 
 
 
@@ -56,12 +56,12 @@ class DiscardTest {
         nickname.add("simo");
 
         GameMultiPlayer gameMultiPlayer = new GameMultiPlayer(3,nickname);
-        assertTrue(gameMultiPlayer.leaderDeckSize()==4);
-        assertTrue(gameMultiPlayer.getPlayerFromList(0).personalLeaderCardSize()==4);
-        assertTrue(gameMultiPlayer.getPlayerFromList(0).getGameBoardOfPlayer().leaderCardsSize()==0);
+        assertEquals(4, gameMultiPlayer.leaderDeckSize());
+        assertEquals(4, gameMultiPlayer.getPlayerFromList(0).personalLeaderCardSize());
+        assertEquals(0, gameMultiPlayer.getPlayerFromList(0).getGameBoardOfPlayer().leaderCardsSize());
         gameMultiPlayer.getPlayerFromList(0).saveLeaderCard(1,2);
-        assertTrue(gameMultiPlayer.getPlayerFromList(0).personalLeaderCardSize()==4);
-        assertTrue(gameMultiPlayer.getPlayerFromList(0).getGameBoardOfPlayer().leaderCardsSize()==2);
+        assertEquals(4, gameMultiPlayer.getPlayerFromList(0).personalLeaderCardSize());
+        assertEquals(2, gameMultiPlayer.getPlayerFromList(0).getGameBoardOfPlayer().leaderCardsSize());
 
 
 
@@ -85,7 +85,7 @@ class DiscardTest {
 
         GameMultiPlayer gameMultiPlayer = new GameMultiPlayer(3,nickname);
         gameMultiPlayer.getPlayerFromList(0).saveLeaderCard(1,2);
-        assertTrue(gameMultiPlayer.getPlayerFromList(0).getGameBoardOfPlayer().reportLeaderCardToGameBoard(0).equals(gameMultiPlayer.getPlayerFromList(0).getCardFromPersonalLeaderCard(1)));
+        assertEquals(gameMultiPlayer.getPlayerFromList(0).getGameBoardOfPlayer().reportLeaderCardToGameBoard(0), gameMultiPlayer.getPlayerFromList(0).getCardFromPersonalLeaderCard(1));
 
 
     }

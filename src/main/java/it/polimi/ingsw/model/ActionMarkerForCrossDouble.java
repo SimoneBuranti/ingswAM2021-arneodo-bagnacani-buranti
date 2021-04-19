@@ -2,7 +2,7 @@ package it.polimi.ingsw.model;
 
 /**
  * this class implements the ActionMarker interface and
- * represents the action marker that moves the black cross forward by two spaces
+ * represents the action marker that moves the black cross forward two spaces
  */
 public class ActionMarkerForCrossDouble implements ActionMarker{
     /**

@@ -1,8 +1,5 @@
 package it.polimi.ingsw.model;
 
-import it.polimi.ingsw.model.GameMultiPlayer;
-import it.polimi.ingsw.model.PlayerFirst;
-import it.polimi.ingsw.model.PlayerSecond;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

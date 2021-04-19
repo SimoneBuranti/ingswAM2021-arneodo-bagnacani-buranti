@@ -1,12 +1,13 @@
 package it.polimi.ingsw.model;
 /**
- * class for redMarble, only 1 object instantiated in Market
+ * this class represents the red marble
  */
 public class RedMarble extends Marble{
     /**
-     * @param player
-     *  player FaithIndicator move of one position
-     * @throws CallForCouncilException, exception thrown from FaithPath, game is finished
+     * this method moves forward the faith indicator of the player in the faithPath by calling the faithMove method of the player class
+     * @param player : the one that has bought from the market
+     * @throws CallForCouncilException : the exception that is thrown when the player reaches a papal space in the faithPath
+     * @throws LastSpaceReachedException :: the exception that is thrown when the player reaches the last papal space in the faithPath
      */
     public void giveResource(Player player) throws CallForCouncilException, LastSpaceReachedException {
         player.faithMove();

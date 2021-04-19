@@ -1,6 +1,5 @@
 package it.polimi.ingsw.model;
 
-import it.polimi.ingsw.model.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -15,23 +14,9 @@ class FaithPathTest {
     @DisplayName("defaultConstructorTest")
     public void defaultConstructorTest() {
 
-        FaithPath faithPath = new FaithPath ();
+        FaithPath faithPath = new FaithPath();
 
         assertEquals(faithPath.getIndicator(), 0);
-        assertEquals(faithPath.getCurrCall(), 0);
-
-    }
-
-    /**
-     * Correct initialised construction check
-     */
-    @Test
-    @DisplayName("initialisedConstructorTest")
-    public void initialisedConstructorTest() {
-
-        FaithPath faithPath = new FaithPath (4);
-
-        assertEquals(faithPath.getIndicator(), 4);
         assertEquals(faithPath.getCurrCall(), 0);
 
     }
@@ -52,7 +37,7 @@ class FaithPathTest {
             } catch (CallForCouncilException c) {
                 System.out.println("CallForCouncilException Thrown");
             } catch (LastSpaceReachedException e) {
-                System.out.println("Partita Terminata");
+                System.out.println("Game Over");
             }
 
         }
@@ -80,7 +65,7 @@ class FaithPathTest {
                 assertEquals(faithPath.getCurrCall(), ++j);
 
             } catch (LastSpaceReachedException e) {
-                System.out.println("Partita Terminata");
+                System.out.println("Game Over");
             }
 
         }
@@ -104,7 +89,7 @@ class FaithPathTest {
             } catch (CallForCouncilException c) {
                 System.out.println("CallForCouncilException Thrown");
             } catch (LastSpaceReachedException e) {
-                System.out.println("Partita Terminata");
+                System.out.println("Game Over");
             }
         }
 
@@ -120,7 +105,7 @@ class FaithPathTest {
             } catch (CallForCouncilException c) {
                 System.out.println("CallForCouncilException Thrown");
             } catch (LastSpaceReachedException e) {
-                System.out.println("Partita Terminata");
+                System.out.println("Game Over");
             }
         }
 
@@ -136,7 +121,7 @@ class FaithPathTest {
             } catch (CallForCouncilException c) {
                 System.out.println("CallForCouncilException Thrown");
             } catch (LastSpaceReachedException e) {
-                System.out.println("Partita Terminata");
+                System.out.println("Game Over");
             }
         }
 
@@ -152,7 +137,7 @@ class FaithPathTest {
             } catch (CallForCouncilException c) {
                 System.out.println("CallForCouncilException Thrown");
             } catch (LastSpaceReachedException e) {
-                System.out.println("Partita Terminata");
+                System.out.println("Game Over");
             }
         }
 
@@ -163,7 +148,7 @@ class FaithPathTest {
             } catch (CallForCouncilException c) {
                 System.out.println("CallForCouncilException Thrown");
             } catch (LastSpaceReachedException e) {
-                System.out.println("Partita Terminata");
+                System.out.println("Game Over");
             }
         }
 
@@ -186,7 +171,7 @@ class FaithPathTest {
             } catch (CallForCouncilException c) {
                 System.out.println("CallForCouncilException Thrown");
             } catch (LastSpaceReachedException e) {
-                System.out.println("Partita Terminata");
+                System.out.println("Game Over");
             }
         }
 
@@ -202,7 +187,7 @@ class FaithPathTest {
             } catch (CallForCouncilException c) {
                 System.out.println("CallForCouncilException Thrown");
             } catch (LastSpaceReachedException e) {
-                System.out.println("Partita Terminata");
+                System.out.println("Game Over");
             }
         }
 
@@ -218,7 +203,7 @@ class FaithPathTest {
             } catch (CallForCouncilException c) {
                 System.out.println("CallForCouncilException Thrown");
             } catch (LastSpaceReachedException e) {
-                System.out.println("Partita Terminata");
+                System.out.println("Game Over");
             }
         }
 
@@ -234,7 +219,7 @@ class FaithPathTest {
             } catch (CallForCouncilException c) {
                 System.out.println("CallForCouncilException Thrown");
             } catch (LastSpaceReachedException e) {
-                System.out.println("Partita Terminata");
+                System.out.println("Game Over");
             }
         }
 
@@ -245,7 +230,7 @@ class FaithPathTest {
             } catch (CallForCouncilException c) {
                 System.out.println("CallForCouncilException Thrown");
             } catch (LastSpaceReachedException e) {
-                System.out.println("Partita Terminata");
+                System.out.println("Game Over");
             }
         }
 
@@ -277,7 +262,7 @@ class FaithPathTest {
                 faithPath.setPapal();
                 assertEquals(faithPath.getPapalCard(j), 1);
                 assertEquals(faithPath.getCurrCall(), ++j);
-                System.out.println("Partita Terminata");
+                System.out.println("Game Over");
             }
         }
 
@@ -319,7 +304,7 @@ class FaithPathTest {
         } catch (CallForCouncilException c) {
             System.out.println("CallForCouncilException Thrown");
         } catch (LastSpaceReachedException e) {
-            System.out.println("Partita Terminata");
+            System.out.println("Game Over");
         }
 
         score = faithPath.faithScore();
@@ -346,7 +331,7 @@ class FaithPathTest {
             } catch (CallForCouncilException c) {
                 System.out.println("CallForCouncilException Thrown");
             } catch (LastSpaceReachedException e) {
-                System.out.println("Partita Terminata");
+                System.out.println("Game Over");
             }
         }
 
@@ -374,7 +359,7 @@ class FaithPathTest {
             } catch (CallForCouncilException c) {
                 System.out.println("CallForCouncilException Thrown");
             } catch (LastSpaceReachedException e) {
-                System.out.println("Partita Terminata");
+                System.out.println("Game Over");
             }
             score = faithPath.faithScore();
             assertEquals( score, 0);
@@ -387,7 +372,7 @@ class FaithPathTest {
             } catch (CallForCouncilException c) {
                 System.out.println("CallForCouncilException Thrown");
             } catch (LastSpaceReachedException e) {
-                System.out.println("Partita Terminata");
+                System.out.println("Game Over");
             }
             score = faithPath.faithScore();
             assertEquals( score, 1);
@@ -400,7 +385,7 @@ class FaithPathTest {
             } catch (CallForCouncilException c) {
                 System.out.println("CallForCouncilException Thrown");
             } catch (LastSpaceReachedException e) {
-                System.out.println("Partita Terminata");
+                System.out.println("Game Over");
             }
             score = faithPath.faithScore();
             assertEquals( score, 2);
@@ -413,7 +398,7 @@ class FaithPathTest {
             } catch (CallForCouncilException c) {
                 System.out.println("CallForCouncilException Thrown");
             } catch (LastSpaceReachedException e) {
-                System.out.println("Partita Terminata");
+                System.out.println("Game Over");
             }
             score = faithPath.faithScore();
             assertEquals( score, 4);
@@ -426,7 +411,7 @@ class FaithPathTest {
             } catch (CallForCouncilException c) {
                 System.out.println("CallForCouncilException Thrown");
             }catch (LastSpaceReachedException e) {
-                System.out.println("Partita Terminata");
+                System.out.println("Game Over");
             }
             score = faithPath.faithScore();
             assertEquals( score, 6);
@@ -439,7 +424,7 @@ class FaithPathTest {
             } catch (CallForCouncilException c) {
                 System.out.println("CallForCouncilException Thrown");
             } catch (LastSpaceReachedException e) {
-                System.out.println("Partita Terminata");
+                System.out.println("Game Over");
             }
             score = faithPath.faithScore();
             assertEquals( score, 9);
@@ -452,7 +437,7 @@ class FaithPathTest {
             } catch (CallForCouncilException c) {
                 System.out.println("CallForCouncilException Thrown");
             } catch (LastSpaceReachedException e) {
-                System.out.println("Partita Terminata");
+                System.out.println("Game Over");
             }
             score = faithPath.faithScore();
             assertEquals( score, 12);
@@ -465,7 +450,7 @@ class FaithPathTest {
             } catch (CallForCouncilException c) {
                 System.out.println("CallForCouncilException Thrown");
             }catch (LastSpaceReachedException e) {
-                System.out.println("Partita Terminata");
+                System.out.println("Game Over");
             }
             score = faithPath.faithScore();
             assertEquals( score, 16);
@@ -478,7 +463,7 @@ class FaithPathTest {
             } catch (CallForCouncilException c) {
                 System.out.println("CallForCouncilException Thrown");
             } catch (LastSpaceReachedException e) {
-                System.out.println("Partita Terminata");
+                System.out.println("Game Over");
             }
             score = faithPath.faithScore();
             assertEquals( score, 20);
@@ -504,7 +489,7 @@ class FaithPathTest {
             } catch (CallForCouncilException c) {
                 System.out.println("CallForCouncilException Thrown");
             } catch (LastSpaceReachedException e) {
-                System.out.println("Partita Terminata");
+                System.out.println("Game Over");
             }
             score = faithPath.faithScore();
             assertEquals( score, 0);
@@ -521,7 +506,7 @@ class FaithPathTest {
             } catch (CallForCouncilException c) {
                 System.out.println("CallForCouncilException Thrown");
             } catch (LastSpaceReachedException e) {
-                System.out.println("Partita Terminata");
+                System.out.println("Game Over");
             }
             score = faithPath.faithScore();
             assertEquals( score, 1);
@@ -535,7 +520,7 @@ class FaithPathTest {
             } catch (CallForCouncilException c) {
                 System.out.println("CallForCouncilException Thrown");
             } catch (LastSpaceReachedException e) {
-                System.out.println("Partita Terminata");
+                System.out.println("Game Over");
             }
             score = faithPath.faithScore();
             assertEquals( score, 2);
@@ -548,7 +533,7 @@ class FaithPathTest {
             } catch (CallForCouncilException c) {
                 System.out.println("CallForCouncilException Thrown");
             } catch (LastSpaceReachedException e) {
-                System.out.println("Partita Terminata");
+                System.out.println("Game Over");
             }
             score = faithPath.faithScore();
             assertEquals( score, 4);
@@ -561,7 +546,7 @@ class FaithPathTest {
             } catch (CallForCouncilException c) {
                 System.out.println("CallForCouncilException Thrown");
             } catch (LastSpaceReachedException e) {
-                System.out.println("Partita Terminata");
+                System.out.println("Game Over");
             }
             score = faithPath.faithScore();
             assertEquals( score, 6 );
@@ -578,7 +563,7 @@ class FaithPathTest {
             } catch (CallForCouncilException c) {
                 System.out.println("CallForCouncilException Thrown");
             } catch (LastSpaceReachedException e) {
-                System.out.println("Partita Terminata");
+                System.out.println("Game Over");
             }
             score = faithPath.faithScore();
             assertEquals( score, 9 + 3);
@@ -591,7 +576,7 @@ class FaithPathTest {
             } catch (CallForCouncilException c) {
                 System.out.println("CallForCouncilException Thrown");
             } catch (LastSpaceReachedException e) {
-                System.out.println("Partita Terminata");
+                System.out.println("Game Over");
             }
             score = faithPath.faithScore();
             assertEquals( score, 12 + 3);
@@ -609,7 +594,7 @@ class FaithPathTest {
             } catch (CallForCouncilException c) {
                 System.out.println("CallForCouncilException Thrown");
             } catch (LastSpaceReachedException e) {
-                System.out.println("Partita Terminata");
+                System.out.println("Game Over");
             }
             score = faithPath.faithScore();
             assertEquals( score, 16 + 7);
@@ -622,7 +607,7 @@ class FaithPathTest {
             } catch (CallForCouncilException c) {
                 System.out.println("CallForCouncilException Thrown");
             } catch (LastSpaceReachedException e) {
-                System.out.println("Partita Terminata");
+                System.out.println("Game Over");
             }
             score = faithPath.faithScore();
             assertEquals( score, 20 + 7);
@@ -631,11 +616,11 @@ class FaithPathTest {
     }
 
     /**
-     * test for control the functionality and the correcteness of move in faithpath and red marble call
+     * test for control the functionality and the correctness of move in faithPath and red marble call
      */
     @Test
     @DisplayName("faithScoreTest : only position - 2")
-    public void faithWithUseOfRedMarble() throws CallForCouncilException {
+    public void faithWithUseOfRedMarble(){
 
         Game game = new Game();
         Player player = new Player("simo", game);
@@ -647,7 +632,7 @@ class FaithPathTest {
         } catch (CallForCouncilException c) {
             System.out.println("CallForCouncilException Thrown");
         } catch (LastSpaceReachedException e) {
-            System.out.println("Partita Terminata");
+            System.out.println("Game Over");
         }
         assertEquals(player.getIndicator(), 1);
         try {
@@ -655,14 +640,14 @@ class FaithPathTest {
         } catch (CallForCouncilException c) {
             System.out.println("CallForCouncilException Thrown");
         } catch (LastSpaceReachedException e) {
-            System.out.println("Partita Terminata");
+            System.out.println("Game Over");
         }
         try {
             redMarble.giveResource(player);
         } catch (CallForCouncilException c) {
             System.out.println("CallForCouncilException Thrown");
         } catch (LastSpaceReachedException e) {
-            System.out.println("Partita Terminata");
+            System.out.println("Game Over");
         }
         assertEquals(player.getIndicator(), 3);
         try {
@@ -670,14 +655,14 @@ class FaithPathTest {
         } catch (CallForCouncilException c) {
             System.out.println("CallForCouncilException Thrown");
         } catch (LastSpaceReachedException e) {
-            System.out.println("Partita Terminata");
+            System.out.println("Game Over");
         }
         try {
             redMarble.giveResource(player);
         } catch (CallForCouncilException c) {
             System.out.println("CallForCouncilException Thrown");
         } catch (LastSpaceReachedException e) {
-            System.out.println("Partita Terminata");
+            System.out.println("Game Over");
         }
         assertEquals(player.getIndicator(), 5);
         try {
@@ -685,21 +670,21 @@ class FaithPathTest {
         } catch (CallForCouncilException c) {
             System.out.println("CallForCouncilException Thrown");
         } catch (LastSpaceReachedException e) {
-            System.out.println("Partita Terminata");
+            System.out.println("Game Over");
         }
         try {
             redMarble.giveResource(player);
         } catch (CallForCouncilException c) {
             System.out.println("CallForCouncilException Thrown");
         } catch (LastSpaceReachedException e) {
-            System.out.println("Partita Terminata");
+            System.out.println("Game Over");
         }
         try {
             redMarble.giveResource(player);
         } catch (CallForCouncilException c) {
             System.out.println("CallForCouncilException Thrown");
         } catch (LastSpaceReachedException e) {
-            System.out.println("Partita Terminata");
+            System.out.println("Game Over");
         }
         assertEquals(player.getIndicator(), 8);
     }

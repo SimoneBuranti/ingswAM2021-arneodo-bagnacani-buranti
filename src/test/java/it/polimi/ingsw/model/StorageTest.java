@@ -2,10 +2,6 @@ package it.polimi.ingsw.model;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import it.polimi.ingsw.model.Reserve;
-import it.polimi.ingsw.model.Resource;
-import it.polimi.ingsw.model.Storage;
-import it.polimi.ingsw.model.UnavailableResourceException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -37,7 +33,7 @@ class StorageTest {
     @DisplayName("addResource Test")
     public void addResourceTest() {
         Storage storage = new Storage();
-        Reserve reserve = new Reserve();
+        new Reserve();
 
         assertEquals(0, storage.getResource(Resource.COIN));
         assertEquals(0, storage.getResource(Resource.ROCK));
@@ -79,7 +75,7 @@ class StorageTest {
     @DisplayName("addResource with unavailable resource Test")
     public void addResourceUnavailableTest() {
         Storage storage = new Storage();
-        Reserve reserve = new Reserve();
+        new Reserve();
 
         for (int i = 0; i < 100 ; i++){
             storage.addResource(Resource.COIN);
@@ -133,7 +129,7 @@ class StorageTest {
     @DisplayName("useResource Test")
     public void useResourceTest() {
         Storage storage = new Storage();
-        Reserve reserve = new Reserve();
+        new Reserve();
 
         storage.addResource(Resource.COIN);
         storage.addResource(Resource.COIN);
@@ -286,7 +282,7 @@ class StorageTest {
     public void checkTest(){
         Storage storage = new Storage();
         ArrayList<Resource> list = new ArrayList<>();
-        Reserve reserve = new Reserve();
+        new Reserve();
 
 
         assertTrue(storage.check(list));
@@ -379,7 +375,7 @@ class StorageTest {
     @DisplayName("resourceScore Test")
     public void resourceScoreTest(){
         Storage storage = new Storage();
-        Reserve reserve = new Reserve();
+        new Reserve();
 
         assertEquals(0, storage.resourceScore());
 
@@ -500,7 +496,7 @@ class StorageTest {
     @DisplayName("getStorageResource Test")
     public void getStorageResourceTest(){
         Storage storage = new Storage();
-        Reserve reserve = new Reserve();
+        new Reserve();
         Map<Resource,Integer> map = new HashMap<>();
 
         map.put(Resource.COIN, 0);
@@ -587,7 +583,7 @@ class StorageTest {
     @DisplayName("availableResourcesTest 0")
     public void availableResourcesTest0(){
         Storage storage = new Storage();
-        Reserve reserve = new Reserve();
+        new Reserve();
 
         Map<Resource,Integer> map = new HashMap<>();
         Map<Resource,Integer> availableMap = new HashMap<>();
@@ -614,14 +610,14 @@ class StorageTest {
                 availableMap.put(resource, availableMap.remove(resource)+1);
         }
 
-        assertTrue(map.equals(availableMap));
+        assertEquals(map, availableMap);
     }
 
 
     @Test
     @DisplayName("availableResourcesTest2")
     public void availableResourcesTest2(){
-        Reserve reserve = new Reserve();
+        new Reserve();
         Storage storage = new Storage();
 
         Resource[] resource = {Resource.COIN,Resource.ROCK,Resource.SHIELD,Resource.SERVANT};
@@ -663,7 +659,7 @@ class StorageTest {
     @DisplayName("availableResourcesTest3")
     public void availableResourcesTest3(){
         Storage storage = new Storage();
-        Reserve reserve = new Reserve();
+        new Reserve();
 
         Map<Resource,Integer> map = new HashMap<>();
         Map<Resource,Integer> availableMap = new HashMap<>();
@@ -702,7 +698,7 @@ class StorageTest {
     @DisplayName("availableResourcesTest4 : available only resources")
     public void availableResourcesTest4(){
         Storage storage = new Storage();
-        Reserve reserve = new Reserve();
+        new Reserve();
 
         Map<Resource,Integer> map = new HashMap<>();
         Map<Resource,Integer> availableMap = new HashMap<>();
@@ -742,7 +738,7 @@ class StorageTest {
     @DisplayName("availableResourcesTest5 : one unavailable resource type")
     public void availableResourcesTest5(){
         Storage storage = new Storage();
-        Reserve reserve = new Reserve();
+        new Reserve();
 
         Map<Resource,Integer> map = new HashMap<>();
         Map<Resource,Integer> availableMap = new HashMap<>();
@@ -782,7 +778,7 @@ class StorageTest {
     @DisplayName("availableResourcesTest6 : all to limits")
     public void availableResourcesTest6(){
         Storage storage = new Storage();
-        Reserve reserve = new Reserve();
+        new Reserve();
 
         Map<Resource,Integer> map = new HashMap<>();
         Map<Resource,Integer> availableMap = new HashMap<>();
@@ -821,7 +817,7 @@ class StorageTest {
     @DisplayName("availableResourcesTest7 : all out of limit")
     public void availableResourcesTest7(){
         Storage storage = new Storage();
-        Reserve reserve = new Reserve();
+        new Reserve();
 
         Map<Resource,Integer> map = new HashMap<>();
         Map<Resource,Integer> availableMap = new HashMap<>();
@@ -863,7 +859,7 @@ class StorageTest {
     @DisplayName("PayResources Test - simple test")
     public void payResourcesTest0(){
         Storage storage = new Storage();
-        Reserve reserve = new Reserve();
+        new Reserve();
 
         Map<Resource,Integer> map = new HashMap<>();
         Map<Resource,Integer> availableMap = new HashMap<>();
@@ -933,7 +929,7 @@ class StorageTest {
     @DisplayName("PayResources Test 1- affordable cost")
     public void payResourcesTest1(){
         Storage storage = new Storage();
-        Reserve reserve = new Reserve();
+        new Reserve();
 
         Map<Resource,Integer> map = new HashMap<>();
         Map<Resource,Integer> availableMap = new HashMap<>();
@@ -1004,7 +1000,7 @@ class StorageTest {
     @DisplayName("PayResources Test 2- affordable cost")
     public void payResourcesTest2(){
         Storage storage = new Storage();
-        Reserve reserve = new Reserve();
+        new Reserve();
 
         Map<Resource,Integer> map = new HashMap<>();
         Map<Resource,Integer> availableMap = new HashMap<>();
@@ -1075,7 +1071,7 @@ class StorageTest {
     @DisplayName("PayResources Test 3 ")
     public void payResourcesTest3(){
         Storage storage = new Storage();
-        Reserve reserve = new Reserve();
+        new Reserve();
 
         Map<Resource,Integer> map = new HashMap<>();
         Map<Resource,Integer> availableMap = new HashMap<>();
@@ -1146,7 +1142,7 @@ class StorageTest {
     @DisplayName("PayResources Test 4 ")
     public void payResourcesTest4(){
         Storage storage = new Storage();
-        Reserve reserve = new Reserve();
+        new Reserve();
 
         Map<Resource,Integer> map = new HashMap<>();
         Map<Resource,Integer> availableMap = new HashMap<>();
@@ -1217,7 +1213,7 @@ class StorageTest {
     @DisplayName("PayResources Test 5 ")
     public void payResourcesTest5(){
         Storage storage = new Storage();
-        Reserve reserve = new Reserve();
+        new Reserve();
 
         Map<Resource,Integer> map = new HashMap<>();
         Map<Resource,Integer> availableMap = new HashMap<>();

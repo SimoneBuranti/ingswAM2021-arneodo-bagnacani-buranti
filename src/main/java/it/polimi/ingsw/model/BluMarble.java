@@ -1,20 +1,16 @@
 package it.polimi.ingsw.model;
 
 /**
- * class for blueMarble, only 2 objects instantiated in Market
+ * this class represents the blue marble
  */
 public class BluMarble extends Marble{
 
     /**
-     * @param player
-     * addResource.shield to player
+     * this class adds a shield recourse to the player buffer by calling the addToBuffer method of the player class
+     * @param player : the one that has bought from the market
      */
     public void giveResource(Player player) {
-        try {
-            Reserve.getResource(Resource.SHIELD);
-            player.addToBuffer(Resource.SHIELD);
-        } catch (UnavailableResourceException ignored) {}
-
-        }
+        player.addToBuffer(Resource.SHIELD);
     }
+}
 

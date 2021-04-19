@@ -1,6 +1,5 @@
 package it.polimi.ingsw.model;
 
-import it.polimi.ingsw.model.*;
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -23,7 +22,7 @@ class WhiteMarbleGameBoardsTest {
     @DisplayName("whiteExchangeTest - null method")
     public void whiteExchangeNullTest() {
         WhiteMarble whiteMarble = new WhiteMarble();
-        Player player = new Player("SIMOSIMO" , new Game());
+        Player player = new Player("Simo" , new Game());
 
         try {
             whiteMarble.giveResource(player);
@@ -36,7 +35,7 @@ class WhiteMarbleGameBoardsTest {
     @Test
     @DisplayName("whiteExchangeTest")
     public void whiteExchangeTest() {
-        Reserve reserve = new Reserve();
+        new Reserve();
         GameBoardInterface gameBoard = new GameBoard();
         gameBoard = new WhiteMarbleGameBoard(gameBoard,Resource.COIN);
 
@@ -49,7 +48,7 @@ class WhiteMarbleGameBoardsTest {
             return;
         }
 
-        assertTrue(resource==gameBoard.getResourceTypeFirst());
+        assertSame(resource, gameBoard.getResourceTypeFirst());
 
     }
 

@@ -1,8 +1,10 @@
 package it.polimi.ingsw.model;
+
 /**
- * class for whiteMarble, only 4 objects instantiated in Market
+ * this class represents the white marble
  */
 public class WhiteMarble extends Marble{
+
 
 
     public void giveResource(Player player) throws WhiteMarbleException {

@@ -1,6 +1,5 @@
 package it.polimi.ingsw.model;
 
-import it.polimi.ingsw.model.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +17,7 @@ public class StorageExtraFirstTest {
     @DisplayName("Constructor Test")
     public void constructorTest(){
         Storage storage = new Storage();
-        Reserve reserve = new Reserve();
+        new Reserve();
 
         storage.addResource(Resource.COIN);
         storage.addResource(Resource.COIN);
@@ -45,7 +44,7 @@ public class StorageExtraFirstTest {
     @DisplayName("addResource Test")
     public void addResourceTest(){
         Storage storage = new Storage();
-        Reserve reserve = new Reserve();
+        new Reserve();
 
         storage.addResource(Resource.COIN);
         storage.addResource(Resource.COIN);
@@ -86,7 +85,7 @@ public class StorageExtraFirstTest {
     @DisplayName("useResource Test")
     public void useResourceTest(){
         Storage storage = new Storage();
-        Reserve reserve = new Reserve();
+        new Reserve();
 
         storage.addResource(Resource.COIN);
         storage.addResource(Resource.COIN);
@@ -163,7 +162,7 @@ public class StorageExtraFirstTest {
     @DisplayName("check Test")
     public void checkTest(){
         Storage storage = new Storage();
-        Reserve reserve = new Reserve();
+        new Reserve();
         ArrayList<Resource> list = new ArrayList<>();
 
         storage.addResource(Resource.COIN);
@@ -241,7 +240,7 @@ public class StorageExtraFirstTest {
     @DisplayName("getResource Test")
     public void getResourceTest(){
         Storage storage = new Storage();
-        Reserve reserve = new Reserve();
+        new Reserve();
 
         storage.addResource(Resource.COIN);
         storage.addResource(Resource.COIN);
@@ -281,7 +280,7 @@ public class StorageExtraFirstTest {
     @DisplayName("resourceScore Test")
     public void resourceScoreTest(){
         Storage storage = new Storage();
-        Reserve reserve = new Reserve();
+        new Reserve();
 
         storage.addResource(Resource.COIN);
         storage.addResource(Resource.COIN);

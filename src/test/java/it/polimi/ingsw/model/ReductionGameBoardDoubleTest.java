@@ -1,6 +1,5 @@
 package it.polimi.ingsw.model;
 
-import it.polimi.ingsw.model.*;
 import org.junit.jupiter.api.*;
 import java.util.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -15,7 +14,6 @@ class ReductionGameBoardDoubleTest {
         gameBoard = new ReductionGameBoardDouble(gameBoard,gameBoard.getResourceTypeFirst(),Resource.COIN);
 
         ReductionGameBoard reductionGameBoard = (ReductionGameBoard) gameBoard;
-        ReductionGameBoardDouble reductionGameBoardDouble = (ReductionGameBoardDouble) gameBoard;
 
         ArrayList<Resource> cost = new ArrayList<>();
         HashMap<Resource,Integer> costMap = new HashMap<>();
@@ -59,7 +57,6 @@ class ReductionGameBoardDoubleTest {
         gameBoard = new ReductionGameBoardDouble(gameBoard,gameBoard.getResourceTypeFirst(),Resource.COIN);
 
         ReductionGameBoard reductionGameBoard = (ReductionGameBoard) gameBoard;
-        ReductionGameBoardDouble reductionGameBoardDouble = (ReductionGameBoardDouble) gameBoard;
 
         ArrayList<Resource> cost = new ArrayList<>();
         HashMap<Resource,Integer> costMap = new HashMap<>();
@@ -103,18 +100,14 @@ class ReductionGameBoardDoubleTest {
     @Test
     @DisplayName("buyProductionCard() test - affordable card")
     public void buyProductionCardTest0(){
-        Reserve reserve = new Reserve();
+        new Reserve();
 
         GameBoardInterface gameBoard = new GameBoard();
         gameBoard = new ReductionGameBoard(gameBoard,Resource.SHIELD);
         gameBoard = new ReductionGameBoardDouble(gameBoard,gameBoard.getResourceTypeFirst(),Resource.COIN);
 
-        ReductionGameBoard reductionGameBoard = (ReductionGameBoard) gameBoard;
-        ReductionGameBoardDouble reductionGameBoardDouble = (ReductionGameBoardDouble) gameBoard;
 
         DeckProductionCardOneBlu blueDeck = new DeckProductionCardOneBlu();
-        DeckProductionCardOneGreen greenDeck = new DeckProductionCardOneGreen();
-        DeckProductionCardOneYellow yellowDeck = new DeckProductionCardOneYellow();
 
         ArrayList<Resource> available ;
         ArrayList<Resource> cost ;
@@ -200,19 +193,15 @@ class ReductionGameBoardDoubleTest {
     @Test
     @DisplayName("buyProductionCard() test - 3 affordable card")
     public void buyProductionCardTest1(){
-        Reserve reserve = new Reserve();
-        Resource parameter = Resource.ROCK;
+        new Reserve();
 
         GameBoardInterface gameBoard = new GameBoard();
         gameBoard = new ReductionGameBoard(gameBoard,Resource.SHIELD);
         gameBoard = new ReductionGameBoardDouble(gameBoard,gameBoard.getResourceTypeFirst(),Resource.COIN);
 
-        ReductionGameBoard reductionGameBoard = (ReductionGameBoard) gameBoard;
-        ReductionGameBoardDouble reductionGameBoardDouble = (ReductionGameBoardDouble) gameBoard;
 
         DeckProductionCardOneBlu blueDeck = new DeckProductionCardOneBlu();
         DeckProductionCardOneGreen greenDeck = new DeckProductionCardOneGreen();
-        DeckProductionCardOneYellow yellowDeck = new DeckProductionCardOneYellow();
 
         ArrayList<Resource> available ;
         ArrayList<Resource> cost ;
@@ -304,9 +293,7 @@ class ReductionGameBoardDoubleTest {
             costMap.put(r,costMap.remove(r)+1);
         }
 
-        for(Resource key : strongboxMap.keySet()){
-            strongboxMap.put(key,availableMap.get(key));
-        }
+        strongboxMap.replaceAll((k, v) -> availableMap.get(k));
 
         try {
             gameBoard.buyProductionCard(greenDeck,1);
@@ -357,9 +344,7 @@ class ReductionGameBoardDoubleTest {
             costMap.put(r,costMap.remove(r)+1);
         }
 
-        for(Resource key : strongboxMap.keySet()){
-            strongboxMap.put(key,availableMap.get(key));
-        }
+        strongboxMap.replaceAll((k, v) -> availableMap.get(k));
 
         try {
             gameBoard.buyProductionCard(greenDeck,2);
@@ -397,18 +382,13 @@ class ReductionGameBoardDoubleTest {
     @Test
     @DisplayName("buyProductionCard() test - not affordable card")
     public void buyProductionCardTest2(){
-        Reserve reserve = new Reserve();
-        Resource parameter = Resource.COIN;
+        new Reserve();
         GameBoardInterface gameBoard = new GameBoard();
         gameBoard = new ReductionGameBoard(gameBoard,Resource.SHIELD);
         gameBoard = new ReductionGameBoardDouble(gameBoard,gameBoard.getResourceTypeFirst(),Resource.COIN);
 
-        ReductionGameBoard reductionGameBoard = (ReductionGameBoard) gameBoard;
-        ReductionGameBoardDouble reductionGameBoardDouble = (ReductionGameBoardDouble) gameBoard;
 
         DeckProductionCardOneBlu blueDeck = new DeckProductionCardOneBlu();
-        DeckProductionCardOneGreen greenDeck = new DeckProductionCardOneGreen();
-        DeckProductionCardOneYellow yellowDeck = new DeckProductionCardOneYellow();
 
         ArrayList<Resource> available ;
         ArrayList<Resource> cost ;
@@ -690,7 +670,7 @@ class ReductionGameBoardDoubleTest {
         GameBoardInterface gameBoard = new GameBoard();
         gameBoard = new ReductionGameBoard(gameBoard,Resource.SHIELD);
         gameBoard = new ReductionGameBoardDouble(gameBoard,gameBoard.getResourceTypeFirst(),Resource.COIN);
-        Reserve reserve = new Reserve();
+        new Reserve();
 
         Map<Resource,Integer> storageMap = new HashMap<>();
         Map<Resource,Integer> strongboxMap = new HashMap<>();
@@ -751,7 +731,7 @@ class ReductionGameBoardDoubleTest {
         GameBoardInterface gameBoard = new GameBoard();
         gameBoard = new ReductionGameBoard(gameBoard,Resource.SHIELD);
         gameBoard = new ReductionGameBoardDouble(gameBoard,gameBoard.getResourceTypeFirst(),Resource.COIN);
-        Reserve reserve = new Reserve();
+        new Reserve();
 
         Map<Resource,Integer> storageMap = new HashMap<>();
         Map<Resource,Integer> strongboxMap = new HashMap<>();
@@ -812,7 +792,7 @@ class ReductionGameBoardDoubleTest {
         GameBoardInterface gameBoard = new GameBoard();
         gameBoard = new ReductionGameBoard(gameBoard,Resource.SHIELD);
         gameBoard = new ReductionGameBoardDouble(gameBoard,gameBoard.getResourceTypeFirst(),Resource.COIN);
-        Reserve reserve = new Reserve();
+        new Reserve();
 
         Map<Resource,Integer> storageMap = new HashMap<>();
         Map<Resource,Integer> strongboxMap = new HashMap<>();
@@ -874,7 +854,7 @@ class ReductionGameBoardDoubleTest {
         GameBoardInterface gameBoard = new GameBoard();
         gameBoard = new ReductionGameBoard(gameBoard,Resource.SHIELD);
         gameBoard = new ReductionGameBoardDouble(gameBoard,gameBoard.getResourceTypeFirst(),Resource.COIN);
-        Reserve reserve = new Reserve();
+        new Reserve();
 
         Map<Resource,Integer> storageMap = new HashMap<>();
         Map<Resource,Integer> strongboxMap = new HashMap<>();
@@ -935,7 +915,7 @@ class ReductionGameBoardDoubleTest {
         GameBoardInterface gameBoard = new GameBoard();
         gameBoard = new ReductionGameBoard(gameBoard,Resource.SHIELD);
         gameBoard = new ReductionGameBoardDouble(gameBoard,gameBoard.getResourceTypeFirst(),Resource.COIN);
-        Reserve reserve = new Reserve();
+        new Reserve();
 
         Map<Resource,Integer> costMap = new HashMap<>();
         Map<Resource,Integer> storageMap = new HashMap<>();
@@ -1008,7 +988,7 @@ class ReductionGameBoardDoubleTest {
         GameBoardInterface gameBoard = new GameBoard();
         gameBoard = new ReductionGameBoard(gameBoard,Resource.SHIELD);
         gameBoard = new ReductionGameBoardDouble(gameBoard,gameBoard.getResourceTypeFirst(),Resource.COIN);
-        Reserve reserve = new Reserve();
+        new Reserve();
 
         Map<Resource,Integer> costMap = new HashMap<>();
         Map<Resource,Integer> storageMap = new HashMap<>();
@@ -1081,7 +1061,7 @@ class ReductionGameBoardDoubleTest {
         GameBoardInterface gameBoard = new GameBoard();
         gameBoard = new ReductionGameBoard(gameBoard,Resource.SHIELD);
         gameBoard = new ReductionGameBoardDouble(gameBoard,gameBoard.getResourceTypeFirst(),Resource.COIN);
-        Reserve reserve = new Reserve();
+        new Reserve();
 
         Map<Resource,Integer> costMap = new HashMap<>();
         Map<Resource,Integer> storageMap = new HashMap<>();
@@ -1280,7 +1260,7 @@ class ReductionGameBoardDoubleTest {
     @DisplayName("productionScoreTest() test - complete test")
     public void productionScoreTest(){
         GameBoard gameBoard = new GameBoard() ;
-        Reserve reserve = new Reserve();
+        new Reserve();
         DeckProductionCardOneBlu blueDeck = new DeckProductionCardOneBlu();
         DeckProductionCardTwoBlu blueDeckTwo = new DeckProductionCardTwoBlu();
         DeckProductionCardThreeBlu blueDeckThree = new DeckProductionCardThreeBlu();
@@ -1402,7 +1382,7 @@ class ReductionGameBoardDoubleTest {
         GameBoardInterface gameBoard = new GameBoard();
         gameBoard = new ReductionGameBoard(gameBoard,Resource.SHIELD);
         gameBoard = new ReductionGameBoardDouble(gameBoard,gameBoard.getResourceTypeFirst(),Resource.COIN);
-        Reserve reserve = new Reserve();
+        new Reserve();
 
         Map<Resource,Integer> storageMap = new HashMap<>();
         Map<Resource,Integer> strongboxMap = new HashMap<>();
@@ -1485,19 +1465,12 @@ class ReductionGameBoardDoubleTest {
         GameBoardInterface gameBoard = new GameBoard();
         gameBoard = new ReductionGameBoard(gameBoard,Resource.SHIELD);
         gameBoard = new ReductionGameBoardDouble(gameBoard,gameBoard.getResourceTypeFirst(),Resource.COIN);
-        Reserve reserve = new Reserve();
+        new Reserve();
 
         Map<Resource,Integer> storageMap = new HashMap<>();
         Map<Resource,Integer> strongboxMap = new HashMap<>();
-        Map<Resource,Integer> availableMap = new HashMap<>();
         Map<Resource,Integer> newResourcesMap = new HashMap<>();
         ArrayList<Resource> newResourcesList = new ArrayList<>();
-        ArrayList<Resource> available = new ArrayList<>();
-
-        availableMap.put(Resource.COIN, 0);
-        availableMap.put(Resource.ROCK, 0);
-        availableMap.put(Resource.SHIELD, 0);
-        availableMap.put(Resource.SERVANT, 0);
 
         storageMap.put(Resource.COIN, 0);
         storageMap.put(Resource.ROCK, 0);
@@ -1550,19 +1523,13 @@ class ReductionGameBoardDoubleTest {
         GameBoardInterface gameBoard = new GameBoard();
         gameBoard = new ReductionGameBoard(gameBoard,Resource.SHIELD);
         gameBoard = new ReductionGameBoardDouble(gameBoard,gameBoard.getResourceTypeFirst(),Resource.COIN);
-        Reserve reserve = new Reserve();
+        new Reserve();
 
         Map<Resource,Integer> storageMap = new HashMap<>();
         Map<Resource,Integer> strongboxMap = new HashMap<>();
-        Map<Resource,Integer> availableMap = new HashMap<>();
         Map<Resource,Integer> newResourcesMap = new HashMap<>();
         ArrayList<Resource> newResourcesList = new ArrayList<>();
-        ArrayList<Resource> available = new ArrayList<>();
 
-        availableMap.put(Resource.COIN, 0);
-        availableMap.put(Resource.ROCK, 0);
-        availableMap.put(Resource.SHIELD, 0);
-        availableMap.put(Resource.SERVANT, 0);
 
         storageMap.put(Resource.COIN, 0);
         storageMap.put(Resource.ROCK, 0);
@@ -1614,10 +1581,9 @@ class ReductionGameBoardDoubleTest {
         GameBoardInterface gameBoard = new GameBoard();
         gameBoard = new ReductionGameBoard(gameBoard,Resource.SHIELD);
         gameBoard = new ReductionGameBoardDouble(gameBoard,gameBoard.getResourceTypeFirst(),Resource.COIN);
-        Reserve reserve = new Reserve();
+        new Reserve();
 
         Map<Resource,Integer> storageMap = new HashMap<>();
-        Map<Resource,Integer> strongboxMap = new HashMap<>();
         Map<Resource,Integer> availableMap = new HashMap<>();
 
         ArrayList<Resource> available;
@@ -1632,10 +1598,6 @@ class ReductionGameBoardDoubleTest {
         storageMap.put(Resource.SHIELD, 1);
         storageMap.put(Resource.SERVANT, 0);
 
-        strongboxMap.put(Resource.COIN, 0);
-        strongboxMap.put(Resource.ROCK, 0);
-        strongboxMap.put(Resource.SHIELD, 0);
-        strongboxMap.put(Resource.SERVANT, 0);
 
         for(Resource key : storageMap.keySet()){
             for (int i = 0; i<storageMap.get(key); i++){
@@ -1674,28 +1636,15 @@ class ReductionGameBoardDoubleTest {
         GameBoardInterface gameBoard = new GameBoard();
         gameBoard = new ReductionGameBoard(gameBoard,Resource.SHIELD);
         gameBoard = new ReductionGameBoardDouble(gameBoard,gameBoard.getResourceTypeFirst(),Resource.COIN);
-        Reserve reserve = new Reserve();
+        new Reserve();
 
         Map<Resource,Integer> storageMap = new HashMap<>();
-        Map<Resource,Integer> strongboxMap = new HashMap<>();
-        Map<Resource,Integer> availableMap = new HashMap<>();
-
-        ArrayList<Resource> available = new ArrayList<>();
-
-        availableMap.put(Resource.COIN, 0);
-        availableMap.put(Resource.ROCK, 0);
-        availableMap.put(Resource.SHIELD, 0);
-        availableMap.put(Resource.SERVANT, 0);
 
         storageMap.put(Resource.COIN, 1);
         storageMap.put(Resource.ROCK, 1);
         storageMap.put(Resource.SHIELD, 1);
         storageMap.put(Resource.SERVANT, 0);
 
-        strongboxMap.put(Resource.COIN, 0);
-        strongboxMap.put(Resource.ROCK, 0);
-        strongboxMap.put(Resource.SHIELD, 0);
-        strongboxMap.put(Resource.SERVANT, 0);
 
         for(Resource key : storageMap.keySet()){
             for (int i = 0; i<storageMap.get(key); i++){
@@ -1711,17 +1660,6 @@ class ReductionGameBoardDoubleTest {
 
         gameBoard.endOfProduction();
 
-/*available = gameBoard.availableResources();
-
-for(Resource r : available){
-    availableMap.put(r,availableMap.remove(r)+1);
-}
-
-assertEquals(0,availableMap.get(Resource.COIN));
-assertEquals(1,availableMap.get(Resource.ROCK));
-assertEquals(2,availableMap.get(Resource.SHIELD));
-assertEquals(0,availableMap.get(Resource.SERVANT));*/
-
     }
 
     /**
@@ -1733,10 +1671,9 @@ assertEquals(0,availableMap.get(Resource.SERVANT));*/
         GameBoardInterface gameBoard = new GameBoard();
         gameBoard = new ReductionGameBoard(gameBoard,Resource.SHIELD);
         gameBoard = new ReductionGameBoardDouble(gameBoard,gameBoard.getResourceTypeFirst(),Resource.COIN);
-        Reserve reserve = new Reserve();
+        new Reserve();
 
         Map<Resource,Integer> storageMap = new HashMap<>();
-        Map<Resource,Integer> strongboxMap = new HashMap<>();
         Map<Resource,Integer> availableMap = new HashMap<>();
 
         ArrayList<Resource> available;
@@ -1750,11 +1687,6 @@ assertEquals(0,availableMap.get(Resource.SERVANT));*/
         storageMap.put(Resource.ROCK, 2);
         storageMap.put(Resource.SHIELD, 1);
         storageMap.put(Resource.SERVANT, 0);
-
-        strongboxMap.put(Resource.COIN, 0);
-        strongboxMap.put(Resource.ROCK, 0);
-        strongboxMap.put(Resource.SHIELD, 0);
-        strongboxMap.put(Resource.SERVANT, 0);
 
         for(Resource key : storageMap.keySet()){
             for (int i = 0; i<storageMap.get(key); i++){
@@ -1792,7 +1724,7 @@ assertEquals(0,availableMap.get(Resource.SERVANT));*/
         GameBoardInterface gameBoard = new GameBoard();
         gameBoard = new ReductionGameBoard(gameBoard,Resource.SHIELD);
         gameBoard = new ReductionGameBoardDouble(gameBoard,gameBoard.getResourceTypeFirst(),Resource.COIN);
-        Reserve reserve = new Reserve();
+        new Reserve();
         ProductionCard card;
         Map<Resource,Integer> storageMap = new HashMap<>();
         Map<Resource,Integer> strongboxMap = new HashMap<>();
@@ -1892,7 +1824,7 @@ assertEquals(0,availableMap.get(Resource.SERVANT));*/
         GameBoardInterface gameBoard = new GameBoard();
         gameBoard = new ReductionGameBoard(gameBoard,Resource.SHIELD);
         gameBoard = new ReductionGameBoardDouble(gameBoard,gameBoard.getResourceTypeFirst(),Resource.COIN);
-        Reserve reserve = new Reserve();
+        new Reserve();
         ProductionCard card;
         Map<Resource,Integer> storageMap = new HashMap<>();
         Map<Resource,Integer> strongboxMap = new HashMap<>();
@@ -1940,15 +1872,11 @@ assertEquals(0,availableMap.get(Resource.SERVANT));*/
         outputList = card.getOut();
         inputList = card.getIn();
 
-        //System.out.println("InputList:\n");
         for(Resource r : inputList){
             inputMap.put(r,inputMap.remove(r)+1);
-            //System.out.println(r +" ");
         }
-        //System.out.println("outputList:\n");
         for(Resource r : outputList) {
             outputMap.put(r, outputMap.remove(r) + 1);
-            //System.out.println(r +" ");
         }
 
         ArrayList<Resource> available;
@@ -1975,14 +1903,9 @@ assertEquals(0,availableMap.get(Resource.SERVANT));*/
 
         available = gameBoard.availableResources();
 
-
-        //System.out.println("Available after production:\n");
         for(Resource r : available){
             availableMap.put(r,availableMap.remove(r)+1);
-            //System.out.println(r +" ");
         }
-        //System.out.println("FaithPath:\nInit: " + init + ", isFaithPath: "+card.isFaithPoint()+", final: "+gameBoard.getIndicator()+"\n");
-
 
         assertEquals(init+card.isFaithPoint(),gameBoard.getIndicator());
         assertEquals(10-inputMap.get(Resource.COIN)+outputMap.get(Resource.COIN),availableMap.get(Resource.COIN));
@@ -2000,7 +1923,7 @@ assertEquals(0,availableMap.get(Resource.SERVANT));*/
         GameBoardInterface gameBoard = new GameBoard();
         gameBoard = new ReductionGameBoard(gameBoard,Resource.SHIELD);
         gameBoard = new ReductionGameBoardDouble(gameBoard,gameBoard.getResourceTypeFirst(),Resource.COIN);
-        Reserve reserve = new Reserve();
+        new Reserve();
         ProductionCard card;
         Map<Resource,Integer> storageMap = new HashMap<>();
         Map<Resource,Integer> strongboxMap = new HashMap<>();
@@ -2048,15 +1971,11 @@ assertEquals(0,availableMap.get(Resource.SERVANT));*/
         outputList = card.getOut();
         inputList = card.getIn();
 
-        //System.out.println("InputList:\n");
         for(Resource r : inputList){
             inputMap.put(r,inputMap.remove(r)+1);
-            //System.out.println(r +" ");
         }
-        //System.out.println("outputList:\n");
         for(Resource r : outputList) {
             outputMap.put(r, outputMap.remove(r) + 1);
-            //System.out.println(r +" ");
         }
 
         ArrayList<Resource> available;
@@ -2085,13 +2004,9 @@ assertEquals(0,availableMap.get(Resource.SERVANT));*/
         available = gameBoard.availableResources();
 
 
-        //System.out.println("Available after production:\n");
         for(Resource r : available){
             availableMap.put(r,availableMap.remove(r)+1);
-            //System.out.println(r +" ");
         }
-        //System.out.println("FaithPath:\nInit: " + init + ", isFaithPath: "+card.isFaithPoint()+", final: "+gameBoard.getIndicator()+"\n");
-
 
         assertEquals(init+card.isFaithPoint(),gameBoard.getIndicator());
         assertEquals(4-inputMap.get(Resource.COIN)+outputMap.get(Resource.COIN),availableMap.get(Resource.COIN));
@@ -2110,7 +2025,7 @@ assertEquals(0,availableMap.get(Resource.SERVANT));*/
         GameBoardInterface gameBoard = new GameBoard();
         gameBoard = new ReductionGameBoard(gameBoard,Resource.SHIELD);
         gameBoard = new ReductionGameBoardDouble(gameBoard,gameBoard.getResourceTypeFirst(),Resource.COIN);
-        Reserve reserve = new Reserve();
+        new Reserve();
         ProductionCard card;
         Map<Resource,Integer> storageMap = new HashMap<>();
         Map<Resource,Integer> strongboxMap = new HashMap<>();
@@ -2119,7 +2034,6 @@ assertEquals(0,availableMap.get(Resource.SERVANT));*/
         ArrayList<Resource>  inputList;
         Map<Resource,Integer> outputMap = new HashMap<>();
         ArrayList<Resource>  outputList;
-        int init ;
 
         availableMap.put(Resource.COIN, 0);
         availableMap.put(Resource.ROCK, 0);
@@ -2145,7 +2059,6 @@ assertEquals(0,availableMap.get(Resource.SERVANT));*/
         strongboxMap.put(Resource.SERVANT, 0);
 
         DeckProductionCardOneGreen deck = new DeckProductionCardOneGreen();
-        init = gameBoard.getIndicator();
         try {
             card = deck.pickUpFirstCard();
         } catch (EmptyException e) {
@@ -2158,15 +2071,11 @@ assertEquals(0,availableMap.get(Resource.SERVANT));*/
         outputList = card.getOut();
         inputList = card.getIn();
 
-        //System.out.println("InputList:\n");
         for(Resource r : inputList){
             inputMap.put(r,inputMap.remove(r)+1);
-            //System.out.println(r +" ");
         }
-        //System.out.println("outputList:\n");
         for(Resource r : outputList) {
             outputMap.put(r, outputMap.remove(r) + 1);
-            //System.out.println(r +" ");
         }
 
         ArrayList<Resource> available;
@@ -2194,20 +2103,9 @@ assertEquals(0,availableMap.get(Resource.SERVANT));*/
 
         available = gameBoard.availableResources();
 
-
-        //System.out.println("Available after production:\n");
         for(Resource r : available){
             availableMap.put(r,availableMap.remove(r)+1);
-            //System.out.println(r +" ");
         }
-        //System.out.println("FaithPath:\nInit: " + init + ", isFaithPath: "+card.isFaithPoint()+", final: "+gameBoard.getIndicator()+"\n");
-
-
-/*assertEquals(init+card.isFaithPoint(),gameBoard.getIndicator());
-assertEquals(4-inputMap.get(Resource.COIN)+outputMap.get(Resource.COIN),availableMap.get(Resource.COIN));
-assertEquals(4-inputMap.get(Resource.ROCK)+outputMap.get(Resource.ROCK),availableMap.get(Resource.ROCK));
-assertEquals(4-inputMap.get(Resource.SHIELD)+outputMap.get(Resource.SHIELD),availableMap.get(Resource.SHIELD));
-assertEquals(4-inputMap.get(Resource.SERVANT)+outputMap.get(Resource.SERVANT),availableMap.get(Resource.SERVANT));*/
     }
 
     /**
@@ -2219,7 +2117,7 @@ assertEquals(4-inputMap.get(Resource.SERVANT)+outputMap.get(Resource.SERVANT),av
         GameBoardInterface gameBoard = new GameBoard();
         gameBoard = new ReductionGameBoard(gameBoard,Resource.SHIELD);
         gameBoard = new ReductionGameBoardDouble(gameBoard,gameBoard.getResourceTypeFirst(),Resource.COIN);
-        Reserve reserve = new Reserve();
+        new Reserve();
         ProductionCard card;
         Map<Resource,Integer> storageMap = new HashMap<>();
         Map<Resource,Integer> strongboxMap = new HashMap<>();
@@ -2228,7 +2126,6 @@ assertEquals(4-inputMap.get(Resource.SERVANT)+outputMap.get(Resource.SERVANT),av
         ArrayList<Resource>  inputList;
         Map<Resource,Integer> outputMap = new HashMap<>();
         ArrayList<Resource>  outputList;
-        int init ;
 
         availableMap.put(Resource.COIN, 0);
         availableMap.put(Resource.ROCK, 0);
@@ -2254,7 +2151,6 @@ assertEquals(4-inputMap.get(Resource.SERVANT)+outputMap.get(Resource.SERVANT),av
         strongboxMap.put(Resource.SERVANT, 0);
 
         DeckProductionCardOneGreen deck = new DeckProductionCardOneGreen();
-        init = gameBoard.getIndicator();
         try {
             card = deck.pickUpFirstCard();
         } catch (EmptyException e) {
@@ -2262,20 +2158,14 @@ assertEquals(4-inputMap.get(Resource.SERVANT)+outputMap.get(Resource.SERVANT),av
             return;
         }
 
-        //gameBoard.setProductionCard(card,0);
-
         outputList = card.getOut();
         inputList = card.getIn();
 
-        //System.out.println("InputList:\n");
         for(Resource r : inputList){
             inputMap.put(r,inputMap.remove(r)+1);
-            //System.out.println(r +" ");
         }
-        //System.out.println("outputList:\n");
         for(Resource r : outputList) {
             outputMap.put(r, outputMap.remove(r) + 1);
-            //System.out.println(r +" ");
         }
 
         ArrayList<Resource> available;
@@ -2303,20 +2193,9 @@ assertEquals(4-inputMap.get(Resource.SERVANT)+outputMap.get(Resource.SERVANT),av
 
         available = gameBoard.availableResources();
 
-
-        //System.out.println("Available after production:\n");
         for(Resource r : available){
             availableMap.put(r,availableMap.remove(r)+1);
-            //System.out.println(r +" ");
         }
-        //System.out.println("FaithPath:\nInit: " + init + ", isFaithPath: "+card.isFaithPoint()+", final: "+gameBoard.getIndicator()+"\n");
-
-
-/*assertEquals(init+card.isFaithPoint(),gameBoard.getIndicator());
-assertEquals(4-inputMap.get(Resource.COIN)+outputMap.get(Resource.COIN),availableMap.get(Resource.COIN));
-assertEquals(4-inputMap.get(Resource.ROCK)+outputMap.get(Resource.ROCK),availableMap.get(Resource.ROCK));
-assertEquals(4-inputMap.get(Resource.SHIELD)+outputMap.get(Resource.SHIELD),availableMap.get(Resource.SHIELD));
-assertEquals(4-inputMap.get(Resource.SERVANT)+outputMap.get(Resource.SERVANT),availableMap.get(Resource.SERVANT));*/
     }
 
     /**
@@ -2328,7 +2207,7 @@ assertEquals(4-inputMap.get(Resource.SERVANT)+outputMap.get(Resource.SERVANT),av
         GameBoardInterface gameBoard = new GameBoard();
         gameBoard = new ReductionGameBoard(gameBoard,Resource.SHIELD);
         gameBoard = new ReductionGameBoardDouble(gameBoard,gameBoard.getResourceTypeFirst(),Resource.COIN);
-        Reserve reserve = new Reserve();
+        new Reserve();
         ProductionCard card,card2;
         Map<Resource,Integer> storageMap = new HashMap<>();
         Map<Resource,Integer> strongboxMap = new HashMap<>();
@@ -2392,25 +2271,17 @@ assertEquals(4-inputMap.get(Resource.SERVANT)+outputMap.get(Resource.SERVANT),av
         output2List = card2.getOut();
         input2List = card2.getIn();
 
-        //System.out.println("InputList:\n");
         for(Resource r : input1List){
             input1Map.put(r,input1Map.remove(r)+1);
-            //System.out.println(r +" ");
         }
-        //System.out.println("outputList:\n");
         for(Resource r : output1List) {
             output1Map.put(r, output1Map.remove(r) + 1);
-            //System.out.println(r +" ");
         }
-        //System.out.println("InputList:\n");
         for(Resource r : input2List){
             input2Map.put(r,input2Map.remove(r)+1);
-            //System.out.println(r +" ");
         }
-        //System.out.println("outputList:\n");
         for(Resource r : output2List) {
             output2Map.put(r, output2Map.remove(r) + 1);
-            //System.out.println(r +" ");
         }
 
         ArrayList<Resource> available;
@@ -2443,14 +2314,9 @@ assertEquals(4-inputMap.get(Resource.SERVANT)+outputMap.get(Resource.SERVANT),av
 
         available = gameBoard.availableResources();
 
-
-        //System.out.println("Available after production:\n");
         for(Resource r : available){
             availableMap.put(r,availableMap.remove(r)+1);
-            //System.out.println(r +" ");
         }
-        //System.out.println("FaithPath:\nInit: " + init + ", isFaithPath: "+card.isFaithPoint()+", final: "+gameBoard.getIndicator()+"\n");
-
 
         assertEquals(init+card.isFaithPoint()+ card2.isFaithPoint(),gameBoard.getIndicator());
         assertEquals(5-input1Map.get(Resource.COIN)+output1Map.get(Resource.COIN)-input2Map.get(Resource.COIN)+output2Map.get(Resource.COIN),availableMap.get(Resource.COIN));

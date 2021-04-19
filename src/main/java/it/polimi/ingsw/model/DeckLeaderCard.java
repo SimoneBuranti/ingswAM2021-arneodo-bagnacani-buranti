@@ -2,24 +2,34 @@ package it.polimi.ingsw.model;
 
 import java.util.ArrayList;
 
-
 /**
- * class of Leader Card deck, only 1 object instantiated
+ * this class represents the leader card deck
  */
 public class DeckLeaderCard {
 
-
     /**
-     * it represents deck
+     * this attribute collects the leader cards of the deck
      */
     private static  ArrayList<LeaderCard> deckLeaderCard;
+    /**
+     * this attribute instantiates a blue colour
+     */
     private Colour blue =new  Blue();
+    /**
+     * this attribute instantiates a green colour
+     */
     private Colour green =new  Green();
+    /**
+     * this attribute instantiates a yellow colour
+     */
     private Colour yellow =new  Yellow();
+    /**
+     * this attribute instantiates a violet colour
+     */
     private Colour violet =new  Violet();
 
     /**
-     * constructor of deck
+     * this constructor creates all the leader cards and adds them to the list and shuffles the newly created deck
      */
     public DeckLeaderCard(){
 
@@ -113,7 +123,8 @@ public class DeckLeaderCard {
 
 
     /**
-     * @return deckLeaderCard.size()
+     * Test only method: this method returns the size of the leader card deck
+     * @return int : size of the deck
      */
     public int size(){
         return deckLeaderCard.size();
@@ -121,9 +132,9 @@ public class DeckLeaderCard {
 
 
     /**
-     * method which return card at index position
-     * @param index
-     * @return deckLeaderCard.get(index)
+     * this method returns the leader card in the index position in the list
+     * @param index : the position of the leader card in the list
+     * @return LeaderCard : the leaderCard in the index position
      */
     public LeaderCard getCardDeck(int index){
         return deckLeaderCard.get(index);
@@ -131,8 +142,8 @@ public class DeckLeaderCard {
 
 
     /**
-     * method which return the first deck card and shift all other cards of one position
-     * @return deckLeaderCard.get(0)
+     * this method returns the first deck card and shifts all other cards of one position
+     * @return LeaderCard : the first leader card of the deck
      */
     public static LeaderCard arrangeDeckLeaderCards(){
         LeaderCard tempLeaderCard=deckLeaderCard.get(0);
@@ -141,5 +152,5 @@ public class DeckLeaderCard {
         deckLeaderCard.remove(deckLeaderCard.size()-1);
         return tempLeaderCard;
     }
-    }
+}
 
