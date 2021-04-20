@@ -6,15 +6,20 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-
+/**
+ * test class about DeckLeaderCard
+ */
 class DeckLeaderCardTest {
     /**
-     * Rigorous Test :-)
+     * test about match creation and its consequent deckLeader creation
      */
     @Test
     public void testAboutTheSizeLeaderCardsDeck()
     {
+
         ArrayList<String> nickname =new ArrayList<>(2);
+        nickname.add("ale");
+        nickname.add("ali");
         GameMultiPlayer game= new GameMultiPlayer(0,nickname);
         assertEquals(16,game.leaderDeckSize());
     }
@@ -23,7 +28,7 @@ class DeckLeaderCardTest {
 
 
     /**
-     * Rigorous Test :-)
+     * test about match creation and its consequent deckLeader creation, with the control on the distribution of eight leader Cards
      */
     @Test
     public void testAboutDrawLeaderCards()
@@ -38,7 +43,9 @@ class DeckLeaderCardTest {
 
 
     /**
-     * Rigorous Test :-)
+     * test about match creation and its consequent deckLeader creation, with the control on the distribution of eight leader Cards.
+     * test also controls if draw cards are correct or not
+     *
      */
     @Test
     public void testAboutEqualsOfPersonalLeaderCards()
@@ -80,7 +87,7 @@ class DeckLeaderCardTest {
 
 
     /**
-     * Rigorous Test :-)
+     * test about match creation and his consequent listOf players and its order
      */
     @Test
     public void testAboutTypeOfPlayers()

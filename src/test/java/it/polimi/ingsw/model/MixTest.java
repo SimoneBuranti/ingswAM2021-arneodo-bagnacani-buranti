@@ -5,7 +5,9 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
-
+/**
+ * test class about Mix
+ */
 public class MixTest {
     /**
      * test about the functionality of marble list

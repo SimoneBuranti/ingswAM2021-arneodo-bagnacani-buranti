@@ -1,12 +1,20 @@
 package it.polimi.ingsw.model;
 
-import java.util.*;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
-import org.junit.jupiter.api.*;
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+/**
+ * test class about ReductionGameBoard
+ */
 class ReductionGameBoardTest {
-
+    /**
+     * test about simple instantiated of reductiongameboard
+     */
     @Test
     @DisplayName("reductionTest - simple test")
     public void reductionTest0() {
@@ -46,7 +54,10 @@ class ReductionGameBoardTest {
 
     }
 
-
+    /**
+     * test about simple instantiated of reductiongameboard
+     * testing "0 resources"
+     */
     @Test
     @DisplayName("reductionTest - 0 resources")
     public void reductionTest1() {
@@ -91,7 +102,10 @@ class ReductionGameBoardTest {
 
     }
 
-
+    /**
+     * test about simple instantiated of reductiongameboard
+     * buyProductionCard() affordable card"
+     */
     @Test
     @DisplayName("buyProductionCard() test - affordable card")
     public void buyProductionCardTest0(){
@@ -186,7 +200,10 @@ class ReductionGameBoardTest {
         assertEquals(3,blueDeck.size());
 
     }
-
+    /**
+     * test about simple instantiated of reductiongameboard
+     * buyProductionCard() 3 affordable card"
+     */
     @Test
     @DisplayName("buyProductionCard() test - 3 affordable card")
     public void buyProductionCardTest1(){
@@ -393,7 +410,10 @@ class ReductionGameBoardTest {
         assertEquals(2,greenDeck.size());
 
     }
-
+    /**
+     * test about simple instantiated of reductiongameboard
+     * buyProductionCard() not affordable card"
+     */
     @Test
     @DisplayName("buyProductionCard() test - not affordable card")
     public void buyProductionCardTest2(){

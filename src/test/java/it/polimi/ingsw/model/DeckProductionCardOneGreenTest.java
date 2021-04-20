@@ -4,10 +4,14 @@ import org.junit.jupiter.api.*;
 
 import java.util.*;
 
-
+/**
+ * test class about DeckProductionCardOneGreen
+ */
 class DeckProductionCardOneGreenTest {
 
-
+    /**
+     * test about requiredResourcesTest
+     */
     @Test
     @DisplayName("requiredResourcesTest -")
     public void requiredResourcesTest(){

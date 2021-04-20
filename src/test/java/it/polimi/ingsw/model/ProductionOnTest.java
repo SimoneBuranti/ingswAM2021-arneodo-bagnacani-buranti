@@ -1,7 +1,5 @@
 package it.polimi.ingsw.model;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -9,8 +7,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+/**
+ * test class about ProductionOn
+ */
 public class ProductionOnTest {
-
+    /**
+     * test about BaseProductionOnTest called directly on gameboard
+     *input resources only from storage
+     */
     @Test
     @DisplayName("baseProductionOn test: input resources only from storage")
     public void baseProductionOnTest() {
@@ -96,7 +101,10 @@ public class ProductionOnTest {
 
     }
 
-
+    /**
+     * test about BaseProductionOnTest called directly on gameboard
+     * input resources from storage and strongbox
+     */
     @Test
     @DisplayName("baseProductionOn test: input resources from storage and strongbox")
     public void baseProductionOnSecondTest() {
@@ -254,7 +262,11 @@ public class ProductionOnTest {
         assertEquals(3, gameBoard.resourceQuantity(Resource.SHIELD));
         assertEquals(3, gameBoard.resourceQuantity(Resource.SERVANT));
     }
-
+    /**
+     * test about BaseProductionOnTest called directly on gameboard
+     * testing "not enough resources in reserve"
+     *
+     */
     @Test
     @DisplayName("baseProductionOn test: not enough resources in reserve")
     public void baseProductionOnThirdTest() {
@@ -299,6 +311,12 @@ public class ProductionOnTest {
         assertEquals(0, gameBoard.resourceQuantity(Resource.SERVANT));
     }
 
+
+    /**
+     * test about ProductionOnTest called directly on gameboard
+     * testing "no production card in the gameBoard"
+     *
+     */
     @Test
     @DisplayName("productionOn test: no production card in the gameBoard")
     public void productionOnTest0() {
@@ -319,6 +337,13 @@ public class ProductionOnTest {
             gameBoard.setPapal();
         }
     }
+
+
+    /**
+     * test about ProductionOnTest called directly on gameboard
+     * testing "productionOn test: first level production card"
+     *
+     */
 
     @Test
     @DisplayName("productionOn test: first level production card")
@@ -388,6 +413,13 @@ public class ProductionOnTest {
         assertEquals(1, gameBoard.getIndicator());
     }
 
+
+
+    /**
+     * test about ProductionOnTest called directly on gameboard
+     * testing "productionOn test: second level production card"
+     *
+     */
     @Test
     @DisplayName("productionOn test: second level production card")
     public void productionOnTest2() {
@@ -475,6 +507,13 @@ public class ProductionOnTest {
         assertEquals(2, gameBoard.getIndicator());
     }
 
+
+
+    /**
+     * test about ProductionOnTest called directly on gameboard
+     * testing "productionOn test: third level production card"
+     *
+     */
     @Test
     @DisplayName("productionOn test: third level production card")
     public void productionOnTest3() {
@@ -572,6 +611,15 @@ public class ProductionOnTest {
         assertEquals(1, gameBoard.getIndicator());
     }
 
+
+
+
+
+    /**
+     * test about ProductionOnTest called directly on gameboard
+     * testing "productionOn test: callForCouncilException"
+     *
+     */
     @Test
     @DisplayName("productionOn test: callForCouncilException")
     public void productionOnTest4() {
@@ -659,6 +707,12 @@ public class ProductionOnTest {
         assertEquals(6, gameBoard.faithScore());
     }
 
+
+    /**
+     * test about ProductionOnTest called directly on gameboard
+     * testing "lastSpaceReachedException"
+     *
+     */
     @Test
     @DisplayName("productionOn test: lastSpaceReachedException")
     public void productionOnTest5() {
@@ -748,6 +802,12 @@ public class ProductionOnTest {
         assertEquals(24, gameBoard.getIndicator());
     }
 
+
+    /**
+     * test about ProductionOnTest called directly on gameboard
+     * testing "without ProductionGameBoard""
+     *
+     */
     @Test
     @DisplayName("extraProductionOn test: without ProductionGameBoard")
     public void extraProductionOnTest0() {
@@ -775,7 +835,11 @@ public class ProductionOnTest {
         assertEquals(1, gameBoard.resourceQuantity(Resource.SERVANT));
         assertEquals(0, gameBoard.getIndicator());
     }
-
+    /**
+     * test about ProductionOnTest called directly on gameboard
+     * testing "with ProductionGameBoard""
+     *
+     */
     @Test
     @DisplayName("extraProductionOn test: with ProductionGameBoard")
     public void extraProductionOnTest1() {
@@ -813,6 +877,11 @@ public class ProductionOnTest {
         assertEquals(1, gameBoard.getIndicator());
     }
 
+    /**
+     * test about extraProductionOn called directly on gameboard
+     * testing "call for council exception"
+     *
+     */
     @Test
     @DisplayName("extraProductionOn test: call for council exception")
     public void extraProductionOnTest2() {
@@ -855,6 +924,13 @@ public class ProductionOnTest {
         assertEquals(8, gameBoard.getIndicator());
     }
 
+
+
+    /**
+     * test about extraProductionOn called directly on gameboard
+     * testing "last space reached exception"
+     *
+     */
     @Test
     @DisplayName("extraProductionOn test: last space reached exception")
     public void extraProductionOnTest3() {
@@ -900,6 +976,11 @@ public class ProductionOnTest {
     }
 
 
+    /**
+     * test about anotherExtraProductionOn  called directly on gameboard
+     * testing "without ProductionGameBoardDouble"
+     *
+     */
     @Test
     @DisplayName("anotherExtraProductionOn test: without ProductionGameBoardDouble")
     public void anotherExtraProductionOnTest0() {
@@ -927,7 +1008,11 @@ public class ProductionOnTest {
         assertEquals(1, gameBoard.resourceQuantity(Resource.SERVANT));
         assertEquals(0, gameBoard.getIndicator());
     }
-
+    /**
+     * test about anotherExtraProductionOn  called directly on gameboard
+     * testing "with ProductionGameBoardDouble"
+     *
+     */
     @Test
     @DisplayName("anotherExtraProductionOn test: with ProductionGameBoardDouble")
     public void anotherExtraProductionOnTest1() {
@@ -984,6 +1069,12 @@ public class ProductionOnTest {
         assertEquals(2, gameBoard.getIndicator());
     }
 
+    /**
+     * test about anotherExtraProductionOn  called directly on gameboard
+     * testing "call for council exception"
+     *
+     */
+
     @Test
     @DisplayName("anotherExtraProductionOn test: call for council exception")
     public void anotherExtraProductionOnTest2() {
@@ -1026,6 +1117,11 @@ public class ProductionOnTest {
         assertEquals(8, gameBoard.getIndicator());
     }
 
+    /**
+     * test about anotherExtraProductionOn  called directly on gameboard
+     * testing "last space reached exception"
+     *
+     */
     @Test
     @DisplayName("anotherExtraProductionOn test: last space reached exception")
     public void anotherExtraProductionOnTest3() {
@@ -1069,7 +1165,10 @@ public class ProductionOnTest {
         assertEquals(0, gameBoard.resourceQuantity(Resource.SERVANT));
         assertEquals(24, gameBoard.getIndicator());
     }
-
+    /**
+     * test about all type of productions called directly on gameboard
+     *
+     */
     @Test
     @DisplayName("All productions")
     public void allProductionTest(){

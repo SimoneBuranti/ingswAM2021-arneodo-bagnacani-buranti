@@ -3,7 +3,9 @@ package it.polimi.ingsw.model;
 import org.junit.jupiter.api.*;
 import java.util.*;
 import static org.junit.jupiter.api.Assertions.*;
-
+/**
+ * test class about ProductionGameBoardtest
+ */
 class ProductionGameBoardTest {
 
     /**
@@ -2143,7 +2145,10 @@ class ProductionGameBoardTest {
         assertEquals(5-input1Map.get(Resource.SHIELD)+output1Map.get(Resource.SHIELD)-input2Map.get(Resource.SHIELD)+output2Map.get(Resource.SHIELD),availableMap.get(Resource.SHIELD));
         assertEquals(5-input1Map.get(Resource.SERVANT)+output1Map.get(Resource.SERVANT)-input2Map.get(Resource.SERVANT)+output2Map.get(Resource.SERVANT),availableMap.get(Resource.SERVANT));
     }
-
+    /**
+     * test about extraProductionOnTest called from game
+     * when ProductionGameBoard(leader card power) is instantiated
+     */
     @Test
     @DisplayName("extraProductionOnTest0 - simple test")
     public void extraProductionOnTest0() {
@@ -2208,7 +2213,10 @@ class ProductionGameBoardTest {
         assertEquals(strongboxMap.get(Resource.SERVANT),availableMap.get(Resource.SERVANT));
 
     }
-
+    /**
+     * test about extraProductionOnTest called from game
+     * when ProductionGameBoard(leader card power) is instantiated
+     */
     @Test
     @DisplayName("extraProductionOnTest1 - simple test")
     public void extraProductionOnTest1() {
@@ -2272,7 +2280,10 @@ class ProductionGameBoardTest {
         assertEquals(strongboxMap.get(Resource.SERVANT),availableMap.get(Resource.SERVANT));
 
     }
-
+    /**
+     * test about extraProductionOnTest called from game
+     * when ProductionGameBoard(leader card power) is instantiated
+     */
     @Test
     @DisplayName("extraProductionOnTest2 - simple test")
     public void extraProductionOnTest2() {

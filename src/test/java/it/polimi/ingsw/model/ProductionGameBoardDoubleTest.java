@@ -8,9 +8,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
-
+/**
+ * test class about ProductionGameBoardDoubleTest
+ */
 class ProductionGameBoardDoubleTest {
-
+    /**
+     * test about extraProductionOnTest called from game
+     * when ProductionGameBoardDouble(leader card power) is instantiated
+     */
     @Test
     @DisplayName("extraProductionOnTest0 - simple test")
     public void extraProductionOnTest0() {
@@ -77,7 +82,10 @@ class ProductionGameBoardDoubleTest {
         assertEquals(strongboxMap.get(Resource.SERVANT),availableMap.get(Resource.SERVANT));
 
     }
-
+    /**
+     * test about extraProductionOnTest called from game
+     * when ProductionGameBoardDouble(leader card power) is instantiated
+     */
     @Test
     @DisplayName("extraProductionOnTest1 - simple test")
     public void extraProductionOnTest1() {
@@ -143,6 +151,11 @@ class ProductionGameBoardDoubleTest {
         assertEquals(strongboxMap.get(Resource.SERVANT),availableMap.get(Resource.SERVANT));
 
     }
+
+    /**
+     * test about extraProductionOnTest called from game
+     * when ProductionGameBoardDouble(leader card power) is instantiated
+     */
 
     @Test
     @DisplayName("extraProductionOnTest2 - simple test")
@@ -211,7 +224,10 @@ class ProductionGameBoardDoubleTest {
     }
 
 
-
+    /**
+     * test about extraProductionOnTest called from game
+     * when ProductionGameBoardDouble(leader card power) is instantiated
+     */
     @Test
     @DisplayName("anotherExtraProductionOnTest0 - simple test")
     public void anotherExtraProductionOnTest0() {
@@ -278,7 +294,10 @@ class ProductionGameBoardDoubleTest {
         assertEquals(strongboxMap.get(Resource.SERVANT),availableMap.get(Resource.SERVANT));
 
     }
-
+    /**
+     * test about extraProductionOnTest called from game
+     * when ProductionGameBoardDouble(leader card power) is instantiated
+     */
     @Test
     @DisplayName("anotherExtraProductionOnTest1 - simple test")
     public void anotherExtraProductionOnTest1() {
@@ -344,7 +363,10 @@ class ProductionGameBoardDoubleTest {
         assertEquals(strongboxMap.get(Resource.SERVANT),availableMap.get(Resource.SERVANT));
 
     }
-
+    /**
+     * test about extraProductionOnTest called from game
+     * when ProductionGameBoardDouble(leader card power) is instantiated
+     */
     @Test
     @DisplayName("anotherExtraProductionOnTest2 - simple test")
     public void anotherExtraProductionOnTest2() {

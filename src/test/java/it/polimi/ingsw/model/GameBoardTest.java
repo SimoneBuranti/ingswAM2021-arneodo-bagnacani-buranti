@@ -3,7 +3,9 @@ package it.polimi.ingsw.model;
 import org.junit.jupiter.api.*;
 import java.util.*;
 import static org.junit.jupiter.api.Assertions.*;
-
+/**
+ * test class about GameBoard
+ */
 class GameBoardTest {
 
     /**

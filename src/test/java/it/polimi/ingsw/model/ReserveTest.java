@@ -1,9 +1,12 @@
 package it.polimi.ingsw.model;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
-import org.junit.jupiter.api.*;
-
+import static org.junit.jupiter.api.Assertions.assertEquals;
+/**
+ * test class about Reserve
+ */
 class ReserveTest {
 
 

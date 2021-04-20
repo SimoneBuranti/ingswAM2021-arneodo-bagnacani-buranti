@@ -3,9 +3,14 @@ package it.polimi.ingsw.model;
 import org.junit.jupiter.api.*;
 import java.util.*;
 import static org.junit.jupiter.api.Assertions.*;
-
+/**
+ * test class about ReductionGameBoardDouble
+ */
 class ReductionGameBoardDoubleTest {
 
+    /**
+     * test about simple instantiated of reductiongameboardDouble
+     */
     @Test
     @DisplayName("reductionTest - simple test")
     public void reductionTest0() {
@@ -48,7 +53,10 @@ class ReductionGameBoardDoubleTest {
 
     }
 
-
+    /**
+     * test about simple instantiated of reductiongameboard
+     * testing "0 resources"
+     */
     @Test
     @DisplayName("reductionTest - 0 resources")
     public void reductionTest1() {
@@ -96,7 +104,10 @@ class ReductionGameBoardDoubleTest {
 
     }
 
-
+    /**
+     * test about simple instantiated of reductiongameboard
+     * buyProductionCard() affordable card"
+     */
     @Test
     @DisplayName("buyProductionCard() test - affordable card")
     public void buyProductionCardTest0(){
@@ -189,7 +200,10 @@ class ReductionGameBoardDoubleTest {
 
     }
 
-
+    /**
+     * test about simple instantiated of reductiongameboard
+     * buyProductionCard() 3 affordable card"
+     */
     @Test
     @DisplayName("buyProductionCard() test - 3 affordable card")
     public void buyProductionCardTest1(){
@@ -378,7 +392,10 @@ class ReductionGameBoardDoubleTest {
 
         assertEquals(2,greenDeck.size());
     }
-
+    /**
+     * test about simple instantiated of reductiongameboard
+     * buyProductionCard() not affordable card"
+     */
     @Test
     @DisplayName("buyProductionCard() test - not affordable card")
     public void buyProductionCardTest2(){

@@ -1,13 +1,13 @@
 package it.polimi.ingsw.model;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 public class StrongboxTest {
@@ -392,7 +392,9 @@ public class StrongboxTest {
         assertEquals(0, strongbox.resourceScore());
     }
 
-
+    /**
+     * Check of the correct availability of Resources
+     */
     @Test
     @DisplayName("availableResourcesTest 0")
     public void availableResourcesTest0(){
@@ -426,7 +428,9 @@ public class StrongboxTest {
 
         assertEquals(map, availableMap);
     }
-
+    /**
+     * Check of the correct availability of Resources
+     */
     @Test
     @DisplayName("availableResourcesTest3")
     public void availableResourcesTest3(){
@@ -465,7 +469,9 @@ public class StrongboxTest {
         assertEquals(availableMap.get(Resource.SHIELD),0);
         assertEquals(availableMap.get(Resource.SERVANT),0);
     }
-
+    /**
+     * Check of the correct availability of Resources
+     */
     @Test
     @DisplayName("availableResourcesTest4 : available only resources")
     public void availableResourcesTest4(){
@@ -505,7 +511,9 @@ public class StrongboxTest {
         assertEquals(availableMap.get(Resource.SERVANT),3);
     }
 
-
+    /**
+     * Check of the correct availability of Resources and unavailable resource type
+     */
     @Test
     @DisplayName("availableResourcesTest5 : one unavailable resource type")
     public void availableResourcesTest5(){
@@ -545,7 +553,9 @@ public class StrongboxTest {
         assertEquals(availableMap.get(Resource.SERVANT),100);
     }
 
-
+    /**
+     * Check of the correct availability of Resources to limits
+     */
     @Test
     @DisplayName("availableResourcesTest6 : all to limits")
     public void availableResourcesTest6(){
@@ -584,7 +594,9 @@ public class StrongboxTest {
         assertEquals(availableMap.get(Resource.SHIELD),100);
         assertEquals(availableMap.get(Resource.SERVANT),100);
     }
-
+    /**
+     * Check of the correct availability of Resources out limits
+     */
     @Test
     @DisplayName("availableResourcesTest7 : all out of limit")
     public void availableResourcesTest7(){
@@ -623,7 +635,9 @@ public class StrongboxTest {
         assertEquals(availableMap.get(Resource.SHIELD),100);
         assertEquals(availableMap.get(Resource.SERVANT),100);
     }
-
+    /**
+     * Check of the correct of payment in Resources
+     */
     @Test
     @DisplayName("PayResources Test - simple test")
     public void payResourcesTest0(){
@@ -693,7 +707,9 @@ public class StrongboxTest {
         assertEquals(availableMap.get(Resource.SERVANT),0);
 
     }
-
+    /**
+     * Check of the correct of payment in Resources
+     */
     @Test
     @DisplayName("PayResources Test 1- affordable cost")
     public void payResourcesTest1(){
@@ -764,7 +780,9 @@ public class StrongboxTest {
         assertEquals(availableMap.get(Resource.SERVANT),7);
 
     }
-
+    /**
+     * Check of the correct of payment in Resources
+     */
     @Test
     @DisplayName("PayResources Test 2- affordable cost")
     public void payResourcesTest2(){
@@ -835,7 +853,9 @@ public class StrongboxTest {
         assertEquals(availableMap.get(Resource.SERVANT),2);
 
     }
-
+    /**
+     * Check of the correct of payment in Resources
+     */
     @Test
     @DisplayName("PayResources Test 3 ")
     public void payResourcesTest3(){
@@ -906,7 +926,9 @@ public class StrongboxTest {
         assertEquals(availableMap.get(Resource.SERVANT),0);
 
     }
-
+    /**
+     * Check of the correct of payment in Resources
+     */
     @Test
     @DisplayName("PayResources Test 4 ")
     public void payResourcesTest4(){
@@ -977,7 +999,9 @@ public class StrongboxTest {
         assertEquals(availableMap.get(Resource.SERVANT),9);
 
     }
-
+    /**
+     * Check of the correct of payment in Resources
+     */
     @Test
     @DisplayName("PayResources Test 5 ")
     public void payResourcesTest5(){

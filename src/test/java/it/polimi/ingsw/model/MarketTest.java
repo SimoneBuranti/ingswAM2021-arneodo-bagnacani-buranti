@@ -6,7 +6,9 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
+/**
+ * test class about Market
+ */
 public class MarketTest {
     /**
      * test on creation of Market(Grid) with mixed functionality
@@ -66,7 +68,8 @@ public class MarketTest {
 
 
     /**
-     * test about the pushRow
+     * test about the calls pushrow from Game
+     * test controls if draw marble are shift in right way
      */
     @Test
     public void PushRowsOfMarket(){
@@ -160,6 +163,7 @@ public void PushRowsOfMarketCycling() {
 
     /**
      * test about the PushColumn
+     * test controls if draw marble are shift in right way
      */
     @Test
     public void PushColumnsOfMarket(){

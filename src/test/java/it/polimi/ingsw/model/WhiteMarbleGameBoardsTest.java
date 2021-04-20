@@ -5,6 +5,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class WhiteMarbleGameBoardsTest {
 
+    /**
+     * testing the Correctness of gameboard instance
+     */
     @Test
     @DisplayName("Correct instance test")
     public void correctInstancesTest(){
@@ -17,7 +20,11 @@ class WhiteMarbleGameBoardsTest {
 
         assertTrue(gameBoard instanceof WhiteMarbleGameBoardDouble);
     }
-
+    /**
+     * testing the Correctness of gameboard instance
+     * whiteExchangeTest - null method
+     * null return
+     */
     @Test
     @DisplayName("whiteExchangeTest - null method")
     public void whiteExchangeNullTest() {
@@ -31,7 +38,11 @@ class WhiteMarbleGameBoardsTest {
         }
 
     }
-
+    /**
+     * testing the Correctness of gameboard instance
+     * whiteExchangeTest - not empty method
+     * resource return
+     */
     @Test
     @DisplayName("whiteExchangeTest")
     public void whiteExchangeTest() {
@@ -51,7 +62,11 @@ class WhiteMarbleGameBoardsTest {
         assertSame(resource, gameBoard.getResourceTypeFirst());
 
     }
-
+    /**
+     * testing the Correctness of gameboard instance
+     * whiteExchangeTestDouble - not empty method
+     * return exception to view
+     */
     @Test
     @DisplayName("whiteExchangeDoubleTest")
     public void whiteExchangeDoubleTest() {
