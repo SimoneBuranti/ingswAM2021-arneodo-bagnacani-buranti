@@ -6,16 +6,58 @@ import java.util.ArrayList;
  */
 
 public class GameMultiPlayer extends Game {
+
+
+    /**
+     * this attribute represents the number of player
+     */
     private final int numberOfPlayer;
+
+    /**
+     * this attribute represents the first player
+     */
     PlayerFirst firstPlayer;
+
+    /**
+     * this attribute represents the second player
+     */
     PlayerSecond secondPlayer;
+    /**
+     * this attribute represents the third player
+     */
     PlayerThird thirdPlayer;
+    /**
+     * this attribute represents the fourth player
+     */
     PlayerFourth fourthPlayer;
+
+    /**
+     * this attribute represents the inkwell given to the first player in initstate
+     */
     private final int inkwell;
+
+    /**
+     * this attribute represents the boolean which indicates the last turn or not
+     */
     private boolean lastTurn = false;
+
+
+    /**
+     * this attribute represents nickNameInOrder which indicates players in order, giving importance only to nickname
+     */
     private ArrayList<String> nickNameInOrder = new ArrayList<>();
+
+
+    /**
+     * this attribute represents nickNameInOrder which indicates players in order, giving importance to player type
+     */
     private ArrayList<Player> playerList = new ArrayList<>();
-    private int currentPLayerPosition = 0;
+
+
+    /**
+     * this attribute represents currentPlayerPosition on playerlist
+     */
+    private int currentPlayerPosition = 0;
 
     /**
      * this is the constructor for the class
@@ -28,7 +70,7 @@ public class GameMultiPlayer extends Game {
         inkwell=createRandomNumber(numberOfPlayer);
         nickNameInOrder=correctOrder(nickName,inkwell);
         createPlayer(numberOfPlayer,nickNameInOrder);
-        currentPlayer = playerList.get(currentPLayerPosition);
+        currentPlayer = playerList.get(currentPlayerPosition);
     }
 
     /**
@@ -81,14 +123,16 @@ public class GameMultiPlayer extends Game {
     }
 
 
-    //AGGIUNGERE CONTROLLO CONNESSIONE
+    /**
+     * method for set new current player at the end of old current player turn
+     */
     public void setCurrentPlayer() {
-        if(currentPLayerPosition == numberOfPlayer-1)
-            currentPLayerPosition = 0;
+        if(currentPlayerPosition == numberOfPlayer-1)
+            currentPlayerPosition = 0;
         else
-            currentPLayerPosition += 1;
+            currentPlayerPosition += 1;
 
-        currentPlayer = playerList.get(currentPLayerPosition);
+        currentPlayer = playerList.get(currentPlayerPosition);
     }
 
 
@@ -146,6 +190,12 @@ public class GameMultiPlayer extends Game {
         }
     }
 
+
+
+    /**
+     * Override method CallForCouncilException
+     * @param e
+     */
     @Override
     protected void exceptionHandler(CallForCouncilException e) {
         for(Player p : playerList){
@@ -153,6 +203,11 @@ public class GameMultiPlayer extends Game {
         }
     }
 
+
+    /**
+     * Override method LastSpaceReachedException
+     * @param e
+     */
     @Override
     protected void exceptionHandler(LastSpaceReachedException e) {
         for(Player p : playerList){
@@ -162,6 +217,11 @@ public class GameMultiPlayer extends Game {
         lastTurn = true;
     }
 
+
+    /**
+     * Override method EndOfSolitaireGame
+     * @param e
+     */
     @Override
     protected void exceptionHandler(EndGameException e) {
         lastTurn = true;

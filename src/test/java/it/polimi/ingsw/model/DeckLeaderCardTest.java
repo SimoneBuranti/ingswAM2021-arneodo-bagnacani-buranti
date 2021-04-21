@@ -10,21 +10,6 @@ import static org.junit.jupiter.api.Assertions.*;
  * test class about DeckLeaderCard
  */
 class DeckLeaderCardTest {
-    /**
-     * test about match creation and its consequent deckLeader creation
-     */
-    @Test
-    public void testAboutTheSizeLeaderCardsDeck()
-    {
-
-        ArrayList<String> nickname =new ArrayList<>(2);
-        nickname.add("ale");
-        nickname.add("ali");
-        GameMultiPlayer game= new GameMultiPlayer(0,nickname);
-        assertEquals(16,game.leaderDeckSize());
-    }
-
-
 
 
     /**

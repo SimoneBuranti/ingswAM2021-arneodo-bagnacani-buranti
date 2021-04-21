@@ -118,6 +118,12 @@ public class GameSolitaire extends Game{
     }
 
 
+    /**
+     * remove production card blue due to action marker effect
+     * @param blue
+     * @throws EndOfSolitaireGame
+     * @throws EmptyException
+     */
     public void removeProductionCard(Blue blue) throws EndOfSolitaireGame, EmptyException {
         try {
             deckProductionCardOneBlu.removeOneCard();
@@ -129,7 +135,12 @@ public class GameSolitaire extends Game{
             }
         }
     }
-
+    /**
+     * remove production card yelllow due to action marker effect
+     * @param yellow
+     * @throws EndOfSolitaireGame
+     * @throws EmptyException
+     */
     public void removeProductionCard(Yellow yellow) throws EndOfSolitaireGame, EmptyException {
         try {
             deckProductionCardOneYellow.removeOneCard();
@@ -143,7 +154,12 @@ public class GameSolitaire extends Game{
 
 
     }
-
+    /**
+     * remove production card green due to action marker effect
+     * @param green
+     * @throws EndOfSolitaireGame
+     * @throws EmptyException
+     */
     public void removeProductionCard(Green green) throws EndOfSolitaireGame, EmptyException {
         try {
             deckProductionCardOneGreen.removeOneCard();
@@ -157,7 +173,12 @@ public class GameSolitaire extends Game{
 
 
     }
-
+    /**
+     * remove production card violet due to action marker effect
+     * @param violet
+     * @throws EndOfSolitaireGame
+     * @throws EmptyException
+     */
     public void removeProductionCard(Violet violet) throws EndOfSolitaireGame, EmptyException {
         try {
             deckProductionCardOneViolet.removeOneCard();
@@ -172,7 +193,11 @@ public class GameSolitaire extends Game{
     }
 
 
-
+    /**
+     *  Override method
+     * not implemented method called when the player discards a resource
+     * @param player : the one who discards the resource
+     */
     @Override
     public void moveEveryoneExcept(Player player){
         try {
@@ -184,18 +209,34 @@ public class GameSolitaire extends Game{
         }
     }
 
+
+    /**
+     * Override method CallForCouncilException
+     * @param e
+     */
     @Override
     protected void exceptionHandler(CallForCouncilException e) {
         player.setPapal();
         lorenzoTheMagnificent.setCurrCall();
     }
 
+
+    /**
+     * Override method LastSpaceReachedException
+     * @param e
+     */
     @Override
     protected void exceptionHandler(LastSpaceReachedException e) {
         player.setPapal();
         //...fine partita, calcolo punteggio
     }
 
+
+
+    /**
+     * Override method EndOfSolitaireGame
+     * @param e
+     */
     @Override
     protected void exceptionHandler(EndOfSolitaireGame e) {
         System.out.println("Lorenzo the Magnificent WIN");
