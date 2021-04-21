@@ -1,7 +1,7 @@
 package it.polimi.ingsw.model;
 
 /**
- * type of resource
+ * This enum contains all type of resources
  */
 public enum Resource {
     COIN, ROCK, SERVANT, SHIELD

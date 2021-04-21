@@ -68,7 +68,7 @@ public class MarketTest {
 
 
     /**
-     * test about the calls pushrow from Game
+     * test about the calls pushRow from Game
      * test controls if draw marble are shift in right way
      */
     @Test

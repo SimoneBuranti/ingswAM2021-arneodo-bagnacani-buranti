@@ -2,6 +2,9 @@ package it.polimi.ingsw.model;
 
 import java.util.*;
 
+/**
+ * this class represents the game resource reserve common to all players
+ */
 public class Reserve {
 
     /**
@@ -15,8 +18,7 @@ public class Reserve {
     private static final Map<Resource , Integer> reservePools = new HashMap<>();
 
     /**
-     * The constructor initialise every resource type to the requirement parameter
-     * @return Reserve
+     * The constructor initialise every resource type to the value of AMOUNT
      */
     public Reserve() {
         reservePools.put(Resource.COIN,AMOUNT);
@@ -26,35 +28,39 @@ public class Reserve {
     }
 
     /**
-     *Getter for tests
-     * @return int  (resource current amount)
-     */
-    public static Integer getAmountOf(Resource resource) {
-
-        return reservePools.get(resource);
-    }
-
-    /** Static method
-     *addResource(Resource) adds a resource type one at a time without restrictions
+     * static method that adds the resource passed as a parameter to the reserve
+     * @param resource : resource type to add
      */
     public static void addResource(Resource resource) {
 
         reservePools.put(resource, reservePools.remove(resource) + 1);
     }
 
-    /** Static method
-     *getResource(Resource) decrease a resource type counter one at a time only if
-     * available, an UnavailableResourceException otherwise.
+    /**
+     * static method that decreases a resource type counter one at a time only if
+     * available, otherwise it throws an UnavailableResourceException
+     * @param resource : resource type to remove
+     * @throws UnavailableResourceException : the exception which is thrown when there are no more resources in the reserve
+     *                                        of the resource type to be withdrawn
      */
     public static void getResource(Resource resource) throws UnavailableResourceException{
 
         if (reservePools.get(resource) != 0) {
             reservePools.put(resource , reservePools.remove(resource) -1);
-
             return;
         }
 
         throw new UnavailableResourceException();
+    }
+
+    /**
+     * Test only method: getter method for the amount of the resource passed as a parameter in the reserve
+     * @param resource : type of resource
+     * @return int : resource current amount
+     */
+    public static Integer getAmountOf(Resource resource) {
+
+        return reservePools.get(resource);
     }
 
 }

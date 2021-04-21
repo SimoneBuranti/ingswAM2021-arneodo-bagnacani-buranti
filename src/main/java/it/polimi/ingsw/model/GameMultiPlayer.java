@@ -176,9 +176,9 @@ public class GameMultiPlayer extends Game {
         Player playerWinner;
         playerWinner=playerList.get(0);
         for(Player p : playerList){
-            if(p.getScore()>playerWinner.getScore() && !p.equals(playerList.get(0)))
+            if(p.playerScore()>playerWinner.playerScore() && !p.equals(playerList.get(0)))
                 playerWinner=p;
-            else if(p.getScore()==playerWinner.getScore() && p.getGameBoardOfPlayer().scoreResource()>playerWinner.getGameBoardOfPlayer().scoreResource() && !p.equals(playerList.get(0)))
+            else if(p.playerScore()==playerWinner.playerScore() && p.getGameBoardOfPlayer().scoreResource()>playerWinner.getGameBoardOfPlayer().scoreResource() && !p.equals(playerList.get(0)))
                 playerWinner=p;
         }
         return playerWinner;

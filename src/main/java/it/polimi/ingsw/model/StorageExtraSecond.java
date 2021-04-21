@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 /**
- * this class represents the storage of the gameBoard with an extra storage activated by a second leaderCard
+ * this class represents the storage of the game board with an extra storage activated by a second storage-type leaderCard
  */
 
 public class StorageExtraSecond extends StorageExtraFirst {
@@ -33,6 +33,10 @@ public class StorageExtraSecond extends StorageExtraFirst {
         storageExtraSecond[1] = 0;
     }
 
+    /**
+     * This method returns an ArrayList containing the whole available resources inside the storage
+     * @return ArrayList<Resource> : collection of all the resources present in the storage
+     */
     @Override
     public ArrayList<Resource> availableResources() {
         ArrayList<Resource> storageExtraSecondResources = new ArrayList<>();
@@ -48,7 +52,7 @@ public class StorageExtraSecond extends StorageExtraFirst {
     /**
      * this method removes a resource type from the reserve if available and
      * adds it to the second extra storage if it can, otherwise
-     * it adds it in the map by calling the method of the super class
+     * it adds it in the map or in the first extra storage by calling the method of the super class
      * @param resource :type of resource to add
      */
     @Override
@@ -72,7 +76,8 @@ public class StorageExtraSecond extends StorageExtraFirst {
      * removes it from the second extra storage if it can, otherwise
      * it removes the resource by calling the method of the super class
      * @param resource: type of resource to remove
-     * @throws UnavailableResourceException
+     * @throws UnavailableResourceException : the exception which is thrown when there are no more resources in the storage
+     *                                        of the resource type to be withdrawn
      */
     @Override
     public void useResource(Resource resource) throws UnavailableResourceException {
@@ -145,7 +150,7 @@ public class StorageExtraSecond extends StorageExtraFirst {
 
     /**
      * this method returns true if the second extra storage is full, false otherwise
-     * @return boolean
+     * @return boolean : true if the second extra storage is full, false otherwise
      */
     @Override
     public boolean isStorageExtraSecondFull(){
@@ -156,7 +161,7 @@ public class StorageExtraSecond extends StorageExtraFirst {
 
     /**
      * this method returns true if the second extra storage is empty, false otherwise
-     * @return boolean
+     * @return boolean : true if the second extra storage is empty, false otherwise
      */
     @Override
     public boolean isStorageExtraSecondEmpty(){
@@ -167,8 +172,8 @@ public class StorageExtraSecond extends StorageExtraFirst {
 
 
     /**
-     * this method return the type of resources of the second extra storage
-     * @return Resource
+     * this method returns the type of resources of the second extra storage
+     * @return Resource : the type of resources of the second extra storage
      */
     @Override
     public Resource getSecondResourceType() {
@@ -177,8 +182,8 @@ public class StorageExtraSecond extends StorageExtraFirst {
 
 
     /**
-     * this method return the amount of places available in the second extra storage
-     * @return int
+     * this method returns the amount of places available in the second extra storage
+     * @return int : the amount of places available in the second extra storage
      */
     @Override
     public int getNUmExtraSecondAvailable(){

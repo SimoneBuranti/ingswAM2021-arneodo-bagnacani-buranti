@@ -1,7 +1,10 @@
 package it.polimi.ingsw.model;
 
 import java.util.ArrayList;
-
+/**
+ * This is the interface from which starts all the Decorator Pattern used to
+ * implement the effects of the {@link LeaderCard}
+ */
 public interface GameBoardInterface {
     void setStorageExtra(Resource resource);
 

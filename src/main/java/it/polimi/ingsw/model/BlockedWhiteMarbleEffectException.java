@@ -5,4 +5,5 @@ package it.polimi.ingsw.model;
  * and the player has obtained white marbles from the market
  */
 public class BlockedWhiteMarbleEffectException extends Exception{
+
 }

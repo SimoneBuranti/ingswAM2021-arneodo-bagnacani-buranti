@@ -21,10 +21,8 @@ public class LorenzoTheMagnificent{
      */
     private int currCall;
 
-
     /**
      * this constructor initializes faithIndicator and currCall attributes to zero
-     *@return FaithPath
      */
     public LorenzoTheMagnificent() {
         this.faithIndicator = 0;
@@ -32,9 +30,13 @@ public class LorenzoTheMagnificent{
     }
 
     /**
-     * this method increases the faithIndicator counter by one and
-     * if the counter is located on the current papal space the method throws an CallForCouncilException
-     * @throws CallForCouncilException
+     *  this method increases the faithIndicator counter by one and
+     *  if the counter is located on the current papal space the method throws an CallForCouncilException
+     *  if instead the counter is located on the last papal space it throws an EndOfSolitaireGame,
+     *  which means that the player has lost
+     * @throws CallForCouncilException : the exception that is thrown when the player reaches a papal space in the faithPath
+     * @throws EndOfSolitaireGame : the exception which is thrown when the black cross reaches the last papal space and
+     *                               and states that the solitaire game is over and the winner is Lorenzo The Magnificent
      */
     public void moveBlackCross() throws CallForCouncilException, EndOfSolitaireGame{
         faithIndicator++;
@@ -45,8 +47,7 @@ public class LorenzoTheMagnificent{
     }
 
     /**
-     * this method increases the currCall counter by one and
-     * if the counter is equal to the PAPAL_N attribute the method throws an EndOfSolitaireGame exception
+     * this method increases the currCall counter by one
      */
     public void setCurrCall(){
         currCall++;

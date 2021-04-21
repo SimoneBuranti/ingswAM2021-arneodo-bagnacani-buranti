@@ -6,13 +6,13 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 /**
- * test class about DiscardLeaderCardForFaithPoin
+ * test class about DiscardLeaderCardForFaithPoint
  */
 class DiscardLeaderCardForFaithPoint {
 
 
     /**
-     * test about discard one or two leaderCard, from 0ne to two players, monitoring call on method moveTo of FaithPath
+     * test about discard one or two leaderCard, from one to two players, monitoring call on method moveTo of FaithPath
      */
     @Test
     public void testOnDiscardOneCard() throws LeaderCardsGameBoardEmptyException, CallForCouncilException, LastSpaceReachedException {

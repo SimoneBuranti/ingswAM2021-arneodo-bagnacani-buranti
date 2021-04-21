@@ -3,7 +3,7 @@ package it.polimi.ingsw.model;
 import java.util.*;
 
 /**
- * This class represents a player's personal board
+ * This class represents a player's personal board and can be decorated with any {@link GameBoardDecorator}
  */
 public class GameBoard implements GameBoardInterface{
 
@@ -139,16 +139,24 @@ public class GameBoard implements GameBoardInterface{
 
     /**
      * This method represents the first extra production upgrade due to the respective leader card activation.
-     * When it is not upgraded yet a null reaction is needed.
+     * When it is not upgraded yet a null reaction is needed. The method throws the ImpossibleProductionException
+     * which will be handled by the caller method.
+     * @throws ImpossibleProductionException : the exception which is thrown when there are no production-type leader cards activated
      */
-    public void extraProductionOn(Resource resource){}
+    public void extraProductionOn(Resource resource) throws ImpossibleProductionException {
+        throw new ImpossibleProductionException();
+    }
 
 
     /**
      * This method represents the second extra production upgrade of the respective leader card activation.
-     * When it is not upgraded yet a null reaction is needed.
+     * When it is not upgraded yet a null reaction is needed.  The method throws the ImpossibleProductionException
+     * which will be handled by the caller method.
+     * @throws ImpossibleProductionException : the exception which is thrown when there are no two production-type leader cards activated
      */
-    public void anotherExtraProductionOn(Resource resource){}
+    public void anotherExtraProductionOn(Resource resource) throws ImpossibleProductionException {
+        throw new ImpossibleProductionException();
+    }
 
     /**
      * This method returns the first available position in the chosen column received as a parameter if present,
@@ -206,7 +214,7 @@ public class GameBoard implements GameBoardInterface{
 
     /**
      * This method returns an ArrayList of resources containing the resources of both the storage and the strongbox
-     * @return ArrayList : collection of all the resources contained in the storage and in the strongbox
+     * @return ArrayList<Resource> : collection of all the resources contained in the storage and in the strongbox
      */
     public ArrayList<Resource> availableResources() {
         ArrayList<Resource> overallResources = new ArrayList<>();
@@ -334,7 +342,7 @@ public class GameBoard implements GameBoardInterface{
      * @param i1 : the first resource type of the base production input
      * @param i2 : the second resource type of the base production input
      * @param o : the resource type of the base production output
-     * @throws ImpossibleProductionException : the exception which is thrown when not all input resources are available
+     * @throws ImpossibleProductionException : the exception which is thrown when not all input resources are not available
      */
     public void baseProductionOn(Resource i1, Resource i2, Resource o) throws ImpossibleProductionException {
         ArrayList<Resource> available = availableResources();
@@ -360,7 +368,7 @@ public class GameBoard implements GameBoardInterface{
      * otherwise ImpossibleProductionException or EmptyColumnException are thrown.
      * Moreover, it spreads CallForCouncilException and LastSpaceReachedException.
      * @param chosenColumn : the column containing the card whose production the player wants to activate
-     * @throws ImpossibleProductionException : the exception which is thrown when not all input resources are available
+     * @throws ImpossibleProductionException : the exception which is thrown when not all input resources are not available
      * @throws EmptyColumnException : the exception which is thrown when there are no cards in the deck
      * @throws CallForCouncilException : the exception which is thrown when the faith indicator has reached the current papal space
      * @throws LastSpaceReachedException : the exception which is thrown when the faith indicator has reached the last papal space

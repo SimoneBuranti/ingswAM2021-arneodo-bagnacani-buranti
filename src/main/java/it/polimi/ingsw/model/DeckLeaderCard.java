@@ -11,22 +11,6 @@ public class DeckLeaderCard {
      * this attribute collects the leader cards of the deck
      */
     private static  ArrayList<LeaderCard> deckLeaderCard;
-    /**
-     * this attribute instantiates a blue colour
-     */
-    private Colour blue =new  Blue();
-    /**
-     * this attribute instantiates a green colour
-     */
-    private Colour green =new  Green();
-    /**
-     * this attribute instantiates a yellow colour
-     */
-    private Colour yellow =new  Yellow();
-    /**
-     * this attribute instantiates a violet colour
-     */
-    private Colour violet =new  Violet();
 
     /**
      * this constructor creates all the leader cards and adds them to the list and shuffles the newly created deck
@@ -34,7 +18,10 @@ public class DeckLeaderCard {
     public DeckLeaderCard(){
 
         deckLeaderCard= new ArrayList<>(16);
-
+        Colour blue =new  Blue();
+        Colour green =new  Green();
+        Colour yellow =new  Yellow();
+        Colour violet =new  Violet();
 
         Requirements requirementsOne= new ResourceRequirement(Resource.COIN);
         LeaderCard leaderCardOne= new LeaderCardStorage(requirementsOne,3, Resource.ROCK);
@@ -87,16 +74,16 @@ public class DeckLeaderCard {
 
 
         Requirements requirementsThirteen= new TwoFlagsTwoColourRequirement(blue, violet);
-        LeaderCard leaderCardThirteen= new LeaderCardStorage(requirementsThirteen,3, Resource.SHIELD);
+        LeaderCard leaderCardThirteen= new LeaderCardReduction(requirementsThirteen,3, Resource.SHIELD);
 
         Requirements requirementsFourteen= new TwoFlagsTwoColourRequirement(yellow,green);
-        LeaderCard leaderCardFourteen= new LeaderCardStorage(requirementsFourteen,3, Resource.SERVANT);
+        LeaderCard leaderCardFourteen= new LeaderCardReduction(requirementsFourteen,3, Resource.SERVANT);
 
         Requirements requirementsFifteen= new TwoFlagsTwoColourRequirement(yellow,violet);
-        LeaderCard leaderCardFifteen= new LeaderCardStorage(requirementsFifteen,3, Resource.COIN);
+        LeaderCard leaderCardFifteen= new LeaderCardReduction(requirementsFifteen,3, Resource.COIN);
 
         Requirements requirementsSixteen= new TwoFlagsTwoColourRequirement(green,blue);
-        LeaderCard leaderCardSixteen= new LeaderCardStorage(requirementsSixteen,3, Resource.ROCK);
+        LeaderCard leaderCardSixteen= new LeaderCardReduction(requirementsSixteen,3, Resource.ROCK);
 
 
         deckLeaderCard.add(leaderCardOne);

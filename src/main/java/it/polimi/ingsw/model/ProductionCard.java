@@ -2,36 +2,43 @@ package it.polimi.ingsw.model;
 
 import java.util.*;
 
+/**
+ * This class represents the production card
+ */
 public class ProductionCard {
+    /**
+     * this attribute indicates how many cells of the faith path to move forward the faith indicator
+     * of the player who activated the production of the production card
+     */
     private final int faithPoint;
 
     /**
-     * costProductionCard represents the card cost as a map containing resources and their quantities
+     * this attribute represents the card cost as a map containing resources and their quantities
      */
     private final Map<Resource,Integer> costProductionCard;
 
     /**
-     * inputResources contains the input set of resources for the card own production effect
+     * this attribute contains the input set of resources for the card own production effect
      */
     private final Map<Resource,Integer> inputResources;
 
     /**
-     * outputResources contains the output set of resources of the card own production effect
+     * this attribute contains the output set of resources of the card own production effect
      */
     private final Map<Resource,Integer> outputResources;
 
     /**
-     * Card own points
+     * this attribute indicates the card own victory points
      */
     private final int points;
 
     /**
-     * level indicates the card level
+     * this attribute indicates the card level
      */
     private final Integer level;
 
     /**
-     * colour indicates the card colour
+     * this attribute indicates the card colour
      */
     private final Colour colour;
 
@@ -50,10 +57,9 @@ public class ProductionCard {
     }
 
 
-
     /**
      * Getter method for the card cost
-     * It returns a copy of the private attribute
+     * @return Map<Resource,Integer> : a copy of the private attribute costProductionCard
      */
     public Map<Resource,Integer> getCost() {
         Map<Resource,Integer> m = new HashMap<>();
@@ -62,8 +68,8 @@ public class ProductionCard {
     }
 
     /**
-     * getter method for the card input resources which are required for production effect
-     * It returns a copy of the private attribute
+     * Getter method for the card input resources which are required for production effect
+     * @return ArrayList<Resource> : a list copy of the private attribute inputResources
      */
     public ArrayList<Resource> getIn() {
         ArrayList<Resource>  input= new ArrayList<>();
@@ -74,8 +80,8 @@ public class ProductionCard {
     }
 
     /**
-     *getter method for the card output resources which are produced by production effect
-     * It returns a copy of the private attribute
+     * Getter method for the card output resources which are produced by production effect
+     * @return ArrayList<Resource> : a list copy of the private attribute outputResources
      */
     public ArrayList<Resource> getOut() {
         ArrayList<Resource>  output = new ArrayList<>();
@@ -85,31 +91,35 @@ public class ProductionCard {
         return output;
     }
 
+
     /**
-     * getter method for the card colour
+     * Getter method for the card colour
+     * @return Colour : the card colour
      */
     public Colour getColour() {
         return colour;
     }
 
     /**
-     * getter method for the card level
+     * Getter method for the card level
+     * @return Integer : the card level
      */
     public Integer getLevel() {
         return level;
     }
 
     /**
-     * getter method for the card points
+     * Getter method for the card victory points
+     * @return int : the card victory points
      */
-    public Integer getPoints() {
+    public int getPoints() {
         return this.points;
     }
 
 
-
     /**
-     * getter method for activate or not move on faithPath
+     * Getter method for the card faithPoint
+     * @return int : the card faithPoint
      */
     public int isFaithPoint() {
         return faithPoint;

@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * This class represents the storage of the gameBoard
+ * This class represents the storage of the game board
  */
 public class Storage {
     /**
@@ -35,7 +35,7 @@ public class Storage {
     /**
      * This method returns an ArrayList containing the whole available resources
      * inside the storage
-     * @return
+     * @return ArrayList<Resource> : collection of all the resources present in the storage
      */
     public ArrayList<Resource> availableResources() {
         ArrayList<Resource> storageResources = new ArrayList<>();
@@ -49,9 +49,9 @@ public class Storage {
     }
 
     /**
-     * This method gets as an input the resource ArrayList containing the cost and return the unpaid resources.
-     * @param cost
-     * @return
+     * This method gets as an input the cost and after paying all possible resources it returns the unpaid resources
+     * @param cost : a collection of resources to pay for
+     * @return ArrayList<Resource> : a collection of unpaid resources
      */
     public ArrayList<Resource> payResources(ArrayList<Resource> cost) {
 
@@ -72,7 +72,7 @@ public class Storage {
 
 
     /**
-     *This method removes a resource type from the reserve if available by adding it to the map,
+     * This method removes a resource type from the reserve if available by adding it to the map,
      * it does nothing otherwise
      * @param resource :type of resource to add
      */
@@ -90,10 +90,11 @@ public class Storage {
     }
 
     /**
-     *This method removes a resource type from the map if available and adds it to the reserve,
+     * This method removes a resource type from the map if available and adds it to the reserve,
      * throws an exception otherwise
      * @param resource: type of resource to remove
-     * @throws UnavailableResourceException
+     * @throws UnavailableResourceException : the exception which is thrown when there are no more resources in the storage
+     *                                        of the resource type to be withdrawn
      */
     public void useResource(Resource resource) throws UnavailableResourceException {
         int value;
@@ -107,8 +108,9 @@ public class Storage {
     }
 
     /**
-     * This method check that there are at most 3 resources of a first type, 2 of a second type and 1 of a third type
-     * and that there are not 4 different type of resources at the same time
+     * This method checks that there are at most 3 resources of a first type, 2 of a second type and 1 of a third type
+     * in the storage with added the resources passed as a parameter and that there are not 4 different type
+     * of resources at the same time
      * @param list : a list of resources to check before adding
      * @return boolean : if it checks the conditions returns true, false otherwise
      */
@@ -144,7 +146,7 @@ public class Storage {
 
 
     /**
-     *This method returns the current number of a resource type
+     * This method returns the current number of a resource type
      * @param resource : type of resource
      * @return int : the current amount of the resource
      */
@@ -158,7 +160,7 @@ public class Storage {
     }
 
     /**
-     *This method returns the total number of resources in the map
+     * This method returns the total number of resources in the map
      * @return int : the total amount of resources
      */
     public int resourceScore(){
@@ -174,7 +176,7 @@ public class Storage {
     }
 
     /**
-     * This method return a copy of the map to the caller
+     * This method returns a copy of the map to the caller
      * @return Map<Resource, Integer> : a copy of the map
      */
     public Map<Resource, Integer> getStorageResource() {
@@ -183,30 +185,64 @@ public class Storage {
         return map;
     }
 
+    /**
+     * method of the subclass that does nothing
+     * @return boolean : false
+     */
     public boolean isStorageExtraFirstFull(){
         return false;
     }
+
+    /**
+     * method of the subclass that does nothing
+     * @return boolean : false
+     */
     public boolean isStorageExtraFirstEmpty(){
         return false;
     }
+
+    /**
+     * method of the subclass that does nothing
+     * @return Resource : null
+     */
     public Resource getFirstResourceType() {
         return null;
     }
 
+    /**
+     * method of the subclass that does nothing
+     * @return int : 0
+     */
     public int getNumExtraFirstAvailable(){return 0;}
 
+    /**
+     * method of the subclass that does nothing
+     * @return boolean : false
+     */
     public boolean isStorageExtraSecondFull(){
         return false;
     }
 
+    /**
+     * method of the subclass that does nothing
+     * @return boolean : false
+     */
     public boolean isStorageExtraSecondEmpty(){
         return false;
     }
 
+    /**
+     * method of the subclass that does nothing
+     * @return Resource : null
+     */
     public Resource getSecondResourceType() {
         return null;
     }
 
+    /**
+     * method of the subclass that does nothing
+     * @return int : 0
+     */
     public int getNUmExtraSecondAvailable(){
         return 0;
     }

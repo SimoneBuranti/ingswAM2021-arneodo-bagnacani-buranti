@@ -1,7 +1,20 @@
 package it.polimi.ingsw.model;
 
+/**
+ * this class represents the reduction-type leader card
+ */
 public class LeaderCardReduction extends LeaderCard{
-    private Resource costReduction;
+    /**
+     * this attribute indicates the type of resource that can be subtracted from the cost of production cards
+     */
+    private final Resource costReduction;
+
+    /**
+     * Default constructor
+     * @param requirements : the type of card requirement
+     * @param point : the card victory points
+     * @param costReduction : the type of resource that can be subtracted from the cost of production cards
+     */
     public LeaderCardReduction(Requirements requirements, int point ,Resource costReduction){
         super(requirements,point);
         this.costReduction=costReduction;
@@ -9,7 +22,10 @@ public class LeaderCardReduction extends LeaderCard{
 
 
     /**
-     * method  on abilityActivation of the decorator
+     * This method checks if the requirements are met: if so, it adds the reduce functionality to the game board passed
+     * as a parameter through the use of the pattern decorator and returns true, otherwise it returns false
+     * @param gameBoard : the game board to be updated
+     * @return boolean : true if the game board has been updated, false otherwise
      */
     @Override
     public boolean abilityActivation(GameBoardInterface gameBoard){
@@ -25,15 +41,13 @@ public class LeaderCardReduction extends LeaderCard{
     }
 
     /**
-     * method check for the possibility of activate leader card
-     * the ability is improving on Production on resource
+     * this method checks if the leader card requirements are met by the game board of the player who wants to activate the card
+     * @param gameBoard : the game board that must meet the requirements
+     * @return boolean : true if the game board meets the requirements, false otherwise
      */
     public boolean check(GameBoardInterface gameBoard){
         if(gameBoard.colourQuantity(requirements.getColourFirstRequirement()) < 1)
             return false;
-        else if(gameBoard.colourQuantity(requirements.getColourSecondRequirement()) < 1)
-            return false;
-        else
-            return true;
+        else return gameBoard.colourQuantity(requirements.getColourSecondRequirement()) >= 1;
     }
 }

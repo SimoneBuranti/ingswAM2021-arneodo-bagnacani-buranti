@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 class ReductionGameBoardTest {
     /**
-     * test about simple instantiated of reductiongameboard
+     * test about simple instantiated of ReductionGameBoard
      */
     @Test
     @DisplayName("reductionTest - simple test")
@@ -55,7 +55,7 @@ class ReductionGameBoardTest {
     }
 
     /**
-     * test about simple instantiated of reductiongameboard
+     * test about simple instantiated of ReductionGameBoard
      * testing "0 resources"
      */
     @Test
@@ -103,7 +103,7 @@ class ReductionGameBoardTest {
     }
 
     /**
-     * test about simple instantiated of reductiongameboard
+     * test about simple instantiated of ReductionGameBoard
      * buyProductionCard() affordable card"
      */
     @Test
@@ -201,7 +201,7 @@ class ReductionGameBoardTest {
 
     }
     /**
-     * test about simple instantiated of reductiongameboard
+     * test about simple instantiated of ReductionGameBoard
      * buyProductionCard() 3 affordable card"
      */
     @Test
@@ -411,7 +411,7 @@ class ReductionGameBoardTest {
 
     }
     /**
-     * test about simple instantiated of reductiongameboard
+     * test about simple instantiated of ReductionGameBoard
      * buyProductionCard() not affordable card"
      */
     @Test

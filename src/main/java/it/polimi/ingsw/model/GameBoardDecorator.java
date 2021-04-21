@@ -2,6 +2,9 @@ package it.polimi.ingsw.model;
 
 import java.util.ArrayList;
 
+/**
+ * Parent decorator for the GameBoardInterface class. Used to add custom effects to a GameBoard.
+ */
 public abstract class GameBoardDecorator implements GameBoardInterface {
 
     protected GameBoardInterface gameBoard;

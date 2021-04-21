@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 /**
- * this class represents the storage of the gameBoard with an extra storage activated by a first leaderCard
+ * this class represents the storage of the game board with an extra storage activated by a first storage-type leaderCard
  */
 public class StorageExtraFirst extends Storage{
     /**
@@ -36,7 +36,7 @@ public class StorageExtraFirst extends Storage{
      * initialises the vector storageExtraFirst values depending on the number numFirstExtra
      * @param resourceType :the type of resources of the first extra storage
      * @param map : the map to be copied in the super class
-     * @param numFirstExtra: the amount of resources contained in the first extra storage
+     * @param numFirstExtra: the amount of resources that can be contained in the first extra storage
      */
     public StorageExtraFirst(Resource resourceType, Map<Resource, Integer> map, int numFirstExtra){
         super(map);
@@ -53,7 +53,10 @@ public class StorageExtraFirst extends Storage{
         }
     }
 
-
+    /**
+     * This method returns an ArrayList containing the whole available resources inside the storage
+     * @return ArrayList<Resource> : collection of all the resources present in the storage
+     */
     public ArrayList<Resource> availableResources() {
         ArrayList<Resource> storageExtraFirstResources = new ArrayList<>();
 
@@ -66,10 +69,10 @@ public class StorageExtraFirst extends Storage{
     }
 
     /**
-     * this method a resource type from the reserve if available and
+     * this method removes a resource type from the reserve if available and
      * adds it to the first extra storage if it can, otherwise
      * it adds it in the map by calling the method of the super class
-     * @param resource :type of resource to add
+     * @param resource : type of resource to add
      */
     @Override
     public void addResource(Resource resource) {
@@ -92,7 +95,8 @@ public class StorageExtraFirst extends Storage{
      * removes it from the first extra storage if it can, otherwise
      * it removes the resource by calling the method of the super class
      * @param resource: type of resource to remove
-     * @throws UnavailableResourceException
+     * @throws UnavailableResourceException : the exception which is thrown when there are no more resources in the storage
+     *                                        of the resource type to be withdrawn
      */
     @Override
     public void useResource(Resource resource) throws UnavailableResourceException {
@@ -165,7 +169,7 @@ public class StorageExtraFirst extends Storage{
 
     /**
      * this method returns true if the first extra storage is full, false otherwise
-     * @return boolean
+     * @return boolean : true if the first extra storage is full, false otherwise
      */
     @Override
     public boolean isStorageExtraFirstFull(){
@@ -176,7 +180,7 @@ public class StorageExtraFirst extends Storage{
 
     /**
      * this method returns true if the first extra storage is empty, false otherwise
-     * @return boolean
+     * @return boolean : true if the first extra storage is empty, false otherwise
      */
     @Override
     public boolean isStorageExtraFirstEmpty(){
@@ -187,8 +191,8 @@ public class StorageExtraFirst extends Storage{
 
 
     /**
-     * this method return the type of resources of the first extra storage
-     * @return Resource
+     * this method returns the type of resources of the first extra storage
+     * @return Resource : the type of resources of the first extra storage
      */
     @Override
     public Resource getFirstResourceType() {
@@ -197,8 +201,8 @@ public class StorageExtraFirst extends Storage{
 
 
     /**
-     * this method return the amount of places available in the second extra storage
-     * @return int
+     * this method returns the amount of places available in the second extra storage
+     * @return int : the amount of places available in the second extra storage
      */
     @Override
     public int getNumExtraFirstAvailable(){

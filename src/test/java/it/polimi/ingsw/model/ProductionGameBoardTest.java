@@ -4,7 +4,7 @@ import org.junit.jupiter.api.*;
 import java.util.*;
 import static org.junit.jupiter.api.Assertions.*;
 /**
- * test class about ProductionGameBoardtest
+ * test class about ProductionGameBoardTest
  */
 class ProductionGameBoardTest {
 
