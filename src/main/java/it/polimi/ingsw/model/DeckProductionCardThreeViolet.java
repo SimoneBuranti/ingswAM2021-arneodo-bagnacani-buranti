@@ -13,7 +13,8 @@ public class DeckProductionCardThreeViolet extends DeckProductionCard {
         public  DeckProductionCardThreeViolet (){
 
         Violet violet= new Violet();
-                deck = new ArrayList<>(4);
+        deck = new ArrayList<>(4);
+
         Map<Resource,Integer> violetNine =new HashMap<>();
         violetNine.put(Resource.COIN, 0);
         violetNine.put(Resource.ROCK, 0);
@@ -30,7 +31,7 @@ public class DeckProductionCardThreeViolet extends DeckProductionCard {
         violetNineOut.put(Resource.SERVANT, 0);
         violetNineOut.put(Resource.SHIELD, 0);
         ProductionCard cardNine =new ProductionCard(violetNine,violetNineIn,violetNineOut, 9, 3, violet,2);
-                deck.add(cardNine);
+        deck.add(cardNine);
 
         Map<Resource,Integer> violetTen =new HashMap<>();
         violetTen.put(Resource.COIN, 2);
@@ -48,7 +49,7 @@ public class DeckProductionCardThreeViolet extends DeckProductionCard {
         violetTenOut.put(Resource.SERVANT, 2);
         violetTenOut.put(Resource.SHIELD, 0);
         ProductionCard cardTen =new ProductionCard(violetTen, violetTenIn, violetTenOut, 10, 3, violet, 1);
-                deck.add(cardTen);
+        deck.add(cardTen);
 
 
 
@@ -68,7 +69,7 @@ public class DeckProductionCardThreeViolet extends DeckProductionCard {
         violetElevenOut.put(Resource.SERVANT, 0);
         violetElevenOut.put(Resource.SHIELD, 0);
         ProductionCard cardEleven =new ProductionCard(violetEleven,violetElevenIn, violetElevenOut, 11, 3, violet, 3);
-                deck.add(cardEleven);
+        deck.add(cardEleven);
 
 
         Map<Resource,Integer> violetTwelve =new HashMap<>();
@@ -87,9 +88,10 @@ public class DeckProductionCardThreeViolet extends DeckProductionCard {
         violetTwEightOut.put(Resource.SERVANT, 1);
         violetTwEightOut.put(Resource.SHIELD, 0);
         ProductionCard cardTwelve =new ProductionCard(violetTwelve, violetTwelveIn, violetTwEightOut, 12, 3, violet, 0);
-                deck.add(cardTwelve);
+        deck.add(cardTwelve);
 
         Mix.MIXED(deck);
+
     }
 
 }

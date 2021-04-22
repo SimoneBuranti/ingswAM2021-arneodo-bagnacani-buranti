@@ -29,9 +29,29 @@ public class GameSolitaire extends Game{
         currentPlayer = player;
     }
 
+    /**
+     * this method calls the super class method to buy the production card and calls the checkProductionDeck method
+     * to check if all the decks of a certain colour are empty: if they are, the EndOfSolitaireGame exception is caught
+     * and handled by calling the exceptionHandler method
+     * @param deck : it is the production card deck from which the current player wants to buy the card
+     * @param chosenColumn : the game board column in which the current player wants to place the bought card
+     */
+    @Override
+    public void buyProductionCard(DeckProductionCard deck, int chosenColumn){
+
+        super.buyProductionCard(deck, chosenColumn);
+
+        try {
+            checkProductionDeck();
+        } catch (EndOfSolitaireGame e) {
+            exceptionHandler(e);
+        }
+    }
+
 
     /**
-     * this method takes the first action marker of the deck and applies its effect
+     * this method takes the first action marker of the deck and applies its effect and catches EmptyException and EndOfSolitaireGame.
+     * When the exceptions are caught, the method calls the exceptionHandler method.
      */
     public void revealAndActivateActionMarker() {
         try {
@@ -43,24 +63,10 @@ public class GameSolitaire extends Game{
         }
     }
 
-    /**
-     * this method has been implemented for testing and applies the effect of the action marker passed as a parameter
-     * @param actionMarker
-     */
-    public void activateActionMarker(ActionMarker actionMarker)  {
-        try {
-            actionMarker.actionMarkerEffect(this);
-        } catch (EmptyException e) {
-            exceptionHandler(e);
-        } catch (EndOfSolitaireGame endOfSolitaireGame) {
-            exceptionHandler(endOfSolitaireGame);
-        }
-    }
-
 
     /**
      * this method calls the Lorenzo the magnificent method to move the black cross,
-     * if an exception is caught it calls the Lorenzo the magnificent method to increase the currCall counter
+     * if CallForCouncilException or EndOfSolitaireGame is caught it calls the exceptionHandler method to handle it
      */
     public void moveBlackCrossOnce(){
         try {
@@ -74,7 +80,7 @@ public class GameSolitaire extends Game{
 
     /**
      * this method calls the Lorenzo the magnificent method to move the black cross twice,
-     * if an exception is caught it calls the Lorenzo the magnificent method to increase the currCall counter
+     * if CallForCouncilException or EndOfSolitaireGame is caught it calls the exceptionHandler method to handle it
      */
     public void moveBlackCrossDouble(){
         try {
@@ -102,27 +108,12 @@ public class GameSolitaire extends Game{
     }
 
     /**
-     * this method is implemented for testing and returns the first action marker of the deck
-     * @return ActionMarker : the first action marker of the deck
-     */
-    public ActionMarker showFirst(){
-        return deckActionMarker.showFirst();
-    }
-
-    /**
-     * this method is implemented for testing and returns the black cross current position on faithPath
-     * @return int : the black cross current position on faithPath
-     */
-    public int getLorenzoFaithIndicator(){
-        return lorenzoTheMagnificent.getFaithIndicator();
-    }
-
-
-    /**
-     * remove production card blue due to action marker effect
-     * @param blue
-     * @throws EndOfSolitaireGame
-     * @throws EmptyException
+     * this method removes a blue production card due to action marker effect starting from the level one deck up
+     * to the level three deck. It spreads the EndOfSolitaireGame exception if all three blue decks are empty.
+     * @param blue : the colour of the decks
+     * @throws EndOfSolitaireGame: the exception which is thrown when all the blue production cards decks are empty
+     *                              and states that the solitaire game is over and the winner is Lorenzo The Magnificent
+     * @throws EmptyException : the exception which is thrown when there are no more cards left in the level three deck
      */
     public void removeProductionCard(Blue blue) throws EndOfSolitaireGame, EmptyException {
         try {
@@ -136,10 +127,12 @@ public class GameSolitaire extends Game{
         }
     }
     /**
-     * remove production card yelllow due to action marker effect
-     * @param yellow
-     * @throws EndOfSolitaireGame
-     * @throws EmptyException
+     * this method removes a yellow production card due to action marker effect starting from the level one deck up
+     * to the level three deck. It spreads the EndOfSolitaireGame exception if all three yellow decks are empty.
+     * @param yellow : the colour of the decks
+     * @throws EndOfSolitaireGame: the exception which is thrown when all the yellow production cards decks are empty
+     *                              and states that the solitaire game is over and the winner is Lorenzo The Magnificent
+     * @throws EmptyException : the exception which is thrown when there are no more cards left in the level three deck
      */
     public void removeProductionCard(Yellow yellow) throws EndOfSolitaireGame, EmptyException {
         try {
@@ -155,10 +148,12 @@ public class GameSolitaire extends Game{
 
     }
     /**
-     * remove production card green due to action marker effect
-     * @param green
-     * @throws EndOfSolitaireGame
-     * @throws EmptyException
+     * this method removes a green production card due to action marker effect starting from the level one deck up
+     * to the level three deck. It spreads the EndOfSolitaireGame exception if all three green decks are empty.
+     * @param green : the colour of the decks
+     * @throws EndOfSolitaireGame: the exception which is thrown when all the green production cards decks are empty
+     *                              and states that the solitaire game is over and the winner is Lorenzo The Magnificent
+     * @throws EmptyException : the exception which is thrown when there are no more cards left in the level three deck
      */
     public void removeProductionCard(Green green) throws EndOfSolitaireGame, EmptyException {
         try {
@@ -174,10 +169,12 @@ public class GameSolitaire extends Game{
 
     }
     /**
-     * remove production card violet due to action marker effect
-     * @param violet
-     * @throws EndOfSolitaireGame
-     * @throws EmptyException
+     * this method removes a violet production card due to action marker effect starting from the level one deck up
+     * to the level three deck. It spreads the EndOfSolitaireGame exception if all three violet decks are empty.
+     * @param violet : the colour of the decks
+     * @throws EndOfSolitaireGame : the exception which is thrown when all the violet production cards decks are empty
+     *                              and states that the solitaire game is over and the winner is Lorenzo The Magnificent
+     * @throws EmptyException : the exception which is thrown when there are no more cards left in the level three deck
      */
     public void removeProductionCard(Violet violet) throws EndOfSolitaireGame, EmptyException {
         try {
@@ -192,10 +189,63 @@ public class GameSolitaire extends Game{
 
     }
 
+    /**
+     * this method checks if there is a colour for which all decks are empty, if so it spreads the EndOfSolitaireGame exception
+     * @throws EndOfSolitaireGame : the exception which is thrown when all decks of a certain color are empty
+     *                              and states that the solitaire game is over and the winner is Lorenzo The Magnificent
+     */
+    public void checkProductionDeck() throws EndOfSolitaireGame {
+        checkProductionDeck(new Blue());
+        checkProductionDeck(new Green());
+        checkProductionDeck(new Yellow());
+        checkProductionDeck(new Violet());
+    }
 
     /**
-     *  Override method
-     * not implemented method called when the player discards a resource
+     * this method throws an EndOfSolitaireGame exception if all blue decks are empty
+     * @param blue : the colour of the decks
+     * @throws EndOfSolitaireGame : the exception which is thrown when all the blue production cards decks are empty
+     *                              and states that the solitaire game is over and the winner is Lorenzo The Magnificent
+     */
+    public void checkProductionDeck(Blue blue) throws EndOfSolitaireGame {
+        if(deckProductionCardOneBlu.size() == 0 && deckProductionCardTwoBlu.size() == 0 && deckProductionCardThreeBlu.size() == 0)
+            throw new EndOfSolitaireGame();
+    }
+    /**
+     * this method throws an EndOfSolitaireGame exception if all green decks are empty
+     * @param green : the colour of the decks
+     * @throws EndOfSolitaireGame : the exception which is thrown when all the green production cards decks are empty
+     *                              and states that the solitaire game is over and the winner is Lorenzo The Magnificent
+     */
+    public void checkProductionDeck(Green green) throws EndOfSolitaireGame {
+        if(deckProductionCardOneGreen.size() == 0 && deckProductionCardTwoGreen.size() == 0 && deckProductionCardThreeGreen.size() == 0)
+            throw new EndOfSolitaireGame();
+    }
+    /**
+     * this method throws an EndOfSolitaireGame exception if all yellow decks are empty
+     * @param yellow : the colour of the decks
+     * @throws EndOfSolitaireGame : the exception which is thrown when all the yellow production cards decks are empty
+     *                              and states that the solitaire game is over and the winner is Lorenzo The Magnificent
+     */
+    public void checkProductionDeck(Yellow yellow) throws EndOfSolitaireGame {
+        if(deckProductionCardOneYellow.size() == 0 && deckProductionCardTwoYellow.size() == 0 && deckProductionCardThreeYellow.size() == 0)
+            throw new EndOfSolitaireGame();
+    }
+    /**
+     * this method throws an EndOfSolitaireGame exception if all violet decks are empty
+     * @param violet : the colour of the decks
+     * @throws EndOfSolitaireGame : the exception which is thrown when all the violet production cards decks are empty
+     *                              and states that the solitaire game is over and the winner is Lorenzo The Magnificent
+     */
+    public void checkProductionDeck(Violet violet) throws EndOfSolitaireGame {
+        if(deckProductionCardOneViolet.size() == 0 && deckProductionCardTwoViolet.size() == 0 && deckProductionCardThreeViolet.size() == 0)
+            throw new EndOfSolitaireGame();
+    }
+
+
+    /**
+     * method called when the player discards a resource, it moves the black cross forward one position.
+     * If CallForCouncilException or EndOfSolitaireGame is caught it calls the exceptionHandler method to handle it
      * @param player : the one who discards the resource
      */
     @Override
@@ -211,8 +261,9 @@ public class GameSolitaire extends Game{
 
 
     /**
-     * Override method CallForCouncilException
-     * @param e
+     * this method handles the CallForCouncilException by calling the player and Lorenzo the Magnificent methods
+     * for assigning papal cards and incrementing the currCall counter
+     * @param e : the exception to handle
      */
     @Override
     protected void exceptionHandler(CallForCouncilException e) {
@@ -222,26 +273,65 @@ public class GameSolitaire extends Game{
 
 
     /**
-     * Override method LastSpaceReachedException
-     * @param e
+     * this method handles the LastSpaceReachedException by calling the player methods for assigning papal cards and
+     * for calculating the final score
+     * @param e : the exception to handle
      */
     @Override
     protected void exceptionHandler(LastSpaceReachedException e) {
         player.setPapal();
-        //...fine partita, calcolo punteggio
+        player.playerScore();
+        //...fine partita
     }
 
 
 
     /**
-     * Override method EndOfSolitaireGame
-     * @param e
+     * this method handles the EndOfSolitaireGame exception by assigning the victory to Lorenzo the Magnificent
+     * @param e : the exception to handle
      */
     @Override
     protected void exceptionHandler(EndOfSolitaireGame e) {
         System.out.println("Lorenzo the Magnificent WIN");
     }
 
+    /**
+     * Only test method : getter method for the player's game board
+     * @return GameBoardInterface : the game board of the player
+     */
+    public GameBoardInterface getGameBoardOfPlayer(){
+        return player.getGameBoardOfPlayer();
+    }
 
+
+    /**
+     * Only test method : it applies the effect of the action marker passed as a parameter and catches EmptyException and EndOfSolitaireGame
+     * @param actionMarker : action marker whose effect to activate
+     */
+    public void activateActionMarker(ActionMarker actionMarker)  {
+        try {
+            actionMarker.actionMarkerEffect(this);
+        } catch (EmptyException e) {
+            exceptionHandler(e);
+        } catch (EndOfSolitaireGame endOfSolitaireGame) {
+            exceptionHandler(endOfSolitaireGame);
+        }
+    }
+
+    /**
+     * Only test method: it returns the first action marker of the deck
+     * @return ActionMarker : the first action marker of the deck
+     */
+    public ActionMarker showFirst(){
+        return deckActionMarker.showFirst();
+    }
+
+    /**
+     * Only test method : it returns the black cross current position on faithPath
+     * @return int : the black cross current position on faithPath
+     */
+    public int getLorenzoFaithIndicator(){
+        return lorenzoTheMagnificent.getFaithIndicator();
+    }
 
 }

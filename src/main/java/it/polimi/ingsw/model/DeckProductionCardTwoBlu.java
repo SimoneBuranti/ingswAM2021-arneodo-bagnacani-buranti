@@ -91,6 +91,7 @@ public class DeckProductionCardTwoBlu extends DeckProductionCard {
         deck.add(cardFortyFour);
 
         Mix.MIXED(deck);
+
     }
 
 }

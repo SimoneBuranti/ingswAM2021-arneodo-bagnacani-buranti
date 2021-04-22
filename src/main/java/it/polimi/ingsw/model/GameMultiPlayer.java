@@ -2,11 +2,9 @@ package it.polimi.ingsw.model;
 
 import java.util.ArrayList;
 /**
- * this class represents the game multiPlayer
+ * this class represents the game multi player
  */
-
 public class GameMultiPlayer extends Game {
-
 
     /**
      * this attribute represents the number of player
@@ -17,7 +15,6 @@ public class GameMultiPlayer extends Game {
      * this attribute represents the first player
      */
     PlayerFirst firstPlayer;
-
     /**
      * this attribute represents the second player
      */
@@ -32,7 +29,7 @@ public class GameMultiPlayer extends Game {
     PlayerFourth fourthPlayer;
 
     /**
-     * this attribute represents the inkwell given to the first player in initstate
+     * this attribute represents the inkwell given to the first player in intestate
      */
     private final int inkwell;
 
@@ -55,13 +52,14 @@ public class GameMultiPlayer extends Game {
 
 
     /**
-     * this attribute represents currentPlayerPosition on playerlist
+     * this attribute represents currentPlayerPosition on playerList
      */
     private int currentPlayerPosition = 0;
 
     /**
      * this is the constructor for the class
-     * @param numberOfPlayer
+     * @param numberOfPlayer : the number of players in the game
+     * @param nickName : the collection of players' nicknames
      */
     public GameMultiPlayer(int numberOfPlayer, ArrayList<String> nickName){
         super();
@@ -74,18 +72,17 @@ public class GameMultiPlayer extends Game {
     }
 
     /**
-     * method which return number of participant in game
+     * this method returns the number of participant in the game
      */
-
     public int getNumberOfPlayer() {
         return numberOfPlayer;
     }
-    /**
-     * this is the constructor for the players
-     * @param numberOfPlayer
-     *
-     */
 
+    /**
+     * this method creates all the players in the game starting from the number of players and their nicknames
+     * @param numberOfPlayer : the number of players in the game
+     * @param nickNameInOrder : collection of players' nicknames already sorted according to the random assignment of the inkwell
+     */
     private void createPlayer(int numberOfPlayer,ArrayList<String> nickNameInOrder){
        if (numberOfPlayer==2)
         {
@@ -103,8 +100,6 @@ public class GameMultiPlayer extends Game {
             playerList.add(firstPlayer);
             playerList.add(secondPlayer);
             playerList.add(thirdPlayer);
-
-
 
         }
        else if (numberOfPlayer==4)
@@ -124,7 +119,7 @@ public class GameMultiPlayer extends Game {
 
 
     /**
-     * method for set new current player at the end of old current player turn
+     * this method sets the new current player at the end of old current player turn
      */
     public void setCurrentPlayer() {
         if(currentPlayerPosition == numberOfPlayer-1)
@@ -137,9 +132,9 @@ public class GameMultiPlayer extends Game {
 
 
     /**
-     * method which return the player at index position
-     * @param index
-     * @return playerList.get(index)
+     * this method returns the player at index position
+     * @param index : the position in the playerList
+     * @return Player : the player at index position
      */
     public Player getPlayerFromList(int index){
         return playerList.get(index);
@@ -147,8 +142,9 @@ public class GameMultiPlayer extends Game {
 
 
     /**
-     * @param numberOfPlayer
-     * @return n = (int) (Math.random() * (numberOfPlayer) a random number from 0 to numberOfPlayer -1
+     * this method returns a random number between zero and the number of players that is assigned to the inkwell in the constructor
+     * @param numberOfPlayer : the number of players in the game
+     * @return int : the position of the player with the inkwell in the list of nicknames to sort
      */
     public int createRandomNumber(int numberOfPlayer){
         return (int) (Math.random() * (numberOfPlayer));
@@ -156,10 +152,10 @@ public class GameMultiPlayer extends Game {
 
 
     /**
-     * method which return the nicknameList of player in order
-     * @param nickName
-     * @param inkwell
-     * @return nickNameInOrder
+     * this method returns the player's nicknameList in order according to the value of the inkwell
+     * @param nickName : the list of nickNames to sort
+     * @param inkwell : the position in the list to be sorted of the first player on the sorted list
+     * @return ArrayList<String> : ordered list of nickNames
      */
     private ArrayList<String> correctOrder(ArrayList<String> nickName,int inkwell){
 
@@ -171,9 +167,10 @@ public class GameMultiPlayer extends Game {
         return  nickNameInOrder;}
 
     /**
-     * method called when one of the players discard Resources
-     * @param player
-     *
+     * method called when the player discards a resource,it moves the faith indicator of all players except the one
+     * passed as a parameter forward one position on the faith path.
+     * If CallForCouncilException or LastSpaceReachedException is caught it calls the exceptionHandler method to handle it
+     * @param player : the one who discards the resource
      */
     @Override
     public void moveEveryoneExcept(Player player){
@@ -191,10 +188,10 @@ public class GameMultiPlayer extends Game {
     }
 
 
-
     /**
-     * Override method CallForCouncilException
-     * @param e
+     * this method handles the CallForCouncilException by calling the method of all players
+     * for assigning papal cards and incrementing the currCall counter
+     * @param e : the exception to handle
      */
     @Override
     protected void exceptionHandler(CallForCouncilException e) {
@@ -205,8 +202,9 @@ public class GameMultiPlayer extends Game {
 
 
     /**
-     * Override method LastSpaceReachedException
-     * @param e
+     * this method handles the CallForCouncilException by calling the method of all players
+     * for assigning papal cards and incrementing the currCall counter and by setting the lastTurn attribute to true
+     * @param e : the exception to handle
      */
     @Override
     protected void exceptionHandler(LastSpaceReachedException e) {
@@ -219,8 +217,8 @@ public class GameMultiPlayer extends Game {
 
 
     /**
-     * Override method EndOfSolitaireGame
-     * @param e
+     * this method handles the CallForCouncilException by setting the lastTurn attribute to true
+     * @param e : the exception to handle
      */
     @Override
     protected void exceptionHandler(EndGameException e) {
@@ -229,8 +227,8 @@ public class GameMultiPlayer extends Game {
 
 
     /**
-     * method called when game is finished
-     * @return playerWinner
+     * method called when the game is over, it calculates the score of all players and returns the winner
+     * @return Player : the player with the highest score
      */
     public Player theWinnerIs(){
         Player playerWinner;

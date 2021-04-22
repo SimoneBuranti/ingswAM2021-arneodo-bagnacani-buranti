@@ -12,6 +12,7 @@ public abstract class DeckProductionCard {
      */
     protected ArrayList<ProductionCard> deck ;
 
+
     /**
      * this method returns the cost of the first deck card
      * @return ArrayList<Resource> : a collection of all the resources of the first card cost
@@ -62,12 +63,21 @@ public abstract class DeckProductionCard {
     }
 
     /**
-     * Test only method: getter method for the deck size
+     * Getter method for the top card victory level
+     * @return int : level of the first production card of the deck
+     */
+    public int getLevel(){
+        return deck.get(0).getLevel();
+    }
+
+    /**
+     * Getter method for the deck size
      * @return int: the number of cards in the deck
      */
     public int size(){
         return deck.size();
     }
+
 
     /**
      * Test only method: getter method for the top card victory points
@@ -75,14 +85,6 @@ public abstract class DeckProductionCard {
      */
     public int getPoints() {
         return deck.get(0).getPoints();
-    }
-
-    /**
-     * Test only method: getter method for the top card victory level
-     * @return int : level of the first production card of the deck
-     */
-    public int getLevel(){
-        return deck.get(0).getLevel();
     }
 
 }

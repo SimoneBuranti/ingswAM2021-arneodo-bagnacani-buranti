@@ -17,11 +17,12 @@ public class DeckLeaderCard {
      */
     public DeckLeaderCard(){
 
-        deckLeaderCard= new ArrayList<>(16);
         Colour blue =new  Blue();
         Colour green =new  Green();
         Colour yellow =new  Yellow();
         Colour violet =new  Violet();
+
+        deckLeaderCard= new ArrayList<>(16);
 
         Requirements requirementsOne= new ResourceRequirement(Resource.COIN);
         LeaderCard leaderCardOne= new LeaderCardStorage(requirementsOne,3, Resource.ROCK);
@@ -34,7 +35,6 @@ public class DeckLeaderCard {
 
         Requirements requirementsFour= new ResourceRequirement(Resource.SERVANT);
         LeaderCard leaderCardFour= new LeaderCardStorage(requirementsFour,3, Resource.SHIELD);
-
 
 
 
@@ -54,8 +54,6 @@ public class DeckLeaderCard {
 
 
 
-
-
         Requirements requirementsNine= new ThreeFlagsTwoColourRequirement(blue,yellow);
         LeaderCard leaderCardNine= new LeaderCardMarble(requirementsNine,5, Resource.ROCK);
 
@@ -67,8 +65,6 @@ public class DeckLeaderCard {
 
         Requirements requirementsTwelve= new ThreeFlagsTwoColourRequirement(yellow, blue);
         LeaderCard leaderCardTwelve= new LeaderCardMarble(requirementsTwelve,5, Resource.SERVANT);
-
-
 
 
 

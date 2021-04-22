@@ -90,6 +90,7 @@ public class DeckProductionCardThreeGreen extends DeckProductionCard {
         deck.add(cardTwentyFour);
 
         Mix.MIXED(deck);
+
     }
 
  }

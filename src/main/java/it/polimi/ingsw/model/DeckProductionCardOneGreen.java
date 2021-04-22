@@ -91,11 +91,8 @@ public class DeckProductionCardOneGreen extends DeckProductionCard {
         deck.add(cardSixteen);
 
         Mix.MIXED(deck);
+
     }
-    /**
-     * this method has been implemented to do the tests and returns the size of the deck
-     * @return int: the number of cards in the deck
-     */
 
 }
 

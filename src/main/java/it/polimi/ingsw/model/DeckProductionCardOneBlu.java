@@ -92,6 +92,7 @@ public class DeckProductionCardOneBlu extends DeckProductionCard {
         deck.add(cardForty);
 
         Mix.MIXED(deck);
+
     }
 
 
