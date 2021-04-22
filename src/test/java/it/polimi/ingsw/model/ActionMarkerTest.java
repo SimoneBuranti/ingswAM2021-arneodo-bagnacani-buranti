@@ -1,5 +1,11 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.model.actionMarkers.ActionMarker;
+import it.polimi.ingsw.model.actionMarkers.ActionMarkerForCrossDouble;
+import it.polimi.ingsw.model.actionMarkers.ActionMarkerForCrossOnce;
+import it.polimi.ingsw.model.actionMarkers.ActionMarkerProductionBlue;
+import it.polimi.ingsw.model.exceptions.EmptyException;
+import it.polimi.ingsw.model.exceptions.EndOfSolitaireGame;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

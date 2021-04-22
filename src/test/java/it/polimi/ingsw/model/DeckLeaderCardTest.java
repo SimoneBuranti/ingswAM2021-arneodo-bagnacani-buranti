@@ -1,5 +1,7 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.model.players.PlayerFirst;
+import it.polimi.ingsw.model.players.PlayerSecond;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

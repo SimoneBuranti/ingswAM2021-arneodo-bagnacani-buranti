@@ -1,5 +1,8 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.model.exceptions.CallForCouncilException;
+import it.polimi.ingsw.model.exceptions.LastSpaceReachedException;
+import it.polimi.ingsw.model.leaderCards.LeaderCardsGameBoardEmptyException;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

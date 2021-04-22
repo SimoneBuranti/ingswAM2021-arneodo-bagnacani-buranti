@@ -1,5 +1,10 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.model.exceptions.CallForCouncilException;
+import it.polimi.ingsw.model.exceptions.EndGameException;
+import it.polimi.ingsw.model.exceptions.LastSpaceReachedException;
+import it.polimi.ingsw.model.players.*;
+
 import java.util.ArrayList;
 /**
  * this class represents the game multi player

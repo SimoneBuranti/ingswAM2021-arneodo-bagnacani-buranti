@@ -1,5 +1,11 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.model.exceptions.*;
+import it.polimi.ingsw.model.gameBoard.GameBoard;
+import it.polimi.ingsw.model.gameBoard.GameBoardInterface;
+import it.polimi.ingsw.model.gameBoard.ReductionGameBoard;
+import it.polimi.ingsw.model.productionCards.DeckProductionCardOneBlu;
+import it.polimi.ingsw.model.productionCards.DeckProductionCardOneGreen;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

@@ -1,6 +1,20 @@
 package it.polimi.ingsw.model;
 
 
+import it.polimi.ingsw.model.actionMarkers.ActionMarker;
+import it.polimi.ingsw.model.actionMarkers.DeckActionMarker;
+import it.polimi.ingsw.model.colours.Blue;
+import it.polimi.ingsw.model.colours.Green;
+import it.polimi.ingsw.model.colours.Violet;
+import it.polimi.ingsw.model.colours.Yellow;
+import it.polimi.ingsw.model.exceptions.CallForCouncilException;
+import it.polimi.ingsw.model.exceptions.EmptyException;
+import it.polimi.ingsw.model.exceptions.EndOfSolitaireGame;
+import it.polimi.ingsw.model.exceptions.LastSpaceReachedException;
+import it.polimi.ingsw.model.gameBoard.GameBoardInterface;
+import it.polimi.ingsw.model.players.Player;
+import it.polimi.ingsw.model.productionCards.DeckProductionCard;
+
 /**
  * this class represents the game in solitary
  */

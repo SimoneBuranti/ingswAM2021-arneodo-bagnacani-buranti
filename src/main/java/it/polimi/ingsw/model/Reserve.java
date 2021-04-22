@@ -1,5 +1,7 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.model.exceptions.UnavailableResourceException;
+
 import java.util.*;
 
 /**
@@ -43,7 +45,7 @@ public class Reserve {
      * @throws UnavailableResourceException : the exception which is thrown when there are no more resources in the reserve
      *                                        of the resource type to be withdrawn
      */
-    public static void getResource(Resource resource) throws UnavailableResourceException{
+    public static void getResource(Resource resource) throws UnavailableResourceException {
 
         if (reservePools.get(resource) != 0) {
             reservePools.put(resource , reservePools.remove(resource) -1);

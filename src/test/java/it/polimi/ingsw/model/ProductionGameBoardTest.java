@@ -1,5 +1,10 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.model.exceptions.*;
+import it.polimi.ingsw.model.gameBoard.GameBoard;
+import it.polimi.ingsw.model.gameBoard.GameBoardInterface;
+import it.polimi.ingsw.model.gameBoard.ProductionGameBoard;
+import it.polimi.ingsw.model.productionCards.*;
 import org.junit.jupiter.api.*;
 import java.util.*;
 import static org.junit.jupiter.api.Assertions.*;

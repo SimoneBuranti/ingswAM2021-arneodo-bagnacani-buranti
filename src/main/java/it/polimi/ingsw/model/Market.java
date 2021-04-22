@@ -1,4 +1,10 @@
 package it.polimi.ingsw.model;
+import it.polimi.ingsw.model.exceptions.CallForCouncilException;
+import it.polimi.ingsw.model.exceptions.LastSpaceReachedException;
+import it.polimi.ingsw.model.exceptions.WhiteMarbleException;
+import it.polimi.ingsw.model.marbles.*;
+import it.polimi.ingsw.model.players.Player;
+
 import java.util.ArrayList;
 
 /**
@@ -108,7 +114,7 @@ public class Market {
      * @throws LastSpaceReachedException : the exception which is thrown when the faith indicator has reached the last papal space
      * @throws WhiteMarbleException : the exception which is thrown when the player has activated two white marble-type leader cards
      */
-    public void pushColumn(int chosenColumn,Player player) throws CallForCouncilException, LastSpaceReachedException, WhiteMarbleException {
+    public void pushColumn(int chosenColumn, Player player) throws CallForCouncilException, LastSpaceReachedException, WhiteMarbleException {
         int i;
         Marble temp;
         for(i=0; i<3; i++)

@@ -1,5 +1,12 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.model.exceptions.*;
+import it.polimi.ingsw.model.leaderCards.DeckLeaderCard;
+import it.polimi.ingsw.model.leaderCards.LeaderCardsGameBoardEmptyException;
+import it.polimi.ingsw.model.marbles.Marble;
+import it.polimi.ingsw.model.players.Player;
+import it.polimi.ingsw.model.productionCards.*;
+
 /**
  * this class represents the game
  */

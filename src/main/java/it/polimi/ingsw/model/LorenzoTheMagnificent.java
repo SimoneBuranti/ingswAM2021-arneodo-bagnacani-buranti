@@ -1,5 +1,8 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.model.exceptions.CallForCouncilException;
+import it.polimi.ingsw.model.exceptions.EndOfSolitaireGame;
+
 /**
  * this class represents the faith indicator of Lorenzo the magnificent for the game in solitary
  */
