@@ -7,17 +7,17 @@ import java.net.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class Server {
+public class ServerApp {
 
     static int portNumber = 1234;
 
     public static void main(String[] args) {
         int argc = args.length;
-        ServerSocket serverSocket = null;
+        ServerSocket serverSocket;
         Socket clientSocket = null;
         String hostName;
 
-        /*if (argc==2){
+        /*if (argc==2){   //--> Questo sarebbe carino ma dobbiamo capire come funziona json su intellij
             hostName = args[0];
             portNumber = Integer.parseInt(args[1]);
         }else{
