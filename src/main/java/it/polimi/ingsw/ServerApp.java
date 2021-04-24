@@ -1,51 +1,31 @@
 package it.polimi.ingsw;
 
-import it.polimi.ingsw.server.network.ClientHandler;
+import it.polimi.ingsw.server.network.*;
 
 import java.io.*;
-import java.net.*;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import com.google.gson.*;
 
 public class ServerApp {
 
-    static int portNumber = 1234;
-
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         int argc = args.length;
-        ServerSocket serverSocket;
-        Socket clientSocket = null;
-        String hostName;
 
-        /*if (argc==2){   //--> Questo sarebbe carino ma dobbiamo capire come funziona json su intellij
+        SocketServer socketServer;
+        String hostName;
+        int portNumber;
+
+        if (argc==2){
             hostName = args[0];
             portNumber = Integer.parseInt(args[1]);
+            socketServer = new SocketServer(hostName,portNumber);
+
         }else{
-
-        }*/
-
-        ExecutorService executor = Executors.newCachedThreadPool();
-
-        try {
-            serverSocket = new ServerSocket(portNumber);
-        } catch (IOException e) {
-            System.err.println(e.getMessage()); // Porta non disponibile
-            return;
+            Gson gson = new Gson();
+            socketServer = gson.fromJson(new FileReader("src/main/resources/defaultServer"),SocketServer.class);
         }
 
-        System.out.println("Server ready");
+        socketServer.create();
 
-        while (true) {
-            try {
-                Socket socket = serverSocket.accept();
-                System.out.println("Client connected");
-                executor.submit(new ClientHandler(socket));
-            } catch(IOException e) {
-                break; // Entrerei qui se serverSocket venisse chiuso
-            }
-        }
-
-        executor.shutdown();
     }
 
 }
