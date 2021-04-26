@@ -9,14 +9,12 @@ public class SocketServer {
 
     private final Server server;
     ServerSocket serverSocket;
-    private String hostName;
     private final int portNumber;
 
 
-    public SocketServer(String hostName, int port){
-        this.hostName = hostName;
+    public SocketServer(Server server, int port){
         this.portNumber = port;
-        this.server = new Server();
+        this.server = server;
     }
 
     public void create(){
@@ -45,10 +43,6 @@ public class SocketServer {
         executor.shutdown();
     }
 
-
-    public String getHostName() {
-        return hostName;
-    }
 
     public int getPortNumber() {
         return portNumber;

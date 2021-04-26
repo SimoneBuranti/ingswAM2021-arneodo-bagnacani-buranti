@@ -9,6 +9,10 @@ public class ClientHandler implements Runnable {
 
     private Socket socket;
 
+    private Scanner in;
+    private PrintWriter out;
+
+
     public ClientHandler(Socket socket) {
         this.socket = socket;
     }
@@ -17,8 +21,9 @@ public class ClientHandler implements Runnable {
     public void run() {
 
         try {
-            Scanner in = new Scanner(socket.getInputStream());
-            PrintWriter out = new PrintWriter(socket.getOutputStream());
+            this.in = new Scanner(socket.getInputStream());
+            this.out = new PrintWriter(socket.getOutputStream());
+
             String line;
 
             while (true) {
@@ -40,7 +45,8 @@ public class ClientHandler implements Runnable {
             System.err.println(e.getMessage());
         }
 
-
     }
+
+    public void addClient
 
 }
