@@ -4,6 +4,8 @@ import it.polimi.ingsw.server.controller.GameController;
 import it.polimi.ingsw.server.network.*;
 
 import java.io.*;
+import java.util.Map;
+
 import com.google.gson.*;
 
 public class ServerApp {
@@ -25,8 +27,8 @@ public class ServerApp {
 
         }else{
             Gson g = new Gson();
-            socketServer = g.fromJson(new FileReader("src/main/resources/defaultServer"),SocketServer.class);
-            socketServer = new SocketServer(server,1234);
+            Map map = g.fromJson(new FileReader("src/main/resources/defaultServer.json"),Map.class);
+            socketServer = new SocketServer(server,((Double) map.get("defaultServerPort")).intValue());
         }
 
         socketServer.create();

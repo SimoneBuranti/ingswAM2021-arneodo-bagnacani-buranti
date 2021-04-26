@@ -1,14 +1,61 @@
 package it.polimi.ingsw.server.network.messages;
+import it.polimi.ingsw.server.model.*;
+import it.polimi.ingsw.server.model.leaderCards.*;
 
-public abstract class message {
+import java.util.ArrayList;
+import java.util.Map;
 
-    import java.io.Serializable;
+public class message {
 
-    /**
-     * Abstract message class which must be extended by each message type.
-     * Both server and clients will communicate using this generic type of message.
-     * This avoids the usage of the "instance of" primitive.
-     */
+    private MessageType messageType;
+
+    private String nickname;
+
+    private int nOfPlayers;
+
+    private int missPlayer;
+
+    private ArrayList<Resource> resources;
+
+    private ArrayList<LeaderCard> initLeaderCards;
+
+    private int[] choosenLeaderCards;
+
+    private int productionCardNumber;
+
+    private int choosenRow;
+
+    private int choosenColumn;
+
+    private Resource firstInputResource;
+
+    private Resource secondInputResource;
+
+    private Resource outputResource;
+
+    private int howManyWhite;
+
+    private int leaderCardAction;
+
+    private int deckNumber;
+
+    private Map playerScores;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /*
     public abstract class Message implements Serializable {
         private static final long serialVersionUID = 6589184250663958343L;
 
@@ -35,5 +82,5 @@ public abstract class message {
                     ", messageType=" + messageType +
                     '}';
         }
-    }
+    }*/
 }

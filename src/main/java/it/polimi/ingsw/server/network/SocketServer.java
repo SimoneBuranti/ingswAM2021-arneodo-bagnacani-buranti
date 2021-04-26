@@ -47,4 +47,20 @@ public class SocketServer {
     public int getPortNumber() {
         return portNumber;
     }
+
+
+    /*
+    public void addClient(String nickname, ClientHandler clientHandler) {
+        server.addClient(nickname, clientHandler);
+    }
+
+
+    public void onMessageReceived(Message message) {
+        server.onMessageReceived(message);
+    }
+
+
+    public void onDisconnect(ClientHandler clientHandler) {
+        server.onDisconnect(clientHandler);
+    }*/
 }
