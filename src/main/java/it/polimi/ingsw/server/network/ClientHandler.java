@@ -48,7 +48,7 @@ public class ClientHandler implements Runnable {
     }
 
     public void addClient(){}
-
+    /*
     private void handleClientConnection() throws IOException {
         Server.LOGGER.info("Client connected from " + client.getInetAddress());
 
@@ -107,6 +107,6 @@ public class ClientHandler implements Runnable {
             Server.LOGGER.severe(e.getMessage());
             disconnect();
         }
-    }
+    }*/
 
 }

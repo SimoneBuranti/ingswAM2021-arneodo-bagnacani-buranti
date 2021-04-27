@@ -5,7 +5,7 @@ import it.polimi.ingsw.server.model.leaderCards.*;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class message {
+public class Message {
 
     private MessageType messageType;
 
@@ -42,18 +42,78 @@ public class message {
     private Map playerScores;
 
 
+    public Message(MessageType messageType, String nickname){
+        this.messageType = messageType;
+        this.nickname = nickname;
+    }
 
+    public MessageType getMessageType() {
+        return messageType;
+    }
 
+    public String getNickname() {
+        return nickname;
+    }
 
+    public int getnOfPlayers() {
+        return nOfPlayers;
+    }
 
+    public int getMissPlayer() {
+        return missPlayer;
+    }
 
+    public ArrayList<Resource> getResources() {
+        return resources;
+    }
 
+    public ArrayList<LeaderCard> getInitLeaderCards() {
+        return initLeaderCards;
+    }
 
+    public int[] getChoosenLeaderCards() {
+        return choosenLeaderCards;
+    }
 
+    public int getProductionCardNumber() {
+        return productionCardNumber;
+    }
 
+    public int getChoosenRow() {
+        return choosenRow;
+    }
 
+    public int getChoosenColumn() {
+        return choosenColumn;
+    }
 
+    public Resource getFirstInputResource() {
+        return firstInputResource;
+    }
 
+    public Resource getSecondInputResource() {
+        return secondInputResource;
+    }
+
+    public Resource getOutputResource() {
+        return outputResource;
+    }
+
+    public int getHowManyWhite() {
+        return howManyWhite;
+    }
+
+    public int getLeaderCardAction() {
+        return leaderCardAction;
+    }
+
+    public int getDeckNumber() {
+        return deckNumber;
+    }
+
+    public Map getPlayerScores() {
+        return playerScores;
+    }
 
     /*
     public abstract class Message implements Serializable {
