@@ -1,1 +1,2 @@
 {"specialStorage":"COIN","points":3,"requirements":{"resourceRequirement":"SHIELD"}}
+{"specialStorage":"SHIELD","points":3,"requirements":{"resourceRequirement":"SHIELD"}}

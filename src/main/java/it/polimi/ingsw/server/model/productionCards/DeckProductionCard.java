@@ -1,15 +1,19 @@
 package it.polimi.ingsw.server.model.productionCards;
 
+import it.polimi.ingsw.server.model.Resource;
 import it.polimi.ingsw.server.model.exceptions.EmptyException;
 import it.polimi.ingsw.server.model.exceptions.EndOfSolitaireGame;
-import it.polimi.ingsw.server.model.Resource;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Map;
 
 /**
  * this abstract class represents the production card deck
  */
 public abstract class DeckProductionCard {
+
+
+
 
     /**
      * this attribute collects the production cards of the deck

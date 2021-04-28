@@ -10,6 +10,18 @@ import it.polimi.ingsw.server.model.GameSolitaire;
  * represents the action marker that discards two blue production cards from level one deck up to level three deck
  */
 public class ActionMarkerProductionBlue implements ActionMarker{
+
+    /**
+     * type of object
+     */
+    private String type="ActionMarkerProductionBlue";
+
+
+    @Override
+    public String getType() {
+        return type;
+    }
+
     /**
      * the class constructor
      */

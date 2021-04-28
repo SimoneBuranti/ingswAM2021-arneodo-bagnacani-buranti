@@ -1,20 +1,28 @@
 package it.polimi.ingsw.server.model.productionCards;
 
+import com.google.gson.Gson;
 import it.polimi.ingsw.server.model.Mix;
 import it.polimi.ingsw.server.model.Resource;
 import it.polimi.ingsw.server.model.colours.Violet;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
 
 /**
  * this class represents the second level violet production card deck
  */
 public class DeckProductionCardTwoViolet extends DeckProductionCard {
-
+    /**
+     * file for initial configuration
+     */
+    FileWriter configDeckVioletTwo= null;
     /**
      * this constructor creates all the production cards and adds them to the list and shuffles the newly created deck
      */
     public DeckProductionCardTwoViolet (){
+        Gson g = new Gson();
+        String JSONArray;
 
         Violet violet= new Violet();
         deck = new ArrayList<>(4);
@@ -33,7 +41,7 @@ public class DeckProductionCardTwoViolet extends DeckProductionCard {
         violetFiveOut.put(Resource.ROCK, 0);
         violetFiveOut.put(Resource.SERVANT, 0);
         violetFiveOut.put(Resource.SHIELD, 0);
-        ProductionCard cardFive =new ProductionCard(violetFive,violetFiveIn,violetFiveOut, 5, 2, violet,2);
+        ProductionCard cardFive =new ProductionCard(violetFive,violetFiveIn,violetFiveOut, 5, 2, violet,2,5);
         deck.add(cardFive);
 
         Map<Resource,Integer> violetSix =new HashMap<>();
@@ -51,7 +59,7 @@ public class DeckProductionCardTwoViolet extends DeckProductionCard {
         violetSixOut.put(Resource.ROCK, 0);
         violetSixOut.put(Resource.SERVANT, 0);
         violetSixOut.put(Resource.SHIELD, 3);
-        ProductionCard cardSix =new ProductionCard(violetSix,violetSixIn,violetSixOut, 6, 2, violet, 0);
+        ProductionCard cardSix =new ProductionCard(violetSix,violetSixIn,violetSixOut, 6, 2, violet, 0,6);
         deck.add(cardSix);
 
 
@@ -71,7 +79,7 @@ public class DeckProductionCardTwoViolet extends DeckProductionCard {
         violetSevenOut.put(Resource.ROCK, 0);
         violetSevenOut.put(Resource.SERVANT, 0);
         violetSevenOut.put(Resource.SHIELD, 0);
-        ProductionCard cardSeven =new ProductionCard(violetSeven,violetSevenIn,violetSevenOut, 7, 2, violet, 2);
+        ProductionCard cardSeven =new ProductionCard(violetSeven,violetSevenIn,violetSevenOut, 7, 2, violet, 2,7);
         deck.add(cardSeven);
 
 
@@ -90,10 +98,40 @@ public class DeckProductionCardTwoViolet extends DeckProductionCard {
         violetEightOut.put(Resource.ROCK, 0);
         violetEightOut.put(Resource.SERVANT, 2);
         violetEightOut.put(Resource.SHIELD, 0);
-        ProductionCard cardEight =new ProductionCard(violetEight,violetEightIn,violetEightOut, 8, 2, violet, 1);
+        ProductionCard cardEight =new ProductionCard(violetEight,violetEightIn,violetEightOut, 8, 2, violet, 1,8);
         deck.add(cardEight);
 
         Mix.MIXED(deck);
+
+        List<Integer> list = new ArrayList<Integer>();
+        list.add(deck.get(0).getKey());
+        list.add(deck.get(1).getKey());
+        list.add(deck.get(2).getKey());
+        list.add(deck.get(3).getKey());
+
+        String jsonStr = g.toJson(list);
+
+        try {
+
+            // Constructs a FileWriter given a file name, using the platform's default charset
+            configDeckVioletTwo= new FileWriter("src/main/resources/configDeckVioletTwo.json");
+            configDeckVioletTwo.write(jsonStr);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        } finally {
+
+            try {
+                configDeckVioletTwo.flush();
+                configDeckVioletTwo.close();
+            } catch (IOException e) {
+
+                e.printStackTrace();
+            }
+
+
+        }
 
     }
 

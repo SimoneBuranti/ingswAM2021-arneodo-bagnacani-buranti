@@ -14,22 +14,31 @@ import java.io.IOException;
 public class AppForFile {
 
     public static void main(String[] args) throws FileNotFoundException {
-        FileWriter configGame = null;
+        FileWriter cofiguration = null;
         Gson g = new Gson();
 
 
         Requirements requirementsThree= new ResourceRequirement(Resource.SHIELD);
         LeaderCard leaderCardThree= new LeaderCardStorage(requirementsThree,3, Resource.COIN);
-
-
         String jsonString = g.toJson(leaderCardThree);
 
+        Requirements requirementsthwo= new ResourceRequirement(Resource.SHIELD);
+        LeaderCard leaderCardtwo= new LeaderCardStorage(requirementsthwo,3, Resource.SHIELD);
+        String jsonStrin = g.toJson(leaderCardtwo);
+
+        System.out.println(jsonStrin);
         System.out.println(jsonString);
         try {
 
             // Constructs a FileWriter given a file name, using the platform's default charset
-            configGame = new FileWriter("src/main/resources/configGame");
-            configGame.write(jsonString);
+            cofiguration = new FileWriter("src/main/resources/cofiguration.json");
+            cofiguration.write(jsonString);
+            cofiguration.write("\n");
+            cofiguration.write(jsonStrin);
+            cofiguration.write("");
+
+
+
 
 
         } catch (IOException e) {
@@ -38,12 +47,25 @@ public class AppForFile {
         } finally {
 
             try {
-                configGame.flush();
-                configGame.close();
+                cofiguration.flush();
+                cofiguration.close();
             } catch (IOException e) {
-                // TODO Auto-generated catch block
+
                 e.printStackTrace();
             }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     }

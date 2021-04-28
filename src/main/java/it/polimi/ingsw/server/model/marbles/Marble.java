@@ -18,4 +18,8 @@ public class Marble {
      *                                 having activated two white marble leader cards
      */
     public void giveResource(Player player) throws CallForCouncilException, LastSpaceReachedException, WhiteMarbleException {}
+    /**
+     * @return colour marble
+     */
+    public String getColour(){return null;};
 }

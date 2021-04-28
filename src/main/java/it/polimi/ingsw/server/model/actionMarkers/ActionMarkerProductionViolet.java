@@ -11,6 +11,18 @@ import it.polimi.ingsw.server.model.colours.Violet;
  */
 public class ActionMarkerProductionViolet implements ActionMarker{
 
+
+    /**
+     * type of object
+     */
+    private String type="ActionMarkerProductionViolet";
+
+
+    @Override
+    public String getType() {
+        return type;
+    }
+
     /**
      * the class constructor
      */

@@ -14,7 +14,7 @@ public class Mix {
      * @param <T> : generic object contained in the list
      */
     public static  <T> void MIXED (ArrayList<T> list) {
-        Collections.shuffle(list, new Random(4));
+        Collections.shuffle(list, new Random());
     }
 
 }

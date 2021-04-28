@@ -9,7 +9,16 @@ import it.polimi.ingsw.server.model.exceptions.BlockedWhiteMarbleEffectException
  */
 public class WhiteMarble extends Marble {
 
+    /**
+     * colour marble
+     */
+    private String colour= "white";
 
+
+    @Override
+    public String getColour() {
+        return colour;
+    }
     /**
      * this method adds the resource specified by the whiteExchange method to the player's buffer
      * if the player has activated a white marble leader card, otherwise it does nothing.

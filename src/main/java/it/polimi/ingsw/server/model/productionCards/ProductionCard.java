@@ -45,11 +45,18 @@ public class ProductionCard {
      */
     private final Colour colour;
 
+    /**
+     * this attribute indicates the key
+     */
+    private final int key;
+
+
+
 
     /**
      * Base Constructor of the class: every attribute is needed as a constructor parameter
      */
-    public ProductionCard(Map<Resource,Integer> cost, Map<Resource,Integer> in, Map<Resource,Integer> out, int points, int level, Colour colour, int faithPoint) {
+    public ProductionCard(Map<Resource,Integer> cost, Map<Resource,Integer> in, Map<Resource,Integer> out, int points, int level, Colour colour, int faithPoint, int key) {
         this.costProductionCard = cost;
         this.inputResources = in;
         this.outputResources = out;
@@ -57,6 +64,7 @@ public class ProductionCard {
         this.level = level;
         this.colour = colour;
         this.faithPoint = faithPoint;
+        this.key=key;
     }
 
 
@@ -126,5 +134,9 @@ public class ProductionCard {
      */
     public int isFaithPoint() {
         return faithPoint;
+    }
+
+    public int getKey() {
+        return key;
     }
 }

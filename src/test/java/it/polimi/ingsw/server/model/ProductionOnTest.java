@@ -385,7 +385,7 @@ public class ProductionOnTest {
         violetFourOut.put(Resource.ROCK, 2);
         violetFourOut.put(Resource.SERVANT, 0);
         violetFourOut.put(Resource.SHIELD, 0);
-        ProductionCard cardOne =new ProductionCard(violetFour,violetFourIn,violetFourOut, 4, 1, new Violet(), 1);
+        ProductionCard cardOne =new ProductionCard(violetFour,violetFourIn,violetFourOut, 4, 1, new Violet(), 1,1);
 
         gameBoard.setProductionCard(cardOne, 0);
 
@@ -462,7 +462,7 @@ public class ProductionOnTest {
         violetFourOut.put(Resource.ROCK, 2);
         violetFourOut.put(Resource.SERVANT, 0);
         violetFourOut.put(Resource.SHIELD, 0);
-        ProductionCard cardOne =new ProductionCard(violetFour,violetFourIn,violetFourOut, 4, 1, new Violet(), 1);
+        ProductionCard cardOne =new ProductionCard(violetFour,violetFourIn,violetFourOut, 4, 1, new Violet(), 1,1);
         gameBoard.setProductionCard(cardOne, 0);
 
         Map<Resource,Integer> blueSeven =new HashMap<>();
@@ -480,7 +480,7 @@ public class ProductionOnTest {
         blueSevenOut.put(Resource.ROCK, 0);
         blueSevenOut.put(Resource.SERVANT, 0);
         blueSevenOut.put(Resource.SHIELD, 2);
-        ProductionCard cardTwo =new ProductionCard(blueSeven, blueSevenIn, blueSevenOut, 7, 2, new Blue(), 2);
+        ProductionCard cardTwo =new ProductionCard(blueSeven, blueSevenIn, blueSevenOut, 7, 2, new Blue(), 2,2);
         gameBoard.setProductionCard(cardTwo, 0);
 
         assertEquals(1, gameBoard.resourceQuantity(Resource.COIN));
@@ -548,7 +548,7 @@ public class ProductionOnTest {
         violetFourOut.put(Resource.ROCK, 2);
         violetFourOut.put(Resource.SERVANT, 0);
         violetFourOut.put(Resource.SHIELD, 0);
-        ProductionCard cardOne =new ProductionCard(violetFour,violetFourIn,violetFourOut, 4, 1, new Violet(), 1);
+        ProductionCard cardOne =new ProductionCard(violetFour,violetFourIn,violetFourOut, 4, 1, new Violet(), 1,1);
         gameBoard.setProductionCard(cardOne, 0);
 
         Map<Resource,Integer> blueSeven =new HashMap<>();
@@ -566,7 +566,7 @@ public class ProductionOnTest {
         blueSevenOut.put(Resource.ROCK, 0);
         blueSevenOut.put(Resource.SERVANT, 0);
         blueSevenOut.put(Resource.SHIELD, 2);
-        ProductionCard cardTwo =new ProductionCard(blueSeven, blueSevenIn, blueSevenOut, 7, 2, new Blue(), 2);
+        ProductionCard cardTwo =new ProductionCard(blueSeven, blueSevenIn, blueSevenOut, 7, 2, new Blue(), 2,2);
         gameBoard.setProductionCard(cardTwo, 0);
 
         Map<Resource,Integer> greenTen =new HashMap<>();
@@ -584,7 +584,7 @@ public class ProductionOnTest {
         greenTenOut.put(Resource.ROCK, 2);
         greenTenOut.put(Resource.SERVANT, 0);
         greenTenOut.put(Resource.SHIELD, 2);
-        ProductionCard cardThree =new ProductionCard(greenTen, greenTenIn, greenTenOut, 10, 3, new Green(), 1);
+        ProductionCard cardThree =new ProductionCard(greenTen, greenTenIn, greenTenOut, 10, 3, new Green(), 1,3);
         gameBoard.setProductionCard(cardThree, 0);
 
         assertEquals(1, gameBoard.resourceQuantity(Resource.COIN));
@@ -659,7 +659,7 @@ public class ProductionOnTest {
         violetFourOut.put(Resource.ROCK, 2);
         violetFourOut.put(Resource.SERVANT, 0);
         violetFourOut.put(Resource.SHIELD, 0);
-        ProductionCard cardOne =new ProductionCard(violetFour,violetFourIn,violetFourOut, 4, 1, new Violet(), 1);
+        ProductionCard cardOne =new ProductionCard(violetFour,violetFourIn,violetFourOut, 4, 1, new Violet(), 1,1);
         gameBoard.setProductionCard(cardOne, 0);
 
         Map<Resource,Integer> blueSeven =new HashMap<>();
@@ -677,7 +677,7 @@ public class ProductionOnTest {
         blueSevenOut.put(Resource.ROCK, 0);
         blueSevenOut.put(Resource.SERVANT, 0);
         blueSevenOut.put(Resource.SHIELD, 2);
-        ProductionCard cardTwo =new ProductionCard(blueSeven, blueSevenIn, blueSevenOut, 7, 2, new Blue(), 2);
+        ProductionCard cardTwo =new ProductionCard(blueSeven, blueSevenIn, blueSevenOut, 7, 2, new Blue(), 2,2);
         gameBoard.setProductionCard(cardTwo, 0);
 
         assertEquals(0, gameBoard.resourceQuantity(Resource.COIN));
@@ -755,7 +755,7 @@ public class ProductionOnTest {
         violetFourOut.put(Resource.ROCK, 2);
         violetFourOut.put(Resource.SERVANT, 0);
         violetFourOut.put(Resource.SHIELD, 0);
-        ProductionCard cardOne =new ProductionCard(violetFour,violetFourIn,violetFourOut, 4, 1, new Violet(), 1);
+        ProductionCard cardOne =new ProductionCard(violetFour,violetFourIn,violetFourOut, 4, 1, new Violet(), 1,1);
         gameBoard.setProductionCard(cardOne, 0);
 
         Map<Resource,Integer> blueSeven =new HashMap<>();
@@ -773,7 +773,7 @@ public class ProductionOnTest {
         blueSevenOut.put(Resource.ROCK, 0);
         blueSevenOut.put(Resource.SERVANT, 0);
         blueSevenOut.put(Resource.SHIELD, 2);
-        ProductionCard cardTwo =new ProductionCard(blueSeven, blueSevenIn, blueSevenOut, 7, 2, new Blue(), 2);
+        ProductionCard cardTwo =new ProductionCard(blueSeven, blueSevenIn, blueSevenOut, 7, 2, new Blue(), 2,2);
         gameBoard.setProductionCard(cardTwo, 0);
 
         assertEquals(0, gameBoard.resourceQuantity(Resource.COIN));
@@ -1216,7 +1216,7 @@ public class ProductionOnTest {
         violetFourOut.put(Resource.ROCK, 2);
         violetFourOut.put(Resource.SERVANT, 0);
         violetFourOut.put(Resource.SHIELD, 0);
-        ProductionCard cardOne =new ProductionCard(violetFour,violetFourIn,violetFourOut, 4, 1, new Violet(), 1);
+        ProductionCard cardOne =new ProductionCard(violetFour,violetFourIn,violetFourOut, 4, 1, new Violet(), 1,1);
         gameBoard.setProductionCard(cardOne, 0);
 
         Map<Resource,Integer> blueSeven =new HashMap<>();
@@ -1234,7 +1234,7 @@ public class ProductionOnTest {
         blueSevenOut.put(Resource.ROCK, 0);
         blueSevenOut.put(Resource.SERVANT, 0);
         blueSevenOut.put(Resource.SHIELD, 2);
-        ProductionCard cardTwo =new ProductionCard(blueSeven, blueSevenIn, blueSevenOut, 7, 2, new Blue(), 2);
+        ProductionCard cardTwo =new ProductionCard(blueSeven, blueSevenIn, blueSevenOut, 7, 2, new Blue(), 2,2);
         gameBoard.setProductionCard(cardTwo, 0);
 
         Map<Resource,Integer> yellowThree =new HashMap<>();
@@ -1252,7 +1252,7 @@ public class ProductionOnTest {
         yellowThreeOut.put(Resource.ROCK, 1);
         yellowThreeOut.put(Resource.SERVANT, 1);
         yellowThreeOut.put(Resource.SHIELD, 0);
-        ProductionCard cardThree =new ProductionCard(yellowThree, yellowThreeIn, yellowThreeOut, 3, 1, new Yellow(), 0);
+        ProductionCard cardThree =new ProductionCard(yellowThree, yellowThreeIn, yellowThreeOut, 3, 1, new Yellow(), 0,3);
         gameBoard.setProductionCard(cardThree, 2);
 
 

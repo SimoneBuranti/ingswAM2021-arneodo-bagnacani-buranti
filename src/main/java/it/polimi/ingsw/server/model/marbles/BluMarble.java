@@ -1,12 +1,24 @@
 package it.polimi.ingsw.server.model.marbles;
 
-import it.polimi.ingsw.server.model.players.Player;
 import it.polimi.ingsw.server.model.Resource;
+import it.polimi.ingsw.server.model.players.Player;
 
 /**
  * this class represents the blue marble
  */
 public class BluMarble extends Marble {
+
+    /**
+     * colour marble
+     */
+    private String colour= "blue";
+
+
+    @Override
+    public String getColour() {
+        return colour;
+    }
+
 
     /**
      * this class adds a shield recourse to the player buffer by calling the addToBuffer method of the player class
@@ -15,5 +27,7 @@ public class BluMarble extends Marble {
     public void giveResource(Player player) {
         player.addToBuffer(Resource.SHIELD);
     }
+
+
 }
 

@@ -15,4 +15,9 @@ public interface ActionMarker{
      * @param game : the instantiated solitaire game a player is playing
      */
     void actionMarkerEffect(GameSolitaire game) throws EmptyException, EndOfSolitaireGame;
+
+    /**
+     * @return type of object
+     */
+   String getType();
 }

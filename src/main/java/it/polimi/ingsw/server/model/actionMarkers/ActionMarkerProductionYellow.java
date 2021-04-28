@@ -12,6 +12,18 @@ import it.polimi.ingsw.server.model.colours.Yellow;
 public class ActionMarkerProductionYellow implements ActionMarker{
 
     /**
+     * type of object
+     */
+    private String type="ActionMarkerProductionYellow";
+
+
+    @Override
+    public String getType() {
+        return type;
+    }
+
+
+    /**
      * the class constructor
      */
     public ActionMarkerProductionYellow() {

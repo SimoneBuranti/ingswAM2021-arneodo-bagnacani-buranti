@@ -1,20 +1,29 @@
 package it.polimi.ingsw.server.model.productionCards;
 
+import com.google.gson.Gson;
 import it.polimi.ingsw.server.model.Mix;
 import it.polimi.ingsw.server.model.Resource;
 import it.polimi.ingsw.server.model.colours.Violet;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
 
 /**
  * this class represents the third level violet production card deck
  */
 public class DeckProductionCardThreeViolet extends DeckProductionCard {
+        /**
+         * file for initial configuration
+         */
+        FileWriter configDeckVioletThree = null;
 
         /**
          * this constructor creates all the production cards and adds them to the list and shuffles the newly created deck
          */
         public  DeckProductionCardThreeViolet (){
+                Gson g = new Gson();
+                String JSONArray;
 
         Violet violet= new Violet();
         deck = new ArrayList<>(4);
@@ -34,7 +43,7 @@ public class DeckProductionCardThreeViolet extends DeckProductionCard {
         violetNineOut.put(Resource.ROCK, 0);
         violetNineOut.put(Resource.SERVANT, 0);
         violetNineOut.put(Resource.SHIELD, 0);
-        ProductionCard cardNine =new ProductionCard(violetNine,violetNineIn,violetNineOut, 9, 3, violet,2);
+        ProductionCard cardNine =new ProductionCard(violetNine,violetNineIn,violetNineOut, 9, 3, violet,2,9);
         deck.add(cardNine);
 
         Map<Resource,Integer> violetTen =new HashMap<>();
@@ -52,7 +61,7 @@ public class DeckProductionCardThreeViolet extends DeckProductionCard {
         violetTenOut.put(Resource.ROCK, 0);
         violetTenOut.put(Resource.SERVANT, 2);
         violetTenOut.put(Resource.SHIELD, 0);
-        ProductionCard cardTen =new ProductionCard(violetTen, violetTenIn, violetTenOut, 10, 3, violet, 1);
+        ProductionCard cardTen =new ProductionCard(violetTen, violetTenIn, violetTenOut, 10, 3, violet, 1,10);
         deck.add(cardTen);
 
 
@@ -72,7 +81,7 @@ public class DeckProductionCardThreeViolet extends DeckProductionCard {
         violetElevenOut.put(Resource.ROCK, 1);
         violetElevenOut.put(Resource.SERVANT, 0);
         violetElevenOut.put(Resource.SHIELD, 0);
-        ProductionCard cardEleven =new ProductionCard(violetEleven,violetElevenIn, violetElevenOut, 11, 3, violet, 3);
+        ProductionCard cardEleven =new ProductionCard(violetEleven,violetElevenIn, violetElevenOut, 11, 3, violet, 3,11);
         deck.add(cardEleven);
 
 
@@ -91,10 +100,39 @@ public class DeckProductionCardThreeViolet extends DeckProductionCard {
         violetTwEightOut.put(Resource.ROCK, 3);
         violetTwEightOut.put(Resource.SERVANT, 1);
         violetTwEightOut.put(Resource.SHIELD, 0);
-        ProductionCard cardTwelve =new ProductionCard(violetTwelve, violetTwelveIn, violetTwEightOut, 12, 3, violet, 0);
+        ProductionCard cardTwelve =new ProductionCard(violetTwelve, violetTwelveIn, violetTwEightOut, 12, 3, violet, 0,12);
         deck.add(cardTwelve);
 
         Mix.MIXED(deck);
+                List<Integer> list = new ArrayList<Integer>();
+                list.add(deck.get(0).getKey());
+                list.add(deck.get(1).getKey());
+                list.add(deck.get(2).getKey());
+                list.add(deck.get(3).getKey());
+
+                String jsonStr = g.toJson(list);
+
+                try {
+
+                        // Constructs a FileWriter given a file name, using the platform's default charset
+                        configDeckVioletThree= new FileWriter("src/main/resources/configDeckVioletThree.json");
+                        configDeckVioletThree.write(jsonStr);
+
+                } catch (IOException e) {
+                        e.printStackTrace();
+
+                } finally {
+
+                        try {
+                                configDeckVioletThree.flush();
+                                configDeckVioletThree.close();
+                        } catch (IOException e) {
+
+                                e.printStackTrace();
+                        }
+
+
+                }
 
     }
 

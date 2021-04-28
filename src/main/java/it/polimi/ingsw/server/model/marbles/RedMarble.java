@@ -9,6 +9,16 @@ import it.polimi.ingsw.server.model.exceptions.LastSpaceReachedException;
  */
 public class RedMarble extends Marble{
     /**
+     * colour marble
+     */
+    private String colour= "red";
+
+
+    @Override
+    public String getColour() {
+        return colour;
+    }
+    /**
      * this method moves forward the faith indicator of the player in the faithPath by calling the faithMove method of the player class
      * @param player : the one that has bought from the market
      * @throws CallForCouncilException : the exception that is thrown when the player reaches a papal space in the faithPath

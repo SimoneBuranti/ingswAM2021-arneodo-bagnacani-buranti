@@ -1,22 +1,31 @@
 package it.polimi.ingsw.server.model.productionCards;
 
+import com.google.gson.Gson;
 import it.polimi.ingsw.server.model.colours.Blue;
 import it.polimi.ingsw.server.model.Mix;
 import it.polimi.ingsw.server.model.Resource;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
 
 /**
  * this class represents the first level blue production card deck
  */
 public class DeckProductionCardOneBlu extends DeckProductionCard {
+    /**
+     * file for initial configuration
+     */
 
+    FileWriter configDeckBlueOne = null;
 
 
     /**
      * this constructor creates all the production cards and adds them to the list and shuffles the newly created deck
      */
     public DeckProductionCardOneBlu(){
+        Gson g = new Gson();
+        String JSONArray;
 
         Blue blue= new Blue();
         deck = new ArrayList<>(4);
@@ -35,7 +44,7 @@ public class DeckProductionCardOneBlu extends DeckProductionCard {
         blueOneOut.put(Resource.ROCK, 0);
         blueOneOut.put(Resource.SERVANT, 0);
         blueOneOut.put(Resource.SHIELD, 0);
-        ProductionCard cardThirtySeven=new ProductionCard(blueOne, blueOneIn, blueOneOut, 1, 1, blue ,1);
+        ProductionCard cardThirtySeven=new ProductionCard(blueOne, blueOneIn, blueOneOut, 1, 1, blue ,1,1);
         deck.add(cardThirtySeven);
 
         Map<Resource,Integer> blueTwo =new HashMap<>();
@@ -53,7 +62,7 @@ public class DeckProductionCardOneBlu extends DeckProductionCard {
         blueTwoOut.put(Resource.ROCK, 1);
         blueTwoOut.put(Resource.SERVANT, 0);
         blueTwoOut.put(Resource.SHIELD, 0);
-        ProductionCard cardThirtyEight =new ProductionCard(blueTwo, blueTwoIn,blueTwoOut, 2, 1, blue, 0);
+        ProductionCard cardThirtyEight =new ProductionCard(blueTwo, blueTwoIn,blueTwoOut, 2, 1, blue, 0, 2);
         deck.add(cardThirtyEight);
 
 
@@ -73,7 +82,7 @@ public class DeckProductionCardOneBlu extends DeckProductionCard {
         blueThreeOut.put(Resource.ROCK, 0);
         blueThreeOut.put(Resource.SERVANT, 1);
         blueThreeOut.put(Resource.SHIELD, 1);
-        ProductionCard cardThirtyNine =new ProductionCard(blueThree, blueThreeIn, blueThreeOut, 3, 1, blue, 0);
+        ProductionCard cardThirtyNine =new ProductionCard(blueThree, blueThreeIn, blueThreeOut, 3, 1, blue, 0,3);
         deck.add(cardThirtyNine);
 
 
@@ -92,14 +101,36 @@ public class DeckProductionCardOneBlu extends DeckProductionCard {
         blueFourOut.put(Resource.ROCK, 0);
         blueFourOut.put(Resource.SERVANT, 2);
         blueFourOut.put(Resource.SHIELD, 0);
-        ProductionCard cardForty =new ProductionCard(blueFour, blueFourIn,blueFourOut, 4, 1,blue, 1);
+        ProductionCard cardForty =new ProductionCard(blueFour, blueFourIn,blueFourOut, 4, 1,blue, 1,4);
         deck.add(cardForty);
 
         Mix.MIXED(deck);
 
-    }
+        List<Integer> list = new ArrayList<Integer>();
+        list.add(deck.get(0).getKey());
+        list.add(deck.get(1).getKey());
+        list.add(deck.get(2).getKey());
+        list.add(deck.get(3).getKey());
 
+        String jsonStr = g.toJson(list);
 
+        try {
 
+            // Constructs a FileWriter given a file name, using the platform's default charset
+            configDeckBlueOne = new FileWriter("src/main/resources/configDeckBlueOne.json");
+            configDeckBlueOne.write(jsonStr);
 
-}
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        } finally {
+
+            try {
+                configDeckBlueOne.flush();
+                configDeckBlueOne.close();
+            } catch (IOException e) {
+
+                e.printStackTrace();
+            }
+        }}}
+
