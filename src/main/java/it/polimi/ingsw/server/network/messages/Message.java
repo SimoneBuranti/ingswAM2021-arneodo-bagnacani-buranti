@@ -19,13 +19,13 @@ public class Message {
 
     private ArrayList<LeaderCard> initLeaderCards;
 
-    private int[] choosenLeaderCards;
+    private int[] chosenLeaderCards;
 
     private int productionCardNumber;
 
-    private int choosenRow;
+    private int chosenRow;
 
-    private int choosenColumn;
+    private int chosenColumn;
 
     private Resource firstInputResource;
 
@@ -47,6 +47,10 @@ public class Message {
         this.nickname = nickname;
     }
 
+    public Message(MessageType messageType){
+        this.messageType = messageType;
+    }
+
     public MessageType getMessageType() {
         return messageType;
     }
@@ -55,7 +59,7 @@ public class Message {
         return nickname;
     }
 
-    public int getnOfPlayers() {
+    public int getNOfPlayers() {
         return nOfPlayers;
     }
 
@@ -71,20 +75,20 @@ public class Message {
         return initLeaderCards;
     }
 
-    public int[] getChoosenLeaderCards() {
-        return choosenLeaderCards;
+    public int[] getChosenLeaderCards() {
+        return chosenLeaderCards;
     }
 
     public int getProductionCardNumber() {
         return productionCardNumber;
     }
 
-    public int getChoosenRow() {
-        return choosenRow;
+    public int getChosenRow() {
+        return chosenRow;
     }
 
-    public int getChoosenColumn() {
-        return choosenColumn;
+    public int getChosenColumn() {
+        return chosenColumn;
     }
 
     public Resource getFirstInputResource() {

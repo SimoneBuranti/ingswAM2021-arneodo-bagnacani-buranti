@@ -1,7 +1,7 @@
 package it.polimi.ingsw.server.network.messages;
 
 public enum MessageType {
-    CONNECTONREQUEST,
+    CONNECTIONREQUEST,
     OK,
     MESSAGEERRORNET,
     MESSAGECOMPLETE,
@@ -38,5 +38,7 @@ public enum MessageType {
     MESSAGEENDOFTURN,
     MESSAGECHANGECURRENTPLAYER,
     MESSAGELASTTURN,
-    MESSAGEENDGAME
+    MESSAGEENDGAME,
+    PING,
+    PONG
 }
