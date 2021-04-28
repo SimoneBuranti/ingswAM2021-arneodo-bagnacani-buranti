@@ -3,6 +3,10 @@ package it.polimi.ingsw.server.network;
 import java.io.*;
 import java.net.*;
 import java.util.*;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 
 public class ClientHandler implements Runnable {
@@ -26,6 +30,22 @@ public class ClientHandler implements Runnable {
 
             String line;
 
+            InetAddress clientAddress = socket.getInetAddress();
+            System.out.println(clientAddress.getHostAddress());
+            ScheduledExecutorService pinger = Executors.newSingleThreadScheduledExecutor();
+            pinger.scheduleAtFixedRate(() -> {
+                                                try {
+                                                    if(!clientAddress.isReachable(3000)){
+                                                        System.out.println("Sono entrato");
+                                                        disconnect();
+                                                        pinger.shutdown();
+                                                    }
+                                                    System.out.println("Non ho chiuso il pinger");
+                                                } catch (IOException e) {
+                                                    e.printStackTrace();
+                                                }
+                                            }, 0, 3000, TimeUnit.MILLISECONDS);
+
             while (true) {
                 line = in.nextLine();
 
@@ -38,13 +58,21 @@ public class ClientHandler implements Runnable {
                 }
             }
 
-            in.close();
-            out.close();
-            socket.close();
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }
 
+    }
+
+    public void disconnect() {
+        in.close();
+        out.close();
+        System.out.println("Ho disconnesso il client");
+        try {
+            socket.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void addClient(){}
@@ -110,3 +138,12 @@ public class ClientHandler implements Runnable {
     }*/
 
 }
+
+/*Thread pinger = new Thread(() ->{
+                InetAddress clientAddress = socket.getInetAddress();
+                try {
+                    clientAddress.isReachable(3000);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });*/

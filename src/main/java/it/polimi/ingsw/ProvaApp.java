@@ -1,20 +1,17 @@
 package it.polimi.ingsw;
 
 import com.google.gson.Gson;
-import it.polimi.ingsw.server.controller.GameController;
-import it.polimi.ingsw.server.network.Server;
-import it.polimi.ingsw.server.network.SocketServer;
-import it.polimi.ingsw.server.network.messages.Message;
-import it.polimi.ingsw.server.network.messages.MessageType;
+import it.polimi.ingsw.server.model.Game;
+import it.polimi.ingsw.server.model.GameSolitaire;
+import it.polimi.ingsw.server.network.messages.*;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.util.Map;
+import java.io.*;
 
 public class ProvaApp {
 
 
     public static void main(String[] args) throws FileNotFoundException {
+
 
         Gson g = new Gson();
         Message message = g.fromJson(new FileReader("src/main/resources/prova.json"),Message.class);
@@ -25,15 +22,34 @@ public class ProvaApp {
 
         System.out.println(message.getMessageType() +" "+ message.getResources().get(0));
 
-        Message msg = new Message(MessageType.USERNAME,"Ali");
 
-        String jsonString = g.toJson(msg);
+        /*String jsonString = g.toJson(msg);
 
         System.out.println(jsonString);
 
         message = g.fromJson(jsonString,Message.class);
 
         System.out.println(message.getMessageType() +" "+ message.getNickname());
+
+
+        File file = new File("src/main/resources/modelState.json");
+
+        System.out.println(file.exists());
+
+        try {
+            System.out.println(file.createNewFile());
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            BufferedWriter fileBufferInput = new BufferedWriter(new FileWriter(file));
+            fileBufferInput.write(g.toJson(msg));
+            fileBufferInput.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }*/
 
     }
 }
