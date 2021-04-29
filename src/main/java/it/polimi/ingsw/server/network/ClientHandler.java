@@ -15,22 +15,33 @@ import java.util.concurrent.TimeUnit;
 
 public class ClientHandler implements Runnable {
 
-    private Socket socketClient;
-    private SocketServer socketServer;
+    private final Socket socketClient;
+    //private SocketServer socketServer;
 
     //private Scanner in;
     //private PrintWriter out;
-    private final ObjectOutputStream out;
-    private final ObjectInputStream in;
+    //private final ObjectOutputStream out;
+    //private final ObjectInputStream in;
     private boolean isConnected;
 
+    private final InputStream inputStream;
+    private final OutputStream outputStream;
 
-    public ClientHandler(SocketServer socketServer, Socket client) throws IOException {
+    private final BufferedReader readStream;
+    private final PrintWriter writeStream;
+
+
+    public ClientHandler(Socket client) throws IOException {
         this.socketClient = client;
-        this.socketServer = socketServer;
+        //this.socketServer = socketServer;
         isConnected = true;
-        this.out = new ObjectOutputStream(socketClient.getOutputStream());
-        this.in = new ObjectInputStream(socketClient.getInputStream());
+        //this.out = new ObjectOutputStream(socketClient.getOutputStream());
+        //this.in = new ObjectInputStream(socketClient.getInputStream());
+        inputStream = socketClient.getInputStream();
+        outputStream = socketClient.getOutputStream();
+
+        readStream = new BufferedReader(new InputStreamReader(inputStream));
+        writeStream = new PrintWriter(outputStream);
     }
 
 
@@ -41,62 +52,60 @@ public class ClientHandler implements Runnable {
             //out = new PrintWriter(socket.getOutputStream());
 
             String line;
-
-            while (true) {
+            Gson g = new Gson();
+            Message msg;
+            int n = 0;
+            while (n<2000) {
+                //TimeUnit.SECONDS.sleep(30);
                 if(!sendPing())
                     isConnected = false;
-                line = (String) in.readObject();
-
-                if (line.equals("quit")) {
+                System.out.println(isConnected);
+                /*line = readStream.readLine();
+                msg = g.fromJson(line, Message.class);
+                if (msg.getMessageType() == MessageType.EXIT) {
                     System.out.println("Client disconnected");
                     break;
                 } else {
                     //out.println("ClientHandler: " + line);
-                    out.flush();
-                }
+                    writeStream.flush();
+                }*/
+                n++;
             }
 
         } catch (IOException e) {
             System.err.println(e.getMessage());
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
         }
 
     }
 
     public void disconnect() throws IOException {
-        in.close();
-        out.close();
+
+        if (inputStream != null) inputStream.close();
+        if (outputStream != null) outputStream.close();
         System.out.println("Ho disconnesso il client");
-        try {
-            socketClient.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        socketClient.close();
     }
 
     public boolean sendPing() throws IOException {
         String line;
         Gson g = new Gson();
         Message msg = new Message(MessageType.PING);
-        out.write(Integer.parseInt(g.toJson(msg)));
-
-        System.out.println("wiurfuiwgufiw");
+        writeStream.println(g.toJson(msg));
+        writeStream.flush();
         for(int i = 0; i < 30; i++){
             try {
                 TimeUnit.MILLISECONDS.sleep(100);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            try {
-                line = (String) in.readObject();
+            if(readStream.ready()) {
+                line = readStream.readLine();
                 msg = g.fromJson(line, Message.class);
                 System.out.println(msg.getMessageType());
-                if(msg.getMessageType() == MessageType.PONG)
+                if (msg.getMessageType() == MessageType.PONG)
                     return true;
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            }
+            }else
+                return false;
         }
 
         return false;

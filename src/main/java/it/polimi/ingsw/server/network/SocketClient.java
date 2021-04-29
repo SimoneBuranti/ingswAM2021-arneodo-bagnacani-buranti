@@ -12,9 +12,11 @@ import java.util.concurrent.Executors;
 
 public class SocketClient {
     private final Socket serverSocket;
-    private final ObjectOutputStream out;
-    private final ObjectInputStream in;
-    private final ExecutorService readExecutionQueue;
+    //private final ObjectOutputStream out;
+    //private final ObjectInputStream in;
+    //private final ExecutorService readExecutionQueue;
+    private BufferedReader in;
+    private PrintWriter out;
     //private Scanner in;
     //private PrintWriter out;
     /*Scanner keyboard = new Scanner(System.in);
@@ -24,9 +26,11 @@ public class SocketClient {
 
     public SocketClient(String address, int port) throws IOException {
         this.serverSocket = new Socket(address, port);
-        this.out = new ObjectOutputStream(serverSocket.getOutputStream());
-        this.in = new ObjectInputStream(serverSocket.getInputStream());
-        this.readExecutionQueue = Executors.newSingleThreadExecutor();
+        //this.out = new ObjectOutputStream(serverSocket.getOutputStream());
+        //this.in = new ObjectInputStream(serverSocket.getInputStream());
+        //this.readExecutionQueue = Executors.newSingleThreadExecutor();
+        in = new BufferedReader(new InputStreamReader(serverSocket.getInputStream()));
+        out = new PrintWriter(serverSocket.getOutputStream(), true);
         //in = new Scanner(serverSocket.getInputStream());
         //out = new PrintWriter(serverSocket.getOutputStream());
         /*this.out = new PrintWriter(serverSocket.getOutputStream(), true);
@@ -36,7 +40,22 @@ public class SocketClient {
 
 
     public void readMessage(){
-        readExecutionQueue.execute(() -> {
+
+        while(true){
+            try {
+                String line;
+                Gson g = new Gson();
+                line = in.readLine();
+                Message msg = g.fromJson(line, Message.class);
+                if (msg != null && msg.getMessageType() == MessageType.PING)
+                    System.out.println(msg.getMessageType());
+                    sendMessage(MessageType.PONG);
+
+            } catch (IOException e) {
+                break;
+            }
+        }
+        /*readExecutionQueue.execute(() -> {
             while (!readExecutionQueue.isShutdown()) {
                 String line;
                 Gson g = new Gson();
@@ -52,7 +71,7 @@ public class SocketClient {
                         e.printStackTrace();
                     }
             }
-        });
+        });*/
     }
 
         /*while(true){
@@ -75,10 +94,6 @@ public class SocketClient {
     public void sendMessage(MessageType messageType){
         Gson g = new Gson();
         Message msg = new Message(messageType);
-                try {
-                    out.write(Integer.parseInt(g.toJson(msg)));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
+        out.println(g.toJson(msg));
+    }
 }

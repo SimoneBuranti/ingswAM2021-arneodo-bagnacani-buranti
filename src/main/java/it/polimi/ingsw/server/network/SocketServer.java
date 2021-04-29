@@ -34,7 +34,7 @@ public class SocketServer {
             try {
                 Socket socket = serverSocket.accept();
                 System.out.println("Client connected");
-                executor.submit(new ClientHandler(this, socket));
+                executor.submit(new ClientHandler(socket));
             } catch(IOException e) {
                 break; // Entrerei qui se serverSocket venisse chiuso
             }
