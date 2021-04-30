@@ -8,7 +8,7 @@ public class KeepResourcesMessage extends Message{
     private final MessageType messageType = MessageType.KEEPRESOURCES;
 
     private List<Resource> choosenResources;
-
+@Override
     public MessageType getMessageType() {
         return messageType;
     }

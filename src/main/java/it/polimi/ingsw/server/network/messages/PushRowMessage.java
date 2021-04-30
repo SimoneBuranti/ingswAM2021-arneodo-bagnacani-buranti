@@ -4,7 +4,7 @@ public class PushRowMessage extends Message{
     private final MessageType messageType = MessageType.PUSHROW;
 
     private int rowNumber;
-
+@Override
     public MessageType getMessageType() {
         return messageType;
     }

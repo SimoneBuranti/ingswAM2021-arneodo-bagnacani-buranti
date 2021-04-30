@@ -11,4 +11,9 @@ public class SetPapalsMessage extends Message{
     public void setCurrCall(int currCall) {
         this.currCall = currCall;
     }
+
+    @Override
+    public MessageType getMessageType() {
+        return messageType;
+    }
 }

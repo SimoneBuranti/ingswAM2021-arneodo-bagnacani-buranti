@@ -22,4 +22,9 @@ public class OpponentActivateLeaderCardMessage extends Message{
     public void setLeaderCard(LeaderCard leaderCard) {
         this.leaderCard = leaderCard;
     }
+
+    @Override
+    public MessageType getMessageType() {
+        return messageType;
+    }
 }

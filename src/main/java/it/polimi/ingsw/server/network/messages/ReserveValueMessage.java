@@ -15,4 +15,9 @@ public class ReserveValueMessage extends Message{
     public void setReserve(Map<Resource, Integer> reserve) {
         this.reserve = reserve;
     }
+
+    @Override
+    public MessageType getMessageType() {
+        return messageType;
+    }
 }

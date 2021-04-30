@@ -1,7 +1,5 @@
 package it.polimi.ingsw.server.network.messages;
 
-import it.polimi.ingsw.server.model.Resource;
-
 import java.util.Map;
 
 public class EndGameMessage extends Message{
@@ -16,4 +14,8 @@ public class EndGameMessage extends Message{
         this.scoreOfPlayers = scoreOfPlayers;
     }
 
+    @Override
+    public MessageType getMessageType() {
+        return messageType;
+    }
 }

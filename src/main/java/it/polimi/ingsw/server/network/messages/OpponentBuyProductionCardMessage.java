@@ -20,4 +20,9 @@ public class OpponentBuyProductionCardMessage extends Message{
     public void setProductionDeck(int productionDeck) {
         this.productionDeck = productionDeck;
     }
+
+    @Override
+    public MessageType getMessageType() {
+        return messageType;
+    }
 }
