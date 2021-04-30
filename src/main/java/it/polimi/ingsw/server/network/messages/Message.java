@@ -5,9 +5,119 @@ import it.polimi.ingsw.server.model.leaderCards.*;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class Message {
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
-    private MessageType messageType;
+public abstract class Message{
+    static Gson gson = new Gson();
+    private static JsonParser jsonParser = new JsonParser();
+
+    /**
+     * Contains the method to deserialize messages from Json and to serialize
+     * object in Json messages.
+     *
+     *
+     * @param jsonMsg the json msg
+     * @return the abstract message
+     */
+    public static Message deserialize (String jsonMsg) {
+        JsonObject jsonObj = jsonParser.parse(jsonMsg).getAsJsonObject();
+
+        String msgTopicString = jsonObj.get("topic").getAsString();
+        if (msgTopicString == null) throw new IllegalArgumentException("Missing message topic");
+
+        MessageType topic = MessageType.valueOf(msgTopicString);
+
+        switch (topic) {
+            case CHOOSE_NICKNAME:
+                return gson.fromJson(jsonObj, ChooseNicknameMessage.class);
+            case GAME_SETTINGS:
+                return gson.fromJson(jsonObj, GameSettingsMessage.class);
+            case ACTION_START:
+                return gson.fromJson(jsonObj, ActionStartMessage.class);
+
+            case ACTION:
+                return gson.fromJson(jsonObj, ActionMessage.class);
+
+            case ACTION_END:
+                return gson.fromJson(jsonObj, ActionEndMessage.class);
+
+            case END_TURN:
+                return gson.fromJson(jsonObj, EndTurnMessage.class);
+
+            case GAME_STATE:
+                return gson.fromJson(jsonObj, GameStateMessage.class);
+            case END_GAME:
+                return gson.fromJson(jsonObj, EndGameMessage.class);
+
+            case ERROR:
+                return gson.fromJson(jsonObj, ErrorMessage.class);
+            default:
+                throw new IllegalArgumentException("Invalid topic " + msgTopicString);
+        }
+    }
+
+    /**
+     * Serialize string.
+     *
+     * @return the string
+     */
+    public String serialize () {
+        return gson.toJson(this);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   /* private MessageType messageType;
 
     private String nickname;
 
@@ -119,32 +229,5 @@ public class Message {
         return playerScores;
     }
 
-    /*
-    public abstract class Message implements Serializable {
-        private static final long serialVersionUID = 6589184250663958343L;
 
-        private final String nickname;
-        private final MessageType messageType;
-
-        Message(String nickname, MessageType messageType) {
-            this.nickname = nickname;
-            this.messageType = messageType;
-        }
-
-        public String getNickname() {
-            return nickname;
-        }
-
-        public MessageType getMessageType() {
-            return messageType;
-        }
-
-        @Override
-        public String toString() {
-            return "Message{" +
-                    "nickname=" + nickname +
-                    ", messageType=" + messageType +
-                    '}';
-        }
-    }*/
-}
+}*/
