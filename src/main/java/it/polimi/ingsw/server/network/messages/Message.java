@@ -30,7 +30,7 @@ public abstract class Message{
         MessageType topic = MessageType.valueOf(msgTopicString);
 
         switch (topic) {
-            case CHOOSE_NICKNAME:
+            /*case CHOOSE_NICKNAME:
                 return gson.fromJson(jsonObj, ChooseNicknameMessage.class);
             case GAME_SETTINGS:
                 return gson.fromJson(jsonObj, GameSettingsMessage.class);
@@ -54,7 +54,7 @@ public abstract class Message{
             case ERROR:
                 return gson.fromJson(jsonObj, ErrorMessage.class);
             default:
-                throw new IllegalArgumentException("Invalid topic " + msgTopicString);
+                throw new IllegalArgumentException("Invalid topic " + msgTopicString);*/
         }
     }
 
