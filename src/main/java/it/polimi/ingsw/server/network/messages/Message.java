@@ -53,7 +53,7 @@ public abstract class Message{
                 return gson.fromJson(jsonObj, PickedLeaderCardsMessage.class);
 
             case BASEPRODUCTIONON:
-                return gson.fromJson(jsonObj, BaseProdcutionOnMessage.class);
+                return gson.fromJson(jsonObj, BaseProductionOnMessage.class);
 
             case EXTRAPRODUCTIONON:
                 return gson.fromJson(jsonObj, ExtraProductionOnMessage.class);
@@ -167,6 +167,11 @@ public abstract class Message{
     public String serialize () {
         return gson.toJson(this);
     }
+
+
+    /**
+     */
+    public abstract MessageType getMessageType();
 }
 
 

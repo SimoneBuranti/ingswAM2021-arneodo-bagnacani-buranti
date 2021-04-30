@@ -12,4 +12,9 @@ public class OpponentFaithMoveMessage extends Message{
     public void setNickname(String nickname) {
         this.nickname = nickname;
     }
+
+    @Override
+    public MessageType getMessageType() {
+        return messageType;
+    }
 }

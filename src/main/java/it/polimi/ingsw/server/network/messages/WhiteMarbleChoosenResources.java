@@ -8,7 +8,7 @@ public class WhiteMarbleChoosenResources extends Message {
     private final MessageType messageType = MessageType.WHITEMARBLECHOOSENRESOURCES;
 
     private List<Resource> choosenResources;
-
+@Override
     public MessageType getMessageType() {
         return messageType;
     }

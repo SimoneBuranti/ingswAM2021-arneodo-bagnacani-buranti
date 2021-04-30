@@ -8,9 +8,10 @@ public class OkMessage extends Message {
     private final MessageType messageType=MessageType.OK;
 
     /**
-     * @return type of message
-     */
+     */@Override
     public MessageType getMessageType() {
         return messageType;
     }
+
+
 }

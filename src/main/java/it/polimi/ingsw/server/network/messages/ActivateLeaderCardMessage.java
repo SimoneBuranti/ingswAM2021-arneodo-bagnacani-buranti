@@ -6,6 +6,7 @@ public class ActivateLeaderCardMessage extends Message {
 
     private int cardNumber;
 
+    @Override
     public MessageType getMessageType() {
         return messageType;
     }

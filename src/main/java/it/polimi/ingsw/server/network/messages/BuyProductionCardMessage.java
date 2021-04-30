@@ -11,4 +11,9 @@ public class BuyProductionCardMessage extends Message{
     public void setDeckNumber(int deckNumber){
         this.deckNumber = deckNumber;
     }
+
+    @Override
+    public MessageType getMessageType() {
+        return messageType;
+    }
 }

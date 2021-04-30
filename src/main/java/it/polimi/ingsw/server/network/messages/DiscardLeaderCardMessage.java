@@ -4,7 +4,7 @@ public class DiscardLeaderCardMessage extends Message {
     private final MessageType messageType = MessageType.DISCARDLEADERCARD;
 
     private int cardNumber;
-
+@Override
     public MessageType getMessageType() {
         return messageType;
     }

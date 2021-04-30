@@ -13,4 +13,9 @@ public class LorenzoActionMessage extends Message{
     public void setActionMarker(ActionMarker actionMarker) {
         this.actionMarker = actionMarker;
     }
+
+    @Override
+    public MessageType getMessageType() {
+        return messageType;
+    }
 }
