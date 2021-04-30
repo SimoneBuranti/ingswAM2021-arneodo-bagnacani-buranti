@@ -1,10 +1,4 @@
 package it.polimi.ingsw.server.network.messages;
-import it.polimi.ingsw.server.model.*;
-import it.polimi.ingsw.server.model.leaderCards.*;
-
-import java.util.ArrayList;
-import java.util.Map;
-
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -30,29 +24,70 @@ public abstract class Message{
         MessageType topic = MessageType.valueOf(msgTopicString);
 
         switch (topic) {
-            case CHOOSE_NICKNAME:
-                return gson.fromJson(jsonObj, ChooseNicknameMessage.class);
-            case GAME_SETTINGS:
-                return gson.fromJson(jsonObj, GameSettingsMessage.class);
-            case ACTION_START:
-                return gson.fromJson(jsonObj, ActionStartMessage.class);
+            case CONNECTIONREQUEST:
+                return gson.fromJson(jsonObj, MessageConnectionRequest.class);
+            case OK:
+                return gson.fromJson(jsonObj, MessageOk.class);
 
-            case ACTION:
-                return gson.fromJson(jsonObj, ActionMessage.class);
+            case MESSAGEERRORNET:
+                return gson.fromJson(jsonObj, MessageErrorNet.class);
 
-            case ACTION_END:
-                return gson.fromJson(jsonObj, ActionEndMessage.class);
+            case MESSAGECOMPLETE:
+                return gson.fromJson(jsonObj, MessageComplete.class);
 
-            case END_TURN:
-                return gson.fromJson(jsonObj, EndTurnMessage.class);
+            case MESSAGEFORNPLAYERS:
+                return gson.fromJson(jsonObj, MessageForNPlayers.class);
 
-            case GAME_STATE:
-                return gson.fromJson(jsonObj, GameStateMessage.class);
-            case END_GAME:
-                return gson.fromJson(jsonObj, EndGameMessage.class);
+            case PLAYERNUMBER:
+                return gson.fromJson(jsonObj, MessageForNPlayers.class);
 
-            case ERROR:
-                return gson.fromJson(jsonObj, ErrorMessage.class);
+            case USERNAME:
+                return gson.fromJson(jsonObj, MessageUsername.class);
+            case MESSAGENONICKNAME:
+                return gson.fromJson(jsonObj, MessageNoNickname.class);
+
+            case CHOOSENINTERFACE:
+                return gson.fromJson(jsonObj, MessageChoosenInterface.class);
+
+            case EXIT:
+                return gson.fromJson(jsonObj, MessageExit.class);
+
+            case MESSAGEINITFCLIENT:
+                return gson.fromJson(jsonObj, MessageInitClient.class);
+
+            case MESSAGEINITFSERVER:
+                return gson.fromJson(jsonObj, MessageInitServer.class);
+
+            case KEEPLEADERCARDS:
+                return gson.fromJson(jsonObj, MessageKeepLeaderCards.class);
+            case PRODUCTIONON:
+                return gson.fromJson(jsonObj, MessageProductionOn.class);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             default:
                 throw new IllegalArgumentException("Invalid topic " + msgTopicString);
         }
