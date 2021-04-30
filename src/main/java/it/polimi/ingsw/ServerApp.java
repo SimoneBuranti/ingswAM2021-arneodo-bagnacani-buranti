@@ -1,12 +1,13 @@
 package it.polimi.ingsw;
 
+import com.google.gson.Gson;
 import it.polimi.ingsw.server.controller.GameController;
-import it.polimi.ingsw.server.network.*;
+import it.polimi.ingsw.server.network.Server;
+import it.polimi.ingsw.server.network.SocketServer;
 
-import java.io.*;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.Map;
-
-import com.google.gson.*;
 
 public class ServerApp {
 
@@ -21,7 +22,7 @@ public class ServerApp {
         Server server = new Server(gameController);
 
         if (argc==2){
-            //hostName = args[0];
+
             portNumber = Integer.parseInt(args[1]);
             socketServer = new SocketServer(server,portNumber);
 
@@ -33,10 +34,6 @@ public class ServerApp {
 
         socketServer.create();
 
-
-
-        /*Thread thread = new Thread(socketServer, "socketserver_");
-        thread.start();*/
     }
 
 }
