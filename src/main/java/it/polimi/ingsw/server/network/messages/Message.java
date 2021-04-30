@@ -70,6 +70,50 @@ public abstract class Message{
             case DOUBLEEXTRAPRODUCTIONON:
                 return gson.fromJson(jsonObj, DoubleProductionOnMessage.class);
 
+            case ALREADYACTIVATEDERROR:
+                return gson.fromJson(jsonObj, AlreadyActivatedErrorMessage.class);
+
+            case WRONGCOLUMNERROR:
+                return gson.fromJson(jsonObj, WrongColumnErrorMessage.class);
+
+            case  NOTAVAILABLERESOURCESERROR:
+                return gson.fromJson(jsonObj, NotAvailableResourcesErrorMessage.class);
+
+            case ENDOFPRODUCTION:
+                return gson.fromJson(jsonObj, EndOfProductionMessage.class);
+
+            case PUSHROW:
+                return gson.fromJson(jsonObj, PushRowMessage.class);
+
+            case PUSHCOLUMN:
+                return gson.fromJson(jsonObj, PushColumnMessage.class);
+
+            case DOUBLEWHITEMARBLEEFFECT:
+                return gson.fromJson(jsonObj, DoubleWhiteMarbleEffectMessage.class);
+
+            case WHITEMARBLECHOOSENRESOURCES:
+                return gson.fromJson(jsonObj, WhiteMarbleChoosenResources.class);
+
+            case NOTENOUGHSPACEERROR:
+                return gson.fromJson(jsonObj, NotEnoughSpaceErrorMessage.class);
+
+            case KEEPRESOURCES:
+                return gson.fromJson(jsonObj, KeepResourcesMessage.class);
+
+            case DISCARDLEADERCARD:
+                return gson.fromJson(jsonObj, DiscardLeaderCardMessage.class);
+
+            case ACTIVATELEADERCARD:
+                return gson.fromJson(jsonObj, ActivateLeaderCardMessage.class);
+
+            case ALREADYUSEDLEADERCARDERROR:
+                return gson.fromJson(jsonObj, AlreadyUsedLeaderCardErrorMessage.class);
+
+            case REQUIREMENTSERROR:
+                return gson.fromJson(jsonObj, RequirementsErrorMessage.class);
+
+
+
 
 
 
