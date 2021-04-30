@@ -112,35 +112,47 @@ public abstract class Message{
             case REQUIREMENTSERROR:
                 return gson.fromJson(jsonObj, RequirementsErrorMessage.class);
 
+            case BUYPRODUCTIONCARD:
+                return gson.fromJson(jsonObj, BuyProductionCardMessage.class);
 
+            case ENDOFTURN:
+                return gson.fromJson(jsonObj, EndOfTurnMessage.class);
 
+            case CHANGECURRENTPLAYER:
+                return gson.fromJson(jsonObj, ChangeCurrentPlayerMessage.class);
 
+            case LASTTURN:
+                return gson.fromJson(jsonObj, LastTurnMessage.class);
 
+            case ENDGAME:
+                return gson.fromJson(jsonObj, EndGameMessage.class);
 
+            case OPPONENTFAITHMOVE:
+                return gson.fromJson(jsonObj, OpponentFaithMoveMessage.class);
 
+            case OPPONENTBUYPRODCARD:
+                return gson.fromJson(jsonObj, OpponentBuyProductionCardMessage.class);
 
+            case OPPONENTDISCARDLC:
+                return gson.fromJson(jsonObj, OpponentDiscardLeaderCardMessage.class);
 
+            case OPPONENTACTIVATELC:
+                return gson.fromJson(jsonObj, OpponentActivateLeaderCardMessage.class);
 
+            case SETPAPALS:
+                return gson.fromJson(jsonObj, SetPapalsMessage.class);
 
+            case LORENZOSACTION:
+                return gson.fromJson(jsonObj, LorenzoActionMessage.class);
 
+            case RESERVEVALUE:
+                return gson.fromJson(jsonObj, ReserveValueMessage.class);
 
+            case PING:
+                return gson.fromJson(jsonObj, PingMessage.class);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            case PONG:
+                return gson.fromJson(jsonObj, PongMessage.class);
 
             default:
                 throw new IllegalArgumentException("Invalid topic " + msgTopicString);
