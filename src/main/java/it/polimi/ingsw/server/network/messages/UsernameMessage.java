@@ -1,4 +1,4 @@
 package it.polimi.ingsw.server.network.messages;
 
-public class MessageInitClient extends Message{
+public class UsernameMessage extends Message{
 }

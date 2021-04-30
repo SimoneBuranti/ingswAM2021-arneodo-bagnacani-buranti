@@ -1,4 +1,4 @@
 package it.polimi.ingsw.server.network.messages;
 
-public class MessageErrorNet extends Message{
+public class ProductionOnMessage extends Message {
 }

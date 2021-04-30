@@ -24,44 +24,54 @@ public abstract class Message{
         MessageType topic = MessageType.valueOf(msgTopicString);
 
         switch (topic) {
-            case CONNECTIONREQUEST:
-                return gson.fromJson(jsonObj, MessageConnectionRequest.class);
+
             case OK:
-                return gson.fromJson(jsonObj, MessageOk.class);
-
-            case MESSAGEERRORNET:
-                return gson.fromJson(jsonObj, MessageErrorNet.class);
-
-            case MESSAGECOMPLETE:
-                return gson.fromJson(jsonObj, MessageComplete.class);
-
-            case MESSAGEFORNPLAYERS:
-                return gson.fromJson(jsonObj, MessageForNPlayers.class);
-
-            case PLAYERNUMBER:
-                return gson.fromJson(jsonObj, MessageForNPlayers.class);
-
-            case USERNAME:
-                return gson.fromJson(jsonObj, MessageUsername.class);
-            case MESSAGENONICKNAME:
-                return gson.fromJson(jsonObj, MessageNoNickname.class);
-
-            case CHOOSENINTERFACE:
-                return gson.fromJson(jsonObj, MessageChoosenInterface.class);
+                return gson.fromJson(jsonObj, OkMessage.class);
 
             case EXIT:
-                return gson.fromJson(jsonObj, MessageExit.class);
+                return gson.fromJson(jsonObj, ExitMessage.class);
 
-            case MESSAGEINITFCLIENT:
-                return gson.fromJson(jsonObj, MessageInitClient.class);
+            case  COMPLETERUNNINGMATCHERROR:
+                return gson.fromJson(jsonObj, CompleteRunningMatchErrorMessage.class);
 
-            case MESSAGEINITFSERVER:
-                return gson.fromJson(jsonObj, MessageInitServer.class);
+            case MESSAGEFORNPLAYERS:
+                return gson.fromJson(jsonObj, NPlayersMessage.class);
+
+            case PLAYERNUMBER:
+                return gson.fromJson(jsonObj, NumberPlayerMessage.class);
+
+            case USERNAME:
+                return gson.fromJson(jsonObj, UsernameMessage.class);
+
+            case NICKNAMENOTFOUNDERROR:
+                return gson.fromJson(jsonObj, NoNicknameMessage.class);
+
+            case INITIALRESOURCES:
+                return gson.fromJson(jsonObj, InitialResourcesMessage.class);
+
+            case PICKEDLEADERCARDS:
+                return gson.fromJson(jsonObj, PickedLeaderCardsMessage.class);
+
+            case BASEPRODUCTIONON:
+                return gson.fromJson(jsonObj, BaseProdcutionOnMessage.class);
+
+            case EXTRAPRODUCTIONON:
+                return gson.fromJson(jsonObj, ExtraProductionOnMessage.class);
 
             case KEEPLEADERCARDS:
-                return gson.fromJson(jsonObj, MessageKeepLeaderCards.class);
+                return gson.fromJson(jsonObj, KeepLeaderCardsMessage.class);
+
             case PRODUCTIONON:
-                return gson.fromJson(jsonObj, MessageProductionOn.class);
+                return gson.fromJson(jsonObj, ProductionOnMessage.class);
+
+            case ALREADYEXISTINGNICKNAMEERROR:
+                return gson.fromJson(jsonObj, AlreadyExistingNickNameErrorMessage.class);
+
+            case DOUBLEEXTRAPRODUCTIONON:
+                return gson.fromJson(jsonObj, DoubleProductionOnMessage.class);
+
+
+
 
 
 
