@@ -1,9 +1,7 @@
 package it.polimi.ingsw;
 
 import com.google.gson.Gson;
-import it.polimi.ingsw.server.model.Game;
-import it.polimi.ingsw.server.model.GameSolitaire;
-import it.polimi.ingsw.server.network.messages.*;
+import it.polimi.ingsw.messages.*;
 
 import java.io.*;
 

@@ -1,8 +1,8 @@
 package it.polimi.ingsw.server.network;
 
 import com.google.gson.Gson;
-import it.polimi.ingsw.server.network.messages.Message;
-import it.polimi.ingsw.server.network.messages.MessageType;
+import it.polimi.ingsw.messages.Message;
+import it.polimi.ingsw.messages.MessageType;
 
 import java.io.BufferedReader;
 import java.io.IOException;
