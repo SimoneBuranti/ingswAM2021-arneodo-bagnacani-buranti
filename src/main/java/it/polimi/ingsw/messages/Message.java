@@ -20,12 +20,12 @@ public abstract class Message{
     public static Message deserialize (String jsonMsg) {
         JsonObject jsonObj = jsonParser.parse(jsonMsg).getAsJsonObject();
 
-        String msgTopicString = jsonObj.get("topic").getAsString();
+        String msgTopicString = jsonObj.get("messageType").getAsString();
         if (msgTopicString == null) throw new IllegalArgumentException("Missing message topic");
 
-        MessageType topic = MessageType.valueOf(msgTopicString);
+        MessageType messageType = MessageType.valueOf(msgTopicString);
 
-        switch (topic) {
+        switch (messageType) {
 
             case OK:
                 return gson.fromJson(jsonObj, OkMessage.class);

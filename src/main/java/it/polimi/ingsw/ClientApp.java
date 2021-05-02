@@ -21,9 +21,8 @@ public class ClientApp {
 
         //socketClient.readMessage();
 
-        Message msg = new NumberPlayerMessage(3);
-
-        //msg.setnOfPlayers(3);
+        NumberPlayerMessage msg = new NumberPlayerMessage();
+        msg.setnOfPlayers(3);
 
         socketClient.sendMessage(msg);
     }

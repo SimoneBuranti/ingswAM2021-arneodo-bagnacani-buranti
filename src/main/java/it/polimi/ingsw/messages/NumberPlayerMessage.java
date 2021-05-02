@@ -9,9 +9,6 @@ public class NumberPlayerMessage extends Message {
      */
     private final MessageType messageType=MessageType.PLAYERNUMBER;
 
-    public NumberPlayerMessage(int nOfPlayers){
-        this.nOfPlayers = nOfPlayers;
-    }
     /**
      */@Override
     public MessageType getMessageType() {

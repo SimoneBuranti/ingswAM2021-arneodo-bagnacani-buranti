@@ -52,9 +52,9 @@ public class SocketClient {
         parsedMsg.accept(viewController);
     }
 
-    public void sendMessage(Message message ){
-        out.println(message.serialize());
-
+    public void sendMessage(Message message){
+        String msg = message.serialize();
+        out.println(msg);
     }
 
     public void disconnect() throws IOException {

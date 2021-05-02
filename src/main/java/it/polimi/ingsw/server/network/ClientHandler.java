@@ -60,8 +60,8 @@ public class ClientHandler implements Runnable {
         parsedMsg.accept(clientController);
     }
 
-    public void sendMessage (String msg) {
-        writeStream.println(msg);
+    public void sendMessage (Message msg) {
+        writeStream.println(msg.serialize());
         writeStream.flush();
     }
 
