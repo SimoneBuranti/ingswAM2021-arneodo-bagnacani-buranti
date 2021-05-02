@@ -3,6 +3,7 @@ package it.polimi.ingsw.server.network;
 import com.google.gson.Gson;
 import it.polimi.ingsw.messages.Message;
 import it.polimi.ingsw.messages.MessageType;
+import it.polimi.ingsw.server.controller.ClientController;
 
 import java.io.*;
 import java.net.Socket;
@@ -12,7 +13,7 @@ import java.util.concurrent.TimeUnit;
 public class ClientHandler implements Runnable {
 
     private final Socket socketClient;
-    private boolean isConnected;
+    private final ClientController clientController;
 
     private final InputStream inputStream;
     private final OutputStream outputStream;
@@ -23,8 +24,8 @@ public class ClientHandler implements Runnable {
 
     public ClientHandler(Socket client) throws IOException {
         this.socketClient = client;
-        //this.socketServer = socketServer;
-        isConnected = true;
+
+        clientController = new ClientController();
 
         inputStream = socketClient.getInputStream();
         outputStream = socketClient.getOutputStream();
@@ -37,26 +38,32 @@ public class ClientHandler implements Runnable {
     public void run() {
 
         try {
+            String msg;
 
-
-            String line;
-            Gson g = new Gson();
-            Message msg;
-
-            while (isConnected) {
-
-
-                if(!sendPing()){
-                    isConnected = false;
-                    System.out.println("ciao sono falso");}
-                else
-                    System.out.println("ciao sono vero");
+            while(true){
+                msg = readStream.readLine();
+                if(msg != null){
+                    readMessageServer(msg);
+                }
             }
-
         } catch (IOException e) {
-            System.err.println(e.getMessage());
-        } }
+            try {
+                disconnect();
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+        }
+    }
 
+    public void readMessageServer(String msg){
+        Message parsedMsg = Message.deserialize(msg);
+        parsedMsg.accept(clientController);
+    }
+
+    public void sendMessage (String msg) {
+        writeStream.println(msg);
+        writeStream.flush();
+    }
 
     public void disconnect() throws IOException {
 
@@ -67,7 +74,7 @@ public class ClientHandler implements Runnable {
     }
 
 
-    public boolean sendPing() throws IOException {
+    /*public boolean sendPing() throws IOException {
         String line;
         Gson g = new Gson();
         Message msg = new Message(MessageType.PING);
@@ -90,6 +97,6 @@ public class ClientHandler implements Runnable {
         }
 
         return false;
-    }
+    }*/
 }
 

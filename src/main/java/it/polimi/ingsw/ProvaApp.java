@@ -11,7 +11,7 @@ public class ProvaApp {
     public static void main(String[] args) throws FileNotFoundException {
 
 
-        Gson g = new Gson();
+        /*Gson g = new Gson();
         Message message = g.fromJson(new FileReader("src/main/resources/prova.json"),Message.class);
 
         System.out.println(message.getMessageType() +" "+ message.getNickname());
@@ -19,7 +19,7 @@ public class ProvaApp {
         message = g.fromJson(new FileReader("src/main/resources/prova2.json"),Message.class);
 
         System.out.println(message.getMessageType() +" "+ message.getResources().get(0));
-
+*/
 
         /*String jsonString = g.toJson(msg);
 

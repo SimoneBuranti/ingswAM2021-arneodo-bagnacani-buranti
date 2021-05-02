@@ -11,6 +11,7 @@ public interface MessageVisitor {
     void visit(NotEnoughSpaceErrorMessage msg);
     void visit(RequirementsErrorMessage msg);
     void visit(WrongColumnErrorMessage msg);
+    void visit(NotYourTurnErrorMessage msg);
 
     //Server to client
     void visit(ChangeCurrentPlayerMessage msg);
