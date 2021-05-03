@@ -3,7 +3,6 @@ package it.polimi.ingsw;
 import it.polimi.ingsw.Client.SocketClient;
 import it.polimi.ingsw.messages.Message;
 import it.polimi.ingsw.messages.NumberPlayerMessage;
-
 import java.io.IOException;
 
 public class ClientApp {
