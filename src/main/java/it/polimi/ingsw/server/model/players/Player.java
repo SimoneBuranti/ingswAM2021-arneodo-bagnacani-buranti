@@ -59,6 +59,15 @@ public class Player {
         this.connected = true;
     }
 
+    public Player(String nickName){
+        buffer= new ArrayList<>();
+        gameBoardOfPlayer = new GameBoard();
+        personalLeaderCard=new ArrayList<>();
+        this.nickName = nickName;
+        this.game = null;
+        this.connected = true;
+    }
+
 
     /**
      * this method adds the leader cards in position firstIndex and secondIndex in the personalLeaderCard list to the game board

@@ -12,7 +12,7 @@ import java.util.ArrayList;
 /**
  * Parent decorator for the GameBoardInterface class. Used to add custom effects to a GameBoard.
  */
-public abstract class GameBoardDecorator implements GameBoardInterface {
+public abstract class GameBoardDecorator extends GameBoardInterface {
 
     protected GameBoardInterface gameBoard;
 
@@ -162,8 +162,8 @@ public abstract class GameBoardDecorator implements GameBoardInterface {
     }
 
     @Override
-    public GameBoardInterface activationLeaderCard(GameBoardInterface gameBoard,int index) throws RequirementsException {
-        return gameBoard.activationLeaderCard(gameBoard,index);
+    public GameBoardInterface activationLeaderCard(GameBoardInterface gameBoard1,int index) throws RequirementsException {
+        return gameBoard.activationLeaderCard(gameBoard1,index);
     }
 
     @Override

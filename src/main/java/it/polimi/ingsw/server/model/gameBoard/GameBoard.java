@@ -12,7 +12,7 @@ import java.util.*;
 /**
  * This class represents a player's personal board and can be decorated with any {@link GameBoardDecorator}
  */
-public class GameBoard implements GameBoardInterface{
+public class GameBoard extends GameBoardInterface{
 
     /**
      * developmentBoard references the production card set of the player

@@ -12,89 +12,88 @@ import java.util.ArrayList;
  * This is the interface from which starts all the Decorator Pattern used to
  * implement the effects of the {@link LeaderCard}
  */
-public interface GameBoardInterface {
-    void setStorageExtra(Resource resource);
+public abstract class GameBoardInterface {
+    public abstract void setStorageExtra(Resource resource);
 
-    void endOfProduction();
+    public abstract void endOfProduction();
 
-    int getIndicator();
+    public abstract int getIndicator();
 
-    void  faithMove () throws CallForCouncilException, LastSpaceReachedException;
+    public abstract void  faithMove () throws CallForCouncilException, LastSpaceReachedException;
 
-    void setPapal();
+    public abstract void setPapal();
 
-    Resource whiteExchange() throws BlockedWhiteMarbleEffectException, WhiteMarbleException;
+    public abstract Resource whiteExchange() throws BlockedWhiteMarbleEffectException, WhiteMarbleException;
 
-    void extraProductionOn(Resource resource) throws ImpossibleProductionException, CallForCouncilException, LastSpaceReachedException;
+    public abstract void extraProductionOn(Resource resource) throws ImpossibleProductionException, CallForCouncilException, LastSpaceReachedException;
 
-    void anotherExtraProductionOn(Resource resource) throws ImpossibleProductionException, CallForCouncilException, LastSpaceReachedException;
+    public abstract void anotherExtraProductionOn(Resource resource) throws ImpossibleProductionException, CallForCouncilException, LastSpaceReachedException;
 
-    void addToStorage(Resource resource);
+    public abstract void addToStorage(Resource resource);
 
-    void addToStrongbox(Resource resource);
+    public abstract void addToStrongbox(Resource resource);
 
-    int firstRowFree(int chosenColumn) throws FullColumnException;
+    public abstract int firstRowFree(int chosenColumn) throws FullColumnException;
 
-    int lastRowOccupied(int chosenColumn) throws EmptyColumnException;
+    public abstract int lastRowOccupied(int chosenColumn) throws EmptyColumnException;
 
-    void setNewProductionCard(DeckProductionCard deck, int chosenColumn) throws EmptyException, FullColumnException;
+    public abstract void setNewProductionCard(DeckProductionCard deck, int chosenColumn) throws EmptyException, FullColumnException;
 
-    void payResources(ArrayList<Resource> cost);
+    public abstract void payResources(ArrayList<Resource> cost);
 
-    ArrayList<Resource> availableResources();
+    public abstract ArrayList<Resource> availableResources();
 
-    void seventhCardCheck() throws EndGameException;
+    public abstract void seventhCardCheck() throws EndGameException;
 
-    void buyProductionCard(DeckProductionCard deck, int chosenColumn) throws LevelException, NotEnoughResourcesException, EmptyException, FullColumnException, EndGameException;
+    public abstract void buyProductionCard(DeckProductionCard deck, int chosenColumn) throws LevelException, NotEnoughResourcesException, EmptyException, FullColumnException, EndGameException;
 
-    int score();
+    public abstract int score();
 
-    int faithScore();
+    public abstract int faithScore();
 
-    void takeFromMarket(ArrayList<Resource> newResources) throws NotEnoughSpaceInStorageException;
+    public abstract void takeFromMarket(ArrayList<Resource> newResources) throws NotEnoughSpaceInStorageException;
 
-    void baseProductionOn(Resource i1, Resource i2, Resource o) throws ImpossibleProductionException;
+    public abstract void baseProductionOn(Resource i1, Resource i2, Resource o) throws ImpossibleProductionException;
 
-    void productionOn(int chosenColumn) throws ImpossibleProductionException, EmptyColumnException, CallForCouncilException, LastSpaceReachedException;
+    public abstract void productionOn(int chosenColumn) throws ImpossibleProductionException, EmptyColumnException, CallForCouncilException, LastSpaceReachedException;
 
-    void addToProductionBuffer(ArrayList<Resource> output);
+    public abstract void addToProductionBuffer(ArrayList<Resource> output);
 
-    void setProductionCard(ProductionCard card, int chosenColumn);
+    public abstract void setProductionCard(ProductionCard card, int chosenColumn);
 
-    void addLeaderCardToGameBoard(LeaderCard leaderCard);
+    public abstract void addLeaderCardToGameBoard(LeaderCard leaderCard);
 
-   int leaderCardsSize();
+    public abstract int leaderCardsSize();
 
-   LeaderCard reportLeaderCardToGameBoard(int index);
+    public abstract LeaderCard reportLeaderCardToGameBoard(int index);
 
+    public abstract void removeLeaderCardToGameBoard(int index);
 
-    void removeLeaderCardToGameBoard(int index);
+    public abstract GameBoardInterface activationLeaderCard(GameBoardInterface gameBoard,int index) throws RequirementsException;
 
-    GameBoardInterface activationLeaderCard(GameBoardInterface gameBoard,int index) throws RequirementsException;
+    public abstract int colourQuantity(Colour colour);
 
-    int colourQuantity(Colour colour);
+    public abstract int levelAndColourQuantity(Colour colour, int level);
 
-    int levelAndColourQuantity(Colour colour, int level);
+    public abstract int resourceQuantity(Resource resource);
 
-    int resourceQuantity(Resource resource);
+    public abstract int getWhiteMarbleCardActivated();
 
-    int getWhiteMarbleCardActivated();
+    public abstract void setWhiteMarbleCardActivated();
 
-    void setWhiteMarbleCardActivated();
+    public abstract int getProductionCardActivated();
 
-    int getProductionCardActivated();
+    public abstract void setProductionCardActivated();
 
-    void setProductionCardActivated();
+    public abstract int getReductionCardActivated();
 
-    int getReductionCardActivated();
+    public abstract void setReductionCardActivated();
 
-    void setReductionCardActivated();
+    public abstract int getStorageCardActivated();
 
-    int getStorageCardActivated();
+    public abstract void setStorageCardActivated();
 
-    void setStorageCardActivated();
+    public abstract Resource getResourceTypeFirst();
 
-    Resource getResourceTypeFirst();
-
-    int scoreResource();
+    public abstract int scoreResource();
 }
