@@ -1,5 +1,7 @@
-package it.polimi.ingsw.server.model;
+package it.polimi.ingsw.server.model.leaderCards;
 
+import it.polimi.ingsw.server.model.Reserve;
+import it.polimi.ingsw.server.model.Resource;
 import it.polimi.ingsw.server.model.exceptions.*;
 import it.polimi.ingsw.server.model.gameBoard.GameBoard;
 import it.polimi.ingsw.server.model.gameBoard.GameBoardInterface;
@@ -25,7 +27,7 @@ class ReductionGameBoardTest {
     @DisplayName("reductionTest - simple test")
     public void reductionTest0() {
         GameBoardInterface gameBoard = new GameBoard();
-        gameBoard = new ReductionGameBoard(gameBoard,Resource.SHIELD);
+        gameBoard = new ReductionGameBoard(gameBoard, Resource.SHIELD);
         ReductionGameBoard reductionGameBoard = (ReductionGameBoard) gameBoard;
         ArrayList<Resource> cost = new ArrayList<>();
         HashMap<Resource,Integer> costMap = new HashMap<>();

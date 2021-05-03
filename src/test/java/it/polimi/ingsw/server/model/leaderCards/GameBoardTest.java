@@ -1,5 +1,7 @@
-package it.polimi.ingsw.server.model;
+package it.polimi.ingsw.server.model.leaderCards;
 
+import it.polimi.ingsw.server.model.Reserve;
+import it.polimi.ingsw.server.model.Resource;
 import it.polimi.ingsw.server.model.exceptions.*;
 import it.polimi.ingsw.server.model.gameBoard.GameBoard;
 import it.polimi.ingsw.server.model.productionCards.*;
@@ -2134,6 +2136,17 @@ class GameBoardTest {
         assertEquals(5-input1Map.get(Resource.SHIELD)+output1Map.get(Resource.SHIELD)-input2Map.get(Resource.SHIELD)+output2Map.get(Resource.SHIELD),availableMap.get(Resource.SHIELD));
         assertEquals(5-input1Map.get(Resource.SERVANT)+output1Map.get(Resource.SERVANT)-input2Map.get(Resource.SERVANT)+output2Map.get(Resource.SERVANT),availableMap.get(Resource.SERVANT));
     }
+
+
+
+
+
+
+
+
+
+
+
 
 
 }

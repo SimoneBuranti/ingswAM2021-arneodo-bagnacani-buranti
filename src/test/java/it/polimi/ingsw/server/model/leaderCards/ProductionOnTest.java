@@ -1,5 +1,7 @@
-package it.polimi.ingsw.server.model;
+package it.polimi.ingsw.server.model.leaderCards;
 
+import it.polimi.ingsw.server.model.Reserve;
+import it.polimi.ingsw.server.model.Resource;
 import it.polimi.ingsw.server.model.colours.Blue;
 import it.polimi.ingsw.server.model.colours.Green;
 import it.polimi.ingsw.server.model.colours.Violet;

@@ -105,7 +105,6 @@ public class Game {
         deckProductionCardThreeViolet = new DeckProductionCardThreeViolet();
 
         deckLeaderCard= new DeckLeaderCard();
-
     }
 
     /**
@@ -468,6 +467,17 @@ public class Game {
      */
     public Reserve getReserve() {
         return reserve;
+    }
+
+
+    /**
+     * save information for a possible restart game
+     */
+    public void saveInformation(){
+       // saveInformationOfProudciotnDeck();
+        //saveInformationOfMarket();
+       // saveInformationOfProudciotnDeck();
+
     }
 
 }

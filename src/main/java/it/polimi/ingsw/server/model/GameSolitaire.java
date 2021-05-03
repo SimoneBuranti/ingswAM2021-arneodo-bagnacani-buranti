@@ -13,6 +13,7 @@ import it.polimi.ingsw.server.model.exceptions.EndOfSolitaireGame;
 import it.polimi.ingsw.server.model.exceptions.LastSpaceReachedException;
 import it.polimi.ingsw.server.model.gameBoard.GameBoardInterface;
 import it.polimi.ingsw.server.model.players.Player;
+import it.polimi.ingsw.server.model.players.PlayerFirst;
 import it.polimi.ingsw.server.model.productionCards.DeckProductionCard;
 
 /**
@@ -39,7 +40,7 @@ public class GameSolitaire extends Game{
         super();
         deckActionMarker = new DeckActionMarker();
         lorenzoTheMagnificent = new LorenzoTheMagnificent();
-        player = new Player(nickName, this);
+        player = new PlayerFirst(nickName, this);
         currentPlayer = player;
     }
 
@@ -348,4 +349,16 @@ public class GameSolitaire extends Game{
         return lorenzoTheMagnificent.getFaithIndicator();
     }
 
+
+
+    /**
+     * save information for a possible restart game
+     */
+    @Override
+    public void saveInformation(){
+       // super();
+        player.savePlayerInformation();
+        //saveInformationOfActionMarker();
+        //saveInformationOfLorenzo();
+    }
 }

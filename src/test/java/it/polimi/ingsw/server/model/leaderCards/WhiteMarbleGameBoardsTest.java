@@ -1,5 +1,8 @@
-package it.polimi.ingsw.server.model;
+package it.polimi.ingsw.server.model.leaderCards;
 
+import it.polimi.ingsw.server.model.Game;
+import it.polimi.ingsw.server.model.Reserve;
+import it.polimi.ingsw.server.model.Resource;
 import it.polimi.ingsw.server.model.exceptions.BlockedWhiteMarbleEffectException;
 import it.polimi.ingsw.server.model.exceptions.WhiteMarbleException;
 import it.polimi.ingsw.server.model.gameBoard.GameBoard;
@@ -20,7 +23,7 @@ class WhiteMarbleGameBoardsTest {
     @DisplayName("Correct instance test")
     public void correctInstancesTest(){
         GameBoardInterface gameBoard = new GameBoard();
-        gameBoard = new WhiteMarbleGameBoard(gameBoard,Resource.COIN);
+        gameBoard = new WhiteMarbleGameBoard(gameBoard, Resource.COIN);
 
         assertTrue(gameBoard instanceof WhiteMarbleGameBoard);
 
