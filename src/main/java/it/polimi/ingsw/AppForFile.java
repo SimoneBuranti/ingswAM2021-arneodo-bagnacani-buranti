@@ -39,8 +39,6 @@ public class AppForFile {
 
 
 
-
-
         } catch (IOException e) {
             e.printStackTrace();
 

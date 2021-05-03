@@ -1,5 +1,7 @@
-package it.polimi.ingsw.server.model;
+package it.polimi.ingsw.server.model.leaderCards;
 
+import it.polimi.ingsw.server.model.Reserve;
+import it.polimi.ingsw.server.model.Resource;
 import it.polimi.ingsw.server.model.exceptions.CallForCouncilException;
 import it.polimi.ingsw.server.model.exceptions.ImpossibleProductionException;
 import it.polimi.ingsw.server.model.exceptions.LastSpaceReachedException;
@@ -27,7 +29,7 @@ class ProductionGameBoardDoubleTest {
     @DisplayName("extraProductionOnTest0 - simple test")
     public void extraProductionOnTest0() {
         GameBoardInterface gameBoard = new GameBoard();
-        gameBoard = new ProductionGameBoard(gameBoard,Resource.COIN);
+        gameBoard = new ProductionGameBoard(gameBoard, Resource.COIN);
         gameBoard = new ProductionGameBoardDouble(gameBoard,gameBoard.getResourceTypeFirst(),Resource.ROCK);
 
         new Reserve();

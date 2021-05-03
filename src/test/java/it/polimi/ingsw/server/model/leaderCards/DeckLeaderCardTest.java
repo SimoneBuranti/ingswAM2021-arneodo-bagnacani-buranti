@@ -1,5 +1,6 @@
-package it.polimi.ingsw.server.model;
+package it.polimi.ingsw.server.model.leaderCards;
 
+import it.polimi.ingsw.server.model.GameMultiPlayer;
 import it.polimi.ingsw.server.model.players.PlayerFirst;
 import it.polimi.ingsw.server.model.players.PlayerSecond;
 import org.junit.jupiter.api.Test;

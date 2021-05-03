@@ -1,13 +1,15 @@
 package it.polimi.ingsw.server.model.players;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import it.polimi.ingsw.RuntimeTypeAdapterFactory;
 import it.polimi.ingsw.server.model.*;
+import it.polimi.ingsw.server.model.colours.*;
 import it.polimi.ingsw.server.model.exceptions.*;
-import it.polimi.ingsw.server.model.gameBoard.GameBoard;
-import it.polimi.ingsw.server.model.gameBoard.GameBoardInterface;
-import it.polimi.ingsw.server.model.leaderCards.DeckLeaderCard;
-import it.polimi.ingsw.server.model.leaderCards.LeaderCard;
-import it.polimi.ingsw.server.model.leaderCards.LeaderCardsGameBoardEmptyException;
+import it.polimi.ingsw.server.model.gameBoard.*;
+import it.polimi.ingsw.server.model.leaderCards.*;
 import it.polimi.ingsw.server.model.productionCards.DeckProductionCard;
+import it.polimi.ingsw.server.model.requirements.*;
 
 import java.util.ArrayList;
 
@@ -300,4 +302,77 @@ public class Player {
     public LeaderCard getCardFromPersonalLeaderCard(int index){
         return  personalLeaderCard.get(index);
     }
+
+    /**
+     * method for gameboard adaptation saving
+     */
+    public Gson gameBoardSaving(){
+
+        RuntimeTypeAdapterFactory<GameBoardInterface> adapterGameboard =
+                RuntimeTypeAdapterFactory
+                        .of(GameBoardInterface.class)
+                        .registerSubtype(GameBoard.class)
+                        .registerSubtype(GameBoardDecorator.class)
+                        .registerSubtype(ProductionGameBoard.class)
+                        .registerSubtype(ProductionGameBoardDouble.class)
+                        .registerSubtype(ReductionGameBoard.class)
+                        .registerSubtype(ReductionGameBoardDouble.class)
+                        .registerSubtype(WhiteMarbleGameBoard.class)
+                        .registerSubtype(WhiteMarbleGameBoardDouble.class);
+
+
+
+
+        RuntimeTypeAdapterFactory<Storage> adapterStorageOne =
+                RuntimeTypeAdapterFactory
+                        .of(Storage.class)
+                        .registerSubtype(Storage.class)
+                        .registerSubtype(StorageExtraFirst.class)
+                        .registerSubtype(StorageExtraSecond.class);
+
+
+        RuntimeTypeAdapterFactory<Colour> adapterColour =
+                RuntimeTypeAdapterFactory
+                        .of(Colour.class)
+                        .registerSubtype(Green.class)
+                        .registerSubtype(Yellow.class)
+                        .registerSubtype(Blue.class)
+                        .registerSubtype(Violet.class);
+
+
+        RuntimeTypeAdapterFactory<Requirements> adapterRequirements =
+                RuntimeTypeAdapterFactory
+                        .of(Requirements.class)
+                        .registerSubtype(ResourceRequirement.class)
+                        .registerSubtype(SecondLevelRequirement.class)
+                        .registerSubtype(ThreeFlagsTwoColourRequirement.class)
+                        .registerSubtype(TwoFlagsTwoColourRequirement.class);
+
+        RuntimeTypeAdapterFactory<LeaderCard> adapterLeader =
+                RuntimeTypeAdapterFactory
+                        .of(LeaderCard.class)
+                        .registerSubtype(LeaderCardMarble.class)
+                        .registerSubtype(LeaderCardProduction.class)
+                        .registerSubtype(LeaderCardReduction.class)
+                        .registerSubtype(LeaderCardStorage.class);
+
+        Gson gson=new GsonBuilder()
+                .setPrettyPrinting()
+                .registerTypeAdapterFactory(adapterGameboard)
+                .registerTypeAdapterFactory(adapterStorageOne)
+                .registerTypeAdapterFactory(adapterLeader)
+                .registerTypeAdapterFactory(adapterRequirements)
+                .registerTypeAdapterFactory(adapterColour)
+                .create();
+
+
+        return gson;
+    }
+
+    /**
+     * save information for a possible restart game
+     */
+    public void savePlayerInformation(){ }
+
+
 }

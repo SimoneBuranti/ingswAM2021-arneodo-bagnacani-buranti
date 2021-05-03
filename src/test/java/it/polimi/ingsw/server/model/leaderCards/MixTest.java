@@ -1,5 +1,6 @@
-package it.polimi.ingsw.server.model;
+package it.polimi.ingsw.server.model.leaderCards;
 
+import it.polimi.ingsw.server.model.Mix;
 import it.polimi.ingsw.server.model.marbles.*;
 import org.junit.jupiter.api.Test;
 

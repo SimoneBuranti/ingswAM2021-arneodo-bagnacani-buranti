@@ -247,4 +247,24 @@ public class GameMultiPlayer extends Game {
         return playerWinner;
     }
 
+
+
+    /**
+     * save information for a possible restart game
+     */
+    @Override
+    public void saveInformation(){
+       // super();
+        for(Player p : playerList){
+            p.savePlayerInformation();
+        }
+        saveInformationAboutTurn();
+    }
+
+
+
+
+    private void saveInformationAboutTurn() {
+    }
+
 }

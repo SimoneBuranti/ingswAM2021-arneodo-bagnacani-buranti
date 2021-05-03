@@ -1,15 +1,23 @@
 package it.polimi.ingsw.server.model.players;
 
+import com.google.gson.Gson;
+import it.polimi.ingsw.RuntimeTypeAdapterFactory;
 import it.polimi.ingsw.server.model.Game;
 import it.polimi.ingsw.server.model.Resource;
+import it.polimi.ingsw.server.model.colours.*;
 import it.polimi.ingsw.server.model.exceptions.CallForCouncilException;
 import it.polimi.ingsw.server.model.exceptions.LastSpaceReachedException;
+import it.polimi.ingsw.server.model.leaderCards.*;
+import it.polimi.ingsw.server.model.requirements.*;
+
+import java.io.FileWriter;
+import java.io.IOException;
 
 /**
  * This class represents the third player in the multiplayer game to play in a round
  */
 public class PlayerFourth extends Player {
-
+    FileWriter fileInformatioPlayerFourth;
     /**
      * Default constructor that calls the super class constructor
      * @param nickName : the nickname chosen by the player
@@ -34,4 +42,30 @@ public class PlayerFourth extends Player {
         getGameBoardOfPlayer().faithMove();
     }
 
-}
+    /**
+     * save information for a possible restart game
+     */
+    @Override
+    public void savePlayerInformation(){
+        Gson gson=gameBoardSaving();
+        String jsonStrin = gson.toJson(getGameBoardOfPlayer());
+        try {
+
+            // Constructs a FileWriter given a file name, using the platform's default charset
+            fileInformatioPlayerFourth = new FileWriter("src/main/resources/fileInformatioPlayerFourth.json");
+            fileInformatioPlayerFourth.write(jsonStrin);
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        } finally {
+
+            try {
+                fileInformatioPlayerFourth.flush();
+                fileInformatioPlayerFourth.close();
+            } catch (IOException e) {
+
+                e.printStackTrace();
+            }
+        }
+
+    }}

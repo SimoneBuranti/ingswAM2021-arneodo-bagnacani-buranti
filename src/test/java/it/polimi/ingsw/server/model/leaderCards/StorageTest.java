@@ -1,5 +1,7 @@
-package it.polimi.ingsw.server.model;
+package it.polimi.ingsw.server.model.leaderCards;
 
+import it.polimi.ingsw.server.model.Reserve;
+import it.polimi.ingsw.server.model.Resource;
 import it.polimi.ingsw.server.model.exceptions.UnavailableResourceException;
 import it.polimi.ingsw.server.model.gameBoard.Storage;
 import org.junit.jupiter.api.DisplayName;
