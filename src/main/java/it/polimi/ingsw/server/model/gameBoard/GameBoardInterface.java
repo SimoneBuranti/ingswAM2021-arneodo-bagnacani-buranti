@@ -70,7 +70,7 @@ public interface GameBoardInterface {
 
     void removeLeaderCardToGameBoard(int index);
 
-    void activationLeaderCard(int index);
+    GameBoardInterface activationLeaderCard(GameBoardInterface gameBoard,int index) throws RequirementsException;
 
     int colourQuantity(Colour colour);
 

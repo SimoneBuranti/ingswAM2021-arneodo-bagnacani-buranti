@@ -1,5 +1,6 @@
 package it.polimi.ingsw.server.model.leaderCards;
 
+import it.polimi.ingsw.server.model.exceptions.RequirementsException;
 import it.polimi.ingsw.server.model.gameBoard.GameBoardInterface;
 import it.polimi.ingsw.server.model.requirements.Requirements;
 import it.polimi.ingsw.server.model.Resource;
@@ -32,13 +33,13 @@ public class LeaderCardStorage extends LeaderCard {
      * @return boolean : true if the game board has been updated, false otherwise
      */
     @Override
-    public boolean abilityActivation(GameBoardInterface gameBoard){
+    public GameBoardInterface abilityActivation(GameBoardInterface gameBoard) throws RequirementsException {
         if(check(gameBoard)){
             gameBoard.setStorageExtra(specialStorage);
             gameBoard.setStorageCardActivated();
-            return true;
+            return gameBoard;
         }else
-            return false;
+            throw new RequirementsException();
     }
 
     /**

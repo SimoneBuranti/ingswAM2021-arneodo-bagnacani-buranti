@@ -1,9 +1,8 @@
 package it.polimi.ingsw.server.model.leaderCards;
 
 import it.polimi.ingsw.server.model.*;
-import it.polimi.ingsw.server.model.gameBoard.GameBoardInterface;
-import it.polimi.ingsw.server.model.gameBoard.ProductionGameBoard;
-import it.polimi.ingsw.server.model.gameBoard.ProductionGameBoardDouble;
+import it.polimi.ingsw.server.model.exceptions.RequirementsException;
+import it.polimi.ingsw.server.model.gameBoard.*;
 import it.polimi.ingsw.server.model.requirements.Requirements;
 
 /**
@@ -33,16 +32,18 @@ public class LeaderCardProduction extends LeaderCard {
      * @return boolean : true if the game board has been updated, false otherwise
      */
     @Override
-    public boolean abilityActivation(GameBoardInterface gameBoard){
+    public GameBoardInterface abilityActivation(GameBoardInterface gameBoard) throws RequirementsException {
+        GameBoardInterface newGameBoard;
+
         if(check(gameBoard)){
             if(gameBoard.getProductionCardActivated() == 0) {
-                gameBoard = new ProductionGameBoard(gameBoard, resourceProduction);
-                gameBoard.setProductionCardActivated();
+                newGameBoard = new ProductionGameBoard(gameBoard, resourceProduction);
+                newGameBoard.setProductionCardActivated();
             }else
-                gameBoard = new ProductionGameBoardDouble(gameBoard, gameBoard.getResourceTypeFirst(), resourceProduction);
-            return true;
+                newGameBoard = new ProductionGameBoardDouble(gameBoard, gameBoard.getResourceTypeFirst(), resourceProduction);
+            return newGameBoard;
         }else
-            return false;
+            throw new RequirementsException();
     }
 
     /**

@@ -456,12 +456,13 @@ public class GameBoard implements GameBoardInterface{
      * after adding it to the leaderCardsActivated list removes it from the leaderCards list
      * @param index : the position of the leader card in the list
      */
-    public void activationLeaderCard(int index){
-        if(leaderCards.get(index).abilityActivation(this)){
-            leaderCardsActivated.add(leaderCards.get(index));
-            leaderCards.remove(index);
-        }
+    public GameBoardInterface activationLeaderCard(GameBoardInterface gameBoard,int index) throws RequirementsException {
+        GameBoardInterface newGameBoard;
+        newGameBoard = leaderCards.get(index).abilityActivation(gameBoard);
+        leaderCardsActivated.add(leaderCards.get(index));
+        leaderCards.remove(index);
 
+        return newGameBoard;
     }
 
     /**

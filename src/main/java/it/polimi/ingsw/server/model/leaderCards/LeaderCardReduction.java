@@ -1,9 +1,8 @@
 package it.polimi.ingsw.server.model.leaderCards;
 
 import it.polimi.ingsw.server.model.*;
-import it.polimi.ingsw.server.model.gameBoard.GameBoardInterface;
-import it.polimi.ingsw.server.model.gameBoard.ReductionGameBoard;
-import it.polimi.ingsw.server.model.gameBoard.ReductionGameBoardDouble;
+import it.polimi.ingsw.server.model.exceptions.RequirementsException;
+import it.polimi.ingsw.server.model.gameBoard.*;
 import it.polimi.ingsw.server.model.requirements.Requirements;
 
 /**
@@ -34,17 +33,20 @@ public class LeaderCardReduction extends LeaderCard{
      * @return boolean : true if the game board has been updated, false otherwise
      */
     @Override
-    public boolean abilityActivation(GameBoardInterface gameBoard){
+    public GameBoardInterface abilityActivation(GameBoardInterface gameBoard) throws RequirementsException {
+        GameBoardInterface newGameBoard;
+
         if(check(gameBoard)){
             if(gameBoard.getReductionCardActivated() == 0) {
-                gameBoard = new ReductionGameBoard(gameBoard, costReduction);
-                gameBoard.setReductionCardActivated();
+                newGameBoard = new ReductionGameBoard(gameBoard, costReduction);
+                newGameBoard.setReductionCardActivated();
             }else
-                gameBoard = new ReductionGameBoardDouble(gameBoard, gameBoard.getResourceTypeFirst(), costReduction);
-            return true;
+                newGameBoard = new ReductionGameBoardDouble(gameBoard, gameBoard.getResourceTypeFirst(), costReduction);
+            return newGameBoard;
         }else
-            return false;
+            throw new RequirementsException();
     }
+
 
     /**
      * this method checks if the leader card requirements are met by the game board of the player who wants to activate the card

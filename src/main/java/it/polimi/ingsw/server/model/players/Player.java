@@ -22,7 +22,7 @@ public class Player {
     /**
      * this attribute is the player's personal game board
      */
-    private final GameBoardInterface gameBoardOfPlayer ;
+    private GameBoardInterface gameBoardOfPlayer ;
     /**
      * this attribute is the player's nickname
      */
@@ -153,9 +153,9 @@ public class Player {
      * @throws LeaderCardsGameBoardEmptyException : the exception which is thrown when there is no leader card in the position
      *                                              passed as a parameter
      */
-   public void activationLeaderCard(int index) throws LeaderCardsGameBoardEmptyException {
+   public void activationLeaderCard(int index) throws LeaderCardsGameBoardEmptyException, RequirementsException {
        if(index < getGameBoardOfPlayer().leaderCardsSize())
-           getGameBoardOfPlayer().activationLeaderCard(index);
+           gameBoardOfPlayer = getGameBoardOfPlayer().activationLeaderCard(gameBoardOfPlayer,index);
        else
            throw new LeaderCardsGameBoardEmptyException();
    }

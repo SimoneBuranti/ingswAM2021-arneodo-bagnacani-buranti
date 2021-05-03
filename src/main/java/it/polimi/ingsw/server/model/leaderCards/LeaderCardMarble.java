@@ -1,6 +1,7 @@
 package it.polimi.ingsw.server.model.leaderCards;
 
 import it.polimi.ingsw.server.model.*;
+import it.polimi.ingsw.server.model.exceptions.RequirementsException;
 import it.polimi.ingsw.server.model.gameBoard.GameBoardInterface;
 import it.polimi.ingsw.server.model.gameBoard.WhiteMarbleGameBoard;
 import it.polimi.ingsw.server.model.gameBoard.WhiteMarbleGameBoardDouble;
@@ -34,16 +35,18 @@ public class LeaderCardMarble extends LeaderCard{
      * @return boolean : true if the game board has been updated, false otherwise
      */
     @Override
-    public boolean abilityActivation(GameBoardInterface gameBoard){
+    public GameBoardInterface abilityActivation(GameBoardInterface gameBoard) throws RequirementsException {
+        GameBoardInterface newGameBoard;
+
         if(check(gameBoard)){
             if(gameBoard.getWhiteMarbleCardActivated() == 0) {
-                gameBoard = new WhiteMarbleGameBoard(gameBoard, whiteMarble);
-                gameBoard.setWhiteMarbleCardActivated();
+                newGameBoard = new WhiteMarbleGameBoard(gameBoard, whiteMarble);
+                newGameBoard.setWhiteMarbleCardActivated();
             }else
-                gameBoard = new WhiteMarbleGameBoardDouble(gameBoard, gameBoard.getResourceTypeFirst(), whiteMarble);
-            return true;
+                newGameBoard = new WhiteMarbleGameBoardDouble(gameBoard, gameBoard.getResourceTypeFirst(), whiteMarble);
+            return newGameBoard;
         }else
-            return false;
+            throw new RequirementsException();
     }
 
 

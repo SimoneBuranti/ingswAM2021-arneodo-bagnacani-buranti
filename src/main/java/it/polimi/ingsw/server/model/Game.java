@@ -301,6 +301,8 @@ public class Game {
             currentPlayer.activationLeaderCard(index);
         } catch (LeaderCardsGameBoardEmptyException e) {
             exceptionHandler(e);
+        } catch (RequirementsException e) {
+            e.printStackTrace();
         }
     }
 
@@ -374,6 +376,9 @@ public class Game {
     }
 
     protected void exceptionHandler(EndGameException e) {
+    }
+
+    protected void exceptionHandler(RequirementsException e) {
     }
 
     protected void exceptionHandler(CallForCouncilException e) {

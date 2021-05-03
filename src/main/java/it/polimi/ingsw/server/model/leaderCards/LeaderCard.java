@@ -1,5 +1,6 @@
 package it.polimi.ingsw.server.model.leaderCards;
 
+import it.polimi.ingsw.server.model.exceptions.RequirementsException;
 import it.polimi.ingsw.server.model.gameBoard.GameBoardInterface;
 import it.polimi.ingsw.server.model.requirements.Requirements;
 
@@ -40,7 +41,7 @@ public class LeaderCard {
      * @param gameBoard : the game board to be updated
      * @return boolean : false
      */
-    public boolean abilityActivation(GameBoardInterface gameBoard){
-        return false;
+    public GameBoardInterface abilityActivation(GameBoardInterface gameBoard) throws RequirementsException {
+        return null;
     }
 }

@@ -162,8 +162,8 @@ public abstract class GameBoardDecorator implements GameBoardInterface {
     }
 
     @Override
-    public void activationLeaderCard(int index){
-        gameBoard.activationLeaderCard(index);
+    public GameBoardInterface activationLeaderCard(GameBoardInterface gameBoard,int index) throws RequirementsException {
+        return gameBoard.activationLeaderCard(gameBoard,index);
     }
 
     @Override
