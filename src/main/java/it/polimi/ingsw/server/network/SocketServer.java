@@ -2,8 +2,7 @@ package it.polimi.ingsw.server.network;
 
 import java.io.*;
 import java.net.*;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.*;
 
 public class SocketServer {
 
@@ -34,7 +33,7 @@ public class SocketServer {
             try {
                 Socket socket = serverSocket.accept();
                 System.out.println("Client connected");
-                executor.submit(new ClientHandler(socket));
+                executor.submit(new ClientHandler(socket,server));
             } catch(IOException e) {
                 break; // Entrerei qui se serverSocket venisse chiuso
             }
@@ -47,20 +46,4 @@ public class SocketServer {
     public int getPortNumber() {
         return portNumber;
     }
-
-
-    /*
-    public void addClient(String nickname, ClientHandler clientHandler) {
-        server.addClient(nickname, clientHandler);
-    }
-
-
-    public void onMessageReceived(Message message) {
-        server.onMessageReceived(message);
-    }
-
-
-    public void onDisconnect(ClientHandler clientHandler) {
-        server.onDisconnect(clientHandler);
-    }*/
 }

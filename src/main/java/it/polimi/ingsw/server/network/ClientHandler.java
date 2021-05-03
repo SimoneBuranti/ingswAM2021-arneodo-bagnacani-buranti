@@ -1,13 +1,10 @@
 package it.polimi.ingsw.server.network;
 
-import com.google.gson.Gson;
 import it.polimi.ingsw.messages.Message;
-import it.polimi.ingsw.messages.MessageType;
 import it.polimi.ingsw.server.controller.ClientController;
 
 import java.io.*;
 import java.net.Socket;
-import java.util.concurrent.TimeUnit;
 
 
 public class ClientHandler implements Runnable {
@@ -21,11 +18,13 @@ public class ClientHandler implements Runnable {
     private final BufferedReader readStream;
     private final PrintWriter writeStream;
 
+    private final Server server;
 
-    public ClientHandler(Socket client) throws IOException {
+
+    public ClientHandler(Socket client, Server server) throws IOException {
         this.socketClient = client;
-
-        clientController = new ClientController();
+        this.server = server;
+        clientController = new ClientController(server);
 
         inputStream = socketClient.getInputStream();
         outputStream = socketClient.getOutputStream();

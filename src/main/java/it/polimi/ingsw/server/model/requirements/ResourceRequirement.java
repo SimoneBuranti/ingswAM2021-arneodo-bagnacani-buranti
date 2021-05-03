@@ -10,6 +10,8 @@ import it.polimi.ingsw.server.model.colours.Colour;
  */
 public class ResourceRequirement extends Requirements{
 
+    private static final String requirementType = "ResourceRequirement";
+
     /**
      * this attribute defines the type of resource that the player must have with the quantity of 5
      */

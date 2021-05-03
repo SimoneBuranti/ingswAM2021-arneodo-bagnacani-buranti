@@ -14,12 +14,14 @@ public class ProvaApp {
         /*Gson g = new Gson();
         Message message = g.fromJson(new FileReader("src/main/resources/prova.json"),Message.class);
 
-        System.out.println(message.getMessageType() +" "+ message.getNickname());
+        /*System.out.println(message.getMessageType() +" "+ message.getNickname());
 
         message = g.fromJson(new FileReader("src/main/resources/prova2.json"),Message.class);
 
-        System.out.println(message.getMessageType() +" "+ message.getResources().get(0));
-*/
+        System.out.println(message.getMessageType() +" "+ message.getResources().get(0));*/
+
+
+
 
         /*String jsonString = g.toJson(msg);
 

@@ -8,6 +8,9 @@ import it.polimi.ingsw.server.model.colours.Colour;
  * with the colour specified by this requirement in order to activate the leader card
  */
 public class SecondLevelRequirement extends Requirements {
+
+    private static final String requirementType = "SecondLevelRequirement";
+
     /**
      * this attribute defines the colour of the second level production card that the player must have
      */

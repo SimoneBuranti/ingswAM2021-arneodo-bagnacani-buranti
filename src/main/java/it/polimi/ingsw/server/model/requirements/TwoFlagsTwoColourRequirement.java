@@ -8,6 +8,9 @@ import it.polimi.ingsw.server.model.colours.Colour;
  * specified by this requirement in order to activate the leader card
  */
 public class TwoFlagsTwoColourRequirement extends Requirements{
+
+    private static final String requirementType = "TwoFlagsTwoColoursRequirement";
+
     /**
      * this attribute defines the first colour of the production card that the player must have
      */

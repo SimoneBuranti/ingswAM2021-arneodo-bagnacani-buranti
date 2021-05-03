@@ -9,6 +9,9 @@ import it.polimi.ingsw.server.model.colours.Colour;
  * The two colours are specified by this requirement.
  */
 public class ThreeFlagsTwoColourRequirement extends Requirements{
+
+    private static final String requirementType = "ThreeFlagsTwoColourRequirement";
+
     /**
      * This attribute defines the colour of the production card that the player must have on two distinct cards
      */
