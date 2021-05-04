@@ -2,10 +2,46 @@ package it.polimi.ingsw.server.controller;
 
 import it.polimi.ingsw.messages.*;
 
-public class GameControllerDisconnection implements GameControllerInterface {
+public class GameControllerDisconnection extends GameControllerInterface {
 
 
     @Override
+    public void handleMessage(ExitMessage msg) {
+
+    }
+
+    @Override
+    public void handleMessage(NumberPlayerMessage msg) {
+
+    }
+
+    @Override
+    public void handleMessage(UsernameMessage msg) {
+
+    }
+
+
+    @Override
+    public void handleMessage(OkMessage msg) {
+
+    }
+
+    @Override
+    public void handleMessage(PingMessage msg) {
+
+    }
+
+    @Override
+    public void handleMessage(PongMessage msg) {
+
+    }
+
+    @Override
+    public void refreshStatus() {
+
+    }
+
+    /*@Override
     public void handleMessage(ActivateLeaderCardMessage msg) {
 
     }
@@ -36,11 +72,6 @@ public class GameControllerDisconnection implements GameControllerInterface {
     }
 
     @Override
-    public void handleMessage(ExitMessage msg) {
-
-    }
-
-    @Override
     public void handleMessage(ExtraProductionOnMessage msg) {
 
     }
@@ -61,11 +92,6 @@ public class GameControllerDisconnection implements GameControllerInterface {
     }
 
     @Override
-    public void handleMessage(NumberPlayerMessage msg) {
-
-    }
-
-    @Override
     public void handleMessage(ProductionOnMessage msg) {
 
     }
@@ -80,33 +106,9 @@ public class GameControllerDisconnection implements GameControllerInterface {
 
     }
 
-    @Override
-    public void handleMessage(UsernameMessage msg) {
-
-    }
 
     @Override
     public void handleMessage(WhiteMarbleChoosenResources msg) {
 
-    }
-
-    @Override
-    public void handleMessage(OkMessage msg) {
-
-    }
-
-    @Override
-    public void handleMessage(PingMessage msg) {
-
-    }
-
-    @Override
-    public void handleMessage(PongMessage msg) {
-
-    }
-
-    @Override
-    public void refreshStatus() {
-
-    }
+    }*/
 }

@@ -223,7 +223,7 @@ public class JsonApp {
 
         Gson gson=new GsonBuilder().setPrettyPrinting().registerTypeAdapterFactory(adapterGameBoard).registerTypeAdapterFactory(adapterStorage).registerTypeAdapterFactory(adapterColour).registerTypeAdapterFactory(adapterRequirements).registerTypeAdapterFactory(adapterLeader).create();
 
-        //System.out.println(gson.toJson(player.getGameBoardOfPlayer()));
+        System.out.println(gson.toJson(player));
 
         String jsonString = gson.toJson(player.getGameBoardOfPlayer(), GameBoardInterface.class);
 
@@ -240,7 +240,7 @@ public class JsonApp {
             System.out.println("LastSpaceReachedException");
         }
 
-        System.out.println(gson.toJson(gameBoard1));
+        //System.out.println(gson.toJson(gameBoard1));
 
     }
 }

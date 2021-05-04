@@ -89,32 +89,32 @@ public class ClientController implements MessageVisitor {
 
     @Override
     public void visit(ActivateLeaderCardMessage msg) {
-        server.getGameController().handleMessage(msg);
+        //server.getGameController().handleMessage(msg);
     }
 
     @Override
     public void visit(BaseProductionOnMessage msg) {
-        server.getGameController().handleMessage(msg);
+        //server.getGameController().handleMessage(msg);
     }
 
     @Override
     public void visit(BuyProductionCardMessage msg) {
-        server.getGameController().handleMessage(msg);
+        //server.getGameController().handleMessage(msg);
     }
 
     @Override
     public void visit(DiscardLeaderCardMessage msg) {
-        server.getGameController().handleMessage(msg);
+        //server.getGameController().handleMessage(msg);
     }
 
     @Override
     public void visit(DoubleProductionOnMessage msg) {
-        server.getGameController().handleMessage(msg);
+        //server.getGameController().handleMessage(msg);
     }
 
     @Override
     public void visit(EndOfProductionMessage msg) {
-        server.getGameController().handleMessage(msg);
+        //server.getGameController().handleMessage(msg);
     }
 
     @Override
@@ -124,22 +124,22 @@ public class ClientController implements MessageVisitor {
 
     @Override
     public void visit(ExtraProductionOnMessage msg) {
-        server.getGameController().handleMessage(msg);
+        //server.getGameController().handleMessage(msg);
     }
 
     @Override
     public void visit(InitialResourcesMessage msg) {
-        server.getGameController().handleMessage(msg);
+        //server.getGameController().handleMessage(msg);
     }
 
     @Override
     public void visit(KeepLeaderCardsMessage msg) {
-        server.getGameController().handleMessage(msg);
+        //server.getGameController().handleMessage(msg);
     }
 
     @Override
     public void visit(KeepResourcesMessage msg) {
-        server.getGameController().handleMessage(msg);
+        //server.getGameController().handleMessage(msg);
     }
 
     @Override
@@ -149,17 +149,17 @@ public class ClientController implements MessageVisitor {
 
     @Override
     public void visit(ProductionOnMessage msg) {
-        server.getGameController().handleMessage(msg);
+        //server.getGameController().handleMessage(msg);
     }
 
     @Override
     public void visit(PushColumnMessage msg) {
-        server.getGameController().handleMessage(msg);
+        //server.getGameController().handleMessage(msg);
     }
 
     @Override
     public void visit(PushRowMessage msg) {
-        server.getGameController().handleMessage(msg);
+        //server.getGameController().handleMessage(msg);
     }
 
     @Override
@@ -169,7 +169,7 @@ public class ClientController implements MessageVisitor {
 
     @Override
     public void visit(WhiteMarbleChoosenResources msg) {
-        server.getGameController().handleMessage(msg);
+        //server.getGameController().handleMessage(msg);
     }
 
     @Override
