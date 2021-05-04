@@ -1,9 +1,13 @@
 package it.polimi.ingsw.server.model.productionCards;
 
 import com.google.gson.Gson;
-import it.polimi.ingsw.server.model.colours.Blue;
+import com.google.gson.GsonBuilder;
+import it.polimi.ingsw.RuntimeTypeAdapterFactory;
+import it.polimi.ingsw.server.model.colours.*;
 import it.polimi.ingsw.server.model.Mix;
 import it.polimi.ingsw.server.model.Resource;
+import it.polimi.ingsw.server.model.marbles.*;
+import it.polimi.ingsw.server.model.requirements.*;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -132,5 +136,34 @@ public class DeckProductionCardOneBlu extends DeckProductionCard {
 
                 e.printStackTrace();
             }
-        }}}
+        }}
+
+
+
+
+
+
+    /**
+     * save information of deck for a possible restart game
+     */
+    @Override
+    public void saveInformationOfProductionDeck(){
+        Gson gson=deckSaving();
+
+        FileWriter config = null;
+        String jsonStrin = gson.toJson(deck);
+        try {
+            // Constructs a FileWriter given a file name, using the platform's default charset
+            config = new FileWriter("src/main/resources/DeckProductionCardOneBluLatest.json");
+            config.write(jsonStrin);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                config.flush();
+                config.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } } }
+}
 

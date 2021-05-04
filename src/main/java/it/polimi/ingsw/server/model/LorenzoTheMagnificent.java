@@ -1,7 +1,16 @@
 package it.polimi.ingsw.server.model;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import it.polimi.ingsw.RuntimeTypeAdapterFactory;
+import it.polimi.ingsw.server.model.colours.*;
 import it.polimi.ingsw.server.model.exceptions.CallForCouncilException;
 import it.polimi.ingsw.server.model.exceptions.EndOfSolitaireGame;
+import it.polimi.ingsw.server.model.marbles.*;
+
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * this class represents the faith indicator of Lorenzo the magnificent for the game in solitary
@@ -71,4 +80,31 @@ public class LorenzoTheMagnificent{
     public int getCurrCall() {
         return currCall;
     }
-}
+
+
+    /**
+     * save information for a possible restart game
+     */
+    public void saveInformationOfLorenzo(){
+        Gson gson=new Gson();
+        ArrayList<Integer> servList = new ArrayList<>(2);
+        servList.add(faithIndicator);
+        servList.add(currCall);
+        FileWriter config = null;
+        String jsonStrin = gson.toJson(servList);
+        try {
+            // Constructs a FileWriter given a file name, using the platform's default charset
+            config = new FileWriter("src/main/resources/LoriMagnific.json");
+            config.write(jsonStrin);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                config.flush();
+                config.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } } }
+
+    }
+

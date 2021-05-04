@@ -1,8 +1,15 @@
 package it.polimi.ingsw.server.model.productionCards;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import it.polimi.ingsw.RuntimeTypeAdapterFactory;
 import it.polimi.ingsw.server.model.Resource;
+import it.polimi.ingsw.server.model.colours.*;
 import it.polimi.ingsw.server.model.exceptions.EmptyException;
 import it.polimi.ingsw.server.model.exceptions.EndOfSolitaireGame;
+import it.polimi.ingsw.server.model.gameBoard.*;
+import it.polimi.ingsw.server.model.leaderCards.*;
+import it.polimi.ingsw.server.model.requirements.*;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -94,6 +101,32 @@ public abstract class DeckProductionCard {
     public int getPoints() {
         return deck.get(0).getPoints();
     }
+
+
+    /**
+     * save information of deck for a possible restart game
+     */
+    public void saveInformationOfProductionDeck(){ }
+
+
+    public Gson deckSaving(){
+
+
+        RuntimeTypeAdapterFactory<Colour> adapterColour =
+                RuntimeTypeAdapterFactory
+                        .of(Colour.class)
+                        .registerSubtype(Green.class)
+                        .registerSubtype(Yellow.class)
+                        .registerSubtype(Blue.class)
+                        .registerSubtype(Violet.class);
+
+        Gson gson=new GsonBuilder().setPrettyPrinting()
+                .registerTypeAdapterFactory(adapterColour)
+                .create();
+
+        return gson;
+    }
+
 
 }
 

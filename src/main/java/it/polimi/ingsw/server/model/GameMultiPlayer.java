@@ -1,10 +1,13 @@
 package it.polimi.ingsw.server.model;
 
+import com.google.gson.Gson;
 import it.polimi.ingsw.server.model.exceptions.CallForCouncilException;
 import it.polimi.ingsw.server.model.exceptions.EndGameException;
 import it.polimi.ingsw.server.model.exceptions.LastSpaceReachedException;
 import it.polimi.ingsw.server.model.players.*;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 /**
  * this class represents the game multi player
@@ -254,7 +257,7 @@ public class GameMultiPlayer extends Game {
      */
     @Override
     public void saveInformation(){
-       // super();
+       super.saveInformation();
         for(Player p : playerList){
             p.savePlayerInformation();
         }
@@ -266,7 +269,23 @@ public class GameMultiPlayer extends Game {
 
 
     private void saveInformationAboutTurn() {
+        Gson gson = new Gson();
+        FileWriter config = null;
+        String jsonStrin = gson.toJson(nickNameInOrder);
+        try {
+            // Constructs a FileWriter given a file name, using the platform's default charset
+            config = new FileWriter("src/main/resources/InformationAboutTurn.json");
+            config.write(jsonStrin);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                config.flush();
+                config.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } } }
+
 
     }
 
-}

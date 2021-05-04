@@ -1,7 +1,10 @@
 package it.polimi.ingsw.server.model;
 
+import com.google.gson.Gson;
 import it.polimi.ingsw.server.model.exceptions.UnavailableResourceException;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
 
 /**
@@ -28,6 +31,8 @@ public class Reserve {
         reservePools.put(Resource.SHIELD,AMOUNT);
         reservePools.put(Resource.SERVANT,AMOUNT);
     }
+
+
 
     /**
      * static method that adds the resource passed as a parameter to the reserve
@@ -64,5 +69,27 @@ public class Reserve {
 
         return reservePools.get(resource);
     }
+    /**
+     * method for saveInformationOfReserve
+     */
+    public void saveInformationOfReserve(){
 
+        Gson g= new Gson();
+        FileWriter config = null;
+        String jsonStrin = g.toJson(reservePools);
+        try {
+            // Constructs a FileWriter given a file name, using the platform's default charset
+            config = new FileWriter("src/main/resources/Reserve.json");
+            config.write(jsonStrin);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                config.flush();
+                config.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } } }
 }
+
+

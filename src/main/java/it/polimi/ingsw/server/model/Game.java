@@ -474,11 +474,26 @@ public class Game {
      * save information for a possible restart game
      */
     public void saveInformation(){
-       // saveInformationOfProductionDeck();
-        //saveInformationOfMarket();
-       // saveInformationOfReserve();
+        deckProductionCardOneBlu.saveInformationOfProductionDeck();
+        deckProductionCardOneGreen.saveInformationOfProductionDeck();
+        deckProductionCardOneViolet.saveInformationOfProductionDeck();
+        deckProductionCardOneYellow.saveInformationOfProductionDeck();
+        deckProductionCardThreeBlu.saveInformationOfProductionDeck();
+        deckProductionCardThreeGreen.saveInformationOfProductionDeck();
+        deckProductionCardThreeYellow.saveInformationOfProductionDeck();
+        deckProductionCardThreeViolet.saveInformationOfProductionDeck();
+        deckProductionCardTwoBlu.saveInformationOfProductionDeck();
+        deckProductionCardTwoGreen.saveInformationOfProductionDeck();
+        deckProductionCardTwoViolet.saveInformationOfProductionDeck();
+        deckProductionCardTwoYellow.saveInformationOfProductionDeck();
+        market.saveInformationOfMarket();
+        reserve.saveInformationOfReserve();
 
     }
+
+
+
+
 
 }
 

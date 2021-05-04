@@ -356,9 +356,9 @@ public class GameSolitaire extends Game{
      */
     @Override
     public void saveInformation(){
-       // super();
+       super.saveInformation();
         player.savePlayerInformation();
-        //saveInformationOfActionMarker();
-        //saveInformationOfLorenzo();
+        deckActionMarker.saveInformationOfActionMarker();
+        lorenzoTheMagnificent.saveInformationOfLorenzo();
     }
 }

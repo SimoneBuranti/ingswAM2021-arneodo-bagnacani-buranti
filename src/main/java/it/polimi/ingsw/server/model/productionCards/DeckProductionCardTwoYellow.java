@@ -136,6 +136,27 @@ public class DeckProductionCardTwoYellow extends DeckProductionCard {
         }
 
     }
+    /**
+     * save information of deck for a possible restart game
+     */
+    @Override
+    public void saveInformationOfProductionDeck(){
+        Gson gson=deckSaving();
 
+        FileWriter config = null;
+        String jsonStrin = gson.toJson(deck);
+        try {
+            // Constructs a FileWriter given a file name, using the platform's default charset
+            config = new FileWriter("src/main/resources/DeckProductionCardOTwoYellowLatest.json");
+            config.write(jsonStrin);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                config.flush();
+                config.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } } }
 
 }

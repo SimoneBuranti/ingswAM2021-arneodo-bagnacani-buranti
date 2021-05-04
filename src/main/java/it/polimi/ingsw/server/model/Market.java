@@ -1,5 +1,8 @@
 package it.polimi.ingsw.server.model;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import it.polimi.ingsw.RuntimeTypeAdapterFactory;
+import it.polimi.ingsw.server.model.colours.*;
 import it.polimi.ingsw.server.model.exceptions.CallForCouncilException;
 import it.polimi.ingsw.server.model.exceptions.LastSpaceReachedException;
 import it.polimi.ingsw.server.model.exceptions.WhiteMarbleException;
@@ -35,6 +38,10 @@ public class Market {
      * this attribute is the list of balls in the initial order
      */
     private final ArrayList<Marble> initialMarbleList = new ArrayList<>(13);
+    /**
+     * this attribute is the list of balls in the initial order
+     */
+    private final ArrayList<Marble> latestMarbleList = new ArrayList<>(13);
 
     /**
      * This constructor creates the 13 marbles by adding them to the list.
@@ -242,5 +249,63 @@ public class Market {
     public Marble getCellGrid(int i, int j) {
         return grid[i][j];
     }
+
+
+
+    /**
+     * method for saveInformationOfmarket
+     */
+    public void saveInformationOfMarket(){
+        int i;
+        int j;
+        for(i=0;i<3;i++){
+            for (j=0;j<4;j++)
+            latestMarbleList.add(getCellGrid(i,j));
+        }
+        latestMarbleList.add(getExtra());
+
+
+        RuntimeTypeAdapterFactory<Colour> adapterColour =
+                RuntimeTypeAdapterFactory
+                        .of(Colour.class)
+                        .registerSubtype(Green.class)
+                        .registerSubtype(Yellow.class)
+                        .registerSubtype(Blue.class)
+                        .registerSubtype(Violet.class);
+
+        RuntimeTypeAdapterFactory<Marble> adapterMarble =
+                RuntimeTypeAdapterFactory
+                        .of(Marble.class)
+                        .registerSubtype(Marble.class)
+                        .registerSubtype(GreyMarble.class)
+                        .registerSubtype(YellowMarble.class)
+                        .registerSubtype(BluMarble.class)
+                        .registerSubtype(WhiteMarble.class)
+                        .registerSubtype(PurpleMarble.class)
+                        .registerSubtype(RedMarble.class);
+
+
+
+        Gson gson=new GsonBuilder().setPrettyPrinting()
+                .registerTypeAdapterFactory(adapterMarble)
+                .registerTypeAdapterFactory(adapterColour)
+                .create();
+
+
+        FileWriter config = null;
+        String jsonStrin = gson.toJson(latestMarbleList);
+        try {
+            // Constructs a FileWriter given a file name, using the platform's default charset
+            config = new FileWriter("src/main/resources/Market.json");
+            config.write(jsonStrin);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                config.flush();
+                config.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } } }
 
 }

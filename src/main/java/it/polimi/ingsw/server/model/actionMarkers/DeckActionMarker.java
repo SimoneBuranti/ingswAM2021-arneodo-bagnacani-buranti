@@ -1,7 +1,13 @@
 package it.polimi.ingsw.server.model.actionMarkers;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import it.polimi.ingsw.RuntimeTypeAdapterFactory;
 import it.polimi.ingsw.server.model.Mix;
+import it.polimi.ingsw.server.model.colours.*;
+import it.polimi.ingsw.server.model.gameBoard.*;
+import it.polimi.ingsw.server.model.leaderCards.*;
+import it.polimi.ingsw.server.model.requirements.*;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -20,10 +26,6 @@ public class DeckActionMarker {
      */
 
     private FileWriter configActionMarker= null;
-
-
-
-
 
     /**
      * this attribute collects the action markers of the deck
@@ -122,4 +124,106 @@ public class DeckActionMarker {
     public ActionMarker showFirst(){
         return actionMarkerDeck.get(0);
     }
+
+
+    /**
+     * method for saveInformationOfActionMarker
+     */
+    public void saveInformationOfActionMarker(){
+        Gson gson=gameBoardSaving();
+
+        FileWriter config = null;
+        String jsonStrin = gson.toJson(actionMarkerDeck);
+        try {
+            // Constructs a FileWriter given a file name, using the platform's default charset
+            config = new FileWriter("src/main/resources/DeckActionMarker.json");
+            config.write(jsonStrin);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                config.flush();
+                config.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } } }
+
+
+
+
+    public Gson gameBoardSaving(){
+
+        RuntimeTypeAdapterFactory<Storage> adapterStorage =
+                RuntimeTypeAdapterFactory
+                        .of(Storage.class)
+                        .registerSubtype(Storage.class)
+                        .registerSubtype(StorageExtraFirst.class)
+                        .registerSubtype(StorageExtraSecond.class);
+
+
+        RuntimeTypeAdapterFactory<Colour> adapterColour =
+                RuntimeTypeAdapterFactory
+                        .of(Colour.class)
+                        .registerSubtype(Green.class)
+                        .registerSubtype(Yellow.class)
+                        .registerSubtype(Blue.class)
+                        .registerSubtype(Violet.class);
+
+        RuntimeTypeAdapterFactory<GameBoardInterface> adapterGameBoard =
+                RuntimeTypeAdapterFactory
+                        .of(GameBoardInterface.class)
+                        .registerSubtype(GameBoard.class)
+                        .registerSubtype(ProductionGameBoardDouble.class)
+                        .registerSubtype(ProductionGameBoard.class)
+                        .registerSubtype(WhiteMarbleGameBoard.class)
+                        .registerSubtype(WhiteMarbleGameBoardDouble.class)
+                        .registerSubtype(ReductionGameBoard.class)
+                        .registerSubtype(ReductionGameBoardDouble.class);
+
+
+        RuntimeTypeAdapterFactory<Requirements> adapterRequirements =
+                RuntimeTypeAdapterFactory
+                        .of(Requirements.class)
+                        .registerSubtype(ResourceRequirement.class)
+                        .registerSubtype(SecondLevelRequirement.class)
+                        .registerSubtype(ThreeFlagsTwoColourRequirement.class)
+                        .registerSubtype(TwoFlagsTwoColourRequirement.class);
+
+        RuntimeTypeAdapterFactory<LeaderCard> adapterLeader =
+                RuntimeTypeAdapterFactory
+                        .of(LeaderCard.class)
+                        .registerSubtype(LeaderCardMarble.class)
+                        .registerSubtype(LeaderCardProduction.class)
+                        .registerSubtype(LeaderCardReduction.class)
+                        .registerSubtype(LeaderCardStorage.class);
+
+
+        RuntimeTypeAdapterFactory<ActionMarker> adapterAction =
+                RuntimeTypeAdapterFactory
+                        .of(ActionMarker.class)
+                        .registerSubtype(ActionMarkerProductionViolet.class)
+                        .registerSubtype(ActionMarkerProductionYellow.class)
+                .registerSubtype(ActionMarkerProductionGreen.class)
+                .registerSubtype(ActionMarkerProductionBlue.class)
+                        .registerSubtype(ActionMarkerForCrossDouble.class)
+                        .registerSubtype(ActionMarkerForCrossOnce.class)
+                ;
+
+
+        Gson gson=new GsonBuilder().setPrettyPrinting()
+                .registerTypeAdapterFactory(adapterGameBoard)
+                .registerTypeAdapterFactory(adapterStorage)
+                .registerTypeAdapterFactory(adapterColour)
+                .registerTypeAdapterFactory(adapterRequirements)
+                .registerTypeAdapterFactory(adapterLeader)
+                .create();
+
+        return gson;
+    }
+
+
+
+
+
+
 }
