@@ -474,9 +474,9 @@ public class Game {
      * save information for a possible restart game
      */
     public void saveInformation(){
-       // saveInformationOfProudciotnDeck();
+       // saveInformationOfProductionDeck();
         //saveInformationOfMarket();
-       // saveInformationOfProudciotnDeck();
+       // saveInformationOfReserve();
 
     }
 

@@ -259,12 +259,14 @@ public class GameMultiPlayer extends Game {
             p.savePlayerInformation();
         }
         saveInformationAboutTurn();
+
     }
 
 
 
 
     private void saveInformationAboutTurn() {
+
     }
 
 }

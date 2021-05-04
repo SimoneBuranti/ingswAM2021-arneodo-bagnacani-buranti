@@ -317,22 +317,7 @@ public class Player {
      */
     public Gson gameBoardSaving(){
 
-        RuntimeTypeAdapterFactory<GameBoardInterface> adapterGameboard =
-                RuntimeTypeAdapterFactory
-                        .of(GameBoardInterface.class)
-                        .registerSubtype(GameBoard.class)
-                        .registerSubtype(GameBoardDecorator.class)
-                        .registerSubtype(ProductionGameBoard.class)
-                        .registerSubtype(ProductionGameBoardDouble.class)
-                        .registerSubtype(ReductionGameBoard.class)
-                        .registerSubtype(ReductionGameBoardDouble.class)
-                        .registerSubtype(WhiteMarbleGameBoard.class)
-                        .registerSubtype(WhiteMarbleGameBoardDouble.class);
-
-
-
-
-        RuntimeTypeAdapterFactory<Storage> adapterStorageOne =
+        RuntimeTypeAdapterFactory<Storage> adapterStorage =
                 RuntimeTypeAdapterFactory
                         .of(Storage.class)
                         .registerSubtype(Storage.class)
@@ -347,6 +332,17 @@ public class Player {
                         .registerSubtype(Yellow.class)
                         .registerSubtype(Blue.class)
                         .registerSubtype(Violet.class);
+
+        RuntimeTypeAdapterFactory<GameBoardInterface> adapterGameBoard =
+                RuntimeTypeAdapterFactory
+                        .of(GameBoardInterface.class)
+                        .registerSubtype(GameBoard.class)
+                        .registerSubtype(ProductionGameBoardDouble.class)
+                        .registerSubtype(ProductionGameBoard.class)
+                        .registerSubtype(WhiteMarbleGameBoard.class)
+                        .registerSubtype(WhiteMarbleGameBoardDouble.class)
+                        .registerSubtype(ReductionGameBoard.class)
+                        .registerSubtype(ReductionGameBoardDouble.class);
 
 
         RuntimeTypeAdapterFactory<Requirements> adapterRequirements =
@@ -365,15 +361,16 @@ public class Player {
                         .registerSubtype(LeaderCardReduction.class)
                         .registerSubtype(LeaderCardStorage.class);
 
-        Gson gson=new GsonBuilder()
-                .setPrettyPrinting()
-                .registerTypeAdapterFactory(adapterGameboard)
-                .registerTypeAdapterFactory(adapterStorageOne)
-                .registerTypeAdapterFactory(adapterLeader)
-                .registerTypeAdapterFactory(adapterRequirements)
-                .registerTypeAdapterFactory(adapterColour)
-                .create();
 
+
+
+        Gson gson=new GsonBuilder().setPrettyPrinting()
+                .registerTypeAdapterFactory(adapterGameBoard)
+                .registerTypeAdapterFactory(adapterStorage)
+                .registerTypeAdapterFactory(adapterColour)
+                .registerTypeAdapterFactory(adapterRequirements)
+                .registerTypeAdapterFactory(adapterLeader)
+                .create();
 
         return gson;
     }

@@ -4,8 +4,7 @@ import it.polimi.ingsw.messages.*;
 
 public class GameControllerSinglePlayer implements GameControllerInterface{
 
-
-    @Override
+* @Override
     public void handleMessage(ActivateLeaderCardMessage msg) {
 
     }
@@ -33,14 +32,14 @@ public class GameControllerSinglePlayer implements GameControllerInterface{
     @Override
     public void handleMessage(EndOfProductionMessage msg) {
 
-    }
+    }*/
 
     @Override
     public void handleMessage(ExitMessage msg) {
 
     }
 
-    @Override
+   /* @Override
     public void handleMessage(ExtraProductionOnMessage msg) {
 
     }
@@ -58,14 +57,14 @@ public class GameControllerSinglePlayer implements GameControllerInterface{
     @Override
     public void handleMessage(KeepResourcesMessage msg) {
 
-    }
+    }*/
 
     @Override
     public void handleMessage(NumberPlayerMessage msg) {
 
     }
 
-    @Override
+   /* @Override
     public void handleMessage(ProductionOnMessage msg) {
 
     }
@@ -78,17 +77,17 @@ public class GameControllerSinglePlayer implements GameControllerInterface{
     @Override
     public void handleMessage(PushRowMessage msg) {
 
-    }
+    }*/
 
     @Override
     public void handleMessage(UsernameMessage msg) {
 
     }
 
-    @Override
+   /* @Override
     public void handleMessage(WhiteMarbleChoosenResources msg) {
 
-    }
+    }*/
 
     @Override
     public void handleMessage(OkMessage msg) {

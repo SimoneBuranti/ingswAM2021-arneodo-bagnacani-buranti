@@ -100,46 +100,10 @@ public class App
 
 
 
-
-
-        RuntimeTypeAdapterFactory<GameBoardInterface> adapterGameboard1=
-                RuntimeTypeAdapterFactory
-                        .of(GameBoardInterface.class)
-                        .registerSubtype(GameBoard.class)
-                        .registerSubtype(GameBoardDecorator.class)
-                        .registerSubtype(ProductionGameBoard.class)
-                        .registerSubtype(ProductionGameBoardDouble.class)
-                        .registerSubtype(ReductionGameBoard.class)
-                        .registerSubtype(ReductionGameBoardDouble.class)
-                        .registerSubtype(WhiteMarbleGameBoard.class)
-                        .registerSubtype(WhiteMarbleGameBoardDouble.class);
-
-
-        RuntimeTypeAdapterFactory<GameBoardDecorator> adapterGameboard2=
-                RuntimeTypeAdapterFactory
-                        .of(GameBoardDecorator.class)
-                        .registerSubtype(GameBoardDecorator.class)
-                        .registerSubtype(ProductionGameBoard.class)
-                        .registerSubtype(ProductionGameBoardDouble.class)
-                        .registerSubtype(ReductionGameBoard.class)
-                        .registerSubtype(ReductionGameBoardDouble.class)
-                        .registerSubtype(WhiteMarbleGameBoard.class)
-                        .registerSubtype(WhiteMarbleGameBoardDouble.class);
-
-
-
-
-       RuntimeTypeAdapterFactory<Storage> adapterStorageOne =
+        RuntimeTypeAdapterFactory<Storage> adapterStorage =
                 RuntimeTypeAdapterFactory
                         .of(Storage.class)
                         .registerSubtype(Storage.class)
-                        .registerSubtype(StorageExtraFirst.class)
-                        .registerSubtype(StorageExtraSecond.class);
-
-
-        RuntimeTypeAdapterFactory<StorageExtraFirst> adapterStorageTwo =
-                RuntimeTypeAdapterFactory
-                        .of(StorageExtraFirst.class)
                         .registerSubtype(StorageExtraFirst.class)
                         .registerSubtype(StorageExtraSecond.class);
 
@@ -151,6 +115,17 @@ public class App
                         .registerSubtype(Yellow.class)
                         .registerSubtype(Blue.class)
                         .registerSubtype(Violet.class);
+
+        RuntimeTypeAdapterFactory<GameBoardInterface> adapterGameBoard =
+                RuntimeTypeAdapterFactory
+                        .of(GameBoardInterface.class)
+                        .registerSubtype(GameBoard.class)
+                        .registerSubtype(ProductionGameBoardDouble.class)
+                        .registerSubtype(ProductionGameBoard.class)
+                        .registerSubtype(WhiteMarbleGameBoard.class)
+                        .registerSubtype(WhiteMarbleGameBoardDouble.class)
+                        .registerSubtype(ReductionGameBoard.class)
+                        .registerSubtype(ReductionGameBoardDouble.class);
 
 
         RuntimeTypeAdapterFactory<Requirements> adapterRequirements =
@@ -169,18 +144,23 @@ public class App
                         .registerSubtype(LeaderCardReduction.class)
                         .registerSubtype(LeaderCardStorage.class);
 
-        Gson gson=new GsonBuilder()
-                .setPrettyPrinting()
-                .registerTypeAdapterFactory(adapterGameboard1)
-                .registerTypeAdapterFactory(adapterGameboard2)
-                .registerTypeAdapterFactory(adapterStorageOne)
-                .registerTypeAdapterFactory(adapterStorageTwo)
-                .registerTypeAdapterFactory(adapterLeader)
-                .registerTypeAdapterFactory(adapterRequirements)
+
+
+
+        Gson gson=new GsonBuilder().setPrettyPrinting()
+                .registerTypeAdapterFactory(adapterGameBoard)
+                .registerTypeAdapterFactory(adapterStorage)
                 .registerTypeAdapterFactory(adapterColour)
+                .registerTypeAdapterFactory(adapterRequirements)
+                .registerTypeAdapterFactory(adapterLeader)
                 .create();
 
-        String jsonStrin = gson.toJson(gameMultiPlayer.getPlayerFromList(0).getGameBoardOfPlayer());
+
+
+
+
+
+        String jsonStrin = gson.toJson(gameMultiPlayer.getPlayerFromList(0).getGameBoardOfPlayer(),GameBoardInterface.class);
 
         try {
 
@@ -205,19 +185,11 @@ public class App
 
 
 
-            GameBoard gameBoardOne = gson.fromJson(new FileReader("src/main/resources/ConfigurationTry.json"),GameBoard.class);
+            GameBoardInterface gameBoardOne = gson.fromJson(new FileReader("src/main/resources/ConfigurationTry.json"),GameBoardInterface.class);
 
-            if((gameBoardOne.equals(gameMultiPlayer.getPlayerFromList(0).getGameBoardOfPlayer())))
-                System.out.println("yes");
+            System.out.println(gameBoardOne.getClass());
 
-
-
-
-
-
-
-
-
+            System.out.println(gson.toJson(gameBoardOne));
 
 
 
