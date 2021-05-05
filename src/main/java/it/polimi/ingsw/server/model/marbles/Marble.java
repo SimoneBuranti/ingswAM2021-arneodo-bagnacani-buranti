@@ -21,5 +21,5 @@ public class Marble {
     /**
      * @return colour marble
      */
-    public String getColour(){return null;};
+    public String getColour(){return null;}
 }

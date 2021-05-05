@@ -1,6 +1,7 @@
 package it.polimi.ingsw.server.model;
 
 
+import com.google.gson.Gson;
 import it.polimi.ingsw.server.model.actionMarkers.ActionMarker;
 import it.polimi.ingsw.server.model.actionMarkers.DeckActionMarker;
 import it.polimi.ingsw.server.model.colours.Blue;
@@ -15,6 +16,12 @@ import it.polimi.ingsw.server.model.gameBoard.GameBoardInterface;
 import it.polimi.ingsw.server.model.players.Player;
 import it.polimi.ingsw.server.model.players.PlayerFirst;
 import it.polimi.ingsw.server.model.productionCards.DeckProductionCard;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * this class represents the game in solitary
@@ -33,15 +40,26 @@ public class GameSolitaire extends Game{
      * this attribute represents the player of the game
      */
     Player player;
+
+    private String nickNamePlayer;
+
+
     /**
      * the constructor calls the super class constructor and instantiates the attributes of the solitaire game
      */
-    public GameSolitaire(String nickName) {
-        super();
+
+
+
+    public GameSolitaire(String nickName, Boolean newGame) {
+        super(newGame);
+        if(newGame){
+        this.nickNamePlayer=nickName;
         deckActionMarker = new DeckActionMarker();
         lorenzoTheMagnificent = new LorenzoTheMagnificent();
         player = new PlayerFirst(nickName, this);
-        currentPlayer = player;
+        currentPlayer = player;}
+        else
+            restoreGameSolitaire();
     }
 
     /**
@@ -360,5 +378,75 @@ public class GameSolitaire extends Game{
         player.savePlayerInformation();
         deckActionMarker.saveInformationOfActionMarker();
         lorenzoTheMagnificent.saveInformationOfLorenzo();
+        saveNickNamePlayer();
+    }
+
+
+
+
+    public void  restoreGameSolitaire() {
+        currentPlayer = player;
+        Gson gson=new Gson();
+
+        try {
+            nickNamePlayer= gson.fromJson(new FileReader("src/main/resources/InformationAboutNickname.json"), String.class);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        RestoreActionMarker();
+        player = new PlayerFirst(nickNamePlayer);
+        RestoreActionMagnific();
+
+    }
+
+
+
+    public void saveNickNamePlayer(){
+        Gson gson = new Gson();
+        FileWriter config = null;
+        String jsonStrin = gson.toJson(nickNamePlayer);
+        try {
+            // Constructs a FileWriter given a file name, using the platform's default charset
+            config = new FileWriter("src/main/resources/InformationAboutNickname.json");
+            config.write(jsonStrin);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                config.flush();
+                config.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } }
+    }
+
+
+    /**
+     * restore magnific game
+     */
+    public void RestoreActionMagnific(){
+        Gson gson=new Gson();
+        int[] servList;
+
+        try {
+            servList = gson.fromJson(new FileReader("src/main/resources/LoriMagnific.json"),int[].class);
+            lorenzoTheMagnificent=new LorenzoTheMagnificent(servList);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * save information for a possible restart game
+     */
+    public void RestoreActionMarker(){
+        Gson gson=new Gson();
+        ActionMarker[] servList;
+        try {
+            servList= gson.fromJson(new FileReader("src/main/resources/DeckActionMarker.json"),ActionMarker[].class);
+            this.deckActionMarker = new DeckActionMarker(servList);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 }

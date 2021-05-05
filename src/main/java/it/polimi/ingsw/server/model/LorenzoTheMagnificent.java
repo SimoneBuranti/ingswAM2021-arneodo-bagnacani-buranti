@@ -8,6 +8,8 @@ import it.polimi.ingsw.server.model.exceptions.CallForCouncilException;
 import it.polimi.ingsw.server.model.exceptions.EndOfSolitaireGame;
 import it.polimi.ingsw.server.model.marbles.*;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -106,5 +108,20 @@ public class LorenzoTheMagnificent{
                 e.printStackTrace();
             } } }
 
+
+
+
+    public LorenzoTheMagnificent(int[] list) {
+        faithIndicator=list[0];
+        currCall=list[1];
     }
+
+
+
+
+
+
+
+
+}
 

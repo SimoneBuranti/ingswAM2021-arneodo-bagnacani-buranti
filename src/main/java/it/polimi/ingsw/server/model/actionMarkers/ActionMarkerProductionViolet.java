@@ -9,7 +9,7 @@ import it.polimi.ingsw.server.model.colours.Violet;
  * this class implements the ActionMarker interface and
  * represents the action marker that discards two violet production cards from level one deck up to level three deck
  */
-public class ActionMarkerProductionViolet implements ActionMarker{
+public class ActionMarkerProductionViolet extends ActionMarker {
 
 
     /**

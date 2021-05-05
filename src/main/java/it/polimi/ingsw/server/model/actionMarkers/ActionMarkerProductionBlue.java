@@ -9,7 +9,7 @@ import it.polimi.ingsw.server.model.GameSolitaire;
  * this class implements the ActionMarker interface and
  * represents the action marker that discards two blue production cards from level one deck up to level three deck
  */
-public class ActionMarkerProductionBlue implements ActionMarker{
+public class ActionMarkerProductionBlue extends ActionMarker {
 
     /**
      * type of object

@@ -24,7 +24,7 @@ public class ActionMarkerTest {
     @Test
     @DisplayName("Action Marker Production Cards Test")
     public void actionMarkerBlueTest(){
-        GameSolitaire game = new GameSolitaire("Ali");
+        GameSolitaire game = new GameSolitaire("Ali",true);
         ActionMarker actionMarker= new ActionMarkerProductionBlue();
 
 
@@ -82,7 +82,7 @@ public class ActionMarkerTest {
     @DisplayName("Action Marker Production Cards Complete Test")
     public void actionMarkerBlueCompleteTest() throws EndOfSolitaireGame {
 
-        GameSolitaire game = new GameSolitaire("Ali");
+        GameSolitaire game = new GameSolitaire("Ali",true);
         ActionMarker actionMarker= new ActionMarkerProductionBlue();
 
 
@@ -136,7 +136,7 @@ public class ActionMarkerTest {
     @DisplayName("Action Marker Black Cross Once Test")
     public void ActionMarkerCrossOnceTest(){
         ActionMarkerForCrossOnce actionMarker = new ActionMarkerForCrossOnce();
-        GameSolitaire game = new GameSolitaire("Ali");
+        GameSolitaire game = new GameSolitaire("Ali",true);
 
         ActionMarker actionMarker1 = game.showFirst();
         assertEquals(0, game.getLorenzoFaithIndicator());
@@ -198,7 +198,7 @@ public class ActionMarkerTest {
     @DisplayName("Action Marker Black Cross Double Test")
     public void ActionMarkerCrossDoubleTest(){
         ActionMarkerForCrossDouble actionMarker = new ActionMarkerForCrossDouble();
-        GameSolitaire game = new GameSolitaire("Ali");
+        GameSolitaire game = new GameSolitaire("Ali",true);
 
         ActionMarker actionMarker1;
         actionMarker1 = game.showFirst();

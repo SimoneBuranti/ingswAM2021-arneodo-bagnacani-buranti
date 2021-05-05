@@ -23,7 +23,7 @@ public class MarketTest {
         ArrayList<String> nickname =new ArrayList<>(2);
         nickname.add("ale");
         nickname.add("ali");
-        GameMultiPlayer game= new GameMultiPlayer(2,nickname);
+        GameMultiPlayer game= new GameMultiPlayer(2,nickname,true);
 
 
         assertTrue(!( game.getCellGridMarket(0, 0) instanceof RedMarble) ||
@@ -52,7 +52,7 @@ public class MarketTest {
         ArrayList<String> nickname =new ArrayList<>(2);
         nickname.add("ale");
         nickname.add("ali");
-        GameMultiPlayer game= new GameMultiPlayer(2,nickname);
+        GameMultiPlayer game= new GameMultiPlayer(2,nickname,true);
 
         assertTrue(!( game.getExtraMarket() instanceof RedMarble) ||
                 (game.getExtraMarket() instanceof YellowMarble)||
@@ -79,7 +79,7 @@ public class MarketTest {
         ArrayList<String> nickname =new ArrayList<>(2);
         nickname.add("ale");
         nickname.add("ali");
-        GameMultiPlayer game= new GameMultiPlayer(2,nickname);
+        GameMultiPlayer game= new GameMultiPlayer(2,nickname,true);
 
 
         assertTrue(( game.getCellGridMarket(0, 0) instanceof RedMarble) ||
@@ -123,7 +123,7 @@ public void PushRowsOfMarketCycling() {
         ArrayList<String> nickname =new ArrayList<>(2);
         nickname.add("ale");
         nickname.add("ali");
-        GameMultiPlayer game= new GameMultiPlayer(2,nickname);
+        GameMultiPlayer game= new GameMultiPlayer(2,nickname,true);
         game.pushRowInMarket(0);
         assertEquals(game.getCellGridMarket(0, 0), game.getInitialMarbleListMarket(1));
         assertEquals(game.getCellGridMarket(0, 1), game.getInitialMarbleListMarket(2));
@@ -173,7 +173,7 @@ public void PushRowsOfMarketCycling() {
         ArrayList<String> nickname =new ArrayList<>(2);
         nickname.add("ale");
         nickname.add("ali");
-        GameMultiPlayer game= new GameMultiPlayer(2,nickname);
+        GameMultiPlayer game= new GameMultiPlayer(2,nickname,true);
 
 
         assertTrue(( game.getCellGridMarket(0, 0) instanceof RedMarble) ||
@@ -213,7 +213,7 @@ public void PushRowsOfMarketCycling() {
         ArrayList<String> nickname =new ArrayList<>(2);
         nickname.add("ale");
         nickname.add("ali");
-        GameMultiPlayer game= new GameMultiPlayer(2,nickname);
+        GameMultiPlayer game= new GameMultiPlayer(2,nickname,true);
 
         assertEquals(game.getCellGridMarket(0, 0), game.getInitialMarbleListMarket(0));
         assertEquals(game.getCellGridMarket(1, 0), game.getInitialMarbleListMarket(4));

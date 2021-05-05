@@ -30,7 +30,7 @@ public class App
         nickname.add("bb");
         FileWriter cofiguration = null;
 
-        GameMultiPlayer gameMultiPlayer =new GameMultiPlayer(2, nickname);
+        GameMultiPlayer gameMultiPlayer =new GameMultiPlayer(2, nickname,true);
 
         Colour blue =new Blue();
         Colour green =new Green();
@@ -164,7 +164,6 @@ public class App
 
         try {
 
-            // Constructs a FileWriter given a file name, using the platform's default charset
             cofiguration = new FileWriter("src/main/resources/ConfigurationTry.json");
             cofiguration.write(jsonStrin);
 
@@ -186,6 +185,7 @@ public class App
 
 
             GameBoardInterface gameBoardOne = gson.fromJson(new FileReader("src/main/resources/ConfigurationTry.json"),GameBoardInterface.class);
+
 
             System.out.println(gameBoardOne.getClass());
 

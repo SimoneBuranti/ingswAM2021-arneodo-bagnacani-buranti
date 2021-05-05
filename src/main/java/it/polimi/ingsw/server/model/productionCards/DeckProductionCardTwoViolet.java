@@ -5,6 +5,8 @@ import it.polimi.ingsw.server.model.Mix;
 import it.polimi.ingsw.server.model.Resource;
 import it.polimi.ingsw.server.model.colours.Violet;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
@@ -145,7 +147,7 @@ public class DeckProductionCardTwoViolet extends DeckProductionCard {
         String jsonStrin = gson.toJson(deck);
         try {
             // Constructs a FileWriter given a file name, using the platform's default charset
-            config = new FileWriter("src/main/resources/DeckProductionCardTwoVioletLatest.json");
+            config = new FileWriter("src/main/resources/DeckProductionCardTwoYellowLatest.json");
             config.write(jsonStrin);
         } catch (IOException e) {
             e.printStackTrace();
@@ -157,4 +159,36 @@ public class DeckProductionCardTwoViolet extends DeckProductionCard {
                 e.printStackTrace();
             } } }
 
+    public DeckProductionCardTwoViolet(ProductionCard[] deckRecover){
+        this.deck = new ArrayList<>();
+        int l=deckRecover.length;
+        for(int i=0; i < l; i++)
+            deck.add(deckRecover[i]);
+        Gson gson = new Gson();
+
+        List<Integer> list = new ArrayList<Integer>();
+        for(int i=0; i < deck.size(); i++)
+            list.add(deck.get(i).getKey());
+
+        String jsonStr = gson.toJson(list);
+
+        try {
+
+            // Constructs a FileWriter given a file name, using the platform's default charset
+            configDeckVioletTwo= new FileWriter("src/main/resources/configDeckVioletTwo.json");
+            configDeckVioletTwo.write(jsonStr);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        } finally {
+
+            try {
+                configDeckVioletTwo.flush();
+                configDeckVioletTwo.close();
+            } catch (IOException e) {
+
+                e.printStackTrace();
+            }
+        }}
 }

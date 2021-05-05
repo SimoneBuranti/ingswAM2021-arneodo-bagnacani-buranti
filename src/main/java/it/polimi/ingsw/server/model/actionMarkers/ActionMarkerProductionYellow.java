@@ -9,7 +9,7 @@ import it.polimi.ingsw.server.model.colours.Yellow;
  * this class implements the ActionMarker interface and
  * represents the action marker that discards two yellow production cards from level one deck up to level three deck
  */
-public class ActionMarkerProductionYellow implements ActionMarker{
+public class ActionMarkerProductionYellow extends ActionMarker {
 
     /**
      * type of object

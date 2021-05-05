@@ -28,7 +28,7 @@ public class BuyProductionCardTest {
     @Test
     @DisplayName("Buy production card in solitaire game test")
     public void buyInSolitaireGame(){
-        GameSolitaire game = new GameSolitaire("Ali");
+        GameSolitaire game = new GameSolitaire("Ali",true);
 
         GameBoardInterface gameBoard = game.getGameBoardOfPlayer();
 

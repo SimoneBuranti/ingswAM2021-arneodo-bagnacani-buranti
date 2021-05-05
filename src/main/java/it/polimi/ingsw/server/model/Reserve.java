@@ -3,6 +3,8 @@ package it.polimi.ingsw.server.model;
 import com.google.gson.Gson;
 import it.polimi.ingsw.server.model.exceptions.UnavailableResourceException;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
@@ -20,7 +22,7 @@ public class Reserve {
     /**
      * A static final map reservePools collects the current resource amount of the reserve
      */
-    private static final Map<Resource , Integer> reservePools = new HashMap<>();
+    private static Map<Resource , Integer> reservePools = new HashMap<>();
 
     /**
      * The constructor initialise every resource type to the value of AMOUNT
@@ -90,6 +92,12 @@ public class Reserve {
             } catch (IOException e) {
                 e.printStackTrace();
             } } }
+
+
+
+ public Reserve(Map map) {
+        reservePools=map;
+    }
 }
 
 

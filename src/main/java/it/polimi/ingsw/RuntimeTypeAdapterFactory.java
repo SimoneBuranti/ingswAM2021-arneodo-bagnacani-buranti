@@ -100,6 +100,7 @@ public final class RuntimeTypeAdapterFactory<T> implements TypeAdapterFactory {
             subtypeToDelegate.put(entry.getValue(), delegate);
         }
 
+
         return new TypeAdapter<R>() {
             @Override public R read(JsonReader in) throws IOException {
                 JsonElement jsonElement = Streams.parse(in);

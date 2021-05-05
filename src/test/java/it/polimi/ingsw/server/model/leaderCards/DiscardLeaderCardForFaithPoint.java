@@ -23,7 +23,7 @@ class DiscardLeaderCardForFaithPoint {
         ArrayList<String> nickname = new ArrayList<>();
         nickname.add("ale");
         nickname.add("ali");
-        GameMultiPlayer game=new GameMultiPlayer(2, nickname);
+        GameMultiPlayer game=new GameMultiPlayer(2, nickname,true);
         assertEquals(8,game.leaderDeckSize());
         assertNotEquals(game.getPlayerFromList(0).getCardFromPersonalLeaderCard(0),(game.getPlayerFromList(1).getCardFromPersonalLeaderCard(0)));
         assertNotEquals(game.getPlayerFromList(0).getCardFromPersonalLeaderCard(0),(game.getPlayerFromList(1).getCardFromPersonalLeaderCard(1)));

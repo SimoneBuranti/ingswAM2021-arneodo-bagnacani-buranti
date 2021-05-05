@@ -114,11 +114,11 @@ public abstract class DeckProductionCard {
 
         RuntimeTypeAdapterFactory<Colour> adapterColour =
                 RuntimeTypeAdapterFactory
-                        .of(Colour.class)
-                        .registerSubtype(Green.class)
-                        .registerSubtype(Yellow.class)
-                        .registerSubtype(Blue.class)
-                        .registerSubtype(Violet.class);
+                        .of(Colour.class,"type")
+                        .registerSubtype(Green.class,"Green")
+                        .registerSubtype(Yellow.class,"Yellow")
+                        .registerSubtype(Blue.class,"Blue")
+                        .registerSubtype(Violet.class,"Violet");
 
         Gson gson=new GsonBuilder().setPrettyPrinting()
                 .registerTypeAdapterFactory(adapterColour)

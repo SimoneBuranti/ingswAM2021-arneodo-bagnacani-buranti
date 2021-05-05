@@ -15,9 +15,22 @@ public class ReserveTest {
 
         ArrayList<String> nickname =new ArrayList<>(2);
         nickname.add("aa");
+        nickname.add("ii");
 
 
 
-        GameSolitaire gameMultiPlayer =new GameSolitaire( "nickname");
-        gameMultiPlayer.saveInformation(); }
+       /* GameSolitaire gameMultiPlayer1 =new GameSolitaire( "nickname",true);
+        gameMultiPlayer1.saveInformation();
+
+        GameSolitaire gameMultiPlayer2 =new GameSolitaire( "nickname",false);*/
+
+
+        GameMultiPlayer gameMultiPlayer3 =new GameMultiPlayer(2,nickname,true);
+        gameMultiPlayer3.saveInformation();
+
+        GameMultiPlayer gameMultiPlayer4 =new GameMultiPlayer( 2,nickname,false);
+
+
+
+    }
 }

@@ -14,6 +14,8 @@ public class BluMarble extends Marble {
     private String colour= "blue";
 
 
+
+
     @Override
     public String getColour() {
         return colour;

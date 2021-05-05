@@ -6,9 +6,12 @@ import it.polimi.ingsw.server.model.colours.*;
 import it.polimi.ingsw.server.model.exceptions.CallForCouncilException;
 import it.polimi.ingsw.server.model.exceptions.LastSpaceReachedException;
 import it.polimi.ingsw.server.model.exceptions.WhiteMarbleException;
+import it.polimi.ingsw.server.model.gameBoard.GameBoardInterface;
 import it.polimi.ingsw.server.model.marbles.*;
 import it.polimi.ingsw.server.model.players.Player;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -37,11 +40,12 @@ public class Market {
     /**
      * this attribute is the list of balls in the initial order
      */
-    private final ArrayList<Marble> initialMarbleList = new ArrayList<>(13);
+    private ArrayList<Marble> initialMarbleList = new ArrayList<>(13);
     /**
      * this attribute is the list of balls in the initial order
      */
     private final ArrayList<Marble> latestMarbleList = new ArrayList<>(13);
+
 
     /**
      * This constructor creates the 13 marbles by adding them to the list.
@@ -84,7 +88,7 @@ public class Market {
 
         Mix.MIXED(initialMarbleList);
 
-        setGrid(initialMarbleList);
+        setGrid();
         setExtra();
 
         List<String> list = new ArrayList<String>();
@@ -191,9 +195,9 @@ public class Market {
 
     /**
      * this method initialises grid with the first 12 elements of the ArrayList passed as a parameter
-     * @param initialMarbleList : a collection of marbles to be placed in the market structure
+
      */
-    private void setGrid(ArrayList<Marble> initialMarbleList){
+    private void setGrid(){
     int i;
     int j;
     int index=0;
@@ -276,7 +280,6 @@ public class Market {
         RuntimeTypeAdapterFactory<Marble> adapterMarble =
                 RuntimeTypeAdapterFactory
                         .of(Marble.class)
-                        .registerSubtype(Marble.class)
                         .registerSubtype(GreyMarble.class)
                         .registerSubtype(YellowMarble.class)
                         .registerSubtype(BluMarble.class)
@@ -286,9 +289,10 @@ public class Market {
 
 
 
-        Gson gson=new GsonBuilder().setPrettyPrinting()
+        Gson gson=new GsonBuilder()
                 .registerTypeAdapterFactory(adapterMarble)
                 .registerTypeAdapterFactory(adapterColour)
+                .setPrettyPrinting()
                 .create();
 
 
@@ -307,5 +311,41 @@ public class Market {
             } catch (IOException e) {
                 e.printStackTrace();
             } } }
+
+
+
+
+    public Market(Marble[] list){
+        Gson g = new Gson();
+
+        for(int i=0; i < 13; i++)
+            initialMarbleList.add(list[i]);
+        setGrid();
+        setExtra();
+
+        String jsonStr = g.toJson(initialMarbleList);
+
+        try {
+
+            // Constructs a FileWriter given a file name, using the platform's default charset
+            configMarket= new FileWriter("src/main/resources/configMarket.json");
+            configMarket.write(jsonStr);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        } finally {
+
+            try {
+                configMarket.flush();
+                configMarket.close();
+            } catch (IOException e) {
+
+                e.printStackTrace();
+            }
+        }}
+
+
+
 
 }

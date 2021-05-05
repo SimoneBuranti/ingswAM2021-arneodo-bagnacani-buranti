@@ -6,7 +6,7 @@ import it.polimi.ingsw.server.model.GameSolitaire;
  * this class implements the ActionMarker interface and
  * represents the action marker that moves the black cross forward two spaces
  */
-public class ActionMarkerForCrossDouble implements ActionMarker{
+public class ActionMarkerForCrossDouble extends ActionMarker {
 
 
     private String type="ActionMarkerForCrossDouble";

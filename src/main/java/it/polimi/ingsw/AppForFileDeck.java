@@ -11,10 +11,10 @@ public class AppForFileDeck {
         ArrayList<String> nickname =new ArrayList<>(2);
         nickname.add("aa");
         nickname.add("bb");
-        GameMultiPlayer gameMultiPlayer=new GameMultiPlayer(2,nickname);
+        GameMultiPlayer gameMultiPlayer=new GameMultiPlayer(2,nickname,true);
 
 
-        GameSolitaire gameSolitaire= new GameSolitaire("aa");
+        GameSolitaire gameSolitaire= new GameSolitaire("aa",true);
 
     }
 

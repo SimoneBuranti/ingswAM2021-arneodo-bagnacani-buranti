@@ -6,6 +6,8 @@ import it.polimi.ingsw.server.model.exceptions.EndGameException;
 import it.polimi.ingsw.server.model.exceptions.LastSpaceReachedException;
 import it.polimi.ingsw.server.model.players.*;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,7 +19,7 @@ public class GameMultiPlayer extends Game {
     /**
      * this attribute represents the number of player
      */
-    private final int numberOfPlayer;
+    private int numberOfPlayer;
 
     /**
      * this attribute represents the first player
@@ -39,7 +41,7 @@ public class GameMultiPlayer extends Game {
     /**
      * this attribute represents the inkwell given to the first player in intestate
      */
-    private final int inkwell;
+    private int inkwell;
 
     /**
      * this attribute represents the boolean which indicates the last turn or not
@@ -69,14 +71,18 @@ public class GameMultiPlayer extends Game {
      * @param numberOfPlayer : the number of players in the game
      * @param nickName : the collection of players' nicknames
      */
-    public GameMultiPlayer(int numberOfPlayer, ArrayList<String> nickName){
-        super();
-        this.playerList= new ArrayList<>();
+    public GameMultiPlayer(int numberOfPlayer, ArrayList<String> nickName, Boolean newGame){
+        super(newGame);
+        if(newGame){
+        this.playerList= new ArrayList<>(numberOfPlayer);
         this.numberOfPlayer=numberOfPlayer;
         inkwell=createRandomNumber(numberOfPlayer);
         nickNameInOrder=correctOrder(nickName,inkwell);
         createPlayer(numberOfPlayer,nickNameInOrder);
-        currentPlayer = playerList.get(currentPlayerPosition);
+        currentPlayer = playerList.get(currentPlayerPosition);}
+        else
+            restoreGameMultiPlayer();
+
     }
 
     /**
@@ -262,8 +268,34 @@ public class GameMultiPlayer extends Game {
             p.savePlayerInformation();
         }
         saveInformationAboutTurn();
-
+        saveInformationPlayerNumber();
+        saveCurrentPosition();
     }
+
+
+
+    private void saveCurrentPosition() {
+        Gson gson = new Gson();
+        FileWriter config = null;
+        String jsonStrin = gson.toJson(currentPlayerPosition);
+        try {
+
+            config = new FileWriter("src/main/resources/InformationAboutCurrentPosition.json");
+            config.write(jsonStrin);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                config.flush();
+                config.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } } }
+
+
+
+
+
 
 
 
@@ -273,7 +305,6 @@ public class GameMultiPlayer extends Game {
         FileWriter config = null;
         String jsonStrin = gson.toJson(nickNameInOrder);
         try {
-            // Constructs a FileWriter given a file name, using the platform's default charset
             config = new FileWriter("src/main/resources/InformationAboutTurn.json");
             config.write(jsonStrin);
         } catch (IOException e) {
@@ -287,5 +318,111 @@ public class GameMultiPlayer extends Game {
             } } }
 
 
+
+
+    /**
+     * save information for a possible restart game
+     */
+    public void restoreGameMultiPlayer(){
+        restoreGameTurn();
     }
+
+
+    /**
+     * restore turn
+     */
+    public void restoreGameTurn(){
+        Gson gson=new Gson();
+
+        try {
+            nickNameInOrder = gson.fromJson(new FileReader("src/main/resources/InformationAboutTurn.json"),ArrayList.class);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            numberOfPlayer = gson.fromJson(new FileReader("src/main/resources/InformationAboutTurnPlayerNumber.json"),Integer.class);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        try {
+            currentPlayerPosition= gson.fromJson(new FileReader("src/main/resources/InformationAboutCurrentPosition.json"),Integer.class);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        createPlayerRestore(numberOfPlayer,nickNameInOrder);
+        currentPlayer = playerList.get(currentPlayerPosition);
+
+    }
+
+
+
+
+
+    /**
+     * this method creates all the players in the game starting from the number of players and their nicknames
+     * @param numberOfPlayer : the number of players in the game
+     * @param nickNameInOrder : collection of players' nicknames already sorted according to the random assignment of the inkwell
+     */
+    private void createPlayerRestore(int numberOfPlayer,ArrayList<String> nickNameInOrder){
+        if (numberOfPlayer==2)
+        {
+            firstPlayer=new PlayerFirst(nickNameInOrder.get(0));
+            secondPlayer= new PlayerSecond(nickNameInOrder.get(1));
+            playerList.add(firstPlayer);
+            playerList.add(secondPlayer);
+        }
+
+        else if (numberOfPlayer==3)
+        {
+            firstPlayer=new PlayerFirst(nickNameInOrder.get(0));
+            secondPlayer= new PlayerSecond(nickNameInOrder.get(1));
+            thirdPlayer= new PlayerThird(nickNameInOrder.get(2));
+            playerList.add(firstPlayer);
+            playerList.add(secondPlayer);
+            playerList.add(thirdPlayer);
+
+        }
+        else if (numberOfPlayer==4)
+        {
+            firstPlayer=new PlayerFirst(nickNameInOrder.get(0));
+            secondPlayer= new PlayerSecond(nickNameInOrder.get(1));
+            thirdPlayer= new PlayerThird(nickNameInOrder.get(2));
+            fourthPlayer=new PlayerFourth(nickNameInOrder.get(3));
+            playerList.add(firstPlayer);
+            playerList.add(secondPlayer);
+            playerList.add(thirdPlayer);
+            playerList.add(fourthPlayer);
+
+        }
+
+    }
+
+
+    /**
+     * saveInformationPlayerNumber
+     */
+    private void saveInformationPlayerNumber() {
+        Gson gson = new Gson();
+        FileWriter config = null;
+        String jsonStrin = gson.toJson(numberOfPlayer);
+        try {
+            // Constructs a FileWriter given a file name, using the platform's default charset
+            config = new FileWriter("src/main/resources/InformationAboutTurnPlayerNumber.json");
+            config.write(jsonStrin);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                config.flush();
+                config.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } } }
+    }
+
+
+
+
 

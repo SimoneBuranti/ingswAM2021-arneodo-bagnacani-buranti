@@ -27,7 +27,7 @@ class DiscardTest {
     nickname.add("ali");
     nickname.add("simo");
 
-    GameMultiPlayer gameMultiPlayer = new GameMultiPlayer(3,nickname);
+    GameMultiPlayer gameMultiPlayer = new GameMultiPlayer(3,nickname,true);
     assertEquals(4, gameMultiPlayer.leaderDeckSize());
     assertEquals(4, gameMultiPlayer.getPlayerFromList(0).personalLeaderCardSize());
     assertEquals(0, gameMultiPlayer.getPlayerFromList(0).getGameBoardOfPlayer().leaderCardsSize());
@@ -58,7 +58,7 @@ class DiscardTest {
         nickname.add("ali");
         nickname.add("simo");
 
-        GameMultiPlayer gameMultiPlayer = new GameMultiPlayer(3,nickname);
+        GameMultiPlayer gameMultiPlayer = new GameMultiPlayer(3,nickname,true);
         assertEquals(4, gameMultiPlayer.leaderDeckSize());
         assertEquals(4, gameMultiPlayer.getPlayerFromList(0).personalLeaderCardSize());
         assertEquals(0, gameMultiPlayer.getPlayerFromList(0).getGameBoardOfPlayer().leaderCardsSize());
@@ -86,7 +86,7 @@ class DiscardTest {
         nickname.add("ali");
         nickname.add("simo");
 
-        GameMultiPlayer gameMultiPlayer = new GameMultiPlayer(3,nickname);
+        GameMultiPlayer gameMultiPlayer = new GameMultiPlayer(3,nickname,true);
         gameMultiPlayer.getPlayerFromList(0).saveLeaderCard(1,2);
         assertEquals(gameMultiPlayer.getPlayerFromList(0).getGameBoardOfPlayer().reportLeaderCardToGameBoard(0), gameMultiPlayer.getPlayerFromList(0).getCardFromPersonalLeaderCard(1));
 

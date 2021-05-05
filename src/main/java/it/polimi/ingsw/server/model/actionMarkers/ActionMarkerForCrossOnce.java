@@ -6,7 +6,7 @@ import it.polimi.ingsw.server.model.GameSolitaire;
  * this class implements the ActionMarker interface and
  * represents the action marker that moves the black cross forward one spaces and shuffles the action marker deck
  */
-public class ActionMarkerForCrossOnce implements ActionMarker{
+public class ActionMarkerForCrossOnce extends ActionMarker {
 
     /**
      * type of object

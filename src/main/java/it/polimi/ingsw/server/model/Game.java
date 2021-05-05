@@ -1,11 +1,17 @@
 package it.polimi.ingsw.server.model;
 
+import com.google.gson.Gson;
 import it.polimi.ingsw.server.model.exceptions.*;
 import it.polimi.ingsw.server.model.leaderCards.DeckLeaderCard;
 import it.polimi.ingsw.server.model.leaderCards.LeaderCardsGameBoardEmptyException;
 import it.polimi.ingsw.server.model.marbles.Marble;
 import it.polimi.ingsw.server.model.players.Player;
 import it.polimi.ingsw.server.model.productionCards.*;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.Map;
 
 /**
  * this class represents the game
@@ -15,11 +21,11 @@ public class Game {
     /**
      * this attribute represents the game market
      */
-    private final Market market;
+    private Market market;
     /**
      * this attribute represents the game reserve
      */
-    private final Reserve reserve;
+    private Reserve reserve;
     /**
      * this attribute represents the game current player
      */
@@ -84,10 +90,12 @@ public class Game {
     /**
      * this constructor instantiates all the game attributes
      */
-    public Game(){
-        market = new Market();
-        reserve = new Reserve();
+    public Game(Boolean newGame){
 
+        if (newGame)
+
+        {market = new Market();
+        reserve = new Reserve();
         deckProductionCardOneBlu = new DeckProductionCardOneBlu();
         deckProductionCardTwoBlu = new DeckProductionCardTwoBlu();
         deckProductionCardThreeBlu = new DeckProductionCardThreeBlu();
@@ -104,7 +112,12 @@ public class Game {
         deckProductionCardTwoViolet = new DeckProductionCardTwoViolet();
         deckProductionCardThreeViolet = new DeckProductionCardThreeViolet();
 
-        deckLeaderCard= new DeckLeaderCard();
+        deckLeaderCard= new DeckLeaderCard();}
+        else
+            restoreGame();
+
+
+
     }
 
     /**
@@ -474,6 +487,7 @@ public class Game {
      * save information for a possible restart game
      */
     public void saveInformation(){
+        market.saveInformationOfMarket();
         deckProductionCardOneBlu.saveInformationOfProductionDeck();
         deckProductionCardOneGreen.saveInformationOfProductionDeck();
         deckProductionCardOneViolet.saveInformationOfProductionDeck();
@@ -486,7 +500,6 @@ public class Game {
         deckProductionCardTwoGreen.saveInformationOfProductionDeck();
         deckProductionCardTwoViolet.saveInformationOfProductionDeck();
         deckProductionCardTwoYellow.saveInformationOfProductionDeck();
-        market.saveInformationOfMarket();
         reserve.saveInformationOfReserve();
 
     }
@@ -495,8 +508,136 @@ public class Game {
 
 
 
+    /**
+     * save information for a possible restart game
+     */
+    protected void restoreGame(){
+
+
+        restoreInformationOfMarket();
+        restoreInformationOfProductionDeck();
+        restoreInformationOfReserve();
+    }
+
+    /**
+     * restore information
+     */
+    private void restoreInformationOfProductionDeck() {
+        Gson gson=new Gson();
+        ProductionCard[] deck;
+
+
+        try {
+            deck = gson.fromJson(new FileReader("src/main/resources/DeckProductionCardOneBluLatest.json"), ProductionCard[].class);
+            deckProductionCardOneBlu = new DeckProductionCardOneBlu(deck);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            deck = gson.fromJson(new FileReader("src/main/resources/DeckProductionCardTwoBluLatest.json"), ProductionCard[].class);
+            deckProductionCardTwoBlu = new DeckProductionCardTwoBlu(deck);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        try {
+            deck = gson.fromJson(new FileReader("src/main/resources/DeckProductionCardThreeBluLatest.json"), ProductionCard[].class);
+            deckProductionCardThreeBlu = new DeckProductionCardThreeBlu(deck);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        try {
+            deck = gson.fromJson(new FileReader("src/main/resources/DeckProductionCardOneGreenLatest.json"), ProductionCard[].class);
+            deckProductionCardOneGreen = new DeckProductionCardOneGreen(deck);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        try {
+            deck = gson.fromJson(new FileReader("src/main/resources/DeckProductionCardTwoGreenLatest.json"), ProductionCard[].class);
+            deckProductionCardTwoGreen = new DeckProductionCardTwoGreen(deck);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            deck = gson.fromJson(new FileReader("src/main/resources/DeckProductionCardThreeGreenLatest.json"), ProductionCard[].class);
+            deckProductionCardThreeGreen = new DeckProductionCardThreeGreen(deck);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            deck = gson.fromJson(new FileReader("src/main/resources/DeckProductionCardOneYellowLatest.json"), ProductionCard[].class);
+            deckProductionCardOneYellow = new DeckProductionCardOneYellow(deck);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        try {
+            deck = gson.fromJson(new FileReader("src/main/resources/DeckProductionCardTwoYellowLatest.json"), ProductionCard[].class);
+            deckProductionCardTwoYellow = new DeckProductionCardTwoYellow(deck);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        try {
+            deck = gson.fromJson(new FileReader("src/main/resources/DeckProductionCardThreeYellowLatest.json"), ProductionCard[].class);
+            deckProductionCardThreeYellow = new DeckProductionCardThreeYellow(deck);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        try {
+            deck = gson.fromJson(new FileReader("src/main/resources/DeckProductionCardOneVioletLatest.json"), ProductionCard[].class);
+            deckProductionCardOneViolet = new DeckProductionCardOneViolet(deck);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        try {
+            deck = gson.fromJson(new FileReader("src/main/resources/DeckProductionCardTwoVioletLatest.json"), ProductionCard[].class);
+            deckProductionCardTwoViolet = new DeckProductionCardTwoViolet(deck);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+
+        try {
+            deck = gson.fromJson(new FileReader("src/main/resources/DeckProductionCardThreeVioletLatest.json"), ProductionCard[].class);
+            deckProductionCardThreeViolet = new DeckProductionCardThreeViolet(deck);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    /**
+     * restore information from backup
+     */
+    private void restoreInformationOfMarket() {
+        Gson gson=new Gson();
+        Marble[] list;
+
+        try {
+            list = gson.fromJson(new FileReader("src/main/resources/Market.json"),Marble[].class);
+
+            market= new Market(list);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
+
+    /**
+     * restore information from backup
+     */
+  private void restoreInformationOfReserve() {
+        Gson gson=new Gson();
+        Map map;
+        try {
+            map = gson.fromJson(new FileReader("src/main/resources/Reserve.json"),Map.class);
+            reserve= new Reserve(map);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+    }
 }
-
-
-
-

@@ -30,7 +30,7 @@ class LeaderCardTestActivation {
         nickname.add("bb");
         FileWriter cofiguration = null;
 
-        GameMultiPlayer gameMultiPlayer = new GameMultiPlayer(2, nickname);
+        GameMultiPlayer gameMultiPlayer = new GameMultiPlayer(2, nickname,true);
 
         Colour blue = new Blue();
         Colour green = new Green();

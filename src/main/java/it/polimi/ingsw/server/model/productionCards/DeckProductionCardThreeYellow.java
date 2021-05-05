@@ -5,6 +5,8 @@ import it.polimi.ingsw.server.model.Mix;
 import it.polimi.ingsw.server.model.Resource;
 import it.polimi.ingsw.server.model.colours.Yellow;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
@@ -158,6 +160,42 @@ public class DeckProductionCardThreeYellow extends DeckProductionCard {
             } catch (IOException e) {
                 e.printStackTrace();
             } } }
+
+
+
+    public DeckProductionCardThreeYellow(ProductionCard[] deckRecover){
+        this.deck = new ArrayList<>();
+        int l=deckRecover.length;
+        for(int i=0; i < l; i++)
+            deck.add(deckRecover[i]);
+        Gson gson = new Gson();
+
+        List<Integer> list = new ArrayList<Integer>();
+        for(int i=0; i < deck.size(); i++)
+            list.add(deck.get(i).getKey());
+
+        String jsonStr = gson.toJson(list);
+
+        try {
+
+            // Constructs a FileWriter given a file name, using the platform's default charset
+            configDeckYellowThree = new FileWriter("src/main/resources/configDeckThreeYellow.json");
+            configDeckYellowThree.write(jsonStr);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        } finally {
+
+            try {
+                configDeckYellowThree.flush();
+                configDeckYellowThree.close();
+            } catch (IOException e) {
+
+                e.printStackTrace();
+            }
+        }}
+
 
 
 }

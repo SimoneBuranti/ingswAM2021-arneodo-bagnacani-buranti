@@ -630,7 +630,7 @@ class FaithPathTest {
     @DisplayName("faithScoreTest : only position - 2")
     public void faithWithUseOfRedMarble(){
 
-        Game game = new Game();
+        Game game = new Game(true);
         Player player = new Player("simo", game);
         RedMarble redMarble = new RedMarble();
 

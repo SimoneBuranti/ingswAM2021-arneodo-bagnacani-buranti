@@ -64,7 +64,6 @@ public class Player {
 
     public Player(String nickName){
         buffer= new ArrayList<>();
-        gameBoardOfPlayer = new GameBoard();
         personalLeaderCard=new ArrayList<>();
         this.nickName = nickName;
         this.game = null;

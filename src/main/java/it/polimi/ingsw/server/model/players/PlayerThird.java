@@ -1,15 +1,19 @@
 package it.polimi.ingsw.server.model.players;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import it.polimi.ingsw.RuntimeTypeAdapterFactory;
 import it.polimi.ingsw.server.model.Game;
 import it.polimi.ingsw.server.model.Resource;
 import it.polimi.ingsw.server.model.colours.*;
 import it.polimi.ingsw.server.model.exceptions.CallForCouncilException;
 import it.polimi.ingsw.server.model.exceptions.LastSpaceReachedException;
+import it.polimi.ingsw.server.model.gameBoard.*;
 import it.polimi.ingsw.server.model.leaderCards.*;
 import it.polimi.ingsw.server.model.requirements.*;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -17,7 +21,7 @@ import java.io.IOException;
  * This class represents the third player in the multiplayer game to play in a round
  */
 public class PlayerThird extends Player {
-
+    private GameBoardInterface gameBoard;
     FileWriter fileInformatioPlayerThird;
     /**
      * Default constructor that calls the super class constructor
@@ -27,6 +31,75 @@ public class PlayerThird extends Player {
     public PlayerThird(String nickName, Game game){
         super(nickName, game);
     }
+
+    /**
+     * Restore constructor that calls the super class constructor
+     * @param nickName : the nickname chosen by the player
+     */
+
+    public PlayerThird(String nickName){
+        super(nickName);
+        RuntimeTypeAdapterFactory<Storage> adapterStorage =
+                RuntimeTypeAdapterFactory
+                        .of(Storage.class)
+                        .registerSubtype(Storage.class)
+                        .registerSubtype(StorageExtraFirst.class)
+                        .registerSubtype(StorageExtraSecond.class);
+
+
+        RuntimeTypeAdapterFactory<Colour> adapterColour =
+                RuntimeTypeAdapterFactory
+                        .of(Colour.class)
+                        .registerSubtype(Green.class)
+                        .registerSubtype(Yellow.class)
+                        .registerSubtype(Blue.class)
+                        .registerSubtype(Violet.class);
+
+        RuntimeTypeAdapterFactory<GameBoardInterface> adapterGameBoard =
+                RuntimeTypeAdapterFactory
+                        .of(GameBoardInterface.class)
+                        .registerSubtype(GameBoard.class)
+                        .registerSubtype(ProductionGameBoardDouble.class)
+                        .registerSubtype(ProductionGameBoard.class)
+                        .registerSubtype(WhiteMarbleGameBoard.class)
+                        .registerSubtype(WhiteMarbleGameBoardDouble.class)
+                        .registerSubtype(ReductionGameBoard.class)
+                        .registerSubtype(ReductionGameBoardDouble.class);
+
+
+        RuntimeTypeAdapterFactory<Requirements> adapterRequirements =
+                RuntimeTypeAdapterFactory
+                        .of(Requirements.class)
+                        .registerSubtype(ResourceRequirement.class)
+                        .registerSubtype(SecondLevelRequirement.class)
+                        .registerSubtype(ThreeFlagsTwoColourRequirement.class)
+                        .registerSubtype(TwoFlagsTwoColourRequirement.class);
+
+        RuntimeTypeAdapterFactory<LeaderCard> adapterLeader =
+                RuntimeTypeAdapterFactory
+                        .of(LeaderCard.class)
+                        .registerSubtype(LeaderCardMarble.class)
+                        .registerSubtype(LeaderCardProduction.class)
+                        .registerSubtype(LeaderCardReduction.class)
+                        .registerSubtype(LeaderCardStorage.class);
+
+
+
+        Gson gson=new GsonBuilder().setPrettyPrinting()
+                .registerTypeAdapterFactory(adapterGameBoard)
+                .registerTypeAdapterFactory(adapterStorage)
+                .registerTypeAdapterFactory(adapterColour)
+                .registerTypeAdapterFactory(adapterRequirements)
+                .registerTypeAdapterFactory(adapterLeader)
+                .create();
+
+        try {
+            gameBoard = gson.fromJson(new FileReader("src/main/resources/fileInformationPlayerThird.json"), GameBoardInterface.class);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     /**
      * This method initializes the second player's storage with the resource passed as a parameter
@@ -48,11 +121,11 @@ public class PlayerThird extends Player {
     public void savePlayerInformation(){
 
         Gson gson=gameBoardSaving();
-        String jsonStrin = gson.toJson(getGameBoardOfPlayer());
+        String jsonStrin = gson.toJson(getGameBoardOfPlayer(),GameBoardInterface.class);
         try {
 
             // Constructs a FileWriter given a file name, using the platform's default charset
-            fileInformatioPlayerThird = new FileWriter("src/main/resources/fileInformatioPlayerThird.json");
+            fileInformatioPlayerThird = new FileWriter("src/main/resources/fileInformationPlayerThird.json");
             fileInformatioPlayerThird.write(jsonStrin);
         } catch (IOException e) {
             e.printStackTrace();

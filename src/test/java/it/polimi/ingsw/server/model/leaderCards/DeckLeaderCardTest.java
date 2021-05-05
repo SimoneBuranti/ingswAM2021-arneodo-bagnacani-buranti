@@ -24,7 +24,7 @@ class DeckLeaderCardTest {
         ArrayList<String> nickname =new ArrayList<>(2);
         nickname.add("ale");
         nickname.add("ali");
-        GameMultiPlayer game= new GameMultiPlayer(2,nickname);
+        GameMultiPlayer game= new GameMultiPlayer(2,nickname,true);
         assertEquals(8,game.leaderDeckSize());
     }
 
@@ -42,7 +42,7 @@ class DeckLeaderCardTest {
         ArrayList<String> nickname =new ArrayList<>(2);
         nickname.add("ale");
         nickname.add("ali");
-        GameMultiPlayer game= new GameMultiPlayer(2,nickname);
+        GameMultiPlayer game= new GameMultiPlayer(2,nickname,true);
         assertEquals(8,game.leaderDeckSize());
         assertNotEquals(game.getPlayerFromList(0).getCardFromPersonalLeaderCard(0),(game.getPlayerFromList(1).getCardFromPersonalLeaderCard(0)));
         assertNotEquals(game.getPlayerFromList(0).getCardFromPersonalLeaderCard(0),(game.getPlayerFromList(1).getCardFromPersonalLeaderCard(1)));
@@ -83,7 +83,7 @@ class DeckLeaderCardTest {
         ArrayList<String> nickname =new ArrayList<>(2);
         nickname.add("ale");
         nickname.add("ali");
-        GameMultiPlayer game= new GameMultiPlayer(2,nickname);
+        GameMultiPlayer game= new GameMultiPlayer(2,nickname,true);
         assertTrue(game.getPlayerFromList(0) instanceof PlayerFirst);
         assertTrue(game.getPlayerFromList(1) instanceof PlayerSecond);
 

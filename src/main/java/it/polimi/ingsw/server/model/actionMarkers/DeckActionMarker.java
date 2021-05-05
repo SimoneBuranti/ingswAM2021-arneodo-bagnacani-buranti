@@ -9,6 +9,8 @@ import it.polimi.ingsw.server.model.gameBoard.*;
 import it.polimi.ingsw.server.model.leaderCards.*;
 import it.polimi.ingsw.server.model.requirements.*;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -30,7 +32,7 @@ public class DeckActionMarker {
     /**
      * this attribute collects the action markers of the deck
      */
-    private final ArrayList<ActionMarker> actionMarkerDeck;
+    private  ArrayList<ActionMarker> actionMarkerDeck;
 
     /**
      * this constructor creates all the action markers and adds them to the list and shuffles the newly created deck
@@ -201,6 +203,7 @@ public class DeckActionMarker {
         RuntimeTypeAdapterFactory<ActionMarker> adapterAction =
                 RuntimeTypeAdapterFactory
                         .of(ActionMarker.class)
+                        .registerSubtype(ActionMarker.class)
                         .registerSubtype(ActionMarkerProductionViolet.class)
                         .registerSubtype(ActionMarkerProductionYellow.class)
                 .registerSubtype(ActionMarkerProductionGreen.class)
@@ -211,6 +214,7 @@ public class DeckActionMarker {
 
 
         Gson gson=new GsonBuilder().setPrettyPrinting()
+                .registerTypeAdapterFactory(adapterAction)
                 .registerTypeAdapterFactory(adapterGameBoard)
                 .registerTypeAdapterFactory(adapterStorage)
                 .registerTypeAdapterFactory(adapterColour)
@@ -222,8 +226,41 @@ public class DeckActionMarker {
     }
 
 
+    /**
+     * this constructor creates all the action markers and adds them to the list and shuffles the newly created deck
+     */
+    public DeckActionMarker(ActionMarker[] list){
+        this.actionMarkerDeck =new ArrayList<ActionMarker>();
+        int l=list.length;
+        for(int i=0; i < l; i++)
+            actionMarkerDeck.add(list[i]);
+        Gson g = new Gson();
 
 
+        Mix.MIXED(actionMarkerDeck);
+        List<String> listOF = new ArrayList<String>();
+        for(int i=0; i < actionMarkerDeck.size(); i++)
+            listOF.add(actionMarkerDeck.get(i).getType());
 
+        String jsonStr = g.toJson(listOF);
 
-}
+        try {
+
+            // Constructs a FileWriter given a file name, using the platform's default charset
+            configActionMarker = new FileWriter("src/main/resources/configActionMarker.json");
+            configActionMarker.write(jsonStr);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        } finally {
+
+            try {
+                configActionMarker.flush();
+                configActionMarker.close();
+            } catch (IOException e) {
+
+                e.printStackTrace();
+            }
+        }
+    }}

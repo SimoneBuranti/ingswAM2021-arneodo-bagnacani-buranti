@@ -30,13 +30,13 @@ public class Server {
     }
 
     public void initNewMultiplayerGame(){
-        game = new GameMultiPlayer(lobby.size(),lobby);
+        game = new GameMultiPlayer(lobby.size(),lobby,true);
         virtualView = new VirtualView();
         gameController = new GameControllerMultiplayer();
     }
 
     public void initNewSolitaireGame(){
-        game = new GameSolitaire(lobby.get(0));
+        game = new GameSolitaire(lobby.get(0),true);
         virtualView = new VirtualView();
         gameController = new GameControllerSinglePlayer();
     }

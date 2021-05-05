@@ -40,7 +40,7 @@ class WhiteMarbleGameBoardsTest {
     @DisplayName("whiteExchangeTest - null method")
     public void whiteExchangeNullTest() {
         WhiteMarble whiteMarble = new WhiteMarble();
-        Player player = new Player("Simo" , new Game());
+        Player player = new Player("Simo" , new Game(true));
 
         try {
             whiteMarble.giveResource(player);

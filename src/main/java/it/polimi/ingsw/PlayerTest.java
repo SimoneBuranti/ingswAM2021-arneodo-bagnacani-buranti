@@ -13,7 +13,7 @@ public class PlayerTest {public static void main(String[] args) throws IOExcepti
     nickname.add("bb");
     FileWriter cofiguration = null;
 
-    GameMultiPlayer gameMultiPlayer =new GameMultiPlayer(2, nickname);
+    GameMultiPlayer gameMultiPlayer =new GameMultiPlayer(2, nickname,true);
 
     gameMultiPlayer.getPlayerFromList(0).savePlayerInformation();
 }
