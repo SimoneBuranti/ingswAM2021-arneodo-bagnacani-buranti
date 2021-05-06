@@ -13,6 +13,7 @@ import it.polimi.ingsw.server.model.requirements.*;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.Map;
 
 /**
@@ -365,7 +366,7 @@ public class Game {
     public int scoreOfPlayerP(Player p){
         return p.playerScore();
     }
-
+    
 
     public boolean disconnectPlayer(String nickname){
         return false;
@@ -381,8 +382,6 @@ public class Game {
     public int numPlayersDisconnected(){
         return 0;
     }
-
-// Exceptions Handlers:
 
     /**
      * These methods handle all kinds of exceptions that come into the game
@@ -831,5 +830,10 @@ public class Game {
      * endGame method
      */
     public void endGame(){}
+
+    public void giveResourceFromClient(ArrayList<Resource> list) throws NotEnoughSpaceInStorageException {
+        currentPlayer.takeResourceFromClientToGameboard(list); }
+
+
 
 }

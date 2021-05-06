@@ -40,7 +40,7 @@ public class Player {
     /**
      * this attribute is the reference to the game the player is playing
      */
-    //private final Game game;
+    private final Game game;
 
 
     /**
@@ -57,7 +57,7 @@ public class Player {
         personalLeaderCard.add(DeckLeaderCard.arrangeDeckLeaderCards());
         personalLeaderCard.add(DeckLeaderCard.arrangeDeckLeaderCards());
         this.nickName = nickName;
-        //this.game = game;
+        this.game = game;
         this.connected = true;
     }
 
@@ -65,7 +65,7 @@ public class Player {
         buffer= new ArrayList<>();
         personalLeaderCard=new ArrayList<>();
         this.nickName = nickName;
-        //this.game = null;
+        this.game = null;
         this.connected = true;
     }
 
@@ -193,20 +193,14 @@ public class Player {
 
     public void discardResource(Resource resource){
         Reserve.addResource(resource);
-        //game.moveEveryoneExcept(this);
+        game.moveEveryoneExcept(this);
     }
 
 
-    public void takeFromMarket() {
+    public void takeFromMarket() throws NotEnoughSpaceInStorageException {
         Resource resource;
-
-        try {
             gameBoardOfPlayer.takeFromMarket((ArrayList<Resource>)buffer.clone());
             buffer = new ArrayList<>();
-        } catch (NotEnoughSpaceInStorageException e) {
-            //discardResource(buffer.remove(resource));
-            
-        }
     }
 
     /**
@@ -378,6 +372,13 @@ public class Player {
      * save information for a possible restart game
      */
     public void savePlayerInformation(){ }
+
+
+    public void takeResourceFromClientToGameboard(ArrayList<Resource> list) throws NotEnoughSpaceInStorageException {
+            gameBoardOfPlayer.takeFromMarket(list);
+    }
+
+
 
 
 }
