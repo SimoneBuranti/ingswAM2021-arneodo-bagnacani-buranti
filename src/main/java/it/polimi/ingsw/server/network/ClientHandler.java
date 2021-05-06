@@ -24,7 +24,7 @@ public class ClientHandler implements Runnable {
     public ClientHandler(Socket client, Server server) throws IOException {
         this.socketClient = client;
         this.server = server;
-        clientController = new ClientController(server);
+        clientController = new ClientController(server, this);
 
         inputStream = socketClient.getInputStream();
         outputStream = socketClient.getOutputStream();

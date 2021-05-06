@@ -1,16 +1,42 @@
 package it.polimi.ingsw.server.controller;
 
 import it.polimi.ingsw.messages.*;
+import it.polimi.ingsw.server.model.Game;
 import it.polimi.ingsw.server.network.*;
 
 public class ClientController implements MessageVisitor {
 
     private final Server server;
+    private final ClientHandler clientHandler;
+    private Game game;
+    private String nickname;
 
-    public ClientController(Server server) {
+    public ClientController(Server server, ClientHandler clientHandler) {
         this.server = server;
+        this.clientHandler = clientHandler;
+        this.game = null;
+        this.nickname = null;
     }
 
+    public Game getGame() {
+        return game;
+    }
+
+    public void setGame(Game game){
+        this.game = game;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public ClientHandler getClientHandler() {
+        return clientHandler;
+    }
 
     @Override
     public void visit(AlreadyActivatedErrorMessage msg) {}
@@ -119,7 +145,7 @@ public class ClientController implements MessageVisitor {
 
     @Override
     public void visit(ExitMessage msg) {
-        server.getGameController().handleMessage(msg);
+        server.getGameController().handleMessage(msg, this);
     }
 
     @Override
@@ -144,7 +170,7 @@ public class ClientController implements MessageVisitor {
 
     @Override
     public void visit(NumberPlayerMessage msg) {
-        server.getGameController().handleMessage(msg);
+        server.getGameController().handleMessage(msg, this);
     }
 
     @Override
@@ -164,7 +190,7 @@ public class ClientController implements MessageVisitor {
 
     @Override
     public void visit(UsernameMessage msg) {
-        server.getGameController().handleMessage(msg);
+        server.getGameController().handleMessage(msg, this);
     }
 
     @Override
@@ -174,16 +200,16 @@ public class ClientController implements MessageVisitor {
 
     @Override
     public void visit(OkMessage msg) {
-        server.getGameController().handleMessage(msg);
+        server.getGameController().handleMessage(msg, this);
     }
 
     @Override
     public void visit(PingMessage msg) {
-        server.getGameController().handleMessage(msg);
+        server.getGameController().handleMessage(msg, this);
     }
 
     @Override
     public void visit(PongMessage msg) {
-        server.getGameController().handleMessage(msg);
+        server.getGameController().handleMessage(msg, this);
     }
 }

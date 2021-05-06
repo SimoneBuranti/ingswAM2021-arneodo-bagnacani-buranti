@@ -2,42 +2,51 @@ package it.polimi.ingsw.server.controller;
 
 import it.polimi.ingsw.messages.*;
 
+import java.io.IOException;
+
 public class GameControllerSinglePlayer extends GameControllerInterface{
 
     @Override
-    public void handleMessage(ExitMessage msg) {
+    public void handleMessage(ExitMessage msg, ClientController clientController) {
+        //game.disconnectPlayer(clientController.getNickname);
+        try {
+            clientController.getClientHandler().disconnect();
+        } catch (IOException e) {
+            //messaggio di errore
+        }
+        server.setGameController(new GameControllerDisconnection());
+    }
+
+    @Override
+    public void handleMessage(NumberPlayerMessage msg, ClientController clientController) {
+        //messaggio di CompleteRunningMatchErrorMessage
+    }
+
+    @Override
+    public void handleMessage(UsernameMessage msg, ClientController clientController) {
+        //messaggio di CompleteRunningMatchErrorMessage
+        try {
+            clientController.getClientHandler().disconnect();
+        } catch (IOException e) {
+            //messaggio di errore
+        }
+    }
+
+    @Override
+    public void handleMessage(OkMessage msg, ClientController clientController) {
 
     }
 
     @Override
-    public void handleMessage(NumberPlayerMessage msg) {
+    public void handleMessage(PingMessage msg, ClientController clientController) {
 
     }
 
     @Override
-    public void handleMessage(UsernameMessage msg) {
+    public void handleMessage(PongMessage msg, ClientController clientController) {
 
     }
 
-    @Override
-    public void handleMessage(OkMessage msg) {
-
-    }
-
-    @Override
-    public void handleMessage(PingMessage msg) {
-
-    }
-
-    @Override
-    public void handleMessage(PongMessage msg) {
-
-    }
-
-    @Override
-    public void refreshStatus() {
-
-    }
 
    /* @Override
     public void handleMessage(ActivateLeaderCardMessage msg) {

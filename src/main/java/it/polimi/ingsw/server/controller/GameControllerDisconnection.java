@@ -2,42 +2,44 @@ package it.polimi.ingsw.server.controller;
 
 import it.polimi.ingsw.messages.*;
 
+import java.io.IOException;
+
 public class GameControllerDisconnection extends GameControllerInterface {
 
 
     @Override
-    public void handleMessage(ExitMessage msg) {
+    public void handleMessage(ExitMessage msg, ClientController clientController) {
+        //game.disconnectPlayer(clientController.getNickname);
+        try {
+            clientController.getClientHandler().disconnect();
+        } catch (IOException e) {
+            //messaggio di errore
+        }
+    }
+
+    @Override
+    public void handleMessage(NumberPlayerMessage msg, ClientController clientController) {
+        //messaggio di errore
+    }
+
+    @Override
+    public void handleMessage(UsernameMessage msg, ClientController clientController) {
+
+    }
+
+
+    @Override
+    public void handleMessage(OkMessage msg, ClientController clientController) {
 
     }
 
     @Override
-    public void handleMessage(NumberPlayerMessage msg) {
+    public void handleMessage(PingMessage msg, ClientController clientController) {
 
     }
 
     @Override
-    public void handleMessage(UsernameMessage msg) {
-
-    }
-
-
-    @Override
-    public void handleMessage(OkMessage msg) {
-
-    }
-
-    @Override
-    public void handleMessage(PingMessage msg) {
-
-    }
-
-    @Override
-    public void handleMessage(PongMessage msg) {
-
-    }
-
-    @Override
-    public void refreshStatus() {
+    public void handleMessage(PongMessage msg, ClientController clientController) {
 
     }
 

@@ -1,45 +1,42 @@
 package it.polimi.ingsw.server.controller;
 
 import it.polimi.ingsw.messages.*;
+import it.polimi.ingsw.server.network.ClientHandler;
 
 public class GameControllerEmpty extends GameControllerInterface{
 
 
     @Override
-    public void handleMessage(ExitMessage msg) {
+    public void handleMessage(ExitMessage msg, ClientController clientController) {
 
     }
 
     @Override
-    public void handleMessage(NumberPlayerMessage msg) {
+    public void handleMessage(NumberPlayerMessage msg, ClientController clientController) {
 
     }
 
     @Override
-    public void handleMessage(UsernameMessage msg) {
+    public void handleMessage(UsernameMessage msg, ClientController clientController) {
 
     }
 
 
     @Override
-    public void handleMessage(OkMessage msg) {
+    public void handleMessage(OkMessage msg, ClientController clientController) {
 
     }
 
     @Override
-    public void handleMessage(PingMessage msg) {
+    public void handleMessage(PingMessage msg, ClientController clientController) {
 
     }
 
     @Override
-    public void handleMessage(PongMessage msg) {
+    public void handleMessage(PongMessage msg, ClientController clientController) {
 
     }
 
-    @Override
-    public void refreshStatus() {
-
-    }
 
     /*@Override
     public void handleMessage(ActivateLeaderCardMessage msg) {

@@ -17,6 +17,7 @@ public class Server {
 
     public Server(GameControllerInterface gameController) {
         this.gameController = gameController;
+        gameController.setServer(this);
         lobby = new ArrayList<>();
         //this.clientHandlers = new ArrayList<>();
     }

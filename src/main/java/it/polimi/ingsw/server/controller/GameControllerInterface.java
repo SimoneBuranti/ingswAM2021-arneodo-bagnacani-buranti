@@ -1,19 +1,24 @@
 package it.polimi.ingsw.server.controller;
 
 import it.polimi.ingsw.messages.*;
+import it.polimi.ingsw.server.model.Game;
+import it.polimi.ingsw.server.network.ClientHandler;
+import it.polimi.ingsw.server.network.Server;
 
 public abstract class GameControllerInterface {
     protected int numberOfPlayers;
+    protected Game game;
+    protected Server server;
 
     //Client to server
-    public abstract void handleMessage(ExitMessage msg);
-    public abstract void handleMessage(NumberPlayerMessage msg);
-    public abstract void handleMessage(UsernameMessage msg);
+    public abstract void handleMessage(ExitMessage msg, ClientController clientController);
+    public abstract void handleMessage(NumberPlayerMessage msg, ClientController clientController);
+    public abstract void handleMessage(UsernameMessage msg, ClientController clientController);
 
     //General messages
-    public abstract void handleMessage(OkMessage msg);
-    public abstract void handleMessage(PingMessage msg);
-    public abstract void handleMessage(PongMessage msg);
+    public abstract void handleMessage(OkMessage msg, ClientController clientController);
+    public abstract void handleMessage(PingMessage msg, ClientController clientController);
+    public abstract void handleMessage(PongMessage msg, ClientController clientController);
 
     public int getNumberOfPlayers() {
         return numberOfPlayers;
@@ -21,6 +26,22 @@ public abstract class GameControllerInterface {
 
     public void setNumberOfPlayers(int numberOfPlayers) {
         this.numberOfPlayers = numberOfPlayers;
+    }
+
+    public Server getServer() {
+        return server;
+    }
+
+    public void setServer(Server server) {
+        this.server = server;
+    }
+
+    public Game getGame() {
+        return game;
+    }
+
+    public void setGame(Game game) {
+        this.game = game;
     }
 
     /*void handleMessage(ActivateLeaderCardMessage msg);
@@ -38,7 +59,4 @@ public abstract class GameControllerInterface {
     void handleMessage(PushRowMessage msg);
     void handleMessage(WhiteMarbleChoosenResources msg);*/
 
-
-
-    public abstract void refreshStatus();
 }

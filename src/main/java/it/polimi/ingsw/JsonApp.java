@@ -2,8 +2,7 @@ package it.polimi.ingsw;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import it.polimi.ingsw.server.model.Reserve;
-import it.polimi.ingsw.server.model.Resource;
+import it.polimi.ingsw.server.model.*;
 import it.polimi.ingsw.server.model.colours.*;
 import it.polimi.ingsw.server.model.exceptions.CallForCouncilException;
 import it.polimi.ingsw.server.model.exceptions.ImpossibleProductionException;
@@ -11,7 +10,7 @@ import it.polimi.ingsw.server.model.exceptions.LastSpaceReachedException;
 import it.polimi.ingsw.server.model.exceptions.RequirementsException;
 import it.polimi.ingsw.server.model.gameBoard.*;
 import it.polimi.ingsw.server.model.leaderCards.*;
-import it.polimi.ingsw.server.model.players.Player;
+import it.polimi.ingsw.server.model.players.*;
 import it.polimi.ingsw.server.model.productionCards.ProductionCard;
 import it.polimi.ingsw.server.model.requirements.*;
 
@@ -20,11 +19,12 @@ import java.util.Map;
 
 public class JsonApp {
     public static void main( String[] args ){
+        //Game game = new GameSolitaire("Ali");
         Reserve reserve = new Reserve();
-        Player player = new Player("Ali");
+        Player player = new PlayerFirst("Ali", new Game(false));
         //GameBoardInterface gameBoard = new GameBoard();
 
-        Colour blue =new Blue();
+        /*Colour blue =new Blue();
         Colour green =new Green();
         Colour yellow =new Yellow();
         Colour violet =new Violet();
@@ -165,7 +165,7 @@ public class JsonApp {
             e.printStackTrace();
         } catch (LastSpaceReachedException e) {
             e.printStackTrace();
-        }
+        }*/
 
         RuntimeTypeAdapterFactory<Storage> adapterStorage =
                 RuntimeTypeAdapterFactory
@@ -194,15 +194,14 @@ public class JsonApp {
                         .registerSubtype(ReductionGameBoard.class)
                         .registerSubtype(ReductionGameBoardDouble.class);
 
-        /*RuntimeTypeAdapterFactory<GameBoardDecorator> adapterGameBoard1 =
+        RuntimeTypeAdapterFactory<Player> adapterPlayer =
                 RuntimeTypeAdapterFactory
-                        .of(GameBoardDecorator.class)
-                        .registerSubtype(ProductionGameBoardDouble.class)
-                        .registerSubtype(ProductionGameBoard.class)
-                        .registerSubtype(WhiteMarbleGameBoard.class)
-                        .registerSubtype(WhiteMarbleGameBoardDouble.class)
-                        .registerSubtype(ReductionGameBoard.class)
-                        .registerSubtype(ReductionGameBoardDouble.class);*/
+                        .of(Player.class)
+                        .registerSubtype(Player.class)
+                        .registerSubtype(PlayerFirst.class)
+                        .registerSubtype(PlayerFourth.class)
+                        .registerSubtype(PlayerSecond.class)
+                        .registerSubtype(PlayerThird.class);
 
 
         RuntimeTypeAdapterFactory<Requirements> adapterRequirements =
@@ -221,16 +220,31 @@ public class JsonApp {
                         .registerSubtype(LeaderCardReduction.class)
                         .registerSubtype(LeaderCardStorage.class);
 
-        Gson gson=new GsonBuilder().setPrettyPrinting().registerTypeAdapterFactory(adapterGameBoard).registerTypeAdapterFactory(adapterStorage).registerTypeAdapterFactory(adapterColour).registerTypeAdapterFactory(adapterRequirements).registerTypeAdapterFactory(adapterLeader).create();
+        RuntimeTypeAdapterFactory<Game> adapterGame =
+                RuntimeTypeAdapterFactory
+                        .of(Game.class)
+                        .registerSubtype(Game.class)
+                        .registerSubtype(GameSolitaire.class)
+                        .registerSubtype(GameMultiPlayer.class);
+
+        Gson gson=new GsonBuilder().setPrettyPrinting()
+                .registerTypeAdapterFactory(adapterGameBoard)
+                .registerTypeAdapterFactory(adapterStorage)
+                .registerTypeAdapterFactory(adapterColour)
+                .registerTypeAdapterFactory(adapterRequirements)
+                .registerTypeAdapterFactory(adapterLeader)
+                //.registerTypeAdapterFactory(adapterPlayer)
+                .registerTypeAdapterFactory(adapterGame)
+                .create();
 
         System.out.println(gson.toJson(player));
 
-        String jsonString = gson.toJson(player.getGameBoardOfPlayer(), GameBoardInterface.class);
+        //String jsonString = gson.toJson(game, Game.class);
 
-        GameBoardInterface gameBoard1 = gson.fromJson(jsonString,GameBoardInterface.class);
+        //Game game1 = gson.fromJson(jsonString,Game.class);
 
 
-        try {
+        /*try {
             gameBoard1.extraProductionOn(Resource.ROCK);
         } catch (ImpossibleProductionException e) {
             System.out.println("ImpossibleProductionException");
@@ -238,7 +252,7 @@ public class JsonApp {
             System.out.println("CallForCouncilException");
         } catch (LastSpaceReachedException e) {
             System.out.println("LastSpaceReachedException");
-        }
+        }*/
 
         //System.out.println(gson.toJson(gameBoard1));
 
