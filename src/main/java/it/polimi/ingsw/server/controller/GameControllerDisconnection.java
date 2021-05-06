@@ -9,7 +9,7 @@ public class GameControllerDisconnection extends GameControllerInterface {
 
     @Override
     public void handleMessage(ExitMessage msg, ClientController clientController) {
-        //game.disconnectPlayer(clientController.getNickname);
+        game.disconnectPlayer(clientController.getNickname());
         try {
             clientController.getClientHandler().disconnect();
         } catch (IOException e) {
@@ -19,11 +19,25 @@ public class GameControllerDisconnection extends GameControllerInterface {
 
     @Override
     public void handleMessage(NumberPlayerMessage msg, ClientController clientController) {
-        //messaggio di errore
+        clientController.getClientHandler().sendMessage(new CompleteRunningMatchErrorMessage());
     }
 
     @Override
     public void handleMessage(UsernameMessage msg, ClientController clientController) {
+        if(game.checkNickname(msg.getUsername())){
+            clientController.setNickname(msg.getUsername());
+            clientController.setGame(this.getGame());
+            game.connectPlayer(msg.getUsername());
+            if(game.numPlayersDisconnected() == 0)
+                server.setGameController(new GameControllerMultiplayer()); //oppure gameControllerSinglePlayer
+        }else{
+            clientController.getClientHandler().sendMessage(new NoNicknameMessage());
+            /*try {
+                clientController.getClientHandler().disconnect();
+            } catch (IOException e) {
+                //messaggio di errore
+            }*/
+        }
 
     }
 

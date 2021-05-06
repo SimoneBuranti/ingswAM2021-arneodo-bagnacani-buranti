@@ -201,6 +201,47 @@ public class GameMultiPlayer extends Game {
         }
     }
 
+    @Override
+    public boolean disconnectPlayer(String nickname){
+        for(Player p : playerList){
+            if(p.getNickName().equals(nickname) && p.isConnected()){
+                p.setConnected();
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public void connectPlayer(String nickname){
+        for(Player p : playerList){
+            if(p.getNickName().equals(nickname) && !(p.isConnected())){
+                p.setConnected();
+            }
+        }
+    }
+
+
+    @Override
+    public boolean checkNickname(String nickname){
+        for(Player p : playerList){
+            if(p.getNickName().equals(nickname) && !(p.isConnected())){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public int numPlayersDisconnected(){
+        int num = 0;
+        for(Player p : playerList){
+            if(!(p.isConnected())){
+                num++;
+            }
+        }
+        return num;
+    }
 
     /**
      * this method handles the CallForCouncilException by calling the method of all players

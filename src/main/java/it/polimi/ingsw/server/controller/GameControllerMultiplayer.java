@@ -9,23 +9,28 @@ public class GameControllerMultiplayer extends GameControllerInterface{
 
  @Override
  public void handleMessage(ExitMessage msg, ClientController clientController){
-    //game.disconnectPlayer(clientController.getNickname());
+   boolean flag = false;
+   if(game.disconnectPlayer(clientController.getNickname())) {
+    flag = true;
+   }
    try {
     clientController.getClientHandler().disconnect();
    } catch (IOException e) {
    //messaggio di errore
   }
-  server.setGameController(new GameControllerDisconnection());
+   if(flag) {
+    server.setGameController(new GameControllerDisconnection());
+   }
  }
 
  @Override
  public void handleMessage(NumberPlayerMessage msg, ClientController clientController) {
-  //messaggio di errore (CompleteRunningMatchErrorMessage) o non fare nulla
+  clientController.getClientHandler().sendMessage(new CompleteRunningMatchErrorMessage());
  }
 
  @Override
  public void handleMessage(UsernameMessage msg, ClientController clientController) {
-  //messaggio di CompleteRunningMatchErrorMessage
+  clientController.getClientHandler().sendMessage(new CompleteRunningMatchErrorMessage());
   try {
    clientController.getClientHandler().disconnect();
   } catch (IOException e) {

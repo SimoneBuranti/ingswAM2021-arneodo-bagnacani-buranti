@@ -367,6 +367,21 @@ public class Game {
     }
 
 
+    public boolean disconnectPlayer(String nickname){
+        return false;
+    }
+
+    public void connectPlayer(String nickname){
+    }
+
+    public boolean checkNickname(String nickname){
+        return false;
+    }
+
+    public int numPlayersDisconnected(){
+        return 0;
+    }
+
 // Exceptions Handlers:
 
     /**

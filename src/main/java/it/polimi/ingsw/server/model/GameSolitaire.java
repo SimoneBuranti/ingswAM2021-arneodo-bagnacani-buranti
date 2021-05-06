@@ -292,6 +292,38 @@ public class GameSolitaire extends Game{
         }
     }
 
+    @Override
+    public boolean disconnectPlayer(String nickname){
+        if(player.isConnected()){
+            player.setConnected();
+            return true;
+        }else
+            return false;
+    }
+
+    @Override
+    public void connectPlayer(String nickname){
+        if(player.getNickName().equals(nickname) && !(player.isConnected())){
+            player.setConnected();
+        }
+    }
+
+    @Override
+    public boolean checkNickname(String nickname){
+        if(player.getNickName().equals(nickname) && !(player.isConnected())){
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public int numPlayersDisconnected(){
+        int num = 0;
+        if(!(player.isConnected())){
+            num++;
+        }
+        return num;
+    }
 
     /**
      * this method handles the CallForCouncilException by calling the player and Lorenzo the Magnificent methods
