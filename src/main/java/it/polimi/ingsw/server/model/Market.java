@@ -1,17 +1,13 @@
 package it.polimi.ingsw.server.model;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import it.polimi.ingsw.RuntimeTypeAdapterFactory;
 import it.polimi.ingsw.server.model.colours.*;
 import it.polimi.ingsw.server.model.exceptions.CallForCouncilException;
 import it.polimi.ingsw.server.model.exceptions.LastSpaceReachedException;
 import it.polimi.ingsw.server.model.exceptions.WhiteMarbleException;
-import it.polimi.ingsw.server.model.gameBoard.GameBoardInterface;
 import it.polimi.ingsw.server.model.marbles.*;
 import it.polimi.ingsw.server.model.players.Player;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;

@@ -4,18 +4,10 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import it.polimi.ingsw.server.model.*;
 import it.polimi.ingsw.server.model.colours.*;
-import it.polimi.ingsw.server.model.exceptions.CallForCouncilException;
-import it.polimi.ingsw.server.model.exceptions.ImpossibleProductionException;
-import it.polimi.ingsw.server.model.exceptions.LastSpaceReachedException;
-import it.polimi.ingsw.server.model.exceptions.RequirementsException;
 import it.polimi.ingsw.server.model.gameBoard.*;
 import it.polimi.ingsw.server.model.leaderCards.*;
 import it.polimi.ingsw.server.model.players.*;
-import it.polimi.ingsw.server.model.productionCards.ProductionCard;
 import it.polimi.ingsw.server.model.requirements.*;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class JsonApp {
     public static void main( String[] args ){

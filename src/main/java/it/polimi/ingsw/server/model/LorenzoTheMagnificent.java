@@ -1,15 +1,9 @@
 package it.polimi.ingsw.server.model;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import it.polimi.ingsw.RuntimeTypeAdapterFactory;
-import it.polimi.ingsw.server.model.colours.*;
 import it.polimi.ingsw.server.model.exceptions.CallForCouncilException;
 import it.polimi.ingsw.server.model.exceptions.EndOfSolitaireGame;
-import it.polimi.ingsw.server.model.marbles.*;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;

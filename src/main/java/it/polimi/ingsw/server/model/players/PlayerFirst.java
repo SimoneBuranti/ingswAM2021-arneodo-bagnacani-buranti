@@ -2,7 +2,7 @@ package it.polimi.ingsw.server.model.players;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import it.polimi.ingsw.RuntimeTypeAdapterFactory;
+import it.polimi.ingsw.server.model.RuntimeTypeAdapterFactory;
 import it.polimi.ingsw.server.model.Game;
 import it.polimi.ingsw.server.model.colours.*;
 import it.polimi.ingsw.server.model.gameBoard.*;
@@ -13,7 +13,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 
 /**
  * This class represents the first player in the multiplayer game to play in a round, he is the one who has the inkwell

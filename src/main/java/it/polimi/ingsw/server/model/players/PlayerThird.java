@@ -2,7 +2,7 @@ package it.polimi.ingsw.server.model.players;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import it.polimi.ingsw.RuntimeTypeAdapterFactory;
+import it.polimi.ingsw.server.model.RuntimeTypeAdapterFactory;
 import it.polimi.ingsw.server.model.Game;
 import it.polimi.ingsw.server.model.Resource;
 import it.polimi.ingsw.server.model.colours.*;

@@ -177,7 +177,7 @@ public class DeckProductionCardTwoBlu extends DeckProductionCard {
         try {
 
             // Constructs a FileWriter given a file name, using the platform's default charset
-            configDeckBlueTwo = new FileWriter("src/main/resources/configDeckTwoBlu.json");
+            configDeckBlueTwo = new FileWriter("src/main/resources/configDeckBlueTwo.json");
             configDeckBlueTwo .write(jsonStr);
 
         } catch (IOException e) {

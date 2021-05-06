@@ -420,7 +420,20 @@ public class GameMultiPlayer extends Game {
             } catch (IOException e) {
                 e.printStackTrace();
             } } }
+
+
+
+    /**
+     * endGame method
+     */
+    @Override
+    public void endGame(){
+        theWinnerIs();
+        FileClass.FileDestroyer();
+
     }
+
+}
 
 
 

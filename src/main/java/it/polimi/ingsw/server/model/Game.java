@@ -2,7 +2,6 @@ package it.polimi.ingsw.server.model;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import it.polimi.ingsw.RuntimeTypeAdapterFactory;
 import it.polimi.ingsw.server.model.colours.*;
 import it.polimi.ingsw.server.model.exceptions.*;
 import it.polimi.ingsw.server.model.gameBoard.*;
@@ -14,7 +13,6 @@ import it.polimi.ingsw.server.model.requirements.*;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.util.ArrayList;
 import java.util.Map;
 
 /**
@@ -813,4 +811,10 @@ public class Game {
         }
 
     }
+
+    /**
+     * endGame method
+     */
+    public void endGame(){}
+
 }

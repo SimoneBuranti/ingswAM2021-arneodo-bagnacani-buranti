@@ -176,7 +176,7 @@ public class DeckProductionCardThreeViolet extends DeckProductionCard {
                 try {
 
                         // Constructs a FileWriter given a file name, using the platform's default charset
-                        configDeckVioletThree = new FileWriter("src/main/resources/configDeckThreeViolet.json");
+                        configDeckVioletThree = new FileWriter("src/main/resources/configDeckVioletThree.json");
                         configDeckVioletThree.write(jsonStr);
 
                 } catch (IOException e) {

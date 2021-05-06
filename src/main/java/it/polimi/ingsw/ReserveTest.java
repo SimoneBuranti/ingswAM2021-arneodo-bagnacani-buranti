@@ -106,7 +106,7 @@ public class ReserveTest {
         GameMultiPlayer gameMultiPlayer5 =new GameMultiPlayer( 2,nickname,false);
         gameMultiPlayer5.getPlayerFromList(0).getGameBoardOfPlayer().addLeaderCardToGameBoard(leaderCardThree);
 
-        gameMultiPlayer5.saveInformation();
+        gameMultiPlayer5.endGame();
 
 
 

@@ -2,14 +2,11 @@ package it.polimi.ingsw.server.model.productionCards;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import it.polimi.ingsw.RuntimeTypeAdapterFactory;
+import it.polimi.ingsw.server.model.RuntimeTypeAdapterFactory;
 import it.polimi.ingsw.server.model.Resource;
 import it.polimi.ingsw.server.model.colours.*;
 import it.polimi.ingsw.server.model.exceptions.EmptyException;
 import it.polimi.ingsw.server.model.exceptions.EndOfSolitaireGame;
-import it.polimi.ingsw.server.model.gameBoard.*;
-import it.polimi.ingsw.server.model.leaderCards.*;
-import it.polimi.ingsw.server.model.requirements.*;
 
 import java.util.ArrayList;
 import java.util.Map;

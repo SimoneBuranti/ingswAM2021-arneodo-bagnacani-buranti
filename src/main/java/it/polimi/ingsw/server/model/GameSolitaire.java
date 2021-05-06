@@ -449,4 +449,15 @@ public class GameSolitaire extends Game{
             e.printStackTrace();
         }
     }
+
+
+
+    /**
+     * endGame method
+     */
+    @Override
+    public void endGame(){
+        FileClass.FileDestroyer();
+
+    }
 }

@@ -179,7 +179,7 @@ public class DeckProductionCardThreeYellow extends DeckProductionCard {
         try {
 
             // Constructs a FileWriter given a file name, using the platform's default charset
-            configDeckYellowThree = new FileWriter("src/main/resources/configDeckThreeYellow.json");
+            configDeckYellowThree = new FileWriter("src/main/resources/configDeckYellowThree.json");
             configDeckYellowThree.write(jsonStr);
 
         } catch (IOException e) {
