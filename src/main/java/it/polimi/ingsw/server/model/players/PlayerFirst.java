@@ -21,7 +21,7 @@ import java.util.ArrayList;
 public class PlayerFirst extends Player{
     FileWriter fileInformatioPlayerFirst;
 
-    private GameBoardInterface gameBoard;
+
 
     /**
      * Default constructor that calls the super class constructor
@@ -98,7 +98,7 @@ public class PlayerFirst extends Player{
                 .create();
 
         try {
-           this.gameBoard = gson.fromJson(new FileReader("src/main/resources/fileInformationPlayerFirst.json"),GameBoardInterface.class);
+           this.gameBoardOfPlayer= gson.fromJson(new FileReader("src/main/resources/fileInformationPlayerFirst.json"),GameBoardInterface.class);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

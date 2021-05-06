@@ -22,7 +22,6 @@ import java.io.IOException;
  */
 public class PlayerFourth extends Player {
     FileWriter fileInformatioPlayerFourth;
-    private GameBoardInterface gameBoard;
     /**
      * Default constructor that calls the super class constructor
      * @param nickName : the nickname chosen by the player
@@ -94,7 +93,7 @@ public class PlayerFourth extends Player {
                 .create();
 
         try {
-            gameBoard = gson.fromJson(new FileReader("src/main/resources/fileInformationPlayerFourth.json"), GameBoardInterface.class);
+            gameBoardOfPlayer= gson.fromJson(new FileReader("src/main/resources/fileInformationPlayerFourth.json"), GameBoardInterface.class);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

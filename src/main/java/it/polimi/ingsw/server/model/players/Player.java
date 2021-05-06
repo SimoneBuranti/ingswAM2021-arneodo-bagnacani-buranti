@@ -25,7 +25,7 @@ public class Player {
     /**
      * this attribute is the player's personal game board
      */
-    private GameBoardInterface gameBoardOfPlayer ;
+    protected GameBoardInterface gameBoardOfPlayer ;
     /**
      * this attribute is the player's nickname
      */

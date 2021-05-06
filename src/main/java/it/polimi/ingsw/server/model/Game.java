@@ -1,12 +1,16 @@
 package it.polimi.ingsw.server.model;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import it.polimi.ingsw.RuntimeTypeAdapterFactory;
+import it.polimi.ingsw.server.model.colours.*;
 import it.polimi.ingsw.server.model.exceptions.*;
-import it.polimi.ingsw.server.model.leaderCards.DeckLeaderCard;
-import it.polimi.ingsw.server.model.leaderCards.LeaderCardsGameBoardEmptyException;
-import it.polimi.ingsw.server.model.marbles.Marble;
+import it.polimi.ingsw.server.model.gameBoard.*;
+import it.polimi.ingsw.server.model.leaderCards.*;
+import it.polimi.ingsw.server.model.marbles.*;
 import it.polimi.ingsw.server.model.players.Player;
 import it.polimi.ingsw.server.model.productionCards.*;
+import it.polimi.ingsw.server.model.requirements.*;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -523,7 +527,59 @@ public class Game {
      * restore information
      */
     private void restoreInformationOfProductionDeck() {
-        Gson gson=new Gson();
+        RuntimeTypeAdapterFactory<Storage> adapterStorage =
+                RuntimeTypeAdapterFactory
+                        .of(Storage.class)
+                        .registerSubtype(Storage.class)
+                        .registerSubtype(StorageExtraFirst.class)
+                        .registerSubtype(StorageExtraSecond.class);
+
+
+        RuntimeTypeAdapterFactory<Colour> adapterColour =
+                RuntimeTypeAdapterFactory
+                        .of(Colour.class)
+                        .registerSubtype(Green.class)
+                        .registerSubtype(Yellow.class)
+                        .registerSubtype(Blue.class)
+                        .registerSubtype(Violet.class);
+
+        RuntimeTypeAdapterFactory<GameBoardInterface> adapterGameBoard =
+                RuntimeTypeAdapterFactory
+                        .of(GameBoardInterface.class)
+                        .registerSubtype(GameBoard.class)
+                        .registerSubtype(ProductionGameBoardDouble.class)
+                        .registerSubtype(ProductionGameBoard.class)
+                        .registerSubtype(WhiteMarbleGameBoard.class)
+                        .registerSubtype(WhiteMarbleGameBoardDouble.class)
+                        .registerSubtype(ReductionGameBoard.class)
+                        .registerSubtype(ReductionGameBoardDouble.class);
+
+
+        RuntimeTypeAdapterFactory<Requirements> adapterRequirements =
+                RuntimeTypeAdapterFactory
+                        .of(Requirements.class)
+                        .registerSubtype(ResourceRequirement.class)
+                        .registerSubtype(SecondLevelRequirement.class)
+                        .registerSubtype(ThreeFlagsTwoColourRequirement.class)
+                        .registerSubtype(TwoFlagsTwoColourRequirement.class);
+
+        RuntimeTypeAdapterFactory<LeaderCard> adapterLeader =
+                RuntimeTypeAdapterFactory
+                        .of(LeaderCard.class)
+                        .registerSubtype(LeaderCardMarble.class)
+                        .registerSubtype(LeaderCardProduction.class)
+                        .registerSubtype(LeaderCardReduction.class)
+                        .registerSubtype(LeaderCardStorage.class);
+
+
+
+        Gson gson=new GsonBuilder().setPrettyPrinting()
+                .registerTypeAdapterFactory(adapterGameBoard)
+                .registerTypeAdapterFactory(adapterStorage)
+                .registerTypeAdapterFactory(adapterColour)
+                .registerTypeAdapterFactory(adapterRequirements)
+                .registerTypeAdapterFactory(adapterLeader)
+                .create();
         ProductionCard[] deck;
 
 
@@ -611,7 +667,59 @@ public class Game {
      * restore information from backup
      */
     private void restoreInformationOfMarket() {
-        Gson gson=new Gson();
+        RuntimeTypeAdapterFactory<Storage> adapterStorage =
+                RuntimeTypeAdapterFactory
+                        .of(Storage.class)
+                        .registerSubtype(Storage.class)
+                        .registerSubtype(StorageExtraFirst.class)
+                        .registerSubtype(StorageExtraSecond.class);
+
+
+        RuntimeTypeAdapterFactory<Colour> adapterColour =
+                RuntimeTypeAdapterFactory
+                        .of(Colour.class)
+                        .registerSubtype(Green.class)
+                        .registerSubtype(Yellow.class)
+                        .registerSubtype(Blue.class)
+                        .registerSubtype(Violet.class);
+
+        RuntimeTypeAdapterFactory<GameBoardInterface> adapterGameBoard =
+                RuntimeTypeAdapterFactory
+                        .of(GameBoardInterface.class)
+                        .registerSubtype(GameBoard.class)
+                        .registerSubtype(ProductionGameBoardDouble.class)
+                        .registerSubtype(ProductionGameBoard.class)
+                        .registerSubtype(WhiteMarbleGameBoard.class)
+                        .registerSubtype(WhiteMarbleGameBoardDouble.class)
+                        .registerSubtype(ReductionGameBoard.class)
+                        .registerSubtype(ReductionGameBoardDouble.class);
+
+
+        RuntimeTypeAdapterFactory<Requirements> adapterRequirements =
+                RuntimeTypeAdapterFactory
+                        .of(Requirements.class)
+                        .registerSubtype(ResourceRequirement.class)
+                        .registerSubtype(SecondLevelRequirement.class)
+                        .registerSubtype(ThreeFlagsTwoColourRequirement.class)
+                        .registerSubtype(TwoFlagsTwoColourRequirement.class);
+
+        RuntimeTypeAdapterFactory<LeaderCard> adapterLeader =
+                RuntimeTypeAdapterFactory
+                        .of(LeaderCard.class)
+                        .registerSubtype(LeaderCardMarble.class)
+                        .registerSubtype(LeaderCardProduction.class)
+                        .registerSubtype(LeaderCardReduction.class)
+                        .registerSubtype(LeaderCardStorage.class);
+
+
+
+        Gson gson=new GsonBuilder().setPrettyPrinting()
+                .registerTypeAdapterFactory(adapterGameBoard)
+                .registerTypeAdapterFactory(adapterStorage)
+                .registerTypeAdapterFactory(adapterColour)
+                .registerTypeAdapterFactory(adapterRequirements)
+                .registerTypeAdapterFactory(adapterLeader)
+                .create();
         Marble[] list;
 
         try {
@@ -630,7 +738,72 @@ public class Game {
      * restore information from backup
      */
   private void restoreInformationOfReserve() {
-        Gson gson=new Gson();
+      RuntimeTypeAdapterFactory<Storage> adapterStorage =
+              RuntimeTypeAdapterFactory
+                      .of(Storage.class)
+                      .registerSubtype(Storage.class)
+                      .registerSubtype(StorageExtraFirst.class)
+                      .registerSubtype(StorageExtraSecond.class);
+
+
+      RuntimeTypeAdapterFactory<Colour> adapterColour =
+              RuntimeTypeAdapterFactory
+                      .of(Colour.class)
+                      .registerSubtype(Green.class)
+                      .registerSubtype(Yellow.class)
+                      .registerSubtype(Blue.class)
+                      .registerSubtype(Violet.class);
+
+      RuntimeTypeAdapterFactory<GameBoardInterface> adapterGameBoard =
+              RuntimeTypeAdapterFactory
+                      .of(GameBoardInterface.class)
+                      .registerSubtype(GameBoard.class)
+                      .registerSubtype(ProductionGameBoardDouble.class)
+                      .registerSubtype(ProductionGameBoard.class)
+                      .registerSubtype(WhiteMarbleGameBoard.class)
+                      .registerSubtype(WhiteMarbleGameBoardDouble.class)
+                      .registerSubtype(ReductionGameBoard.class)
+                      .registerSubtype(ReductionGameBoardDouble.class);
+
+
+      RuntimeTypeAdapterFactory<Requirements> adapterRequirements =
+              RuntimeTypeAdapterFactory
+                      .of(Requirements.class)
+                      .registerSubtype(ResourceRequirement.class)
+                      .registerSubtype(SecondLevelRequirement.class)
+                      .registerSubtype(ThreeFlagsTwoColourRequirement.class)
+                      .registerSubtype(TwoFlagsTwoColourRequirement.class);
+
+      RuntimeTypeAdapterFactory<LeaderCard> adapterLeader =
+              RuntimeTypeAdapterFactory
+                      .of(LeaderCard.class)
+                      .registerSubtype(LeaderCardMarble.class)
+                      .registerSubtype(LeaderCardProduction.class)
+                      .registerSubtype(LeaderCardReduction.class)
+                      .registerSubtype(LeaderCardStorage.class);
+
+      RuntimeTypeAdapterFactory<Marble> adapterMarble =
+              RuntimeTypeAdapterFactory
+                      .of(Marble.class)
+                      .registerSubtype(Marble.class)
+                      .registerSubtype(GreyMarble.class)
+                      .registerSubtype(YellowMarble.class)
+                      .registerSubtype(BluMarble.class)
+                      .registerSubtype(WhiteMarble.class)
+                      .registerSubtype(PurpleMarble.class)
+                      .registerSubtype(RedMarble.class);
+
+
+
+
+      Gson gson=new GsonBuilder().setPrettyPrinting()
+              .registerTypeAdapterFactory(adapterMarble)
+              .registerTypeAdapterFactory(adapterGameBoard)
+              .registerTypeAdapterFactory(adapterStorage)
+              .registerTypeAdapterFactory(adapterColour)
+              .registerTypeAdapterFactory(adapterRequirements)
+              .registerTypeAdapterFactory(adapterLeader)
+              .create();
         Map map;
         try {
             map = gson.fromJson(new FileReader("src/main/resources/Reserve.json"),Map.class);

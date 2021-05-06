@@ -21,7 +21,7 @@ import java.io.IOException;
  * This class represents the third player in the multiplayer game to play in a round
  */
 public class PlayerThird extends Player {
-    private GameBoardInterface gameBoard;
+
     FileWriter fileInformatioPlayerThird;
     /**
      * Default constructor that calls the super class constructor
@@ -94,7 +94,7 @@ public class PlayerThird extends Player {
                 .create();
 
         try {
-            gameBoard = gson.fromJson(new FileReader("src/main/resources/fileInformationPlayerThird.json"), GameBoardInterface.class);
+           this.gameBoardOfPlayer= gson.fromJson(new FileReader("src/main/resources/fileInformationPlayerThird.json"), GameBoardInterface.class);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

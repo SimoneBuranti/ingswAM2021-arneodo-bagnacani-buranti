@@ -280,6 +280,7 @@ public class Market {
         RuntimeTypeAdapterFactory<Marble> adapterMarble =
                 RuntimeTypeAdapterFactory
                         .of(Marble.class)
+                        .registerSubtype(Marble.class)
                         .registerSubtype(GreyMarble.class)
                         .registerSubtype(YellowMarble.class)
                         .registerSubtype(BluMarble.class)
