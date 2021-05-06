@@ -175,6 +175,12 @@ public class FileClass {
             f.delete();
 
 
+        f = new File("src/main/resources/lastTurn.json");
+        if (f.exists())
+            f.delete();
+
+
+
 
 
 

@@ -314,7 +314,7 @@ public class GameSolitaire extends Game{
     protected void exceptionHandler(LastSpaceReachedException e) {
         player.setPapal();
         player.playerScore();
-        //...fine partita
+       endGame();
     }
 
 
@@ -326,6 +326,7 @@ public class GameSolitaire extends Game{
     @Override
     protected void exceptionHandler(EndOfSolitaireGame e) {
         System.out.println("Lorenzo the Magnificent WIN");
+        endGame();
     }
 
     /**

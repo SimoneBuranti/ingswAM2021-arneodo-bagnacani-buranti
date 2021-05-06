@@ -241,6 +241,15 @@ public class GameMultiPlayer extends Game {
 
 
     /**
+     * this method handles the CallForCouncilException by setting the lastTurn attribute to true
+     * @param e : the exception to handle
+     */
+    protected void endOfLastTurn(EndGameException e) {
+        endGame();
+    }
+
+
+    /**
      * method called when the game is over, it calculates the score of all players and returns the winner
      * @return Player : the player with the highest score
      */
@@ -281,6 +290,25 @@ public class GameMultiPlayer extends Game {
         try {
 
             config = new FileWriter("src/main/resources/InformationAboutCurrentPosition.json");
+            config.write(jsonStrin);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                config.flush();
+                config.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } } }
+
+
+    private void saveIfLastTurnOrNot() {
+        Gson gson = new Gson();
+        FileWriter config = null;
+        String jsonStrin = gson.toJson(lastTurn);
+        try {
+
+            config = new FileWriter("src/main/resources/lastTurn.json");
             config.write(jsonStrin);
         } catch (IOException e) {
             e.printStackTrace();
@@ -347,6 +375,11 @@ public class GameMultiPlayer extends Game {
         }
         try {
             currentPlayerPosition= gson.fromJson(new FileReader("src/main/resources/InformationAboutCurrentPosition.json"),Integer.class);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        try {
+           lastTurn= gson.fromJson(new FileReader("src/main/resources/lastTurn.json"),Boolean.class);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
