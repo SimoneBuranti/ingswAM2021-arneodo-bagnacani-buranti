@@ -337,6 +337,8 @@ public class Game {
             exceptionHandler(e);
         } catch (LastSpaceReachedException e) {
             exceptionHandler(e);
+        } catch (NotEnoughSpaceInStorageException e) {
+            e.printStackTrace();
         }
     }
 
@@ -355,6 +357,8 @@ public class Game {
             exceptionHandler(e);
         } catch (LastSpaceReachedException e) {
             exceptionHandler(e);
+        } catch (NotEnoughSpaceInStorageException e) {
+            e.printStackTrace();
         }
     }
 

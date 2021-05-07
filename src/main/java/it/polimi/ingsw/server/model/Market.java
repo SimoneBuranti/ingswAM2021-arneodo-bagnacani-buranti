@@ -4,6 +4,7 @@ import com.google.gson.GsonBuilder;
 import it.polimi.ingsw.server.model.colours.*;
 import it.polimi.ingsw.server.model.exceptions.CallForCouncilException;
 import it.polimi.ingsw.server.model.exceptions.LastSpaceReachedException;
+import it.polimi.ingsw.server.model.exceptions.NotEnoughSpaceInStorageException;
 import it.polimi.ingsw.server.model.exceptions.WhiteMarbleException;
 import it.polimi.ingsw.server.model.marbles.*;
 import it.polimi.ingsw.server.model.players.Player;
@@ -139,7 +140,7 @@ public class Market {
      * @throws LastSpaceReachedException : the exception which is thrown when the faith indicator has reached the last papal space
      * @throws WhiteMarbleException : the exception which is thrown when the player has activated two white marble-type leader cards
      */
-    public void pushRow(int chosenRow, Player player) throws CallForCouncilException, LastSpaceReachedException, WhiteMarbleException {
+    public void pushRow(int chosenRow, Player player) throws CallForCouncilException, LastSpaceReachedException, WhiteMarbleException, NotEnoughSpaceInStorageException {
         int j;
         WhiteMarbleException exception = new WhiteMarbleException(0);
         Marble temp;
@@ -174,7 +175,7 @@ public class Market {
      * @throws LastSpaceReachedException : the exception which is thrown when the faith indicator has reached the last papal space
      * @throws WhiteMarbleException : the exception which is thrown when the player has activated two white marble-type leader cards
      */
-    public void pushColumn(int chosenColumn, Player player) throws CallForCouncilException, LastSpaceReachedException, WhiteMarbleException {
+    public void pushColumn(int chosenColumn, Player player) throws CallForCouncilException, LastSpaceReachedException, WhiteMarbleException, NotEnoughSpaceInStorageException {
         int i;
         Marble temp;
         for(i=0; i<3; i++)

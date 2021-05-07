@@ -136,11 +136,22 @@ public class GameMultiPlayer extends Game {
      * this method sets the new current player at the end of old current player turn
      */
     public void setCurrentPlayer() {
+        int cont;
         if(currentPlayerPosition == numberOfPlayer-1)
-            currentPlayerPosition = 0;
+            cont = 0;
         else
-            currentPlayerPosition += 1;
+            cont = currentPlayerPosition+1;
 
+        while(!(playerList.get(cont).isConnected())){
+            cont++;
+            if(cont == numberOfPlayer)
+                cont = 0;
+            if(cont == currentPlayerPosition && !(playerList.get(cont).isConnected())){
+                currentPlayer = null;
+                return;
+            }
+        }
+        currentPlayerPosition = cont;
         currentPlayer = playerList.get(currentPlayerPosition);
     }
 
@@ -178,7 +189,12 @@ public class GameMultiPlayer extends Game {
         for(int i=0; i<inkwell;i++)
             nickNameInOrder.add(nickName.get(i));
 
-        return  nickNameInOrder;}
+        return  nickNameInOrder;
+    }
+
+    public ArrayList<String> getNickNameInOrder(){
+        return nickNameInOrder;
+    }
 
     /**
      * method called when the player discards a resource,it moves the faith indicator of all players except the one
