@@ -40,25 +40,12 @@ public class Player {
     /**
      * this attribute is the reference to the game the player is playing
      */
-    private final Game game;
+    protected Game game;
 
 
-    /**
-     * constructor that initializes the player's attributes and assigns the player four leader cards from the common deck
-     * @param nickName : the nickname chosen by the player
-     *
-     */
-    public Player(String nickName){
-        buffer= new ArrayList<>();
-        gameBoardOfPlayer = new GameBoard();
-        personalLeaderCard=new ArrayList<>(4);
-        personalLeaderCard.add(DeckLeaderCard.arrangeDeckLeaderCards());
-        personalLeaderCard.add(DeckLeaderCard.arrangeDeckLeaderCards());
-        personalLeaderCard.add(DeckLeaderCard.arrangeDeckLeaderCards());
-        personalLeaderCard.add(DeckLeaderCard.arrangeDeckLeaderCards());
-        this.nickName = nickName;
-        this.connected = true;
-    }
+    protected boolean newMatch;
+
+
 
     /**
      * constructor that initializes the player's attributes and assigns the player four leader cards from the common deck
@@ -76,15 +63,29 @@ public class Player {
         this.nickName = nickName;
         this.game = game;
         this.connected = true;
+        this.newMatch=true;
     }
 
-    /*public Player(String nickName){
+
+    /**
+     * constructor that initializes the player's attributes and assigns the player four leader cards from the common deck
+     * @param nickName : the nickname chosen by the player
+     *
+     */
+    public Player(String nickName,Game game,boolean newMatch){
         buffer= new ArrayList<>();
-        personalLeaderCard=new ArrayList<>();
+        gameBoardOfPlayer = new GameBoard();
+        personalLeaderCard=new ArrayList<>(4);
+        personalLeaderCard.add(DeckLeaderCard.arrangeDeckLeaderCards());
+        personalLeaderCard.add(DeckLeaderCard.arrangeDeckLeaderCards());
+        personalLeaderCard.add(DeckLeaderCard.arrangeDeckLeaderCards());
+        personalLeaderCard.add(DeckLeaderCard.arrangeDeckLeaderCards());
+        this.newMatch=false;
         this.nickName = nickName;
-        this.game = null;
+        this.game = game;
         this.connected = true;
-    }*/
+    }
+
 
 
     /**
@@ -405,6 +406,7 @@ public class Player {
     }
 
 
-
-
+    public boolean isNewMatch() {
+        return newMatch;
+    }
 }

@@ -27,17 +27,17 @@ public class PlayerThird extends Player {
      * Default constructor that calls the super class constructor
      * @param nickName : the nickname chosen by the player
      */
-    /*public PlayerThird(String nickName){
-        super(nickName);
-    }*/
+    public PlayerThird(String nickName,Game game){
+        super(nickName, game );
+    }
 
     /**
      * Restore constructor that calls the super class constructor
      * @param nickName : the nickname chosen by the player
      */
 
-    public PlayerThird(String nickName){
-        super(nickName);
+    public PlayerThird(String nickName, Game game, boolean newmatch){
+        super(nickName,game,newmatch);
         RuntimeTypeAdapterFactory<Storage> adapterStorage =
                 RuntimeTypeAdapterFactory
                         .of(Storage.class)
