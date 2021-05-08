@@ -44,5 +44,8 @@ public enum MessageType {
     LORENZOSACTION,
     RESERVEVALUE,
     PING,
-    PONG
+    PONG,
+   /* ****** ********************* */
+   DECKPRODUCTIONCARD,
+
 }

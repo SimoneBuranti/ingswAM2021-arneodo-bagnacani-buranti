@@ -288,7 +288,7 @@ public class GameMultiPlayer extends Game {
 
 
     /**
-     * this method handles the CallForCouncilException by setting the lastTurn attribute to true
+     * this method handles the CallForC ouncilException by setting the lastTurn attribute to true
      * @param e : the exception to handle
      */
     @Override
@@ -336,6 +336,7 @@ public class GameMultiPlayer extends Game {
         saveInformationAboutTurn();
         saveInformationPlayerNumber();
         saveCurrentPosition();
+        saveIfLastTurnOrNot();
     }
 
 
@@ -357,6 +358,7 @@ public class GameMultiPlayer extends Game {
             } catch (IOException e) {
                 e.printStackTrace();
             } } }
+
 
 
     private void saveIfLastTurnOrNot() {

@@ -2,6 +2,7 @@ package it.polimi.ingsw.server.network;
 
 import it.polimi.ingsw.messages.Message;
 import it.polimi.ingsw.server.controller.ClientController;
+import it.polimi.ingsw.server.virtualview.VirtualView;
 
 import java.io.*;
 import java.net.Socket;
@@ -21,11 +22,11 @@ public class ClientHandler implements Runnable {
     private final Server server;
 
 
+
     public ClientHandler(Socket client, Server server) throws IOException {
         this.socketClient = client;
         this.server = server;
         clientController = new ClientController(server, this);
-
         inputStream = socketClient.getInputStream();
         outputStream = socketClient.getOutputStream();
 

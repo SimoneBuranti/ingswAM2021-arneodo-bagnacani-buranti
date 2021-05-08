@@ -3,6 +3,7 @@ package it.polimi.ingsw.server.controller;
 import it.polimi.ingsw.messages.*;
 import it.polimi.ingsw.server.model.Game;
 import it.polimi.ingsw.server.network.*;
+import it.polimi.ingsw.server.virtualview.VirtualView;
 
 public class ClientController implements MessageVisitor {
 
@@ -10,12 +11,15 @@ public class ClientController implements MessageVisitor {
     private final ClientHandler clientHandler;
     private Game game;
     private String nickname;
+    private VirtualView virtualView;
 
     public ClientController(Server server, ClientHandler clientHandler) {
         this.server = server;
         this.clientHandler = clientHandler;
         this.game = null;
         this.nickname = null;
+        this.virtualView = new VirtualView(clientHandler);
+        game.addObserver(virtualView);
     }
 
     public Game getGame() {
@@ -144,8 +148,7 @@ public class ClientController implements MessageVisitor {
     }
 
     @Override
-    public void visit(ExitMessage msg) {
-        server.getGameController().handleMessage(msg, this);
+    public void visit(ExitMessage msg) { server.getGameController().handleMessage(msg, this);
     }
 
     @Override
@@ -211,5 +214,9 @@ public class ClientController implements MessageVisitor {
     @Override
     public void visit(PongMessage msg) {
         server.getGameController().handleMessage(msg, this);
+    }
+
+    public VirtualView getVirtualView() {
+        return virtualView;
     }
 }

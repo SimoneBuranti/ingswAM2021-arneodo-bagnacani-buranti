@@ -16,9 +16,11 @@ public class Server {
     private ArrayList<String> lobby;
 
     public Server(GameControllerInterface gameController) {
+
         this.gameController = gameController;
         gameController.setServer(this);
         lobby = new ArrayList<>();
+
         //this.clientHandlers = new ArrayList<>();
     }
 
@@ -32,13 +34,12 @@ public class Server {
 
     public void initNewMultiplayerGame(){
         game = new GameMultiPlayer(lobby.size(),lobby,true);
-        virtualView = new VirtualView();
+        //VirtualView virtualView = new VirtualView();
         gameController = new GameControllerMultiplayer();
     }
 
     public void initNewSolitaireGame(){
         game = new GameSolitaire(lobby.get(0),true);
-        virtualView = new VirtualView();
         gameController = new GameControllerSinglePlayer();
     }
 

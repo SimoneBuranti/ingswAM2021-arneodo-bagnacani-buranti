@@ -374,8 +374,17 @@ public class Player {
     public void savePlayerInformation(){ }
 
 
+    /**
+     * method called in answer to WhiteMarbleException and NotEnoughSpaceInStorageException
+     * @param list
+     * @throws NotEnoughSpaceInStorageException
+     */
     public void takeResourceFromClientToGameboard(ArrayList<Resource> list) throws NotEnoughSpaceInStorageException {
+        int delta;
             gameBoardOfPlayer.takeFromMarket(list);
+            delta= buffer.size()-list.size();
+            for(;delta>0;delta--)
+                game.moveEveryoneExcept(this);
     }
 
 

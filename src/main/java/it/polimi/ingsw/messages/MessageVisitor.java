@@ -53,4 +53,9 @@ public interface MessageVisitor {
     void visit(PingMessage msg);
     void visit(PongMessage msg);
 
+
+    //Observer
+    void visit(DeckProductionCardMessage msg);
+    void visit(DeckProductionCardConfigMessage msg);
+
 }

@@ -2,6 +2,8 @@ package it.polimi.ingsw.server.model.productionCards;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import it.polimi.ingsw.Observer.Observable;
+import it.polimi.ingsw.Observer.Observer;
 import it.polimi.ingsw.server.model.RuntimeTypeAdapterFactory;
 import it.polimi.ingsw.server.model.Resource;
 import it.polimi.ingsw.server.model.colours.*;
@@ -14,7 +16,7 @@ import java.util.Map;
 /**
  * this abstract class represents the production card deck
  */
-public abstract class DeckProductionCard {
+public abstract class DeckProductionCard extends Observable {
 
 
 

@@ -8,6 +8,7 @@ import it.polimi.ingsw.server.model.colours.*;
 import it.polimi.ingsw.server.model.gameBoard.*;
 import it.polimi.ingsw.server.model.leaderCards.*;
 import it.polimi.ingsw.server.model.requirements.*;
+import it.polimi.ingsw.server.virtualview.VirtualView;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -19,6 +20,7 @@ import java.io.IOException;
  */
 public class PlayerFirst extends Player{
     FileWriter fileInformatioPlayerFirst;
+
 
 
 

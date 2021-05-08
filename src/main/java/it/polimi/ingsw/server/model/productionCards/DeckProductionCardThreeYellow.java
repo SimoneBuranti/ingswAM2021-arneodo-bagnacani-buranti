@@ -1,6 +1,7 @@
 package it.polimi.ingsw.server.model.productionCards;
 
 import com.google.gson.Gson;
+import it.polimi.ingsw.messages.DeckProductionCardConfigMessage;
 import it.polimi.ingsw.server.model.Mix;
 import it.polimi.ingsw.server.model.Resource;
 import it.polimi.ingsw.server.model.colours.Yellow;
@@ -25,8 +26,7 @@ public class DeckProductionCardThreeYellow extends DeckProductionCard {
      * this constructor creates all the production cards and adds them to the list and shuffles the newly created deck
      */
     public DeckProductionCardThreeYellow(){
-        Gson g = new Gson();
-        String JSONArray;
+
 
         Yellow yellow= new Yellow();
         deck = new ArrayList<>(4);
@@ -107,35 +107,12 @@ public class DeckProductionCardThreeYellow extends DeckProductionCard {
 
         Mix.MIXED(deck);
 
-        List<Integer> list = new ArrayList<Integer>();
+        ArrayList<Integer> list = new ArrayList<Integer>();
         list.add(deck.get(0).getKey());
         list.add(deck.get(1).getKey());
         list.add(deck.get(2).getKey());
         list.add(deck.get(3).getKey());
-
-        String jsonStr = g.toJson(list);
-
-        try {
-
-            // Constructs a FileWriter given a file name, using the platform's default charset
-            configDeckYellowThree= new FileWriter("src/main/resources/configDeckYellowThree.json");
-            configDeckYellowThree.write(jsonStr);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-
-        } finally {
-
-            try {
-                configDeckYellowThree.flush();
-                configDeckYellowThree.close();
-            } catch (IOException e) {
-
-                e.printStackTrace();
-            }
-
-
-        }
+        notifyObserver(new DeckProductionCardConfigMessage(7,list));
 
     }
     /**
@@ -168,34 +145,14 @@ public class DeckProductionCardThreeYellow extends DeckProductionCard {
         int l=deckRecover.length;
         for(int i=0; i < l; i++)
             deck.add(deckRecover[i]);
-        Gson gson = new Gson();
 
-        List<Integer> list = new ArrayList<Integer>();
+
+        ArrayList<Integer> list = new ArrayList<Integer>();
         for(int i=0; i < deck.size(); i++)
             list.add(deck.get(i).getKey());
-
-        String jsonStr = gson.toJson(list);
-
-        try {
-
-            // Constructs a FileWriter given a file name, using the platform's default charset
-            configDeckYellowThree = new FileWriter("src/main/resources/configDeckYellowThree.json");
-            configDeckYellowThree.write(jsonStr);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-
-        } finally {
-
-            try {
-                configDeckYellowThree.flush();
-                configDeckYellowThree.close();
-            } catch (IOException e) {
-
-                e.printStackTrace();
-            }
-        }}
+        notifyObserver(new DeckProductionCardConfigMessage(7,list));
+    }}
 
 
 
-}
+
