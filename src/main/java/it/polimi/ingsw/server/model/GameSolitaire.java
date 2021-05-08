@@ -53,7 +53,7 @@ public class GameSolitaire extends Game{
         this.nickNamePlayer=nickName;
         deckActionMarker = new DeckActionMarker();
         lorenzoTheMagnificent = new LorenzoTheMagnificent();
-        player = new PlayerFirst(nickName);
+        player = new PlayerFirst(nickName,this);
         currentPlayer = player;}
         else
             restoreGameSolitaire();
@@ -424,7 +424,7 @@ public class GameSolitaire extends Game{
             e.printStackTrace();
         }
         RestoreActionMarker();
-        player = new PlayerFirst(nickNamePlayer);
+        player = new PlayerFirst(nickNamePlayer,this,false);
         RestoreActionMagnific();
 
     }
