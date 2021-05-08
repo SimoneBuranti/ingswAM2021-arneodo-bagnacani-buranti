@@ -222,4 +222,14 @@ public class ViewController implements MessageVisitor {
     public void visit(PongMessage msg) {
 
     }
+
+    @Override
+    public void visit(DeckProductionCardMessage msg) {
+
+    }
+
+    @Override
+    public void visit(DeckProductionCardConfigMessage msg) {
+
+    }
 }

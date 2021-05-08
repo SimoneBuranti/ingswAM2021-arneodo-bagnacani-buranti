@@ -16,12 +16,7 @@ import java.util.*;
  * this class represents the second level blue production card deck
  */
 public class DeckProductionCardTwoBlu extends DeckProductionCard {
-    /**
-     * file for initial configuration
-     */
-
-    FileWriter configDeckBlueTwo= null;
-
+    private final int key=8;
     /**
      * this constructor creates all the production cards and adds them to the list and shuffles the newly created deck
      */
@@ -150,7 +145,12 @@ public class DeckProductionCardTwoBlu extends DeckProductionCard {
             list.add(deck.get(i).getKey());
 
         notifyObserver(new DeckProductionCardConfigMessage(8,list));
-    }}
+    }
+
+    public int getKey() {
+        return key;
+    }
+}
 
 
 

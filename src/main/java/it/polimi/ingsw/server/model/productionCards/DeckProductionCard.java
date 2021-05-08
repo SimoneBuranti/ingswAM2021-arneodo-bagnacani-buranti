@@ -51,7 +51,10 @@ public abstract class DeckProductionCard extends Observable {
      */
     public ProductionCard pickUpFirstCard() throws EmptyException {
         if(!deck.isEmpty())
+
             return deck.remove(0);
+
+
         else
             throw new EmptyException();
     }
@@ -124,6 +127,10 @@ public abstract class DeckProductionCard extends Observable {
                 .create();
 
         return gson;
+    }
+
+    public int getKey() {
+        return 0;
     }
 
 

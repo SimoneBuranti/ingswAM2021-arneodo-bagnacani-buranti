@@ -28,6 +28,7 @@ public class ClientController implements MessageVisitor {
 
     public void setGame(Game game){
         this.game = game;
+        game.addObserver(virtualView);
     }
 
     public String getNickname() {
@@ -214,6 +215,16 @@ public class ClientController implements MessageVisitor {
     @Override
     public void visit(PongMessage msg) {
         server.getGameController().handleMessage(msg, this);
+    }
+
+    @Override
+    public void visit(DeckProductionCardMessage msg) {
+
+    }
+
+    @Override
+    public void visit(DeckProductionCardConfigMessage msg) {
+
     }
 
     public VirtualView getVirtualView() {

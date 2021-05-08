@@ -15,11 +15,7 @@ import java.util.*;
  * this class represents the second level yellow production card deck
  */
 public class DeckProductionCardTwoYellow extends DeckProductionCard {
-    /**
-     * file for initial configuration
-     */
-    FileWriter configDeckYellowTwo= null;
-
+    private final int key=11;
 
 
     /**
@@ -150,6 +146,11 @@ public class DeckProductionCardTwoYellow extends DeckProductionCard {
             list.add(deck.get(i).getKey());
 
         notifyObserver(new DeckProductionCardConfigMessage(11,list));
-    }}
+    }
+
+    public int getKey() {
+        return key;
+    }
+}
 
 

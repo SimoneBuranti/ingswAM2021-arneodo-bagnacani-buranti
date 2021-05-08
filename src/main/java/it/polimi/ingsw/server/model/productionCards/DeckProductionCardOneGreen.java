@@ -16,12 +16,9 @@ import java.util.*;
  * this class represents the first level green production card deck
  */
 public class DeckProductionCardOneGreen extends DeckProductionCard {
-    /**
-     * file for initial configuration
-     */
-    FileWriter configDeckGreenOne = null;
 
 
+    private final int key=1;
     /**
      * this constructor creates all the production cards and adds them to the list and shuffles the newly created deck
      */
@@ -156,4 +153,9 @@ public class DeckProductionCardOneGreen extends DeckProductionCard {
             list.add(deck.get(i).getKey());
 
         notifyObserver(new DeckProductionCardConfigMessage(1,list));
-    }}
+    }
+
+    public int getKey() {
+        return key;
+    }
+}

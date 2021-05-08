@@ -2,6 +2,11 @@ package it.polimi.ingsw.server.model;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import it.polimi.ingsw.Observer.Observable;
+import it.polimi.ingsw.Observer.Observer;
+import it.polimi.ingsw.messages.DeckProductionCardMessage;
+import it.polimi.ingsw.messages.Message;
+import it.polimi.ingsw.messages.WrongColumnErrorMessage;
 import it.polimi.ingsw.server.model.colours.*;
 import it.polimi.ingsw.server.model.exceptions.*;
 import it.polimi.ingsw.server.model.gameBoard.*;
@@ -19,7 +24,7 @@ import java.util.Map;
 /**
  * this class represents the game
  */
-public class Game {
+public class Game extends Observable {
 
     /**
      * this attribute represents the game market
@@ -97,7 +102,8 @@ public class Game {
 
         if (newGame)
 
-        {market = new Market();
+        {
+            market = new Market();
         reserve = new Reserve();
         deckProductionCardOneBlu = new DeckProductionCardOneBlu();
         deckProductionCardTwoBlu = new DeckProductionCardTwoBlu();
@@ -184,14 +190,14 @@ public class Game {
         } catch (EndGameException e) {
             exceptionHandler(e);
         }
+        notifyObserver(new DeckProductionCardMessage(deck.getKey()));
     }
 
     /**
      * not implemented method called when the player discards a resource
      * @param player : the one who discards the resource
      */
-    public void moveEveryoneExcept(Player player){
-    }
+    public void moveEveryoneExcept(Player player){ }
 
     /**
      * this method activates the production of the highest level card in the chosen column of the current player game board by calling the current player method
@@ -393,7 +399,7 @@ public class Game {
      */
 
     protected void exceptionHandler(EmptyColumnException e) {
-    }
+        }
 
     protected void exceptionHandler(LevelException e) {
     }
@@ -827,8 +833,7 @@ public class Game {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-
-    }
+  }
 
     /**
      * endGame method

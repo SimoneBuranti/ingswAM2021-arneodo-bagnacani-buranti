@@ -7,6 +7,10 @@ public class DeckProductionCardMessage extends Message {
 
     private int NumberDeck;
 
+    public DeckProductionCardMessage(int numberDeck){
+        this.NumberDeck=numberDeck;
+    }
+
     @Override
     public MessageType getMessageType() {
         return messageType;
@@ -17,13 +21,6 @@ public class DeckProductionCardMessage extends Message {
         v.visit(this);
     }
 
-    public int getNumberDeck() {
-        return NumberDeck;
-    }
-
-    public void setNumberDeck(int numberDeck) {
-        NumberDeck = numberDeck;
-    }
 
 
 

@@ -14,11 +14,9 @@ import java.util.*;
  * this class represents the first level blue production card deck
  */
 public class DeckProductionCardOneBlu extends DeckProductionCard {
-    /**
-     * file for initial configuration
-     */
 
-    FileWriter configDeckBlueOne = null;
+
+    private final int key=0;
 
 
     /**
@@ -150,13 +148,7 @@ public class DeckProductionCardOneBlu extends DeckProductionCard {
 
 
 
-
-
-
-
-
-
-    /**
+            /**
      * this constructor creates all the production cards and adds them to the list and shuffles the newly created deck
      */
     public DeckProductionCardOneBlu(ProductionCard[] deckRecover){
@@ -172,4 +164,9 @@ public class DeckProductionCardOneBlu extends DeckProductionCard {
             list.add(deck.get(i).getKey());
 
         notifyObserver(new DeckProductionCardConfigMessage(0,list));
-    }}
+    }
+
+    public int getKey() {
+        return key;
+    }
+}

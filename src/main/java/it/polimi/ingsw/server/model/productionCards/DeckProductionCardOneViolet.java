@@ -17,11 +17,7 @@ import java.util.*;
  * this class represents the first level violet production card deck
  */
 public class DeckProductionCardOneViolet extends DeckProductionCard {
-    /**
-     * file for initial configuration
-     */
-
-    FileWriter configDeckVioletOne = null;
+    private final int key=2;
 
     /**
      * this constructor creates all the production cards and adds them to the list and shuffles the newly created deck
@@ -155,7 +151,12 @@ public class DeckProductionCardOneViolet extends DeckProductionCard {
             list.add(deck.get(i).getKey());
 
         notifyObserver(new DeckProductionCardConfigMessage(2,list));
-    }}
+    }
+
+    public int getKey() {
+        return key;
+    }
+}
 
 
 
