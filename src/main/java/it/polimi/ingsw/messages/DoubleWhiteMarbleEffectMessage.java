@@ -5,6 +5,10 @@ public class DoubleWhiteMarbleEffectMessage extends Message {
 
     private int whiteMarbleNumber;
 
+    public DoubleWhiteMarbleEffectMessage(int whiteMarbleNumber) {
+        this.whiteMarbleNumber = whiteMarbleNumber;
+    }
+
     @Override
     public MessageType getMessageType() {
         return messageType;
@@ -12,10 +16,6 @@ public class DoubleWhiteMarbleEffectMessage extends Message {
 
     public int getWhiteMarbleNumber() {
         return whiteMarbleNumber;
-    }
-
-    public void setWhiteMarbleNumber(int whiteMarbleNumber) {
-        this.whiteMarbleNumber = whiteMarbleNumber;
     }
 
     @Override

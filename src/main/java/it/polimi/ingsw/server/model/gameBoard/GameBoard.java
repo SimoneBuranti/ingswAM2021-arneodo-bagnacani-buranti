@@ -333,7 +333,7 @@ public class GameBoard extends GameBoardInterface{
     public void takeFromMarket(ArrayList<Resource> newResources) throws NotEnoughSpaceInStorageException {
 
         if (!storageOfGameBoard.check((ArrayList<Resource>) newResources.clone())){
-            throw new NotEnoughSpaceInStorageException();
+            throw new NotEnoughSpaceInStorageException((ArrayList<Resource>) newResources.clone());
         } else {
             for (Resource r : newResources) {
                 storageOfGameBoard.addResource(r);

@@ -3,13 +3,19 @@ package it.polimi.ingsw.messages;
 public class BuyProductionCardMessage extends Message{
     private final MessageType messageType = MessageType.BUYPRODUCTIONCARD;
     private int deckNumber;
+    private int columnNumber;
+
+    public BuyProductionCardMessage(int deckNumber, int columnNumber) {
+        this.deckNumber = deckNumber;
+        this.columnNumber = columnNumber;
+    }
 
     public int getDeckNumber() {
         return deckNumber;
     }
 
-    public void setDeckNumber(int deckNumber){
-        this.deckNumber = deckNumber;
+    public int getColumnNumber() {
+        return columnNumber;
     }
 
     @Override

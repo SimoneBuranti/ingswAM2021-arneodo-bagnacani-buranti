@@ -138,6 +138,14 @@ public class Game extends Observable {
     }
 
     /**
+     * This getter method return the current player of the game
+     * @return Player : the game current player
+     */
+    public String getCurrentNickname() {
+        return currentPlayer.getNickName();
+    }
+
+    /**
      * this method initialises the current player resource and catches CallForCouncilException and LastSpaceReachedException.
      * When the exceptions are caught, the method calls the exceptionHandler method.
      * @param resource : initial resource of the current player
@@ -169,6 +177,70 @@ public class Game extends Observable {
 
     }
 
+    public DeckProductionCard deckFromDeckNumber(int deckNumber){
+        switch(deckNumber) {
+            case 0:
+                return deckProductionCardOneBlu;
+            case 1:
+                return deckProductionCardTwoBlu;
+            case 2:
+                return deckProductionCardThreeBlu;
+            case 3:
+                return deckProductionCardOneGreen;
+            case 4:
+                return deckProductionCardTwoGreen;
+            case 5:
+                return deckProductionCardThreeGreen;
+            case 6:
+                return deckProductionCardOneYellow;
+            case 7:
+                return deckProductionCardTwoYellow;
+            case 8:
+                return deckProductionCardThreeYellow;
+            case 9:
+                return deckProductionCardOneViolet;
+            case 10:
+                return deckProductionCardTwoViolet;
+            case 11:
+                return deckProductionCardThreeViolet;
+        }
+
+        return null;
+    }
+
+
+    public int deckNumberFromDeck(DeckProductionCard deck){
+
+        if (deck instanceof DeckProductionCardOneBlu)
+            return 0;
+        if (deck instanceof DeckProductionCardTwoBlu)
+            return 1;
+        if (deck instanceof DeckProductionCardThreeBlu)
+            return 2;
+        if (deck instanceof DeckProductionCardOneGreen)
+            return 3;
+        if (deck instanceof DeckProductionCardTwoGreen)
+            return 4;
+        if (deck instanceof DeckProductionCardThreeGreen)
+            return 5;
+        if (deck instanceof DeckProductionCardOneYellow)
+            return 6;
+        if (deck instanceof DeckProductionCardTwoYellow)
+            return 7;
+        if (deck instanceof DeckProductionCardThreeYellow)
+            return 8;
+        if (deck instanceof DeckProductionCardOneViolet)
+            return 2;
+        if (deck instanceof DeckProductionCardTwoViolet)
+            return 2;
+        if (deck instanceof DeckProductionCardThreeViolet)
+            return 2;
+
+
+
+        return -1;
+    }
+
     /**
      * this method is used to buy a production card by calling the current player method and catches LevelException,
      * NotEnoughResourcesException, EmptyException, FullColumnException and EndGameException.
@@ -176,17 +248,9 @@ public class Game extends Observable {
      * @param deck : it is the production card deck from which the current player wants to buy the card
      * @param chosenColumn : the game board column in which the current player wants to place the bought card
      */
-    public void buyProductionCard(DeckProductionCard deck, int chosenColumn){
+    public void buyProductionCard(DeckProductionCard deck, int chosenColumn) throws EmptyException, FullColumnException, NotEnoughResourcesException, LevelException {
         try {
             currentPlayer.buyProductionCard(deck,chosenColumn);
-        } catch (LevelException e) {
-            exceptionHandler(e);
-        } catch (NotEnoughResourcesException e) {
-            exceptionHandler(e);
-        } catch (EmptyException e) {
-            exceptionHandler(e);
-        } catch (FullColumnException e) {
-            exceptionHandler(e);
         } catch (EndGameException e) {
             exceptionHandler(e);
         }
@@ -205,13 +269,9 @@ public class Game extends Observable {
      * When the exceptions are caught, the method calls the exceptionHandler method.
      * @param chosenColumn : the game board column where the card the player wants to active is situated
      */
-    public void productionOn(int chosenColumn){
+    public void productionOn(int chosenColumn) throws ImpossibleProductionException, EmptyColumnException {
         try {
             currentPlayer.productionOn(chosenColumn);
-        } catch (ImpossibleProductionException e) {
-            exceptionHandler(e);
-        } catch (EmptyColumnException e) {
-            exceptionHandler(e);
         } catch (CallForCouncilException e) {
             exceptionHandler(e);
         } catch (LastSpaceReachedException e) {
@@ -226,12 +286,9 @@ public class Game extends Observable {
      * @param i2 : the second resource type of the base production input
      * @param output : the resource type of the base production output
      */
-    public void baseProductionOn(Resource i1, Resource i2, Resource output){
-        try {
-            currentPlayer.baseProductionOn(i1, i2, output);
-        } catch (ImpossibleProductionException e) {
-            exceptionHandler(e);
-        }
+    public void baseProductionOn(Resource i1, Resource i2, Resource output) throws ImpossibleProductionException {
+        currentPlayer.baseProductionOn(i1, i2, output);
+
     }
 
     /**
@@ -258,14 +315,12 @@ public class Game extends Observable {
      * When the exception is caught, the method calls the exceptionHandler method.
      * @param resource: the resource type of the second extra production output
      */
-    public void anotherExtraProductionOn(Resource resource){
+    public void anotherExtraProductionOn(Resource resource) throws ImpossibleProductionException {
         try {
             currentPlayer.anotherExtraProductionOn(resource);
         } catch (LastSpaceReachedException e) {
             exceptionHandler(e);
         } catch (CallForCouncilException e) {
-            exceptionHandler(e);
-        } catch (ImpossibleProductionException e) {
             exceptionHandler(e);
         }
     }
@@ -275,13 +330,7 @@ public class Game extends Observable {
      * When the exception is caught, the method calls the exceptionHandler method.
      */
     public void endOfProduction(){
-        try {
-            currentPlayer.endOfProduction();
-        } catch (CallForCouncilException e) {
-            exceptionHandler(e);
-        } catch (LastSpaceReachedException e) {
-            exceptionHandler(e);
-        }
+        currentPlayer.endOfProduction();
     }
 
     /**
@@ -299,16 +348,15 @@ public class Game extends Observable {
      * When the exception is caught, the method calls the exceptionHandler method.
      * @param index : the position where the leader card to be discarded is
      */
-    public void discardLeaderCard(int index){
+    public void discardLeaderCard(int index) throws LeaderCardsGameBoardEmptyException{
         try {
             currentPlayer.discardLeaderCard(index);
         } catch (CallForCouncilException e) {
             exceptionHandler(e);
         } catch (LastSpaceReachedException e) {
             exceptionHandler(e);
-        } catch (LeaderCardsGameBoardEmptyException e) {
-            exceptionHandler(e);
         }
+
     }
 
     /**
@@ -317,14 +365,8 @@ public class Game extends Observable {
      *  When the exception is caught, the method calls the exceptionHandler method.
      * @param index : the position where the leader card to be activated is
      */
-    public void activateLeaderCard(int index){
-        try {
-            currentPlayer.activationLeaderCard(index);
-        } catch (LeaderCardsGameBoardEmptyException e) {
-            exceptionHandler(e);
-        } catch (RequirementsException e) {
-            e.printStackTrace();
-        }
+    public void activateLeaderCard(int index) throws RequirementsException, LeaderCardsGameBoardEmptyException {
+        currentPlayer.activationLeaderCard(index);
     }
 
 
@@ -334,17 +376,13 @@ public class Game extends Observable {
      * When the exception is caught, the method calls the exceptionHandler method.
      * @param chosenRow : the row chosen by the current player
      */
-    public void pushRowInMarket(int chosenRow){
+    public void pushRowInMarket(int chosenRow) throws NotEnoughSpaceInStorageException, WhiteMarbleException {
         try {
             market.pushRow(chosenRow,currentPlayer);
-        } catch (WhiteMarbleException e) {
-            exceptionHandler(e);
         } catch (CallForCouncilException e) {
             exceptionHandler(e);
         } catch (LastSpaceReachedException e) {
             exceptionHandler(e);
-        } catch (NotEnoughSpaceInStorageException e) {
-            e.printStackTrace();
         }
     }
 
@@ -354,17 +392,13 @@ public class Game extends Observable {
      * When the exception is caught, the method calls the exceptionHandler method.
      * @param chosenColumn : the column chosen by the current player
      */
-    public void pushColumnInMarket(int chosenColumn){
+    public void pushColumnInMarket(int chosenColumn) throws NotEnoughSpaceInStorageException, WhiteMarbleException {
         try {
             market.pushColumn(chosenColumn,currentPlayer);
-        } catch (WhiteMarbleException e) {
-            exceptionHandler(e);
         } catch (CallForCouncilException e) {
             exceptionHandler(e);
         } catch (LastSpaceReachedException e) {
             exceptionHandler(e);
-        } catch (NotEnoughSpaceInStorageException e) {
-            e.printStackTrace();
         }
     }
 
@@ -841,8 +875,16 @@ public class Game extends Observable {
     public void endGame(){}
 
     public void giveResourceFromClient(ArrayList<Resource> list) throws NotEnoughSpaceInStorageException {
-        currentPlayer.takeResourceFromClientToGameboard(list); }
+        currentPlayer.takeResourceFromClientToGameboard(list);
+    }
 
+    public void continueTakeFromMarketAfterChoosenWhiteMarble(ArrayList<Resource> whiteMarbleList) throws NotEnoughSpaceInStorageException {
+        for(Resource r : whiteMarbleList){
+            currentPlayer.addToBuffer(r);
+        }
+
+        currentPlayer.takeFromMarket();
+    }
 
 
 }

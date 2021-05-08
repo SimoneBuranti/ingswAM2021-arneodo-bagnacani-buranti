@@ -41,21 +41,11 @@ public class GameControllerDisconnection extends GameControllerInterface {
 
     }
 
-
     @Override
-    public void handleMessage(OkMessage msg, ClientController clientController) {
-
+    public void handleMessage(RestartAnswerMessage msg, ClientController clientController) {
+        //unreachable
     }
 
-    @Override
-    public void handleMessage(PingMessage msg, ClientController clientController) {
-
-    }
-
-    @Override
-    public void handleMessage(PongMessage msg, ClientController clientController) {
-
-    }
 
     /*@Override
     public void handleMessage(ActivateLeaderCardMessage msg) {

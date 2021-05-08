@@ -1,9 +1,12 @@
 package it.polimi.ingsw.server.network;
 
+import com.google.gson.Gson;
 import it.polimi.ingsw.server.controller.*;
 import it.polimi.ingsw.server.model.*;
 import it.polimi.ingsw.server.virtualview.*;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.ArrayList;
 
 
@@ -12,45 +15,109 @@ public class Server {
     private GameControllerInterface gameController;
     private Game game;
     private VirtualView virtualView;
-    //private ArrayList<ClientHandler> clientHandlers;
     private ArrayList<String> lobby;
+    private boolean sendRestartQuestion;
 
-    public Server(GameControllerInterface gameController) {
 
-        this.gameController = gameController;
-        gameController.setServer(this);
-        lobby = new ArrayList<>();
+    public Server() {
+        try {
+            ArrayList<String> nickNameInOrder;
+            Gson gson = new Gson();
 
-        //this.clientHandlers = new ArrayList<>();
+            nickNameInOrder = gson.fromJson(new FileReader("src/main/resources/InformationAboutTurn.json"),ArrayList.class);
+            this.gameController = new GameControllerRestart();
+            gameController.setServer(this);
+            lobby = nickNameInOrder;
+            sendRestartQuestion = true;
+
+        } catch (FileNotFoundException e) {
+            this.gameController = new GameControllerEmpty();
+            gameController.setServer(this);
+            lobby = new ArrayList<>();
+            sendRestartQuestion = false;
+        }
+
     }
+
+    //------------------------Getter--------------------------------------
+
+    public int getLobbySize() {
+        return lobby.size();
+    }
+
 
     public GameControllerInterface getGameController() {
         return gameController;
+    }
+
+
+    public boolean getSendRestartQuestion() {
+        return sendRestartQuestion;
+    }
+
+
+    public boolean isInLobby(String nickname){
+        for (String nick : lobby){
+            if(nick.equals(nickname))
+                return true;
+        }
+        return false;
+    }
+
+    //--------------------------------------------------------------------
+
+    public void initNewSolitaireGame(){
+        game = new GameSolitaire(lobby.get(0),true);
+        //virtualView = new VirtualView();
+        gameController = new GameControllerSinglePlayer();
+    }
+
+
+    public void initNewMultiplayerGame(){
+        game = new GameMultiPlayer(lobby.size(),lobby,true);
+        //virtualView = new VirtualView();
+        gameController = new GameControllerMultiplayer();
+    }
+
+    public void restoreGameBackup(){}
+
+
+    //------------------------Setter--------------------------------------
+
+    public void setSendRestartQuestion(){
+        sendRestartQuestion = false;
     }
 
     public synchronized void  setGameController(GameControllerInterface gameController) {
         this.gameController = gameController;
     }
 
-    public void initNewMultiplayerGame(){
-        game = new GameMultiPlayer(lobby.size(),lobby,true);
-        //VirtualView virtualView = new VirtualView();
-        gameController = new GameControllerMultiplayer();
-    }
 
-    public void initNewSolitaireGame(){
-        game = new GameSolitaire(lobby.get(0),true);
-        gameController = new GameControllerSinglePlayer();
-    }
-
-    public synchronized void addPlayerToLobby(String nickname){
+    public synchronized boolean addPlayerToLobby(String nickname){
+        for(String nick : lobby){
+            if (nick.equals(nickname))
+                return false;
+        }
         lobby.add(nickname);
+        return true;
     }
+
+    public synchronized void removePlayerToLobby(String nickname){
+        for(int i=0;i<lobby.size();i++){
+            if (lobby.get(i).equals(nickname))
+                lobby.remove(i);
+        }
+    }
+
+    public synchronized void restartLobby(){
+        lobby = new ArrayList<>();
+    }
+
+
+
     /*public void addPlayer(ClientHandler clientHandler){
         this.clientHandlers.add(clientHandler);
     }*/
 
-    public int getLobbySize() {
-        return lobby.size();
-    }
+
 }

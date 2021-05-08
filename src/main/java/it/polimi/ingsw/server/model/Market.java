@@ -144,12 +144,14 @@ public class Market {
         int j;
         WhiteMarbleException exception = new WhiteMarbleException(0);
         Marble temp;
+
         for(j=0; j<4; j++)
             try {
                 grid[chosenRow][j].giveResource(player);
             }catch(WhiteMarbleException e){
                 exception.increase();
         }
+
         temp=extra;
         extra=grid[chosenRow][0];
         for(j=1; j<4; j++)

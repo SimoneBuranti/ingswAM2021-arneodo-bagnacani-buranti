@@ -2,13 +2,15 @@ package it.polimi.ingsw.messages;
 
 public class NPlayersMessage extends Message {
 
-    private int missPlayer;
+    private int nOfPlayers;
     /**
- * type of message
- */
-private final MessageType messageType=MessageType.MESSAGEFORNPLAYERS;
+    * type of message
+    */
+    private final MessageType messageType=MessageType.MESSAGEFORNPLAYERS;
 
-
+    public NPlayersMessage(int nOfPlayers){
+        this.nOfPlayers = nOfPlayers;
+    }
 
 
     /**
@@ -18,11 +20,11 @@ private final MessageType messageType=MessageType.MESSAGEFORNPLAYERS;
     }
 
     public int getMissPlayer() {
-        return missPlayer;
+        return nOfPlayers;
     }
 
-    public void setMissPlayer(int missPlayer) {
-        this.missPlayer = missPlayer;
+    public void setMissPlayer(int nOfPlayers) {
+        this.nOfPlayers = nOfPlayers;
     }
 
     @Override

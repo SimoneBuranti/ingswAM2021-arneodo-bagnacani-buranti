@@ -25,11 +25,10 @@ public class PlayerFourth extends Player {
     /**
      * Default constructor that calls the super class constructor
      * @param nickName : the nickname chosen by the player
-     * @param game : the game the player is playing
      */
-    public PlayerFourth(String nickName, Game game){
-        super(nickName, game);
-    }
+    /*public PlayerFourth(String nickName){
+        super(nickName);
+    }*/
 
     /**
      * Restore constructor that calls the super class constructor

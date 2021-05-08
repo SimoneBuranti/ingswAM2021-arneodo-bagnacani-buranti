@@ -26,7 +26,7 @@ public class DeckLeaderCard {
         Colour yellow =new Yellow();
         Colour violet =new Violet();
 
-        deckLeaderCard= new ArrayList<>(16);
+        deckLeaderCard = new ArrayList<>(16);
 
         Requirements requirementsOne= new ResourceRequirement(Resource.COIN);
         LeaderCard leaderCardOne= new LeaderCardStorage(requirementsOne,3, Resource.ROCK);

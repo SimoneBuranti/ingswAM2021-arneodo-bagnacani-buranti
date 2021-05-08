@@ -26,11 +26,10 @@ public class PlayerThird extends Player {
     /**
      * Default constructor that calls the super class constructor
      * @param nickName : the nickname chosen by the player
-     * @param game : the game the player is playing
      */
-    public PlayerThird(String nickName, Game game){
-        super(nickName, game);
-    }
+    /*public PlayerThird(String nickName){
+        super(nickName);
+    }*/
 
     /**
      * Restore constructor that calls the super class constructor

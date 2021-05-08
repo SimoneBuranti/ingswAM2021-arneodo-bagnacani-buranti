@@ -1,8 +1,10 @@
 package it.polimi.ingsw.messages;
 
 public enum MessageType {
-    OK,
     EXIT,
+    RESTARTQUESTIONMESSAGE,
+    RESTARTANSWERMESSAGE,
+    BOOTINGLOBBYERROR,
     COMPLETERUNNINGMATCHERROR,
     MESSAGEFORNPLAYERS,
     PLAYERNUMBER,

@@ -15,10 +15,6 @@ public abstract class GameControllerInterface {
     public abstract void handleMessage(NumberPlayerMessage msg, ClientController clientController);
     public abstract void handleMessage(UsernameMessage msg, ClientController clientController);
 
-    //General messages
-    public abstract void handleMessage(OkMessage msg, ClientController clientController);
-    public abstract void handleMessage(PingMessage msg, ClientController clientController);
-    public abstract void handleMessage(PongMessage msg, ClientController clientController);
 
     public int getNumberOfPlayers() {
         return numberOfPlayers;
@@ -43,6 +39,8 @@ public abstract class GameControllerInterface {
     public void setGame(Game game) {
         this.game = game;
     }
+
+    public abstract void handleMessage(RestartAnswerMessage msg, ClientController clientController);
 
     /*void handleMessage(ActivateLeaderCardMessage msg);
     void handleMessage(BaseProductionOnMessage msg);

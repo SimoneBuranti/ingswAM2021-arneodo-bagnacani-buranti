@@ -2,7 +2,7 @@ package it.polimi.ingsw.messages;
 
 public class ProductionOnMessage extends Message {
 
-    private int productionCardNumber;
+    private int columnNumber;
 
 
     /**
@@ -16,12 +16,12 @@ public class ProductionOnMessage extends Message {
         return messageType;
     }
 
-    public int getProductionCardNumber() {
-        return productionCardNumber;
+    public int getColumnNumber() {
+        return columnNumber;
     }
 
-    public void setProductionCardNumber(int productionCardNumber) {
-        this.productionCardNumber = productionCardNumber;
+    public void setColumnNumber(int columnNumber) {
+        this.columnNumber = columnNumber;
     }
 
     @Override

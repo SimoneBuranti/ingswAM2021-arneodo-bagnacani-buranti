@@ -1,4 +1,4 @@
-package it.polimi.ingsw.Client;
+package it.polimi.ingsw.client;
 
 import it.polimi.ingsw.messages.*;
 
@@ -50,6 +50,16 @@ public class ViewController implements MessageVisitor {
 
     @Override
     public void visit(NotYourTurnErrorMessage msg) {
+
+    }
+
+    @Override
+    public void visit(BootingLobbyErrorMessage msg) {
+
+    }
+
+    @Override
+    public void visit(RestartQuestionMessage msg) {
 
     }
 
@@ -120,6 +130,11 @@ public class ViewController implements MessageVisitor {
 
     @Override
     public void visit(SetPapalsMessage msg) {
+
+    }
+
+    @Override
+    public void visit(RestartAnswerMessage msg) {
 
     }
 
@@ -204,14 +219,14 @@ public class ViewController implements MessageVisitor {
     }
 
     @Override
-    public void visit(WhiteMarbleChoosenResources msg) {
+    public void visit(WhiteMarbleChoosenResourcesMessage msg) {
 
     }
 
-    @Override
+    /*@Override
     public void visit(OkMessage msg) {
 
-    }
+    }*/
 
     @Override
     public void visit(PingMessage msg) {

@@ -15,8 +15,8 @@ public class ServerApp {
 
         int portNumber;
 
-        GameControllerInterface gameController = new GameControllerEmpty();
-        Server server = new Server(gameController);
+
+        Server server = new Server();
 
         if (argc==2){
 

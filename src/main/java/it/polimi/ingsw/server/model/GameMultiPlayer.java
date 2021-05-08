@@ -100,17 +100,17 @@ public class GameMultiPlayer extends Game {
     private void createPlayer(int numberOfPlayer,ArrayList<String> nickNameInOrder){
        if (numberOfPlayer==2)
         {
-            firstPlayer=new PlayerFirst(nickNameInOrder.get(0), this);
-            secondPlayer= new PlayerSecond(nickNameInOrder.get(1), this);
+            firstPlayer=new PlayerFirst(nickNameInOrder.get(0));
+            secondPlayer= new PlayerSecond(nickNameInOrder.get(1));
             playerList.add(firstPlayer);
             playerList.add(secondPlayer);
         }
 
         else if (numberOfPlayer==3)
         {
-            firstPlayer=new PlayerFirst(nickNameInOrder.get(0),this);
-            secondPlayer= new PlayerSecond(nickNameInOrder.get(1),this);
-            thirdPlayer= new PlayerThird(nickNameInOrder.get(2),this);
+            firstPlayer=new PlayerFirst(nickNameInOrder.get(0));
+            secondPlayer= new PlayerSecond(nickNameInOrder.get(1));
+            thirdPlayer= new PlayerThird(nickNameInOrder.get(2));
             playerList.add(firstPlayer);
             playerList.add(secondPlayer);
             playerList.add(thirdPlayer);
@@ -118,10 +118,10 @@ public class GameMultiPlayer extends Game {
         }
        else if (numberOfPlayer==4)
         {
-            firstPlayer=new PlayerFirst(nickNameInOrder.get(0),this);
-            secondPlayer= new PlayerSecond(nickNameInOrder.get(1),this);
-            thirdPlayer= new PlayerThird(nickNameInOrder.get(2),this);
-            fourthPlayer=new PlayerFourth(nickNameInOrder.get(3),this);
+            firstPlayer=new PlayerFirst(nickNameInOrder.get(0));
+            secondPlayer= new PlayerSecond(nickNameInOrder.get(1));
+            thirdPlayer= new PlayerThird(nickNameInOrder.get(2));
+            fourthPlayer=new PlayerFourth(nickNameInOrder.get(3));
             playerList.add(firstPlayer);
             playerList.add(secondPlayer);
             playerList.add(thirdPlayer);
@@ -378,6 +378,7 @@ public class GameMultiPlayer extends Game {
             } catch (IOException e) {
                 e.printStackTrace();
             } } }
+
 
 
 

@@ -8,10 +8,7 @@ import it.polimi.ingsw.server.model.colours.Blue;
 import it.polimi.ingsw.server.model.colours.Green;
 import it.polimi.ingsw.server.model.colours.Violet;
 import it.polimi.ingsw.server.model.colours.Yellow;
-import it.polimi.ingsw.server.model.exceptions.CallForCouncilException;
-import it.polimi.ingsw.server.model.exceptions.EmptyException;
-import it.polimi.ingsw.server.model.exceptions.EndOfSolitaireGame;
-import it.polimi.ingsw.server.model.exceptions.LastSpaceReachedException;
+import it.polimi.ingsw.server.model.exceptions.*;
 import it.polimi.ingsw.server.model.gameBoard.GameBoardInterface;
 import it.polimi.ingsw.server.model.players.Player;
 import it.polimi.ingsw.server.model.players.PlayerFirst;
@@ -56,7 +53,7 @@ public class GameSolitaire extends Game{
         this.nickNamePlayer=nickName;
         deckActionMarker = new DeckActionMarker();
         lorenzoTheMagnificent = new LorenzoTheMagnificent();
-        player = new PlayerFirst(nickName, this);
+        player = new PlayerFirst(nickName);
         currentPlayer = player;}
         else
             restoreGameSolitaire();
@@ -70,7 +67,7 @@ public class GameSolitaire extends Game{
      * @param chosenColumn : the game board column in which the current player wants to place the bought card
      */
     @Override
-    public void buyProductionCard(DeckProductionCard deck, int chosenColumn){
+    public void buyProductionCard(DeckProductionCard deck, int chosenColumn) throws EmptyException, FullColumnException, NotEnoughResourcesException, LevelException {
 
         super.buyProductionCard(deck, chosenColumn);
 

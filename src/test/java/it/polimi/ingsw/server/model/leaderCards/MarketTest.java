@@ -1,6 +1,8 @@
 package it.polimi.ingsw.server.model.leaderCards;
 
 import it.polimi.ingsw.server.model.GameMultiPlayer;
+import it.polimi.ingsw.server.model.exceptions.NotEnoughSpaceInStorageException;
+import it.polimi.ingsw.server.model.exceptions.WhiteMarbleException;
 import it.polimi.ingsw.server.model.marbles.*;
 import org.junit.jupiter.api.Test;
 
@@ -100,7 +102,13 @@ public class MarketTest {
         assertEquals(game.getCellGridMarket(0, 2), game.getInitialMarbleListMarket(2));
         assertEquals(game.getCellGridMarket(0, 3), game.getInitialMarbleListMarket(3));
         assertEquals(game.getExtraMarket(), game.getInitialMarbleListMarket(12));
-        game.pushRowInMarket(0);
+        try {
+            game.pushRowInMarket(0);
+        } catch (NotEnoughSpaceInStorageException e) {
+            e.printStackTrace();
+        } catch (WhiteMarbleException e) {
+            e.printStackTrace();
+        }
         assertEquals(game.getCellGridMarket(0, 0), game.getInitialMarbleListMarket(1));
         assertEquals(game.getCellGridMarket(0, 1), game.getInitialMarbleListMarket(2));
         assertEquals(game.getCellGridMarket(0, 2), game.getInitialMarbleListMarket(3));
@@ -124,14 +132,26 @@ public void PushRowsOfMarketCycling() {
         nickname.add("ale");
         nickname.add("ali");
         GameMultiPlayer game= new GameMultiPlayer(2,nickname,true);
-        game.pushRowInMarket(0);
+        try {
+            game.pushRowInMarket(0);
+        } catch (NotEnoughSpaceInStorageException e) {
+            e.printStackTrace();
+        } catch (WhiteMarbleException e) {
+            e.printStackTrace();
+        }
         assertEquals(game.getCellGridMarket(0, 0), game.getInitialMarbleListMarket(1));
         assertEquals(game.getCellGridMarket(0, 1), game.getInitialMarbleListMarket(2));
         assertEquals(game.getCellGridMarket(0, 2), game.getInitialMarbleListMarket(3));
         assertEquals(game.getCellGridMarket(0, 3), game.getInitialMarbleListMarket(12));
         assertEquals(game.getExtraMarket(), game.getInitialMarbleListMarket(0));
 
-        game.pushRowInMarket(0);
+        try {
+            game.pushRowInMarket(0);
+        } catch (NotEnoughSpaceInStorageException e) {
+            e.printStackTrace();
+        } catch (WhiteMarbleException e) {
+            e.printStackTrace();
+        }
         assertEquals(game.getCellGridMarket(0, 0), game.getInitialMarbleListMarket(2));
         assertEquals(game.getCellGridMarket(0, 1), game.getInitialMarbleListMarket(3));
         assertEquals(game.getCellGridMarket(0, 2), game.getInitialMarbleListMarket(12));
@@ -139,14 +159,26 @@ public void PushRowsOfMarketCycling() {
         assertEquals(game.getExtraMarket(), game.getInitialMarbleListMarket(1));
 
         game.setCurrentPlayer();
-        game.pushRowInMarket(0);
+        try {
+            game.pushRowInMarket(0);
+        } catch (NotEnoughSpaceInStorageException e) {
+            e.printStackTrace();
+        } catch (WhiteMarbleException e) {
+            e.printStackTrace();
+        }
         assertEquals(game.getCellGridMarket(0, 0), game.getInitialMarbleListMarket(3));
         assertEquals(game.getCellGridMarket(0, 1), game.getInitialMarbleListMarket(12));
         assertEquals(game.getCellGridMarket(0, 2), game.getInitialMarbleListMarket(0));
         assertEquals(game.getCellGridMarket(0, 3), game.getInitialMarbleListMarket(1));
         assertEquals(game.getExtraMarket(), game.getInitialMarbleListMarket(2));
 
-        game.pushRowInMarket(0);
+        try {
+            game.pushRowInMarket(0);
+        } catch (NotEnoughSpaceInStorageException e) {
+            e.printStackTrace();
+        } catch (WhiteMarbleException e) {
+            e.printStackTrace();
+        }
         assertEquals(game.getCellGridMarket(0, 0), game.getInitialMarbleListMarket(12));
         assertEquals(game.getCellGridMarket(0, 1), game.getInitialMarbleListMarket(0));
         assertEquals(game.getCellGridMarket(0, 2), game.getInitialMarbleListMarket(1));
@@ -154,7 +186,13 @@ public void PushRowsOfMarketCycling() {
         assertEquals(game.getExtraMarket(), game.getInitialMarbleListMarket(3));
 
         game.setCurrentPlayer();
-        game.pushRowInMarket(0);
+        try {
+            game.pushRowInMarket(0);
+        } catch (NotEnoughSpaceInStorageException e) {
+            e.printStackTrace();
+        } catch (WhiteMarbleException e) {
+            e.printStackTrace();
+        }
         assertEquals(game.getCellGridMarket(0, 0), game.getInitialMarbleListMarket(0));
         assertEquals(game.getCellGridMarket(0, 1), game.getInitialMarbleListMarket(1));
         assertEquals(game.getCellGridMarket(0, 2), game.getInitialMarbleListMarket(2));
@@ -193,7 +231,13 @@ public void PushRowsOfMarketCycling() {
         assertEquals(game.getCellGridMarket(1, 0), game.getInitialMarbleListMarket(4));
         assertEquals(game.getCellGridMarket(2, 0), game.getInitialMarbleListMarket(8));
         assertEquals(game.getExtraMarket(), game.getInitialMarbleListMarket(12));
-        game.pushColumnInMarket(0);
+        try {
+            game.pushColumnInMarket(0);
+        } catch (NotEnoughSpaceInStorageException e) {
+            e.printStackTrace();
+        } catch (WhiteMarbleException e) {
+            e.printStackTrace();
+        }
         assertEquals(game.getCellGridMarket(0, 0), game.getInitialMarbleListMarket(4));
         assertEquals(game.getCellGridMarket(1, 0), game.getInitialMarbleListMarket(8));
         assertEquals(game.getCellGridMarket(2, 0), game.getInitialMarbleListMarket(12));
@@ -219,28 +263,52 @@ public void PushRowsOfMarketCycling() {
         assertEquals(game.getCellGridMarket(1, 0), game.getInitialMarbleListMarket(4));
         assertEquals(game.getCellGridMarket(2, 0), game.getInitialMarbleListMarket(8));
         assertEquals(game.getExtraMarket(), game.getInitialMarbleListMarket(12));
-        game.pushColumnInMarket(0);
+        try {
+            game.pushColumnInMarket(0);
+        } catch (NotEnoughSpaceInStorageException e) {
+            e.printStackTrace();
+        } catch (WhiteMarbleException e) {
+            e.printStackTrace();
+        }
         assertEquals(game.getCellGridMarket(0, 0), game.getInitialMarbleListMarket(4));
         assertEquals(game.getCellGridMarket(1, 0), game.getInitialMarbleListMarket(8));
         assertEquals(game.getCellGridMarket(2, 0), game.getInitialMarbleListMarket(12));
         assertEquals(game.getExtraMarket(), game.getInitialMarbleListMarket(0));
 
         game.setCurrentPlayer();
-        game.pushColumnInMarket(0);
+        try {
+            game.pushColumnInMarket(0);
+        } catch (NotEnoughSpaceInStorageException e) {
+            e.printStackTrace();
+        } catch (WhiteMarbleException e) {
+            e.printStackTrace();
+        }
         assertEquals(game.getCellGridMarket(0, 0), game.getInitialMarbleListMarket(8));
         assertEquals(game.getCellGridMarket(1, 0), game.getInitialMarbleListMarket(12));
         assertEquals(game.getCellGridMarket(2, 0), game.getInitialMarbleListMarket(0));
         assertEquals(game.getExtraMarket(), game.getInitialMarbleListMarket(4));
 
         game.setCurrentPlayer();
-        game.pushColumnInMarket(0);
+        try {
+            game.pushColumnInMarket(0);
+        } catch (NotEnoughSpaceInStorageException e) {
+            e.printStackTrace();
+        } catch (WhiteMarbleException e) {
+            e.printStackTrace();
+        }
         assertEquals(game.getCellGridMarket(0, 0), game.getInitialMarbleListMarket(12));
         assertEquals(game.getCellGridMarket(1, 0), game.getInitialMarbleListMarket(0));
         assertEquals(game.getCellGridMarket(2, 0), game.getInitialMarbleListMarket(4));
         assertEquals(game.getExtraMarket(), game.getInitialMarbleListMarket(8));
 
         game.setCurrentPlayer();
-        game.pushColumnInMarket(0);
+        try {
+            game.pushColumnInMarket(0);
+        } catch (NotEnoughSpaceInStorageException e) {
+            e.printStackTrace();
+        } catch (WhiteMarbleException e) {
+            e.printStackTrace();
+        }
         assertEquals(game.getCellGridMarket(0, 0), game.getInitialMarbleListMarket(0));
         assertEquals(game.getCellGridMarket(1, 0), game.getInitialMarbleListMarket(4));
         assertEquals(game.getCellGridMarket(2, 0), game.getInitialMarbleListMarket(8));

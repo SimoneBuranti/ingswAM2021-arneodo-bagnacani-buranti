@@ -46,9 +46,26 @@ public class Player {
     /**
      * constructor that initializes the player's attributes and assigns the player four leader cards from the common deck
      * @param nickName : the nickname chosen by the player
-     * @param game : the game the player is playing
+     *
      */
-    public Player(String nickName, Game game){
+    public Player(String nickName){
+        buffer= new ArrayList<>();
+        gameBoardOfPlayer = new GameBoard();
+        personalLeaderCard=new ArrayList<>(4);
+        personalLeaderCard.add(DeckLeaderCard.arrangeDeckLeaderCards());
+        personalLeaderCard.add(DeckLeaderCard.arrangeDeckLeaderCards());
+        personalLeaderCard.add(DeckLeaderCard.arrangeDeckLeaderCards());
+        personalLeaderCard.add(DeckLeaderCard.arrangeDeckLeaderCards());
+        this.nickName = nickName;
+        this.connected = true;
+    }
+
+    /**
+     * constructor that initializes the player's attributes and assigns the player four leader cards from the common deck
+     * @param nickName : the nickname chosen by the player
+     *
+     */
+    public Player(String nickName,Game game){
         buffer= new ArrayList<>();
         gameBoardOfPlayer = new GameBoard();
         personalLeaderCard=new ArrayList<>(4);
@@ -61,13 +78,13 @@ public class Player {
         this.connected = true;
     }
 
-    public Player(String nickName){
+    /*public Player(String nickName){
         buffer= new ArrayList<>();
         personalLeaderCard=new ArrayList<>();
         this.nickName = nickName;
         this.game = null;
         this.connected = true;
-    }
+    }*/
 
 
     /**
@@ -257,7 +274,7 @@ public class Player {
      * @throws CallForCouncilException : the exception which is thrown when the faith indicator has reached the current papal space
      * @throws LastSpaceReachedException : the exception which is thrown when the faith indicator has reached the last papal space
      */
-    public void endOfProduction() throws CallForCouncilException, LastSpaceReachedException {
+    public void endOfProduction(){
        gameBoardOfPlayer.endOfProduction();
     }
 

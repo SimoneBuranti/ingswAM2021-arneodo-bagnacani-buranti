@@ -27,8 +27,8 @@ public abstract class Message{
 
         switch (messageType) {
 
-            case OK:
-                return gson.fromJson(jsonObj, OkMessage.class);
+            /*case OK:
+                return gson.fromJson(jsonObj, OkMessage.class);*/
 
             case EXIT:
                 return gson.fromJson(jsonObj, ExitMessage.class);
@@ -94,7 +94,7 @@ public abstract class Message{
                 return gson.fromJson(jsonObj, DoubleWhiteMarbleEffectMessage.class);
 
             case WHITEMARBLECHOOSENRESOURCES:
-                return gson.fromJson(jsonObj, WhiteMarbleChoosenResources.class);
+                return gson.fromJson(jsonObj, WhiteMarbleChoosenResourcesMessage.class);
 
             case NOTENOUGHSPACEERROR:
                 return gson.fromJson(jsonObj, NotEnoughSpaceErrorMessage.class);

@@ -12,8 +12,10 @@ public interface MessageVisitor {
     void visit(RequirementsErrorMessage msg);
     void visit(WrongColumnErrorMessage msg);
     void visit(NotYourTurnErrorMessage msg);
+    void visit(BootingLobbyErrorMessage msg);
 
     //Server to client
+    void visit(RestartQuestionMessage msg);
     void visit(ChangeCurrentPlayerMessage msg);
     void visit(EndGameMessage msg);
     void visit(EndOfTurnMessage msg);
@@ -30,6 +32,7 @@ public interface MessageVisitor {
     void visit(SetPapalsMessage msg);
 
     //Client to server
+    void visit(RestartAnswerMessage msg);
     void visit(ActivateLeaderCardMessage msg);
     void visit(BaseProductionOnMessage msg);
     void visit(BuyProductionCardMessage msg);
@@ -46,10 +49,9 @@ public interface MessageVisitor {
     void visit(PushColumnMessage msg);
     void visit(PushRowMessage msg);
     void visit(UsernameMessage msg);
-    void visit(WhiteMarbleChoosenResources msg);
+    void visit(WhiteMarbleChoosenResourcesMessage msg);
 
     //General messages
-    void visit(OkMessage msg);
     void visit(PingMessage msg);
     void visit(PongMessage msg);
 

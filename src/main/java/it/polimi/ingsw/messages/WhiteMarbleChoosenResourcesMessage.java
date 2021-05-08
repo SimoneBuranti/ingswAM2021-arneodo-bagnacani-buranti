@@ -2,22 +2,29 @@ package it.polimi.ingsw.messages;
 
 import it.polimi.ingsw.server.model.Resource;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class WhiteMarbleChoosenResources extends Message {
+public class WhiteMarbleChoosenResourcesMessage extends Message {
     private final MessageType messageType = MessageType.WHITEMARBLECHOOSENRESOURCES;
 
-    private List<Resource> choosenResources;
-@Override
+    private ArrayList<Resource> choosenResources;
+
+
+    public WhiteMarbleChoosenResourcesMessage(ArrayList<Resource> choosenResources) {
+        this.choosenResources = choosenResources;
+    }
+
+    @Override
     public MessageType getMessageType() {
         return messageType;
     }
 
-    public List<Resource> getChoosenResources() {
+    public ArrayList<Resource> getChoosenResources() {
         return choosenResources;
     }
 
-    public void setChoosenResources(List<Resource> choosenResources) {
+    public void setChoosenResources(ArrayList<Resource> choosenResources) {
         this.choosenResources = choosenResources;
     }
 

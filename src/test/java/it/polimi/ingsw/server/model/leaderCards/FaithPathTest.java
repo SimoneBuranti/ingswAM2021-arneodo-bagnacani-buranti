@@ -631,7 +631,7 @@ class FaithPathTest {
     public void faithWithUseOfRedMarble(){
 
         Game game = new Game(true);
-        Player player = new Player("simo", game);
+        Player player = new Player("simo");
         RedMarble redMarble = new RedMarble();
 
         assertEquals(player.getIndicator(), 0);
