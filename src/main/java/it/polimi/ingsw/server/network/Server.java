@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class Server {
 
-    private GameControllerInterface gameController;
+    private GameController gameController;
     private Game game;
     private VirtualView virtualView;
     private ArrayList<String> lobby;
@@ -46,7 +46,7 @@ public class Server {
     }
 
 
-    public GameControllerInterface getGameController() {
+    public GameController getGameController() {
         return gameController;
     }
 
@@ -88,7 +88,7 @@ public class Server {
         sendRestartQuestion = false;
     }
 
-    public synchronized void  setGameController(GameControllerInterface gameController) {
+    public synchronized void  setGameController(GameController gameController) {
         this.gameController = gameController;
     }
 

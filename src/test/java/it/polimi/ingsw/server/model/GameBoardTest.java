@@ -1,19 +1,17 @@
-package it.polimi.ingsw.server.model.leaderCards;
+package it.polimi.ingsw.server.model;
 
 import it.polimi.ingsw.server.model.Reserve;
 import it.polimi.ingsw.server.model.Resource;
 import it.polimi.ingsw.server.model.exceptions.*;
 import it.polimi.ingsw.server.model.gameBoard.GameBoard;
-import it.polimi.ingsw.server.model.gameBoard.GameBoardInterface;
-import it.polimi.ingsw.server.model.gameBoard.ProductionGameBoard;
 import it.polimi.ingsw.server.model.productionCards.*;
 import org.junit.jupiter.api.*;
 import java.util.*;
 import static org.junit.jupiter.api.Assertions.*;
 /**
- * test class about ProductionGameBoardTest
+ * test class about GameBoard
  */
-class ProductionGameBoardTest {
+class GameBoardTest {
 
     /**
      * This test checks the correct behaviour of both the methods firstRowFree and setProductionCard
@@ -21,9 +19,7 @@ class ProductionGameBoardTest {
     @Test
     @DisplayName("FirstRowFree and setProductionCardTest - first column")
     public void firstRowFreeAndSetProductionCard(){
-        GameBoardInterface gameBoard = new GameBoard();
-        gameBoard = new ProductionGameBoard(gameBoard, Resource.SHIELD);
-
+        GameBoard gameBoard = new GameBoard();
         DeckProductionCardOneBlu deck = new DeckProductionCardOneBlu();
         DeckProductionCardOneGreen deck2 = new DeckProductionCardOneGreen();
         DeckProductionCardOneViolet deck3 = new DeckProductionCardOneViolet();
@@ -222,8 +218,7 @@ class ProductionGameBoardTest {
     @Test
     @DisplayName("Available resources test - Empty storage and Strongbox")
     public void availableResourcesTest(){
-        GameBoardInterface gameBoard = new GameBoard();
-        gameBoard = new ProductionGameBoard(gameBoard,Resource.SHIELD);
+        GameBoard gameBoard = new GameBoard();
         new Reserve();
 
         Map<Resource,Integer> storageMap = new HashMap<>();
@@ -282,8 +277,7 @@ class ProductionGameBoardTest {
     @Test
     @DisplayName("Available resources test 1 - simple")
     public void availableResourcesTest1(){
-        GameBoardInterface gameBoard = new GameBoard();
-        gameBoard = new ProductionGameBoard(gameBoard,Resource.SHIELD);
+        GameBoard gameBoard = new GameBoard();
         new Reserve();
 
         Map<Resource,Integer> storageMap = new HashMap<>();
@@ -342,8 +336,7 @@ class ProductionGameBoardTest {
     @Test
     @DisplayName("Available resources test 2 - simple")
     public void availableResourcesTest2(){
-        GameBoardInterface gameBoard = new GameBoard();
-        gameBoard = new ProductionGameBoard(gameBoard,Resource.SHIELD);
+        GameBoard gameBoard = new GameBoard();
         new Reserve();
 
         Map<Resource,Integer> storageMap = new HashMap<>();
@@ -403,8 +396,7 @@ class ProductionGameBoardTest {
     @Test
     @DisplayName("Available resources test 3 - unavailable resources")
     public void availableResourcesTest3(){
-        GameBoardInterface gameBoard = new GameBoard();
-        gameBoard = new ProductionGameBoard(gameBoard,Resource.SHIELD);
+        GameBoard gameBoard = new GameBoard();
         new Reserve();
 
         Map<Resource,Integer> storageMap = new HashMap<>();
@@ -463,8 +455,7 @@ class ProductionGameBoardTest {
     @Test
     @DisplayName("PayResources Test - simple test")
     public void payResourcesTest0(){
-        GameBoardInterface gameBoard = new GameBoard();
-        gameBoard = new ProductionGameBoard(gameBoard,Resource.SHIELD);
+        GameBoard gameBoard = new GameBoard();
         new Reserve();
 
         Map<Resource,Integer> costMap = new HashMap<>();
@@ -535,8 +526,7 @@ class ProductionGameBoardTest {
     @Test
     @DisplayName("PayResources Test 1 - simple test")
     public void payResourcesTest1(){
-        GameBoardInterface gameBoard = new GameBoard();
-        gameBoard = new ProductionGameBoard(gameBoard,Resource.SHIELD);
+        GameBoard gameBoard = new GameBoard();
         new Reserve();
 
         Map<Resource,Integer> costMap = new HashMap<>();
@@ -607,8 +597,7 @@ class ProductionGameBoardTest {
     @Test
     @DisplayName("PayResources Test 2 - all the resources needed and all the resources payed")
     public void payResourcesTest2(){
-        GameBoardInterface gameBoard = new GameBoard();
-        gameBoard = new ProductionGameBoard(gameBoard,Resource.SHIELD);
+        GameBoard gameBoard = new GameBoard();
         new Reserve();
 
         Map<Resource,Integer> costMap = new HashMap<>();
@@ -1219,8 +1208,7 @@ class ProductionGameBoardTest {
     @Test
     @DisplayName("takeFromMarketTest() - ")
     public void takeFromMarketTest(){
-        GameBoardInterface gameBoard = new GameBoard();
-        gameBoard = new ProductionGameBoard(gameBoard,Resource.SHIELD);
+        GameBoard gameBoard = new GameBoard();
         new Reserve();
 
         Map<Resource,Integer> storageMap = new HashMap<>();
@@ -1301,8 +1289,7 @@ class ProductionGameBoardTest {
     @Test
     @DisplayName("takeFromMarketTest1() - too many resources in buffer")
     public void takeFromMarketTest1() {
-        GameBoardInterface gameBoard = new GameBoard();
-        gameBoard = new ProductionGameBoard(gameBoard,Resource.SHIELD);
+        GameBoard gameBoard = new GameBoard();
         new Reserve();
 
         Map<Resource,Integer> storageMap = new HashMap<>();
@@ -1358,14 +1345,14 @@ class ProductionGameBoardTest {
     @Test
     @DisplayName("takeFromMarketTest2() - too many resources in buffer")
     public void takeFromMarketTest2() {
-        GameBoardInterface gameBoard = new GameBoard();
-        gameBoard = new ProductionGameBoard(gameBoard,Resource.SHIELD);
+        GameBoard gameBoard = new GameBoard();
         new Reserve();
 
         Map<Resource,Integer> storageMap = new HashMap<>();
         Map<Resource,Integer> strongboxMap = new HashMap<>();
         Map<Resource,Integer> newResourcesMap = new HashMap<>();
         ArrayList<Resource> newResourcesList = new ArrayList<>();
+
 
         storageMap.put(Resource.COIN, 0);
         storageMap.put(Resource.ROCK, 0);
@@ -1412,10 +1399,9 @@ class ProductionGameBoardTest {
      * This test checks the correct base production action behaviour.
      */
     @Test
-    @DisplayName("productionOn() test - correct production attempt")
+    @DisplayName("baseProductionOn() test - correct production attempt")
     public void baseProductionOnTest0() {
-        GameBoardInterface gameBoard = new GameBoard();
-        gameBoard = new ProductionGameBoard(gameBoard,Resource.SHIELD);
+        GameBoard gameBoard = new GameBoard();
         new Reserve();
 
         Map<Resource,Integer> storageMap = new HashMap<>();
@@ -1432,6 +1418,7 @@ class ProductionGameBoardTest {
         storageMap.put(Resource.ROCK, 1);
         storageMap.put(Resource.SHIELD, 1);
         storageMap.put(Resource.SERVANT, 0);
+
 
         for(Resource key : storageMap.keySet()){
             for (int i = 0; i<storageMap.get(key); i++){
@@ -1465,10 +1452,9 @@ class ProductionGameBoardTest {
      * This test checks the correct base production action behaviour.
      */
     @Test
-    @DisplayName("productionOn1() test - wrong production attempt")
+    @DisplayName("baseProductionOn1() test - wrong production attempt")
     public void baseProductionOnTest1() {
-        GameBoardInterface gameBoard = new GameBoard();
-        gameBoard = new ProductionGameBoard(gameBoard,Resource.SHIELD);
+        GameBoard gameBoard = new GameBoard();
         new Reserve();
 
         Map<Resource,Integer> storageMap = new HashMap<>();
@@ -1477,7 +1463,6 @@ class ProductionGameBoardTest {
         storageMap.put(Resource.ROCK, 1);
         storageMap.put(Resource.SHIELD, 1);
         storageMap.put(Resource.SERVANT, 0);
-
 
         for(Resource key : storageMap.keySet()){
             for (int i = 0; i<storageMap.get(key); i++){
@@ -1499,10 +1484,9 @@ class ProductionGameBoardTest {
      * This test checks the correct base production action behaviour.
      */
     @Test
-    @DisplayName("productionOn2() test - correct production attempt")
+    @DisplayName("baseProductionOn2() test - correct production attempt")
     public void baseProductionOnTest2() {
-        GameBoardInterface gameBoard = new GameBoard();
-        gameBoard = new ProductionGameBoard(gameBoard,Resource.SHIELD);
+        GameBoard gameBoard = new GameBoard();
         new Reserve();
 
         Map<Resource,Integer> storageMap = new HashMap<>();
@@ -1519,6 +1503,7 @@ class ProductionGameBoardTest {
         storageMap.put(Resource.ROCK, 2);
         storageMap.put(Resource.SHIELD, 1);
         storageMap.put(Resource.SERVANT, 0);
+
 
         for(Resource key : storageMap.keySet()){
             for (int i = 0; i<storageMap.get(key); i++){
@@ -1553,8 +1538,7 @@ class ProductionGameBoardTest {
     @Test
     @DisplayName("productionOn0() test - correct production attempt")
     public void productionOnTest0() {
-        GameBoardInterface gameBoard = new GameBoard();
-        gameBoard = new ProductionGameBoard(gameBoard,Resource.SHIELD);
+        GameBoard gameBoard = new GameBoard();
         new Reserve();
         ProductionCard card;
         Map<Resource,Integer> storageMap = new HashMap<>();
@@ -1652,8 +1636,7 @@ class ProductionGameBoardTest {
     @Test
     @DisplayName("productionOn3() test - correct production attempt")
     public void productionOnTest3() {
-        GameBoardInterface gameBoard = new GameBoard();
-        gameBoard = new ProductionGameBoard(gameBoard,Resource.SHIELD);
+        GameBoard gameBoard = new GameBoard();
         new Reserve();
         ProductionCard card;
         Map<Resource,Integer> storageMap = new HashMap<>();
@@ -1751,8 +1734,7 @@ class ProductionGameBoardTest {
     @Test
     @DisplayName("productionOn2() test - correct production attempt")
     public void productionOnTest2() {
-        GameBoardInterface gameBoard = new GameBoard();
-        gameBoard = new ProductionGameBoard(gameBoard,Resource.SHIELD);
+        GameBoard gameBoard = new GameBoard();
         new Reserve();
         ProductionCard card;
         Map<Resource,Integer> storageMap = new HashMap<>();
@@ -1833,7 +1815,6 @@ class ProductionGameBoardTest {
 
         available = gameBoard.availableResources();
 
-
         for(Resource r : available){
             availableMap.put(r,availableMap.remove(r)+1);
         }
@@ -1853,8 +1834,7 @@ class ProductionGameBoardTest {
     @Test
     @DisplayName("productionOn1() test - wrong production attempt not enough resources")
     public void productionOnTest1() {
-        GameBoardInterface gameBoard = new GameBoard();
-        gameBoard = new ProductionGameBoard(gameBoard,Resource.SHIELD);
+        GameBoard gameBoard = new GameBoard();
         new Reserve();
         ProductionCard card;
         Map<Resource,Integer> storageMap = new HashMap<>();
@@ -1933,6 +1913,7 @@ class ProductionGameBoardTest {
 
         available = gameBoard.availableResources();
 
+
         for(Resource r : available){
             availableMap.put(r,availableMap.remove(r)+1);
         }
@@ -1944,8 +1925,7 @@ class ProductionGameBoardTest {
     @Test
     @DisplayName("productionOn4() test - wrong production attempt empty column")
     public void productionOnTest4() {
-        GameBoardInterface gameBoard = new GameBoard();
-        gameBoard = new ProductionGameBoard(gameBoard,Resource.SHIELD);
+        GameBoard gameBoard = new GameBoard();
         new Reserve();
         ProductionCard card;
         Map<Resource,Integer> storageMap = new HashMap<>();
@@ -1987,6 +1967,7 @@ class ProductionGameBoardTest {
             return;
         }
 
+
         outputList = card.getOut();
         inputList = card.getIn();
 
@@ -2022,6 +2003,7 @@ class ProductionGameBoardTest {
 
         available = gameBoard.availableResources();
 
+
         for(Resource r : available){
             availableMap.put(r,availableMap.remove(r)+1);
         }
@@ -2033,8 +2015,7 @@ class ProductionGameBoardTest {
     @Test
     @DisplayName("productionOn5() test - correct multiple production attempt ")
     public void productionOnTest5() {
-        GameBoardInterface gameBoard = new GameBoard();
-        gameBoard = new ProductionGameBoard(gameBoard,Resource.SHIELD);
+        GameBoard gameBoard = new GameBoard();
         new Reserve();
         ProductionCard card,card2;
         Map<Resource,Integer> storageMap = new HashMap<>();
@@ -2142,9 +2123,12 @@ class ProductionGameBoardTest {
 
         available = gameBoard.availableResources();
 
+
         for(Resource r : available){
             availableMap.put(r,availableMap.remove(r)+1);
         }
+
+
 
         assertEquals(init+card.isFaithPoint()+ card2.isFaithPoint(),gameBoard.getIndicator());
         assertEquals(5-input1Map.get(Resource.COIN)+output1Map.get(Resource.COIN)-input2Map.get(Resource.COIN)+output2Map.get(Resource.COIN),availableMap.get(Resource.COIN));
@@ -2152,208 +2136,16 @@ class ProductionGameBoardTest {
         assertEquals(5-input1Map.get(Resource.SHIELD)+output1Map.get(Resource.SHIELD)-input2Map.get(Resource.SHIELD)+output2Map.get(Resource.SHIELD),availableMap.get(Resource.SHIELD));
         assertEquals(5-input1Map.get(Resource.SERVANT)+output1Map.get(Resource.SERVANT)-input2Map.get(Resource.SERVANT)+output2Map.get(Resource.SERVANT),availableMap.get(Resource.SERVANT));
     }
-    /**
-     * test about extraProductionOnTest called from game
-     * when ProductionGameBoard(leader card power) is instantiated
-     */
-    @Test
-    @DisplayName("extraProductionOnTest0 - simple test")
-    public void extraProductionOnTest0() {
-        GameBoardInterface gameBoard = new GameBoard();
-        gameBoard = new ProductionGameBoard(gameBoard,Resource.COIN);
-        new Reserve();
-        int init ;
-
-        Map<Resource,Integer> storageMap = new HashMap<>();
-        Map<Resource,Integer> strongboxMap = new HashMap<>();
-        Map<Resource,Integer> availableMap = new HashMap<>();
-
-        availableMap.put(Resource.COIN, 0);
-        availableMap.put(Resource.ROCK, 0);
-        availableMap.put(Resource.SHIELD, 0);
-        availableMap.put(Resource.SERVANT, 0);
-
-        storageMap.put(Resource.COIN, 0);
-        storageMap.put(Resource.ROCK, 0);
-        storageMap.put(Resource.SHIELD, 0);
-        storageMap.put(Resource.SERVANT, 0);
-
-        strongboxMap.put(Resource.COIN, 1);
-        strongboxMap.put(Resource.ROCK, 1);
-        strongboxMap.put(Resource.SHIELD, 1);
-        strongboxMap.put(Resource.SERVANT, 1);
-
-        init = gameBoard.getIndicator();
-
-        ArrayList<Resource> available;
-
-        for(Resource key : storageMap.keySet()){
-            for (int i = 0; i<storageMap.get(key); i++){
-                gameBoard.addToStorage(key);
-            }
-        }
-
-        for(Resource key : strongboxMap.keySet()){
-            for (int i = 0; i<strongboxMap.get(key); i++){
-                gameBoard.addToStrongbox(key);
-            }
-        }
 
 
-        try {
-            gameBoard.extraProductionOn(Resource.COIN);
-        } catch (ImpossibleProductionException | LastSpaceReachedException | CallForCouncilException e) {
-            e.printStackTrace();
-        }
-        gameBoard.endOfProduction();
-
-        available = gameBoard.availableResources();
-        for(Resource r : available){
-            availableMap.put(r,availableMap.remove(r)+1);
-        }
-
-        assertEquals(init+1,gameBoard.getIndicator());
-
-        assertEquals(strongboxMap.get(Resource.COIN),availableMap.get(Resource.COIN));
-        assertEquals(strongboxMap.get(Resource.ROCK),availableMap.get(Resource.ROCK));
-        assertEquals(strongboxMap.get(Resource.SHIELD),availableMap.get(Resource.SHIELD));
-        assertEquals(strongboxMap.get(Resource.SERVANT),availableMap.get(Resource.SERVANT));
-
-    }
-    /**
-     * test about extraProductionOnTest called from game
-     * when ProductionGameBoard(leader card power) is instantiated
-     */
-    @Test
-    @DisplayName("extraProductionOnTest1 - simple test")
-    public void extraProductionOnTest1() {
-        GameBoardInterface gameBoard = new GameBoard();
-        gameBoard = new ProductionGameBoard(gameBoard,Resource.COIN);
-        new Reserve();
-        int init ;
-
-        Map<Resource,Integer> storageMap = new HashMap<>();
-        Map<Resource,Integer> strongboxMap = new HashMap<>();
-        Map<Resource,Integer> availableMap = new HashMap<>();
-
-        availableMap.put(Resource.COIN, 0);
-        availableMap.put(Resource.ROCK, 0);
-        availableMap.put(Resource.SHIELD, 0);
-        availableMap.put(Resource.SERVANT, 0);
-
-        storageMap.put(Resource.COIN, 0);
-        storageMap.put(Resource.ROCK, 0);
-        storageMap.put(Resource.SHIELD, 0);
-        storageMap.put(Resource.SERVANT, 0);
-
-        strongboxMap.put(Resource.COIN, 1);
-        strongboxMap.put(Resource.ROCK, 1);
-        strongboxMap.put(Resource.SHIELD, 1);
-        strongboxMap.put(Resource.SERVANT, 1);
-
-        init = gameBoard.getIndicator();
-
-        ArrayList<Resource> available;
-
-        for(Resource key : storageMap.keySet()){
-            for (int i = 0; i<storageMap.get(key); i++){
-                gameBoard.addToStorage(key);
-            }
-        }
-
-        for(Resource key : strongboxMap.keySet()){
-            for (int i = 0; i<strongboxMap.get(key); i++){
-                gameBoard.addToStrongbox(key);
-            }
-        }
 
 
-        try {
-            gameBoard.extraProductionOn(Resource.SHIELD);
-        } catch (ImpossibleProductionException | LastSpaceReachedException | CallForCouncilException e) {
-            e.printStackTrace();
-        }
-        gameBoard.endOfProduction();
-
-        available = gameBoard.availableResources();
-        for(Resource r : available){
-            availableMap.put(r,availableMap.remove(r)+1);
-        }
-        assertEquals(init+1,gameBoard.getIndicator());
-
-        assertEquals(strongboxMap.get(Resource.COIN)-1,availableMap.get(Resource.COIN));
-        assertEquals(strongboxMap.get(Resource.ROCK),availableMap.get(Resource.ROCK));
-        assertEquals(strongboxMap.get(Resource.SHIELD)+1,availableMap.get(Resource.SHIELD));
-        assertEquals(strongboxMap.get(Resource.SERVANT),availableMap.get(Resource.SERVANT));
-
-    }
-    /**
-     * test about extraProductionOnTest called from game
-     * when ProductionGameBoard(leader card power) is instantiated
-     */
-    @Test
-    @DisplayName("extraProductionOnTest2 - simple test")
-    public void extraProductionOnTest2() {
-        GameBoardInterface gameBoard = new GameBoard();
-        gameBoard = new ProductionGameBoard(gameBoard,Resource.SERVANT);
-        new Reserve();
-        int init ;
-
-        Map<Resource,Integer> storageMap = new HashMap<>();
-        Map<Resource,Integer> strongboxMap = new HashMap<>();
-        Map<Resource,Integer> availableMap = new HashMap<>();
-
-        availableMap.put(Resource.COIN, 0);
-        availableMap.put(Resource.ROCK, 0);
-        availableMap.put(Resource.SHIELD, 0);
-        availableMap.put(Resource.SERVANT, 0);
-
-        storageMap.put(Resource.COIN, 0);
-        storageMap.put(Resource.ROCK, 0);
-        storageMap.put(Resource.SHIELD, 0);
-        storageMap.put(Resource.SERVANT, 0);
-
-        strongboxMap.put(Resource.COIN, 1);
-        strongboxMap.put(Resource.ROCK, 1);
-        strongboxMap.put(Resource.SHIELD, 1);
-        strongboxMap.put(Resource.SERVANT, 1);
-
-        init = gameBoard.getIndicator();
-
-        ArrayList<Resource> available;
-
-        for(Resource key : storageMap.keySet()){
-            for (int i = 0; i<storageMap.get(key); i++){
-                gameBoard.addToStorage(key);
-            }
-        }
-
-        for(Resource key : strongboxMap.keySet()){
-            for (int i = 0; i<strongboxMap.get(key); i++){
-                gameBoard.addToStrongbox(key);
-            }
-        }
 
 
-        try {
-            gameBoard.extraProductionOn(Resource.COIN);
-        } catch (ImpossibleProductionException | LastSpaceReachedException | CallForCouncilException e) {
-            e.printStackTrace();
-        }
-        gameBoard.endOfProduction();
 
-        available = gameBoard.availableResources();
-        for(Resource r : available){
-            availableMap.put(r,availableMap.remove(r)+1);
-        }
-        assertEquals(init+1,gameBoard.getIndicator());
 
-        assertEquals(strongboxMap.get(Resource.COIN)+1,availableMap.get(Resource.COIN));
-        assertEquals(strongboxMap.get(Resource.ROCK),availableMap.get(Resource.ROCK));
-        assertEquals(strongboxMap.get(Resource.SHIELD),availableMap.get(Resource.SHIELD));
-        assertEquals(strongboxMap.get(Resource.SERVANT)-1,availableMap.get(Resource.SERVANT));
 
-    }
+
 
 
 

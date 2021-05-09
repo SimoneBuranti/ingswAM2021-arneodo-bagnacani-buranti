@@ -6,6 +6,7 @@ import it.polimi.ingsw.server.model.GameMultiPlayer;
 import it.polimi.ingsw.server.model.Resource;
 import it.polimi.ingsw.server.model.RuntimeTypeAdapterFactory;
 import it.polimi.ingsw.server.model.colours.*;
+import it.polimi.ingsw.server.model.exceptions.LeaderCardsGameBoardEmptyException;
 import it.polimi.ingsw.server.model.exceptions.RequirementsException;
 import it.polimi.ingsw.server.model.gameBoard.*;
 import it.polimi.ingsw.server.model.leaderCards.*;

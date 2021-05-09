@@ -4,7 +4,7 @@ import it.polimi.ingsw.messages.*;
 
 import java.io.IOException;
 
-public class GameControllerSinglePlayer extends GameControllerInterface{
+public class GameControllerSinglePlayer extends GameController {
 
     @Override
     public void handleMessage(ExitMessage msg, ClientController clientController) {

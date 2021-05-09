@@ -1,4 +1,4 @@
-package it.polimi.ingsw.server.model.leaderCards;
+package it.polimi.ingsw.server.model;
 
 import it.polimi.ingsw.server.model.Game;
 import it.polimi.ingsw.server.model.exceptions.CallForCouncilException;
@@ -631,7 +631,7 @@ class FaithPathTest {
     public void faithWithUseOfRedMarble(){
 
         Game game = new Game(true);
-        Player player = new Player("simo");
+        Player player = new Player("simo",new Game(false));
         RedMarble redMarble = new RedMarble();
 
         assertEquals(player.getIndicator(), 0);

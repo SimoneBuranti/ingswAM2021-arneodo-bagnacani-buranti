@@ -9,6 +9,10 @@ private final MessageType messageType=MessageType.USERNAME;
 
     private String username;
 
+    public UsernameMessage(String username) {
+        this.username = username;
+    }
+
     public String getUsername() {
         return username;
     }

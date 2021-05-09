@@ -1,4 +1,4 @@
-package it.polimi.ingsw.server.model.leaderCards;
+package it.polimi.ingsw.server.model.exceptions;
 
 /**
  * This exception is thrown when there are no unactivated leader cards on a player's board

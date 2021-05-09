@@ -1,4 +1,4 @@
-package it.polimi.ingsw.server.model.leaderCards;
+package it.polimi.ingsw.server.model;
 
 import it.polimi.ingsw.server.model.Mix;
 import it.polimi.ingsw.server.model.marbles.*;

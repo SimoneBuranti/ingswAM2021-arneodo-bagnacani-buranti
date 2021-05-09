@@ -1,6 +1,6 @@
 package it.polimi.ingsw;
 
-import it.polimi.ingsw.Client.SocketClient;
+import it.polimi.ingsw.client.SocketClient;
 import it.polimi.ingsw.messages.Message;
 import it.polimi.ingsw.messages.NumberPlayerMessage;
 import java.io.IOException;
@@ -20,8 +20,7 @@ public class ClientApp {
 
         //socketClient.readMessage();
 
-        NumberPlayerMessage msg = new NumberPlayerMessage();
-        msg.setnOfPlayers(3);
+        NumberPlayerMessage msg = new NumberPlayerMessage(3);
 
         socketClient.sendMessage(msg);
     }

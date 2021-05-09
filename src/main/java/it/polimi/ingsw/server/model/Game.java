@@ -3,10 +3,7 @@ package it.polimi.ingsw.server.model;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import it.polimi.ingsw.Observer.Observable;
-import it.polimi.ingsw.Observer.Observer;
 import it.polimi.ingsw.messages.DeckProductionCardMessage;
-import it.polimi.ingsw.messages.Message;
-import it.polimi.ingsw.messages.WrongColumnErrorMessage;
 import it.polimi.ingsw.server.model.colours.*;
 import it.polimi.ingsw.server.model.exceptions.*;
 import it.polimi.ingsw.server.model.gameBoard.*;
@@ -348,7 +345,7 @@ public class Game extends Observable {
      * When the exception is caught, the method calls the exceptionHandler method.
      * @param index : the position where the leader card to be discarded is
      */
-    public void discardLeaderCard(int index) throws LeaderCardsGameBoardEmptyException{
+    public void discardLeaderCard(int index) throws LeaderCardsGameBoardEmptyException {
         try {
             currentPlayer.discardLeaderCard(index);
         } catch (CallForCouncilException e) {

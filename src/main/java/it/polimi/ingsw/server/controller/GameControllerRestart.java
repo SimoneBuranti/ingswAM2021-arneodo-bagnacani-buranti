@@ -1,12 +1,11 @@
 package it.polimi.ingsw.server.controller;
 
-import com.sun.security.ntlm.Client;
 import it.polimi.ingsw.messages.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class GameControllerRestart extends GameControllerInterface{
+public class GameControllerRestart extends GameController {
 
     private ArrayList<String> reconnected = new ArrayList<>();
     private boolean restartAnswerReceived = false;

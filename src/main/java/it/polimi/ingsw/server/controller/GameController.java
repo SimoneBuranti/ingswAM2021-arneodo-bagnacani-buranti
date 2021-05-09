@@ -2,10 +2,9 @@ package it.polimi.ingsw.server.controller;
 
 import it.polimi.ingsw.messages.*;
 import it.polimi.ingsw.server.model.Game;
-import it.polimi.ingsw.server.network.ClientHandler;
 import it.polimi.ingsw.server.network.Server;
 
-public abstract class GameControllerInterface {
+public abstract class GameController {
     protected int numberOfPlayers;
     protected Game game;
     protected Server server;

@@ -4,7 +4,7 @@ import it.polimi.ingsw.messages.*;
 
 import java.io.IOException;
 
-public class GameControllerEmpty extends GameControllerInterface{
+public class GameControllerEmpty extends GameController {
 
 
 
@@ -15,13 +15,14 @@ public class GameControllerEmpty extends GameControllerInterface{
 
     @Override
     public void handleMessage(NumberPlayerMessage msg, ClientController clientController) {
-        if (msg.getnOfPlayers()== 1){
-            server.setGameController(new GameControllerSinglePlayer());
-            server.initNewSolitaireGame();
-        } else {
-            server.setGameController(new GameControllerLobby(msg.getnOfPlayers()));
+        if (server.getLobbySize()>0){
+            if (msg.getnOfPlayers()== 1){
+                server.setGameController(new GameControllerSinglePlayer());
+                server.initNewSolitaireGame();
+            } else {
+                server.setGameController(new GameControllerLobby(msg.getnOfPlayers()));
+            }
         }
-
     }
 
     @Override

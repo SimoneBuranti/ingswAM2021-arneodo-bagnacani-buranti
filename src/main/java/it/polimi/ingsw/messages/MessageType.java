@@ -2,6 +2,7 @@ package it.polimi.ingsw.messages;
 
 public enum MessageType {
     EXIT,
+    OK,
     RESTARTQUESTIONMESSAGE,
     RESTARTANSWERMESSAGE,
     BOOTINGLOBBYERROR,

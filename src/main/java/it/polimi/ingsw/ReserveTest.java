@@ -1,10 +1,6 @@
 package it.polimi.ingsw;
 
-import it.polimi.ingsw.Client.SocketClient;
-import it.polimi.ingsw.messages.NumberPlayerMessage;
-import it.polimi.ingsw.server.model.Game;
 import it.polimi.ingsw.server.model.GameMultiPlayer;
-import it.polimi.ingsw.server.model.GameSolitaire;
 import it.polimi.ingsw.server.model.Resource;
 import it.polimi.ingsw.server.model.colours.*;
 import it.polimi.ingsw.server.model.exceptions.*;
@@ -13,7 +9,6 @@ import it.polimi.ingsw.server.model.productionCards.DeckProductionCardTwoYellow;
 import it.polimi.ingsw.server.model.productionCards.ProductionCard;
 import it.polimi.ingsw.server.model.requirements.*;
 
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -54,6 +54,7 @@ public interface MessageVisitor {
     //General messages
     void visit(PingMessage msg);
     void visit(PongMessage msg);
+    void visit(OkMessage msg);
 
 
     //Observer

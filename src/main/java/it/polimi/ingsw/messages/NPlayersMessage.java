@@ -19,11 +19,11 @@ public class NPlayersMessage extends Message {
         return messageType;
     }
 
-    public int getMissPlayer() {
+    public int getnOfPlayers() {
         return nOfPlayers;
     }
 
-    public void setMissPlayer(int nOfPlayers) {
+    public void getnOfPlayers(int nOfPlayers) {
         this.nOfPlayers = nOfPlayers;
     }
 

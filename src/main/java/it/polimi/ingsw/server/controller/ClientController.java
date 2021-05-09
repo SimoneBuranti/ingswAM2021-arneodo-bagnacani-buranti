@@ -3,9 +3,8 @@ package it.polimi.ingsw.server.controller;
 import it.polimi.ingsw.messages.*;
 import it.polimi.ingsw.server.model.Game;
 import it.polimi.ingsw.server.model.exceptions.*;
-import it.polimi.ingsw.server.model.leaderCards.LeaderCardsGameBoardEmptyException;
+import it.polimi.ingsw.server.model.exceptions.LeaderCardsGameBoardEmptyException;
 import it.polimi.ingsw.server.network.*;
-import it.polimi.ingsw.server.virtualview.VirtualView;
 
 public class ClientController implements MessageVisitor {
 
@@ -362,6 +361,11 @@ public class ClientController implements MessageVisitor {
     @Override
     public void visit(PongMessage msg) {
         //server.getGameController().handleMessage(msg, this);
+    }
+
+    @Override
+    public void visit(OkMessage msg) {
+
     }
 
     @Override

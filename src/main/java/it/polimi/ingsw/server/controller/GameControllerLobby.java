@@ -1,11 +1,10 @@
 package it.polimi.ingsw.server.controller;
 
 import it.polimi.ingsw.messages.*;
-import it.polimi.ingsw.server.network.ClientHandler;
 
 import java.io.IOException;
 
-public class GameControllerLobby extends GameControllerInterface{
+public class GameControllerLobby extends GameController {
 
     private int lobbySize;
 

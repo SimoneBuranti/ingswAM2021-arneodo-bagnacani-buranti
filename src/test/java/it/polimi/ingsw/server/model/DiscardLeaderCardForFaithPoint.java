@@ -1,9 +1,8 @@
-package it.polimi.ingsw.server.model.leaderCards;
+package it.polimi.ingsw.server.model;
 
-import it.polimi.ingsw.server.model.GameMultiPlayer;
+import it.polimi.ingsw.server.model.exceptions.LeaderCardsGameBoardEmptyException;
 import it.polimi.ingsw.server.model.exceptions.CallForCouncilException;
 import it.polimi.ingsw.server.model.exceptions.LastSpaceReachedException;
-import it.polimi.ingsw.server.model.leaderCards.LeaderCardsGameBoardEmptyException;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
