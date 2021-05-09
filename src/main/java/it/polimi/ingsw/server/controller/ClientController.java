@@ -5,11 +5,13 @@ import it.polimi.ingsw.server.model.Game;
 import it.polimi.ingsw.server.model.exceptions.*;
 import it.polimi.ingsw.server.model.exceptions.LeaderCardsGameBoardEmptyException;
 import it.polimi.ingsw.server.network.*;
+import it.polimi.ingsw.server.virtualview.VirtualView;
 
 public class ClientController implements MessageVisitor {
 
     private final Server server;
     private final ClientHandler clientHandler;
+    private VirtualView virtualView;
     private Game game;
     private String nickname;
 
@@ -18,8 +20,6 @@ public class ClientController implements MessageVisitor {
         this.clientHandler = clientHandler;
         this.game = null;
         this.nickname = null;
-        /*this.virtualView = new VirtualView(clientHandler);
-        game.addObserver(virtualView);*/
     }
 
     public Game getGame() {
@@ -28,7 +28,8 @@ public class ClientController implements MessageVisitor {
 
     public void setGame(Game game){
         this.game = game;
-        //game.addObserver(virtualView);
+        this.virtualView = new VirtualView(this,game);
+        game.addObserver(virtualView);
     }
 
     public String getNickname() {
@@ -43,7 +44,7 @@ public class ClientController implements MessageVisitor {
         this.nickname = nickname;
     }
 
-    private boolean turnCheck(){
+    public boolean turnCheck(){
         return nickname.equals(game.getCurrentNickname());
     }
 

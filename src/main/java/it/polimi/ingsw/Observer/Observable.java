@@ -45,12 +45,12 @@ public class Observable {
      * Notifies the observer through the update method and passes message
      *
      * @param message the message to be passed to the observer.
-     * @param observer the message to be passed to the observer.
      */
 
-    protected void notifyToOneObserver(Message message, Observer observer) {
-        observer.update(message);
-
+    protected void notifyToOneObserver(Message message) {
+        for (Observer observer : observers) {
+            observer.updateOnlyCurrent(message);
+        }
     }
 
 

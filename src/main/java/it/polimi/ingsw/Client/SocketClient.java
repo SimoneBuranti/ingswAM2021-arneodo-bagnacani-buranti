@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
-
+import it.polimi.ingsw.client.ViewController;
 public class SocketClient {
     private final Socket serverSocket;
     private ViewController viewController;
