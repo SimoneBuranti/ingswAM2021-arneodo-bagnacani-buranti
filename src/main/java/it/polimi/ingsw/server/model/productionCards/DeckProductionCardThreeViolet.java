@@ -1,13 +1,11 @@
 package it.polimi.ingsw.server.model.productionCards;
 
 import com.google.gson.Gson;
-import it.polimi.ingsw.messages.DeckProductionCardConfigMessage;
+import it.polimi.ingsw.messages.observable.DeckProductionCardConfigMessage;
 import it.polimi.ingsw.server.model.Mix;
 import it.polimi.ingsw.server.model.Resource;
 import it.polimi.ingsw.server.model.colours.Violet;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;

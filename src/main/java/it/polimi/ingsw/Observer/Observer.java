@@ -11,5 +11,7 @@ public interface Observer {
 
     void updateOnlyCurrent(Message message);
 
+    public void updateNotTheCurrent(Message message);
+
 
 }

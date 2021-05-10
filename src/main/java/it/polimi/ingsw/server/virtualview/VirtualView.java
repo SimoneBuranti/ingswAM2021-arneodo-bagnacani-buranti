@@ -23,14 +23,14 @@ public class VirtualView implements Observer {
 
 
     /**
- * Receives an update message from the model.
- * The message is sent over the network to the client.
- * The proper action based on the message type will be taken by the real view on the client.
- *
- * @param message the update message.
- */
-@Override
-public void update(Message message) {
+    * Receives an update message from the model.
+    * The message is sent over the network to the client.
+    * The proper action based on the message type will be taken by the real view on the client.
+    *
+    * @param message the update message.
+    */
+    @Override
+    public void update(Message message) {
     clientController.getClientHandler().sendMessage(message);
 }
 
@@ -49,6 +49,20 @@ public void update(Message message) {
     public void updateOnlyCurrent(Message message) {
         if (clientController.turnCheck())
         clientController.getClientHandler().sendMessage(message);
+    }
+
+
+    /**
+     * Receives an update message from the model.
+     * The message is sent over the network to the client.
+     * The proper action based on the message type will be taken by the real view on the client.
+     *
+     * @param message the update message.
+     */
+    @Override
+    public void updateNotTheCurrent(Message message) {
+        if (!clientController.turnCheck())
+            clientController.getClientHandler().sendMessage(message);
     }
 
 

@@ -3,7 +3,7 @@ package it.polimi.ingsw.server.model;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import it.polimi.ingsw.Observer.Observable;
-import it.polimi.ingsw.messages.DeckProductionCardMessage;
+import it.polimi.ingsw.messages.observable.DeckProductionCardMessage;
 import it.polimi.ingsw.server.model.colours.*;
 import it.polimi.ingsw.server.model.exceptions.*;
 import it.polimi.ingsw.server.model.gameBoard.*;

@@ -1,6 +1,8 @@
 package it.polimi.ingsw.client;
 
 import it.polimi.ingsw.messages.*;
+import it.polimi.ingsw.messages.observable.DeckProductionCardConfigMessage;
+import it.polimi.ingsw.messages.observable.DeckProductionCardMessage;
 
 public class ViewController implements MessageVisitor {
     @Override

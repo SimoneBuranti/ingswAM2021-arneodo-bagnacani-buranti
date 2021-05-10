@@ -1,17 +1,22 @@
 package it.polimi.ingsw.messages;
 
 
+import it.polimi.ingsw.server.model.players.Player;
+
 public class OpponentFaithMoveMessage extends Message{
     private final MessageType messageType = MessageType.OPPONENTFAITHMOVE;
-    private String nickname;
 
-    public String getNickname() {
-        return nickname;
+
+    private Player player;
+    public OpponentFaithMoveMessage(Player player){
+        this.player=player;
     }
 
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
+
+    public Player getNickname() {
+        return player;
     }
+
 
     @Override
     public MessageType getMessageType() {

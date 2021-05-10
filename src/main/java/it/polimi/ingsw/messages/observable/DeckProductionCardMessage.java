@@ -1,9 +1,13 @@
-package it.polimi.ingsw.messages;
+package it.polimi.ingsw.messages.observable;
+
+import it.polimi.ingsw.messages.Message;
+import it.polimi.ingsw.messages.MessageType;
+import it.polimi.ingsw.messages.MessageVisitor;
 
 import java.util.ArrayList;
 
 public class DeckProductionCardMessage extends Message {
-    private final MessageType messageType = MessageType.DECKPRODUCTIONCARD;
+    private final MessageType messageType = MessageType.REMOVECARD;
 
     private int NumberDeck;
 

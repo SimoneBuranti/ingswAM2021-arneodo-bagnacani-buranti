@@ -1,5 +1,8 @@
 package it.polimi.ingsw.messages;
 
+import it.polimi.ingsw.messages.observable.*;
+import it.polimi.ingsw.server.model.gameBoard.FaithPath;
+
 public interface MessageVisitor {
     //Error messages
     void visit(AlreadyActivatedErrorMessage msg);
@@ -60,5 +63,27 @@ public interface MessageVisitor {
     //Observer
     void visit(DeckProductionCardMessage msg);
     void visit(DeckProductionCardConfigMessage msg);
+    void visit(TakeCardMessage msg);
+    void visit(TakeCardForNotCurrentMessage msg);
+    void visit(ConfigurationMarketMessage msg);
+    void visit(ChangeMarketMessage msg);
+    void visit(MagnificentMoveMessage msg);
+    void visit(MagnificentWinMessage msg);
+    void visit(MyVictoryMessage msg);
+    void visit(MyDefeatMessage msg);
+    void visit(UseActionMarkerMessage msg);
+    void visit(ActionMarkerConfigMessage msg);
+    void visit(ActionMarkerChangeMessage msg);
+    void visit(ProductionMessageForNotCurrentMessage msg);
+    void visit(ProductionMessageForCurrentMessage msg);
+    void visit(ActivationLeaderForNotCurrentMessage msg);
+    void visit(ActivationLeaderForCurrentMessage msg);
+    void visit(DiscardLeaderForNotCurrentMessage msg);
+    void visit(DiscardLeaderForCurrentMessage msg);
+    void visit(FaithPathForNotCurrentMessage msg);
+    void visit(FaithPathForCurrentMessage msg);
+    void visit(EndGamePlayerWinnnerMessage msg);
+
+
 
 }

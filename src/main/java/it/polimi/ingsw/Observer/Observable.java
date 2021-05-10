@@ -54,7 +54,17 @@ public class Observable {
     }
 
 
+    /**
+     * Notifies the observer through the update method and passes message
+     *
+     * @param message the message to be passed to the observer.
+     */
 
+    protected void notifyAllObserverLessOne(Message message) {
+        for (Observer observer : observers) {
+            observer.updateNotTheCurrent(message);
+        }
+    }
 
 
 
