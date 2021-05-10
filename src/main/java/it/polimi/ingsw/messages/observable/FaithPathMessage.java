@@ -3,20 +3,12 @@ package it.polimi.ingsw.messages.observable;
 import it.polimi.ingsw.messages.Message;
 import it.polimi.ingsw.messages.MessageType;
 import it.polimi.ingsw.messages.MessageVisitor;
+import it.polimi.ingsw.server.model.players.Player;
 
-public class FaithPathForNotCurrentMessage extends Message {
-    private final MessageType messageType = MessageType.OPPONENTFAITHPATHMOVE;
-    private String nickname;
+public class FaithPathMessage extends Message {
+    private final MessageType messageType = MessageType.MYFAITHMOVE;
 
-    public String getNickname() {
-        return nickname;
-    }
-
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
-
-    @Override
+@Override
     public MessageType getMessageType() {
         return messageType;
     }

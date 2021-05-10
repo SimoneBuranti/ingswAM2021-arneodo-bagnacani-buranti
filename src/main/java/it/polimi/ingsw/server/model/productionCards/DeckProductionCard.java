@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import it.polimi.ingsw.Observer.Observable;
 import it.polimi.ingsw.Observer.Observer;
+import it.polimi.ingsw.messages.observable.DeckProductionCardMessage;
 import it.polimi.ingsw.server.model.RuntimeTypeAdapterFactory;
 import it.polimi.ingsw.server.model.Resource;
 import it.polimi.ingsw.server.model.colours.*;
@@ -76,7 +77,7 @@ public abstract class DeckProductionCard extends Observable {
             if (deck.isEmpty() && level ==3)
                 throw new EndOfSolitaireGame();
         }
-
+        notifyObserver(new DeckProductionCardMessage(getKey()));
     }
 
     /**

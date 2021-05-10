@@ -86,8 +86,8 @@ public interface MessageVisitor {
     void visit(DiscardLeaderForNotCurrentMessage msg);
     void visit(DiscardLeaderForCurrentMessage msg);
 
-    void visit(FaithPathForNotCurrentMessage msg);
-    void visit(FaithPathForCurrentMessage msg);
+    void visit(FaithPathMessage msg);
+    void visit(FaithPathOpponentMessage msg);
 
     void visit(EndGamePlayerWinnnerMessage msg);
 
