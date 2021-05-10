@@ -416,7 +416,7 @@ public class Game extends Observable {
             int rock=GetAmount.getAmount(currentPlayer.getBuffer(),Resource.ROCK);;
             int servant=GetAmount.getAmount(currentPlayer.getBuffer(),Resource.SERVANT);;
             notifyToOneObserver(new ResultFromMarket(coin,shield,rock,servant) );
-            notifyAllObserverLessOne(new ProductionMessageForNotCurrentMessage(currentPlayer,coin,shield,rock,servant) );
+            notifyAllObserverLessOne(new ResultFromMarketNotCurrentMessage(currentPlayer,coin,shield,rock,servant) );
 
         } catch (CallForCouncilException e) {
             exceptionHandler(e);
@@ -441,7 +441,7 @@ public class Game extends Observable {
             int rock=GetAmount.getAmount(currentPlayer.getBuffer(),Resource.ROCK);;
             int servant=GetAmount.getAmount(currentPlayer.getBuffer(),Resource.SERVANT);;
             notifyToOneObserver(new ResultFromMarket(coin,shield,rock,servant) );
-            notifyAllObserverLessOne(new ProductionMessageForNotCurrentMessage(currentPlayer,coin,shield,rock,servant) );
+            notifyAllObserverLessOne(new ResultFromMarketNotCurrentMessage(currentPlayer,coin,shield,rock,servant) );
         } catch (CallForCouncilException e) {
             exceptionHandler(e);
         } catch (LastSpaceReachedException e) {

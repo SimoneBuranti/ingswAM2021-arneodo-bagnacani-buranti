@@ -74,6 +74,7 @@ public interface MessageVisitor {
     void visit(ChangeMarketMessageColumn msg);
     void visit(ChangeMarketMessageRow msg);
     void visit(ResultFromMarket msg);
+    void visit(ResultFromMarketNotCurrentMessage msg);
 
     void visit(MagnificentMoveMessage msg);
     void visit(MagnificentWinMessage msg);
