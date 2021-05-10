@@ -5,12 +5,12 @@ import it.polimi.ingsw.messages.MessageType;
 import it.polimi.ingsw.messages.MessageVisitor;
 import it.polimi.ingsw.server.model.actionMarkers.ActionMarker;
 
-public class UseActionMarkerMessage extends Message {private final MessageType messageType = MessageType.USEACTIONMARKER;
+public class UseActionMarkerMessage extends Message {
+    private final MessageType messageType = MessageType.USEACTIONMARKER;
 
-    ActionMarker actionMarker;
-    public UseActionMarkerMessage(ActionMarker actionMarker)
+
+    public UseActionMarkerMessage()
     {
-        this.actionMarker=actionMarker;
     }
 
     @Override
@@ -23,7 +23,4 @@ public class UseActionMarkerMessage extends Message {private final MessageType m
         v.visit(this);
     }
 
-    public ActionMarker getActionMarker() {
-        return actionMarker;
-    }
 }

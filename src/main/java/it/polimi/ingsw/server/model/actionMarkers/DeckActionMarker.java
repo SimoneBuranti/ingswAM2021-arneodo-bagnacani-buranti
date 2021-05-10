@@ -2,6 +2,9 @@ package it.polimi.ingsw.server.model.actionMarkers;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import it.polimi.ingsw.Observer.Observable;
+import it.polimi.ingsw.messages.observable.ActionMarkerChangeMessage;
+import it.polimi.ingsw.messages.observable.ActionMarkerConfigMessage;
 import it.polimi.ingsw.server.model.RuntimeTypeAdapterFactory;
 import it.polimi.ingsw.server.model.Mix;
 import it.polimi.ingsw.server.model.colours.*;
@@ -17,7 +20,7 @@ import java.util.List;
 /**
  * this class represents the action marker deck
  */
-public class DeckActionMarker {
+public class DeckActionMarker extends Observable {
 
 
 
@@ -36,8 +39,7 @@ public class DeckActionMarker {
      * this constructor creates all the action markers and adds them to the list and shuffles the newly created deck
      */
     public DeckActionMarker(){
-        String JSONArray = null;
-        Gson g = new Gson();
+
         actionMarkerDeck = new ArrayList<>(7);
         ActionMarker actionMarkerBlue = new ActionMarkerProductionBlue();
         actionMarkerDeck.add(actionMarkerBlue);
@@ -55,44 +57,12 @@ public class DeckActionMarker {
         actionMarkerDeck.add(actionMarkerCrossDoubleSecond);
 
         Mix.MIXED(actionMarkerDeck);
-        List<String> list = new ArrayList<String>();
-        list.add(actionMarkerDeck.get(0).getType());
-        list.add(actionMarkerDeck.get(1).getType());
-        list.add(actionMarkerDeck.get(2).getType());
-        list.add(actionMarkerDeck.get(3).getType());
-        list.add(actionMarkerDeck.get(4).getType());
-        list.add(actionMarkerDeck.get(5).getType());
-        list.add(actionMarkerDeck.get(6).getType());
 
+        notifyObserver(new ActionMarkerConfigMessage(actionMarkerDeck));
 
-
-        String jsonStr = g.toJson(list);
-
-        try {
-
-            // Constructs a FileWriter given a file name, using the platform's default charset
-            configActionMarker = new FileWriter("src/main/resources/configActionMarker.json");
-            configActionMarker.write(jsonStr);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-
-        } finally {
-
-            try {
-                configActionMarker.flush();
-                configActionMarker.close();
-            } catch (IOException e) {
-
-                e.printStackTrace();
-            }
         }
 
 
-
-
-
-    }
 
     /**
      * this method returns the first action marker of the deck after putting it in the last place of the list and
@@ -115,6 +85,7 @@ public class DeckActionMarker {
      */
     public void mixDeck(){
         Mix.MIXED(actionMarkerDeck);
+        notifyObserver(new ActionMarkerChangeMessage(actionMarkerDeck));
     }
 
     /**
@@ -130,7 +101,7 @@ public class DeckActionMarker {
      * method for saveInformationOfActionMarker
      */
     public void saveInformationOfActionMarker(){
-        Gson gson=gameBoardSaving();
+        Gson gson=DeckActionMarkerSaving();
 
         FileWriter config = null;
         String jsonStrin = gson.toJson(actionMarkerDeck);
@@ -151,7 +122,7 @@ public class DeckActionMarker {
 
 
 
-    public Gson gameBoardSaving(){
+    public Gson DeckActionMarkerSaving(){
 
         RuntimeTypeAdapterFactory<Storage> adapterStorage =
                 RuntimeTypeAdapterFactory
@@ -232,33 +203,6 @@ public class DeckActionMarker {
         int l=list.length;
         for(int i=0; i < l; i++)
             actionMarkerDeck.add(list[i]);
-        Gson g = new Gson();
 
-
-        Mix.MIXED(actionMarkerDeck);
-        List<String> listOF = new ArrayList<String>();
-        for(int i=0; i < actionMarkerDeck.size(); i++)
-            listOF.add(actionMarkerDeck.get(i).getType());
-
-        String jsonStr = g.toJson(listOF);
-
-        try {
-
-            // Constructs a FileWriter given a file name, using the platform's default charset
-            configActionMarker = new FileWriter("src/main/resources/configActionMarker.json");
-            configActionMarker.write(jsonStr);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-
-        } finally {
-
-            try {
-                configActionMarker.flush();
-                configActionMarker.close();
-            } catch (IOException e) {
-
-                e.printStackTrace();
-            }
-        }
+        notifyObserver(new ActionMarkerConfigMessage(actionMarkerDeck));
     }}

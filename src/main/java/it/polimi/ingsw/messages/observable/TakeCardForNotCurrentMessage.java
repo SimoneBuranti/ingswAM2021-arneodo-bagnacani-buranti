@@ -10,15 +10,14 @@ public class TakeCardForNotCurrentMessage extends Message {
 
     private int NumberDeck;
 
-    private int column;
 
     private Player player;
 
 
-    public TakeCardForNotCurrentMessage(Player player,int numberDeck, int column ){
+    public TakeCardForNotCurrentMessage(Player player,int numberDeck){
         this.player=player;
         this.NumberDeck=numberDeck;
-        this.column=column;
+
     }
 
     @Override
@@ -31,9 +30,6 @@ public class TakeCardForNotCurrentMessage extends Message {
         v.visit(this);
     }
 
-    public int getColumn() {
-        return column;
-    }
 
     public Player getPlayer() {
         return player;

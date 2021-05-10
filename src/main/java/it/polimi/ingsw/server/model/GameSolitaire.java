@@ -2,6 +2,8 @@ package it.polimi.ingsw.server.model;
 
 
 import com.google.gson.Gson;
+import it.polimi.ingsw.Observer.Observable;
+import it.polimi.ingsw.messages.observable.*;
 import it.polimi.ingsw.server.model.actionMarkers.ActionMarker;
 import it.polimi.ingsw.server.model.actionMarkers.DeckActionMarker;
 import it.polimi.ingsw.server.model.colours.Blue;
@@ -23,7 +25,7 @@ import java.util.ArrayList;
 /**
  * this class represents the game in solitary
  */
-public class GameSolitaire extends Game{
+public class GameSolitaire extends Game {
 
     /**
      * this attribute represents the action marker deck of the game
@@ -91,6 +93,7 @@ public class GameSolitaire extends Game{
         } catch (EndOfSolitaireGame endOfSolitaireGame) {
             exceptionHandler(endOfSolitaireGame);
         }
+        notifyObserver(new UseActionMarkerMessage());
     }
 
 
@@ -342,7 +345,7 @@ public class GameSolitaire extends Game{
     @Override
     protected void exceptionHandler(LastSpaceReachedException e) {
         player.setPapal();
-        player.playerScore();
+        notifyObserver(new MyVictoryMessage(player.playerScore()));
        endGame();
     }
 
@@ -354,7 +357,8 @@ public class GameSolitaire extends Game{
      */
     @Override
     protected void exceptionHandler(EndOfSolitaireGame e) {
-        System.out.println("Lorenzo the Magnificent WIN");
+        notifyObserver(new MagnificentWinMessage());
+        notifyObserver(new MyDefeatMessage());
         endGame();
     }
 

@@ -1,6 +1,8 @@
 package it.polimi.ingsw.server.model;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import it.polimi.ingsw.Observer.Observable;
+import it.polimi.ingsw.messages.observable.ConfigurationMarketMessage;
 import it.polimi.ingsw.server.model.colours.*;
 import it.polimi.ingsw.server.model.exceptions.CallForCouncilException;
 import it.polimi.ingsw.server.model.exceptions.LastSpaceReachedException;
@@ -17,7 +19,7 @@ import java.util.List;
 /**
  * this class represents the game market  common to all players
  */
-public class Market {
+public class Market extends Observable {
     /**
      * file for initial configuration
      */
@@ -49,8 +51,7 @@ public class Market {
      * After shuffling the list, it initialises the two attributes grid and extra
      */
     public Market(){
-        Gson g = new Gson();
-        String JSONArray;
+
         RedMarble redOne = new RedMarble();
         initialMarbleList.add(redOne);
 
@@ -88,45 +89,8 @@ public class Market {
         setGrid();
         setExtra();
 
-        List<String> list = new ArrayList<String>();
-        list.add(initialMarbleList.get(0).getColour());
-        list.add(initialMarbleList.get(1).getColour());
-        list.add(initialMarbleList.get(2).getColour());
-        list.add(initialMarbleList.get(3).getColour());
-        list.add(initialMarbleList.get(4).getColour());
-        list.add(initialMarbleList.get(5).getColour());
-        list.add(initialMarbleList.get(6).getColour());
-        list.add(initialMarbleList.get(7).getColour());
-        list.add(initialMarbleList.get(8).getColour());
-        list.add(initialMarbleList.get(9).getColour());
-        list.add(initialMarbleList.get(10).getColour());
-        list.add(initialMarbleList.get(11).getColour());
-        list.add(initialMarbleList.get(12).getColour());
-
-        String jsonStr = g.toJson(list);
-
-        try {
-
-            // Constructs a FileWriter given a file name, using the platform's default charset
-            configMarket= new FileWriter("src/main/resources/configMarket.json");
-            configMarket.write(jsonStr);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-
-        } finally {
-
-            try {
-                configMarket.flush();
-                configMarket.close();
-            } catch (IOException e) {
-
-                e.printStackTrace();
-            }
-
-
-
-    };}
+        notifyObserver(new ConfigurationMarketMessage(initialMarbleList));
+    }
 
     /**
      * This method calls the marble's giveResource method for each marble in the market grid in the chosen row
@@ -316,34 +280,13 @@ public class Market {
 
 
     public Market(Marble[] list){
-        Gson g = new Gson();
 
         for(int i=0; i < 13; i++)
             initialMarbleList.add(list[i]);
         setGrid();
         setExtra();
 
-        String jsonStr = g.toJson(initialMarbleList);
-
-        try {
-
-            // Constructs a FileWriter given a file name, using the platform's default charset
-            configMarket= new FileWriter("src/main/resources/configMarket.json");
-            configMarket.write(jsonStr);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-
-        } finally {
-
-            try {
-                configMarket.flush();
-                configMarket.close();
-            } catch (IOException e) {
-
-                e.printStackTrace();
-            }
-        }}
+        notifyObserver(new ConfigurationMarketMessage(initialMarbleList));}
 
 
 

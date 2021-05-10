@@ -8,10 +8,10 @@ import it.polimi.ingsw.server.model.leaderCards.LeaderCard;
 public class ActivationLeaderForCurrentMessage extends Message {
     private final MessageType messageType = MessageType.ACTIVATIONLEADERCARDRESPONSE;
 
-    private LeaderCard leaderCard;
+    private int index;
 
-    public ActivationLeaderForCurrentMessage(LeaderCard leaderCard){
-        this.leaderCard=leaderCard;
+    public ActivationLeaderForCurrentMessage(int index){
+        this.index=index;
     }
 
     @Override
@@ -24,7 +24,7 @@ public class ActivationLeaderForCurrentMessage extends Message {
         v.visit(this);
     }
 
-    public LeaderCard getLeaderCard() {
-        return leaderCard;
+    public int getIndex() {
+        return index;
     }
 }

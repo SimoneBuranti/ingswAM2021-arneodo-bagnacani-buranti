@@ -1,6 +1,7 @@
 package it.polimi.ingsw.server.model;
 
 import com.google.gson.Gson;
+import it.polimi.ingsw.messages.observable.EndGamePlayerWinnnerMessage;
 import it.polimi.ingsw.server.model.exceptions.CallForCouncilException;
 import it.polimi.ingsw.server.model.exceptions.EndGameException;
 import it.polimi.ingsw.server.model.exceptions.LastSpaceReachedException;
@@ -521,7 +522,7 @@ public class GameMultiPlayer extends Game {
      */
     @Override
     public void endGame(){
-        theWinnerIs();
+        notifyObserver(new EndGamePlayerWinnnerMessage(theWinnerIs()));
         FileClass.FileDestroyer();
 
     }

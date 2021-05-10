@@ -3,7 +3,8 @@ package it.polimi.ingsw.server.model;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import it.polimi.ingsw.Observer.Observable;
-import it.polimi.ingsw.messages.observable.DeckProductionCardMessage;
+import it.polimi.ingsw.messages.Message;
+import it.polimi.ingsw.messages.observable.*;
 import it.polimi.ingsw.server.model.colours.*;
 import it.polimi.ingsw.server.model.exceptions.*;
 import it.polimi.ingsw.server.model.gameBoard.*;
@@ -251,6 +252,8 @@ public class Game extends Observable {
         } catch (EndGameException e) {
             exceptionHandler(e);
         }
+        notifyToOneObserver(new TakeCardMessage(deck.getKey(), chosenColumn));
+        notifyAllObserverLessOne(new TakeCardForNotCurrentMessage(currentPlayer,deck.getKey()));
         notifyObserver(new DeckProductionCardMessage(deck.getKey()));
     }
 
@@ -353,6 +356,8 @@ public class Game extends Observable {
         } catch (LastSpaceReachedException e) {
             exceptionHandler(e);
         }
+        notifyToOneObserver(new DiscardLeaderForCurrentMessage(index));
+        notifyAllObserverLessOne(new DiscardLeaderForNotCurrentMessage(currentPlayer));
 
     }
 
@@ -364,6 +369,8 @@ public class Game extends Observable {
      */
     public void activateLeaderCard(int index) throws RequirementsException, LeaderCardsGameBoardEmptyException {
         currentPlayer.activationLeaderCard(index);
+        notifyToOneObserver(new ActivationLeaderForCurrentMessage(index));
+        notifyAllObserverLessOne(new ActivationLeaderForNotCurrentMessage(currentPlayer));
     }
 
 
@@ -381,6 +388,7 @@ public class Game extends Observable {
         } catch (LastSpaceReachedException e) {
             exceptionHandler(e);
         }
+        notifyObserver(new ChangeMarketMessageRow(chosenRow));
     }
 
     /**
@@ -397,6 +405,7 @@ public class Game extends Observable {
         } catch (LastSpaceReachedException e) {
             exceptionHandler(e);
         }
+        notifyObserver(new ChangeMarketMessageRow(chosenColumn));
     }
 
     /**
@@ -782,6 +791,7 @@ public class Game extends Observable {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+
 
     }
 

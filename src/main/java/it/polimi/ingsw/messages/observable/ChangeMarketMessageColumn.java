@@ -3,15 +3,15 @@ package it.polimi.ingsw.messages.observable;
 import it.polimi.ingsw.messages.Message;
 import it.polimi.ingsw.messages.MessageType;
 import it.polimi.ingsw.messages.MessageVisitor;
-import it.polimi.ingsw.server.model.leaderCards.LeaderCard;
+import it.polimi.ingsw.server.model.marbles.Marble;
 
-public class DiscardLeaderForCurrentMessage extends Message {
-    private final MessageType messageType = MessageType.DISCARDLEADERCARDRESPONSE;
+import java.util.ArrayList;
 
-    private int index;
-
-    public DiscardLeaderForCurrentMessage(int index){
-        this.index=index;
+public class ChangeMarketMessageColumn extends Message {
+    private final MessageType messageType = MessageType.CHANGEMARKETMESSAGECOLUMN;
+private int column;
+    public ChangeMarketMessageColumn(int column){
+        this.column=column;
     }
 
     @Override
@@ -24,7 +24,8 @@ public class DiscardLeaderForCurrentMessage extends Message {
         v.visit(this);
     }
 
-    public int getIndex() {
-        return index;
+
+    public int getColumn() {
+        return column;
     }
 }

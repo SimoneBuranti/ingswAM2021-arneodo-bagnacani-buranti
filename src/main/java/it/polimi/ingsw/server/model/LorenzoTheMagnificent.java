@@ -1,6 +1,8 @@
 package it.polimi.ingsw.server.model;
 
 import com.google.gson.Gson;
+import it.polimi.ingsw.Observer.Observable;
+import it.polimi.ingsw.messages.observable.MagnificentMoveMessage;
 import it.polimi.ingsw.server.model.exceptions.CallForCouncilException;
 import it.polimi.ingsw.server.model.exceptions.EndOfSolitaireGame;
 
@@ -11,7 +13,7 @@ import java.util.ArrayList;
 /**
  * this class represents the faith indicator of Lorenzo the magnificent for the game in solitary
  */
-public class LorenzoTheMagnificent{
+public class LorenzoTheMagnificent extends Observable {
     /**
      * PAPAL_N represents how many papal positions there are in the faith path
      */
@@ -48,10 +50,12 @@ public class LorenzoTheMagnificent{
      */
     public void moveBlackCross() throws CallForCouncilException, EndOfSolitaireGame{
         faithIndicator++;
-        if (currCall < PAPAL_N-1 && faithIndicator == PAPAL_POS[currCall])
+        notifyObserver(new MagnificentMoveMessage());
+        if (currCall < PAPAL_N-1 && faithIndicator == PAPAL_POS[currCall] )
             throw new CallForCouncilException();
         else if(currCall == PAPAL_N-1 && faithIndicator == PAPAL_POS[currCall])
             throw new EndOfSolitaireGame();
+
     }
 
     /**
