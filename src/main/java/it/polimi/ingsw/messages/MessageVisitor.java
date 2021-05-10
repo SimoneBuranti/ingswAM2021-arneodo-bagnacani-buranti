@@ -1,6 +1,7 @@
 package it.polimi.ingsw.messages;
 
 import it.polimi.ingsw.messages.observable.*;
+import it.polimi.ingsw.server.model.Reserve;
 
 public interface MessageVisitor {
     //Error messages
@@ -60,6 +61,8 @@ public interface MessageVisitor {
 
 
     //Observer
+    void visit(NicknameStartedMessage msg);
+
     void visit(DeckProductionCardMessage msg);
     void visit(DeckProductionCardConfigMessage msg);
     void visit(TakeCardMessage msg);
@@ -68,6 +71,7 @@ public interface MessageVisitor {
     void visit(ConfigurationMarketMessage msg);
     void visit(ChangeMarketMessageColumn msg);
     void visit(ChangeMarketMessageRow msg);
+    void visit(ResultFromMarket msg);
 
     void visit(MagnificentMoveMessage msg);
     void visit(MagnificentWinMessage msg);
@@ -80,6 +84,7 @@ public interface MessageVisitor {
 
     void visit(ProductionMessageForNotCurrentMessage msg);
     void visit(ProductionMessageForCurrentMessage msg);
+    void visit(ResultOfProductionMessage msg);
 
     void visit(ActivationLeaderForNotCurrentMessage msg);
     void visit(ActivationLeaderForCurrentMessage msg);

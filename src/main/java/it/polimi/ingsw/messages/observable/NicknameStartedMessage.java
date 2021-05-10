@@ -4,14 +4,16 @@ import it.polimi.ingsw.messages.Message;
 import it.polimi.ingsw.messages.MessageType;
 import it.polimi.ingsw.messages.MessageVisitor;
 
-public class FaithPathForNotCurrentMessage extends Message {
-    private final MessageType messageType = MessageType.OPPONENTFAITHPATHMOVE;
-    private String nickname;
+import java.util.ArrayList;
 
-    public FaithPathForNotCurrentMessage(String nickname){
-    this.nickname=nickname;
-}
-    public String getNickname() {
+public class NicknameStartedMessage extends Message {
+    private final MessageType messageType = MessageType.OPPONENTFAITHPATHMOVE;
+    private ArrayList<String> nickname;
+
+    public NicknameStartedMessage(ArrayList<String> nickname){
+        this.nickname=nickname;
+    }
+    public ArrayList<String> getNickname() {
         return nickname;
     }
 
