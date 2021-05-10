@@ -77,6 +77,7 @@ public abstract class DeckProductionCard extends Observable {
             if (deck.isEmpty() && level ==3)
                 throw new EndOfSolitaireGame();
         }
+
         notifyObserver(new DeckProductionCardMessage(getKey()));
     }
 
