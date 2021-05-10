@@ -4,7 +4,7 @@ import it.polimi.ingsw.messages.Message;
 import it.polimi.ingsw.messages.MessageType;
 import it.polimi.ingsw.messages.MessageVisitor;
 
-public class FaithPathForNotCurrentMessage extends Message {
+public class FaithPathOpponentMessage extends Message {
     private final MessageType messageType = MessageType.OPPONENTFAITHPATHMOVE;
     private String nickname;
 

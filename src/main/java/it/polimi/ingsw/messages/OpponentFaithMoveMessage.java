@@ -13,7 +13,7 @@ public class OpponentFaithMoveMessage extends Message{
     }
 
 
-    public Player getNickname() {
+    public Player getPlayer() {
         return player;
     }
 

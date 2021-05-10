@@ -143,9 +143,15 @@ public class Market extends Observable {
      */
     public void pushColumn(int chosenColumn, Player player) throws CallForCouncilException, LastSpaceReachedException, WhiteMarbleException, NotEnoughSpaceInStorageException {
         int i;
+        WhiteMarbleException exception = new WhiteMarbleException(0);
         Marble temp;
-        for(i=0; i<3; i++)
-            grid[i][chosenColumn].giveResource(player);
+        for(i=0; i<3; i++){
+            try {
+                grid[i][chosenColumn].giveResource(player);
+            }catch(WhiteMarbleException e) {
+                exception.increase();
+            }
+        }
 
         temp=extra;
         extra=grid[0][chosenColumn];
@@ -153,7 +159,10 @@ public class Market extends Observable {
             grid[i-1][chosenColumn]=grid[i][chosenColumn];
         grid[2][chosenColumn]=temp;
 
-        player.takeFromMarket();
+        if(exception.getN() == 0)
+            player.takeFromMarket();
+        else
+            throw exception;
     }
 
     /**

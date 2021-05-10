@@ -5,7 +5,7 @@ import it.polimi.ingsw.messages.MessageType;
 import it.polimi.ingsw.messages.MessageVisitor;
 import it.polimi.ingsw.server.model.players.Player;
 
-public class FaithPathForCurrentMessage extends Message {
+public class FaithPathMessage extends Message {
     private final MessageType messageType = MessageType.MYFAITHMOVE;
 
 @Override

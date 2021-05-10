@@ -15,6 +15,10 @@ public class DeckProductionCardMessage extends Message {
         this.NumberDeck=numberDeck;
     }
 
+    public int getNumberDeck() {
+        return NumberDeck;
+    }
+
     @Override
     public MessageType getMessageType() {
         return messageType;
