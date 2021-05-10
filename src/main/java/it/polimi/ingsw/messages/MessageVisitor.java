@@ -1,6 +1,7 @@
 package it.polimi.ingsw.messages;
 
 import it.polimi.ingsw.messages.observable.*;
+import it.polimi.ingsw.messages.observable.LeadercardconfigMessage;
 
 public interface MessageVisitor {
     //Error messages
@@ -102,9 +103,21 @@ public interface MessageVisitor {
 
     void visit(EndGamePlayerWinnnerMessage msg);
 
-    void visit(GameboardConfigMessage msg);
+    void visit(StorageConfigMessage msg);
+    void visit(StrongboxConfigMessage msg);
+    void visit(LeadercardconfigMessage msg);
+    void visit(StorageExtraConfig msg);
+    void visit(StorageExtraDoubleConfig msg);
+    void visit(FaithConfigMessage msg);
+
 
     void visit(ReserveMessage msg);
+
+
+
+
+
+
 
 
 

@@ -1,12 +1,11 @@
 package it.polimi.ingsw.server.model;
 
 import com.google.gson.Gson;
-import it.polimi.ingsw.messages.observable.EndGamePlayerWinnnerMessage;
-import it.polimi.ingsw.messages.observable.FaithPathMessage;
-import it.polimi.ingsw.messages.observable.FaithPathOpponentMessage;
+import it.polimi.ingsw.messages.observable.*;
 import it.polimi.ingsw.server.model.exceptions.CallForCouncilException;
 import it.polimi.ingsw.server.model.exceptions.EndGameException;
 import it.polimi.ingsw.server.model.exceptions.LastSpaceReachedException;
+import it.polimi.ingsw.server.model.leaderCards.LeaderCardProduction;
 import it.polimi.ingsw.server.model.players.*;
 
 import java.io.FileNotFoundException;
@@ -237,6 +236,27 @@ public class GameMultiPlayer extends Game {
         for(Player p : playerList){
             if(p.getNickName().equals(nickname) && !(p.isConnected())){
                 p.setConnected();
+                int shield=p.getGameBoardOfPlayer().getStorageOfGameBoard().getResource(Resource.SHIELD);
+                int coin=p.getGameBoardOfPlayer().getStorageOfGameBoard().getResource(Resource.COIN);
+                int rock=p.getGameBoardOfPlayer().getStorageOfGameBoard().getResource(Resource.ROCK);
+                int servant=p.getGameBoardOfPlayer().getStorageOfGameBoard().getResource(Resource.SERVANT);
+                notifyOnlyOneSpecificObserver(new StorageConfigMessage(coin, shield,rock,servant), p.getNickName());
+                shield=p.getGameBoardOfPlayer().getStrongboxOfGameBoard().getResource(Resource.SHIELD);
+                coin=p.getGameBoardOfPlayer().getStrongboxOfGameBoard().getResource(Resource.COIN);
+                rock=p.getGameBoardOfPlayer().getStrongboxOfGameBoard().getResource(Resource.ROCK);
+                servant=p.getGameBoardOfPlayer().getStrongboxOfGameBoard().getResource(Resource.SERVANT);
+                notifyOnlyOneSpecificObserver(new StrongboxConfigMessage(coin, shield,rock,servant), p.getNickName());
+                notifyOnlyOneSpecificObserver(new LeadercardconfigMessage(p.getGameBoardOfPlayer().getLeaderCards(),p.getGameBoardOfPlayer().getLeaderCardsActivated()), p.getNickName());
+                notifyOnlyOneSpecificObserver(new FaithConfigMessage(p.getGameBoardOfPlayer().getIndicator()), p.getNickName());
+
+                if(p.getGameBoardOfPlayer().getLeaderCardsActivated().get(0)!=null){
+                    if(p.getGameBoardOfPlayer().getLeaderCardsActivated().get(0) instanceof LeaderCardProduction)
+                        notifyOnlyOneSpecificObserver(new StorageExtraConfig(p.getGameBoardOfPlayer().getStorageOfGameBoard().getNumExtraFirstAvailable()), p.getNickName());
+                }
+                if(p.getGameBoardOfPlayer().getLeaderCardsActivated().get(1)!=null){
+                    if(p.getGameBoardOfPlayer().getLeaderCardsActivated().get(1) instanceof LeaderCardProduction)
+                        notifyOnlyOneSpecificObserver(new StorageExtraDoubleConfig(p.getGameBoardOfPlayer().getStorageOfGameBoard().getNumExtraFirstAvailable()), p.getNickName());
+                }
             }
         }
     }

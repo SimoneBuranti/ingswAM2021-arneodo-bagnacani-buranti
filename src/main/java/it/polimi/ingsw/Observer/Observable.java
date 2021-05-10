@@ -67,6 +67,19 @@ public class Observable {
     }
 
 
+    /**
+     * Notifies the observer through the update method and passes message
+     *
+     * @param message the message to be passed to the observer.
+     */
+
+    protected void notifyOnlyOneSpecificObserver(Message message,String nickname) {
+        for (Observer observer : observers) {
+            observer.updateOnlyObserverByNickname(message,nickname);
+        }
+    }
+
+
 
 
 

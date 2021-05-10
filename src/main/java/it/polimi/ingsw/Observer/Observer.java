@@ -14,4 +14,5 @@ public interface Observer {
     public void updateNotTheCurrent(Message message);
 
 
+    void updateOnlyObserverByNickname(Message message,String nickame);
 }

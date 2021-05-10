@@ -658,4 +658,22 @@ public class GameBoard extends GameBoardInterface{
     public ArrayList<Resource> getProductionBuffer(){
         return productionBuffer;
     }
+
+    public Storage getStorageOfGameBoard(){
+        return storageOfGameBoard;
+    }
+
+    public Strongbox getStrongboxOfGameBoard(){
+        return strongboxOfGameBoard;
+    }
+
+    public ArrayList<LeaderCard> getLeaderCards(){
+        return leaderCards;
+    }
+
+    public ArrayList<LeaderCard> getLeaderCardsActivated(){
+        return leaderCardsActivated;
+    }
+
+
 }

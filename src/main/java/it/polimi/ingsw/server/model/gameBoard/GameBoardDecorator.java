@@ -228,4 +228,24 @@ public abstract class GameBoardDecorator extends GameBoardInterface {
         return gameBoard.getProductionBuffer();
     }
 
+    @Override
+    public Storage getStorageOfGameBoard(){
+        return gameBoard.getStorageOfGameBoard();
+    }
+
+    @Override
+    public Strongbox getStrongboxOfGameBoard(){
+        return gameBoard.getStrongboxOfGameBoard();
+    }
+
+    @Override
+    public  ArrayList<LeaderCard> getLeaderCards(){
+        return gameBoard.getLeaderCards();
+    }
+
+    @Override
+    public  ArrayList<LeaderCard> getLeaderCardsActivated(){
+        return gameBoard.getLeaderCardsActivated();
+    }
+
 }

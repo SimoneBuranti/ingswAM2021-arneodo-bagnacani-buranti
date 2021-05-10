@@ -98,4 +98,12 @@ public abstract class GameBoardInterface {
     public abstract int scoreResource();
 
     public abstract ArrayList<Resource> getProductionBuffer();
+
+    public abstract Storage getStorageOfGameBoard();
+
+    public abstract Strongbox getStrongboxOfGameBoard();
+
+    public abstract ArrayList<LeaderCard> getLeaderCards();
+
+    public abstract ArrayList<LeaderCard> getLeaderCardsActivated();
 }
