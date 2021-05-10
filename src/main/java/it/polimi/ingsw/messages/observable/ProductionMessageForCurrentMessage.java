@@ -13,14 +13,14 @@ public class ProductionMessageForCurrentMessage extends Message {
     private int shield;
     private int rock;
 
-    public ProductionMessageForCurrentMessage(int coins, int shield, int rock, int servant){
-
+    public ProductionMessageForCurrentMessage(int coins, int shield, int rock, int servant)
+    {
         this.coins=coins;
         this.shield=shield;
         this.rock=rock;
         this.servant=servant;
-
     }
+
 
     @Override
     public MessageType getMessageType() {

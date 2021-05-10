@@ -89,6 +89,8 @@ public interface MessageVisitor {
     void visit(ProductionMessageForNotCurrentMessage msg);
     void visit(ProductionMessageForCurrentMessage msg);
     void visit(ResultOfProductionMessage msg);
+    void visit(ResultForProductionForNotCurrentMessage msg);
+
 
     void visit(ActivationLeaderForNotCurrentMessage msg);
     void visit(ActivationLeaderForCurrentMessage msg);

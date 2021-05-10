@@ -2,6 +2,8 @@ package it.polimi.ingsw.server.model;
 
 import com.google.gson.Gson;
 import it.polimi.ingsw.messages.observable.EndGamePlayerWinnnerMessage;
+import it.polimi.ingsw.messages.observable.FaithPathMessage;
+import it.polimi.ingsw.messages.observable.FaithPathOpponentMessage;
 import it.polimi.ingsw.server.model.exceptions.CallForCouncilException;
 import it.polimi.ingsw.server.model.exceptions.EndGameException;
 import it.polimi.ingsw.server.model.exceptions.LastSpaceReachedException;
@@ -209,6 +211,7 @@ public class GameMultiPlayer extends Game {
             if (p != player) {
                 try {
                     p.faithMove();
+                    notifyAllObserverLessOne(new FaithPathMessage());
                 } catch (CallForCouncilException e1) {
                     exceptionHandler(e1);
                 } catch (LastSpaceReachedException e2) {

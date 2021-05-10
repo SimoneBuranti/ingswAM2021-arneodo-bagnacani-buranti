@@ -274,9 +274,20 @@ public class Game extends Observable {
      * When the exceptions are caught, the method calls the exceptionHandler method.
      * @param chosenColumn : the game board column where the card the player wants to active is situated
      */
-    public void productionOn(int chosenColumn) throws ImpossibleProductionException, EmptyColumnException {
+    public void productionOn(int chosenColumn, ArrayList<Resource> list, boolean faithMove) throws ImpossibleProductionException, EmptyColumnException {
         try {
+
+            int shield=GetAmount.getAmount(list,Resource.SHIELD);
+            int coin=GetAmount.getAmount(list,Resource.COIN);
+            int rock=GetAmount.getAmount(list,Resource.ROCK);
+            int servant=GetAmount.getAmount(list,Resource.SERVANT);
+            notifyToOneObserver(new ProductionMessageForCurrentMessage(coin,shield,rock,servant));
+            notifyAllObserverLessOne(new ResultForProductionForNotCurrentMessage(currentPlayer,coin,shield,rock,servant) );
             currentPlayer.productionOn(chosenColumn);
+            if (faithMove)
+            {notifyToOneObserver(new FaithPathMessage());
+            notifyAllObserverLessOne(new FaithPathOpponentMessage(currentPlayer.getNickName()));}
+
         } catch (CallForCouncilException e) {
             exceptionHandler(e);
         } catch (LastSpaceReachedException e) {
@@ -312,8 +323,17 @@ public class Game extends Observable {
      * When the exception is caught, the method calls the exceptionHandler method.
      * @param resource : the resource type of the first extra production output
      */
-    public void extraProductionOn(Resource resource){
+    public void extraProductionOn(Resource resource, Resource resourceLeader){
         try {
+            ArrayList<Resource> arrayList =new ArrayList<>(4);
+            int shield=GetAmount.isThereEqual(resource,resourceLeader);
+            int coin=GetAmount.isThereEqual(resource,resourceLeader);
+            int rock=GetAmount.isThereEqual(resource,resourceLeader);
+            int servant=GetAmount.isThereEqual(resource,resourceLeader);
+            notifyToOneObserver(new ProductionMessageForCurrentMessage(coin,shield,rock,servant));
+            notifyAllObserverLessOne(new ResultForProductionForNotCurrentMessage(currentPlayer,coin,shield,rock,servant) );
+            notifyToOneObserver(new FaithPathMessage());
+            notifyAllObserverLessOne(new FaithPathOpponentMessage(currentPlayer.getNickName()));
             currentPlayer.extraProductionOn(resource);
         } catch (LastSpaceReachedException e) {
             exceptionHandler(e);
@@ -330,8 +350,17 @@ public class Game extends Observable {
      * When the exception is caught, the method calls the exceptionHandler method.
      * @param resource: the resource type of the second extra production output
      */
-    public void anotherExtraProductionOn(Resource resource) throws ImpossibleProductionException {
+    public void anotherExtraProductionOn(Resource resource, Resource resourceLeader) throws ImpossibleProductionException {
         try {
+            ArrayList<Resource> arrayList =new ArrayList<>(4);
+            int shield=GetAmount.isThereEqual(resource,resourceLeader);
+            int coin=GetAmount.isThereEqual(resource,resourceLeader);
+            int rock=GetAmount.isThereEqual(resource,resourceLeader);
+            int servant=GetAmount.isThereEqual(resource,resourceLeader);
+            notifyToOneObserver(new ProductionMessageForCurrentMessage(coin,shield,rock,servant));
+            notifyAllObserverLessOne(new ResultForProductionForNotCurrentMessage(currentPlayer,coin,shield,rock,servant) );
+            notifyToOneObserver(new FaithPathMessage());
+            notifyAllObserverLessOne(new FaithPathOpponentMessage(currentPlayer.getNickName()));
             currentPlayer.anotherExtraProductionOn(resource);
         } catch (LastSpaceReachedException e) {
             exceptionHandler(e);

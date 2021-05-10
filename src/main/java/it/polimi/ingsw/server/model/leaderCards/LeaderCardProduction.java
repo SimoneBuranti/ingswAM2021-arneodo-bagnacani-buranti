@@ -54,4 +54,9 @@ public class LeaderCardProduction extends LeaderCard {
     public boolean check(GameBoardInterface gameBoard){
         return gameBoard.levelAndColourQuantity(requirements.getColourRequirement(), 2) >= 1;
     }
+
+
+    public Resource getResourceProduction(){
+        return resourceProduction;
+    }
 }

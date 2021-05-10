@@ -1,6 +1,7 @@
 package it.polimi.ingsw.messages;
 
 import it.polimi.ingsw.server.model.Resource;
+import it.polimi.ingsw.server.model.leaderCards.LeaderCard;
 
 public class DoubleProductionOnMessage extends Message {
     /**
@@ -10,6 +11,11 @@ public class DoubleProductionOnMessage extends Message {
 
     private Resource outputResource;
 
+   private Resource resourceLeader;
+
+
+
+
     public Resource getOutputResource() {
         return outputResource;
     }
@@ -17,7 +23,6 @@ public class DoubleProductionOnMessage extends Message {
     public void setOutputResource(Resource outputResource) {
         this.outputResource = outputResource;
     }
-
 
     /**
      */@Override
@@ -28,5 +33,13 @@ public class DoubleProductionOnMessage extends Message {
     @Override
     public void accept(MessageVisitor v) {
         v.visit(this);
+    }
+
+    public Resource getResourceLeader() {
+        return resourceLeader;
+    }
+
+    public void setResourceLeader(Resource resourceLeader) {
+        this.resourceLeader = resourceLeader;
     }
 }

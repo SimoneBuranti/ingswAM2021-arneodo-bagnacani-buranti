@@ -1,5 +1,10 @@
 package it.polimi.ingsw.messages;
 
+import it.polimi.ingsw.server.model.Resource;
+import it.polimi.ingsw.server.model.productionCards.ProductionCard;
+
+import java.util.ArrayList;
+
 public class ProductionOnMessage extends Message {
 
     private int columnNumber;
@@ -9,6 +14,12 @@ public class ProductionOnMessage extends Message {
      * type of message
      */
     private final MessageType messageType=MessageType.PRODUCTIONON;
+
+    private ArrayList<Resource> list;
+
+    private Boolean faithMove;
+
+
 
     /**
      */@Override
@@ -27,5 +38,22 @@ public class ProductionOnMessage extends Message {
     @Override
     public void accept(MessageVisitor v) {
         v.visit(this);
+    }
+
+
+    public ArrayList<Resource> getList() {
+        return list;
+    }
+
+    public void setList() {
+        this.list=list;
+    }
+
+    public Boolean getFaithMove() {
+        return faithMove;
+    }
+
+    public void setFaithMove(Boolean faithMove) {
+        this.faithMove = faithMove;
     }
 }

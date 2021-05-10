@@ -3,14 +3,10 @@ package it.polimi.ingsw.messages.observable;
 import it.polimi.ingsw.messages.Message;
 import it.polimi.ingsw.messages.MessageType;
 import it.polimi.ingsw.messages.MessageVisitor;
-import it.polimi.ingsw.server.model.actionMarkers.ActionMarker;
 import it.polimi.ingsw.server.model.players.Player;
 
-import java.util.ArrayList;
-
-public class ProductionMessageForNotCurrentMessage extends Message {
-
-    private final MessageType messageType = MessageType.PRODUCTIONUPDATE;
+public class ResultForProductionForNotCurrentMessage extends Message {
+    private final MessageType messageType = MessageType.PRODUCTIONUPDATEFORNOTCURRENT;
 
 
     private int coins;
@@ -19,7 +15,7 @@ public class ProductionMessageForNotCurrentMessage extends Message {
     private int rock;
     private Player player;
 
-    public ProductionMessageForNotCurrentMessage(Player player, int coins, int shield, int rock, int servant){
+    public ResultForProductionForNotCurrentMessage(Player player, int coins, int shield, int rock, int servant){
 
         this.player=player;
         this.coins=coins;

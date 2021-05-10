@@ -234,7 +234,7 @@ public class ClientController implements MessageVisitor {
     public void visit(DoubleProductionOnMessage msg) {
         if (turnCheck()){
             try {
-                game.anotherExtraProductionOn(msg.getOutputResource());
+                game.anotherExtraProductionOn(msg.getOutputResource(),msg.getResourceLeader());
             } catch (ImpossibleProductionException e) {
                 clientHandler.sendMessage(new NotAvailableResourcesErrorMessage());
             }
@@ -255,7 +255,7 @@ public class ClientController implements MessageVisitor {
     @Override
     public void visit(ExtraProductionOnMessage msg) {
         if (turnCheck()){
-            game.extraProductionOn(msg.getOutputResource());
+            game.extraProductionOn(msg.getOutputResource(),msg.getResourceLeader());
         } else {
             clientHandler.sendMessage(new NotYourTurnErrorMessage());
         }
@@ -287,7 +287,7 @@ public class ClientController implements MessageVisitor {
     public void visit(ProductionOnMessage msg) {
         if (turnCheck()){
             try {
-                game.productionOn(msg.getColumnNumber());
+                game.productionOn(msg.getColumnNumber(),msg.getList(), msg.getFaithMove());
             } catch (ImpossibleProductionException e) {
                 clientHandler.sendMessage(new NotAvailableResourcesErrorMessage());
             } catch (EmptyColumnException e) {

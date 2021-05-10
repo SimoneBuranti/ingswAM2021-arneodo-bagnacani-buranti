@@ -22,6 +22,15 @@ public class GetAmount {
         return i;
     }
 
+    public static int isThereEqual (Resource resource1,Resource resource2){
+        int i=0;
+        if (resource1.equals(resource2))
+                i=1;
+        return i;
+    }
+
+
+
 
 
 }
