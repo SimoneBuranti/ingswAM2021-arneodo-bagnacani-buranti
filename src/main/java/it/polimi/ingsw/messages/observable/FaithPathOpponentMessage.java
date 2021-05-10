@@ -8,7 +8,7 @@ public class FaithPathOpponentMessage extends Message {
     private final MessageType messageType = MessageType.OPPONENTFAITHPATHMOVE;
     private String nickname;
 
-    public FaithPathForNotCurrentMessage(String nickname){
+    public FaithPathOpponentMessage(String nickname){
     this.nickname=nickname;
 }
     public String getNickname() {
