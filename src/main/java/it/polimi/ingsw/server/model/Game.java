@@ -3,7 +3,6 @@ package it.polimi.ingsw.server.model;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import it.polimi.ingsw.Observer.Observable;
-import it.polimi.ingsw.messages.Message;
 import it.polimi.ingsw.messages.observable.*;
 import it.polimi.ingsw.server.model.colours.*;
 import it.polimi.ingsw.server.model.exceptions.*;
@@ -156,6 +155,10 @@ public class Game extends Observable {
         } catch (LastSpaceReachedException e) {
             exceptionHandler(e);
         }
+        notifyToOneObserver(new UpdateInitResourceMessage(resource));
+        notifyAllObserverLessOne(new UpdateForNotCurrentResourceMessage(resource));
+
+
     }
 
     /**
@@ -172,6 +175,8 @@ public class Game extends Observable {
         } catch (LastSpaceReachedException e) {
             exceptionHandler(e);
         }
+        notifyToOneObserver(new UpdateInitResourceMessage(resourceOne,resourceTwo));
+        notifyAllObserverLessOne(new UpdateForNotCurrentResourceMessage(resourceOne,resourceTwo));
 
     }
 
@@ -296,6 +301,7 @@ public class Game extends Observable {
         int rock=GetAmount.isThere(arrayList,i1,i2);
         int servant=GetAmount.isThere(arrayList,i1,i2);
         notifyToOneObserver(new ProductionMessageForCurrentMessage(coin,shield,rock,servant) );
+        notifyAllObserverLessOne(new ProductionMessageForNotCurrentMessage(currentPlayer,coin,shield,rock,servant) );
 
 
     }
@@ -410,6 +416,7 @@ public class Game extends Observable {
             int rock=GetAmount.getAmount(currentPlayer.getBuffer(),Resource.ROCK);;
             int servant=GetAmount.getAmount(currentPlayer.getBuffer(),Resource.SERVANT);;
             notifyToOneObserver(new ResultFromMarket(coin,shield,rock,servant) );
+            notifyAllObserverLessOne(new ProductionMessageForNotCurrentMessage(currentPlayer,coin,shield,rock,servant) );
 
         } catch (CallForCouncilException e) {
             exceptionHandler(e);
@@ -429,6 +436,12 @@ public class Game extends Observable {
     public void pushColumnInMarket(int chosenColumn) throws NotEnoughSpaceInStorageException, WhiteMarbleException {
         try {
             market.pushColumn(chosenColumn,currentPlayer);
+            int shield=GetAmount.getAmount(currentPlayer.getBuffer(),Resource.SHIELD);
+            int coin=GetAmount.getAmount(currentPlayer.getBuffer(),Resource.COIN);;
+            int rock=GetAmount.getAmount(currentPlayer.getBuffer(),Resource.ROCK);;
+            int servant=GetAmount.getAmount(currentPlayer.getBuffer(),Resource.SERVANT);;
+            notifyToOneObserver(new ResultFromMarket(coin,shield,rock,servant) );
+            notifyAllObserverLessOne(new ProductionMessageForNotCurrentMessage(currentPlayer,coin,shield,rock,servant) );
         } catch (CallForCouncilException e) {
             exceptionHandler(e);
         } catch (LastSpaceReachedException e) {
