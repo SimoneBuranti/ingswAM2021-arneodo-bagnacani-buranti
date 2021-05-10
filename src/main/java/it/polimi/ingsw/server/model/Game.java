@@ -277,6 +277,7 @@ public class Game extends Observable {
         } catch (LastSpaceReachedException e) {
             exceptionHandler(e);
         }
+
     }
 
     /**
@@ -288,6 +289,14 @@ public class Game extends Observable {
      */
     public void baseProductionOn(Resource i1, Resource i2, Resource output) throws ImpossibleProductionException {
         currentPlayer.baseProductionOn(i1, i2, output);
+
+        ArrayList<Resource> arrayList =new ArrayList<>(4);
+        int shield=GetAmount.isThere(arrayList,i1,i2);
+        int coin=GetAmount.isThere(arrayList,i1,i2);
+        int rock=GetAmount.isThere(arrayList,i1,i2);
+        int servant=GetAmount.isThere(arrayList,i1,i2);
+        notifyToOneObserver(new ProductionMessageForCurrentMessage(coin,shield,rock,servant) );
+
 
     }
 
@@ -330,7 +339,18 @@ public class Game extends Observable {
      * When the exception is caught, the method calls the exceptionHandler method.
      */
     public void endOfProduction(){
+
+        int shield=GetAmount.getAmount(currentPlayer.getGameBoardOfPlayer().getProductionBuffer(),Resource.SHIELD);
+        int coin=GetAmount.getAmount(currentPlayer.getGameBoardOfPlayer().getProductionBuffer(),Resource.COIN);
+        int rock=GetAmount.getAmount(currentPlayer.getGameBoardOfPlayer().getProductionBuffer(),Resource.ROCK);
+        int servant=GetAmount.getAmount(currentPlayer.getGameBoardOfPlayer().getProductionBuffer(),Resource.SERVANT);
+
+        notifyToOneObserver(new ResultOfProductionMessage(coin,shield,rock,servant) );
+
+        notifyAllObserverLessOne(new ProductionMessageForNotCurrentMessage(currentPlayer,coin,shield,rock,servant) );
+
         currentPlayer.endOfProduction();
+
     }
 
     /**
@@ -339,6 +359,7 @@ public class Game extends Observable {
      * @param index2 : the position where the second chosen leader card is
      */
     public void saveLeaderCardChosen(int index1, int index2){
+
         currentPlayer.saveLeaderCard(index1,index2);
     }
 
@@ -383,12 +404,20 @@ public class Game extends Observable {
     public void pushRowInMarket(int chosenRow) throws NotEnoughSpaceInStorageException, WhiteMarbleException {
         try {
             market.pushRow(chosenRow,currentPlayer);
+
+            int shield=GetAmount.getAmount(currentPlayer.getBuffer(),Resource.SHIELD);
+            int coin=GetAmount.getAmount(currentPlayer.getBuffer(),Resource.COIN);;
+            int rock=GetAmount.getAmount(currentPlayer.getBuffer(),Resource.ROCK);;
+            int servant=GetAmount.getAmount(currentPlayer.getBuffer(),Resource.SERVANT);;
+            notifyToOneObserver(new ResultFromMarket(coin,shield,rock,servant) );
+
         } catch (CallForCouncilException e) {
             exceptionHandler(e);
         } catch (LastSpaceReachedException e) {
             exceptionHandler(e);
         }
         notifyObserver(new ChangeMarketMessageRow(chosenRow));
+
     }
 
     /**

@@ -2,6 +2,7 @@ package it.polimi.ingsw.server.model;
 
 import com.google.gson.Gson;
 import it.polimi.ingsw.Observer.Observable;
+import it.polimi.ingsw.messages.observable.LorenzoTheMagnificentConfigMessage;
 import it.polimi.ingsw.messages.observable.MagnificentMoveMessage;
 import it.polimi.ingsw.server.model.exceptions.CallForCouncilException;
 import it.polimi.ingsw.server.model.exceptions.EndOfSolitaireGame;
@@ -112,6 +113,7 @@ public class LorenzoTheMagnificent extends Observable {
     public LorenzoTheMagnificent(int[] list) {
         faithIndicator=list[0];
         currCall=list[1];
+        notifyObserver(new LorenzoTheMagnificentConfigMessage(currCall,faithIndicator));
     }
 
 

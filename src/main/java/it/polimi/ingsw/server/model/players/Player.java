@@ -409,4 +409,8 @@ public class Player {
     public boolean isNewMatch() {
         return newMatch;
     }
+
+    public ArrayList<Resource> getBuffer(){
+        return  buffer;
+    }
 }

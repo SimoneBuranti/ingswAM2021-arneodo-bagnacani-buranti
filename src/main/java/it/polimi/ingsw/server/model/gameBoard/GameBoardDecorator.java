@@ -223,4 +223,9 @@ public abstract class GameBoardDecorator extends GameBoardInterface {
         return gameBoard.scoreResource();
     }
 
+    @Override
+    public ArrayList<Resource> getProductionBuffer(){
+        return gameBoard.getProductionBuffer();
+    }
+
 }

@@ -652,4 +652,10 @@ public class GameBoard extends GameBoardInterface{
     public int leaderCardsSize(){
         return leaderCards.size();
     }
+
+
+
+    public ArrayList<Resource> getProductionBuffer(){
+        return productionBuffer;
+    }
 }

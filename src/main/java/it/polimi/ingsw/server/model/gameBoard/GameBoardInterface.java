@@ -96,4 +96,6 @@ public abstract class GameBoardInterface {
     public abstract Resource getResourceTypeFirst();
 
     public abstract int scoreResource();
+
+    public abstract ArrayList<Resource> getProductionBuffer();
 }

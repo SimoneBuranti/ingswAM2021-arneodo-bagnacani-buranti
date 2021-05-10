@@ -1,6 +1,7 @@
 package it.polimi.ingsw.server.model;
 
 import com.google.gson.Gson;
+import it.polimi.ingsw.messages.observable.ResultFromMarket;
 import it.polimi.ingsw.server.model.exceptions.UnavailableResourceException;
 
 import java.io.FileNotFoundException;
@@ -43,6 +44,7 @@ public class Reserve {
     public static void addResource(Resource resource) {
 
         reservePools.put(resource, reservePools.remove(resource) + 1);
+
     }
 
     /**

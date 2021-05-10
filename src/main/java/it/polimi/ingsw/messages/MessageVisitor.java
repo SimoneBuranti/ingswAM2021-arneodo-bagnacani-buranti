@@ -75,6 +75,7 @@ public interface MessageVisitor {
 
     void visit(MagnificentMoveMessage msg);
     void visit(MagnificentWinMessage msg);
+    void visit(LorenzoTheMagnificentConfigMessage msg);
     void visit(MyVictoryMessage msg);
     void visit(MyDefeatMessage msg);
 
@@ -97,6 +98,8 @@ public interface MessageVisitor {
     void visit(EndGamePlayerWinnnerMessage msg);
 
     void visit(GameboardConfigMessage msg);
+
+    void visit(ReserveMessage msg);
 
 
 
