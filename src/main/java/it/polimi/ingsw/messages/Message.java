@@ -269,9 +269,12 @@ public abstract class Message{
             case UPDATEINITLEADERCARD:
                 return gson.fromJson(jsonObj, UpdateInitLeaderMessage.class);
 
+            case UPDATECHOSENLEADERCARD:
+                return gson.fromJson(jsonObj, UpdateChosenLeaderMessage.class);
+
 
             case UPDATEINITRESOURCE:
-                return gson.fromJson(jsonObj, UpdateInitLeaderMessage.class);
+                return gson.fromJson(jsonObj, UpdateInitResourceMessage.class);
 
             case USEACTIONMARKER:
                 return gson.fromJson(jsonObj, UseActionMarkerMessage.class);

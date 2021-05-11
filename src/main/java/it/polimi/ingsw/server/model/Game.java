@@ -396,7 +396,7 @@ public class Game extends Observable {
     public void saveLeaderCardChosen(int index1, int index2){
 
         currentPlayer.saveLeaderCard(index1,index2);
-        notifyToOneObserver(new UpdateInitLeaderMessage(index1,index2));
+        notifyToOneObserver(new UpdateChosenLeaderMessage(index1,index2));
     }
 
     /**

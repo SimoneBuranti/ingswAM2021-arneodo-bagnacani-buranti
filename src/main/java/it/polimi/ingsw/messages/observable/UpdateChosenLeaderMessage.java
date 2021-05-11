@@ -5,19 +5,21 @@ import it.polimi.ingsw.messages.MessageType;
 import it.polimi.ingsw.messages.MessageVisitor;
 import it.polimi.ingsw.server.model.leaderCards.LeaderCard;
 
-import java.util.ArrayList;
-
-public class UpdateInitLeaderMessage extends Message {
-    private final MessageType messageType = MessageType.UPDATEINITLEADERCARD;
+public class UpdateChosenLeaderMessage extends Message {
+    private final MessageType messageType = MessageType.UPDATECHOSENLEADERCARD;
 
 
-    private ArrayList<LeaderCard> leaderCards;
+    private int cardFirst;
+
+    private int cardSec;
 
 
+    public UpdateChosenLeaderMessage(int cardFirst, int cardSec){
 
-    public UpdateInitLeaderMessage(ArrayList<LeaderCard> leaderCards){
+        this.cardFirst=cardFirst;
+        this.cardSec =cardSec;
 
-        this.leaderCards.addAll(leaderCards);
+
     }
 
     @Override
@@ -31,7 +33,11 @@ public class UpdateInitLeaderMessage extends Message {
     }
 
 
-    public ArrayList<LeaderCard> getLeaderCards(){
-        return leaderCards;
+    public int getCardFirst() {
+        return cardFirst;
+    }
+
+    public int getCardSec() {
+        return cardSec;
     }
 }

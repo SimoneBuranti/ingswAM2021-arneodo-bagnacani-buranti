@@ -65,6 +65,7 @@ public interface MessageVisitor {
     void visit(UpdateForNotCurrentResourceMessage msg);
     void visit(UpdateInitResourceMessage msg);
     void visit(UpdateInitLeaderMessage msg);
+    void visit(UpdateChosenLeaderMessage msg);
 
     void visit(DeckProductionCardMessage msg);
     void visit(DeckProductionCardConfigMessage msg);
