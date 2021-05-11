@@ -18,7 +18,7 @@ public class SocketClient {
 
     public SocketClient(String address, int port) throws IOException {
         this.serverSocket = new Socket(address, port);
-        viewController = new ViewController();
+        viewController = new ViewController(this);
         in = new BufferedReader(new InputStreamReader(serverSocket.getInputStream()));
         out = new PrintWriter(serverSocket.getOutputStream(), true);
 

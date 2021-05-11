@@ -9,9 +9,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ViewController implements MessageVisitor {
-    LightGame game = null;
-    String nickName = null;
-    Map<Resource, Integer> resourceMap = new HashMap<>();
+    private final SocketClient socketClient;
+    private LightGame game = null;
+    private String nickName = null;
+    private Map<Resource, Integer> resourceMap = new HashMap<>();
+
+    public ViewController(SocketClient socketClient){
+        this.socketClient = socketClient;
+
+    }
 
     public void setGame(LightGame game){
         this.game = game;
@@ -241,7 +247,7 @@ public class ViewController implements MessageVisitor {
 
     @Override
     public void visit(PingMessage msg) {
-
+        socketClient.sendMessage(new PongMessage());
     }
 
     @Override
