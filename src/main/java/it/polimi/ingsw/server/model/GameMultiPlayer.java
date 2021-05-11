@@ -106,6 +106,8 @@ public class GameMultiPlayer extends Game {
             secondPlayer= new PlayerSecond(nickNameInOrder.get(1),this);
             playerList.add(firstPlayer);
             playerList.add(secondPlayer);
+            notifyOnlyOneSpecificObserver(new UpdateInitLeaderMessage(firstPlayer.getPersonalLeaderCard()), firstPlayer.getNickName());
+            notifyOnlyOneSpecificObserver(new UpdateInitLeaderMessage(secondPlayer.getPersonalLeaderCard()), secondPlayer.getNickName());
         }
 
         else if (numberOfPlayer==3)
@@ -116,6 +118,10 @@ public class GameMultiPlayer extends Game {
             playerList.add(firstPlayer);
             playerList.add(secondPlayer);
             playerList.add(thirdPlayer);
+            notifyOnlyOneSpecificObserver(new UpdateInitLeaderMessage(firstPlayer.getPersonalLeaderCard()), firstPlayer.getNickName());
+            notifyOnlyOneSpecificObserver(new UpdateInitLeaderMessage(secondPlayer.getPersonalLeaderCard()), secondPlayer.getNickName());
+
+            notifyOnlyOneSpecificObserver(new UpdateInitLeaderMessage(thirdPlayer.getPersonalLeaderCard()),thirdPlayer.getNickName());
 
         }
        else if (numberOfPlayer==4)
@@ -128,6 +134,13 @@ public class GameMultiPlayer extends Game {
             playerList.add(secondPlayer);
             playerList.add(thirdPlayer);
             playerList.add(fourthPlayer);
+            notifyOnlyOneSpecificObserver(new UpdateInitLeaderMessage(firstPlayer.getPersonalLeaderCard()), firstPlayer.getNickName());
+            notifyOnlyOneSpecificObserver(new UpdateInitLeaderMessage(secondPlayer.getPersonalLeaderCard()), secondPlayer.getNickName());
+
+            notifyOnlyOneSpecificObserver(new UpdateInitLeaderMessage(thirdPlayer.getPersonalLeaderCard()),thirdPlayer.getNickName());
+
+            notifyOnlyOneSpecificObserver(new UpdateInitLeaderMessage(fourthPlayer.getPersonalLeaderCard()),fourthPlayer.getNickName());
+
 
         }
 

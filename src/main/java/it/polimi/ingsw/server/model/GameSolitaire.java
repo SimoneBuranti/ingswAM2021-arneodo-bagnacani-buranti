@@ -12,6 +12,7 @@ import it.polimi.ingsw.server.model.colours.Violet;
 import it.polimi.ingsw.server.model.colours.Yellow;
 import it.polimi.ingsw.server.model.exceptions.*;
 import it.polimi.ingsw.server.model.gameBoard.GameBoardInterface;
+import it.polimi.ingsw.server.model.leaderCards.LeaderCardProduction;
 import it.polimi.ingsw.server.model.players.Player;
 import it.polimi.ingsw.server.model.players.PlayerFirst;
 import it.polimi.ingsw.server.model.productionCards.DeckProductionCard;
@@ -56,6 +57,7 @@ public class GameSolitaire extends Game {
         deckActionMarker = new DeckActionMarker();
         lorenzoTheMagnificent = new LorenzoTheMagnificent();
         player = new PlayerFirst(nickName,this);
+        notifyOnlyOneSpecificObserver(new UpdateInitLeaderMessage(player.getPersonalLeaderCard()), player.getNickName());
         currentPlayer = player;}
         else
             restoreGameSolitaire();
@@ -305,8 +307,27 @@ public class GameSolitaire extends Game {
     public void connectPlayer(String nickname){
         if(player.getNickName().equals(nickname) && !(player.isConnected())){
             player.setConnected();
+            notifyOnlyOneSpecificObserver(new StorageConfigMessage(player.getGameBoardOfPlayer().getStorageOfGameBoard().getStorageResource()), player.getNickName());
+
+            notifyOnlyOneSpecificObserver(new StrongboxConfigMessage(player.getGameBoardOfPlayer().getStrongboxOfGameBoard().getStrongBoxResource()), player.getNickName());
+
+            notifyOnlyOneSpecificObserver(new LeadercardconfigMessage(player.getGameBoardOfPlayer().getLeaderCards(),player.getGameBoardOfPlayer().getLeaderCardsActivated()), player.getNickName());
+
+            notifyOnlyOneSpecificObserver(new FaithConfigMessage(player.getGameBoardOfPlayer().getIndicator(),player.getGameBoardOfPlayer().getCurrCall()), player.getNickName());
+
+            notifyOnlyOneSpecificObserver(new ProductionCardConfigMessage(player.getGameBoardOfPlayer().getDevelopmentBoard()),player.getNickName());
+
+            if(player.getGameBoardOfPlayer().getLeaderCardsActivated().get(0)!=null){
+                if(player.getGameBoardOfPlayer().getLeaderCardsActivated().get(0) instanceof LeaderCardProduction)
+                    notifyOnlyOneSpecificObserver(new StorageExtraConfig(player.getGameBoardOfPlayer().getStorageOfGameBoard().getNumExtraFirstAvailable(),((LeaderCardProduction) player.getGameBoardOfPlayer().getLeaderCardsActivated().get(0)).getResourceProduction()), player.getNickName());
+            }
+            if(player.getGameBoardOfPlayer().getLeaderCardsActivated().get(1)!=null){
+                if(player.getGameBoardOfPlayer().getLeaderCardsActivated().get(1) instanceof LeaderCardProduction)
+                    notifyOnlyOneSpecificObserver(new StorageExtraDoubleConfig(player.getGameBoardOfPlayer().getStorageOfGameBoard().getNumExtraFirstAvailable(),((LeaderCardProduction) player.getGameBoardOfPlayer().getLeaderCardsActivated().get(1)).getResourceProduction()), player.getNickName());
+            }
         }
-    }
+        }
+
 
     @Override
     public boolean checkNickname(String nickname){
@@ -483,8 +504,6 @@ public class GameSolitaire extends Game {
             e.printStackTrace();
         }
     }
-
-
 
     /**
      * endGame method

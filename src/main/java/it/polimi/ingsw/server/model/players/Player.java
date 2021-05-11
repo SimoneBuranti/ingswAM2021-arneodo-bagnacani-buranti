@@ -76,10 +76,6 @@ public class Player {
         buffer= new ArrayList<>();
         gameBoardOfPlayer = new GameBoard();
         personalLeaderCard=new ArrayList<>(4);
-        personalLeaderCard.add(DeckLeaderCard.arrangeDeckLeaderCards());
-        personalLeaderCard.add(DeckLeaderCard.arrangeDeckLeaderCards());
-        personalLeaderCard.add(DeckLeaderCard.arrangeDeckLeaderCards());
-        personalLeaderCard.add(DeckLeaderCard.arrangeDeckLeaderCards());
         this.newMatch=false;
         this.nickName = nickName;
         this.game = game;
@@ -412,5 +408,10 @@ public class Player {
 
     public ArrayList<Resource> getBuffer(){
         return  buffer;
+    }
+
+    public ArrayList<LeaderCard> getPersonalLeaderCard()
+    {
+        return personalLeaderCard;
     }
 }
