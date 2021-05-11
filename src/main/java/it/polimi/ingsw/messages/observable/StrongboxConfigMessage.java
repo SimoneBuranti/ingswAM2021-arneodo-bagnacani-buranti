@@ -3,27 +3,29 @@ package it.polimi.ingsw.messages.observable;
 import it.polimi.ingsw.messages.Message;
 import it.polimi.ingsw.messages.MessageType;
 import it.polimi.ingsw.messages.MessageVisitor;
+import it.polimi.ingsw.server.model.Resource;
 import it.polimi.ingsw.server.model.gameBoard.GameBoardInterface;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class StrongboxConfigMessage extends Message {
     private final MessageType messageType = MessageType.CONFIGURATIONSTRONGBOX;
 
 
 
-    private int coins;
-    private int servant;
-    private int shield;
-    private int rock;
+
+    private Map<Resource, Integer> strongBoxResource;
 
 
-    public StrongboxConfigMessage(int coins, int shield, int rock, int servant){
 
-        this.coins=coins;
-        this.shield=shield;
-        this.rock=rock;
-        this.servant=servant;
-
+    public StrongboxConfigMessage(Map<Resource, Integer> strongBoxResource) {
+        strongBoxResource=new HashMap<>();
+        this.strongBoxResource=strongBoxResource;
     }
+
+
     @Override
     public MessageType getMessageType() {
         return messageType;
@@ -35,19 +37,7 @@ public class StrongboxConfigMessage extends Message {
     }
 
 
-    public int getCoins() {
-        return coins;
-    }
-
-    public int getServant() {
-        return servant;
-    }
-
-    public int getShield() {
-        return shield;
-    }
-
-    public int getRock() {
-        return rock;
+    public Map<Resource, Integer> getStrongBoxResource() {
+        return strongBoxResource;
     }
 }

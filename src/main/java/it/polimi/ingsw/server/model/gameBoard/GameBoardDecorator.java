@@ -248,4 +248,13 @@ public abstract class GameBoardDecorator extends GameBoardInterface {
         return gameBoard.getLeaderCardsActivated();
     }
 
+    @Override
+    public int getCurrCall(){
+        return gameBoard.getCurrCall();
+    }
+
+    @Override
+    public ProductionCard[][] getDevelopmentBoard(){
+        return gameBoard.getDevelopmentBoard(); }
+
 }

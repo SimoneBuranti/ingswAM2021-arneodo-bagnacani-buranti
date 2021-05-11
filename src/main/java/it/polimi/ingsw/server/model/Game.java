@@ -396,6 +396,7 @@ public class Game extends Observable {
     public void saveLeaderCardChosen(int index1, int index2){
 
         currentPlayer.saveLeaderCard(index1,index2);
+        notifyToOneObserver(new UpdateInitLeaderMessage(index1,index2));
     }
 
     /**
@@ -414,6 +415,8 @@ public class Game extends Observable {
         }
         notifyToOneObserver(new DiscardLeaderForCurrentMessage(index));
         notifyAllObserverLessOne(new DiscardLeaderForNotCurrentMessage(currentPlayer));
+        notifyToOneObserver(new FaithPathMessage());
+
 
     }
 
@@ -444,7 +447,7 @@ public class Game extends Observable {
             int coin=GetAmount.getAmount(currentPlayer.getBuffer(),Resource.COIN);;
             int rock=GetAmount.getAmount(currentPlayer.getBuffer(),Resource.ROCK);;
             int servant=GetAmount.getAmount(currentPlayer.getBuffer(),Resource.SERVANT);;
-            notifyToOneObserver(new ResultFromMarket(coin,shield,rock,servant) );
+            notifyToOneObserver(new ResultFromMarketMessage(coin,shield,rock,servant) );
             notifyAllObserverLessOne(new ResultFromMarketNotCurrentMessage(currentPlayer,coin,shield,rock,servant) );
 
         } catch (CallForCouncilException e) {
@@ -469,7 +472,7 @@ public class Game extends Observable {
             int coin=GetAmount.getAmount(currentPlayer.getBuffer(),Resource.COIN);;
             int rock=GetAmount.getAmount(currentPlayer.getBuffer(),Resource.ROCK);;
             int servant=GetAmount.getAmount(currentPlayer.getBuffer(),Resource.SERVANT);;
-            notifyToOneObserver(new ResultFromMarket(coin,shield,rock,servant) );
+            notifyToOneObserver(new ResultFromMarketMessage(coin,shield,rock,servant) );
             notifyAllObserverLessOne(new ResultFromMarketNotCurrentMessage(currentPlayer,coin,shield,rock,servant) );
         } catch (CallForCouncilException e) {
             exceptionHandler(e);
@@ -963,6 +966,8 @@ public class Game extends Observable {
 
         currentPlayer.takeFromMarket();
     }
+
+
 
 
 }

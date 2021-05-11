@@ -676,4 +676,14 @@ public class GameBoard extends GameBoardInterface{
     }
 
 
+    public int getCurrCall(){
+        return faithPathOfGameBoard.getCurrCall();
+    }
+
+
+    public ProductionCard[][] getDevelopmentBoard(){
+        return developmentBoard;
+    }
+
+
 }

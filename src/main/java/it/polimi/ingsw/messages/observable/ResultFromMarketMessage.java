@@ -4,7 +4,7 @@ import it.polimi.ingsw.messages.Message;
 import it.polimi.ingsw.messages.MessageType;
 import it.polimi.ingsw.messages.MessageVisitor;
 
-public class ResultFromMarket extends Message {
+public class ResultFromMarketMessage extends Message {
     private final MessageType messageType = MessageType.RESULTFROMARKET;
 
 
@@ -14,7 +14,7 @@ public class ResultFromMarket extends Message {
     private int rock;
 
 
-    public ResultFromMarket(int coins, int shield, int rock, int servant){
+    public ResultFromMarketMessage(int coins, int shield, int rock, int servant){
 
         this.coins=coins;
         this.shield=shield;

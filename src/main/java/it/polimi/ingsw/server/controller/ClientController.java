@@ -358,12 +358,12 @@ public class ClientController implements MessageVisitor {
 
     @Override
     public void visit(PingMessage msg) {
-        //server.getGameController().handleMessage(msg, this);
+
     }
 
     @Override
     public void visit(PongMessage msg) {
-        //server.getGameController().handleMessage(msg, this);
+        clientHandler.setPongo(true);
     }
 
     @Override

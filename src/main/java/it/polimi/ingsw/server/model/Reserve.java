@@ -1,11 +1,8 @@
 package it.polimi.ingsw.server.model;
 
 import com.google.gson.Gson;
-import it.polimi.ingsw.messages.observable.ResultFromMarket;
 import it.polimi.ingsw.server.model.exceptions.UnavailableResourceException;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;

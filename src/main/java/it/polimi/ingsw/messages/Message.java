@@ -2,6 +2,7 @@ package it.polimi.ingsw.messages;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import it.polimi.ingsw.messages.observable.*;
 
 public abstract class Message{
     static Gson gson = new Gson();
@@ -155,6 +156,130 @@ public abstract class Message{
 
             case PONG:
                 return gson.fromJson(jsonObj, PongMessage.class);
+
+            case MYDEFEAT:
+                return gson.fromJson(jsonObj, MyDefeatMessage.class);
+            case MYVICTORY:
+                return gson.fromJson(jsonObj, MyVictoryMessage.class);
+
+            case ACTIONMARKERCHANGE:
+                return gson.fromJson(jsonObj, ActionMarkerChangeMessage.class);
+
+            case ACTIONMARKERCONFIG:
+                return gson.fromJson(jsonObj, ActionMarkerConfigMessage.class);
+
+            case ACTIVATIONLEADERCARDNOTIFICATION:
+                return gson.fromJson(jsonObj, ActivationLeaderForNotCurrentMessage.class);
+
+            case ACTIVATIONLEADERCARDRESPONSE:
+                return gson.fromJson(jsonObj, ActivationLeaderForCurrentMessage.class);
+
+            case CHANGEMARKETMESSAGECOLUMN:
+                return gson.fromJson(jsonObj, ChangeMarketMessageColumn.class);
+
+            case CHANGEMARKETMESSAGEROW:
+                return gson.fromJson(jsonObj, ChangeMarketMessageRow.class);
+
+            case CONFIGURATIONMARKET:
+                return gson.fromJson(jsonObj, ConfigurationMarketMessage.class);
+
+            case DECKPRODUCTIONCARDCONFIG:
+                return gson.fromJson(jsonObj, DeckProductionCardConfigMessage.class);
+
+            case DECKPRODUCTIONCARD:
+                return gson.fromJson(jsonObj, DeckProductionCardMessage.class);
+
+            case DISCARDLEADERCARDRESPONSE:
+                return gson.fromJson(jsonObj, DiscardLeaderForCurrentMessage.class);
+
+            case DISCARDLEADERCARDNOTIFICATION:
+                return gson.fromJson(jsonObj, DiscardLeaderForNotCurrentMessage.class);
+
+            case ENDGAMEWINNER:
+                return gson.fromJson(jsonObj, EndGamePlayerWinnnerMessage.class);
+
+            case MYFAITHMOVECONFIG:
+                return gson.fromJson(jsonObj, FaithConfigMessage.class);
+
+            case MYFAITHMOVE:
+                return gson.fromJson(jsonObj, FaithPathMessage.class);
+
+            case OPPONENTFAITHPATHMOVE:
+                return gson.fromJson(jsonObj, FaithPathOpponentMessage.class);
+
+            case LEADERCONFIGMESSAGE:
+                return gson.fromJson(jsonObj, LeadercardconfigMessage.class);
+
+            case LORENZOCONFIG:
+                return gson.fromJson(jsonObj, LorenzoTheMagnificentConfigMessage.class);
+
+            case MAGNIFICENTMOVEMESSAGE:
+                return gson.fromJson(jsonObj, MagnificentMoveMessage.class);
+
+            case MAGNIFICENTWIN:
+                return gson.fromJson(jsonObj, MagnificentWinMessage.class);
+
+            case NICKNAME:
+                return gson.fromJson(jsonObj, NicknameStartedMessage.class);
+
+            case TABLEPRODUCTIONCARDCONFIG:
+                return gson.fromJson(jsonObj, ProductionCardConfigMessage.class);
+
+            case PRODUCTIONUPDATEFORCURRENT:
+                return gson.fromJson(jsonObj, ProductionMessageForCurrentMessage.class);
+
+            case PRODUCTIONUPDATE:
+                return gson.fromJson(jsonObj, ProductionMessageForNotCurrentMessage.class);
+
+            case PRODUCTIONUPDATEFORNOTCURRENT:
+                return gson.fromJson(jsonObj, ResultForProductionForNotCurrentMessage.class);
+
+            case RESULTFROMARKET:
+                return gson.fromJson(jsonObj, ResultFromMarketMessage.class);
+
+            case RESULTFROMARKETNOTCURRENT:
+                return gson.fromJson(jsonObj, ResultFromMarketNotCurrentMessage.class);
+
+            case PRODUCTIONRESULT:
+                return gson.fromJson(jsonObj, ResultOfProductionMessage.class);
+
+            case CONFIGURATIONSTORAGE:
+                return gson.fromJson(jsonObj, StorageConfigMessage.class);
+
+            case CONFIGURATIONSTORAGEEXTRA:
+                return gson.fromJson(jsonObj, StorageExtraConfig.class);
+
+            case CONFIGURATIONSTORAGEEXTRADOUBLE:
+                return gson.fromJson(jsonObj, StorageExtraDoubleConfig.class);
+
+            case CONFIGURATIONSTRONGBOX:
+                return gson.fromJson(jsonObj, StrongboxConfigMessage.class);
+
+
+            case TAKECARDFORNOTCURRENT:
+                return gson.fromJson(jsonObj, TakeCardForNotCurrentMessage.class);
+
+            case TAKECARD:
+                return gson.fromJson(jsonObj, TakeCardMessage.class);
+
+            case OPPONENTUPDATEINITRESOURCE:
+                return gson.fromJson(jsonObj, UpdateForNotCurrentResourceMessage.class);
+
+
+            case UPDATEINITLEADERCARD:
+                return gson.fromJson(jsonObj, UpdateInitLeaderMessage.class);
+
+
+            case UPDATEINITRESOURCE:
+                return gson.fromJson(jsonObj, UpdateInitLeaderMessage.class);
+
+            case USEACTIONMARKER:
+                return gson.fromJson(jsonObj, UseActionMarkerMessage.class);
+
+
+
+
+
 
             default:
                 throw new IllegalArgumentException("Invalid topic " + msgTopicString);

@@ -5,6 +5,8 @@ import it.polimi.ingsw.messages.observable.DeckProductionCardConfigMessage;
 import it.polimi.ingsw.messages.observable.DeckProductionCardMessage;
 
 public class ViewController implements MessageVisitor {
+
+
     @Override
     public void visit(AlreadyActivatedErrorMessage msg) {
 
@@ -232,6 +234,7 @@ public class ViewController implements MessageVisitor {
 
     @Override
     public void visit(PingMessage msg) {
+
 
     }
 

@@ -106,4 +106,8 @@ public abstract class GameBoardInterface {
     public abstract ArrayList<LeaderCard> getLeaderCards();
 
     public abstract ArrayList<LeaderCard> getLeaderCardsActivated();
+
+    public abstract int getCurrCall();
+
+    public abstract ProductionCard[][] getDevelopmentBoard();
 }

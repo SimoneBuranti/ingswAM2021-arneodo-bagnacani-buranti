@@ -129,4 +129,16 @@ public class Strongbox {
         return numResourceTot;
     }
 
+    /**
+     * This method returns a copy of the map to the caller
+     * @return Map<Resource, Integer> : a copy of the map
+     */
+    public Map<Resource, Integer> getStrongBoxResource() {
+        Map<Resource,Integer> map = new HashMap<>();
+        map.putAll(storageStrongBox);
+        return map;
+    }
+
+
+
 }

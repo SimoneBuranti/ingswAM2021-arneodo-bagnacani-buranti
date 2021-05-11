@@ -74,7 +74,7 @@ public interface MessageVisitor {
     void visit(ConfigurationMarketMessage msg);
     void visit(ChangeMarketMessageColumn msg);
     void visit(ChangeMarketMessageRow msg);
-    void visit(ResultFromMarket msg);
+    void visit(ResultFromMarketMessage msg);
     void visit(ResultFromMarketNotCurrentMessage msg);
 
     void visit(MagnificentMoveMessage msg);
@@ -109,9 +109,10 @@ public interface MessageVisitor {
     void visit(StorageExtraConfig msg);
     void visit(StorageExtraDoubleConfig msg);
     void visit(FaithConfigMessage msg);
+    void visit(ProductionCardConfigMessage msg);
 
 
-    void visit(ReserveMessage msg);
+
 
 
 

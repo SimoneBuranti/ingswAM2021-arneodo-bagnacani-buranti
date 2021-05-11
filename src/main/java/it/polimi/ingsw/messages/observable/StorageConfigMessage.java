@@ -3,31 +3,28 @@ package it.polimi.ingsw.messages.observable;
 import it.polimi.ingsw.messages.Message;
 import it.polimi.ingsw.messages.MessageType;
 import it.polimi.ingsw.messages.MessageVisitor;
+import it.polimi.ingsw.server.model.Resource;
 import it.polimi.ingsw.server.model.gameBoard.GameBoard;
 import it.polimi.ingsw.server.model.gameBoard.GameBoardInterface;
 import it.polimi.ingsw.server.model.marbles.Marble;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class StorageConfigMessage extends Message {
 
     private final MessageType messageType = MessageType.CONFIGURATIONSTORAGE;
-    private int coins;
-    private int servant;
-    private int shield;
-    private int rock;
+    private Map<Resource, Integer> Resource;
 
 
 
-
-    public StorageConfigMessage(int coins, int shield, int rock, int servant){
-
-        this.coins=coins;
-        this.shield=shield;
-        this.rock=rock;
-        this.servant=servant;
+    public StorageConfigMessage(Map<Resource, Integer> availableResources) {
+        Resource=new HashMap<>();
+        this.Resource=availableResources;
 
     }
+
     @Override
     public MessageType getMessageType() {
         return messageType;
@@ -39,19 +36,7 @@ public class StorageConfigMessage extends Message {
     }
 
 
-    public int getCoins() {
-        return coins;
-    }
-
-    public int getServant() {
-        return servant;
-    }
-
-    public int getShield() {
-        return shield;
-    }
-
-    public int getRock() {
-        return rock;
+    public Map<Resource, Integer> getResource() {
+        return Resource;
     }
 }

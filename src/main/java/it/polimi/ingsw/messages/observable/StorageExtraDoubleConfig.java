@@ -3,15 +3,19 @@ package it.polimi.ingsw.messages.observable;
 import it.polimi.ingsw.messages.Message;
 import it.polimi.ingsw.messages.MessageType;
 import it.polimi.ingsw.messages.MessageVisitor;
+import it.polimi.ingsw.server.model.Resource;
 
 public class StorageExtraDoubleConfig extends Message {
     private final MessageType messageType = MessageType.CONFIGURATIONSTORAGEEXTRADOUBLE;
     private int quantityIn;
 
-    public StorageExtraDoubleConfig(int quantityIn){
+    private Resource resourceProduction;
+    public StorageExtraDoubleConfig(int numExtraFirstAvailable, Resource resourceProduction) {
+        this.quantityIn=numExtraFirstAvailable;
 
-        this.quantityIn=quantityIn;
+        this.resourceProduction=resourceProduction;
     }
+
     @Override
     public MessageType getMessageType() {
         return messageType;
@@ -25,5 +29,9 @@ public class StorageExtraDoubleConfig extends Message {
 
     public int getQuantityIn() {
         return quantityIn;
+    }
+
+    public Resource getResourceProduction() {
+        return resourceProduction;
     }
 }

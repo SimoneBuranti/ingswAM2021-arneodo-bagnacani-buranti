@@ -1,6 +1,7 @@
 package it.polimi.ingsw.server.network;
 
 import it.polimi.ingsw.messages.Message;
+import it.polimi.ingsw.messages.PingMessage;
 import it.polimi.ingsw.messages.RestartQuestionMessage;
 import it.polimi.ingsw.server.controller.ClientController;
 import it.polimi.ingsw.server.virtualview.VirtualView;
@@ -21,6 +22,8 @@ public class ClientHandler implements Runnable {
     private final PrintWriter writeStream;
 
     private final Server server;
+
+    private Boolean pongo;
 
 
 
@@ -52,7 +55,7 @@ public class ClientHandler implements Runnable {
                     readMessageServer(msg);
                 }
             }
-        } catch (IOException e) {
+        } catch (IOException | InterruptedException e) {
             try {
                 disconnect();
             } catch (IOException ioException) {
@@ -62,13 +65,20 @@ public class ClientHandler implements Runnable {
     }
 
     public void readMessageServer(String msg){
-        Message parsedMsg = Message.deserialize(msg);
-        parsedMsg.accept(clientController);
+            Message parsedMsg = Message.deserialize(msg);
+            parsedMsg.accept(clientController);
+
     }
 
-    public void sendMessage (Message msg) {
-        writeStream.println(msg.serialize());
+    public void sendMessage (Message msg) throws InterruptedException, IOException {
+        writeStream.println(new PingMessage());
+        wait(1000);
+        if (pongo)
+        {writeStream.println(msg.serialize());
         writeStream.flush();
+        setPongo(false);}
+        else
+            disconnect();
     }
 
     public void disconnect() throws IOException {
@@ -77,6 +87,14 @@ public class ClientHandler implements Runnable {
         if (outputStream != null) outputStream.close();
         System.out.println("Ho disconnesso il client");
         socketClient.close();
+    }
+
+    public Boolean getPongo() {
+        return pongo;
+    }
+
+    public void setPongo(Boolean pongo) {
+        this.pongo = pongo;
     }
 
 

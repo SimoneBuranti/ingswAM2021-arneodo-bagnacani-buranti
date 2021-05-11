@@ -11,6 +11,8 @@ public class NicknameStartedMessage extends Message {
     private ArrayList<String> nickname;
 
     public NicknameStartedMessage(ArrayList<String> nickname){
+        nickname=new ArrayList<>();
+
         this.nickname=nickname;
     }
     public ArrayList<String> getNickname() {

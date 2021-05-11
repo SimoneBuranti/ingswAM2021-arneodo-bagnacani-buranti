@@ -236,26 +236,24 @@ public class GameMultiPlayer extends Game {
         for(Player p : playerList){
             if(p.getNickName().equals(nickname) && !(p.isConnected())){
                 p.setConnected();
-                int shield=p.getGameBoardOfPlayer().getStorageOfGameBoard().getResource(Resource.SHIELD);
-                int coin=p.getGameBoardOfPlayer().getStorageOfGameBoard().getResource(Resource.COIN);
-                int rock=p.getGameBoardOfPlayer().getStorageOfGameBoard().getResource(Resource.ROCK);
-                int servant=p.getGameBoardOfPlayer().getStorageOfGameBoard().getResource(Resource.SERVANT);
-                notifyOnlyOneSpecificObserver(new StorageConfigMessage(coin, shield,rock,servant), p.getNickName());
-                shield=p.getGameBoardOfPlayer().getStrongboxOfGameBoard().getResource(Resource.SHIELD);
-                coin=p.getGameBoardOfPlayer().getStrongboxOfGameBoard().getResource(Resource.COIN);
-                rock=p.getGameBoardOfPlayer().getStrongboxOfGameBoard().getResource(Resource.ROCK);
-                servant=p.getGameBoardOfPlayer().getStrongboxOfGameBoard().getResource(Resource.SERVANT);
-                notifyOnlyOneSpecificObserver(new StrongboxConfigMessage(coin, shield,rock,servant), p.getNickName());
+
+                notifyOnlyOneSpecificObserver(new StorageConfigMessage(p.getGameBoardOfPlayer().getStorageOfGameBoard().getStorageResource()), p.getNickName());
+
+                notifyOnlyOneSpecificObserver(new StrongboxConfigMessage(p.getGameBoardOfPlayer().getStrongboxOfGameBoard().getStrongBoxResource()), p.getNickName());
+
                 notifyOnlyOneSpecificObserver(new LeadercardconfigMessage(p.getGameBoardOfPlayer().getLeaderCards(),p.getGameBoardOfPlayer().getLeaderCardsActivated()), p.getNickName());
-                notifyOnlyOneSpecificObserver(new FaithConfigMessage(p.getGameBoardOfPlayer().getIndicator()), p.getNickName());
+
+                notifyOnlyOneSpecificObserver(new FaithConfigMessage(p.getGameBoardOfPlayer().getIndicator(),p.getGameBoardOfPlayer().getCurrCall()), p.getNickName());
+
+                notifyOnlyOneSpecificObserver(new ProductionCardConfigMessage(p.getGameBoardOfPlayer().getDevelopmentBoard()),p.getNickName());
 
                 if(p.getGameBoardOfPlayer().getLeaderCardsActivated().get(0)!=null){
                     if(p.getGameBoardOfPlayer().getLeaderCardsActivated().get(0) instanceof LeaderCardProduction)
-                        notifyOnlyOneSpecificObserver(new StorageExtraConfig(p.getGameBoardOfPlayer().getStorageOfGameBoard().getNumExtraFirstAvailable()), p.getNickName());
+                        notifyOnlyOneSpecificObserver(new StorageExtraConfig(p.getGameBoardOfPlayer().getStorageOfGameBoard().getNumExtraFirstAvailable(),((LeaderCardProduction) p.getGameBoardOfPlayer().getLeaderCardsActivated().get(0)).getResourceProduction()), p.getNickName());
                 }
                 if(p.getGameBoardOfPlayer().getLeaderCardsActivated().get(1)!=null){
                     if(p.getGameBoardOfPlayer().getLeaderCardsActivated().get(1) instanceof LeaderCardProduction)
-                        notifyOnlyOneSpecificObserver(new StorageExtraDoubleConfig(p.getGameBoardOfPlayer().getStorageOfGameBoard().getNumExtraFirstAvailable()), p.getNickName());
+                        notifyOnlyOneSpecificObserver(new StorageExtraDoubleConfig(p.getGameBoardOfPlayer().getStorageOfGameBoard().getNumExtraFirstAvailable(),((LeaderCardProduction) p.getGameBoardOfPlayer().getLeaderCardsActivated().get(1)).getResourceProduction()), p.getNickName());
                 }
             }
         }

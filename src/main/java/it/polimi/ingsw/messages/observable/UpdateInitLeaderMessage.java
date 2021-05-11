@@ -9,15 +9,15 @@ public class UpdateInitLeaderMessage extends Message {
     private final MessageType messageType = MessageType.UPDATEINITLEADERCARD;
 
 
-    private LeaderCard c1;
+    private int cardFirst;
 
-    private LeaderCard c2;
+    private int cardSec;
 
 
-    public UpdateInitLeaderMessage(LeaderCard c1, LeaderCard c2){
+    public UpdateInitLeaderMessage(int cardFirst, int cardSec){
 
-        this.c1=c1;
-        this.c2 =c2;
+        this.cardFirst=cardFirst;
+        this.cardSec =cardFirst;
 
 
     }
@@ -33,11 +33,11 @@ public class UpdateInitLeaderMessage extends Message {
     }
 
 
-    public LeaderCard getC1() {
-        return c1;
+    public int getCardFirst() {
+        return cardFirst;
     }
 
-    public LeaderCard getC2() {
-        return c2;
+    public int getCardSec() {
+        return cardSec;
     }
 }
