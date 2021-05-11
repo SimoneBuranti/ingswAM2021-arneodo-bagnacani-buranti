@@ -1,15 +1,14 @@
 package it.polimi.ingsw.Client;
 
-import com.google.gson.Gson;
 import it.polimi.ingsw.messages.Message;
-import it.polimi.ingsw.messages.MessageType;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
-import it.polimi.ingsw.client.ViewController;
+
+
 public class SocketClient {
     private final Socket serverSocket;
     private ViewController viewController;

@@ -230,6 +230,9 @@ public class GameBoard extends GameBoardInterface{
         return overallResources;
     }
 
+
+
+
     /**
      * This method checks the total amount of production Card in the player's development board and throws a
      * EndGameException if the seventh production card sale has been successfully completed.
@@ -654,25 +657,33 @@ public class GameBoard extends GameBoardInterface{
     }
 
 
-
+    @Override
     public ArrayList<Resource> getProductionBuffer(){
         return productionBuffer;
     }
-
+    @Override
     public Storage getStorageOfGameBoard(){
         return storageOfGameBoard;
     }
-
+    @Override
     public Strongbox getStrongboxOfGameBoard(){
         return strongboxOfGameBoard;
     }
 
+    @Override
     public ArrayList<LeaderCard> getLeaderCards(){
-        return leaderCards;
+        ArrayList<LeaderCard> list = new ArrayList<>();
+        list.addAll(leaderCards);
+
+        return list;
     }
 
-    public ArrayList<LeaderCard> getLeaderCardsActivated(){
-        return leaderCardsActivated;
+    @Override
+    public ArrayList<LeaderCard> getLeaderCardsActivated() {
+        ArrayList<LeaderCard> list = new ArrayList<>();
+        list.addAll(leaderCardsActivated);
+
+        return list;
     }
 
 

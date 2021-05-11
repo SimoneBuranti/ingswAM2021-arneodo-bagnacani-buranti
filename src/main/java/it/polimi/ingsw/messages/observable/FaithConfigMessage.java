@@ -25,6 +25,10 @@ public class FaithConfigMessage extends Message {
         v.visit(this);
     }
 
+    public int getFaithConfig() {
+        return faithConfig;
+    }
+
     public int getCurrCall() {
         return currCall;
     }
