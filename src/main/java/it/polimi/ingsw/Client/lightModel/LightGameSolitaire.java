@@ -36,11 +36,6 @@ public class LightGameSolitaire extends LightGame{
     }
 
     @Override
-    public void setActionMarkerDeck(ArrayList<ActionMarker> deck){
-        actionMarkerDeck.setDeck(deck);
-    }
-
-    @Override
     public void setFaithPath(String nickname, int faithIndicator, int currCall){
         if(nickname.equals(currentPlayer.getNickName())){
             currentPlayer.setFaithPath(faithIndicator, currCall);
@@ -54,10 +49,10 @@ public class LightGameSolitaire extends LightGame{
         }
     }
 
-    /*@Override
-    public void actionMarkerEffect(ActionMarker actionMarker){
-        actionMarkerDeck.actionMarkerEffect(actionMarker.getType(), this);
-    }*/
+    @Override
+    public void actionMarkerEffect(String actionMarkerType){
+        actionMarkerDeck.actionMarkerEffect(actionMarkerType, this);
+    }
 
 
     /**
@@ -276,10 +271,5 @@ public class LightGameSolitaire extends LightGame{
         if(nickname.equals(currentPlayer.getNickName())){
             currentPlayer.removeResourceStrongbox(resource, quantity);
         }
-    }
-
-    @Override
-    public void useActionMarker(){
-        actionMarkerDeck.useActionMarker();
     }
 }

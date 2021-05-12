@@ -87,7 +87,7 @@ public class ViewController implements MessageVisitor {
 
     @Override
     public void visit(ChangeCurrentPlayerMessage msg) {
-        game.setCurrentPlayer();
+        //game.setCurrentPlayer();
     }
 
 
@@ -344,7 +344,7 @@ public class ViewController implements MessageVisitor {
 
     @Override
     public void visit(UseActionMarkerMessage msg) {
-        game.useActionMarker();
+        game.actionMarkerEffect(msg.getActionType());
     }
 
 

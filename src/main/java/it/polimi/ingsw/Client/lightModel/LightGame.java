@@ -201,7 +201,7 @@ public class LightGame{
 
     }
 
-    public void actionMarkerEffect(ActionMarker actionMarker){}
+    public void actionMarkerEffect(String actionMarkerType){}
 
     public void setCurrentPlayer(){
     }
@@ -245,7 +245,4 @@ public class LightGame{
 
     public void setPlayers(ArrayList<String> nickname){}
 
-    public void setActionMarkerDeck(ArrayList<ActionMarker> deck){}
-
-    public void useActionMarker(){}
 }

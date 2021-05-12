@@ -11,7 +11,7 @@ import java.util.Map;
 
 public class LightGameMultiPlayer extends LightGame{
     private ArrayList<LightPlayer> players;
-    private int currentPlayerPosition;
+    //private int currentPlayerPosition;
     private int numberOfPlayer;
 
     public LightGameMultiPlayer(){
@@ -26,11 +26,11 @@ public class LightGameMultiPlayer extends LightGame{
             player = new LightPlayer(nickname);
             players.add(player);
         }
-        currentPlayerPosition = 0;
-        currentPlayer = players.get(currentPlayerPosition);
+        //currentPlayerPosition = 0;
+        //currentPlayer = players.get(currentPlayerPosition);
     }
 
-    @Override
+    /*@Override
     public void setCurrentPlayer(){
         int cont;
         if(currentPlayerPosition == numberOfPlayer-1)
@@ -49,7 +49,7 @@ public class LightGameMultiPlayer extends LightGame{
         }
         currentPlayerPosition = cont;
         currentPlayer = players.get(currentPlayerPosition);
-    }
+    }*/
 
 
 

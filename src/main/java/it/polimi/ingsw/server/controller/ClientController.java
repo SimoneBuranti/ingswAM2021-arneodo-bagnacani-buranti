@@ -357,8 +357,13 @@ public class ClientController implements MessageVisitor {
     }
 
     @Override
-    public void visit(NicknameStartedMessage msg) {
+    public void visit(UpdateChosenLeaderMessage msg) {
 
+    }
+
+    @Override
+    public void visit(NicknameStartedMessage msg) {
+        
     }
 
     @Override
@@ -373,11 +378,6 @@ public class ClientController implements MessageVisitor {
 
     @Override
     public void visit(UpdateInitLeaderMessage msg) {
-
-    }
-
-    @Override
-    public void visit(UpdateChosenLeaderMessage msg) {
 
     }
 
@@ -441,13 +441,10 @@ public class ClientController implements MessageVisitor {
 
     }
 
-
     @Override
     public void visit(UseActionMarkerMessage msg) {
 
     }
-
-
 
     @Override
     public void visit(ProductionMessageForNotCurrentMessage msg) {
