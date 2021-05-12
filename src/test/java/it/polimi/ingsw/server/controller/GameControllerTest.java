@@ -17,7 +17,7 @@ public class GameControllerTest {
 
     @Test
     @DisplayName("GameControllerEmpty - 1")
-    public void gameControllerEmptyTest1(){
+    public void gameControllerEmptyTest1() throws InterruptedException {
         Server server = new Server();
         Socket tempSocket = new Socket();
         InputStream inputStream;
@@ -47,7 +47,7 @@ public class GameControllerTest {
             assertTrue(parsedMsg instanceof NPlayersMessage);
             assertTrue(((NPlayersMessage) parsedMsg).getnOfPlayers()==-1);
 
-            clientHandler.readMessageServer((new NumberPlayerMessage(4)).serialize());
+           // clientHandler.readMessageServer((new NumberPlayerMessage(4)).serialize());
 
             assertTrue(server.getGameController() instanceof GameControllerLobby);
 

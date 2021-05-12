@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ReserveTest {
-    public static void main(String[] args) throws IOException, RequirementsException, LeaderCardsGameBoardEmptyException, EmptyException, FullColumnException, EndGameException, NotEnoughResourcesException, LevelException {
+    public static void main(String[] args) throws IOException, RequirementsException, LeaderCardsGameBoardEmptyException, EmptyException, FullColumnException, EndGameException, NotEnoughResourcesException, LevelException, InterruptedException {
 
         ArrayList<String> nickname =new ArrayList<>(2);
         nickname.add("aa");
@@ -102,6 +102,8 @@ public class ReserveTest {
         gameMultiPlayer5.getPlayerFromList(0).getGameBoardOfPlayer().addLeaderCardToGameBoard(leaderCardThree);
 
         gameMultiPlayer5.endGame();
+
+
 
 
 

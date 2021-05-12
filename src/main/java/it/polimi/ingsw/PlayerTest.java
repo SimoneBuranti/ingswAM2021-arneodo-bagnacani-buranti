@@ -6,7 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class PlayerTest {public static void main(String[] args) throws IOException {
+public class PlayerTest {public static void main(String[] args) throws IOException, InterruptedException {
 
     ArrayList<String> nickname =new ArrayList<>(2);
     nickname.add("aa");

@@ -7,6 +7,7 @@ import it.polimi.ingsw.server.virtualview.*;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 
 
@@ -17,6 +18,7 @@ public class Server {
     private VirtualView virtualView;
     private ArrayList<String> lobby;
     private boolean sendRestartQuestion;
+
 
 
     public Server() {
@@ -66,14 +68,14 @@ public class Server {
 
     //--------------------------------------------------------------------
 
-    public void initNewSolitaireGame(){
+    public void initNewSolitaireGame() throws IOException, InterruptedException {
         game = new GameSolitaire(lobby.get(0),true);
         //virtualView = new VirtualView();
         gameController = new GameControllerSinglePlayer();
     }
 
 
-    public void initNewMultiplayerGame(){
+    public void initNewMultiplayerGame() throws IOException, InterruptedException {
         game = new GameMultiPlayer(lobby.size(),lobby,true);
         //virtualView = new VirtualView();
         gameController = new GameControllerMultiplayer();

@@ -26,7 +26,7 @@ public class GameControllerRestart extends GameController {
     }
 
     @Override
-    public synchronized void handleMessage(UsernameMessage msg, ClientController clientController) {
+    public synchronized void handleMessage(UsernameMessage msg, ClientController clientController) throws IOException, InterruptedException {
         if (!restartAnswerReceived){
             clientController.getClientHandler().sendMessage(new BootingLobbyErrorMessage());
             try {

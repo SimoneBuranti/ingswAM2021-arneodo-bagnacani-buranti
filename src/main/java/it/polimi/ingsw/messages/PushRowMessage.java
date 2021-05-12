@@ -1,5 +1,7 @@
 package it.polimi.ingsw.messages;
 
+import java.io.IOException;
+
 public class PushRowMessage extends Message{
     private final MessageType messageType = MessageType.PUSHROW;
 
@@ -18,7 +20,7 @@ public class PushRowMessage extends Message{
     }
 
     @Override
-    public void accept(MessageVisitor v) {
+    public void accept(MessageVisitor v) throws IOException, InterruptedException {
         v.visit(this);
     }
 }

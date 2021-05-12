@@ -5,6 +5,7 @@ import it.polimi.ingsw.server.model.players.PlayerFirst;
 import it.polimi.ingsw.server.model.players.PlayerSecond;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -19,8 +20,7 @@ class DeckLeaderCardTest {
      * test about match creation and its consequent deckLeader creation, with the control on the distribution of eight leader Cards
      */
     @Test
-    public void testAboutDrawLeaderCards()
-    {
+    public void testAboutDrawLeaderCards() throws IOException, InterruptedException {
         ArrayList<String> nickname =new ArrayList<>(2);
         nickname.add("ale");
         nickname.add("ali");
@@ -36,8 +36,7 @@ class DeckLeaderCardTest {
      *
      */
     @Test
-    public void testAboutEqualsOfPersonalLeaderCards()
-    {
+    public void testAboutEqualsOfPersonalLeaderCards() throws IOException, InterruptedException {
 
         ArrayList<String> nickname =new ArrayList<>(2);
         nickname.add("ale");
@@ -78,8 +77,7 @@ class DeckLeaderCardTest {
      * test about match creation and his consequent listOf players and its order
      */
     @Test
-    public void testAboutTypeOfPlayers()
-    {
+    public void testAboutTypeOfPlayers() throws IOException, InterruptedException {
         ArrayList<String> nickname =new ArrayList<>(2);
         nickname.add("ale");
         nickname.add("ali");

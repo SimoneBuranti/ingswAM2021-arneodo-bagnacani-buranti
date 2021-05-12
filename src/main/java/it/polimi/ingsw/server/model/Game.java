@@ -15,6 +15,7 @@ import it.polimi.ingsw.server.model.requirements.*;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -38,7 +39,7 @@ public class Game extends Observable {
     /**
      * this attribute represents the game first level blue production card deck
      */
-    protected DeckProductionCard deckProductionCardOneBlu ;
+    protected DeckProductionCard deckProductionCardOneBlu;
     /**
      * this attribute represents the game second level blue production card deck
      */
@@ -95,13 +96,16 @@ public class Game extends Observable {
     /**
      * this constructor instantiates all the game attributes
      */
-    public Game(Boolean newGame){
+    public Game(Boolean newGame) throws IOException, InterruptedException {
 
         if (newGame)
 
         {
-            market = new Market();
+
+
+        market = new Market();
         reserve = new Reserve();
+
         deckProductionCardOneBlu = new DeckProductionCardOneBlu();
         deckProductionCardTwoBlu = new DeckProductionCardTwoBlu();
         deckProductionCardThreeBlu = new DeckProductionCardThreeBlu();
@@ -147,7 +151,7 @@ public class Game extends Observable {
      * When the exceptions are caught, the method calls the exceptionHandler method.
      * @param resource : initial resource of the current player
      */
-    public void initResourceOfPlayer(Resource resource){
+    public void initResourceOfPlayer(Resource resource) throws IOException, InterruptedException {
         try {
             currentPlayer.initResource(resource);
         } catch (CallForCouncilException e) {
@@ -167,7 +171,7 @@ public class Game extends Observable {
      * @param resourceOne : first initial resource type of the current player
      * @param resourceTwo : second initial resource type of the current player
      */
-    public void initResourceOfPlayer(Resource resourceOne, Resource resourceTwo){
+    public void initResourceOfPlayer(Resource resourceOne, Resource resourceTwo) throws IOException, InterruptedException {
         try {
             currentPlayer.initResource(resourceOne, resourceTwo);
         } catch (CallForCouncilException e) {
@@ -251,7 +255,7 @@ public class Game extends Observable {
      * @param deck : it is the production card deck from which the current player wants to buy the card
      * @param chosenColumn : the game board column in which the current player wants to place the bought card
      */
-    public void buyProductionCard(DeckProductionCard deck, int chosenColumn) throws EmptyException, FullColumnException, NotEnoughResourcesException, LevelException {
+    public void buyProductionCard(DeckProductionCard deck, int chosenColumn) throws EmptyException, FullColumnException, NotEnoughResourcesException, LevelException, IOException, InterruptedException {
         try {
             currentPlayer.buyProductionCard(deck,chosenColumn);
         } catch (EndGameException e) {
@@ -266,7 +270,7 @@ public class Game extends Observable {
      * not implemented method called when the player discards a resource
      * @param player : the one who discards the resource
      */
-    public void moveEveryoneExcept(Player player){ }
+    public void moveEveryoneExcept(Player player) throws IOException, InterruptedException { }
 
     /**
      * this method activates the production of the highest level card in the chosen column of the current player game board by calling the current player method
@@ -274,7 +278,7 @@ public class Game extends Observable {
      * When the exceptions are caught, the method calls the exceptionHandler method.
      * @param chosenColumn : the game board column where the card the player wants to active is situated
      */
-    public void productionOn(int chosenColumn, ArrayList<Resource> list, boolean faithMove) throws ImpossibleProductionException, EmptyColumnException {
+    public void productionOn(int chosenColumn, ArrayList<Resource> list, boolean faithMove) throws ImpossibleProductionException, EmptyColumnException, IOException, InterruptedException {
         try {
 
             int shield=GetAmount.getAmount(list,Resource.SHIELD);
@@ -303,7 +307,7 @@ public class Game extends Observable {
      * @param i2 : the second resource type of the base production input
      * @param output : the resource type of the base production output
      */
-    public void baseProductionOn(Resource i1, Resource i2, Resource output) throws ImpossibleProductionException {
+    public void baseProductionOn(Resource i1, Resource i2, Resource output) throws ImpossibleProductionException, IOException, InterruptedException {
         currentPlayer.baseProductionOn(i1, i2, output);
 
         ArrayList<Resource> arrayList =new ArrayList<>(4);
@@ -313,8 +317,6 @@ public class Game extends Observable {
         int servant=GetAmount.isThere(arrayList,i1,i2);
         notifyToOneObserver(new ProductionMessageForCurrentMessage(coin,shield,rock,servant) );
         notifyAllObserverLessOne(new ProductionMessageForNotCurrentMessage(currentPlayer,coin,shield,rock,servant) );
-
-
     }
 
     /**
@@ -323,7 +325,7 @@ public class Game extends Observable {
      * When the exception is caught, the method calls the exceptionHandler method.
      * @param resource : the resource type of the first extra production output
      */
-    public void extraProductionOn(Resource resource, Resource resourceLeader){
+    public void extraProductionOn(Resource resource, Resource resourceLeader) throws IOException, InterruptedException {
         try {
             ArrayList<Resource> arrayList =new ArrayList<>(4);
             int shield=GetAmount.isThereEqual(resource,resourceLeader);
@@ -350,7 +352,7 @@ public class Game extends Observable {
      * When the exception is caught, the method calls the exceptionHandler method.
      * @param resource: the resource type of the second extra production output
      */
-    public void anotherExtraProductionOn(Resource resource, Resource resourceLeader) throws ImpossibleProductionException {
+    public void anotherExtraProductionOn(Resource resource, Resource resourceLeader) throws ImpossibleProductionException, IOException, InterruptedException {
         try {
             ArrayList<Resource> arrayList =new ArrayList<>(4);
             int shield=GetAmount.isThereEqual(resource,resourceLeader);
@@ -373,7 +375,7 @@ public class Game extends Observable {
      * this method activates the end of current player productions and catches CallForCouncilException and LastSpaceReachedException.
      * When the exception is caught, the method calls the exceptionHandler method.
      */
-    public void endOfProduction(){
+    public void endOfProduction() throws IOException, InterruptedException {
 
         int shield=GetAmount.getAmount(currentPlayer.getGameBoardOfPlayer().getProductionBuffer(),Resource.SHIELD);
         int coin=GetAmount.getAmount(currentPlayer.getGameBoardOfPlayer().getProductionBuffer(),Resource.COIN);
@@ -393,7 +395,7 @@ public class Game extends Observable {
      * @param index1 : the position where the first chosen leader card is
      * @param index2 : the position where the second chosen leader card is
      */
-    public void saveLeaderCardChosen(int index1, int index2){
+    public void saveLeaderCardChosen(int index1, int index2) throws IOException, InterruptedException {
 
         currentPlayer.saveLeaderCard(index1,index2);
         notifyToOneObserver(new UpdateChosenLeaderMessage(index1,index2));
@@ -405,7 +407,7 @@ public class Game extends Observable {
      * When the exception is caught, the method calls the exceptionHandler method.
      * @param index : the position where the leader card to be discarded is
      */
-    public void discardLeaderCard(int index) throws LeaderCardsGameBoardEmptyException {
+    public void discardLeaderCard(int index) throws LeaderCardsGameBoardEmptyException, IOException, InterruptedException {
         try {
             currentPlayer.discardLeaderCard(index);
         } catch (CallForCouncilException e) {
@@ -426,7 +428,7 @@ public class Game extends Observable {
      *  When the exception is caught, the method calls the exceptionHandler method.
      * @param index : the position where the leader card to be activated is
      */
-    public void activateLeaderCard(int index) throws RequirementsException, LeaderCardsGameBoardEmptyException {
+    public void activateLeaderCard(int index) throws RequirementsException, LeaderCardsGameBoardEmptyException, IOException, InterruptedException {
         currentPlayer.activationLeaderCard(index);
         notifyToOneObserver(new ActivationLeaderForCurrentMessage(index));
         notifyAllObserverLessOne(new ActivationLeaderForNotCurrentMessage(currentPlayer));
@@ -439,7 +441,7 @@ public class Game extends Observable {
      * When the exception is caught, the method calls the exceptionHandler method.
      * @param chosenRow : the row chosen by the current player
      */
-    public void pushRowInMarket(int chosenRow) throws NotEnoughSpaceInStorageException, WhiteMarbleException {
+    public void pushRowInMarket(int chosenRow) throws NotEnoughSpaceInStorageException, WhiteMarbleException, IOException, InterruptedException {
         try {
             market.pushRow(chosenRow,currentPlayer);
 
@@ -465,7 +467,7 @@ public class Game extends Observable {
      * When the exception is caught, the method calls the exceptionHandler method.
      * @param chosenColumn : the column chosen by the current player
      */
-    public void pushColumnInMarket(int chosenColumn) throws NotEnoughSpaceInStorageException, WhiteMarbleException {
+    public void pushColumnInMarket(int chosenColumn) throws NotEnoughSpaceInStorageException, WhiteMarbleException, IOException, InterruptedException {
         try {
             market.pushColumn(chosenColumn,currentPlayer);
             int shield=GetAmount.getAmount(currentPlayer.getBuffer(),Resource.SHIELD);
@@ -496,7 +498,7 @@ public class Game extends Observable {
         return false;
     }
 
-    public void connectPlayer(String nickname){
+    public void connectPlayer(String nickname) throws IOException, InterruptedException {
     }
 
     public boolean checkNickname(String nickname){
@@ -527,7 +529,7 @@ public class Game extends Observable {
     protected void exceptionHandler(FullColumnException e) {
     }
 
-    protected void exceptionHandler(EndGameException e) {
+    protected void exceptionHandler(EndGameException e) throws IOException, InterruptedException {
     }
 
     protected void exceptionHandler(RequirementsException e) {
@@ -536,10 +538,10 @@ public class Game extends Observable {
     protected void exceptionHandler(CallForCouncilException e) {
     }
 
-    protected void exceptionHandler(LastSpaceReachedException e) {
+    protected void exceptionHandler(LastSpaceReachedException e) throws IOException, InterruptedException {
     }
 
-    protected void exceptionHandler(EndOfSolitaireGame e) {
+    protected void exceptionHandler(EndOfSolitaireGame e) throws IOException, InterruptedException {
     }
 
     protected void exceptionHandler(ImpossibleProductionException e) {
@@ -651,7 +653,7 @@ public class Game extends Observable {
     /**
      * save information for a possible restart game
      */
-    protected void restoreGame(){
+    protected void restoreGame() throws IOException, InterruptedException {
 
 
         restoreInformationOfMarket();
@@ -662,7 +664,7 @@ public class Game extends Observable {
     /**
      * restore information
      */
-    private void restoreInformationOfProductionDeck() {
+    private void restoreInformationOfProductionDeck() throws IOException, InterruptedException {
         RuntimeTypeAdapterFactory<Storage> adapterStorage =
                 RuntimeTypeAdapterFactory
                         .of(Storage.class)
@@ -802,7 +804,7 @@ public class Game extends Observable {
     /**
      * restore information from backup
      */
-    private void restoreInformationOfMarket() {
+    private void restoreInformationOfMarket() throws IOException, InterruptedException {
         RuntimeTypeAdapterFactory<Storage> adapterStorage =
                 RuntimeTypeAdapterFactory
                         .of(Storage.class)
@@ -874,7 +876,7 @@ public class Game extends Observable {
     /**
      * restore information from backup
      */
-  private void restoreInformationOfReserve() {
+  private void restoreInformationOfReserve() throws IOException, InterruptedException {
       RuntimeTypeAdapterFactory<Storage> adapterStorage =
               RuntimeTypeAdapterFactory
                       .of(Storage.class)
@@ -953,9 +955,9 @@ public class Game extends Observable {
     /**
      * endGame method
      */
-    public void endGame(){}
+    public void endGame() throws IOException, InterruptedException {}
 
-    public void giveResourceFromClient(ArrayList<Resource> list) throws NotEnoughSpaceInStorageException {
+    public void giveResourceFromClient(ArrayList<Resource> list) throws NotEnoughSpaceInStorageException, IOException, InterruptedException {
         currentPlayer.takeResourceFromClientToGameboard(list);
     }
 

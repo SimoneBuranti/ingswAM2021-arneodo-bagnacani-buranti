@@ -64,7 +64,7 @@ public class ClientHandler implements Runnable {
         }
     }
 
-    public void readMessageServer(String msg){
+    public void readMessageServer(String msg) throws IOException, InterruptedException {
             Message parsedMsg = Message.deserialize(msg);
             parsedMsg.accept(clientController);
 
@@ -74,9 +74,11 @@ public class ClientHandler implements Runnable {
         writeStream.println(new PingMessage());
         wait(1000);
         if (pongo)
-        {writeStream.println(msg.serialize());
-        writeStream.flush();
-        setPongo(false);}
+        {
+            writeStream.println(msg.serialize());
+            writeStream.flush();
+            setPongo(false);
+        }
         else
             disconnect();
     }

@@ -5,6 +5,8 @@ import it.polimi.ingsw.server.model.exceptions.EndOfSolitaireGame;
 import it.polimi.ingsw.server.model.GameSolitaire;
 import it.polimi.ingsw.server.model.colours.Green;
 
+import java.io.IOException;
+
 /**
  * this class implements the ActionMarker interface and
  * represents the action marker that discards two green production cards from level one deck up to level three deck
@@ -36,7 +38,7 @@ public class ActionMarkerProductionGreen extends ActionMarker {
      * @throws EndOfSolitaireGame : the exception which is thrown when all the green production cards decks are empty
      *                              and states that the solitaire game is over and the winner is Lorenzo The Magnificent
      */
-    public void actionMarkerEffect(GameSolitaire game) throws EmptyException, EndOfSolitaireGame {
+    public void actionMarkerEffect(GameSolitaire game) throws EmptyException, EndOfSolitaireGame, IOException, InterruptedException {
         game.removeProductionCard(new Green());
         game.removeProductionCard(new Green());
     }

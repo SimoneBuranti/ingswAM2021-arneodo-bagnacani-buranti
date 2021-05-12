@@ -8,9 +8,10 @@ import it.polimi.ingsw.server.model.actionMarkers.ActionMarker;
 public class UseActionMarkerMessage extends Message {
     private final MessageType messageType = MessageType.USEACTIONMARKER;
 
-
-    public UseActionMarkerMessage()
+    private String actionType;
+    public UseActionMarkerMessage(String actionType)
     {
+        this.actionType=actionType;
     }
 
     @Override
@@ -23,4 +24,7 @@ public class UseActionMarkerMessage extends Message {
         v.visit(this);
     }
 
+    public String getActionType() {
+        return actionType;
+    }
 }

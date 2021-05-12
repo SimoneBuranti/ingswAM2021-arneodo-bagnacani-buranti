@@ -1,5 +1,7 @@
 package it.polimi.ingsw.messages;
 
+import java.io.IOException;
+
 public class KeepLeaderCardsMessage extends Message{
     /**
      * type of message
@@ -25,7 +27,7 @@ public class KeepLeaderCardsMessage extends Message{
     }
 
     @Override
-    public void accept(MessageVisitor v) {
+    public void accept(MessageVisitor v) throws IOException, InterruptedException {
         v.visit(this);
     }
 }

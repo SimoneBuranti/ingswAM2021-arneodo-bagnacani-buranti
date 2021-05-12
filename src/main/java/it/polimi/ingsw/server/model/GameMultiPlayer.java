@@ -73,7 +73,7 @@ public class GameMultiPlayer extends Game {
      * @param numberOfPlayer : the number of players in the game
      * @param nickName : the collection of players' nicknames
      */
-    public GameMultiPlayer(int numberOfPlayer, ArrayList<String> nickName, Boolean newGame){
+    public GameMultiPlayer(int numberOfPlayer, ArrayList<String> nickName, Boolean newGame) throws IOException, InterruptedException {
         super(newGame);
         if(newGame){
         this.playerList= new ArrayList<>(numberOfPlayer);
@@ -99,7 +99,7 @@ public class GameMultiPlayer extends Game {
      * @param numberOfPlayer : the number of players in the game
      * @param nickNameInOrder : collection of players' nicknames already sorted according to the random assignment of the inkwell
      */
-    private void createPlayer(int numberOfPlayer,ArrayList<String> nickNameInOrder){
+    private void createPlayer(int numberOfPlayer,ArrayList<String> nickNameInOrder) throws IOException, InterruptedException {
        if (numberOfPlayer==2)
         {
             firstPlayer=new PlayerFirst(nickNameInOrder.get(0),this);
@@ -218,7 +218,7 @@ public class GameMultiPlayer extends Game {
      * @param player : the one who discards the resource
      */
     @Override
-    public void moveEveryoneExcept(Player player){
+    public void moveEveryoneExcept(Player player) throws IOException, InterruptedException {
         for(Player p : playerList){
             if (p != player) {
                 try {
@@ -245,7 +245,7 @@ public class GameMultiPlayer extends Game {
     }
 
     @Override
-    public void connectPlayer(String nickname){
+    public void connectPlayer(String nickname) throws IOException, InterruptedException {
         for(Player p : playerList){
             if(p.getNickName().equals(nickname) && !(p.isConnected())){
                 p.setConnected();
@@ -313,12 +313,12 @@ public class GameMultiPlayer extends Game {
      * @param e : the exception to handle
      */
     @Override
-    protected void exceptionHandler(LastSpaceReachedException e) {
+    protected void exceptionHandler(LastSpaceReachedException e) throws IOException, InterruptedException {
         for(Player p : playerList){
             p.setPapal();
         }
-
         lastTurn = true;
+        notifyObserver(new LastTurnMessage());
     }
 
 
@@ -327,8 +327,10 @@ public class GameMultiPlayer extends Game {
      * @param e : the exception to handle
      */
     @Override
-    protected void exceptionHandler(EndGameException e) {
+    protected void exceptionHandler(EndGameException e) throws IOException, InterruptedException {
         lastTurn = true;
+        notifyObserver(new LastTurnMessage());
+
     }
 
 
@@ -336,7 +338,7 @@ public class GameMultiPlayer extends Game {
      * this method handles the CallForCouncilException by setting the lastTurn attribute to true
      * @param e : the exception to handle
      */
-    protected void endOfLastTurn(EndGameException e) {
+    protected void endOfLastTurn(EndGameException e) throws IOException, InterruptedException {
         endGame();
     }
 
@@ -555,10 +557,9 @@ public class GameMultiPlayer extends Game {
      * endGame method
      */
     @Override
-    public void endGame(){
-        notifyObserver(new EndGamePlayerWinnnerMessage(theWinnerIs()));
+    public void endGame() throws IOException, InterruptedException {
+        notifyObserver(new EndGamePlayerWinnerMessage(theWinnerIs()));
         FileClass.FileDestroyer();
-
     }
 
 }

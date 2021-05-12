@@ -9,17 +9,14 @@ public class LorenzoTheMagnificentConfigMessage extends Message {
     private final MessageType messageType = MessageType.LORENZOCONFIG;
 
 
-    private int currCall;
+
 
     private int faithIndicator;
 
 
-    public LorenzoTheMagnificentConfigMessage(int currCall, int faithIndicator){
+    public LorenzoTheMagnificentConfigMessage(int faithIndicator){
 
-        this.currCall=currCall;
         this.faithIndicator =faithIndicator;
-
-
     }
 
     @Override
@@ -38,7 +35,5 @@ public class LorenzoTheMagnificentConfigMessage extends Message {
         return faithIndicator;
     }
 
-    public int getCurrCall() {
-        return currCall;
-    }
+
 }

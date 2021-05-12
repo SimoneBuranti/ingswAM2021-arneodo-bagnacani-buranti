@@ -27,7 +27,7 @@ import java.util.Map;
  */
 public class App 
 {
-    public static void main( String[] args ) throws FileNotFoundException, RequirementsException, LeaderCardsGameBoardEmptyException {ArrayList<String> nickname =new ArrayList<>(2);
+    public static void main( String[] args ) throws IOException, RequirementsException, LeaderCardsGameBoardEmptyException, InterruptedException {ArrayList<String> nickname =new ArrayList<>(2);
         nickname.add("aa");
         nickname.add("bb");
         FileWriter cofiguration = null;

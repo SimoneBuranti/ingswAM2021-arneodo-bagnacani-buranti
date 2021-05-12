@@ -11,6 +11,7 @@ import it.polimi.ingsw.server.model.leaderCards.*;
 import it.polimi.ingsw.server.model.productionCards.DeckProductionCard;
 import it.polimi.ingsw.server.model.requirements.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -205,7 +206,7 @@ public class Player {
         gameBoardOfPlayer.setPapal();
     }
 
-    public void discardResource(Resource resource){
+    public void discardResource(Resource resource) throws IOException, InterruptedException {
         Reserve.addResource(resource);
         game.moveEveryoneExcept(this);
     }
@@ -393,7 +394,7 @@ public class Player {
      * @param list
      * @throws NotEnoughSpaceInStorageException
      */
-    public void takeResourceFromClientToGameboard(ArrayList<Resource> list) throws NotEnoughSpaceInStorageException {
+    public void takeResourceFromClientToGameboard(ArrayList<Resource> list) throws NotEnoughSpaceInStorageException, IOException, InterruptedException {
         int delta;
             gameBoardOfPlayer.takeFromMarket(list);
             delta= buffer.size()-list.size();

@@ -3,6 +3,7 @@ package it.polimi.ingsw.server.model;
 import it.polimi.ingsw.server.model.GameMultiPlayer;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -19,8 +20,7 @@ class DiscardTest {
      *
      */
     @Test
-    public void discardTest()
-    {
+    public void discardTest() throws IOException, InterruptedException {
 
     ArrayList<String> nickname= new ArrayList<>(3);
     nickname.add("ale");
@@ -50,8 +50,7 @@ class DiscardTest {
      * test which controls the correctness of savage of two leader cards (base)
      */
     @Test
-    public void discardTestOne()
-    {
+    public void discardTestOne() throws IOException, InterruptedException {
 
         ArrayList<String> nickname= new ArrayList<>(3);
         nickname.add("ale");
@@ -78,8 +77,7 @@ class DiscardTest {
      */
 
     @Test
-    public void discardTestTwo()
-    {
+    public void discardTestTwo() throws IOException, InterruptedException {
 
         ArrayList<String> nickname= new ArrayList<>(3);
         nickname.add("ale");

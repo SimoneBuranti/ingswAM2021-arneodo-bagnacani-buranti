@@ -1,6 +1,8 @@
 package it.polimi.ingsw.server.model;
 
 import com.google.gson.Gson;
+import it.polimi.ingsw.Observer.Observable;
+import it.polimi.ingsw.messages.observable.ReserveValueMessage;
 import it.polimi.ingsw.server.model.exceptions.UnavailableResourceException;
 
 import java.io.FileWriter;
@@ -10,7 +12,7 @@ import java.util.*;
 /**
  * this class represents the game resource reserve common to all players
  */
-public class Reserve {
+public class Reserve extends Observable {
 
     /**
      * AMOUNT indicates the finite initial amount per resource type
@@ -94,8 +96,10 @@ public class Reserve {
 
 
 
- public Reserve(Map map) {
+ public Reserve(Map map) throws IOException, InterruptedException {
         reservePools=map;
+        notifyObserver(new ReserveValueMessage(map));
+
     }
 }
 

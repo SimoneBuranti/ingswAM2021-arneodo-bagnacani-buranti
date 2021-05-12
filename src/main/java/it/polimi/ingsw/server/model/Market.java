@@ -50,7 +50,7 @@ public class Market extends Observable {
      * This constructor creates the 13 marbles by adding them to the list.
      * After shuffling the list, it initialises the two attributes grid and extra
      */
-    public Market(){
+    public Market() throws IOException, InterruptedException {
 
         RedMarble redOne = new RedMarble();
         initialMarbleList.add(redOne);
@@ -271,8 +271,9 @@ public class Market extends Observable {
 
         FileWriter config = null;
         String jsonStrin = gson.toJson(latestMarbleList);
+
         try {
-            // Constructs a FileWriter given a file name, using the platform's default charset
+
             config = new FileWriter("src/main/resources/Market.json");
             config.write(jsonStrin);
         } catch (IOException e) {
@@ -288,7 +289,7 @@ public class Market extends Observable {
 
 
 
-    public Market(Marble[] list){
+    public Market(Marble[] list) throws IOException, InterruptedException {
 
         for(int i=0; i < 13; i++)
             initialMarbleList.add(list[i]);

@@ -9,8 +9,10 @@ import it.polimi.ingsw.server.model.leaderCards.*;
 import it.polimi.ingsw.server.model.players.*;
 import it.polimi.ingsw.server.model.requirements.*;
 
+import java.io.IOException;
+
 public class JsonApp {
-    public static void main( String[] args ){
+    public static void main( String[] args ) throws IOException, InterruptedException {
         //Game game = new GameSolitaire("Ali");
         Reserve reserve = new Reserve();
         Player player = new PlayerFirst("Ali", new Game(false));

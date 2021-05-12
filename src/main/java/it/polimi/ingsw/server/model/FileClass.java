@@ -6,10 +6,8 @@ public class FileClass {
     public static void FileDestroyer(){
 
         File f = new File("src/main/resources/GameInit.json");
-
         if (f.exists())
             f.delete();
-
 
         f = new File("src/main/resources/DeckProductionCardOneBluLatest.json");
         if (f.exists())
@@ -79,11 +77,6 @@ public class FileClass {
             f.delete();
 
 
-        f = new File("src/main/resources/InformationAboutNickname.json");
-        if (f.exists())
-            f.delete();
-
-
         f = new File("src/main/resources/InformationAboutTurn.json");
         if (f.exists())
             f.delete();
@@ -112,28 +105,6 @@ public class FileClass {
         f = new File("src/main/resources/lastTurn.json");
         if (f.exists())
             f.delete();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     }
 }

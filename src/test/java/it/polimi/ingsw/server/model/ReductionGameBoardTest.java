@@ -11,6 +11,7 @@ import it.polimi.ingsw.server.model.productionCards.DeckProductionCardOneGreen;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -116,7 +117,7 @@ class ReductionGameBoardTest {
      */
     @Test
     @DisplayName("buyProductionCard() test - affordable card")
-    public void buyProductionCardTest0(){
+    public void buyProductionCardTest0() throws IOException, InterruptedException {
         new Reserve();
         Resource parameter = Resource.SERVANT;
         GameBoardInterface gameBoard = new GameBoard() ;
@@ -214,7 +215,7 @@ class ReductionGameBoardTest {
      */
     @Test
     @DisplayName("buyProductionCard() test - 3 affordable card")
-    public void buyProductionCardTest1(){
+    public void buyProductionCardTest1() throws IOException, InterruptedException {
         new Reserve();
         Resource parameter = Resource.ROCK;
         GameBoardInterface gameBoard = new GameBoard() ;
@@ -424,7 +425,7 @@ class ReductionGameBoardTest {
      */
     @Test
     @DisplayName("buyProductionCard() test - not affordable card")
-    public void buyProductionCardTest2(){
+    public void buyProductionCardTest2() throws IOException, InterruptedException {
         new Reserve();
         Resource parameter = Resource.COIN;
         GameBoardInterface gameBoard = new GameBoard() ;

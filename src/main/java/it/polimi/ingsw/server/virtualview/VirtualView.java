@@ -6,6 +6,8 @@ import it.polimi.ingsw.server.controller.ClientController;
 import it.polimi.ingsw.server.model.Game;
 import it.polimi.ingsw.server.network.ClientHandler;
 
+import java.io.IOException;
+
 public class VirtualView implements Observer {
     private final ClientController clientController;
     private final Game game;
@@ -30,7 +32,7 @@ public class VirtualView implements Observer {
     * @param message the update message.
     */
     @Override
-    public void update(Message message) {
+    public void update(Message message) throws IOException, InterruptedException {
     clientController.getClientHandler().sendMessage(message);
 }
 
@@ -49,7 +51,7 @@ public class VirtualView implements Observer {
      * @param message the update message.
      */
     @Override
-    public void updateOnlyCurrent(Message message) {
+    public void updateOnlyCurrent(Message message) throws IOException, InterruptedException {
         if (clientController.turnCheck())
         clientController.getClientHandler().sendMessage(message);
     }
@@ -63,7 +65,7 @@ public class VirtualView implements Observer {
      * @param message the update message.
      */
     @Override
-    public void updateNotTheCurrent(Message message) {
+    public void updateNotTheCurrent(Message message) throws IOException, InterruptedException {
         if (!clientController.turnCheck())
             clientController.getClientHandler().sendMessage(message);
     }
@@ -76,7 +78,7 @@ public class VirtualView implements Observer {
      * @param message the update message.
      */
     @Override
-    public void updateOnlyObserverByNickname(Message message,String nickame) {
+    public void updateOnlyObserverByNickname(Message message,String nickame) throws IOException, InterruptedException {
         if (clientController.getNickname().equals(nickame))
             clientController.getClientHandler().sendMessage(message);
     }

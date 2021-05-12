@@ -90,10 +90,7 @@ public class ViewController implements MessageVisitor {
         game.setCurrentPlayer();
     }
 
-    @Override
-    public void visit(EndGameMessage msg) {
 
-    }
 
     @Override
     public void visit(EndOfTurnMessage msg) {
@@ -105,30 +102,6 @@ public class ViewController implements MessageVisitor {
 
     }
 
-    @Override
-    public void visit(LorenzoActionMessage msg) {
-        game.actionMarkerEffect(msg.getActionMarker());
-    }
-
-    @Override
-    public void visit(OpponentActivateLeaderCardMessage msg) {
-        game.activateLeaderCard(msg.getNickname(), msg.getLeaderCard());
-    }
-
-    @Override
-    public void visit(OpponentDiscardLeaderCardMessage msg) {
-        game.discardLeaderCard(msg.getNickname(), msg.getLeaderCard());
-    }
-
-    @Override
-    public void visit(OpponentFaithMoveMessage msg) {
-        game.faithMove(msg.getPlayer().getNickName());
-    }
-
-    @Override
-    public void visit(OpponentBuyProductionCardMessage msg) {
-        game.removeOneProductionCard(msg.getProductionDeck());
-    }
 
     @Override
     public void visit(ReserveValueMessage msg) {
@@ -348,14 +321,10 @@ public class ViewController implements MessageVisitor {
         resourceMap.put(Resource.ROCK, msg.getRock());
         resourceMap.put(Resource.SERVANT, msg.getServant());
         resourceMap.put(Resource.SHIELD, msg.getShield());
-
         game.useResourceReserve(resourceMap);
     }
 
-    @Override
-    public void visit(MagnificentMoveMessage msg) {
-        game.moveBlackCrossOnce();
-    }
+
 
     @Override
     public void visit(MagnificentWinMessage msg) {
@@ -372,25 +341,12 @@ public class ViewController implements MessageVisitor {
 
     }
 
-    @Override
-    public void visit(MyDefeatMessage msg) {
-
-    }
 
     @Override
     public void visit(UseActionMarkerMessage msg) {
         game.useActionMarker();
     }
 
-    @Override
-    public void visit(ActionMarkerConfigMessage msg) {
-        game.setActionMarkerDeck(msg.getDeck());
-    }
-
-    @Override
-    public void visit(ActionMarkerChangeMessage msg) {
-        game.setActionMarkerDeck(msg.getDeck());
-    }
 
     @Override
     public void visit(ProductionMessageForNotCurrentMessage msg) {
@@ -467,7 +423,7 @@ public class ViewController implements MessageVisitor {
 
 
     @Override
-    public void visit(EndGamePlayerWinnnerMessage msg) {
+    public void visit(EndGamePlayerWinnerMessage msg) {
 
     }
 

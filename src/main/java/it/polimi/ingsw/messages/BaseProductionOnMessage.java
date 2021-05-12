@@ -2,6 +2,8 @@ package it.polimi.ingsw.messages;
 
 import it.polimi.ingsw.server.model.Resource;
 
+import java.io.IOException;
+
 public class BaseProductionOnMessage extends Message{
     /**
      * type of message
@@ -46,7 +48,7 @@ public class BaseProductionOnMessage extends Message{
     }
 
     @Override
-    public void accept(MessageVisitor v) {
+    public void accept(MessageVisitor v) throws IOException, InterruptedException {
         v.visit(this);
     }
 }

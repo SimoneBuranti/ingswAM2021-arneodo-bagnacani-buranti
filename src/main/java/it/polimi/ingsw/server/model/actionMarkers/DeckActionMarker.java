@@ -3,8 +3,6 @@ package it.polimi.ingsw.server.model.actionMarkers;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import it.polimi.ingsw.Observer.Observable;
-import it.polimi.ingsw.messages.observable.ActionMarkerChangeMessage;
-import it.polimi.ingsw.messages.observable.ActionMarkerConfigMessage;
 import it.polimi.ingsw.server.model.RuntimeTypeAdapterFactory;
 import it.polimi.ingsw.server.model.Mix;
 import it.polimi.ingsw.server.model.colours.*;
@@ -15,7 +13,6 @@ import it.polimi.ingsw.server.model.requirements.*;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * this class represents the action marker deck
@@ -38,7 +35,7 @@ public class DeckActionMarker extends Observable {
     /**
      * this constructor creates all the action markers and adds them to the list and shuffles the newly created deck
      */
-    public DeckActionMarker(){
+    public DeckActionMarker() throws IOException, InterruptedException {
 
         actionMarkerDeck = new ArrayList<>(7);
         ActionMarker actionMarkerBlue = new ActionMarkerProductionBlue();
@@ -58,7 +55,6 @@ public class DeckActionMarker extends Observable {
 
         Mix.MIXED(actionMarkerDeck);
 
-        notifyObserver(new ActionMarkerConfigMessage(actionMarkerDeck));
 
         }
 
@@ -83,9 +79,9 @@ public class DeckActionMarker extends Observable {
     /**
      * this method mixes the action markers of the deck
      */
-    public void mixDeck(){
+    public void mixDeck() {
         Mix.MIXED(actionMarkerDeck);
-        notifyObserver(new ActionMarkerChangeMessage(actionMarkerDeck));
+
     }
 
     /**
@@ -202,7 +198,4 @@ public class DeckActionMarker extends Observable {
         this.actionMarkerDeck =new ArrayList<ActionMarker>();
         int l=list.length;
         for(int i=0; i < l; i++)
-            actionMarkerDeck.add(list[i]);
-
-        notifyObserver(new ActionMarkerConfigMessage(actionMarkerDeck));
-    }}
+            actionMarkerDeck.add(list[i]); }}

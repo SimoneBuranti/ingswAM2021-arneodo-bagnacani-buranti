@@ -24,12 +24,12 @@ public class GameControllerMultiplayer extends GameController {
  }
 
  @Override
- public void handleMessage(NumberPlayerMessage msg, ClientController clientController) {
+ public void handleMessage(NumberPlayerMessage msg, ClientController clientController) throws IOException, InterruptedException {
   clientController.getClientHandler().sendMessage(new CompleteRunningMatchErrorMessage());
  }
 
  @Override
- public void handleMessage(UsernameMessage msg, ClientController clientController) {
+ public void handleMessage(UsernameMessage msg, ClientController clientController) throws IOException, InterruptedException {
   clientController.getClientHandler().sendMessage(new CompleteRunningMatchErrorMessage());
   try {
    clientController.getClientHandler().disconnect();

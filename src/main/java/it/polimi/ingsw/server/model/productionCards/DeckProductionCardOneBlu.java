@@ -22,7 +22,7 @@ public class DeckProductionCardOneBlu extends DeckProductionCard {
     /**
      * this constructor creates all the production cards and adds them to the list and shuffles the newly created deck
      */
-    public DeckProductionCardOneBlu(){
+    public DeckProductionCardOneBlu() throws IOException, InterruptedException {
 
 
 
@@ -151,7 +151,7 @@ public class DeckProductionCardOneBlu extends DeckProductionCard {
             /**
      * this constructor creates all the production cards and adds them to the list and shuffles the newly created deck
      */
-    public DeckProductionCardOneBlu(ProductionCard[] deckRecover){
+    public DeckProductionCardOneBlu(ProductionCard[] deckRecover) throws IOException, InterruptedException {
         this.deck = new ArrayList<>();
         int l=deckRecover.length;
         for(int i=0; i < l; i++)

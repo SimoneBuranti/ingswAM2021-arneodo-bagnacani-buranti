@@ -11,6 +11,7 @@ import it.polimi.ingsw.server.model.colours.*;
 import it.polimi.ingsw.server.model.exceptions.EmptyException;
 import it.polimi.ingsw.server.model.exceptions.EndOfSolitaireGame;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -68,7 +69,7 @@ public abstract class DeckProductionCard extends Observable {
      * @throws EndOfSolitaireGame : the exception which is thrown when a production cards deck level three is empty
      *                              and states that the solitaire game is over and the winner is Lorenzo The Magnificent
      */
-    public void removeOneCard() throws EmptyException, EndOfSolitaireGame {
+    public void removeOneCard() throws EmptyException, EndOfSolitaireGame, IOException, InterruptedException {
         if(deck.isEmpty()) {
             throw new EmptyException();
         } else {
@@ -78,7 +79,6 @@ public abstract class DeckProductionCard extends Observable {
                 throw new EndOfSolitaireGame();
         }
 
-        notifyObserver(new DeckProductionCardMessage(getKey()));
     }
 
     /**

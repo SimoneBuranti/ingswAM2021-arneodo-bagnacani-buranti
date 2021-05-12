@@ -4,12 +4,14 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import it.polimi.ingsw.messages.observable.*;
 
+import java.io.IOException;
+
 public abstract class Message{
     static Gson gson = new Gson();
     private static JsonParser jsonParser = new JsonParser();
 
 
-    public abstract void accept(MessageVisitor v);
+    public abstract void accept(MessageVisitor v) throws IOException, InterruptedException;
     /**
      * Contains the method to deserialize messages from Json and to serialize
      * object in Json messages.
@@ -127,26 +129,11 @@ public abstract class Message{
             case LASTTURN:
                 return gson.fromJson(jsonObj, LastTurnMessage.class);
 
-            case ENDGAME:
-                return gson.fromJson(jsonObj, EndGameMessage.class);
-
-            case OPPONENTFAITHMOVE:
-                return gson.fromJson(jsonObj, OpponentFaithMoveMessage.class);
-
-            case OPPONENTBUYPRODCARD:
-                return gson.fromJson(jsonObj, OpponentBuyProductionCardMessage.class);
-
-            case OPPONENTDISCARDLC:
-                return gson.fromJson(jsonObj, OpponentDiscardLeaderCardMessage.class);
-
-            case OPPONENTACTIVATELC:
-                return gson.fromJson(jsonObj, OpponentActivateLeaderCardMessage.class);
 
             case SETPAPALS:
                 return gson.fromJson(jsonObj, SetPapalsMessage.class);
 
-            case LORENZOSACTION:
-                return gson.fromJson(jsonObj, LorenzoActionMessage.class);
+
 
             case RESERVEVALUE:
                 return gson.fromJson(jsonObj, ReserveValueMessage.class);
@@ -157,16 +144,13 @@ public abstract class Message{
             case PONG:
                 return gson.fromJson(jsonObj, PongMessage.class);
 
-            case MYDEFEAT:
-                return gson.fromJson(jsonObj, MyDefeatMessage.class);
+
             case MYVICTORY:
                 return gson.fromJson(jsonObj, MyVictoryMessage.class);
 
-            case ACTIONMARKERCHANGE:
-                return gson.fromJson(jsonObj, ActionMarkerChangeMessage.class);
 
-            case ACTIONMARKERCONFIG:
-                return gson.fromJson(jsonObj, ActionMarkerConfigMessage.class);
+
+
 
             case ACTIVATIONLEADERCARDNOTIFICATION:
                 return gson.fromJson(jsonObj, ActivationLeaderForNotCurrentMessage.class);
@@ -196,7 +180,7 @@ public abstract class Message{
                 return gson.fromJson(jsonObj, DiscardLeaderForNotCurrentMessage.class);
 
             case ENDGAMEWINNER:
-                return gson.fromJson(jsonObj, EndGamePlayerWinnnerMessage.class);
+                return gson.fromJson(jsonObj, EndGamePlayerWinnerMessage.class);
 
             case MYFAITHMOVECONFIG:
                 return gson.fromJson(jsonObj, FaithConfigMessage.class);
@@ -213,8 +197,7 @@ public abstract class Message{
             case LORENZOCONFIG:
                 return gson.fromJson(jsonObj, LorenzoTheMagnificentConfigMessage.class);
 
-            case MAGNIFICENTMOVEMESSAGE:
-                return gson.fromJson(jsonObj, MagnificentMoveMessage.class);
+
 
             case MAGNIFICENTWIN:
                 return gson.fromJson(jsonObj, MagnificentWinMessage.class);
@@ -279,7 +262,7 @@ public abstract class Message{
             case USEACTIONMARKER:
                 return gson.fromJson(jsonObj, UseActionMarkerMessage.class);
 
-                case
+
 
 
 

@@ -3,6 +3,8 @@ package it.polimi.ingsw.messages;
 import it.polimi.ingsw.messages.observable.*;
 import it.polimi.ingsw.messages.observable.LeadercardconfigMessage;
 
+import java.io.IOException;
+
 public interface MessageVisitor {
     //Error messages
     void visit(AlreadyActivatedErrorMessage msg);
@@ -20,14 +22,10 @@ public interface MessageVisitor {
     //Server to client
     void visit(RestartQuestionMessage msg);
     void visit(ChangeCurrentPlayerMessage msg);
-    void visit(EndGameMessage msg);
+
     void visit(EndOfTurnMessage msg);
     void visit(LastTurnMessage msg);
-    void visit(LorenzoActionMessage msg);
-    void visit(OpponentActivateLeaderCardMessage msg);
-    void visit(OpponentDiscardLeaderCardMessage msg);
-    void visit(OpponentFaithMoveMessage msg);
-    void visit(OpponentBuyProductionCardMessage msg);
+
     void visit(ReserveValueMessage msg);
     void visit(DoubleWhiteMarbleEffectMessage msg);
     void visit(NPlayersMessage msg);
@@ -36,23 +34,23 @@ public interface MessageVisitor {
 
     //Client to server
     void visit(RestartAnswerMessage msg);
-    void visit(ActivateLeaderCardMessage msg);
-    void visit(BaseProductionOnMessage msg);
-    void visit(BuyProductionCardMessage msg);
-    void visit(DiscardLeaderCardMessage msg);
-    void visit(DoubleProductionOnMessage msg);
-    void visit(EndOfProductionMessage msg);
+    void visit(ActivateLeaderCardMessage msg) throws IOException, InterruptedException;
+    void visit(BaseProductionOnMessage msg) throws IOException, InterruptedException;
+    void visit(BuyProductionCardMessage msg) throws IOException, InterruptedException;
+    void visit(DiscardLeaderCardMessage msg) throws IOException, InterruptedException;
+    void visit(DoubleProductionOnMessage msg) throws IOException, InterruptedException;
+    void visit(EndOfProductionMessage msg) throws IOException, InterruptedException;
     void visit(ExitMessage msg);
-    void visit(ExtraProductionOnMessage msg);
-    void visit(InitialResourcesMessage msg);
-    void visit(KeepLeaderCardsMessage msg);
-    void visit(KeepResourcesMessage msg);
-    void visit(NumberPlayerMessage msg);
-    void visit(ProductionOnMessage msg);
-    void visit(PushColumnMessage msg);
-    void visit(PushRowMessage msg);
-    void visit(UsernameMessage msg);
-    void visit(WhiteMarbleChoosenResourcesMessage msg);
+    void visit(ExtraProductionOnMessage msg) throws IOException, InterruptedException;
+    void visit(InitialResourcesMessage msg) throws IOException, InterruptedException;
+    void visit(KeepLeaderCardsMessage msg) throws IOException, InterruptedException;
+    void visit(KeepResourcesMessage msg) throws IOException, InterruptedException;
+    void visit(NumberPlayerMessage msg) throws IOException, InterruptedException;
+    void visit(ProductionOnMessage msg) throws IOException, InterruptedException;
+    void visit(PushColumnMessage msg) throws IOException, InterruptedException;
+    void visit(PushRowMessage msg) throws IOException, InterruptedException;
+    void visit(UsernameMessage msg) throws IOException, InterruptedException;
+    void visit(WhiteMarbleChoosenResourcesMessage msg) throws IOException, InterruptedException;
 
     //General messages
     void visit(PingMessage msg);
@@ -78,15 +76,14 @@ public interface MessageVisitor {
     void visit(ResultFromMarketMessage msg);
     void visit(ResultFromMarketNotCurrentMessage msg);
 
-    void visit(MagnificentMoveMessage msg);
+
     void visit(MagnificentWinMessage msg);
     void visit(LorenzoTheMagnificentConfigMessage msg);
     void visit(MyVictoryMessage msg);
-    void visit(MyDefeatMessage msg);
+
 
     void visit(UseActionMarkerMessage msg);
-    void visit(ActionMarkerConfigMessage msg);
-    void visit(ActionMarkerChangeMessage msg);
+
 
     void visit(ProductionMessageForNotCurrentMessage msg);
     void visit(ProductionMessageForCurrentMessage msg);
@@ -102,7 +99,7 @@ public interface MessageVisitor {
     void visit(FaithPathMessage msg);
     void visit(FaithPathOpponentMessage msg);
 
-    void visit(EndGamePlayerWinnnerMessage msg);
+    void visit(EndGamePlayerWinnerMessage msg);
 
     void visit(StorageConfigMessage msg);
     void visit(StrongboxConfigMessage msg);

@@ -3,6 +3,8 @@ package it.polimi.ingsw.messages;
 import it.polimi.ingsw.server.model.Resource;
 import it.polimi.ingsw.server.model.leaderCards.LeaderCard;
 
+import java.io.IOException;
+
 public class ExtraProductionOnMessage extends Message {
     /**
      * type of message
@@ -28,7 +30,7 @@ public class ExtraProductionOnMessage extends Message {
     }
 
     @Override
-    public void accept(MessageVisitor v) {
+    public void accept(MessageVisitor v) throws IOException, InterruptedException {
         v.visit(this);
     }
 

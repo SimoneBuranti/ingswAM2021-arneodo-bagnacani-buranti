@@ -6,6 +6,7 @@ import it.polimi.ingsw.server.model.exceptions.WhiteMarbleException;
 import it.polimi.ingsw.server.model.marbles.*;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -18,8 +19,7 @@ public class MarketTest {
      * test on creation of Market(Grid) with mixed functionality
      */
     @Test
-    public void initializationOfGridMarket()
-    {
+    public void initializationOfGridMarket() throws IOException, InterruptedException {
 
 
         ArrayList<String> nickname =new ArrayList<>(2);
@@ -48,8 +48,7 @@ public class MarketTest {
      * test on creation of Market(Extra) with mixed functionality
      */
     @Test
-    public void initializationOfExtraMarket()
-    {
+    public void initializationOfExtraMarket() throws IOException, InterruptedException {
 
         ArrayList<String> nickname =new ArrayList<>(2);
         nickname.add("ale");
@@ -76,7 +75,7 @@ public class MarketTest {
      * test controls if draw marble are shift in right way
      */
     @Test
-    public void PushRowsOfMarket(){
+    public void PushRowsOfMarket() throws IOException, InterruptedException {
 
         ArrayList<String> nickname =new ArrayList<>(2);
         nickname.add("ale");
@@ -126,7 +125,7 @@ public class MarketTest {
      *
      */
     @Test
-public void PushRowsOfMarketCycling() {
+public void PushRowsOfMarketCycling() throws IOException, InterruptedException {
 
         ArrayList<String> nickname =new ArrayList<>(2);
         nickname.add("ale");
@@ -206,7 +205,7 @@ public void PushRowsOfMarketCycling() {
      * test controls if draw marble are shift in right way
      */
     @Test
-    public void PushColumnsOfMarket(){
+    public void PushColumnsOfMarket() throws IOException, InterruptedException {
 
         ArrayList<String> nickname =new ArrayList<>(2);
         nickname.add("ale");
@@ -252,7 +251,7 @@ public void PushRowsOfMarketCycling() {
      *
      */
     @Test
-    public void PushColumnsOfMarketCycling(){
+    public void PushColumnsOfMarketCycling() throws IOException, InterruptedException {
 
         ArrayList<String> nickname =new ArrayList<>(2);
         nickname.add("ale");

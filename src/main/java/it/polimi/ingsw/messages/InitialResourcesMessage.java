@@ -2,6 +2,7 @@ package it.polimi.ingsw.messages;
 
 import it.polimi.ingsw.server.model.Resource;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class InitialResourcesMessage extends Message {
@@ -29,7 +30,7 @@ public class InitialResourcesMessage extends Message {
     }
 
     @Override
-    public void accept(MessageVisitor v) {
+    public void accept(MessageVisitor v) throws IOException, InterruptedException {
         v.visit(this);
     }
 }

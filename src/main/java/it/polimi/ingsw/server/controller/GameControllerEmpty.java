@@ -14,7 +14,7 @@ public class GameControllerEmpty extends GameController {
     }
 
     @Override
-    public void handleMessage(NumberPlayerMessage msg, ClientController clientController) {
+    public void handleMessage(NumberPlayerMessage msg, ClientController clientController) throws IOException, InterruptedException {
         if (server.getLobbySize()>0){
             if (msg.getnOfPlayers()== 1){
                 server.setGameController(new GameControllerSinglePlayer());
@@ -26,7 +26,7 @@ public class GameControllerEmpty extends GameController {
     }
 
     @Override
-    public void handleMessage(UsernameMessage msg, ClientController clientController) {
+    public void handleMessage(UsernameMessage msg, ClientController clientController) throws IOException, InterruptedException {
         if (server.getLobbySize()==0) {
             if (server.addPlayerToLobby(msg.getUsername())){
                 clientController.setNickname(msg.getUsername());

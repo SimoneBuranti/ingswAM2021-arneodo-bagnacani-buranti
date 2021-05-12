@@ -3,7 +3,6 @@ package it.polimi.ingsw.server.model;
 import com.google.gson.Gson;
 import it.polimi.ingsw.Observer.Observable;
 import it.polimi.ingsw.messages.observable.LorenzoTheMagnificentConfigMessage;
-import it.polimi.ingsw.messages.observable.MagnificentMoveMessage;
 import it.polimi.ingsw.server.model.exceptions.CallForCouncilException;
 import it.polimi.ingsw.server.model.exceptions.EndOfSolitaireGame;
 
@@ -51,7 +50,7 @@ public class LorenzoTheMagnificent extends Observable {
      */
     public void moveBlackCross() throws CallForCouncilException, EndOfSolitaireGame{
         faithIndicator++;
-        notifyObserver(new MagnificentMoveMessage());
+
         if (currCall < PAPAL_N-1 && faithIndicator == PAPAL_POS[currCall] )
             throw new CallForCouncilException();
         else if(currCall == PAPAL_N-1 && faithIndicator == PAPAL_POS[currCall])
@@ -110,10 +109,10 @@ public class LorenzoTheMagnificent extends Observable {
 
 
 
-    public LorenzoTheMagnificent(int[] list) {
+    public LorenzoTheMagnificent(int[] list) throws IOException, InterruptedException {
         faithIndicator=list[0];
         currCall=list[1];
-        notifyObserver(new LorenzoTheMagnificentConfigMessage(currCall,faithIndicator));
+        notifyObserver(new LorenzoTheMagnificentConfigMessage(faithIndicator));
     }
 
 

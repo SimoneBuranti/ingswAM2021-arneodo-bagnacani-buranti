@@ -3,6 +3,7 @@ package it.polimi.ingsw.messages;
 import it.polimi.ingsw.server.model.Resource;
 import it.polimi.ingsw.server.model.productionCards.ProductionCard;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class ProductionOnMessage extends Message {
@@ -36,7 +37,7 @@ public class ProductionOnMessage extends Message {
     }
 
     @Override
-    public void accept(MessageVisitor v) {
+    public void accept(MessageVisitor v) throws IOException, InterruptedException {
         v.visit(this);
     }
 

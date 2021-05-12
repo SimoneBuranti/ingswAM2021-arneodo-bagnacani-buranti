@@ -4,6 +4,7 @@ import it.polimi.ingsw.server.model.Game;
 import it.polimi.ingsw.server.model.GameMultiPlayer;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -11,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class GameMultiPlayerTest {
 
     @Test
-    public void setCurrentPlayerTest(){
+    public void setCurrentPlayerTest() throws IOException, InterruptedException {
         ArrayList<String> nickname = new ArrayList<>();
         nickname.add("Ali");
         nickname.add("Simo");

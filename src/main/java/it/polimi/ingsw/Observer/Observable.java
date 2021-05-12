@@ -2,6 +2,7 @@ package it.polimi.ingsw.Observer;
 
 import it.polimi.ingsw.messages.Message;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,7 +36,7 @@ public class Observable {
      *
      * @param message the message to be passed to the observers.
      */
-    protected void notifyObserver(Message message) {
+    protected void notifyObserver(Message message) throws IOException, InterruptedException {
         for (Observer observer : observers) {
             observer.update(message);
         }
@@ -47,7 +48,7 @@ public class Observable {
      * @param message the message to be passed to the observer.
      */
 
-    protected void notifyToOneObserver(Message message) {
+    protected void notifyToOneObserver(Message message) throws IOException, InterruptedException {
         for (Observer observer : observers) {
             observer.updateOnlyCurrent(message);
         }
@@ -60,7 +61,7 @@ public class Observable {
      * @param message the message to be passed to the observer.
      */
 
-    protected void notifyAllObserverLessOne(Message message) {
+    protected void notifyAllObserverLessOne(Message message) throws IOException, InterruptedException {
         for (Observer observer : observers) {
             observer.updateNotTheCurrent(message);
         }
@@ -73,7 +74,7 @@ public class Observable {
      * @param message the message to be passed to the observer.
      */
 
-    protected void notifyOnlyOneSpecificObserver(Message message,String nickname) {
+    protected void notifyOnlyOneSpecificObserver(Message message,String nickname) throws IOException, InterruptedException {
         for (Observer observer : observers) {
             observer.updateOnlyObserverByNickname(message,nickname);
         }

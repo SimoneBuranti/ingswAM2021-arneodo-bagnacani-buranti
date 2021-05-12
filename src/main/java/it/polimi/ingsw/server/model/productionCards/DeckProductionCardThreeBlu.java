@@ -18,7 +18,7 @@ public class DeckProductionCardThreeBlu extends DeckProductionCard {
     /**
      * this constructor creates all the production cards and adds them to the list and shuffles the newly created deck
      */
-    public  DeckProductionCardThreeBlu(){
+    public  DeckProductionCardThreeBlu() throws IOException, InterruptedException {
         Gson g = new Gson();
         String JSONArray;
 
@@ -132,7 +132,7 @@ public class DeckProductionCardThreeBlu extends DeckProductionCard {
             } } }
 
 
-    public DeckProductionCardThreeBlu(ProductionCard[] deckRecover){
+    public DeckProductionCardThreeBlu(ProductionCard[] deckRecover) throws IOException, InterruptedException {
         this.deck = new ArrayList<>();
         int l=deckRecover.length;
         for(int i=0; i < l; i++)

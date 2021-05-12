@@ -18,7 +18,7 @@ public class DeckProductionCardTwoBlu extends DeckProductionCard {
     /**
      * this constructor creates all the production cards and adds them to the list and shuffles the newly created deck
      */
-    public DeckProductionCardTwoBlu(){
+    public DeckProductionCardTwoBlu() throws IOException, InterruptedException {
 
         Blue blue= new Blue();
         deck = new ArrayList<>(4);
@@ -131,7 +131,7 @@ public class DeckProductionCardTwoBlu extends DeckProductionCard {
                 e.printStackTrace();
             } } }
 
-    public DeckProductionCardTwoBlu(ProductionCard[] deckRecover){
+    public DeckProductionCardTwoBlu(ProductionCard[] deckRecover) throws IOException, InterruptedException {
         this.deck = new ArrayList<>();
         int l=deckRecover.length;
         for(int i=0; i < l; i++)

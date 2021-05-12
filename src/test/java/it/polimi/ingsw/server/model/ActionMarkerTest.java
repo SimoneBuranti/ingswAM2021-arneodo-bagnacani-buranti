@@ -10,6 +10,8 @@ import it.polimi.ingsw.server.model.exceptions.EndOfSolitaireGame;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 /**
@@ -23,7 +25,7 @@ public class ActionMarkerTest {
      */
     @Test
     @DisplayName("Action Marker Production Cards Test")
-    public void actionMarkerBlueTest(){
+    public void actionMarkerBlueTest() throws IOException, InterruptedException {
         GameSolitaire game = new GameSolitaire("Ali",true);
         ActionMarker actionMarker= new ActionMarkerProductionBlue();
 
@@ -80,7 +82,7 @@ public class ActionMarkerTest {
      */
     @Test
     @DisplayName("Action Marker Production Cards Complete Test")
-    public void actionMarkerBlueCompleteTest() throws EndOfSolitaireGame {
+    public void actionMarkerBlueCompleteTest() throws EndOfSolitaireGame, IOException, InterruptedException {
 
         GameSolitaire game = new GameSolitaire("Ali",true);
         ActionMarker actionMarker= new ActionMarkerProductionBlue();
@@ -134,7 +136,7 @@ public class ActionMarkerTest {
      */
     @Test
     @DisplayName("Action Marker Black Cross Once Test")
-    public void ActionMarkerCrossOnceTest(){
+    public void ActionMarkerCrossOnceTest() throws IOException, InterruptedException {
         ActionMarkerForCrossOnce actionMarker = new ActionMarkerForCrossOnce();
         GameSolitaire game = new GameSolitaire("Ali",true);
 
@@ -196,7 +198,7 @@ public class ActionMarkerTest {
      */
     @Test
     @DisplayName("Action Marker Black Cross Double Test")
-    public void ActionMarkerCrossDoubleTest(){
+    public void ActionMarkerCrossDoubleTest() throws IOException, InterruptedException {
         ActionMarkerForCrossDouble actionMarker = new ActionMarkerForCrossDouble();
         GameSolitaire game = new GameSolitaire("Ali",true);
 

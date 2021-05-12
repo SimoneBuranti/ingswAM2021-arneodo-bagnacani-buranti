@@ -11,6 +11,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -23,7 +24,7 @@ class LeaderCardTestActivation {
      */
     @Test
     @DisplayName("Action Marker Production Cards Test")
-    public void activate() throws RequirementsException, LeaderCardsGameBoardEmptyException {
+    public void activate() throws RequirementsException, LeaderCardsGameBoardEmptyException, IOException, InterruptedException {
         ArrayList<String> nickname = new ArrayList<>(2);
         nickname.add("aa");
         nickname.add("bb");

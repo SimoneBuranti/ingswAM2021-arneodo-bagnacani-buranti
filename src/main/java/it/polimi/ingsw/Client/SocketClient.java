@@ -24,18 +24,20 @@ public class SocketClient {
 
     }
 
-    public void readMessage(){
 
+    public void readMessage(){
         try {
             String msg;
 
             while(true){
                 msg = in.readLine();
+                System.out.println(msg);
                 if(msg != null){
                     readMessageClient(msg);
+                    System.out.println(msg);
                 }
             }
-        } catch (IOException e) {
+        } catch (IOException | InterruptedException e) {
             try {
                 disconnect();
             } catch (IOException ioException) {
@@ -46,7 +48,9 @@ public class SocketClient {
     }
 
 
-    public void readMessageClient(String msg){
+    public void readMessageClient(String msg) throws IOException, InterruptedException {
+
+        System.out.println(msg);
         Message parsedMsg = Message.deserialize(msg);
         parsedMsg.accept(viewController);
     }

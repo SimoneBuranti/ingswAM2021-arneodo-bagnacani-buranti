@@ -5,6 +5,7 @@ import it.polimi.ingsw.server.model.exceptions.CallForCouncilException;
 import it.polimi.ingsw.server.model.exceptions.LastSpaceReachedException;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -18,7 +19,7 @@ class DiscardLeaderCardForFaithPoint {
      * test about discard one or two leaderCard, from one to two players, monitoring call on method moveTo of FaithPath
      */
     @Test
-    public void testOnDiscardOneCard() throws LeaderCardsGameBoardEmptyException, CallForCouncilException, LastSpaceReachedException {
+    public void testOnDiscardOneCard() throws LeaderCardsGameBoardEmptyException, CallForCouncilException, LastSpaceReachedException, IOException, InterruptedException {
         ArrayList<String> nickname = new ArrayList<>();
         nickname.add("ale");
         nickname.add("ali");

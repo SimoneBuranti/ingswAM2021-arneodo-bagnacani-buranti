@@ -4,6 +4,8 @@ import it.polimi.ingsw.messages.*;
 import it.polimi.ingsw.server.model.Game;
 import it.polimi.ingsw.server.network.Server;
 
+import java.io.IOException;
+
 public abstract class GameController {
     protected int numberOfPlayers;
     protected Game game;
@@ -11,8 +13,8 @@ public abstract class GameController {
 
     //Client to server
     public abstract void handleMessage(ExitMessage msg, ClientController clientController);
-    public abstract void handleMessage(NumberPlayerMessage msg, ClientController clientController);
-    public abstract void handleMessage(UsernameMessage msg, ClientController clientController);
+    public abstract void handleMessage(NumberPlayerMessage msg, ClientController clientController) throws IOException, InterruptedException;
+    public abstract void handleMessage(UsernameMessage msg, ClientController clientController) throws IOException, InterruptedException;
 
 
     public int getNumberOfPlayers() {

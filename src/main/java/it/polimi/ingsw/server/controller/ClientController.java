@@ -1,13 +1,14 @@
 package it.polimi.ingsw.server.controller;
 
 import it.polimi.ingsw.messages.*;
-import it.polimi.ingsw.messages.observable.DeckProductionCardConfigMessage;
-import it.polimi.ingsw.messages.observable.DeckProductionCardMessage;
+import it.polimi.ingsw.messages.observable.*;
 import it.polimi.ingsw.server.model.Game;
 import it.polimi.ingsw.server.model.exceptions.*;
 import it.polimi.ingsw.server.model.exceptions.LeaderCardsGameBoardEmptyException;
 import it.polimi.ingsw.server.network.*;
 import it.polimi.ingsw.server.virtualview.VirtualView;
+
+import java.io.IOException;
 
 public class ClientController implements MessageVisitor {
 
@@ -83,18 +84,14 @@ public class ClientController implements MessageVisitor {
     public void visit(NotYourTurnErrorMessage msg) {}
 
     @Override
-    public void visit(BootingLobbyErrorMessage msg) {
-    }
+    public void visit(BootingLobbyErrorMessage msg) { }
 
     @Override
-    public void visit(RestartQuestionMessage msg) {
-    }
+    public void visit(RestartQuestionMessage msg) { }
 
     @Override
     public void visit(ChangeCurrentPlayerMessage msg) {}
 
-    @Override
-    public void visit(EndGameMessage msg) {}
 
     @Override
     public void visit(EndOfTurnMessage msg) {}
@@ -102,20 +99,8 @@ public class ClientController implements MessageVisitor {
     @Override
     public void visit(LastTurnMessage msg) {}
 
-    @Override
-    public void visit(LorenzoActionMessage msg) {}
 
-    @Override
-    public void visit(OpponentActivateLeaderCardMessage msg) {}
 
-    @Override
-    public void visit(OpponentDiscardLeaderCardMessage msg) {}
-
-    @Override
-    public void visit(OpponentFaithMoveMessage msg) {}
-
-    @Override
-    public void visit(OpponentBuyProductionCardMessage msg) {}
 
     @Override
     public void visit(ReserveValueMessage msg) {}
@@ -142,12 +127,12 @@ public class ClientController implements MessageVisitor {
     }
 
     @Override
-    public void visit(NumberPlayerMessage msg) {
+    public void visit(NumberPlayerMessage msg) throws IOException, InterruptedException {
         server.getGameController().handleMessage(msg, this);
     }
 
     @Override
-    public void visit(UsernameMessage msg) {
+    public void visit(UsernameMessage msg) throws IOException, InterruptedException {
         server.getGameController().handleMessage(msg, this);
     }
 
@@ -169,7 +154,7 @@ public class ClientController implements MessageVisitor {
 
 
     @Override
-    public void visit(ActivateLeaderCardMessage msg) {
+    public void visit(ActivateLeaderCardMessage msg) throws IOException, InterruptedException {
         if (turnCheck()){
             try {
                 game.activateLeaderCard(msg.getCardNumber());
@@ -188,7 +173,7 @@ public class ClientController implements MessageVisitor {
 
 
     @Override
-    public void visit(BaseProductionOnMessage msg) {
+    public void visit(BaseProductionOnMessage msg) throws IOException, InterruptedException {
         if (turnCheck()){
             try {
                 game.baseProductionOn(msg.getFirstInputResource(),msg.getSecondInputResource(),msg.getOutputResource());
@@ -201,7 +186,7 @@ public class ClientController implements MessageVisitor {
     }
 
     @Override
-    public void visit(BuyProductionCardMessage msg) {
+    public void visit(BuyProductionCardMessage msg) throws IOException, InterruptedException {
         if (turnCheck()){
             try {
                 game.buyProductionCard(game.deckFromDeckNumber(msg.getDeckNumber()),msg.getColumnNumber());
@@ -217,7 +202,7 @@ public class ClientController implements MessageVisitor {
     }
 
     @Override
-    public void visit(DiscardLeaderCardMessage msg) {
+    public void visit(DiscardLeaderCardMessage msg) throws IOException, InterruptedException {
         if (turnCheck()){
             try {
                 game.discardLeaderCard(msg.getCardNumber());
@@ -231,7 +216,7 @@ public class ClientController implements MessageVisitor {
     }
 
     @Override
-    public void visit(DoubleProductionOnMessage msg) {
+    public void visit(DoubleProductionOnMessage msg) throws IOException, InterruptedException {
         if (turnCheck()){
             try {
                 game.anotherExtraProductionOn(msg.getOutputResource(),msg.getResourceLeader());
@@ -244,7 +229,7 @@ public class ClientController implements MessageVisitor {
     }
 
     @Override
-    public void visit(EndOfProductionMessage msg) {
+    public void visit(EndOfProductionMessage msg) throws IOException, InterruptedException {
         if (turnCheck()){
             game.endOfProduction();
         } else {
@@ -253,7 +238,7 @@ public class ClientController implements MessageVisitor {
     }
 
     @Override
-    public void visit(ExtraProductionOnMessage msg) {
+    public void visit(ExtraProductionOnMessage msg) throws IOException, InterruptedException {
         if (turnCheck()){
             game.extraProductionOn(msg.getOutputResource(),msg.getResourceLeader());
         } else {
@@ -262,7 +247,7 @@ public class ClientController implements MessageVisitor {
     }
 
     @Override
-    public void visit(InitialResourcesMessage msg) {
+    public void visit(InitialResourcesMessage msg) throws IOException, InterruptedException {
         if (turnCheck()){
             if(msg.getResources().size()==1){
                 game.initResourceOfPlayer(msg.getResources().get(0));
@@ -275,7 +260,7 @@ public class ClientController implements MessageVisitor {
     }
 
     @Override
-    public void visit(KeepLeaderCardsMessage msg) {
+    public void visit(KeepLeaderCardsMessage msg) throws IOException, InterruptedException {
         if (turnCheck()){
             game.saveLeaderCardChosen(msg.getChosenLeaderCards()[0],msg.getChosenLeaderCards()[1]);
         } else {
@@ -284,7 +269,7 @@ public class ClientController implements MessageVisitor {
     }
 
     @Override
-    public void visit(ProductionOnMessage msg) {
+    public void visit(ProductionOnMessage msg) throws IOException, InterruptedException {
         if (turnCheck()){
             try {
                 game.productionOn(msg.getColumnNumber(),msg.getList(), msg.getFaithMove());
@@ -299,7 +284,7 @@ public class ClientController implements MessageVisitor {
     }
 
     @Override
-    public void visit(PushColumnMessage msg) {
+    public void visit(PushColumnMessage msg) throws IOException, InterruptedException {
         if (turnCheck()){
             try {
                 game.pushColumnInMarket(msg.getColumnNumber());
@@ -314,7 +299,7 @@ public class ClientController implements MessageVisitor {
     }
 
     @Override
-    public void visit(PushRowMessage msg) {
+    public void visit(PushRowMessage msg) throws IOException, InterruptedException {
         if (turnCheck()){
             try {
                 game.pushColumnInMarket(msg.getRowNumber());
@@ -329,7 +314,7 @@ public class ClientController implements MessageVisitor {
     }
 
     @Override
-    public void visit(WhiteMarbleChoosenResourcesMessage msg) {
+    public void visit(WhiteMarbleChoosenResourcesMessage msg) throws IOException, InterruptedException {
         if (turnCheck()){
             try {
                 game.continueTakeFromMarketAfterChoosenWhiteMarble(msg.getChoosenResources());
@@ -342,7 +327,7 @@ public class ClientController implements MessageVisitor {
     }
 
     @Override
-    public void visit(KeepResourcesMessage msg) {
+    public void visit(KeepResourcesMessage msg) throws IOException, InterruptedException {
         if (turnCheck()){
             try {
                 game.giveResourceFromClient(msg.getChoosenResources());
@@ -372,12 +357,185 @@ public class ClientController implements MessageVisitor {
     }
 
     @Override
+    public void visit(NicknameStartedMessage msg) {
+
+    }
+
+    @Override
+    public void visit(UpdateForNotCurrentResourceMessage msg) {
+
+    }
+
+    @Override
+    public void visit(UpdateInitResourceMessage msg) {
+
+    }
+
+    @Override
+    public void visit(UpdateInitLeaderMessage msg) {
+
+    }
+
+    @Override
+    public void visit(UpdateChosenLeaderMessage msg) {
+
+    }
+
+    @Override
     public void visit(DeckProductionCardMessage msg) {
 
     }
 
     @Override
     public void visit(DeckProductionCardConfigMessage msg) {
+
+    }
+
+    @Override
+    public void visit(TakeCardMessage msg) {
+
+    }
+
+    @Override
+    public void visit(TakeCardForNotCurrentMessage msg) {
+
+    }
+
+    @Override
+    public void visit(ConfigurationMarketMessage msg) {
+
+    }
+
+    @Override
+    public void visit(ChangeMarketMessageColumn msg) {
+
+    }
+
+    @Override
+    public void visit(ChangeMarketMessageRow msg) {
+
+    }
+
+    @Override
+    public void visit(ResultFromMarketMessage msg) {
+
+    }
+
+    @Override
+    public void visit(ResultFromMarketNotCurrentMessage msg) {
+
+    }
+
+    @Override
+    public void visit(MagnificentWinMessage msg) {
+
+    }
+
+    @Override
+    public void visit(LorenzoTheMagnificentConfigMessage msg) {
+
+    }
+
+    @Override
+    public void visit(MyVictoryMessage msg) {
+
+    }
+
+
+    @Override
+    public void visit(UseActionMarkerMessage msg) {
+
+    }
+
+
+
+    @Override
+    public void visit(ProductionMessageForNotCurrentMessage msg) {
+
+    }
+
+    @Override
+    public void visit(ProductionMessageForCurrentMessage msg) {
+
+    }
+
+    @Override
+    public void visit(ResultOfProductionMessage msg) {
+
+    }
+
+    @Override
+    public void visit(ResultForProductionForNotCurrentMessage msg) {
+
+    }
+
+    @Override
+    public void visit(ActivationLeaderForNotCurrentMessage msg) {
+
+    }
+
+    @Override
+    public void visit(ActivationLeaderForCurrentMessage msg) {
+
+    }
+
+    @Override
+    public void visit(DiscardLeaderForNotCurrentMessage msg) {
+
+    }
+
+    @Override
+    public void visit(DiscardLeaderForCurrentMessage msg) {
+
+    }
+
+    @Override
+    public void visit(FaithPathMessage msg) {
+
+    }
+
+    @Override
+    public void visit(FaithPathOpponentMessage msg) {
+
+    }
+
+    @Override
+    public void visit(EndGamePlayerWinnerMessage msg) {
+
+    }
+
+    @Override
+    public void visit(StorageConfigMessage msg) {
+
+    }
+
+    @Override
+    public void visit(StrongboxConfigMessage msg) {
+
+    }
+
+    @Override
+    public void visit(LeadercardconfigMessage msg) {
+
+    }
+
+    @Override
+    public void visit(StorageExtraConfig msg) {
+
+    }
+
+    @Override
+    public void visit(StorageExtraDoubleConfig msg) {
+
+    }
+
+    @Override
+    public void visit(FaithConfigMessage msg) {
+
+    }
+
+    @Override
+    public void visit(ProductionCardConfigMessage msg) {
 
     }
 }

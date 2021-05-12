@@ -13,6 +13,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -27,7 +28,7 @@ public class BuyProductionCardTest {
      */
     @Test
     @DisplayName("Buy production card in solitaire game test")
-    public void buyInSolitaireGame(){
+    public void buyInSolitaireGame() throws IOException, InterruptedException {
         GameSolitaire game = new GameSolitaire("Ali",true);
 
         GameBoardInterface gameBoard = game.getGameBoardOfPlayer();

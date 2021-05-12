@@ -18,12 +18,12 @@ public class GameControllerDisconnection extends GameController {
     }
 
     @Override
-    public void handleMessage(NumberPlayerMessage msg, ClientController clientController) {
+    public void handleMessage(NumberPlayerMessage msg, ClientController clientController) throws IOException, InterruptedException {
         clientController.getClientHandler().sendMessage(new CompleteRunningMatchErrorMessage());
     }
 
     @Override
-    public void handleMessage(UsernameMessage msg, ClientController clientController) {
+    public void handleMessage(UsernameMessage msg, ClientController clientController) throws IOException, InterruptedException {
         if(game.checkNickname(msg.getUsername())){
             clientController.setNickname(msg.getUsername());
             clientController.setGame(this.getGame());

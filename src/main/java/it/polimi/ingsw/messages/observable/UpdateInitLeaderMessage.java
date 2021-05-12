@@ -16,8 +16,7 @@ public class UpdateInitLeaderMessage extends Message {
 
 
     public UpdateInitLeaderMessage(ArrayList<LeaderCard> leaderCards){
-
-        this.leaderCards.addAll(leaderCards);
+        this.leaderCards=leaderCards;
     }
 
     @Override

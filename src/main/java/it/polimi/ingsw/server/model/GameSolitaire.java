@@ -50,7 +50,7 @@ public class GameSolitaire extends Game {
 
 
 
-    public GameSolitaire(String nickName, Boolean newGame) {
+    public GameSolitaire(String nickName, Boolean newGame) throws IOException, InterruptedException {
         super(newGame);
         if(newGame){
         this.nickNamePlayer=nickName;
@@ -71,7 +71,7 @@ public class GameSolitaire extends Game {
      * @param chosenColumn : the game board column in which the current player wants to place the bought card
      */
     @Override
-    public void buyProductionCard(DeckProductionCard deck, int chosenColumn) throws EmptyException, FullColumnException, NotEnoughResourcesException, LevelException {
+    public void buyProductionCard(DeckProductionCard deck, int chosenColumn) throws EmptyException, FullColumnException, NotEnoughResourcesException, LevelException, IOException, InterruptedException {
 
         super.buyProductionCard(deck, chosenColumn);
 
@@ -87,15 +87,16 @@ public class GameSolitaire extends Game {
      * this method takes the first action marker of the deck and applies its effect and catches EmptyException and EndOfSolitaireGame.
      * When the exceptions are caught, the method calls the exceptionHandler method.
      */
-    public void revealAndActivateActionMarker() {
+    public void revealAndActivateActionMarker() throws IOException, InterruptedException {
         try {
+            notifyObserver(new UseActionMarkerMessage(deckActionMarker.showFirst().getType()));
             deckActionMarker.pickUpFirstCard().actionMarkerEffect(this);
         } catch (EmptyException e) {
             exceptionHandler(e);
         } catch (EndOfSolitaireGame endOfSolitaireGame) {
             exceptionHandler(endOfSolitaireGame);
         }
-        notifyObserver(new UseActionMarkerMessage());
+
     }
 
 
@@ -103,7 +104,7 @@ public class GameSolitaire extends Game {
      * this method calls the Lorenzo the magnificent method to move the black cross,
      * if CallForCouncilException or EndOfSolitaireGame is caught it calls the exceptionHandler method to handle it
      */
-    public void moveBlackCrossOnce(){
+    public void moveBlackCrossOnce() throws IOException, InterruptedException {
         try {
             lorenzoTheMagnificent.moveBlackCross();
         } catch (CallForCouncilException e) {
@@ -117,7 +118,7 @@ public class GameSolitaire extends Game {
      * this method calls the Lorenzo the magnificent method to move the black cross twice,
      * if CallForCouncilException or EndOfSolitaireGame is caught it calls the exceptionHandler method to handle it
      */
-    public void moveBlackCrossDouble(){
+    public void moveBlackCrossDouble() throws IOException, InterruptedException {
         try {
             lorenzoTheMagnificent.moveBlackCross();
         } catch (CallForCouncilException e) {
@@ -138,7 +139,7 @@ public class GameSolitaire extends Game {
     /**
      * this method calls the action marker deck method to mix action markers
      */
-    public void mixDeckActionMarker(){
+    public void mixDeckActionMarker() throws IOException, InterruptedException {
         deckActionMarker.mixDeck();
     }
 
@@ -150,7 +151,7 @@ public class GameSolitaire extends Game {
      *                              and states that the solitaire game is over and the winner is Lorenzo The Magnificent
      * @throws EmptyException : the exception which is thrown when there are no more cards left in the level three deck
      */
-    public void removeProductionCard(Blue blue) throws EndOfSolitaireGame, EmptyException {
+    public void removeProductionCard(Blue blue) throws EndOfSolitaireGame, EmptyException, IOException, InterruptedException {
         try {
             deckProductionCardOneBlu.removeOneCard();
         } catch (EmptyException e) {
@@ -158,7 +159,11 @@ public class GameSolitaire extends Game {
                 deckProductionCardTwoBlu.removeOneCard();
             } catch (EmptyException emptyException) {
                 deckProductionCardThreeBlu.removeOneCard();
+            } catch (InterruptedException | IOException interruptedException) {
+                interruptedException.printStackTrace();
             }
+        } catch (InterruptedException | IOException e) {
+            e.printStackTrace();
         }
     }
     /**
@@ -169,7 +174,7 @@ public class GameSolitaire extends Game {
      *                              and states that the solitaire game is over and the winner is Lorenzo The Magnificent
      * @throws EmptyException : the exception which is thrown when there are no more cards left in the level three deck
      */
-    public void removeProductionCard(Yellow yellow) throws EndOfSolitaireGame, EmptyException {
+    public void removeProductionCard(Yellow yellow) throws EndOfSolitaireGame, EmptyException, IOException, InterruptedException {
         try {
             deckProductionCardOneYellow.removeOneCard();
         } catch (EmptyException e) {
@@ -177,7 +182,11 @@ public class GameSolitaire extends Game {
                 deckProductionCardTwoYellow.removeOneCard();
             } catch (EmptyException emptyException) {
                 deckProductionCardThreeYellow.removeOneCard();
+            } catch (InterruptedException | IOException interruptedException) {
+                interruptedException.printStackTrace();
             }
+        } catch (InterruptedException | IOException e) {
+            e.printStackTrace();
         }
 
 
@@ -190,7 +199,7 @@ public class GameSolitaire extends Game {
      *                              and states that the solitaire game is over and the winner is Lorenzo The Magnificent
      * @throws EmptyException : the exception which is thrown when there are no more cards left in the level three deck
      */
-    public void removeProductionCard(Green green) throws EndOfSolitaireGame, EmptyException {
+    public void removeProductionCard(Green green) throws EndOfSolitaireGame, EmptyException, IOException, InterruptedException {
         try {
             deckProductionCardOneGreen.removeOneCard();
         } catch (EmptyException e) {
@@ -198,7 +207,11 @@ public class GameSolitaire extends Game {
                 deckProductionCardTwoGreen.removeOneCard();
             } catch (EmptyException emptyException) {
                 deckProductionCardThreeGreen.removeOneCard();
+            } catch (InterruptedException | IOException interruptedException) {
+                interruptedException.printStackTrace();
             }
+        } catch (InterruptedException | IOException e) {
+            e.printStackTrace();
         }
 
 
@@ -211,7 +224,7 @@ public class GameSolitaire extends Game {
      *                              and states that the solitaire game is over and the winner is Lorenzo The Magnificent
      * @throws EmptyException : the exception which is thrown when there are no more cards left in the level three deck
      */
-    public void removeProductionCard(Violet violet) throws EndOfSolitaireGame, EmptyException {
+    public void removeProductionCard(Violet violet) throws EndOfSolitaireGame, EmptyException, IOException, InterruptedException {
         try {
             deckProductionCardOneViolet.removeOneCard();
         } catch (EmptyException e) {
@@ -219,7 +232,11 @@ public class GameSolitaire extends Game {
                 deckProductionCardTwoViolet.removeOneCard();
             } catch (EmptyException emptyException) {
                 deckProductionCardThreeViolet.removeOneCard();
+            } catch (InterruptedException | IOException interruptedException) {
+                interruptedException.printStackTrace();
             }
+        } catch (InterruptedException | IOException e) {
+            e.printStackTrace();
         }
 
     }
@@ -284,7 +301,7 @@ public class GameSolitaire extends Game {
      * @param player : the one who discards the resource
      */
     @Override
-    public void moveEveryoneExcept(Player player){
+    public void moveEveryoneExcept(Player player) throws IOException, InterruptedException {
         try {
             lorenzoTheMagnificent.moveBlackCross();
         } catch (CallForCouncilException e1) {
@@ -304,7 +321,7 @@ public class GameSolitaire extends Game {
     }
 
     @Override
-    public void connectPlayer(String nickname){
+    public void connectPlayer(String nickname) throws IOException, InterruptedException{
         if(player.getNickName().equals(nickname) && !(player.isConnected())){
             player.setConnected();
             notifyOnlyOneSpecificObserver(new StorageConfigMessage(player.getGameBoardOfPlayer().getStorageOfGameBoard().getStorageResource()), player.getNickName());
@@ -364,7 +381,7 @@ public class GameSolitaire extends Game {
      * @param e : the exception to handle
      */
     @Override
-    protected void exceptionHandler(LastSpaceReachedException e) {
+    protected void exceptionHandler(LastSpaceReachedException e) throws IOException, InterruptedException {
         player.setPapal();
         notifyObserver(new MyVictoryMessage(player.playerScore()));
        endGame();
@@ -377,9 +394,8 @@ public class GameSolitaire extends Game {
      * @param e : the exception to handle
      */
     @Override
-    protected void exceptionHandler(EndOfSolitaireGame e) {
+    protected void exceptionHandler(EndOfSolitaireGame e) throws IOException, InterruptedException {
         notifyObserver(new MagnificentWinMessage());
-        notifyObserver(new MyDefeatMessage());
         endGame();
     }
 
@@ -396,7 +412,7 @@ public class GameSolitaire extends Game {
      * Only test method : it applies the effect of the action marker passed as a parameter and catches EmptyException and EndOfSolitaireGame
      * @param actionMarker : action marker whose effect to activate
      */
-    public void activateActionMarker(ActionMarker actionMarker)  {
+    public void activateActionMarker(ActionMarker actionMarker) throws IOException, InterruptedException {
         try {
             actionMarker.actionMarkerEffect(this);
         } catch (EmptyException e) {
@@ -439,7 +455,7 @@ public class GameSolitaire extends Game {
 
 
 
-    public void  restoreGameSolitaire() {
+    public void  restoreGameSolitaire() throws IOException, InterruptedException {
         currentPlayer = player;
         Gson gson=new Gson();
 
@@ -462,7 +478,7 @@ public class GameSolitaire extends Game {
         String jsonStrin = gson.toJson(nickNamePlayer);
         try {
             // Constructs a FileWriter given a file name, using the platform's default charset
-            config = new FileWriter("src/main/resources/InformationAboutNickname.json");
+            config = new FileWriter("src/main/resources/InformationAboutTurn.json");
             config.write(jsonStrin);
         } catch (IOException e) {
             e.printStackTrace();
@@ -479,7 +495,7 @@ public class GameSolitaire extends Game {
     /**
      * restore magnific game
      */
-    public void RestoreActionMagnific(){
+    public void RestoreActionMagnific() throws IOException, InterruptedException {
         Gson gson=new Gson();
         int[] servList;
 
@@ -494,7 +510,7 @@ public class GameSolitaire extends Game {
     /**
      * save information for a possible restart game
      */
-    public void RestoreActionMarker(){
+    public void RestoreActionMarker() throws IOException, InterruptedException {
         Gson gson=new Gson();
         ActionMarker[] servList;
         try {
@@ -511,6 +527,5 @@ public class GameSolitaire extends Game {
     @Override
     public void endGame(){
         FileClass.FileDestroyer();
-
     }
 }

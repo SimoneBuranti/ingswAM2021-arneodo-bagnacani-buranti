@@ -6,6 +6,8 @@ import it.polimi.ingsw.server.model.exceptions.*;
 import it.polimi.ingsw.server.model.gameBoard.GameBoard;
 import it.polimi.ingsw.server.model.productionCards.*;
 import org.junit.jupiter.api.*;
+
+import java.io.IOException;
 import java.util.*;
 import static org.junit.jupiter.api.Assertions.*;
 /**
@@ -18,7 +20,7 @@ class GameBoardTest {
      */
     @Test
     @DisplayName("FirstRowFree and setProductionCardTest - first column")
-    public void firstRowFreeAndSetProductionCard(){
+    public void firstRowFreeAndSetProductionCard() throws IOException, InterruptedException {
         GameBoard gameBoard = new GameBoard();
         DeckProductionCardOneBlu deck = new DeckProductionCardOneBlu();
         DeckProductionCardOneGreen deck2 = new DeckProductionCardOneGreen();
@@ -668,7 +670,7 @@ class GameBoardTest {
      */
     @Test
     @DisplayName("seventhCardCheck() test ")
-    public void seventhCardCheck(){
+    public void seventhCardCheck() throws IOException, InterruptedException {
         GameBoard gameBoard = new GameBoard() ;
         DeckProductionCardOneBlu blueDeck = new DeckProductionCardOneBlu();
         DeckProductionCardOneGreen greenDeck = new DeckProductionCardOneGreen();
@@ -794,7 +796,7 @@ class GameBoardTest {
      */
     @Test
     @DisplayName("buyProductionCard() test - affordable card")
-    public void buyProductionCardTest0(){
+    public void buyProductionCardTest0() throws IOException, InterruptedException {
         GameBoard gameBoard = new GameBoard() ;
         new Reserve();
         DeckProductionCardOneBlu blueDeck = new DeckProductionCardOneBlu();
@@ -839,7 +841,7 @@ class GameBoardTest {
      */
     @Test
     @DisplayName("buyProductionCard() test - too expensive")
-    public void buyProductionCardTest1(){
+    public void buyProductionCardTest1() throws IOException, InterruptedException {
         GameBoard gameBoard = new GameBoard() ;
         new Reserve();
         DeckProductionCardOneBlu blueDeck = new DeckProductionCardOneBlu();
@@ -883,7 +885,7 @@ class GameBoardTest {
      */
     @Test
     @DisplayName("buyProductionCard() test - wrong level")
-    public void buyProductionCardTest2(){
+    public void buyProductionCardTest2() throws IOException, InterruptedException {
         GameBoard gameBoard = new GameBoard() ;
         new Reserve();
         DeckProductionCardThreeBlu blueDeckThree = new DeckProductionCardThreeBlu();
@@ -927,7 +929,7 @@ class GameBoardTest {
      */
     @Test
     @DisplayName("buyProductionCard() test - all level text and recharge available resources")
-    public void buyProductionCardTest3(){
+    public void buyProductionCardTest3() throws IOException, InterruptedException {
         GameBoard gameBoard = new GameBoard() ;
         new Reserve();
         DeckProductionCardOneBlu blueDeck = new DeckProductionCardOneBlu();
@@ -1087,7 +1089,7 @@ class GameBoardTest {
      */
     @Test
     @DisplayName("productionScoreTest() test - complete test")
-    public void productionScoreTest(){
+    public void productionScoreTest() throws IOException, InterruptedException {
         GameBoard gameBoard = new GameBoard() ;
         new Reserve();
         DeckProductionCardOneBlu blueDeck = new DeckProductionCardOneBlu();
@@ -1537,7 +1539,7 @@ class GameBoardTest {
      */
     @Test
     @DisplayName("productionOn0() test - correct production attempt")
-    public void productionOnTest0() {
+    public void productionOnTest0() throws IOException, InterruptedException {
         GameBoard gameBoard = new GameBoard();
         new Reserve();
         ProductionCard card;
@@ -1635,7 +1637,7 @@ class GameBoardTest {
      */
     @Test
     @DisplayName("productionOn3() test - correct production attempt")
-    public void productionOnTest3() {
+    public void productionOnTest3() throws IOException, InterruptedException {
         GameBoard gameBoard = new GameBoard();
         new Reserve();
         ProductionCard card;
@@ -1733,7 +1735,7 @@ class GameBoardTest {
      */
     @Test
     @DisplayName("productionOn2() test - correct production attempt")
-    public void productionOnTest2() {
+    public void productionOnTest2() throws IOException, InterruptedException {
         GameBoard gameBoard = new GameBoard();
         new Reserve();
         ProductionCard card;
@@ -1833,7 +1835,7 @@ class GameBoardTest {
      */
     @Test
     @DisplayName("productionOn1() test - wrong production attempt not enough resources")
-    public void productionOnTest1() {
+    public void productionOnTest1() throws IOException, InterruptedException {
         GameBoard gameBoard = new GameBoard();
         new Reserve();
         ProductionCard card;
@@ -1924,7 +1926,7 @@ class GameBoardTest {
      */
     @Test
     @DisplayName("productionOn4() test - wrong production attempt empty column")
-    public void productionOnTest4() {
+    public void productionOnTest4() throws IOException, InterruptedException {
         GameBoard gameBoard = new GameBoard();
         new Reserve();
         ProductionCard card;
@@ -2014,7 +2016,7 @@ class GameBoardTest {
      */
     @Test
     @DisplayName("productionOn5() test - correct multiple production attempt ")
-    public void productionOnTest5() {
+    public void productionOnTest5() throws IOException, InterruptedException {
         GameBoard gameBoard = new GameBoard();
         new Reserve();
         ProductionCard card,card2;

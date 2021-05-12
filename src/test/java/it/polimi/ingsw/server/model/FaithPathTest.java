@@ -9,6 +9,8 @@ import it.polimi.ingsw.server.model.players.Player;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * test class about FaithPath
@@ -628,7 +630,7 @@ class FaithPathTest {
      */
     @Test
     @DisplayName("faithScoreTest : only position - 2")
-    public void faithWithUseOfRedMarble(){
+    public void faithWithUseOfRedMarble() throws IOException, InterruptedException {
 
         Game game = new Game(true);
         Player player = new Player("simo",new Game(false));
