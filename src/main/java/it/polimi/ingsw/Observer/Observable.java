@@ -75,6 +75,7 @@ public class Observable {
      */
 
     protected void notifyOnlyOneSpecificObserver(Message message,String nickname) throws IOException, InterruptedException {
+        System.out.println(observers.size());
         for (Observer observer : observers) {
             observer.updateOnlyObserverByNickname(message,nickname);
         }

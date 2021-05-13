@@ -13,14 +13,21 @@ public class clientSEcond {
 
         /*InetAddress hostAddress = InetAddress.getByName("95.248.220.116");*/
 
-        int portNumber = 1235;
+        int portNumber = 1234;
 
         SocketClient socketClient = new SocketClient(hostName, portNumber);
 
+        new Thread(){
+            public void run(){
+                socketClient.readMessage();
+            }
+        }.start();
 
-        UsernameMessage msg1 = new UsernameMessage("aa");
+        UsernameMessage msg1 = new UsernameMessage("bb");
 
         socketClient.sendMessage(msg1);
+
+        //socketClient.readMessage();
 
         }
 }

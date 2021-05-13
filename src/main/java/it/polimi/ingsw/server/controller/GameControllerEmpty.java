@@ -18,6 +18,7 @@ public class GameControllerEmpty extends GameController {
 
     @Override
     public void handleMessage(NumberPlayerMessage msg, ClientController clientController) throws IOException, InterruptedException {
+        System.out.println(msg.getnOfPlayers());
         if (server.getLobbySize()>0){
             if (msg.getnOfPlayers()== 1){
                 server.setGameController(new GameControllerSinglePlayer());
@@ -32,8 +33,9 @@ public class GameControllerEmpty extends GameController {
     public void handleMessage(UsernameMessage msg, ClientController clientController) throws IOException, InterruptedException {
         if (server.getLobbySize()==0) {
             if (server.addPlayerToLobby(msg.getUsername())){
-                clientController.setNickname(msg.getUsername());
+                System.out.println(msg.getUsername());
                 clientController.getClientHandler().sendMessage(new NPlayersMessage(-1));
+                server.addClientController(clientController);
             } else {
                 clientController.getClientHandler().sendMessage(new AlreadyExistingNickNameErrorMessage()); //unreachable
             }

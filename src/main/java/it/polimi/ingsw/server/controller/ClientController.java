@@ -348,6 +348,7 @@ public class ClientController implements MessageVisitor {
 
     @Override
     public void visit(PongMessage msg) {
+        System.out.println("Ho rivecuto il pong");
         clientHandler.setPongo(true);
     }
 

@@ -1,6 +1,7 @@
 package it.polimi.ingsw.Client;
 
 import it.polimi.ingsw.Client.lightModel.LightGame;
+import it.polimi.ingsw.Client.lightModel.LightGameMultiPlayer;
 import it.polimi.ingsw.messages.*;
 import it.polimi.ingsw.messages.observable.*;
 import it.polimi.ingsw.server.model.*;
@@ -10,7 +11,7 @@ import java.util.Map;
 
 public class ViewController implements MessageVisitor {
     private final SocketClient socketClient;
-    private LightGame game = null;
+    private LightGame game = new LightGameMultiPlayer();
     private String nickName = null;
     private Map<Resource, Integer> resourceMap = new HashMap<>();
 
@@ -235,6 +236,7 @@ public class ViewController implements MessageVisitor {
 
     @Override
     public void visit(NicknameStartedMessage msg) {
+        System.out.println(msg.getMessageType()+" : "+ msg.getNickname());
         game.setPlayers(msg.getNickname());
     }
 
@@ -257,6 +259,7 @@ public class ViewController implements MessageVisitor {
 
     @Override
     public void visit(UpdateInitLeaderMessage msg) {
+        System.out.println(msg.getMessageType()+" : "+ msg.getLeaderCards());
         game.addLeaderCard(nickName, msg.getLeaderCards());
     }
 
@@ -275,6 +278,7 @@ public class ViewController implements MessageVisitor {
 
     @Override
     public void visit(DeckProductionCardConfigMessage msg) {
+        System.out.println(msg.getMessageType()+" : "+ msg.getDeck());
         game.setDeckProductionCard(msg.getNumberDeck(), msg.getDeck());
     }
 
@@ -290,6 +294,7 @@ public class ViewController implements MessageVisitor {
 
     @Override
     public void visit(ConfigurationMarketMessage msg) {
+        System.out.println(msg.getMessageType()+" : "+ msg.getMarbleList());
         game.setMarket(msg.getMarbleList());
     }
 

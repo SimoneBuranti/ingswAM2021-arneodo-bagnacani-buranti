@@ -17,18 +17,25 @@ public class ClientApp {
 
         /*InetAddress hostAddress = InetAddress.getByName("95.248.220.116");*/
 
-        int portNumber = 1235;
+        int portNumber = 1234;
 
         SocketClient socketClient = new SocketClient(hostName, portNumber);
+
+        new Thread(){
+            public void run(){
+                socketClient.readMessage();
+            }
+        }.start();
 
         UsernameMessage msg1 = new UsernameMessage("aa");
 
         socketClient.sendMessage(msg1);
 
-        NumberPlayerMessage msg = new NumberPlayerMessage(3);
+        NumberPlayerMessage msg = new NumberPlayerMessage(2);
 
         socketClient.sendMessage(msg);
 
+        //socketClient.readMessage();
 
 
     }

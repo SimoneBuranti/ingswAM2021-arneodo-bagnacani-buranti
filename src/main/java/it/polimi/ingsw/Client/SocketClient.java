@@ -27,10 +27,8 @@ public class SocketClient {
 
             while(true){
                 msg = in.readLine();
-                System.out.println(msg);
                 if(msg != null){
                     readMessageClient(msg);
-                    System.out.println(msg);
                 }
             }
         } catch (IOException | InterruptedException e) {

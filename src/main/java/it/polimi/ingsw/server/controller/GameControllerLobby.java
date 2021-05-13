@@ -35,6 +35,7 @@ public class GameControllerLobby extends GameController {
         if (server.addPlayerToLobby(msg.getUsername())){
             clientController.setNickname(msg.getUsername());
             clientController.getClientHandler().sendMessage(new NPlayersMessage(server.getLobbySize()));
+            server.addClientController(clientController);
         } else {
             clientController.getClientHandler().sendMessage(new AlreadyExistingNickNameErrorMessage());
         }

@@ -15,6 +15,7 @@ public class Server {
 
     private GameController gameController;
     private Game game;
+    private ArrayList<ClientController> clientControllers = new ArrayList<>();
     private VirtualView virtualView;
     private ArrayList<String> lobby;
     private boolean sendRestartQuestion;
@@ -79,11 +80,22 @@ public class Server {
         game = new GameMultiPlayer(lobby.size(),lobby,true);
         //virtualView = new VirtualView();
         gameController = new GameControllerMultiplayer(this,this.game);
+
+        for(ClientController client : clientControllers){
+            client.setGame(this.game);
+        }
     }
 
     public void restoreGameBackup(){}
 
 
+    public void addClientController(ClientController clientController){
+        clientControllers.add(clientController);
+    }
+
+    public void removeClientController(ClientController clientController){
+        clientControllers.remove(clientController);
+    }
     //------------------------Setter--------------------------------------
 
     public void setSendRestartQuestion(){

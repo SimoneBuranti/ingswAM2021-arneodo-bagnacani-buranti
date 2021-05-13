@@ -8,6 +8,7 @@ import it.polimi.ingsw.server.virtualview.VirtualView;
 
 import java.io.*;
 import java.net.Socket;
+import java.util.concurrent.TimeUnit;
 
 
 public class ClientHandler implements Runnable {
@@ -23,7 +24,7 @@ public class ClientHandler implements Runnable {
 
     private final Server server;
 
-    private Boolean pongo;
+    private Boolean pongo = false;
 
     /**
      * This attribute is used in tests only in order to check the output messages without
@@ -111,16 +112,21 @@ public class ClientHandler implements Runnable {
         if (testMode){
             outputStreamForTests = msg.serialize();
         } else {
-            writeStream.println(new PingMessage());
-            wait(1000);
-            if (pongo)
-            {
+            //System.out.println("result of sendPing :" + sendPing());
+
+           // PingMessage ping = new PingMessage();
+            //writeStream.println(ping.serialize());
+            //TimeUnit.MILLISECONDS.sleep(5000);
+            //wait(1000);
+            //System.out.println(pongo);
+            //if (pongo)
+            //{
                 writeStream.println(msg.serialize());
                 writeStream.flush();
-                setPongo(false);
-            }
-            else
-                disconnect();
+                //setPongo(false);
+           // }
+            //else
+                //disconnect();
         }
 
     }
@@ -138,15 +144,14 @@ public class ClientHandler implements Runnable {
     }
 
     public void setPongo(Boolean pongo) {
+        System.out.println("Set pongo :" + pongo);
         this.pongo = pongo;
     }
 
 
-    /*public boolean sendPing() throws IOException {
-        String line;
-        Gson g = new Gson();
-        Message msg = new Message(MessageType.PING);
-        writeStream.println(g.toJson(msg));
+    /*public boolean sendPing(){
+        Message msg = new PingMessage();
+        writeStream.println(msg.serialize());
         writeStream.flush();
         for(int i = 0; i < 30; i++){
             try {
@@ -154,13 +159,8 @@ public class ClientHandler implements Runnable {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            if(readStream.ready()) {
-                line = readStream.readLine();
-                msg = g.fromJson(line, Message.class);
-                System.out.println(msg.getMessageType());
-                if (msg.getMessageType() == MessageType.PONG)
-                    return true;
-            }
+            if(pongo)
+                return true;
 
         }
 
