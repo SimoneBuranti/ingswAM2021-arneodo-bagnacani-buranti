@@ -1,6 +1,7 @@
 package it.polimi.ingsw;
 
 import com.google.gson.Gson;
+import it.polimi.ingsw.Client.SocketClient;
 import it.polimi.ingsw.messages.*;
 
 import java.io.*;
@@ -8,8 +9,21 @@ import java.io.*;
 public class ProvaApp {
 
 
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) {
 
+        try {
+
+            SocketClient socketClient = new SocketClient("127.0.0.1",1234);
+
+            socketClient.readMessage();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+}
 
         /*Gson g = new Gson();
         Message message = g.fromJson(new FileReader("src/main/resources/prova.json"),Message.class);
@@ -50,9 +64,6 @@ public class ProvaApp {
         } catch (IOException e) {
             e.printStackTrace();
         }*/
-
-    }
-}
 
         /*import java.util.*;
         import org.json.simple.*;

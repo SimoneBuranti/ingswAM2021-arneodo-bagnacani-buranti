@@ -8,6 +8,8 @@ import it.polimi.ingsw.server.virtualview.VirtualView;
 
 import java.io.*;
 import java.net.Socket;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 
@@ -87,7 +89,36 @@ public class ClientHandler implements Runnable {
                 server.setSendRestartQuestion();
             }
 
+            (new ScheduledThreadPoolExecutor(1)).scheduleAtFixedRate( () -> {
+
+                try {
+                    sendMessage(new PingMessage());
+
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                if (!getPongo()){
+                    try {
+                        disconnect();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                setPongo(false);
+
+            },1000,3000,TimeUnit.MILLISECONDS);
+
             while(true){
+
                 msg = readStream.readLine();
                 if(msg != null){
                     readMessageServer(msg);
