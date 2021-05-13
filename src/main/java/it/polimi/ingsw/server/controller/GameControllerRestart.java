@@ -1,6 +1,7 @@
 package it.polimi.ingsw.server.controller;
 
 import it.polimi.ingsw.messages.*;
+import it.polimi.ingsw.server.network.Server;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,6 +10,10 @@ public class GameControllerRestart extends GameController {
 
     private ArrayList<String> reconnected = new ArrayList<>();
     private boolean restartAnswerReceived = false;
+
+    public GameControllerRestart(Server server) {
+        this.server = server;
+    }
 
     @Override
     public synchronized void handleMessage(ExitMessage msg, ClientController clientController) {
@@ -50,7 +55,7 @@ public class GameControllerRestart extends GameController {
                 if (numberOfPlayers==1){
                     server.setGameController(new GameControllerSinglePlayer());
                 } else {
-                    server.setGameController(new GameControllerMultiplayer());
+                    server.setGameController(new GameControllerMultiplayer(this.server,this.game));
                 }
 
                 server.restoreGameBackup();
@@ -62,7 +67,7 @@ public class GameControllerRestart extends GameController {
     public synchronized void handleMessage(RestartAnswerMessage msg, ClientController clientController) {
         if(msg.getAnswer().equals("no")){
             server.restartLobby();
-            server.setGameController(new GameControllerEmpty());
+            server.setGameController(new GameControllerEmpty(this.server));
         } else {
             restartAnswerReceived = true;
         }

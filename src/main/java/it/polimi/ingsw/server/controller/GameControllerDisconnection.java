@@ -1,11 +1,18 @@
 package it.polimi.ingsw.server.controller;
 
 import it.polimi.ingsw.messages.*;
+import it.polimi.ingsw.server.model.Game;
+import it.polimi.ingsw.server.network.Server;
 
 import java.io.IOException;
 
 public class GameControllerDisconnection extends GameController {
 
+
+    public GameControllerDisconnection(Server server, Game game) {
+        this.server = server;
+        this.game = game;
+    }
 
     @Override
     public void handleMessage(ExitMessage msg, ClientController clientController) {
@@ -29,7 +36,7 @@ public class GameControllerDisconnection extends GameController {
             clientController.setGame(this.getGame());
             game.connectPlayer(msg.getUsername());
             if(game.numPlayersDisconnected() == 0)
-                server.setGameController(new GameControllerMultiplayer()); //oppure gameControllerSinglePlayer
+                server.setGameController(new GameControllerMultiplayer(this.server,this.game)); //oppure gameControllerSinglePlayer
         }else{
             clientController.getClientHandler().sendMessage(new NoNicknameMessage());
             /*try {

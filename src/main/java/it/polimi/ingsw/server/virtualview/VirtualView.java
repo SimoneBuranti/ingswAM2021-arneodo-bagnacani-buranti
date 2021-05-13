@@ -9,6 +9,7 @@ import it.polimi.ingsw.server.network.ClientHandler;
 import java.io.IOException;
 
 public class VirtualView implements Observer {
+
     private final ClientController clientController;
     private final Game game;
 
@@ -34,7 +35,7 @@ public class VirtualView implements Observer {
     @Override
     public void update(Message message) throws IOException, InterruptedException {
     clientController.getClientHandler().sendMessage(message);
-}
+    }
 
 
 
@@ -53,7 +54,7 @@ public class VirtualView implements Observer {
     @Override
     public void updateOnlyCurrent(Message message) throws IOException, InterruptedException {
         if (clientController.turnCheck())
-        clientController.getClientHandler().sendMessage(message);
+            clientController.getClientHandler().sendMessage(message);
     }
 
 

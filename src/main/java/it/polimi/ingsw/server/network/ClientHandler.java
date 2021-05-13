@@ -25,6 +25,17 @@ public class ClientHandler implements Runnable {
 
     private Boolean pongo;
 
+    /**
+     * This attribute is used in tests only in order to check the output messages without
+     * any socket connection
+     */
+    private String outputStreamForTests;
+
+    /**
+     * This attribute is used in tests only in order to change the "outputStream" during tests;
+     */
+    private final boolean testMode;
+
 
 
     public ClientHandler(Socket client, Server server) throws IOException {
@@ -36,8 +47,34 @@ public class ClientHandler implements Runnable {
 
         readStream = new BufferedReader(new InputStreamReader(inputStream));
         writeStream = new PrintWriter(outputStream);
+
+        testMode=false;
     }
 
+
+    /**
+     * NB TEST CONSTRUCTOR, this constructor doesn't create a socket as io endpoint
+     */
+    public ClientHandler(Server server) throws IOException {
+        this.socketClient = new Socket(); // it remains unactivated
+
+        this.server = server;
+        clientController = new ClientController(server, this);
+
+        inputStream = new ByteArrayInputStream(new byte[2]);
+        outputStream = new ByteArrayOutputStream();
+        readStream = new BufferedReader(new InputStreamReader(inputStream));
+        writeStream = new PrintWriter(outputStream);
+        testMode = true;
+    }
+
+    public InputStream getInputStream() {
+        return inputStream;
+    }
+
+    public OutputStream getOutputStream() {
+        return outputStream;
+    }
 
     public void run() {
 
@@ -71,16 +108,21 @@ public class ClientHandler implements Runnable {
     }
 
     public void sendMessage (Message msg) throws InterruptedException, IOException {
-        writeStream.println(new PingMessage());
-        wait(1000);
-        if (pongo)
-        {
-            writeStream.println(msg.serialize());
-            writeStream.flush();
-            setPongo(false);
+        if (testMode){
+            outputStreamForTests = msg.serialize();
+        } else {
+            writeStream.println(new PingMessage());
+            wait(1000);
+            if (pongo)
+            {
+                writeStream.println(msg.serialize());
+                writeStream.flush();
+                setPongo(false);
+            }
+            else
+                disconnect();
         }
-        else
-            disconnect();
+
     }
 
     public void disconnect() throws IOException {
@@ -124,5 +166,23 @@ public class ClientHandler implements Runnable {
 
         return false;
     }*/
+
+
+    /**
+     * Test only method
+     */
+    public ClientController getClientController() {
+        return clientController;
+    }
+
+    /**
+     *Test Only method
+     */
+    public String getOutputStreamForTests() {
+        String out = outputStreamForTests;
+        outputStreamForTests = null;
+        return out;
+    }
+
 }
 

@@ -3,7 +3,7 @@ package it.polimi.ingsw.Client;
 import it.polimi.ingsw.Client.lightModel.LightGame;
 import it.polimi.ingsw.messages.*;
 import it.polimi.ingsw.messages.observable.*;
-import it.polimi.ingsw.server.model.Resource;
+import it.polimi.ingsw.server.model.*;
 
 import java.util.HashMap;
 import java.util.Map;

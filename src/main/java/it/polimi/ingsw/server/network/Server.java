@@ -27,13 +27,13 @@ public class Server {
             Gson gson = new Gson();
 
             nickNameInOrder = gson.fromJson(new FileReader("src/main/resources/InformationAboutTurn.json"),ArrayList.class);
-            this.gameController = new GameControllerRestart();
+            this.gameController = new GameControllerRestart(this);
             gameController.setServer(this);
             lobby = nickNameInOrder;
             sendRestartQuestion = true;
 
         } catch (FileNotFoundException e) {
-            this.gameController = new GameControllerEmpty();
+            this.gameController = new GameControllerEmpty(this);
             gameController.setServer(this);
             lobby = new ArrayList<>();
             sendRestartQuestion = false;
@@ -78,7 +78,7 @@ public class Server {
     public void initNewMultiplayerGame() throws IOException, InterruptedException {
         game = new GameMultiPlayer(lobby.size(),lobby,true);
         //virtualView = new VirtualView();
-        gameController = new GameControllerMultiplayer();
+        gameController = new GameControllerMultiplayer(this,this.game);
     }
 
     public void restoreGameBackup(){}
@@ -117,6 +117,9 @@ public class Server {
 
 
 
+    public Game getGame(){
+        return this.game;
+    }
     /*public void addPlayer(ClientHandler clientHandler){
         this.clientHandlers.add(clientHandler);
     }*/

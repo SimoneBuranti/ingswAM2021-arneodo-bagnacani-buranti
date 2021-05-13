@@ -115,7 +115,6 @@ public abstract class DeckProductionCard extends Observable {
 
     public Gson deckSaving(){
 
-
         RuntimeTypeAdapterFactory<Colour> adapterColour =
                 RuntimeTypeAdapterFactory
                         .of(Colour.class,"type")

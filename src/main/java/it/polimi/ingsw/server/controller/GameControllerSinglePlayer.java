@@ -1,10 +1,16 @@
 package it.polimi.ingsw.server.controller;
 
 import it.polimi.ingsw.messages.*;
+import it.polimi.ingsw.server.network.Server;
 
 import java.io.IOException;
 
 public class GameControllerSinglePlayer extends GameController {
+
+
+    /*public GameControllerSinglePlayer(Server server) {
+        this.server = server;
+    }*/
 
     @Override
     public void handleMessage(ExitMessage msg, ClientController clientController) {
@@ -18,7 +24,7 @@ public class GameControllerSinglePlayer extends GameController {
             //messaggio di errore
         }
         if(flag) {
-            server.setGameController(new GameControllerDisconnection());
+            server.setGameController(new GameControllerDisconnection(this.server,this.game));
         }
     }
 

@@ -1,24 +1,20 @@
 package it.polimi.ingsw.Client;
-
 import it.polimi.ingsw.messages.Message;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.net.Socket;
+import java.io.*;
+import java.net.*;
 
 
 public class SocketClient {
     private final Socket serverSocket;
-    private ViewController viewController;
+    private it.polimi.ingsw.Client.ViewController viewController;
     private BufferedReader in;
     private PrintWriter out;
 
 
     public SocketClient(String address, int port) throws IOException {
         this.serverSocket = new Socket(address, port);
-        viewController = new ViewController(this);
+        viewController = new it.polimi.ingsw.Client.ViewController(this);
         in = new BufferedReader(new InputStreamReader(serverSocket.getInputStream()));
         out = new PrintWriter(serverSocket.getOutputStream(), true);
 

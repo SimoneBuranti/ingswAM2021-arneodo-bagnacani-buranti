@@ -1,6 +1,7 @@
 package it.polimi.ingsw.server.controller;
 
 import it.polimi.ingsw.messages.*;
+import it.polimi.ingsw.server.network.Server;
 
 import java.io.IOException;
 
@@ -8,7 +9,8 @@ public class GameControllerLobby extends GameController {
 
     private int lobbySize;
 
-    public GameControllerLobby(int lobbySize) {
+    public GameControllerLobby(Server server, int lobbySize) {
+        this.server = server;
         this.lobbySize = lobbySize;
     }
 
@@ -38,7 +40,6 @@ public class GameControllerLobby extends GameController {
         }
 
         if(lobbySize == server.getLobbySize()){
-            server.setGameController(new GameControllerMultiplayer());
             server.initNewMultiplayerGame();
         }
     }

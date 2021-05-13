@@ -262,6 +262,9 @@ public abstract class Message{
             case USEACTIONMARKER:
                 return gson.fromJson(jsonObj, UseActionMarkerMessage.class);
 
+            case BOOTINGLOBBYERROR:
+                return gson.fromJson(jsonObj, BootingLobbyErrorMessage.class);
+
 
 
 

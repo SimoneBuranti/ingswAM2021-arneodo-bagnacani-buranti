@@ -1,12 +1,15 @@
 package it.polimi.ingsw.server.controller;
 
 import it.polimi.ingsw.messages.*;
+import it.polimi.ingsw.server.network.Server;
 
 import java.io.IOException;
 
 public class GameControllerEmpty extends GameController {
 
-
+    public GameControllerEmpty(Server server) {
+        this.server = server;
+    }
 
     @Override
     public void handleMessage(ExitMessage msg, ClientController clientController) {
@@ -20,7 +23,7 @@ public class GameControllerEmpty extends GameController {
                 server.setGameController(new GameControllerSinglePlayer());
                 server.initNewSolitaireGame();
             } else {
-                server.setGameController(new GameControllerLobby(msg.getnOfPlayers()));
+                server.setGameController(new GameControllerLobby(this.server,msg.getnOfPlayers()));
             }
         }
     }
