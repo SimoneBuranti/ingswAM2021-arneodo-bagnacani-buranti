@@ -470,7 +470,7 @@ public class ClientController implements MessageVisitor {
     }
 
     @Override
-    public void visit(ResultForProductionForNotCurrentMessage msg) {
+    public void visit(ResultOfProductionForNotCurrentMessage msg) {
 
     }
 

@@ -87,13 +87,13 @@ public class LightGameBoard {
     }
 
     public void addLeaderCard(ArrayList<Integer> leaderCardKeys){
-       for(Integer key : leaderCardKeys){
-           leaderCards.add(leaderCardsByKey.leaderCardByKey(key));
-       }
+        for(int i = 0; i < leaderCardKeys.size(); i++) {
+            leaderCards.add(leaderCardsByKey.leaderCardByKey(leaderCardKeys.get(i)));
+        }
     }
     public void addLeaderCardActivated(ArrayList<Integer> leaderCardKeys){
-        for(Integer key : leaderCardKeys){
-            leaderCardsActivated.add(leaderCardsByKey.leaderCardByKey(key));
+        for(int i = 0; i < leaderCardKeys.size(); i++) {
+            leaderCardsActivated.add(leaderCardsByKey.leaderCardByKey(leaderCardKeys.get(i)));
         }
     }
 
