@@ -18,7 +18,7 @@ public class ProductionOnMessage extends Message {
 
     private ArrayList<Resource> list;
 
-    private Boolean faithMove;
+    private int faithMove;
 
 
 
@@ -50,11 +50,11 @@ public class ProductionOnMessage extends Message {
         this.list=list;
     }
 
-    public Boolean getFaithMove() {
+    public int getFaithMove() {
         return faithMove;
     }
 
-    public void setFaithMove(Boolean faithMove) {
+    public void setFaithMove(int faithMove) {
         this.faithMove = faithMove;
     }
 }

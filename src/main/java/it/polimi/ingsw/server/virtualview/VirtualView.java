@@ -82,5 +82,27 @@ public class VirtualView implements Observer {
             clientController.getClientHandler().sendMessage(message);
     }
 
+    /**
+     * Receives an update message from the model.
+     * The message is sent over the network to the client.
+     * The proper action based on the message type will be taken by the real view on the client.
+     *
+     * @param message the update message.
+     */
+    @Override
+    public void updateAllObserverLessOneByNickname(Message message,String nickame) throws IOException, InterruptedException {
+        if (clientController.getNickname().equals(nickame))
+            clientController.getClientHandler().sendMessage(message);
+    }
+
+
+
+
+
+
+
+
+
+
 }
 

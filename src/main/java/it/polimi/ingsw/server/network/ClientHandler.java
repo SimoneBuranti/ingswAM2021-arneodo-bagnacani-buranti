@@ -38,7 +38,7 @@ public class ClientHandler implements Runnable {
     /**
      * This attribute is used in tests only in order to change the "outputStream" during tests;
      */
-    private final boolean testMode;
+    //private final boolean testMode=true;
 
 
 
@@ -52,7 +52,7 @@ public class ClientHandler implements Runnable {
         readStream = new BufferedReader(new InputStreamReader(inputStream));
         writeStream = new PrintWriter(outputStream);
 
-        testMode=false;
+        //testMode=false;
     }
 
 
@@ -69,7 +69,7 @@ public class ClientHandler implements Runnable {
         outputStream = new ByteArrayOutputStream();
         readStream = new BufferedReader(new InputStreamReader(inputStream));
         writeStream = new PrintWriter(outputStream);
-        testMode = true;
+        //testMode = true;
     }
 
     public InputStream getInputStream() {
@@ -135,19 +135,23 @@ public class ClientHandler implements Runnable {
     }
 
     public void readMessageServer(String msg) throws IOException, InterruptedException {
+        System.out.println(msg);
             Message parsedMsg = Message.deserialize(msg);
             parsedMsg.accept(clientController);
 
     }
 
     public void sendMessage (Message msg) throws InterruptedException, IOException {
-        if (testMode){
+        System.out.println("quante volte da client handler"+ clientController.getNickname());
+        /*if (testMode){
             outputStreamForTests = msg.serialize();
         } else {
                 writeStream.println(msg.serialize());
                 writeStream.flush();
 
-        }
+        }*/
+        writeStream.println(msg.serialize());
+        writeStream.flush();
 
     }
 

@@ -82,11 +82,12 @@ public class GameMultiPlayer extends Game {
         this.playerList= new ArrayList<>(numberOfPlayer);
         this.numberOfPlayer=numberOfPlayer;
         inkwell=createRandomNumber(numberOfPlayer);
+        System.out.println(inkwell);
         clientControllersInOrder=correctOrder(clientControllers,inkwell);
         createPlayer(numberOfPlayer,clientControllersInOrder);
         currentPlayer = playerList.get(currentPlayerPosition);
         nickNameInOrder= new ArrayList<>();
-        createNickNameInOrder(clientControllers);
+        createNickNameInOrder(clientControllersInOrder);
         addObservators();
         configClient();
         }
@@ -284,7 +285,11 @@ public class GameMultiPlayer extends Game {
             if (p != player) {
                 try {
                     p.faithMove();
-                    notifyAllObserverLessOne(new FaithPathMessage());
+
+                    notifyAllObserverLessOne(new FaithPathMessage(1));
+
+                    notifyAllObserverLessOneByNickname(new FaithPathOpponentMessage(p.getNickName(), 1),p.getNickName());
+
                 } catch (CallForCouncilException e1) {
                     exceptionHandler(e1);
                 } catch (LastSpaceReachedException e2) {
@@ -549,11 +554,6 @@ public class GameMultiPlayer extends Game {
         Gson gson=new Gson();
 
         try {
-            inkwell = gson.fromJson(new FileReader("src/main/resources/InformationAboutInkwell.json"),Integer.class);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        try {
             nickNameInOrder = gson.fromJson(new FileReader("src/main/resources/InformationAboutTurn.json"),ArrayList.class);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -576,12 +576,14 @@ public class GameMultiPlayer extends Game {
         }
 
         addObservators();
-        correctOrder(clientControllers,inkwell);
+        this.clientControllersInOrder=clientControllers;
         createPlayerRestore(numberOfPlayer,nickNameInOrder);
         reConfigClient();
         currentPlayer = playerList.get(currentPlayerPosition);
-
     }
+
+
+
 
     public void reConfigClient() throws IOException, InterruptedException {
         super.reConfigClient();
@@ -698,7 +700,7 @@ public class GameMultiPlayer extends Game {
 
 
     @Override
-    public void endOfTurn() {
+    public synchronized void endOfTurn() {
         setCurrentPlayer();
         saveInformation(); }
 

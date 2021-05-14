@@ -322,6 +322,7 @@ public class GameSolitaire extends Game {
     public void moveEveryoneExcept(Player player) throws IOException, InterruptedException {
         try {
             lorenzoTheMagnificent.moveBlackCross();
+            notifyObserver(new LorenzoMoveMessage());
         } catch (CallForCouncilException e1) {
             exceptionHandler(e1);
         }catch (EndOfSolitaireGame e2) {
@@ -393,6 +394,9 @@ public class GameSolitaire extends Game {
         }
         return num;
     }
+
+
+
 
     /**
      * this method handles the CallForCouncilException by calling the player and Lorenzo the Magnificent methods
@@ -598,7 +602,7 @@ public class GameSolitaire extends Game {
     }
 
     @Override
-    public void endOfTurn() throws IOException, InterruptedException {
+    public synchronized void endOfTurn() throws IOException, InterruptedException {
         revealAndActivateActionMarker();
         saveInformation(); }
 }

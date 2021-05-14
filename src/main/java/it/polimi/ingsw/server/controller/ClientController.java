@@ -100,7 +100,10 @@ public class ClientController implements MessageVisitor {
 
     @Override
     public void visit(EndOfTurnMessage msg) throws IOException, InterruptedException {
-        game.endOfTurn();
+        if(turnCheck())
+            game.endOfTurn();
+        else
+            System.out.println("non turno di "+ this.getNickname());
     }
 
     @Override
@@ -470,7 +473,7 @@ public class ClientController implements MessageVisitor {
     }
 
     @Override
-    public void visit(ResultForProductionForNotCurrentMessage msg) {
+    public void visit(ResultOfProductionForNotCurrentMessage msg) {
 
     }
 
@@ -541,6 +544,11 @@ public class ClientController implements MessageVisitor {
 
     @Override
     public void visit(ProductionCardConfigMessage msg) {
+
+    }
+
+    @Override
+    public void visit(LorenzoMoveMessage msg) {
 
     }
 }

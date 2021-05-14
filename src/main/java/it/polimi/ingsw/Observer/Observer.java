@@ -17,4 +17,5 @@ public interface Observer {
 
 
     void updateOnlyObserverByNickname(Message message,String nickame) throws IOException, InterruptedException;
-}
+
+  void updateAllObserverLessOneByNickname(Message message,String nickame) throws IOException, InterruptedException; }

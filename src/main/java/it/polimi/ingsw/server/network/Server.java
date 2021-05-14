@@ -91,6 +91,7 @@ public class Server {
     }
 
     public void restoreGameMultiBackup() throws IOException, InterruptedException {
+        this.clientControllers=orderRestart();
         this.game=new GameMultiPlayer(this.getLobbySize(),lobby,false,clientControllers);
     }
 
@@ -142,5 +143,14 @@ public class Server {
         this.clientHandlers.add(clientHandler);
     }*/
 
+    public ArrayList<ClientController> orderRestart(){
+        ArrayList<ClientController> client = new ArrayList<>();
+        for(int i=0; i<lobby.size();i++)
+            for (ClientController c: clientControllers)
+                if (c.getNickname().equals(lobby.get(i)))
+                    client.add(c);
+
+        return client;
+    }
 
 }

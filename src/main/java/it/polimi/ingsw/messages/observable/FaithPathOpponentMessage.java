@@ -7,9 +7,11 @@ import it.polimi.ingsw.messages.MessageVisitor;
 public class FaithPathOpponentMessage extends Message {
     private final MessageType messageType = MessageType.OPPONENTFAITHPATHMOVE;
     private String nickname;
+    private int faithMove;
 
-    public FaithPathOpponentMessage(String nickname){
+    public FaithPathOpponentMessage(String nickname, int faithMove){
     this.nickname=nickname;
+    this.faithMove=faithMove;
 }
     public String getNickname() {
         return nickname;

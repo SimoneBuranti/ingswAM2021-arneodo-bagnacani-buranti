@@ -11,6 +11,7 @@ public class GameControllerRestart extends GameController {
     private ArrayList<String> reconnected = new ArrayList<>();
     private boolean restartAnswerReceived = false;
 
+
     public GameControllerRestart(Server server) {
         this.server = server;
     }
@@ -44,6 +45,7 @@ public class GameControllerRestart extends GameController {
                 if (!reconnected.contains(msg.getUsername())){
                     clientController.setNickname(msg.getUsername());
                     reconnected.add(msg.getUsername());
+                    server.addClientController(clientController);
                 } else {
                     clientController.getClientHandler().sendMessage(new AlreadyExistingNickNameErrorMessage());
                 }

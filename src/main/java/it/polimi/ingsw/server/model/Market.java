@@ -305,4 +305,22 @@ return gson;
 
 }
 
+
+
+
+public boolean getRedInColumn(int i){
+        for(int j=0; j<3 ; j++)
+            if(grid[j][i] instanceof RedMarble)
+                return true;
+
+        return false; }
+
+
+    public boolean getRedInRow(int i){
+        for(int j=0; j<4 ; j++)
+            if(grid[i][j] instanceof RedMarble)
+                return true;
+
+        return false; }
+
 }

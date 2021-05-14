@@ -109,6 +109,8 @@ public interface MessageVisitor {
     void visit(FaithConfigMessage msg);
     void visit(ProductionCardConfigMessage msg);
 
+    void visit(LorenzoMoveMessage msg);
+
 
 
 

@@ -264,6 +264,9 @@ public abstract class Message{
             case BOOTINGLOBBYERROR:
                 return gson.fromJson(jsonObj, BootingLobbyErrorMessage.class);
 
+            case LORENZOMAGNIFICFAITHMOVE:
+                return gson.fromJson(jsonObj, LorenzoMoveMessage.class);
+
 
 
 

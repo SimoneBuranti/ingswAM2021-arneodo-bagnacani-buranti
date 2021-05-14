@@ -1,17 +1,13 @@
 package it.polimi.ingsw.server.model;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import it.polimi.ingsw.Observer.Observable;
 import it.polimi.ingsw.messages.observable.*;
-import it.polimi.ingsw.server.model.colours.*;
 import it.polimi.ingsw.server.model.exceptions.*;
-import it.polimi.ingsw.server.model.gameBoard.*;
 import it.polimi.ingsw.server.model.leaderCards.*;
 import it.polimi.ingsw.server.model.marbles.*;
 import it.polimi.ingsw.server.model.players.Player;
 import it.polimi.ingsw.server.model.productionCards.*;
-import it.polimi.ingsw.server.model.requirements.*;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -236,15 +232,18 @@ public class Game extends Observable {
      * When the exceptions are caught, the method calls the exceptionHandler method.
      * @param chosenColumn : the game board column where the card the player wants to active is situated
      */
-    public void productionOn(int chosenColumn, ArrayList<Resource> list, boolean faithMove) throws ImpossibleProductionException, EmptyColumnException, IOException, InterruptedException {
+    public void productionOn(int chosenColumn, ArrayList<Resource> list, int faithMove) throws ImpossibleProductionException, EmptyColumnException, IOException, InterruptedException {
         try {
 
             notifyToOneObserver(new ProductionMessageForCurrentMessage(list));
             notifyAllObserverLessOne(new ProductionMessageForNotCurrentMessage(currentPlayer,list) );
             currentPlayer.productionOn(chosenColumn);
-            if (faithMove)
-            {notifyToOneObserver(new FaithPathMessage());
-            notifyAllObserverLessOne(new FaithPathOpponentMessage(currentPlayer.getNickName()));}
+            //if (faithMove)
+            {
+                notifyToOneObserver(new FaithPathMessage(faithMove));
+                notifyAllObserverLessOne(new FaithPathOpponentMessage(currentPlayer.getNickName(),faithMove));
+
+            }
 
         } catch (CallForCouncilException e) {
             exceptionHandler(e);
@@ -283,8 +282,8 @@ public class Game extends Observable {
             list.add(resourceLeader);
             notifyToOneObserver(new ProductionMessageForCurrentMessage(list));
             notifyAllObserverLessOne(new ProductionMessageForNotCurrentMessage(currentPlayer, list) );
-            notifyToOneObserver(new FaithPathMessage());
-            notifyAllObserverLessOne(new FaithPathOpponentMessage(currentPlayer.getNickName()));
+            notifyToOneObserver(new FaithPathMessage(1));
+            notifyAllObserverLessOne(new FaithPathOpponentMessage(currentPlayer.getNickName(), 1));
             currentPlayer.extraProductionOn(resource);
         } catch (LastSpaceReachedException e) {
             exceptionHandler(e);
@@ -307,8 +306,8 @@ public class Game extends Observable {
             list.add(resourceLeader);
             notifyToOneObserver(new ProductionMessageForCurrentMessage(list));
             notifyAllObserverLessOne(new ProductionMessageForNotCurrentMessage(currentPlayer, list) );
-            notifyToOneObserver(new FaithPathMessage());
-            notifyAllObserverLessOne(new FaithPathOpponentMessage(currentPlayer.getNickName()));
+            notifyToOneObserver(new FaithPathMessage(1));
+            notifyAllObserverLessOne(new FaithPathOpponentMessage(currentPlayer.getNickName(), 1));
             currentPlayer.anotherExtraProductionOn(resource);
         } catch (LastSpaceReachedException e) {
             exceptionHandler(e);
@@ -357,7 +356,9 @@ public class Game extends Observable {
         }
         notifyToOneObserver(new DiscardLeaderForCurrentMessage(index));
         notifyAllObserverLessOne(new DiscardLeaderForNotCurrentMessage(currentPlayer));
-        notifyToOneObserver(new FaithPathMessage());
+
+        notifyToOneObserver(new FaithPathMessage(1));
+        notifyAllObserverLessOneByNickname(new FaithPathOpponentMessage(currentPlayer.getNickName(), 1),currentPlayer.getNickName());
 
 
     }
@@ -383,6 +384,11 @@ public class Game extends Observable {
      */
     public void pushRowInMarket(int chosenRow) throws NotEnoughSpaceInStorageException, WhiteMarbleException, IOException, InterruptedException {
         try {
+            if (market.getRedInRow(chosenRow)){
+                notifyToOneObserver(new FaithPathMessage(1));
+                notifyAllObserverLessOneByNickname(new FaithPathOpponentMessage(currentPlayer.getNickName(), 1),currentPlayer.getNickName());
+            }
+
             market.pushRow(chosenRow,currentPlayer);
 
             notifyToOneObserver(new ResultFromMarketMessage(currentPlayer.getBuffer()) );
@@ -405,6 +411,10 @@ public class Game extends Observable {
      */
     public void pushColumnInMarket(int chosenColumn) throws NotEnoughSpaceInStorageException, WhiteMarbleException, IOException, InterruptedException {
         try {
+            if (market.getRedInColumn(chosenColumn)){
+                notifyToOneObserver(new FaithPathMessage(1));
+                notifyAllObserverLessOneByNickname(new FaithPathOpponentMessage(currentPlayer.getNickName(), 1),currentPlayer.getNickName());
+            }
             market.pushColumn(chosenColumn,currentPlayer);
             notifyToOneObserver(new ResultFromMarketMessage(currentPlayer.getBuffer()) );
             notifyAllObserverLessOne(new ResultFromMarketNotCurrentMessage(currentPlayer,currentPlayer.getBuffer()) );
@@ -557,7 +567,7 @@ public class Game extends Observable {
     }
 
 
-    public void endOfTurn() throws IOException, InterruptedException { }
+    public synchronized void endOfTurn() throws IOException, InterruptedException { }
 
 
 
@@ -767,7 +777,7 @@ public class Game extends Observable {
 
         notifyObserver(new DeckProductionCardConfigMessage(9,deckProductionCardOneYellow.getDeck()));
         notifyObserver(new DeckProductionCardConfigMessage(10,deckProductionCardTwoYellow.getDeck()));
-        notifyObserver(new DeckProductionCardConfigMessage(11,deckProductionCardTwoYellow.getDeck()));
+        notifyObserver(new DeckProductionCardConfigMessage(11,deckProductionCardThreeYellow.getDeck()));
 
 
         notifyObserver(new ConfigurationMarketMessage(market.getInitialMarbleList()));

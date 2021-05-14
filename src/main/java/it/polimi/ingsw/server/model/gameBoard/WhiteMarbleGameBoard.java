@@ -34,8 +34,8 @@ public class WhiteMarbleGameBoard extends GameBoardDecorator{
     }
 
     @Override
-    public ProductionCard getdevelopmentBoardCell(int i, int j) {
-        return gameBoard.getdevelopmentBoardCell(i, j);
+    public ProductionCard getDevelopmentBoardCell(int i, int j) {
+        return gameBoard.getDevelopmentBoardCell(i, j);
     }
 
     /**
