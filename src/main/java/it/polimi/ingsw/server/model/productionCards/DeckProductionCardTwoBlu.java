@@ -1,7 +1,6 @@
 package it.polimi.ingsw.server.model.productionCards;
 
 import com.google.gson.Gson;
-import it.polimi.ingsw.messages.observable.DeckProductionCardConfigMessage;
 import it.polimi.ingsw.server.model.colours.Blue;
 import it.polimi.ingsw.server.model.Mix;
 import it.polimi.ingsw.server.model.Resource;
@@ -110,7 +109,7 @@ public class DeckProductionCardTwoBlu extends DeckProductionCard {
      */
     @Override
     public void saveInformationOfProductionDeck(){
-        Gson gson=deckSaving();
+        Gson gson= gsonForEveryoneDeckProduction();
 
         FileWriter config = null;
         String jsonStrin = gson.toJson(deck);

@@ -1,9 +1,12 @@
 package it.polimi.ingsw.server.model;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import it.polimi.ingsw.Observer.Observable;
 import it.polimi.ingsw.messages.observable.ReserveValueMessage;
+import it.polimi.ingsw.server.model.colours.*;
 import it.polimi.ingsw.server.model.exceptions.UnavailableResourceException;
+import it.polimi.ingsw.server.model.marbles.*;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -77,7 +80,7 @@ public class Reserve extends Observable {
      */
     public void saveInformationOfReserve(){
 
-        Gson g= new Gson();
+        Gson g=gsonForEveryoneReserve();
         FileWriter config = null;
         String jsonStrin = g.toJson(reservePools);
         try {
@@ -103,6 +106,38 @@ public class Reserve extends Observable {
 
     public Map<Resource , Integer> getReservePool(){
         return reservePools;
+    }
+
+    public static Gson gsonForEveryoneReserve(){
+        RuntimeTypeAdapterFactory<Colour> adapterColour =
+                RuntimeTypeAdapterFactory
+                        .of(Colour.class)
+                        .registerSubtype(Green.class)
+                        .registerSubtype(Yellow.class)
+                        .registerSubtype(Blue.class)
+                        .registerSubtype(Violet.class);
+
+        RuntimeTypeAdapterFactory<Marble> adapterMarble =
+                RuntimeTypeAdapterFactory
+                        .of(Marble.class)
+                        .registerSubtype(Marble.class)
+                        .registerSubtype(GreyMarble.class)
+                        .registerSubtype(YellowMarble.class)
+                        .registerSubtype(BluMarble.class)
+                        .registerSubtype(WhiteMarble.class)
+                        .registerSubtype(PurpleMarble.class)
+                        .registerSubtype(RedMarble.class);
+
+
+
+        Gson gson=new GsonBuilder()
+                .registerTypeAdapterFactory(adapterMarble)
+                .registerTypeAdapterFactory(adapterColour)
+                .setPrettyPrinting()
+                .create();
+
+        return gson;
+
     }
 }
 

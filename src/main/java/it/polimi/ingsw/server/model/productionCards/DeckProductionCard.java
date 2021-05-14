@@ -114,7 +114,7 @@ public abstract class DeckProductionCard extends Observable {
     public void saveInformationOfProductionDeck(){ }
 
 
-    public Gson deckSaving(){
+    public static Gson gsonForEveryoneDeckProduction(){
 
         RuntimeTypeAdapterFactory<Colour> adapterColour =
                 RuntimeTypeAdapterFactory

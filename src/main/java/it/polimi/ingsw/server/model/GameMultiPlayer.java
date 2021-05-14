@@ -514,14 +514,7 @@ public class GameMultiPlayer extends Game {
 
 
 
-
-
-
-
-
-
-
-    private void saveInformationAboutTurn() {
+            private void saveInformationAboutTurn() {
         Gson gson = new Gson();
         FileWriter config = null;
         String jsonStrin = gson.toJson(nickNameInOrder);
@@ -702,6 +695,12 @@ public class GameMultiPlayer extends Game {
         notifyObserver(new EndGamePlayerWinnerMessage(theWinnerIs().getNickName()));
         FileClass.FileDestroyer();
     }
+
+
+    @Override
+    public void endOfTurn() {
+        setCurrentPlayer();
+        saveInformation(); }
 
 }
 

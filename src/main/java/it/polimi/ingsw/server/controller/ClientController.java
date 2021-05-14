@@ -99,7 +99,9 @@ public class ClientController implements MessageVisitor {
 
 
     @Override
-    public void visit(EndOfTurnMessage msg) {}
+    public void visit(EndOfTurnMessage msg) throws IOException, InterruptedException {
+        game.endOfTurn();
+    }
 
     @Override
     public void visit(LastTurnMessage msg) {}

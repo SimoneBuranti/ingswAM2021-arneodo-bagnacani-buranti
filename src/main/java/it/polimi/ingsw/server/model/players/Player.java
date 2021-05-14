@@ -328,7 +328,7 @@ public class Player {
     /**
      * method for gameboard adaptation saving
      */
-    public Gson gameBoardSaving(){
+    public Gson gsonForEveryone(){
 
         RuntimeTypeAdapterFactory<Storage> adapterStorage =
                 RuntimeTypeAdapterFactory

@@ -4,6 +4,7 @@ import it.polimi.ingsw.server.model.Resource;
 import it.polimi.ingsw.server.model.exceptions.CallForCouncilException;
 import it.polimi.ingsw.server.model.exceptions.ImpossibleProductionException;
 import it.polimi.ingsw.server.model.exceptions.LastSpaceReachedException;
+import it.polimi.ingsw.server.model.productionCards.ProductionCard;
 
 import java.util.ArrayList;
 
@@ -67,6 +68,11 @@ public class ProductionGameBoard extends GameBoardDecorator {
     @Override
     public Resource getResourceTypeFirst(){
         return resourceTypeFirst;
+    }
+
+    @Override
+    public ProductionCard getdevelopmentBoardCell(int i, int j) {
+        return gameBoard.getdevelopmentBoardCell(i, j);
     }
 
 

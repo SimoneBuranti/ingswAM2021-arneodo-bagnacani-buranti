@@ -42,62 +42,8 @@ public class PlayerFirst extends Player{
     public PlayerFirst(String nickName, Game game, boolean newmatch,VirtualView virtualView){
         super(nickName,game,newmatch,virtualView);
 
-
-        RuntimeTypeAdapterFactory<Storage> adapterStorage =
-                RuntimeTypeAdapterFactory
-                        .of(Storage.class)
-                        .registerSubtype(Storage.class)
-                        .registerSubtype(StorageExtraFirst.class)
-                        .registerSubtype(StorageExtraSecond.class);
-
-
-        RuntimeTypeAdapterFactory<Colour> adapterColour =
-                RuntimeTypeAdapterFactory
-                        .of(Colour.class)
-                        .registerSubtype(Green.class)
-                        .registerSubtype(Yellow.class)
-                        .registerSubtype(Blue.class)
-                        .registerSubtype(Violet.class);
-
-        RuntimeTypeAdapterFactory<GameBoardInterface> adapterGameBoard =
-                RuntimeTypeAdapterFactory
-                        .of(GameBoardInterface.class)
-                        .registerSubtype(GameBoard.class)
-                        .registerSubtype(ProductionGameBoardDouble.class)
-                        .registerSubtype(ProductionGameBoard.class)
-                        .registerSubtype(WhiteMarbleGameBoard.class)
-                        .registerSubtype(WhiteMarbleGameBoardDouble.class)
-                        .registerSubtype(ReductionGameBoard.class)
-                        .registerSubtype(ReductionGameBoardDouble.class);
-
-
-        RuntimeTypeAdapterFactory<Requirements> adapterRequirements =
-                RuntimeTypeAdapterFactory
-                        .of(Requirements.class)
-                        .registerSubtype(ResourceRequirement.class)
-                        .registerSubtype(SecondLevelRequirement.class)
-                        .registerSubtype(ThreeFlagsTwoColourRequirement.class)
-                        .registerSubtype(TwoFlagsTwoColourRequirement.class);
-
-        RuntimeTypeAdapterFactory<LeaderCard> adapterLeader =
-                RuntimeTypeAdapterFactory
-                        .of(LeaderCard.class)
-                        .registerSubtype(LeaderCardMarble.class)
-                        .registerSubtype(LeaderCardProduction.class)
-                        .registerSubtype(LeaderCardReduction.class)
-                        .registerSubtype(LeaderCardStorage.class);
-
-
-
-        Gson gson=new GsonBuilder().setPrettyPrinting()
-                .registerTypeAdapterFactory(adapterGameBoard)
-                .registerTypeAdapterFactory(adapterStorage)
-                .registerTypeAdapterFactory(adapterColour)
-                .registerTypeAdapterFactory(adapterRequirements)
-                .registerTypeAdapterFactory(adapterLeader)
-                .create();
-
-        try {
+       Gson gson=gsonForEveryone();
+       try {
            this.gameBoardOfPlayer= gson.fromJson(new FileReader("src/main/resources/fileInformationPlayerFirst.json"),GameBoardInterface.class);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -113,7 +59,7 @@ public class PlayerFirst extends Player{
      */
     @Override
     public void savePlayerInformation(){
-        Gson gson=gameBoardSaving();
+        Gson gson= gsonForEveryone();
         String jsonStrin = gson.toJson(getGameBoardOfPlayer(),GameBoardInterface.class);
         try {
             fileInformatioPlayerFirst = new FileWriter("src/main/resources/fileInformationPlayerFirst.json");
