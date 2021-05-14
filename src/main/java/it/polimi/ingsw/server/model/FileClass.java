@@ -9,6 +9,10 @@ public class FileClass {
         if (f.exists())
             f.delete();
 
+       f = new File("src/main/resources/InformationAboutInkwell.json");
+        if (f.exists())
+            f.delete();
+
         f = new File("src/main/resources/DeckProductionCardOneBluLatest.json");
         if (f.exists())
             f.delete();

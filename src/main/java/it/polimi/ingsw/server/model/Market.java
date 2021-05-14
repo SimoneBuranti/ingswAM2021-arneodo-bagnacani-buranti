@@ -20,11 +20,7 @@ import java.util.List;
  * this class represents the game market  common to all players
  */
 public class Market extends Observable {
-    /**
-     * file for initial configuration
-     */
-    FileWriter configMarket= null;
-    private String JSONArray;
+
 
 
 
@@ -89,7 +85,6 @@ public class Market extends Observable {
         setGrid();
         setExtra();
 
-        notifyObserver(new ConfigurationMarketMessage(initialMarbleList));
     }
 
     /**
@@ -295,8 +290,12 @@ public class Market extends Observable {
             initialMarbleList.add(list[i]);
         setGrid();
         setExtra();
+    }
 
-        notifyObserver(new ConfigurationMarketMessage(initialMarbleList));}
+
+    public ArrayList<Marble> getInitialMarbleList(){
+        return initialMarbleList;
+    }
 
 
 

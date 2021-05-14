@@ -257,4 +257,8 @@ public abstract class GameBoardDecorator extends GameBoardInterface {
     public ProductionCard[][] getDevelopmentBoard(){
         return gameBoard.getDevelopmentBoard(); }
 
+
+    public ProductionCard GetdevelopmentBoardCell(int i,int j){
+       return gameBoard.getdevelopmentBoardCell(i,j);
+    }
 }

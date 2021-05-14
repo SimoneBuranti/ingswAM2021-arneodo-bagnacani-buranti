@@ -1,6 +1,6 @@
 package it.polimi.ingsw.server.model;
 
-import it.polimi.ingsw.server.model.GameMultiPlayer;
+import it.polimi.ingsw.server.controller.ClientController;
 import it.polimi.ingsw.server.model.exceptions.NotEnoughSpaceInStorageException;
 import it.polimi.ingsw.server.model.exceptions.WhiteMarbleException;
 import it.polimi.ingsw.server.model.marbles.*;
@@ -21,11 +21,11 @@ public class MarketTest {
     @Test
     public void initializationOfGridMarket() throws IOException, InterruptedException {
 
-
+        ArrayList<ClientController> clientControllers = new ArrayList<>();
         ArrayList<String> nickname =new ArrayList<>(2);
         nickname.add("ale");
         nickname.add("ali");
-        GameMultiPlayer game= new GameMultiPlayer(2,nickname,true);
+        GameMultiPlayer game= new GameMultiPlayer(2,nickname,true, clientControllers);
 
 
         assertTrue(!( game.getCellGridMarket(0, 0) instanceof RedMarble) ||
@@ -53,7 +53,8 @@ public class MarketTest {
         ArrayList<String> nickname =new ArrayList<>(2);
         nickname.add("ale");
         nickname.add("ali");
-        GameMultiPlayer game= new GameMultiPlayer(2,nickname,true);
+        ArrayList<ClientController> clientControllers = new ArrayList<>();
+        GameMultiPlayer game= new GameMultiPlayer(2,nickname,true, clientControllers);
 
         assertTrue(!( game.getExtraMarket() instanceof RedMarble) ||
                 (game.getExtraMarket() instanceof YellowMarble)||
@@ -80,7 +81,9 @@ public class MarketTest {
         ArrayList<String> nickname =new ArrayList<>(2);
         nickname.add("ale");
         nickname.add("ali");
-        GameMultiPlayer game= new GameMultiPlayer(2,nickname,true);
+
+        ArrayList<ClientController> clientControllers = new ArrayList<>();
+        GameMultiPlayer game= new GameMultiPlayer(2,nickname,true, clientControllers);
 
 
         assertTrue(( game.getCellGridMarket(0, 0) instanceof RedMarble) ||
@@ -130,7 +133,8 @@ public void PushRowsOfMarketCycling() throws IOException, InterruptedException {
         ArrayList<String> nickname =new ArrayList<>(2);
         nickname.add("ale");
         nickname.add("ali");
-        GameMultiPlayer game= new GameMultiPlayer(2,nickname,true);
+        ArrayList<ClientController> clientControllers = new ArrayList<>();
+        GameMultiPlayer game= new GameMultiPlayer(2,nickname,true, clientControllers);
         try {
             game.pushRowInMarket(0);
         } catch (NotEnoughSpaceInStorageException e) {
@@ -210,7 +214,8 @@ public void PushRowsOfMarketCycling() throws IOException, InterruptedException {
         ArrayList<String> nickname =new ArrayList<>(2);
         nickname.add("ale");
         nickname.add("ali");
-        GameMultiPlayer game= new GameMultiPlayer(2,nickname,true);
+        ArrayList<ClientController> clientControllers = new ArrayList<>();
+        GameMultiPlayer game= new GameMultiPlayer(2,nickname,true, clientControllers);
 
 
         assertTrue(( game.getCellGridMarket(0, 0) instanceof RedMarble) ||
@@ -256,7 +261,8 @@ public void PushRowsOfMarketCycling() throws IOException, InterruptedException {
         ArrayList<String> nickname =new ArrayList<>(2);
         nickname.add("ale");
         nickname.add("ali");
-        GameMultiPlayer game= new GameMultiPlayer(2,nickname,true);
+        ArrayList<ClientController> clientControllers = new ArrayList<>();
+        GameMultiPlayer game= new GameMultiPlayer(2,nickname,true, clientControllers);
 
         assertEquals(game.getCellGridMarket(0, 0), game.getInitialMarbleListMarket(0));
         assertEquals(game.getCellGridMarket(1, 0), game.getInitialMarbleListMarket(4));

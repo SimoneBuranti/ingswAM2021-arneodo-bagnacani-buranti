@@ -12,10 +12,10 @@ public class ProductionCardConfigMessage extends Message {
     private final MessageType messageType = MessageType.TABLEPRODUCTIONCARDCONFIG;
 
 
-    private ProductionCard[][] list;
+    private int[][] list;
 
 
-    public ProductionCardConfigMessage(ProductionCard[][] list ){
+    public ProductionCardConfigMessage(int[][] list ){
 
         this.list=list;
 
@@ -32,7 +32,7 @@ public class ProductionCardConfigMessage extends Message {
     }
 
 
-    public ProductionCard[][] getListOwnProductioncard() {
+    public int[][] getListOwnProductioncard() {
         return list;
     }
 }

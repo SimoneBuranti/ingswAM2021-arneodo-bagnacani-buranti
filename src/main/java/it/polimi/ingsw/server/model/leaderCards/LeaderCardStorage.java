@@ -21,8 +21,8 @@ public class LeaderCardStorage extends LeaderCard {
      * @param point : the card victory points
      * @param specialStorage : the type of resource that can be contained in the extra storage
      */
-    public LeaderCardStorage(Requirements requirements, int point, Resource specialStorage) {
-        super(requirements, point);
+    public LeaderCardStorage(Requirements requirements, int point, Resource specialStorage,int key) {
+        super(requirements, point,key);
         this.specialStorage=specialStorage;
     }
 

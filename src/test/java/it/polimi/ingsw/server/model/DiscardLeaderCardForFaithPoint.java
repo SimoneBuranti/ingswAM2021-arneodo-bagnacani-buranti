@@ -1,5 +1,6 @@
 package it.polimi.ingsw.server.model;
 
+import it.polimi.ingsw.server.controller.ClientController;
 import it.polimi.ingsw.server.model.exceptions.LeaderCardsGameBoardEmptyException;
 import it.polimi.ingsw.server.model.exceptions.CallForCouncilException;
 import it.polimi.ingsw.server.model.exceptions.LastSpaceReachedException;
@@ -23,7 +24,8 @@ class DiscardLeaderCardForFaithPoint {
         ArrayList<String> nickname = new ArrayList<>();
         nickname.add("ale");
         nickname.add("ali");
-        GameMultiPlayer game=new GameMultiPlayer(2, nickname,true);
+        ArrayList<ClientController> clientControllers = new ArrayList<>();
+        GameMultiPlayer game=new GameMultiPlayer(2, nickname,true, clientControllers);
         assertEquals(8,game.leaderDeckSize());
         assertNotEquals(game.getPlayerFromList(0).getCardFromPersonalLeaderCard(0),(game.getPlayerFromList(1).getCardFromPersonalLeaderCard(0)));
         assertNotEquals(game.getPlayerFromList(0).getCardFromPersonalLeaderCard(0),(game.getPlayerFromList(1).getCardFromPersonalLeaderCard(1)));

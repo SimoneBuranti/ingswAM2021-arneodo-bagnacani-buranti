@@ -13,9 +13,7 @@ import java.io.IOException;
 
 public class JsonApp {
     public static void main( String[] args ) throws IOException, InterruptedException {
-        //Game game = new GameSolitaire("Ali");
-        Reserve reserve = new Reserve();
-        Player player = new PlayerFirst("Ali", new Game(false));
+
         //GameBoardInterface gameBoard = new GameBoard();
 
         /*Colour blue =new Blue();
@@ -231,7 +229,6 @@ public class JsonApp {
                 .registerTypeAdapterFactory(adapterGame)
                 .create();
 
-        System.out.println(gson.toJson(player));
 
         //String jsonString = gson.toJson(game, Game.class);
 

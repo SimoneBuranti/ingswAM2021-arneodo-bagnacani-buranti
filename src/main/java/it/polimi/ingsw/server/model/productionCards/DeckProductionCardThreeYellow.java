@@ -39,7 +39,7 @@ public class DeckProductionCardThreeYellow extends DeckProductionCard {
         yellowNineOut.put(Resource.ROCK, 0);
         yellowNineOut.put(Resource.SERVANT, 3);
         yellowNineOut.put(Resource.SHIELD, 0);
-        ProductionCard cardThirtyThree =new ProductionCard(yellowNine, yellowNineIn, yellowNineOut, 9, 3, yellow,2,9);
+        ProductionCard cardThirtyThree =new ProductionCard(yellowNine, yellowNineIn, yellowNineOut, 9, 3, yellow,2,45);
         deck.add(cardThirtyThree);
 
         Map<Resource,Integer> yellowTen =new HashMap<>();
@@ -57,7 +57,7 @@ public class DeckProductionCardThreeYellow extends DeckProductionCard {
         yellowTenOut.put(Resource.ROCK, 0);
         yellowTenOut.put(Resource.SERVANT, 0);
         yellowTenOut.put(Resource.SHIELD, 2);
-        ProductionCard cardThirtyFour =new ProductionCard(yellowTen, yellowTenIn, yellowTenOut, 10, 3, yellow, 1,10);
+        ProductionCard cardThirtyFour =new ProductionCard(yellowTen, yellowTenIn, yellowTenOut, 10, 3, yellow, 1,46);
         deck.add(cardThirtyFour);
 
 
@@ -77,7 +77,7 @@ public class DeckProductionCardThreeYellow extends DeckProductionCard {
         yellowElevenOut.put(Resource.ROCK, 0);
         yellowElevenOut.put(Resource.SERVANT, 1);
         yellowElevenOut.put(Resource.SHIELD, 0);
-        ProductionCard cardThirtyFive =new ProductionCard(yellowEleven, yellowElevenIn, yellowElevenOut, 11, 3, yellow, 3,11);
+        ProductionCard cardThirtyFive =new ProductionCard(yellowEleven, yellowElevenIn, yellowElevenOut, 11, 3, yellow, 3,47);
         deck.add(cardThirtyFive);
 
 
@@ -96,17 +96,11 @@ public class DeckProductionCardThreeYellow extends DeckProductionCard {
         yellowTwEightOut.put(Resource.ROCK, 1);
         yellowTwEightOut.put(Resource.SERVANT, 3);
         yellowTwEightOut.put(Resource.SHIELD, 0);
-        ProductionCard cardThirtySix =new ProductionCard(yellowTwelve, yellowTwelveIn, yellowTwEightOut, 12, 3, yellow, 0,12);
+        ProductionCard cardThirtySix =new ProductionCard(yellowTwelve, yellowTwelveIn, yellowTwEightOut, 12, 3, yellow, 0,48);
         deck.add(cardThirtySix);
 
         Mix.MIXED(deck);
 
-        ArrayList<Integer> list = new ArrayList<Integer>();
-        list.add(deck.get(0).getKey());
-        list.add(deck.get(1).getKey());
-        list.add(deck.get(2).getKey());
-        list.add(deck.get(3).getKey());
-        notifyObserver(new DeckProductionCardConfigMessage(7,list));
 
     }
     /**
@@ -140,16 +134,22 @@ public class DeckProductionCardThreeYellow extends DeckProductionCard {
         for(int i=0; i < l; i++)
             deck.add(deckRecover[i]);
 
-
-        ArrayList<Integer> list = new ArrayList<Integer>();
-        for(int i=0; i < deck.size(); i++)
-            list.add(deck.get(i).getKey());
-        notifyObserver(new DeckProductionCardConfigMessage(7,list));
     }
 
     public int getKey() {
         return key;
     }
+
+    @Override
+    public ArrayList<Integer> getDeck(){
+        ArrayList<Integer> list = new ArrayList<Integer>();
+        list.add(deck.get(0).getKey());
+        list.add(deck.get(1).getKey());
+        list.add(deck.get(2).getKey());
+        list.add(deck.get(3).getKey());
+        return list;
+    }
+
 }
 
 

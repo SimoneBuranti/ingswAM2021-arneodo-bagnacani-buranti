@@ -2,6 +2,7 @@ package it.polimi.ingsw.server.model;
 
 import com.google.gson.Gson;
 import it.polimi.ingsw.messages.observable.*;
+import it.polimi.ingsw.server.controller.ClientController;
 import it.polimi.ingsw.server.model.exceptions.CallForCouncilException;
 import it.polimi.ingsw.server.model.exceptions.EndGameException;
 import it.polimi.ingsw.server.model.exceptions.LastSpaceReachedException;
@@ -54,7 +55,7 @@ public class GameMultiPlayer extends Game {
     /**
      * this attribute represents nickNameInOrder which indicates players in order, giving importance only to nickname
      */
-    private ArrayList<String> nickNameInOrder = new ArrayList<>();
+    private ArrayList<ClientController> clientControllersInOrder = new ArrayList<>();
 
 
     /**
@@ -67,24 +68,99 @@ public class GameMultiPlayer extends Game {
      * this attribute represents currentPlayerPosition on playerList
      */
     private int currentPlayerPosition = 0;
+    private ArrayList<String> nickNameInOrder;
 
     /**
      * this is the constructor for the class
      * @param numberOfPlayer : the number of players in the game
      * @param nickName : the collection of players' nicknames
+     * @param clientControllers
      */
-    public GameMultiPlayer(int numberOfPlayer, ArrayList<String> nickName, Boolean newGame) throws IOException, InterruptedException {
+    public GameMultiPlayer(int numberOfPlayer, ArrayList<String> nickName, Boolean newGame, ArrayList<ClientController> clientControllers) throws IOException, InterruptedException {
         super(newGame);
         if(newGame){
         this.playerList= new ArrayList<>(numberOfPlayer);
         this.numberOfPlayer=numberOfPlayer;
         inkwell=createRandomNumber(numberOfPlayer);
-        nickNameInOrder=correctOrder(nickName,inkwell);
-        createPlayer(numberOfPlayer,nickNameInOrder);
-        currentPlayer = playerList.get(currentPlayerPosition);}
+        clientControllersInOrder=correctOrder(clientControllers,inkwell);
+        createPlayer(numberOfPlayer,clientControllersInOrder);
+        currentPlayer = playerList.get(currentPlayerPosition);
+        nickNameInOrder= new ArrayList<>();
+        createNickNameInOrder(clientControllers);
+        addObservators();
+        configClient();
+        }
         else
-            restoreGameMultiPlayer();
+            restoreGameMultiPlayer(clientControllers); }
 
+
+    @Override
+    public void configClient() throws IOException, InterruptedException {
+        super.configClient();
+    if (numberOfPlayer==2)
+    {
+        ArrayList<Integer> needForLeader = new ArrayList<>();
+        for (int i=0; i<4;i++)
+            needForLeader.add(firstPlayer.getPersonalLeaderCard().get(i).getKey());
+        notifyOnlyOneSpecificObserver(new UpdateInitLeaderMessage(needForLeader), firstPlayer.getNickName());
+
+        needForLeader = new ArrayList<>();
+        for (int i=0; i<4;i++)
+            needForLeader.add(secondPlayer.getPersonalLeaderCard().get(i).getKey());
+        notifyOnlyOneSpecificObserver(new UpdateInitLeaderMessage(needForLeader), secondPlayer.getNickName());
+    }
+
+    else if (numberOfPlayer==3)
+    {   ArrayList<Integer> needForLeader = new ArrayList<>();
+        for (int i=0; i<4;i++)
+            needForLeader.add(firstPlayer.getPersonalLeaderCard().get(i).getKey());
+        notifyOnlyOneSpecificObserver(new UpdateInitLeaderMessage(needForLeader), firstPlayer.getNickName());
+
+        needForLeader = new ArrayList<>();
+        for (int i=0; i<4;i++)
+            needForLeader.add(secondPlayer.getPersonalLeaderCard().get(i).getKey());
+        notifyOnlyOneSpecificObserver(new UpdateInitLeaderMessage(needForLeader), secondPlayer.getNickName());
+
+        needForLeader = new ArrayList<>();
+        for (int i=0; i<4;i++)
+            needForLeader.add(thirdPlayer.getPersonalLeaderCard().get(i).getKey());
+        notifyOnlyOneSpecificObserver(new UpdateInitLeaderMessage(needForLeader),thirdPlayer.getNickName());
+
+    }
+    else if (numberOfPlayer==4)
+    {
+        ArrayList<Integer> needForLeader = new ArrayList<>();
+        for (int i=0; i<4;i++)
+            needForLeader.add(firstPlayer.getPersonalLeaderCard().get(i).getKey());
+        notifyOnlyOneSpecificObserver(new UpdateInitLeaderMessage(needForLeader), firstPlayer.getNickName());
+
+        needForLeader = new ArrayList<>();
+        for (int i=0; i<4;i++)
+            needForLeader.add(secondPlayer.getPersonalLeaderCard().get(i).getKey());
+        notifyOnlyOneSpecificObserver(new UpdateInitLeaderMessage(needForLeader), secondPlayer.getNickName());
+
+        needForLeader = new ArrayList<>();
+        for (int i=0; i<4;i++)
+            needForLeader.add(thirdPlayer.getPersonalLeaderCard().get(i).getKey());
+        notifyOnlyOneSpecificObserver(new UpdateInitLeaderMessage(needForLeader),thirdPlayer.getNickName());
+
+        needForLeader = new ArrayList<>();
+        for (int i=0; i<4;i++)
+            needForLeader.add(fourthPlayer.getPersonalLeaderCard().get(i).getKey());
+        notifyOnlyOneSpecificObserver(new UpdateInitLeaderMessage(needForLeader),fourthPlayer.getNickName());
+    }
+
+
+}
+
+    private void createNickNameInOrder(ArrayList<ClientController> clientControllers) {
+        for(int i=0; i<numberOfPlayer;i++)
+            nickNameInOrder.add(clientControllers.get(i).getNickname());
+    }
+
+    private void addObservators() {
+        for(int i=0; i<numberOfPlayer;i++)
+            this.addObserver(clientControllersInOrder.get(i).getVirtualView());
     }
 
     /**
@@ -97,52 +173,37 @@ public class GameMultiPlayer extends Game {
     /**
      * this method creates all the players in the game starting from the number of players and their nicknames
      * @param numberOfPlayer : the number of players in the game
-     * @param nickNameInOrder : collection of players' nicknames already sorted according to the random assignment of the inkwell
+
      */
-    private void createPlayer(int numberOfPlayer,ArrayList<String> nickNameInOrder) throws IOException, InterruptedException {
+    private void createPlayer(int numberOfPlayer,ArrayList<ClientController> clientControllersInOrder) throws IOException, InterruptedException {
        if (numberOfPlayer==2)
         {
-            firstPlayer=new PlayerFirst(nickNameInOrder.get(0),this);
-            secondPlayer= new PlayerSecond(nickNameInOrder.get(1),this);
+            firstPlayer=new PlayerFirst(clientControllersInOrder.get(0).getNickname(),this,clientControllersInOrder.get(0).getVirtualView());
+            secondPlayer= new PlayerSecond(clientControllersInOrder.get(1).getNickname(),this,clientControllersInOrder.get(1).getVirtualView());
             playerList.add(firstPlayer);
             playerList.add(secondPlayer);
-            notifyOnlyOneSpecificObserver(new UpdateInitLeaderMessage(firstPlayer.getPersonalLeaderCard()), firstPlayer.getNickName());
-            notifyOnlyOneSpecificObserver(new UpdateInitLeaderMessage(secondPlayer.getPersonalLeaderCard()), secondPlayer.getNickName());
-        }
+             }
 
         else if (numberOfPlayer==3)
         {
-            firstPlayer=new PlayerFirst(nickNameInOrder.get(0),this);
-            secondPlayer= new PlayerSecond(nickNameInOrder.get(1),this);
-            thirdPlayer= new PlayerThird(nickNameInOrder.get(2),this);
+            firstPlayer=new PlayerFirst(clientControllersInOrder.get(0).getNickname(),this,clientControllersInOrder.get(0).getVirtualView());
+            secondPlayer= new PlayerSecond(clientControllersInOrder.get(1).getNickname(),this,clientControllersInOrder.get(1).getVirtualView());
+            thirdPlayer= new PlayerThird(clientControllersInOrder.get(2).getNickname(),this,clientControllersInOrder.get(2).getVirtualView());
             playerList.add(firstPlayer);
             playerList.add(secondPlayer);
             playerList.add(thirdPlayer);
-            notifyOnlyOneSpecificObserver(new UpdateInitLeaderMessage(firstPlayer.getPersonalLeaderCard()), firstPlayer.getNickName());
-            notifyOnlyOneSpecificObserver(new UpdateInitLeaderMessage(secondPlayer.getPersonalLeaderCard()), secondPlayer.getNickName());
-
-            notifyOnlyOneSpecificObserver(new UpdateInitLeaderMessage(thirdPlayer.getPersonalLeaderCard()),thirdPlayer.getNickName());
-
-        }
+             }
        else if (numberOfPlayer==4)
         {
-            firstPlayer=new PlayerFirst(nickNameInOrder.get(0),this);
-            secondPlayer= new PlayerSecond(nickNameInOrder.get(1),this);
-            thirdPlayer= new PlayerThird(nickNameInOrder.get(2),this);
-            fourthPlayer=new PlayerFourth(nickNameInOrder.get(3),this);
+            firstPlayer=new PlayerFirst(clientControllersInOrder.get(0).getNickname(),this,clientControllersInOrder.get(0).getVirtualView());
+            secondPlayer= new PlayerSecond(clientControllersInOrder.get(1).getNickname(),this,clientControllersInOrder.get(1).getVirtualView());
+            thirdPlayer= new PlayerThird(clientControllersInOrder.get(2).getNickname(),this,clientControllersInOrder.get(2).getVirtualView());
+            fourthPlayer=new PlayerFourth(clientControllersInOrder.get(3).getNickname(),this,clientControllersInOrder.get(3).getVirtualView());
             playerList.add(firstPlayer);
             playerList.add(secondPlayer);
             playerList.add(thirdPlayer);
             playerList.add(fourthPlayer);
-            notifyOnlyOneSpecificObserver(new UpdateInitLeaderMessage(firstPlayer.getPersonalLeaderCard()), firstPlayer.getNickName());
-            notifyOnlyOneSpecificObserver(new UpdateInitLeaderMessage(secondPlayer.getPersonalLeaderCard()), secondPlayer.getNickName());
-
-            notifyOnlyOneSpecificObserver(new UpdateInitLeaderMessage(thirdPlayer.getPersonalLeaderCard()),thirdPlayer.getNickName());
-
-            notifyOnlyOneSpecificObserver(new UpdateInitLeaderMessage(fourthPlayer.getPersonalLeaderCard()),fourthPlayer.getNickName());
-
-
-        }
+             }
 
     }
 
@@ -197,14 +258,14 @@ public class GameMultiPlayer extends Game {
      * @param inkwell : the position in the list to be sorted of the first player on the sorted list
      * @return ArrayList<String> : ordered list of nickNames
      */
-    private ArrayList<String> correctOrder(ArrayList<String> nickName,int inkwell){
+    private ArrayList<ClientController> correctOrder(ArrayList<ClientController> nickName,int inkwell){
 
         for(int i=inkwell; i<nickName.size();i++)
-                nickNameInOrder.add(nickName.get(i));
+            clientControllersInOrder.add(nickName.get(i));
         for(int i=0; i<inkwell;i++)
-            nickNameInOrder.add(nickName.get(i));
+            clientControllersInOrder.add(nickName.get(i));
 
-        return  nickNameInOrder;
+        return  clientControllersInOrder;
     }
 
     public ArrayList<String> getNickNameInOrder(){
@@ -249,16 +310,31 @@ public class GameMultiPlayer extends Game {
         for(Player p : playerList){
             if(p.getNickName().equals(nickname) && !(p.isConnected())){
                 p.setConnected();
+                ArrayList<Integer> needForLeader = new ArrayList<>();
+                ArrayList<Integer> needForLeader2 = new ArrayList<>();
 
                 notifyOnlyOneSpecificObserver(new StorageConfigMessage(p.getGameBoardOfPlayer().getStorageOfGameBoard().getStorageResource()), p.getNickName());
 
                 notifyOnlyOneSpecificObserver(new StrongboxConfigMessage(p.getGameBoardOfPlayer().getStrongboxOfGameBoard().getStrongBoxResource()), p.getNickName());
 
-                notifyOnlyOneSpecificObserver(new LeadercardconfigMessage(p.getGameBoardOfPlayer().getLeaderCards(),p.getGameBoardOfPlayer().getLeaderCardsActivated()), p.getNickName());
+
+                for (int i=0; i<p.getGameBoardOfPlayer().getLeaderCards().size();i++)
+                    needForLeader.add(p.getGameBoardOfPlayer().getLeaderCards().get(i).getKey());
+                for (int i=0; i<p.getGameBoardOfPlayer().getLeaderCardsActivated().size();i++)
+                    needForLeader2.add(p.getGameBoardOfPlayer().getLeaderCardsActivated().get(i).getKey());
+                notifyOnlyOneSpecificObserver(new LeadercardconfigMessage(needForLeader,needForLeader2), p.getNickName());
 
                 notifyOnlyOneSpecificObserver(new FaithConfigMessage(p.getGameBoardOfPlayer().getIndicator(),p.getGameBoardOfPlayer().getCurrCall()), p.getNickName());
 
-                notifyOnlyOneSpecificObserver(new ProductionCardConfigMessage(p.getGameBoardOfPlayer().getDevelopmentBoard()),p.getNickName());
+                int[][] list = new int[3][3];
+                for (int i=0; i<3;i++)
+                    for (int j=0; i<3;i++)
+                        if (p.getGameBoardOfPlayer().getdevelopmentBoardCell(i,j)==null)
+                            list[i][j]=0;
+                        else
+                            list[i][j]=p.getGameBoardOfPlayer().getdevelopmentBoardCell(i,j).getKey();
+
+                notifyOnlyOneSpecificObserver(new ProductionCardConfigMessage(list),p.getNickName());
 
                 if(p.getGameBoardOfPlayer().getLeaderCardsActivated().size() != 0){
                     if (p.getGameBoardOfPlayer().getLeaderCardsActivated().get(0)!=null){
@@ -373,11 +449,29 @@ public class GameMultiPlayer extends Game {
             p.savePlayerInformation();
         }
         saveInformationAboutTurn();
+        saveInformationOfInkwel();
         saveInformationPlayerNumber();
         saveCurrentPosition();
         saveIfLastTurnOrNot();
     }
 
+    private void saveInformationOfInkwel() { Gson gson = new Gson();
+        FileWriter config = null;
+        String jsonStrin = gson.toJson(inkwell);
+        try {
+
+            config = new FileWriter("src/main/resources/InformationAboutInkwell.json");
+            config.write(jsonStrin);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                config.flush();
+                config.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } }
+    }
 
 
     private void saveCurrentPosition() {
@@ -450,17 +544,22 @@ public class GameMultiPlayer extends Game {
     /**
      * save information for a possible restart game
      */
-    public void restoreGameMultiPlayer(){
-        restoreGameTurn();
+    public void restoreGameMultiPlayer(ArrayList<ClientController> clientControllers) throws IOException, InterruptedException {
+        restoreGameTurn(clientControllers);
     }
 
 
     /**
      * restore turn
      */
-    public void restoreGameTurn(){
+    public void restoreGameTurn(ArrayList<ClientController> clientControllers) throws IOException, InterruptedException {
         Gson gson=new Gson();
 
+        try {
+            inkwell = gson.fromJson(new FileReader("src/main/resources/InformationAboutInkwell.json"),Integer.class);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
         try {
             nickNameInOrder = gson.fromJson(new FileReader("src/main/resources/InformationAboutTurn.json"),ArrayList.class);
         } catch (FileNotFoundException e) {
@@ -483,13 +582,53 @@ public class GameMultiPlayer extends Game {
             e.printStackTrace();
         }
 
+        addObservators();
+        correctOrder(clientControllers,inkwell);
         createPlayerRestore(numberOfPlayer,nickNameInOrder);
+        reConfigClient();
         currentPlayer = playerList.get(currentPlayerPosition);
 
     }
 
+    public void reConfigClient() throws IOException, InterruptedException {
+        super.reConfigClient();
+        for(Player p : playerList){
+                ArrayList<Integer> needForLeader = new ArrayList<>();
+                ArrayList<Integer> needForLeader2 = new ArrayList<>();
+
+                notifyOnlyOneSpecificObserver(new StorageConfigMessage(p.getGameBoardOfPlayer().getStorageOfGameBoard().getStorageResource()), p.getNickName());
+
+                notifyOnlyOneSpecificObserver(new StrongboxConfigMessage(p.getGameBoardOfPlayer().getStrongboxOfGameBoard().getStrongBoxResource()), p.getNickName());
 
 
+                for (int i=0; i<p.getGameBoardOfPlayer().getLeaderCards().size();i++)
+                    needForLeader.add(p.getGameBoardOfPlayer().getLeaderCards().get(i).getKey());
+                for (int i=0; i<p.getGameBoardOfPlayer().getLeaderCardsActivated().size();i++)
+                    needForLeader2.add(p.getGameBoardOfPlayer().getLeaderCardsActivated().get(i).getKey());
+                notifyOnlyOneSpecificObserver(new LeadercardconfigMessage(needForLeader,needForLeader2), p.getNickName());
+
+                notifyOnlyOneSpecificObserver(new FaithConfigMessage(p.getGameBoardOfPlayer().getIndicator(),p.getGameBoardOfPlayer().getCurrCall()), p.getNickName());
+
+            int[][] list = new int[3][3];
+            for (int i=0; i<3;i++)
+                for (int j=0; i<3;i++)
+                    if (p.getGameBoardOfPlayer().getdevelopmentBoardCell(i,j)==null)
+                        list[i][j]=0;
+                    else
+                        list[i][j]=p.getGameBoardOfPlayer().getdevelopmentBoardCell(i,j).getKey();
+
+            notifyOnlyOneSpecificObserver(new ProductionCardConfigMessage(list),p.getNickName());
+                if(p.getGameBoardOfPlayer().getLeaderCardsActivated().size() != 0){
+                    if (p.getGameBoardOfPlayer().getLeaderCardsActivated().get(0)!=null){
+                        if(p.getGameBoardOfPlayer().getLeaderCardsActivated().get(0) instanceof LeaderCardProduction)
+                            notifyOnlyOneSpecificObserver(new StorageExtraConfig(p.getGameBoardOfPlayer().getStorageOfGameBoard().getNumExtraFirstAvailable(),((LeaderCardProduction) p.getGameBoardOfPlayer().getLeaderCardsActivated().get(0)).getResourceProduction()), p.getNickName());
+                    }
+                    if(p.getGameBoardOfPlayer().getLeaderCardsActivated()!=null && p.getGameBoardOfPlayer().getLeaderCardsActivated().get(1)!=null){
+                        if(p.getGameBoardOfPlayer().getLeaderCardsActivated().get(1) instanceof LeaderCardProduction)
+                            notifyOnlyOneSpecificObserver(new StorageExtraDoubleConfig(p.getGameBoardOfPlayer().getStorageOfGameBoard().getNumExtraFirstAvailable(),((LeaderCardProduction) p.getGameBoardOfPlayer().getLeaderCardsActivated().get(1)).getResourceProduction()), p.getNickName());
+                    }
+                }
+            } }
 
 
     /**
@@ -497,20 +636,21 @@ public class GameMultiPlayer extends Game {
      * @param numberOfPlayer : the number of players in the game
      * @param nickNameInOrder : collection of players' nicknames already sorted according to the random assignment of the inkwell
      */
-    private void createPlayerRestore(int numberOfPlayer,ArrayList<String> nickNameInOrder){
+    private void
+    createPlayerRestore(int numberOfPlayer,ArrayList<String> nickNameInOrder){
         if (numberOfPlayer==2)
         {
-            firstPlayer=new PlayerFirst(nickNameInOrder.get(0),this,false);
-            secondPlayer= new PlayerSecond(nickNameInOrder.get(1),this,false);
+            firstPlayer=new PlayerFirst(nickNameInOrder.get(0),this,false,clientControllersInOrder.get(0).getVirtualView());
+            secondPlayer= new PlayerSecond(nickNameInOrder.get(1),this,false,clientControllersInOrder.get(1).getVirtualView());
             playerList.add(firstPlayer);
             playerList.add(secondPlayer);
         }
 
         else if (numberOfPlayer==3)
         {
-            firstPlayer=new PlayerFirst(nickNameInOrder.get(0),this,false);
-            secondPlayer= new PlayerSecond(nickNameInOrder.get(1),this,false);
-            thirdPlayer= new PlayerThird(nickNameInOrder.get(2),this ,false);
+            firstPlayer=new PlayerFirst(nickNameInOrder.get(0),this,false,clientControllersInOrder.get(0).getVirtualView());
+            secondPlayer= new PlayerSecond(nickNameInOrder.get(1),this,false,clientControllersInOrder.get(0).getVirtualView());
+            thirdPlayer= new PlayerThird(nickNameInOrder.get(2),this ,false,clientControllersInOrder.get(0).getVirtualView());
             playerList.add(firstPlayer);
             playerList.add(secondPlayer);
             playerList.add(thirdPlayer);
@@ -518,10 +658,10 @@ public class GameMultiPlayer extends Game {
         }
         else if (numberOfPlayer==4)
         {
-            firstPlayer=new PlayerFirst(nickNameInOrder.get(0),this,false);
-            secondPlayer= new PlayerSecond(nickNameInOrder.get(1),this ,false);
-            thirdPlayer= new PlayerThird(nickNameInOrder.get(2),this ,false);
-            fourthPlayer=new PlayerFourth(nickNameInOrder.get(3),this,false);
+            firstPlayer=new PlayerFirst(nickNameInOrder.get(0),this,false,clientControllersInOrder.get(0).getVirtualView());
+            secondPlayer= new PlayerSecond(nickNameInOrder.get(1),this ,false,clientControllersInOrder.get(0).getVirtualView());
+            thirdPlayer= new PlayerThird(nickNameInOrder.get(2),this ,false,clientControllersInOrder.get(0).getVirtualView());
+            fourthPlayer=new PlayerFourth(nickNameInOrder.get(3),this,false,clientControllersInOrder.get(0).getVirtualView());
             playerList.add(firstPlayer);
             playerList.add(secondPlayer);
             playerList.add(thirdPlayer);
@@ -540,7 +680,6 @@ public class GameMultiPlayer extends Game {
         FileWriter config = null;
         String jsonStrin = gson.toJson(numberOfPlayer);
         try {
-            // Constructs a FileWriter given a file name, using the platform's default charset
             config = new FileWriter("src/main/resources/InformationAboutTurnPlayerNumber.json");
             config.write(jsonStrin);
         } catch (IOException e) {
@@ -560,7 +699,7 @@ public class GameMultiPlayer extends Game {
      */
     @Override
     public void endGame() throws IOException, InterruptedException {
-        notifyObserver(new EndGamePlayerWinnerMessage(theWinnerIs()));
+        notifyObserver(new EndGamePlayerWinnerMessage(theWinnerIs().getNickName()));
         FileClass.FileDestroyer();
     }
 

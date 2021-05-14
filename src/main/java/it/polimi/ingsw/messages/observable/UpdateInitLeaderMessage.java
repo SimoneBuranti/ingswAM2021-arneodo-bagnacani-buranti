@@ -11,11 +11,11 @@ public class UpdateInitLeaderMessage extends Message {
     private final MessageType messageType = MessageType.UPDATEINITLEADERCARD;
 
 
-    private ArrayList<LeaderCard> leaderCards;
+    private ArrayList<Integer> leaderCards;
 
 
 
-    public UpdateInitLeaderMessage(ArrayList<LeaderCard> leaderCards){
+    public UpdateInitLeaderMessage(ArrayList<Integer> leaderCards){
         this.leaderCards=leaderCards;
     }
 
@@ -30,7 +30,7 @@ public class UpdateInitLeaderMessage extends Message {
     }
 
 
-    public ArrayList<LeaderCard> getLeaderCards(){
+    public ArrayList<Integer> getLeaderCards(){
         return leaderCards;
     }
 }

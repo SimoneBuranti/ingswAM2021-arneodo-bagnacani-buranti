@@ -4,6 +4,7 @@ package it.polimi.ingsw.server.model;
 import com.google.gson.Gson;
 import it.polimi.ingsw.Observer.Observable;
 import it.polimi.ingsw.messages.observable.*;
+import it.polimi.ingsw.server.controller.ClientController;
 import it.polimi.ingsw.server.model.actionMarkers.ActionMarker;
 import it.polimi.ingsw.server.model.actionMarkers.DeckActionMarker;
 import it.polimi.ingsw.server.model.colours.Blue;
@@ -16,6 +17,7 @@ import it.polimi.ingsw.server.model.leaderCards.LeaderCardProduction;
 import it.polimi.ingsw.server.model.players.Player;
 import it.polimi.ingsw.server.model.players.PlayerFirst;
 import it.polimi.ingsw.server.model.productionCards.DeckProductionCard;
+import it.polimi.ingsw.server.virtualview.VirtualView;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -43,25 +45,41 @@ public class GameSolitaire extends Game {
 
     private String nickNamePlayer;
 
+    private ClientController clientController;
+
 
     /**
      * the constructor calls the super class constructor and instantiates the attributes of the solitaire game
      */
 
+    private VirtualView virtualView;
 
-
-    public GameSolitaire(String nickName, Boolean newGame) throws IOException, InterruptedException {
+    public GameSolitaire(String nickName, Boolean newGame,ClientController clientController) throws IOException, InterruptedException {
         super(newGame);
         if(newGame){
         this.nickNamePlayer=nickName;
+        this.clientController=clientController;
         deckActionMarker = new DeckActionMarker();
         lorenzoTheMagnificent = new LorenzoTheMagnificent();
-        player = new PlayerFirst(nickName,this);
-        notifyOnlyOneSpecificObserver(new UpdateInitLeaderMessage(player.getPersonalLeaderCard()), player.getNickName());
-        currentPlayer = player;}
+        player = new PlayerFirst(nickName,this, clientController.getVirtualView());
+        currentPlayer = player;
+        this.addObserver(clientController.getVirtualView());
+        configClient();}
         else
-            restoreGameSolitaire();
+            restoreGameSolitaire(clientController);
     }
+
+
+    @Override
+    public void configClient() throws IOException, InterruptedException {
+        super.configClient();
+        ArrayList<Integer> needForLeader = new ArrayList<>();
+        for (int i=0; i<4;i++)
+            needForLeader.add(player.getPersonalLeaderCard().get(i).getKey());
+        notifyObserver(new UpdateInitLeaderMessage(needForLeader));
+
+
+        }
 
     /**
      * this method calls the super class method to buy the production card and calls the checkProductionDeck method
@@ -324,16 +342,29 @@ public class GameSolitaire extends Game {
     public void connectPlayer(String nickname) throws IOException, InterruptedException{
         if(player.getNickName().equals(nickname) && !(player.isConnected())){
             player.setConnected();
+            ArrayList<Integer> needForLeader = new ArrayList<>();
+            ArrayList<Integer> needForLeader2 = new ArrayList<>();
             notifyOnlyOneSpecificObserver(new StorageConfigMessage(player.getGameBoardOfPlayer().getStorageOfGameBoard().getStorageResource()), player.getNickName());
 
             notifyOnlyOneSpecificObserver(new StrongboxConfigMessage(player.getGameBoardOfPlayer().getStrongboxOfGameBoard().getStrongBoxResource()), player.getNickName());
 
-            notifyOnlyOneSpecificObserver(new LeadercardconfigMessage(player.getGameBoardOfPlayer().getLeaderCards(),player.getGameBoardOfPlayer().getLeaderCardsActivated()), player.getNickName());
+            for (int i=0; i<player.getGameBoardOfPlayer().getLeaderCards().size();i++)
+                needForLeader.add(player.getGameBoardOfPlayer().getLeaderCards().get(i).getKey());
+            for (int i=0; i<player.getGameBoardOfPlayer().getLeaderCardsActivated().size();i++)
+                needForLeader2.add(player.getGameBoardOfPlayer().getLeaderCardsActivated().get(i).getKey());
+            notifyOnlyOneSpecificObserver(new LeadercardconfigMessage(needForLeader,needForLeader2), player.getNickName());
 
             notifyOnlyOneSpecificObserver(new FaithConfigMessage(player.getGameBoardOfPlayer().getIndicator(),player.getGameBoardOfPlayer().getCurrCall()), player.getNickName());
 
-            notifyOnlyOneSpecificObserver(new ProductionCardConfigMessage(player.getGameBoardOfPlayer().getDevelopmentBoard()),player.getNickName());
+            int[][] list = new int[3][3];
+            for (int i=0; i<3;i++)
+                for (int j=0; i<3;i++)
+                    if (player.getGameBoardOfPlayer().getdevelopmentBoardCell(i,j)==null)
+                        list[i][j]=0;
+                    else
+                        list[i][j]=player.getGameBoardOfPlayer().getdevelopmentBoardCell(i,j).getKey();
 
+            notifyOnlyOneSpecificObserver(new ProductionCardConfigMessage(list),player.getNickName());
             if(player.getGameBoardOfPlayer().getLeaderCardsActivated().get(0)!=null){
                 if(player.getGameBoardOfPlayer().getLeaderCardsActivated().get(0) instanceof LeaderCardProduction)
                     notifyOnlyOneSpecificObserver(new StorageExtraConfig(player.getGameBoardOfPlayer().getStorageOfGameBoard().getNumExtraFirstAvailable(),((LeaderCardProduction) player.getGameBoardOfPlayer().getLeaderCardsActivated().get(0)).getResourceProduction()), player.getNickName());
@@ -455,7 +486,7 @@ public class GameSolitaire extends Game {
 
 
 
-    public void  restoreGameSolitaire() throws IOException, InterruptedException {
+    public void  restoreGameSolitaire(ClientController clientController) throws IOException, InterruptedException {
         currentPlayer = player;
         Gson gson=new Gson();
 
@@ -465,8 +496,10 @@ public class GameSolitaire extends Game {
             e.printStackTrace();
         }
         RestoreActionMarker();
-        player = new PlayerFirst(nickNamePlayer,this,false);
+        player = new PlayerFirst(nickNamePlayer,this,false,clientController.getVirtualView());
         RestoreActionMagnific();
+        this.addObserver(clientController.getVirtualView());
+        reConfigClient();
 
     }
 
@@ -518,6 +551,42 @@ public class GameSolitaire extends Game {
             this.deckActionMarker = new DeckActionMarker(servList);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+        }
+    }
+
+    public void reConfigClient() throws IOException, InterruptedException {
+        super.reConfigClient();
+            ArrayList<Integer> needForLeader = new ArrayList<>();
+            ArrayList<Integer> needForLeader2 = new ArrayList<>();
+            notifyOnlyOneSpecificObserver(new StorageConfigMessage(player.getGameBoardOfPlayer().getStorageOfGameBoard().getStorageResource()), player.getNickName());
+
+            notifyOnlyOneSpecificObserver(new StrongboxConfigMessage(player.getGameBoardOfPlayer().getStrongboxOfGameBoard().getStrongBoxResource()), player.getNickName());
+
+            for (int i=0; i<player.getGameBoardOfPlayer().getLeaderCards().size();i++)
+                needForLeader.add(player.getGameBoardOfPlayer().getLeaderCards().get(i).getKey());
+            for (int i=0; i<player.getGameBoardOfPlayer().getLeaderCardsActivated().size();i++)
+                needForLeader2.add(player.getGameBoardOfPlayer().getLeaderCardsActivated().get(i).getKey());
+            notifyOnlyOneSpecificObserver(new LeadercardconfigMessage(needForLeader,needForLeader2), player.getNickName());
+
+            notifyOnlyOneSpecificObserver(new FaithConfigMessage(player.getGameBoardOfPlayer().getIndicator(),player.getGameBoardOfPlayer().getCurrCall()), player.getNickName());
+
+        int[][] list = new int[3][3];
+        for (int i=0; i<3;i++)
+            for (int j=0; i<3;i++)
+                if (player.getGameBoardOfPlayer().getdevelopmentBoardCell(i,j)==null)
+                    list[i][j]=0;
+                else
+                    list[i][j]=player.getGameBoardOfPlayer().getdevelopmentBoardCell(i,j).getKey();
+
+        notifyOnlyOneSpecificObserver(new ProductionCardConfigMessage(list),player.getNickName());
+            if(player.getGameBoardOfPlayer().getLeaderCardsActivated().get(0)!=null){
+                if(player.getGameBoardOfPlayer().getLeaderCardsActivated().get(0) instanceof LeaderCardProduction)
+                    notifyOnlyOneSpecificObserver(new StorageExtraConfig(player.getGameBoardOfPlayer().getStorageOfGameBoard().getNumExtraFirstAvailable(),((LeaderCardProduction) player.getGameBoardOfPlayer().getLeaderCardsActivated().get(0)).getResourceProduction()), player.getNickName());
+            }
+            if(player.getGameBoardOfPlayer().getLeaderCardsActivated().get(1)!=null){
+                if(player.getGameBoardOfPlayer().getLeaderCardsActivated().get(1) instanceof LeaderCardProduction)
+                    notifyOnlyOneSpecificObserver(new StorageExtraDoubleConfig(player.getGameBoardOfPlayer().getStorageOfGameBoard().getNumExtraFirstAvailable(),((LeaderCardProduction) player.getGameBoardOfPlayer().getLeaderCardsActivated().get(1)).getResourceProduction()), player.getNickName());
+
         }
     }
 

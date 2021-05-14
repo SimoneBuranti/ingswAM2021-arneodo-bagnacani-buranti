@@ -1,5 +1,6 @@
 package it.polimi.ingsw.server.model;
 
+import it.polimi.ingsw.server.controller.ClientController;
 import it.polimi.ingsw.server.model.colours.*;
 import it.polimi.ingsw.server.model.exceptions.LeaderCardsGameBoardEmptyException;
 import it.polimi.ingsw.server.model.exceptions.RequirementsException;
@@ -29,26 +30,25 @@ class LeaderCardTestActivation {
         nickname.add("aa");
         nickname.add("bb");
         FileWriter cofiguration = null;
-
-        GameMultiPlayer gameMultiPlayer = new GameMultiPlayer(2, nickname,true);
+        ArrayList<ClientController> clientControllers = new ArrayList<>();
+        GameMultiPlayer gameMultiPlayer = new GameMultiPlayer(2, nickname,true, clientControllers);
 
         Colour blue = new Blue();
         Colour green = new Green();
         Colour yellow = new Yellow();
         Colour violet = new Violet();
 
-        Requirements requirementsOne = new ResourceRequirement(Resource.COIN);
-        LeaderCard leaderCardOne = new LeaderCardStorage(requirementsOne, 3, Resource.ROCK);
+        Requirements requirementsOne= new ResourceRequirement(Resource.COIN);
+        LeaderCard leaderCardOne= new LeaderCardStorage(requirementsOne,3, Resource.ROCK,1);
 
-        Requirements requirementsFive = new SecondLevelRequirement(blue);
-        LeaderCard leaderCardTwo = new LeaderCardProduction(requirementsFive, 4, Resource.SERVANT);
+        Requirements requirementsFive= new SecondLevelRequirement(blue);
+        LeaderCard leaderCardTwo= new LeaderCardProduction(requirementsFive,4, Resource.SERVANT,2);
 
-        Requirements requirementsTen = new ThreeFlagsTwoColourRequirement(violet, green);
-        LeaderCard leaderCardThree = new LeaderCardMarble(requirementsTen, 5, Resource.COIN);
+        Requirements requirementsTen= new ThreeFlagsTwoColourRequirement(violet,green);
+        LeaderCard leaderCardThree= new LeaderCardMarble(requirementsTen,5, Resource.COIN,3);
 
-        Requirements requirementsFifteen = new TwoFlagsTwoColourRequirement(yellow, violet);
-        LeaderCard leaderCardFour = new LeaderCardReduction(requirementsFifteen, 3, Resource.COIN);
-
+        Requirements requirementsFifteen= new TwoFlagsTwoColourRequirement(yellow,violet);
+        LeaderCard leaderCardFour= new LeaderCardReduction(requirementsFifteen,3, Resource.COIN,4);
         Map<Resource, Integer> yellowOne = new HashMap<>();
         yellowOne.put(Resource.COIN, 0);
         yellowOne.put(Resource.ROCK, 2);

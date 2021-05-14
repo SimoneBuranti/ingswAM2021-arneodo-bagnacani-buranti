@@ -11,6 +11,7 @@ import it.polimi.ingsw.server.model.gameBoard.WhiteMarbleGameBoard;
 import it.polimi.ingsw.server.model.gameBoard.WhiteMarbleGameBoardDouble;
 import it.polimi.ingsw.server.model.marbles.WhiteMarble;
 import it.polimi.ingsw.server.model.players.Player;
+import it.polimi.ingsw.server.virtualview.VirtualView;
 import org.junit.jupiter.api.*;
 
 import java.io.IOException;
@@ -43,7 +44,8 @@ class WhiteMarbleGameBoardsTest {
     @DisplayName("whiteExchangeTest - null method")
     public void whiteExchangeNullTest() throws IOException, InterruptedException {
         WhiteMarble whiteMarble = new WhiteMarble();
-        Player player = new Player("Simo" , new Game(true));
+        VirtualView virtualView=null;
+        Player player = new Player("Simo" , new Game(true),virtualView);
 
         try {
             whiteMarble.giveResource(player);

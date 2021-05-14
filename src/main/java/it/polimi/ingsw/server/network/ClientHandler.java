@@ -143,21 +143,9 @@ public class ClientHandler implements Runnable {
         if (testMode){
             outputStreamForTests = msg.serialize();
         } else {
-            //System.out.println("result of sendPing :" + sendPing());
-
-           // PingMessage ping = new PingMessage();
-            //writeStream.println(ping.serialize());
-            //TimeUnit.MILLISECONDS.sleep(5000);
-            //wait(1000);
-            //System.out.println(pongo);
-            //if (pongo)
-            //{
                 writeStream.println(msg.serialize());
                 writeStream.flush();
-                //setPongo(false);
-           // }
-            //else
-                //disconnect();
+
         }
 
     }

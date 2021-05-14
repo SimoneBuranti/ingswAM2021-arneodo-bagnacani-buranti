@@ -11,17 +11,15 @@ import java.io.IOException;
 public class VirtualView implements Observer {
 
     private final ClientController clientController;
-    private final Game game;
+
 
     /**
      * Default constructor.
+     *  @param clientController
      *
-     * @param clientController
-     * @param game
      */
-    public VirtualView(ClientController clientController, Game game) {
+    public VirtualView(ClientController clientController) {
         this.clientController = clientController;
-        this.game=game;
     }
 
 

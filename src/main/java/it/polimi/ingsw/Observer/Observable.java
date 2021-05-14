@@ -37,6 +37,7 @@ public class Observable {
      * @param message the message to be passed to the observers.
      */
     protected void notifyObserver(Message message) throws IOException, InterruptedException {
+        System.out.println(observers.size());
         for (Observer observer : observers) {
             observer.update(message);
         }

@@ -697,4 +697,10 @@ public class  GameBoard extends GameBoardInterface{
     }
 
 
+    public ProductionCard getdevelopmentBoardCell(int i,int j){
+
+       return developmentBoard[i][j];
+    }
+
+
 }

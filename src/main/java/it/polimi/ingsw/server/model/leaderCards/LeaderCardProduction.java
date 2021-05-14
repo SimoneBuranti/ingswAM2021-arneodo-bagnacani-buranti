@@ -20,8 +20,8 @@ public class LeaderCardProduction extends LeaderCard {
      * @param point : the card victory points
      * @param resourceProduction : the type of resource that can be used to activate the extra production
      */
-    public LeaderCardProduction(Requirements requirements, int point , Resource resourceProduction){
-        super(requirements,point);
+    public LeaderCardProduction(Requirements requirements, int point , Resource resourceProduction,int key){
+        super(requirements,point,key);
         this.resourceProduction=resourceProduction;
     }
 

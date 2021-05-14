@@ -1,5 +1,6 @@
 package it.polimi.ingsw;
 
+import it.polimi.ingsw.server.controller.ClientController;
 import it.polimi.ingsw.server.model.GameMultiPlayer;
 
 import java.io.FileWriter;
@@ -12,8 +13,9 @@ public class PlayerTest {public static void main(String[] args) throws IOExcepti
     nickname.add("aa");
     nickname.add("bb");
     FileWriter cofiguration = null;
+    ArrayList<ClientController> clientControllers = new ArrayList<>();
 
-    GameMultiPlayer gameMultiPlayer =new GameMultiPlayer(2, nickname,true);
+    GameMultiPlayer gameMultiPlayer =new GameMultiPlayer(2, nickname,true, clientControllers);
 
     gameMultiPlayer.getPlayerFromList(0).savePlayerInformation();
 }

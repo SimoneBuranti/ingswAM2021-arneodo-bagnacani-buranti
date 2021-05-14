@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class DeckProductionCardConfigMessage extends Message {
 
 
-    private final MessageType messageType = MessageType.DECKPRODUCTIONCARD;
+    private final MessageType messageType = MessageType.DECKPRODUCTIONCARDCONFIG;
 
     private int NumberDeck;
 

@@ -10,6 +10,7 @@ import it.polimi.ingsw.server.model.gameBoard.*;
 import it.polimi.ingsw.server.model.leaderCards.*;
 import it.polimi.ingsw.server.model.productionCards.DeckProductionCard;
 import it.polimi.ingsw.server.model.requirements.*;
+import it.polimi.ingsw.server.virtualview.VirtualView;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -18,6 +19,8 @@ import java.util.ArrayList;
  * this class represents the player of the game
  */
 public class Player {
+
+    private VirtualView virtualView;
     /**
      * this attribute indicates whether the player is logged in or not
      */
@@ -53,7 +56,8 @@ public class Player {
      * @param nickName : the nickname chosen by the player
      *
      */
-    public Player(String nickName,Game game){
+    public Player(String nickName,Game game,VirtualView virtualView){
+        this.virtualView=virtualView;
         buffer= new ArrayList<>();
         gameBoardOfPlayer = new GameBoard();
         personalLeaderCard=new ArrayList<>(4);
@@ -73,7 +77,8 @@ public class Player {
      * @param nickName : the nickname chosen by the player
      *
      */
-    public Player(String nickName,Game game,boolean newMatch){
+    public Player(String nickName,Game game,boolean newMatch,VirtualView virtualView){
+        this.virtualView=virtualView;
         buffer= new ArrayList<>();
         gameBoardOfPlayer = new GameBoard();
         personalLeaderCard=new ArrayList<>(4);

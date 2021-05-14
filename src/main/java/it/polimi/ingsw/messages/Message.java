@@ -21,6 +21,7 @@ public abstract class Message{
      * @return the abstract message
      */
     public static Message deserialize (String jsonMsg) {
+
         JsonObject jsonObj = jsonParser.parse(jsonMsg).getAsJsonObject();
 
         String msgTopicString = jsonObj.get("messageType").getAsString();
@@ -30,8 +31,6 @@ public abstract class Message{
 
         switch (messageType) {
 
-            /*case OK:
-                return gson.fromJson(jsonObj, OkMessage.class);*/
 
             case EXIT:
                 return gson.fromJson(jsonObj, ExitMessage.class);

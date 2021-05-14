@@ -105,12 +105,8 @@ public class DeckProductionCardOneBlu extends DeckProductionCard {
 
         Mix.MIXED(deck);
 
-        ArrayList<Integer> list = new ArrayList<Integer>();
-        list.add(deck.get(0).getKey());
-        list.add(deck.get(1).getKey());
-        list.add(deck.get(2).getKey());
-        list.add(deck.get(3).getKey());
-        notifyObserver(new DeckProductionCardConfigMessage(0,list));
+
+
         }
 
 
@@ -158,15 +154,20 @@ public class DeckProductionCardOneBlu extends DeckProductionCard {
             deck.add(deckRecover[i]);
 
 
-
-        ArrayList<Integer> list = new ArrayList<Integer>();
-        for(int i=0; i < deck.size(); i++)
-            list.add(deck.get(i).getKey());
-
-        notifyObserver(new DeckProductionCardConfigMessage(0,list));
     }
 
+@Override
     public int getKey() {
         return key;
+    }
+
+@Override
+    public ArrayList<Integer> getDeck(){
+    ArrayList<Integer> list = new ArrayList<Integer>();
+    list.add(deck.get(0).getKey());
+    list.add(deck.get(1).getKey());
+    list.add(deck.get(2).getKey());
+    list.add(deck.get(3).getKey());
+        return list;
     }
 }

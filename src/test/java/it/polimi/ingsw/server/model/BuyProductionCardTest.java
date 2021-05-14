@@ -1,5 +1,6 @@
 package it.polimi.ingsw.server.model;
 
+import it.polimi.ingsw.server.controller.ClientController;
 import it.polimi.ingsw.server.model.GameSolitaire;
 import it.polimi.ingsw.server.model.Resource;
 import it.polimi.ingsw.server.model.actionMarkers.ActionMarkerProductionViolet;
@@ -29,7 +30,8 @@ public class BuyProductionCardTest {
     @Test
     @DisplayName("Buy production card in solitaire game test")
     public void buyInSolitaireGame() throws IOException, InterruptedException {
-        GameSolitaire game = new GameSolitaire("Ali",true);
+        ClientController clientController = null;
+        GameSolitaire game = new GameSolitaire("Ali",true,clientController);
 
         GameBoardInterface gameBoard = game.getGameBoardOfPlayer();
 

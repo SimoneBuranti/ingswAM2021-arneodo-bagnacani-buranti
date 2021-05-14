@@ -8,6 +8,7 @@ import it.polimi.ingsw.server.model.exceptions.*;
 import it.polimi.ingsw.server.model.gameBoard.*;
 import it.polimi.ingsw.server.model.leaderCards.*;
 import it.polimi.ingsw.server.model.requirements.*;
+import it.polimi.ingsw.server.virtualview.VirtualView;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -24,8 +25,8 @@ public class PlayerThird extends Player {
      * Default constructor that calls the super class constructor
      * @param nickName : the nickname chosen by the player
      */
-    public PlayerThird(String nickName,Game game){
-        super(nickName, game );
+    public PlayerThird(String nickName,Game game,VirtualView virtualView){
+        super(nickName, game,virtualView );
     }
 
     /**
@@ -33,8 +34,8 @@ public class PlayerThird extends Player {
      * @param nickName : the nickname chosen by the player
      */
 
-    public PlayerThird(String nickName, Game game, boolean newmatch){
-        super(nickName,game,newmatch);
+    public PlayerThird(String nickName, Game game, boolean newmatch, VirtualView virtualView){
+        super(nickName,game,newmatch,virtualView);
         RuntimeTypeAdapterFactory<Storage> adapterStorage =
                 RuntimeTypeAdapterFactory
                         .of(Storage.class)

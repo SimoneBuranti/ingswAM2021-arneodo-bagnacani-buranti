@@ -1,15 +1,18 @@
 package it.polimi.ingsw.server.model;
 
+import it.polimi.ingsw.server.controller.ClientController;
 import it.polimi.ingsw.server.model.Game;
 import it.polimi.ingsw.server.model.exceptions.CallForCouncilException;
 import it.polimi.ingsw.server.model.exceptions.LastSpaceReachedException;
 import it.polimi.ingsw.server.model.gameBoard.FaithPath;
 import it.polimi.ingsw.server.model.marbles.RedMarble;
 import it.polimi.ingsw.server.model.players.Player;
+import it.polimi.ingsw.server.virtualview.VirtualView;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
@@ -631,9 +634,10 @@ class FaithPathTest {
     @Test
     @DisplayName("faithScoreTest : only position - 2")
     public void faithWithUseOfRedMarble() throws IOException, InterruptedException {
-
+        VirtualView virtualView = null;
         Game game = new Game(true);
-        Player player = new Player("simo",new Game(false));
+        ArrayList<ClientController> clientControllers = new ArrayList<>();
+        Player player = new Player("simo",new Game(false),virtualView);
         RedMarble redMarble = new RedMarble();
 
         assertEquals(player.getIndicator(), 0);

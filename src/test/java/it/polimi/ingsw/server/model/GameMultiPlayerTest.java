@@ -1,13 +1,10 @@
 package it.polimi.ingsw.server.model;
 
-import it.polimi.ingsw.server.model.Game;
-import it.polimi.ingsw.server.model.GameMultiPlayer;
+import it.polimi.ingsw.server.controller.ClientController;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.util.ArrayList;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 public class GameMultiPlayerTest {
 
@@ -17,7 +14,8 @@ public class GameMultiPlayerTest {
         nickname.add("Ali");
         nickname.add("Simo");
         nickname.add("Ale");
-        GameMultiPlayer game = new GameMultiPlayer(3, nickname, true);
+        ArrayList<ClientController> clientControllers = new ArrayList<>();
+        GameMultiPlayer game = new GameMultiPlayer(3, nickname, true, clientControllers);
 
         nickname = new ArrayList<>();
         nickname = game.getNickNameInOrder();

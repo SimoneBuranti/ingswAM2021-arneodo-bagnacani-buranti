@@ -22,8 +22,8 @@ public class LeaderCardMarble extends LeaderCard{
      * @param point : the card victory points
      * @param whiteMarble : the type of resource that can be taken through the white marble
      */
-    public LeaderCardMarble(Requirements requirements, int point , Resource whiteMarble){
-        super(requirements,point);
+    public LeaderCardMarble(Requirements requirements, int point , Resource whiteMarble,int key){
+        super(requirements,point, key);
         this.whiteMarble=whiteMarble;
     }
 

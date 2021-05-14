@@ -41,7 +41,7 @@ public class DeckProductionCardOneGreen extends DeckProductionCard {
         greenOneOut.put(Resource.ROCK, 0);
         greenOneOut.put(Resource.SERVANT, 0);
         greenOneOut.put(Resource.SHIELD, 0);
-        ProductionCard cardThirteen =new ProductionCard(greenOne, greenOneIn, greenOneOut, 1, 1, green ,1,1);
+        ProductionCard cardThirteen =new ProductionCard(greenOne, greenOneIn, greenOneOut, 1, 1, green ,1,13);
         deck.add(cardThirteen);
 
         Map<Resource,Integer> greenTwo =new HashMap<>();
@@ -59,7 +59,7 @@ public class DeckProductionCardOneGreen extends DeckProductionCard {
         greenTwoOut.put(Resource.ROCK, 0);
         greenTwoOut.put(Resource.SERVANT, 1);
         greenTwoOut.put(Resource.SHIELD, 0);
-        ProductionCard cardFourteen =new ProductionCard(greenTwo, greenTwoIn, greenTwoOut, 2, 1, green, 0,2);
+        ProductionCard cardFourteen =new ProductionCard(greenTwo, greenTwoIn, greenTwoOut, 2, 1, green, 0,14);
         deck.add(cardFourteen);
 
 
@@ -79,7 +79,7 @@ public class DeckProductionCardOneGreen extends DeckProductionCard {
         greenThreeOut.put(Resource.ROCK, 1);
         greenThreeOut.put(Resource.SERVANT, 0);
         greenThreeOut.put(Resource.SHIELD, 1);
-        ProductionCard cardFifteen =new ProductionCard(greenThree, greenThreeIn, greenThreeOut, 3, 1, green, 0,3);
+        ProductionCard cardFifteen =new ProductionCard(greenThree, greenThreeIn, greenThreeOut, 3, 1, green, 0,15);
         deck.add(cardFifteen);
 
 
@@ -98,17 +98,13 @@ public class DeckProductionCardOneGreen extends DeckProductionCard {
         greenFourOut.put(Resource.ROCK, 0);
         greenFourOut.put(Resource.SERVANT, 0);
         greenFourOut.put(Resource.SHIELD, 0);
-        ProductionCard cardSixteen =new ProductionCard(greenFour, greenFourIn, greenFourOut, 4, 1,green, 1,4);
+        ProductionCard cardSixteen =new ProductionCard(greenFour, greenFourIn, greenFourOut, 4, 1,green, 1,16);
         deck.add(cardSixteen);
 
         Mix.MIXED(deck);
 
-        ArrayList<Integer> list = new ArrayList<Integer>();
-        list.add(deck.get(0).getKey());
-        list.add(deck.get(1).getKey());
-        list.add(deck.get(2).getKey());
-        list.add(deck.get(3).getKey());
-        notifyObserver(new DeckProductionCardConfigMessage(1,list));
+
+
     }
 
     /**
@@ -145,15 +141,20 @@ public class DeckProductionCardOneGreen extends DeckProductionCard {
             deck.add(deckRecover[i]);
 
 
-
-        ArrayList<Integer> list = new ArrayList<Integer>();
-        for(int i=0; i < deck.size(); i++)
-            list.add(deck.get(i).getKey());
-
-        notifyObserver(new DeckProductionCardConfigMessage(1,list));
     }
 
     public int getKey() {
         return key;
     }
+
+    @Override
+    public ArrayList<Integer> getDeck(){
+        ArrayList<Integer> list = new ArrayList<Integer>();
+        list.add(deck.get(0).getKey());
+        list.add(deck.get(1).getKey());
+        list.add(deck.get(2).getKey());
+        list.add(deck.get(3).getKey());
+        return list;
+    }
 }
+

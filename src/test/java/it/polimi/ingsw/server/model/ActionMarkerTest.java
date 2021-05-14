@@ -1,4 +1,5 @@
 package it.polimi.ingsw.server.model;
+import it.polimi.ingsw.server.controller.ClientController;
 import it.polimi.ingsw.server.model.Game;
 import it.polimi.ingsw.server.model.GameSolitaire;
 import it.polimi.ingsw.server.model.actionMarkers.ActionMarker;
@@ -26,7 +27,7 @@ public class ActionMarkerTest {
     @Test
     @DisplayName("Action Marker Production Cards Test")
     public void actionMarkerBlueTest() throws IOException, InterruptedException {
-        GameSolitaire game = new GameSolitaire("Ali",true);
+      //  GameSolitaire game = new GameSolitaire("Ali",true);
         ActionMarker actionMarker= new ActionMarkerProductionBlue();
 
 
@@ -84,7 +85,7 @@ public class ActionMarkerTest {
     @DisplayName("Action Marker Production Cards Complete Test")
     public void actionMarkerBlueCompleteTest() throws EndOfSolitaireGame, IOException, InterruptedException {
 
-        GameSolitaire game = new GameSolitaire("Ali",true);
+     //   GameSolitaire game = new GameSolitaire("Ali",true);
         ActionMarker actionMarker= new ActionMarkerProductionBlue();
 
 
@@ -138,7 +139,8 @@ public class ActionMarkerTest {
     @DisplayName("Action Marker Black Cross Once Test")
     public void ActionMarkerCrossOnceTest() throws IOException, InterruptedException {
         ActionMarkerForCrossOnce actionMarker = new ActionMarkerForCrossOnce();
-        GameSolitaire game = new GameSolitaire("Ali",true);
+        ClientController clientController = null;
+        GameSolitaire game = new GameSolitaire("Ali",true, clientController);
 
         ActionMarker actionMarker1 = game.showFirst();
         assertEquals(0, game.getLorenzoFaithIndicator());
@@ -200,7 +202,8 @@ public class ActionMarkerTest {
     @DisplayName("Action Marker Black Cross Double Test")
     public void ActionMarkerCrossDoubleTest() throws IOException, InterruptedException {
         ActionMarkerForCrossDouble actionMarker = new ActionMarkerForCrossDouble();
-        GameSolitaire game = new GameSolitaire("Ali",true);
+        ClientController clientController = null;
+        GameSolitaire game = new GameSolitaire("Ali",true,clientController);
 
         ActionMarker actionMarker1;
         actionMarker1 = game.showFirst();

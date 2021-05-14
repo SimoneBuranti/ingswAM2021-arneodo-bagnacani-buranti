@@ -1,5 +1,6 @@
 package it.polimi.ingsw;
 
+import it.polimi.ingsw.server.controller.ClientController;
 import it.polimi.ingsw.server.model.GameMultiPlayer;
 import it.polimi.ingsw.server.model.Resource;
 import it.polimi.ingsw.server.model.colours.*;
@@ -27,24 +28,24 @@ public class ReserveTest {
 
         GameSolitaire gameMultiPlayer2 =new GameSolitaire( "nickname",false);*/
 
-
-        GameMultiPlayer gameMultiPlayer3 =new GameMultiPlayer(2,nickname,true);
+        ArrayList<ClientController> clientControllers = new ArrayList<>();
+        GameMultiPlayer gameMultiPlayer3 =new GameMultiPlayer(2,nickname,true, clientControllers);
 
         Colour blue =new Blue();
         Colour green =new Green();
         Colour yellow =new Yellow();
         Colour violet =new Violet();
         Requirements requirementsOne= new ResourceRequirement(Resource.COIN);
-        LeaderCard leaderCardOne= new LeaderCardStorage(requirementsOne,3, Resource.ROCK);
+        LeaderCard leaderCardOne= new LeaderCardStorage(requirementsOne,3, Resource.ROCK,1);
 
         Requirements requirementsFive= new SecondLevelRequirement(blue);
-        LeaderCard leaderCardTwo= new LeaderCardProduction(requirementsFive,4, Resource.SERVANT);
+        LeaderCard leaderCardTwo= new LeaderCardProduction(requirementsFive,4, Resource.SERVANT,2);
 
         Requirements requirementsTen= new ThreeFlagsTwoColourRequirement(violet,green);
-        LeaderCard leaderCardThree= new LeaderCardMarble(requirementsTen,5, Resource.COIN);
+        LeaderCard leaderCardThree= new LeaderCardMarble(requirementsTen,5, Resource.COIN,3);
 
         Requirements requirementsFifteen= new TwoFlagsTwoColourRequirement(yellow,violet);
-        LeaderCard leaderCardFour= new LeaderCardReduction(requirementsFifteen,3, Resource.COIN);
+        LeaderCard leaderCardFour= new LeaderCardReduction(requirementsFifteen,3, Resource.COIN,4);
 
         Map<Resource,Integer> yellowOne =new HashMap<>();
         yellowOne.put(Resource.COIN, 0);
@@ -93,12 +94,12 @@ public class ReserveTest {
 
         gameMultiPlayer3.saveInformation();
 
-
-        GameMultiPlayer gameMultiPlayer4 =new GameMultiPlayer( 2,nickname,false);
+        ArrayList<ClientController> clientControllers2 = new ArrayList<>();
+        GameMultiPlayer gameMultiPlayer4 =new GameMultiPlayer( 2,nickname,false, clientControllers);
 
         gameMultiPlayer4.saveInformation();
-
-        GameMultiPlayer gameMultiPlayer5 =new GameMultiPlayer( 2,nickname,false);
+        ArrayList<ClientController> clientControllers22 = new ArrayList<>();
+        GameMultiPlayer gameMultiPlayer5 =new GameMultiPlayer( 2,nickname,false, clientControllers);
         gameMultiPlayer5.getPlayerFromList(0).getGameBoardOfPlayer().addLeaderCardToGameBoard(leaderCardThree);
 
         gameMultiPlayer5.endGame();

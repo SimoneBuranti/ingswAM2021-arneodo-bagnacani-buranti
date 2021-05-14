@@ -98,8 +98,11 @@ public class Reserve extends Observable {
 
  public Reserve(Map map) throws IOException, InterruptedException {
         reservePools=map;
-        notifyObserver(new ReserveValueMessage(map));
 
+    }
+
+    public Map<Resource , Integer> getReservePool(){
+        return reservePools;
     }
 }
 

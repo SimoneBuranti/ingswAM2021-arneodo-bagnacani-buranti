@@ -21,6 +21,7 @@ public class ClientController implements MessageVisitor {
     public ClientController(Server server, ClientHandler clientHandler) {
         this.server = server;
         this.clientHandler = clientHandler;
+        this.virtualView = new VirtualView(this);
         this.game = null;
         this.nickname = null;
     }
@@ -31,8 +32,6 @@ public class ClientController implements MessageVisitor {
 
     public void setGame(Game game){
         this.game = game;
-        this.virtualView = new VirtualView(this,game);
-        game.addObserver(virtualView);
     }
 
     public String getNickname() {
@@ -50,6 +49,12 @@ public class ClientController implements MessageVisitor {
     public boolean turnCheck(){
         return nickname.equals(game.getCurrentNickname());
     }
+
+    public VirtualView getVirtualView() {
+        return virtualView;
+    }
+
+
 
     //---------------------------- From Server to Client ---------------------------------------
 

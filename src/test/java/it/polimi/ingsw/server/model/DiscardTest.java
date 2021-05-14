@@ -1,6 +1,6 @@
 package it.polimi.ingsw.server.model;
 
-import it.polimi.ingsw.server.model.GameMultiPlayer;
+import it.polimi.ingsw.server.controller.ClientController;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -26,8 +26,8 @@ class DiscardTest {
     nickname.add("ale");
     nickname.add("ali");
     nickname.add("simo");
-
-    GameMultiPlayer gameMultiPlayer = new GameMultiPlayer(3,nickname,true);
+        ArrayList<ClientController> clientControllers = new ArrayList<>();
+    GameMultiPlayer gameMultiPlayer = new GameMultiPlayer(3,nickname,true, clientControllers);
     assertEquals(4, gameMultiPlayer.leaderDeckSize());
     assertEquals(4, gameMultiPlayer.getPlayerFromList(0).personalLeaderCardSize());
     assertEquals(0, gameMultiPlayer.getPlayerFromList(0).getGameBoardOfPlayer().leaderCardsSize());
@@ -56,8 +56,9 @@ class DiscardTest {
         nickname.add("ale");
         nickname.add("ali");
         nickname.add("simo");
+        ArrayList<ClientController> clientControllers = new ArrayList<>();
 
-        GameMultiPlayer gameMultiPlayer = new GameMultiPlayer(3,nickname,true);
+        GameMultiPlayer gameMultiPlayer = new GameMultiPlayer(3,nickname,true, clientControllers);
         assertEquals(4, gameMultiPlayer.leaderDeckSize());
         assertEquals(4, gameMultiPlayer.getPlayerFromList(0).personalLeaderCardSize());
         assertEquals(0, gameMultiPlayer.getPlayerFromList(0).getGameBoardOfPlayer().leaderCardsSize());
@@ -83,8 +84,8 @@ class DiscardTest {
         nickname.add("ale");
         nickname.add("ali");
         nickname.add("simo");
-
-        GameMultiPlayer gameMultiPlayer = new GameMultiPlayer(3,nickname,true);
+        ArrayList<ClientController> clientControllers = new ArrayList<>();
+        GameMultiPlayer gameMultiPlayer = new GameMultiPlayer(3,nickname,true, clientControllers);
         gameMultiPlayer.getPlayerFromList(0).saveLeaderCard(1,2);
         assertEquals(gameMultiPlayer.getPlayerFromList(0).getGameBoardOfPlayer().reportLeaderCardToGameBoard(0), gameMultiPlayer.getPlayerFromList(0).getCardFromPersonalLeaderCard(1));
 

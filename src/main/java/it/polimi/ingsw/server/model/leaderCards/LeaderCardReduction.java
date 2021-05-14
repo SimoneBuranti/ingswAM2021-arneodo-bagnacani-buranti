@@ -20,8 +20,8 @@ public class LeaderCardReduction extends LeaderCard{
      * @param point : the card victory points
      * @param costReduction : the type of resource that can be subtracted from the cost of production cards
      */
-    public LeaderCardReduction(Requirements requirements, int point , Resource costReduction){
-        super(requirements,point);
+    public LeaderCardReduction(Requirements requirements, int point , Resource costReduction,int key){
+        super(requirements,point,key);
         this.costReduction=costReduction;
     }
 

@@ -70,15 +70,15 @@ public class Server {
     //--------------------------------------------------------------------
 
     public void initNewSolitaireGame() throws IOException, InterruptedException {
-        game = new GameSolitaire(lobby.get(0),true);
-        //virtualView = new VirtualView();
+        game = new GameSolitaire(lobby.get(0),true,clientControllers.get(0));
+
         gameController = new GameControllerSinglePlayer();
     }
 
 
     public void initNewMultiplayerGame() throws IOException, InterruptedException {
-        game = new GameMultiPlayer(lobby.size(),lobby,true);
-        //virtualView = new VirtualView();
+        game = new GameMultiPlayer(lobby.size(),lobby,true,clientControllers);
+
         gameController = new GameControllerMultiplayer(this,this.game);
 
         for(ClientController client : clientControllers){
@@ -86,7 +86,13 @@ public class Server {
         }
     }
 
-    public void restoreGameBackup(){}
+    public void restoreGameSingleBackup() throws IOException, InterruptedException {
+        this.game=new GameSolitaire(clientControllers.get(0).getNickname(),false,clientControllers.get(0));
+    }
+
+    public void restoreGameMultiBackup() throws IOException, InterruptedException {
+        this.game=new GameMultiPlayer(this.getLobbySize(),lobby,false,clientControllers);
+    }
 
 
     public void addClientController(ClientController clientController){

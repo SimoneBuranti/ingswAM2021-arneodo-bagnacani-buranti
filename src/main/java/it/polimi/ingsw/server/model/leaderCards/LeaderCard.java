@@ -18,14 +18,17 @@ public class LeaderCard {
      */
     protected Requirements requirements;
 
+    protected  int key;
+
     /**
      * Default constructor
      * @param requirements : the type of card requirement
      * @param points : the card victory points
      */
-    public LeaderCard(Requirements requirements,int points) {
+    public LeaderCard(Requirements requirements,int points,int key) {
         this.points = points;
         this.requirements=requirements;
+        this.key=key;
     }
 
     /**
@@ -43,5 +46,9 @@ public class LeaderCard {
      */
     public GameBoardInterface abilityActivation(GameBoardInterface gameBoard) throws RequirementsException {
         return null;
+    }
+
+    public int getKey(){
+        return key;
     }
 }

@@ -135,7 +135,13 @@ public abstract class DeckProductionCard extends Observable {
     }
 
 
-}
+
+    public ArrayList<Integer> getDeck(){
+        ArrayList<Integer> list = new ArrayList<Integer>();
+        return list;
+    }
+    }
+
 
 
 

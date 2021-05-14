@@ -7,10 +7,10 @@ import it.polimi.ingsw.server.model.players.Player;
 
 public class EndGamePlayerWinnerMessage extends Message {
     private final MessageType messageType = MessageType.ENDGAMEWINNER;
-private Player player;
+   private String nickname;
 
-    public EndGamePlayerWinnerMessage(Player player){
-        this.player=player;
+    public EndGamePlayerWinnerMessage(String nickname){
+        this.nickname=nickname;
     }
 
     @Override
@@ -23,7 +23,9 @@ private Player player;
         v.visit(this);
     }
 
-    public Player getPlayer() {
-        return player;
+
+
+    public String getNickname() {
+        return nickname;
     }
 }

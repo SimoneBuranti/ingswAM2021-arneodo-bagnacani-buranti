@@ -54,11 +54,12 @@ public class GameControllerRestart extends GameController {
             if (reconnected.size() == server.getLobbySize()){
                 if (numberOfPlayers==1){
                     server.setGameController(new GameControllerSinglePlayer());
+                    server.restoreGameSingleBackup();
                 } else {
                     server.setGameController(new GameControllerMultiplayer(this.server,this.game));
+                    server.restoreGameMultiBackup();
                 }
 
-                server.restoreGameBackup();
             }
         }
     }

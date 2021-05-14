@@ -19,11 +19,11 @@ public class AppForFile {
 
 
         Requirements requirementsThree= new ResourceRequirement(Resource.SHIELD);
-        LeaderCard leaderCardThree= new LeaderCardStorage(requirementsThree,3, Resource.COIN);
+        LeaderCard leaderCardThree= new LeaderCardStorage(requirementsThree,3, Resource.COIN,1);
         String jsonString = g.toJson(leaderCardThree);
 
         Requirements requirementsthwo= new ResourceRequirement(Resource.SHIELD);
-        LeaderCard leaderCardtwo= new LeaderCardStorage(requirementsthwo,3, Resource.SHIELD);
+        LeaderCard leaderCardtwo= new LeaderCardStorage(requirementsthwo,3, Resource.SHIELD,1);
         String jsonStrin = g.toJson(leaderCardtwo);
 
         System.out.println(jsonStrin);

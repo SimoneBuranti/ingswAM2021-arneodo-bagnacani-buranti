@@ -9,10 +9,10 @@ import java.util.ArrayList;
 
 public class LeadercardconfigMessage extends Message {
     private final MessageType messageType = MessageType.LEADERCONFIGMESSAGE;
-    private ArrayList<LeaderCard> notActivated;
-    private ArrayList<LeaderCard> activated;
+    private ArrayList<Integer> notActivated;
+    private ArrayList<Integer> activated;
 
-    public LeadercardconfigMessage(ArrayList<LeaderCard> NotActivated,ArrayList<LeaderCard> Activated){
+    public LeadercardconfigMessage(ArrayList<Integer> NotActivated,ArrayList<Integer> Activated){
         notActivated=new ArrayList<>();
         activated=new ArrayList<>();
         this.notActivated =NotActivated;
@@ -32,11 +32,11 @@ public class LeadercardconfigMessage extends Message {
         v.visit(this);
     }
 
-    public ArrayList<LeaderCard> getNotActivated() {
+    public ArrayList<Integer> getNotActivated() {
         return notActivated;
     }
 
-    public ArrayList<LeaderCard> getActivated() {
+    public ArrayList<Integer> getActivated() {
         return activated;
     }
 }
