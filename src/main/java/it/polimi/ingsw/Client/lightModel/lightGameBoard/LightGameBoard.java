@@ -7,9 +7,11 @@ import it.polimi.ingsw.server.model.leaderCards.LeaderCard;
 import it.polimi.ingsw.server.model.productionCards.ProductionCard;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 public class LightGameBoard {
+    private final String nickname;
     private final LightStorage storage;
     private final LightStrongbox strongbox;
     private final LightFaithPath faithPath;
@@ -19,7 +21,8 @@ public class LightGameBoard {
     private final LightProductionCards productionCardsByKey;
     private final LightLeaderCards leaderCardsByKey;
 
-    public LightGameBoard(){
+    public LightGameBoard(String nickname){
+        this.nickname = nickname;
         storage = new LightStorage();
         strongbox = new LightStrongbox();
         faithPath = new LightFaithPath();
@@ -30,6 +33,9 @@ public class LightGameBoard {
         leaderCardsByKey = new LightLeaderCards();
     }
 
+    public String getNickname(){
+        return nickname;
+    }
     public void setFaithPath(int faithIndicator, int currCall){
         this.faithPath.setFaithPath(faithIndicator, currCall);
     }
@@ -109,8 +115,20 @@ public class LightGameBoard {
         return leaderCardsActivated.get(index);
     }
 
-    public void payResourcesProduction(Map<Resource,Integer> map){
-        strongbox.removeResource(storage.removeAvailableResource(map));
+    public void payResourcesProduction(ArrayList<Resource> list){
+        strongbox.removeResource(storage.removeAvailableResource(fromListToMap(list)));
+    }
+
+    public Map<Resource, Integer> fromListToMap(ArrayList<Resource> list){
+        Map<Resource,Integer> map = new HashMap<>();
+        for(Resource resource : list){
+            if(map.containsKey(resource)){
+                map.put(resource, map.remove(resource)+1);
+            }else{
+                map.put(resource, 1);
+            }
+        }
+        return map;
     }
 
     public void addResourceStorage(Resource resource){

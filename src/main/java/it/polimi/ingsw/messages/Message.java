@@ -214,7 +214,7 @@ public abstract class Message{
                 return gson.fromJson(jsonObj, ProductionMessageForNotCurrentMessage.class);
 
             case PRODUCTIONUPDATEFORNOTCURRENT:
-                return gson.fromJson(jsonObj, ResultForProductionForNotCurrentMessage.class);
+                return gson.fromJson(jsonObj, ResultOfProductionForNotCurrentMessage.class);
 
             case RESULTFROMARKET:
                 return gson.fromJson(jsonObj, ResultFromMarketMessage.class);

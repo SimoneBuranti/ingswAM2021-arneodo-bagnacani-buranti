@@ -359,10 +359,10 @@ public class GameSolitaire extends Game {
             int[][] list = new int[3][3];
             for (int i=0; i<3;i++)
                 for (int j=0; i<3;i++)
-                    if (player.getGameBoardOfPlayer().getdevelopmentBoardCell(i,j)==null)
+                    if (player.getGameBoardOfPlayer().getDevelopmentBoardCell(i,j)==null)
                         list[i][j]=0;
                     else
-                        list[i][j]=player.getGameBoardOfPlayer().getdevelopmentBoardCell(i,j).getKey();
+                        list[i][j]=player.getGameBoardOfPlayer().getDevelopmentBoardCell(i,j).getKey();
 
             notifyOnlyOneSpecificObserver(new ProductionCardConfigMessage(list),player.getNickName());
             if(player.getGameBoardOfPlayer().getLeaderCardsActivated().get(0)!=null){
@@ -573,10 +573,10 @@ public class GameSolitaire extends Game {
         int[][] list = new int[3][3];
         for (int i=0; i<3;i++)
             for (int j=0; i<3;i++)
-                if (player.getGameBoardOfPlayer().getdevelopmentBoardCell(i,j)==null)
+                if (player.getGameBoardOfPlayer().getDevelopmentBoardCell(i,j)==null)
                     list[i][j]=0;
                 else
-                    list[i][j]=player.getGameBoardOfPlayer().getdevelopmentBoardCell(i,j).getKey();
+                    list[i][j]=player.getGameBoardOfPlayer().getDevelopmentBoardCell(i,j).getKey();
 
         notifyOnlyOneSpecificObserver(new ProductionCardConfigMessage(list),player.getNickName());
             if(player.getGameBoardOfPlayer().getLeaderCardsActivated().get(0)!=null){

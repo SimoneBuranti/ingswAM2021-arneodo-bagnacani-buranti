@@ -110,5 +110,5 @@ public abstract class GameBoardInterface {
     public abstract int getCurrCall();
 
     public abstract ProductionCard[][] getDevelopmentBoard();
-    public abstract ProductionCard getdevelopmentBoardCell(int i, int j);
+    public abstract ProductionCard getDevelopmentBoardCell(int i, int j);
 }

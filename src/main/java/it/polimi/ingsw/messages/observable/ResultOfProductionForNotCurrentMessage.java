@@ -8,17 +8,18 @@ import it.polimi.ingsw.server.model.players.Player;
 
 import java.util.ArrayList;
 
-public class ResultFromMarketNotCurrentMessage extends Message {
-    private final MessageType messageType = MessageType.RESULTFROMARKETNOTCURRENT;
+public class ResultOfProductionForNotCurrentMessage extends Message {
+    private final MessageType messageType = MessageType.PRODUCTIONUPDATEFORNOTCURRENT;
 
 
     private ArrayList<Resource> resource;
     private Player player;
 
+    public ResultOfProductionForNotCurrentMessage(Player player,  ArrayList<Resource> resource){
 
-    public ResultFromMarketNotCurrentMessage(Player player, ArrayList<Resource> resource){
         this.player=player;
         this.resource = resource;
+
     }
 
     @Override
@@ -34,9 +35,5 @@ public class ResultFromMarketNotCurrentMessage extends Message {
 
     public ArrayList<Resource> getResource() {
         return resource;
-    }
-
-    public Player getPlayer() {
-        return player;
     }
 }

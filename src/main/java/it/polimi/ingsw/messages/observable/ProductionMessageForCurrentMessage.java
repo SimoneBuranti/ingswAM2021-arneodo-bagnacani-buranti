@@ -3,22 +3,18 @@ package it.polimi.ingsw.messages.observable;
 import it.polimi.ingsw.messages.Message;
 import it.polimi.ingsw.messages.MessageType;
 import it.polimi.ingsw.messages.MessageVisitor;
+import it.polimi.ingsw.server.model.Resource;
+
+import java.util.ArrayList;
 
 public class ProductionMessageForCurrentMessage extends Message {
     private final MessageType messageType = MessageType.PRODUCTIONUPDATEFORCURRENT;
 
+    private ArrayList<Resource> resource;
 
-    private int coins;
-    private int servant;
-    private int shield;
-    private int rock;
-
-    public ProductionMessageForCurrentMessage(int coins, int shield, int rock, int servant)
+    public ProductionMessageForCurrentMessage(ArrayList<Resource> resource)
     {
-        this.coins=coins;
-        this.shield=shield;
-        this.rock=rock;
-        this.servant=servant;
+        this.resource = resource;
     }
 
 
@@ -32,20 +28,7 @@ public class ProductionMessageForCurrentMessage extends Message {
         v.visit(this);
     }
 
-
-    public int getCoins() {
-        return coins;
-    }
-
-    public int getServant() {
-        return servant;
-    }
-
-    public int getShield() {
-        return shield;
-    }
-
-    public int getRock() {
-        return rock;
+    public ArrayList<Resource> getResource() {
+        return resource;
     }
 }

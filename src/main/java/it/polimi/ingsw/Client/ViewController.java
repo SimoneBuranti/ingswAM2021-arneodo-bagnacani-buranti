@@ -11,9 +11,8 @@ import java.util.Map;
 
 public class ViewController implements MessageVisitor {
     private final SocketClient socketClient;
-    private LightGame game = new LightGameMultiPlayer();
+    private LightGame game = new LightGameMultiPlayer("Ali");
     private String nickName = null;
-    private Map<Resource, Integer> resourceMap = new HashMap<>();
 
     public ViewController(SocketClient socketClient){
         this.socketClient = socketClient;
@@ -88,7 +87,7 @@ public class ViewController implements MessageVisitor {
 
     @Override
     public void visit(ChangeCurrentPlayerMessage msg) {
-        //game.setCurrentPlayer();
+        game.setCurrentPlayer(msg.getNickname());
     }
 
 
@@ -237,7 +236,7 @@ public class ViewController implements MessageVisitor {
     @Override
     public void visit(NicknameStartedMessage msg) {
         System.out.println(msg.getMessageType()+" : "+ msg.getNickname());
-        game.setPlayers(msg.getNickname());
+        game.setPlayersInOrder(msg.getNickname());
     }
 
     @Override
@@ -250,24 +249,24 @@ public class ViewController implements MessageVisitor {
     @Override
     public void visit(UpdateInitResourceMessage msg) {
         game.useResourceReserve(msg.getR1(),1);
-        game.addStorage(nickName, msg.getR1(), 1);
+        game.addStorage(msg.getR1(), 1);
         if(msg.getR2() != null) {
             game.useResourceReserve(msg.getR2(),1);
-            game.addStorage(nickName, msg.getR2(), 1);
+            game.addStorage(msg.getR2(), 1);
         }
     }
 
     @Override
     public void visit(UpdateInitLeaderMessage msg) {
         System.out.println(msg.getMessageType()+" : "+ msg.getLeaderCards());
-        game.addLeaderCard(nickName, msg.getLeaderCards());
+        game.addLeaderCard(msg.getLeaderCards());
     }
 
     @Override
     public void visit(UpdateChosenLeaderMessage msg) {
         for(int i = 0; i < 4; i++){
             if(i != msg.getCardFirst() && i != msg.getCardSec());
-                game.discardLeaderCard(nickName, i);
+                game.discardLeaderCard(i);
         }
     }
 
@@ -284,7 +283,7 @@ public class ViewController implements MessageVisitor {
 
     @Override
     public void visit(TakeCardMessage msg) {
-        game.buyProductionCard(nickName, msg.getNumberDeck(), msg.getColumn());
+        game.buyProductionCard(msg.getNumberDeck(), msg.getColumn());
     }
 
     @Override
@@ -310,23 +309,14 @@ public class ViewController implements MessageVisitor {
 
     @Override
     public void visit(ResultFromMarketMessage msg) {
-        resourceMap.put(Resource.COIN, msg.getCoins());
-        resourceMap.put(Resource.ROCK, msg.getRock());
-        resourceMap.put(Resource.SERVANT, msg.getServant());
-        resourceMap.put(Resource.SHIELD, msg.getShield());
-
-        game.addStorage(nickName, resourceMap);
-        game.useResourceReserve(resourceMap);
+        game.addStorage(msg.getResource());
+        game.useResourceReserve(msg.getResource());
     }
 
 
     @Override
     public void visit(ResultFromMarketNotCurrentMessage msg) {
-        resourceMap.put(Resource.COIN, msg.getCoins());
-        resourceMap.put(Resource.ROCK, msg.getRock());
-        resourceMap.put(Resource.SERVANT, msg.getServant());
-        resourceMap.put(Resource.SHIELD, msg.getShield());
-        game.useResourceReserve(resourceMap);
+        game.useResourceReserve(msg.getResource());
     }
 
 
@@ -355,44 +345,28 @@ public class ViewController implements MessageVisitor {
 
     @Override
     public void visit(ProductionMessageForNotCurrentMessage msg) {
-        resourceMap.put(Resource.COIN, msg.getCoins());
-        resourceMap.put(Resource.ROCK, msg.getRock());
-        resourceMap.put(Resource.SERVANT, msg.getServant());
-        resourceMap.put(Resource.SHIELD, msg.getShield());
 
-        game.addResourceReserve(resourceMap);
+        game.addResourceReserve(msg.getResource());
     }
 
     @Override
     public void visit(ProductionMessageForCurrentMessage msg) {
-        resourceMap.put(Resource.COIN, msg.getCoins());
-        resourceMap.put(Resource.ROCK, msg.getRock());
-        resourceMap.put(Resource.SERVANT, msg.getServant());
-        resourceMap.put(Resource.SHIELD, msg.getShield());
 
-        game.addResourceReserve(resourceMap);
-        game.payResourcesProduction(nickName, resourceMap);
+        game.addResourceReserve(msg.getResource());
+        game.payResourcesProduction(msg.getResource());
     }
 
     @Override
     public void visit(ResultOfProductionMessage msg) {
-        resourceMap.put(Resource.COIN, msg.getCoins());
-        resourceMap.put(Resource.ROCK, msg.getRock());
-        resourceMap.put(Resource.SERVANT, msg.getServant());
-        resourceMap.put(Resource.SHIELD, msg.getShield());
 
-        game.useResourceReserve(resourceMap);
-        game.addStrongbox(nickName, resourceMap);
+        game.useResourceReserve(msg.getResource());
+        game.addStrongbox(msg.getResource());
     }
 
     @Override
-    public void visit(ResultForProductionForNotCurrentMessage msg) {
-        resourceMap.put(Resource.COIN, msg.getCoins());
-        resourceMap.put(Resource.ROCK, msg.getRock());
-        resourceMap.put(Resource.SERVANT, msg.getServant());
-        resourceMap.put(Resource.SHIELD, msg.getShield());
+    public void visit(ResultOfProductionForNotCurrentMessage msg) {
 
-        game.useResourceReserve(resourceMap);
+        game.useResourceReserve(msg.getResource());
     }
 
     @Override
@@ -402,7 +376,7 @@ public class ViewController implements MessageVisitor {
 
     @Override
     public void visit(ActivationLeaderForCurrentMessage msg) {
-        game.activateLeaderCard(nickName, msg.getIndex());
+        game.activateLeaderCard(msg.getIndex());
     }
 
     @Override
@@ -412,12 +386,12 @@ public class ViewController implements MessageVisitor {
 
     @Override
     public void visit(DiscardLeaderForCurrentMessage msg) {
-        game.discardLeaderCard(nickName, msg.getIndex());
+        game.discardLeaderCard(msg.getIndex());
     }
 
     @Override
     public void visit(FaithPathMessage msg) {
-        game.faithMove(nickName);
+        game.faithMove();
     }
 
     @Override
@@ -434,38 +408,38 @@ public class ViewController implements MessageVisitor {
 
     @Override
     public void visit(StorageConfigMessage msg) {
-        game.addStorage(nickName, msg.getResource());
+        game.addStorage(msg.getResource());
     }
 
     @Override
     public void visit(StrongboxConfigMessage msg) {
-        game.addStorage(nickName, msg.getStrongBoxResource());
+        game.addStorage(msg.getStrongBoxResource());
     }
 
     @Override
     public void visit(LeadercardconfigMessage msg) {
-       game.addLeaderCard(nickName, msg.getNotActivated());
-       game.addLeaderCardActivated(nickName, msg.getActivated());
+       game.addLeaderCard(msg.getNotActivated());
+       game.addLeaderCardActivated( msg.getActivated());
     }
 
     @Override
     public void visit(StorageExtraConfig msg) {
-        game.addStrongbox(nickName, msg.getResourceProduction(), 2-msg.getQuantityIn());
+        game.addStrongbox(msg.getResourceProduction(), 2-msg.getQuantityIn());
     }
 
     @Override
     public void visit(StorageExtraDoubleConfig msg) {
-        game.addStrongbox(nickName, msg.getResourceProduction(), 2-msg.getQuantityIn());
+        game.addStrongbox(msg.getResourceProduction(), 2-msg.getQuantityIn());
     }
 
     @Override
     public void visit(FaithConfigMessage msg) {
-        game.setFaithPath(nickName, msg.getFaithConfig(), msg.getCurrCall());
+        game.setFaithPath(msg.getFaithConfig(), msg.getCurrCall());
     }
 
     @Override
     public void visit(ProductionCardConfigMessage msg) {
-        game.setProductionCardGameBoard(nickName, msg.getListOwnProductioncard());
+        game.setProductionCardGameBoard(msg.getListOwnProductioncard());
     }
 
 

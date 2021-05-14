@@ -6,6 +6,7 @@ import it.polimi.ingsw.server.model.exceptions.UnavailableResourceException;
 import it.polimi.ingsw.server.model.marbles.Marble;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,17 +31,6 @@ public class LightReserve {
         reservePools.put(Resource.SERVANT,AMOUNT);
     }
 
-    public LightReserve(File file){
-        Gson gson = new Gson();
-
-        try {
-            Map mapResource = gson.fromJson(new FileReader(file), Map.class);
-
-            reservePools.putAll(mapResource);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
 
     public void setLightReserve(Map<Resource, Integer> map){
         reservePools.putAll(map);
@@ -51,10 +41,10 @@ public class LightReserve {
     /**
      * static method that adds the resource passed as a parameter to the reserve
      */
-    public void addResource(Map<Resource, Integer> map) {
+    public void addResource(ArrayList<Resource> list) {
 
-        for(Resource key : map.keySet())
-            reservePools.put(key, reservePools.remove(key) + map.get(key));
+        for(Resource resource : list)
+            reservePools.put(resource, reservePools.remove(resource) + 1);
     }
 
     public void addResource(Resource resource, int quantity) {
@@ -65,17 +55,17 @@ public class LightReserve {
      * static method that decreases a resource type counter one at a time only if
      * available, otherwise it throws an UnavailableResourceException
      */
-    public void useResource(Map<Resource, Integer> map){
+    public void useResource(ArrayList<Resource> list){
 
-        for(Resource key : map.keySet())
-            if(reservePools.get(key) >= map.get(key))
-                reservePools.put(key, reservePools.remove(key) + map.get(key));
+        for(Resource resource : list)
+            if(reservePools.get(resource) > 0)
+                reservePools.put(resource, reservePools.remove(resource) - 1);
     }
 
     public void useResource(Resource resource, int quantity){
 
         if(reservePools.get(resource) >= quantity)
-            reservePools.put(resource, reservePools.remove(resource) + quantity);
+            reservePools.put(resource, reservePools.remove(resource) - quantity);
     }
 
     /**

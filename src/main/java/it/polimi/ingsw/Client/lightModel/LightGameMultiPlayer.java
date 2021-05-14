@@ -10,230 +10,122 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public class LightGameMultiPlayer extends LightGame{
-    private ArrayList<LightPlayer> players;
-    //private int currentPlayerPosition;
-    private int numberOfPlayer;
-
-    public LightGameMultiPlayer(){
-        super();
+    
+    private ArrayList<String> nicknameInOrder = new ArrayList<>();
+    
+    public LightGameMultiPlayer(String nickname){
+        super(nickname);
+    }
+    
+    @Override
+    public void setPlayersInOrder(ArrayList<String> nicknames){
+        nicknameInOrder.addAll(nicknames);
     }
 
     @Override
-    public void setPlayers(ArrayList<String> nicknameList){
-        this.numberOfPlayer = nicknameList.size();
-        LightPlayer player;
-        for(String nickname : nicknameList){
-            player = new LightPlayer(nickname);
-            players.add(player);
-        }
-        //currentPlayerPosition = 0;
-        //currentPlayer = players.get(currentPlayerPosition);
-    }
-
-    /*@Override
-    public void setCurrentPlayer(){
-        int cont;
-        if(currentPlayerPosition == numberOfPlayer-1)
-            cont = 0;
-        else
-            cont = currentPlayerPosition+1;
-
-        while(!(players.get(cont).isConnected())){
-            cont++;
-            if(cont == numberOfPlayer)
-                cont = 0;
-            if(cont == currentPlayerPosition && !(players.get(cont).isConnected())){
-                currentPlayer = null;
-                return;
-            }
-        }
-        currentPlayerPosition = cont;
-        currentPlayer = players.get(currentPlayerPosition);
-    }*/
-
-
-
-    @Override
-    public void setFaithPath(String nickname, int faithIndicator, int currCall){
-        for(LightPlayer player : players){
-            if(nickname.equals(player.getNickName())){
-                player.setFaithPath(faithIndicator, currCall);
-            }
-        }
+    public void setFaithPath(int faithIndicator, int currCall){
+        gameBoardOfPlayer.setFaithPath(faithIndicator, currCall);
     }
 
     @Override
-    public void setProductionCardGameBoard(String nickname, int[][] productionCards){
-        for(LightPlayer player : players){
-            if(nickname.equals(player.getNickName())){
-                player.setProductionCards(productionCards);
-            }
-        }
+    public void setProductionCardGameBoard(int[][] productionCards){
+        gameBoardOfPlayer.setProductionCards(productionCards);
     }
 
 
     @Override
-    public void addLeaderCard(String nickname, ArrayList<Integer> leaderCardKeys){
-        for(LightPlayer player : players){
-            if(nickname.equals(player.getNickName())){
-                player.addLeaderCard(leaderCardKeys);
-            }
-        }
+    public void addLeaderCard(ArrayList<Integer> leaderCardKeys){
+        gameBoardOfPlayer.addLeaderCard(leaderCardKeys);
     }
 
     @Override
-    public void addLeaderCardActivated(String nickname, ArrayList<Integer> leaderCardKeys){
-        for(LightPlayer player : players){
-            if(nickname.equals(player.getNickName())){
-                player.addLeaderCardActivated(leaderCardKeys);
-            }
-        }
+    public void addLeaderCardActivated(ArrayList<Integer> leaderCardKeys){
+       gameBoardOfPlayer.addLeaderCardActivated(leaderCardKeys);
     }
 
 
     @Override
-    public void activateLeaderCard(String nickname, int index){
-        for(LightPlayer player : players){
-            if(nickname.equals(player.getNickName())){
-                player.activateLeaderCard(index);
-            }
-        }
+    public void activateLeaderCard(int index){
+       gameBoardOfPlayer.activateLeaderCard(index);
     }
 
 
     @Override
-    public void discardLeaderCard(String nickname, int index){
-        for(LightPlayer player : players){
-            if(nickname.equals(player.getNickName())){
-                player.discardLeaderCard(index);
-            }
+    public void discardLeaderCard(int index){
+       gameBoardOfPlayer.discardLeaderCard(index);
+    }
+
+    @Override
+    public void faithMove(){
+       gameBoardOfPlayer.moveFaithIndicator();
+    }
+
+    @Override
+    public void buyProductionCard(int deckNumber, int chosenColumn){
+        for (LightDeckProductionCard deck : listOfDeck) {
+            if (deck.getNumberDeck() == deckNumber)
+               gameBoardOfPlayer.addProductionCard(chosenColumn, deck.pickUpFirstCard());
         }
     }
 
     @Override
-    public void faithMove(String nickname){
-        for(LightPlayer player : players){
-            if(nickname.equals(player.getNickName())){
-                player.moveFaithIndicator();
-            }
-        }
-    }
-
-    @Override
-    public void buyProductionCard(String nickname, int deckNumber, int chosenColumn){
-        for(LightPlayer player : players) {
-            if (nickname.equals(player.getNickName())) {
-                for (LightDeckProductionCard deck : listOfDeck) {
-                    if (deck.getNumberDeck() == deckNumber)
-                        currentPlayer.addProductionCard(chosenColumn, deck.pickUpFirstCard());
-                }
-            }
-        }
-    }
-
-    @Override
-    public void payResourcesProduction(String nickname, Map<Resource, Integer> map){
-        for(LightPlayer player : players) {
-            if (nickname.equals(player.getNickName())) {
-                player.payResourcesProduction(map);
-            }
-        }
+    public void payResourcesProduction(ArrayList<Resource> list){
+       gameBoardOfPlayer.payResourcesProduction(list);
     }
 
     @Override
     public void setPapalCards(int currCall){
-        for(LightPlayer player : players)
-            player.setPapal(currCall);
+       gameBoardOfPlayer.setPapal(currCall);
     }
 
     @Override
-    public void addStorage(String nickname, Map<Resource, Integer> map){
-        for(LightPlayer player : players) {
-            if (nickname.equals(player.getNickName())) {
-                player.addResourceStorage(map);
-            }
-        }
+    public void addStorage(Map<Resource, Integer> map){
+       gameBoardOfPlayer.addResourceStorage(map);
     }
 
     @Override
-    public void addStorage(String nickname, ArrayList<Resource> list){
-        for(LightPlayer player : players) {
-            if (nickname.equals(player.getNickName())) {
-                player.addResourceStorage(list);
-            }
-        }
+    public void addStorage(ArrayList<Resource> list){
+       gameBoardOfPlayer.addResourceStorage(list);
     }
 
     @Override
-    public void addStorage(String nickname, Resource resource, int quantity){
-        for(LightPlayer player : players) {
-            if (nickname.equals(player.getNickName())) {
-                player.addResourceStorage(resource, quantity);
-            }
-        }
+    public void addStorage(Resource resource, int quantity){
+       gameBoardOfPlayer.addResourceStorage(resource, quantity);
     }
 
     @Override
-    public void removeStorage(String nickname, Map<Resource, Integer> map){
-        for(LightPlayer player : players) {
-            if (nickname.equals(player.getNickName())) {
-                player.removeResourceStorage(map);
-            }
-        }
+    public void removeStorage(Map<Resource, Integer> map){
+       gameBoardOfPlayer.removeResourceStorage(map);
     }
 
     @Override
-    public void removeStorage(String nickname, Resource resource, int quantity){
-        for(LightPlayer player : players) {
-            if (nickname.equals(player.getNickName())) {
-                player.removeResourceStorage(resource, quantity);
-            }
-        }
+    public void removeStorage(Resource resource, int quantity){
+       gameBoardOfPlayer.removeResourceStorage(resource, quantity);
     }
 
     @Override
-    public void addStrongbox(String nickname, Map<Resource, Integer> map){
-        for(LightPlayer player : players) {
-            if (nickname.equals(player.getNickName())) {
-                player.addResourceStrongbox(map);
-            }
-        }
+    public void addStrongbox(Map<Resource, Integer> map){
+       gameBoardOfPlayer.addResourceStrongbox(map);
     }
 
     @Override
-    public void addStrongbox(String nickname, ArrayList<Resource> list){
-        for(LightPlayer player : players) {
-            if (nickname.equals(player.getNickName())) {
-                player.addResourceStrongbox(list);
-            }
-        }
+    public void addStrongbox(ArrayList<Resource> list){
+       gameBoardOfPlayer.addResourceStrongbox(list);
     }
 
     @Override
-    public void addStrongbox(String nickname, Resource resource, int quantity){
-        for(LightPlayer player : players) {
-            if (nickname.equals(player.getNickName())) {
-                player.addResourceStrongbox(resource, quantity);
-            }
-        }
+    public void addStrongbox(Resource resource, int quantity){
+       gameBoardOfPlayer.addResourceStrongbox(resource, quantity);
     }
 
     @Override
-    public void removeStrongbox(String nickname, Map<Resource, Integer> map){
-        for(LightPlayer player : players) {
-            if (nickname.equals(player.getNickName())) {
-                player.removeResourceStrongbox(map);
-            }
-        }
+    public void removeStrongbox(Map<Resource, Integer> map){
+       gameBoardOfPlayer.removeResourceStrongbox(map);
     }
 
     @Override
-    public void removeStrongbox(String nickname, Resource resource, int quantity){
-        for(LightPlayer player : players) {
-            if (nickname.equals(player.getNickName())) {
-                player.removeResourceStrongbox(resource, quantity);
-            }
-        }
+    public void removeStrongbox(Resource resource, int quantity){
+       gameBoardOfPlayer.removeResourceStrongbox(resource, quantity);
     }
 
 }

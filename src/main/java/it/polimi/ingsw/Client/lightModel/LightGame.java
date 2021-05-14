@@ -1,5 +1,6 @@
 package it.polimi.ingsw.Client.lightModel;
 
+import it.polimi.ingsw.Client.lightModel.lightGameBoard.LightGameBoard;
 import it.polimi.ingsw.Client.lightModel.productionCards.*;
 import it.polimi.ingsw.server.model.Market;
 import it.polimi.ingsw.server.model.Reserve;
@@ -79,11 +80,13 @@ public class LightGame{
 
     protected ArrayList<LightDeckProductionCard> listOfDeck;
 
-    protected LightPlayer currentPlayer;
+    protected String currentPlayer;
+
+    protected LightGameBoard gameBoardOfPlayer;
     /**
      * this constructor instantiates all the game attributes
      */
-    public LightGame(){
+    public LightGame(String nickname){
         listOfDeck = new ArrayList<>();
         deckProductionCardOneBlu = new LightDeckProductionCardOneBlu();
         listOfDeck.add(deckProductionCardOneBlu);
@@ -114,6 +117,8 @@ public class LightGame{
         listOfDeck.add(deckProductionCardThreeViolet);
 
         reserve = new LightReserve();
+
+        gameBoardOfPlayer = new LightGameBoard(nickname);
     }
 
     public void setMarket(ArrayList<Marble> list) {
@@ -131,6 +136,8 @@ public class LightGame{
         }
     }
 
+    public void setPlayersInOrder(ArrayList<String> nicknames){}
+
     public void removeOneProductionCard(int deckNumber){
         for(LightDeckProductionCard deck : listOfDeck){
             if(deck.getNumberDeck() == deckNumber)
@@ -146,46 +153,46 @@ public class LightGame{
         market.pushColumn(chosenColumn);
     }
 
-    public void useResourceReserve(Map<Resource, Integer> map){
-        reserve.useResource(map);
+    public void useResourceReserve(ArrayList<Resource> list){
+        reserve.useResource(list);
     }
 
     public void useResourceReserve(Resource resource, int quantity){
         reserve.useResource(resource, quantity);
     }
 
-    public void addResourceReserve(Map<Resource, Integer> map){
-        reserve.addResource(map);
+    public void addResourceReserve(ArrayList<Resource> list){
+        reserve.addResource(list);
     }
 
     public void addResourceReserve(Resource resource, int quantity){
         reserve.addResource(resource, quantity);
     }
 
-    public void addStorage(String nickname, Map<Resource, Integer> map){}
+    public void addStorage(Map<Resource, Integer> map){}
 
-    public void addStorage(String nickname, ArrayList<Resource> list){}
-    public void addStorage(String nickname, Resource resource, int quantity){}
+    public void addStorage(ArrayList<Resource> list){}
+    public void addStorage(Resource resource, int quantity){}
 
-    public void removeStorage(String nickname, Map<Resource, Integer> map){}
+    public void removeStorage(Map<Resource, Integer> map){}
 
-    public void removeStorage(String nickname, Resource resource, int quantity){}
+    public void removeStorage(Resource resource, int quantity){}
 
-    public void addStrongbox(String nickname, Map<Resource, Integer> map){}
+    public void addStrongbox(Map<Resource, Integer> map){}
 
-    public void addStrongbox(String nickname,ArrayList<Resource> list){}
+    public void addStrongbox(ArrayList<Resource> list){}
 
-    public void addStrongbox(String nickname, Resource resource, int quantity){}
+    public void addStrongbox(Resource resource, int quantity){}
 
-    public void removeStrongbox(String nickname, Map<Resource, Integer> map){}
+    public void removeStrongbox(Map<Resource, Integer> map){}
 
-    public void removeStrongbox(String nickname, Resource resource, int quantity){}
+    public void removeStrongbox(Resource resource, int quantity){}
 
-    public void buyProductionCard(String nickname, int deckNumber, int chosenColumn){
+    public void buyProductionCard(int deckNumber, int chosenColumn){
 
     }
 
-    public void payResourcesProduction(String nickname, Map<Resource, Integer> map){
+    public void payResourcesProduction(ArrayList<Resource> list){
 
     }
 
@@ -194,37 +201,38 @@ public class LightGame{
     public void setLorenzoTheMagnificent(int faithIndicator){
     }
 
-    public void setFaithPath(String nickname, int faithIndicator, int currCall){
+    public void setFaithPath(int faithIndicator, int currCall){
     }
 
-    public void setProductionCardGameBoard(String nickname,int[][] productionCards){
+    public void setProductionCardGameBoard(int[][] productionCards){
 
     }
 
     public void actionMarkerEffect(String actionMarkerType){}
 
-    public void setCurrentPlayer(){
+    public void setCurrentPlayer(String nickname){
+        currentPlayer = nickname;
     }
 
 
-    public void addLeaderCard(String nickname, ArrayList<Integer> leaderCardKeys){
+    public void addLeaderCard(ArrayList<Integer> leaderCardKeys){
 
     }
-    public void addLeaderCardActivated(String nickname, ArrayList<Integer> leaderCardKeys){
-
-    }
-
-
-    public void activateLeaderCard(String nickname, int index){
+    public void addLeaderCardActivated(ArrayList<Integer> leaderCardKeys){
 
     }
 
 
-    public void discardLeaderCard(String nickname, int index){
+    public void activateLeaderCard(int index){
 
     }
 
-    public void faithMove(String nickname){
+
+    public void discardLeaderCard(int index){
+
+    }
+
+    public void faithMove(){
 
     }
 
@@ -234,6 +242,5 @@ public class LightGame{
 
     public void moveBlackCrossOnce(){}
 
-    public void setPlayers(ArrayList<String> nickname){}
 
 }

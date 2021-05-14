@@ -329,10 +329,10 @@ public class GameMultiPlayer extends Game {
                 int[][] list = new int[3][3];
                 for (int i=0; i<3;i++)
                     for (int j=0; i<3;i++)
-                        if (p.getGameBoardOfPlayer().getdevelopmentBoardCell(i,j)==null)
+                        if (p.getGameBoardOfPlayer().getDevelopmentBoardCell(i,j)==null)
                             list[i][j]=0;
                         else
-                            list[i][j]=p.getGameBoardOfPlayer().getdevelopmentBoardCell(i,j).getKey();
+                            list[i][j]=p.getGameBoardOfPlayer().getDevelopmentBoardCell(i,j).getKey();
 
                 notifyOnlyOneSpecificObserver(new ProductionCardConfigMessage(list),p.getNickName());
 
@@ -612,10 +612,10 @@ public class GameMultiPlayer extends Game {
             int[][] list = new int[3][3];
             for (int i=0; i<3;i++)
                 for (int j=0; i<3;i++)
-                    if (p.getGameBoardOfPlayer().getdevelopmentBoardCell(i,j)==null)
+                    if (p.getGameBoardOfPlayer().getDevelopmentBoardCell(i,j)==null)
                         list[i][j]=0;
                     else
-                        list[i][j]=p.getGameBoardOfPlayer().getdevelopmentBoardCell(i,j).getKey();
+                        list[i][j]=p.getGameBoardOfPlayer().getDevelopmentBoardCell(i,j).getKey();
 
             notifyOnlyOneSpecificObserver(new ProductionCardConfigMessage(list),p.getNickName());
                 if(p.getGameBoardOfPlayer().getLeaderCardsActivated().size() != 0){

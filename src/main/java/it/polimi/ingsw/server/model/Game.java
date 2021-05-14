@@ -242,12 +242,8 @@ public class Game extends Observable {
     public void productionOn(int chosenColumn, ArrayList<Resource> list, boolean faithMove) throws ImpossibleProductionException, EmptyColumnException, IOException, InterruptedException {
         try {
 
-            int shield=GetAmount.getAmount(list,Resource.SHIELD);
-            int coin=GetAmount.getAmount(list,Resource.COIN);
-            int rock=GetAmount.getAmount(list,Resource.ROCK);
-            int servant=GetAmount.getAmount(list,Resource.SERVANT);
-            notifyToOneObserver(new ProductionMessageForCurrentMessage(coin,shield,rock,servant));
-            notifyAllObserverLessOne(new ResultForProductionForNotCurrentMessage(currentPlayer,coin,shield,rock,servant) );
+            notifyToOneObserver(new ProductionMessageForCurrentMessage(list));
+            notifyAllObserverLessOne(new ProductionMessageForNotCurrentMessage(currentPlayer,list) );
             currentPlayer.productionOn(chosenColumn);
             if (faithMove)
             {notifyToOneObserver(new FaithPathMessage());
@@ -271,13 +267,11 @@ public class Game extends Observable {
     public void baseProductionOn(Resource i1, Resource i2, Resource output) throws ImpossibleProductionException, IOException, InterruptedException {
         currentPlayer.baseProductionOn(i1, i2, output);
 
-        ArrayList<Resource> arrayList =new ArrayList<>(4);
-        int shield=GetAmount.isThere(arrayList,i1,i2);
-        int coin=GetAmount.isThere(arrayList,i1,i2);
-        int rock=GetAmount.isThere(arrayList,i1,i2);
-        int servant=GetAmount.isThere(arrayList,i1,i2);
-        notifyToOneObserver(new ProductionMessageForCurrentMessage(coin,shield,rock,servant) );
-        notifyAllObserverLessOne(new ProductionMessageForNotCurrentMessage(currentPlayer,coin,shield,rock,servant) );
+        ArrayList<Resource> list =new ArrayList<>();
+        list.add(i1);
+        list.add(i2);
+        notifyToOneObserver(new ProductionMessageForCurrentMessage(list) );
+        notifyAllObserverLessOne(new ProductionMessageForNotCurrentMessage(currentPlayer,list) );
     }
 
     /**
@@ -288,13 +282,10 @@ public class Game extends Observable {
      */
     public void extraProductionOn(Resource resource, Resource resourceLeader) throws IOException, InterruptedException {
         try {
-            ArrayList<Resource> arrayList =new ArrayList<>(4);
-            int shield=GetAmount.isThereEqual(resource,resourceLeader);
-            int coin=GetAmount.isThereEqual(resource,resourceLeader);
-            int rock=GetAmount.isThereEqual(resource,resourceLeader);
-            int servant=GetAmount.isThereEqual(resource,resourceLeader);
-            notifyToOneObserver(new ProductionMessageForCurrentMessage(coin,shield,rock,servant));
-            notifyAllObserverLessOne(new ResultForProductionForNotCurrentMessage(currentPlayer,coin,shield,rock,servant) );
+            ArrayList<Resource> list =new ArrayList<>();
+            list.add(resourceLeader);
+            notifyToOneObserver(new ProductionMessageForCurrentMessage(list));
+            notifyAllObserverLessOne(new ProductionMessageForNotCurrentMessage(currentPlayer, list) );
             notifyToOneObserver(new FaithPathMessage());
             notifyAllObserverLessOne(new FaithPathOpponentMessage(currentPlayer.getNickName()));
             currentPlayer.extraProductionOn(resource);
@@ -315,13 +306,10 @@ public class Game extends Observable {
      */
     public void anotherExtraProductionOn(Resource resource, Resource resourceLeader) throws ImpossibleProductionException, IOException, InterruptedException {
         try {
-            ArrayList<Resource> arrayList =new ArrayList<>(4);
-            int shield=GetAmount.isThereEqual(resource,resourceLeader);
-            int coin=GetAmount.isThereEqual(resource,resourceLeader);
-            int rock=GetAmount.isThereEqual(resource,resourceLeader);
-            int servant=GetAmount.isThereEqual(resource,resourceLeader);
-            notifyToOneObserver(new ProductionMessageForCurrentMessage(coin,shield,rock,servant));
-            notifyAllObserverLessOne(new ResultForProductionForNotCurrentMessage(currentPlayer,coin,shield,rock,servant) );
+            ArrayList<Resource> list =new ArrayList<>();
+            list.add(resourceLeader);
+            notifyToOneObserver(new ProductionMessageForCurrentMessage(list));
+            notifyAllObserverLessOne(new ProductionMessageForNotCurrentMessage(currentPlayer, list) );
             notifyToOneObserver(new FaithPathMessage());
             notifyAllObserverLessOne(new FaithPathOpponentMessage(currentPlayer.getNickName()));
             currentPlayer.anotherExtraProductionOn(resource);
@@ -338,14 +326,8 @@ public class Game extends Observable {
      */
     public void endOfProduction() throws IOException, InterruptedException {
 
-        int shield=GetAmount.getAmount(currentPlayer.getGameBoardOfPlayer().getProductionBuffer(),Resource.SHIELD);
-        int coin=GetAmount.getAmount(currentPlayer.getGameBoardOfPlayer().getProductionBuffer(),Resource.COIN);
-        int rock=GetAmount.getAmount(currentPlayer.getGameBoardOfPlayer().getProductionBuffer(),Resource.ROCK);
-        int servant=GetAmount.getAmount(currentPlayer.getGameBoardOfPlayer().getProductionBuffer(),Resource.SERVANT);
-
-        notifyToOneObserver(new ResultOfProductionMessage(coin,shield,rock,servant) );
-
-        notifyAllObserverLessOne(new ProductionMessageForNotCurrentMessage(currentPlayer,coin,shield,rock,servant) );
+        notifyToOneObserver(new ResultOfProductionMessage(currentPlayer.getGameBoardOfPlayer().getProductionBuffer()) );
+        notifyAllObserverLessOne(new ResultOfProductionForNotCurrentMessage(currentPlayer,currentPlayer.getGameBoardOfPlayer().getProductionBuffer()) );
 
         currentPlayer.endOfProduction();
 
@@ -406,12 +388,8 @@ public class Game extends Observable {
         try {
             market.pushRow(chosenRow,currentPlayer);
 
-            int shield=GetAmount.getAmount(currentPlayer.getBuffer(),Resource.SHIELD);
-            int coin=GetAmount.getAmount(currentPlayer.getBuffer(),Resource.COIN);;
-            int rock=GetAmount.getAmount(currentPlayer.getBuffer(),Resource.ROCK);;
-            int servant=GetAmount.getAmount(currentPlayer.getBuffer(),Resource.SERVANT);;
-            notifyToOneObserver(new ResultFromMarketMessage(coin,shield,rock,servant) );
-            notifyAllObserverLessOne(new ResultFromMarketNotCurrentMessage(currentPlayer,coin,shield,rock,servant) );
+            notifyToOneObserver(new ResultFromMarketMessage(currentPlayer.getBuffer()) );
+            notifyAllObserverLessOne(new ResultFromMarketNotCurrentMessage(currentPlayer,currentPlayer.getBuffer()) );
 
         } catch (CallForCouncilException e) {
             exceptionHandler(e);
@@ -431,12 +409,8 @@ public class Game extends Observable {
     public void pushColumnInMarket(int chosenColumn) throws NotEnoughSpaceInStorageException, WhiteMarbleException, IOException, InterruptedException {
         try {
             market.pushColumn(chosenColumn,currentPlayer);
-            int shield=GetAmount.getAmount(currentPlayer.getBuffer(),Resource.SHIELD);
-            int coin=GetAmount.getAmount(currentPlayer.getBuffer(),Resource.COIN);;
-            int rock=GetAmount.getAmount(currentPlayer.getBuffer(),Resource.ROCK);;
-            int servant=GetAmount.getAmount(currentPlayer.getBuffer(),Resource.SERVANT);;
-            notifyToOneObserver(new ResultFromMarketMessage(coin,shield,rock,servant) );
-            notifyAllObserverLessOne(new ResultFromMarketNotCurrentMessage(currentPlayer,coin,shield,rock,servant) );
+            notifyToOneObserver(new ResultFromMarketMessage(currentPlayer.getBuffer()) );
+            notifyAllObserverLessOne(new ResultFromMarketNotCurrentMessage(currentPlayer,currentPlayer.getBuffer()) );
         } catch (CallForCouncilException e) {
             exceptionHandler(e);
         } catch (LastSpaceReachedException e) {

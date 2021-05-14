@@ -24,8 +24,7 @@ public class LightGameSolitaire extends LightGame{
     private final LightActionMarkerDeck actionMarkerDeck;
 
     public LightGameSolitaire(String nickname){
-        super();
-        currentPlayer = new LightPlayer(nickname);
+        super(nickname);
         lorenzoTheMagnificent = new LightLorenzoTheMagnificent();
         actionMarkerDeck = new LightActionMarkerDeck();
     }
@@ -36,17 +35,13 @@ public class LightGameSolitaire extends LightGame{
     }
 
     @Override
-    public void setFaithPath(String nickname, int faithIndicator, int currCall){
-        if(nickname.equals(currentPlayer.getNickName())){
-            currentPlayer.setFaithPath(faithIndicator, currCall);
-        }
+    public void setFaithPath(int faithIndicator, int currCall){
+        gameBoardOfPlayer.setFaithPath(faithIndicator, currCall);
     }
 
     @Override
-    public void setProductionCardGameBoard(String nickname, int[][] productionCards){
-        if(nickname.equals(currentPlayer.getNickName())){
-            currentPlayer.setProductionCards(productionCards);
-        }
+    public void setProductionCardGameBoard(int[][] productionCards){
+        gameBoardOfPlayer.setProductionCards(productionCards);
     }
 
     @Override
@@ -126,130 +121,96 @@ public class LightGameSolitaire extends LightGame{
     }
 
     @Override
-    public void addLeaderCard(String nickname, ArrayList<Integer> leaderCardKeys){
-        if(nickname.equals(currentPlayer.getNickName())){
-            currentPlayer.addLeaderCard(leaderCardKeys);
-        }
+    public void addLeaderCard(ArrayList<Integer> leaderCardKeys){
+        gameBoardOfPlayer.addLeaderCard(leaderCardKeys);
     }
 
     @Override
-    public void addLeaderCardActivated(String nickname, ArrayList<Integer> leaderCardKeys){
-        if(nickname.equals(currentPlayer.getNickName())){
-            currentPlayer.addLeaderCardActivated(leaderCardKeys);
-        }
+    public void addLeaderCardActivated(ArrayList<Integer> leaderCardKeys){
+        gameBoardOfPlayer.addLeaderCardActivated(leaderCardKeys);
     }
 
 
     @Override
-    public void activateLeaderCard(String nickname, int index){
-        if(nickname.equals(currentPlayer.getNickName())){
-            currentPlayer.activateLeaderCard(index);
+    public void activateLeaderCard(int index){
+        gameBoardOfPlayer.activateLeaderCard(index);
+    }
+
+    @Override
+    public void discardLeaderCard(int index){
+        gameBoardOfPlayer.discardLeaderCard(index);
+    }
+
+    @Override
+    public void faithMove(){
+        gameBoardOfPlayer.moveFaithIndicator();
+    }
+
+    @Override
+    public void buyProductionCard(int deckNumber, int chosenColumn){
+        for(LightDeckProductionCard deck : listOfDeck){
+            if(deck.getNumberDeck() == deckNumber)
+                gameBoardOfPlayer.addProductionCard(chosenColumn, deck.pickUpFirstCard());
         }
     }
 
     @Override
-    public void discardLeaderCard(String nickname, int index){
-        if(nickname.equals(currentPlayer.getNickName())){
-            currentPlayer.discardLeaderCard(index);
-        }
-    }
-
-    @Override
-    public void faithMove(String nickname){
-        if(nickname.equals(currentPlayer.getNickName())){
-            currentPlayer.moveFaithIndicator();
-        }
-    }
-
-    @Override
-    public void buyProductionCard(String nickname, int deckNumber, int chosenColumn){
-        if(nickname.equals(currentPlayer.getNickName())){
-            for(LightDeckProductionCard deck : listOfDeck){
-                if(deck.getNumberDeck() == deckNumber)
-                    currentPlayer.addProductionCard(chosenColumn, deck.pickUpFirstCard());
-            }
-        }
-    }
-
-    @Override
-    public void payResourcesProduction(String nickname, Map<Resource, Integer> map){
-        if(nickname.equals(currentPlayer.getNickName())){
-            currentPlayer.payResourcesProduction(map);
-        }
+    public void payResourcesProduction(ArrayList<Resource> list){
+        gameBoardOfPlayer.payResourcesProduction(list);
     }
 
     @Override
     public void setPapalCards(int currCall){
-        currentPlayer.setPapal(currCall);
+        gameBoardOfPlayer.setPapal(currCall);
     }
 
     @Override
-    public void addStorage(String nickname, Map<Resource, Integer> map){
-        if(nickname.equals(currentPlayer.getNickName())){
-            currentPlayer.addResourceStorage(map);
-        }
+    public void addStorage(Map<Resource, Integer> map){
+        gameBoardOfPlayer.addResourceStorage(map);
     }
 
     @Override
-    public void addStorage(String nickname, Resource resource, int quantity){
-        if(nickname.equals(currentPlayer.getNickName())){
-            currentPlayer.addResourceStorage(resource, quantity);
-        }
+    public void addStorage(Resource resource, int quantity){
+        gameBoardOfPlayer.addResourceStorage(resource, quantity);
     }
 
     @Override
-    public void addStorage(String nickname, ArrayList<Resource> list){
-        if(nickname.equals(currentPlayer.getNickName())){
-            currentPlayer.addResourceStorage(list);
-        }
+    public void addStorage( ArrayList<Resource> list){
+        gameBoardOfPlayer.addResourceStorage(list);
     }
 
     @Override
-    public void removeStorage(String nickname, Map<Resource, Integer> map){
-        if(nickname.equals(currentPlayer.getNickName())){
-            currentPlayer.removeResourceStorage(map);
-        }
+    public void removeStorage(Map<Resource, Integer> map){
+        gameBoardOfPlayer.removeResourceStorage(map);
     }
 
     @Override
-    public void removeStorage(String nickname, Resource resource, int quantity){
-        if(nickname.equals(currentPlayer.getNickName())){
-            currentPlayer.removeResourceStorage(resource, quantity);
-        }
+    public void removeStorage(Resource resource, int quantity){
+        gameBoardOfPlayer.removeResourceStorage(resource, quantity);
     }
 
     @Override
-    public void addStrongbox(String nickname, Map<Resource, Integer> map){
-        if(nickname.equals(currentPlayer.getNickName())){
-            currentPlayer.addResourceStrongbox(map);
-        }
+    public void addStrongbox(Map<Resource, Integer> map){
+        gameBoardOfPlayer.addResourceStrongbox(map);
     }
 
     @Override
-    public void addStrongbox(String nickname, ArrayList<Resource> list){
-        if(nickname.equals(currentPlayer.getNickName())){
-            currentPlayer.addResourceStrongbox(list);
-        }
+    public void addStrongbox(ArrayList<Resource> list){
+        gameBoardOfPlayer.addResourceStrongbox(list);
     }
 
     @Override
-    public void addStrongbox(String nickname, Resource resource, int quantity){
-        if(nickname.equals(currentPlayer.getNickName())){
-            currentPlayer.addResourceStrongbox(resource, quantity);
-        }
+    public void addStrongbox(Resource resource, int quantity){
+        gameBoardOfPlayer.addResourceStrongbox(resource, quantity);
     }
 
     @Override
-    public void removeStrongbox(String nickname, Map<Resource, Integer> map){
-        if(nickname.equals(currentPlayer.getNickName())){
-            currentPlayer.removeResourceStrongbox(map);
-        }
+    public void removeStrongbox(Map<Resource, Integer> map){
+        gameBoardOfPlayer.removeResourceStrongbox(map);
     }
 
     @Override
-    public void removeStrongbox(String nickname, Resource resource, int quantity){
-        if(nickname.equals(currentPlayer.getNickName())){
-            currentPlayer.removeResourceStrongbox(resource, quantity);
-        }
+    public void removeStrongbox(Resource resource, int quantity){
+        gameBoardOfPlayer.removeResourceStrongbox(resource, quantity);
     }
 }

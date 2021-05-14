@@ -15,13 +15,13 @@ import java.util.Map;
 public class StorageConfigMessage extends Message {
 
     private final MessageType messageType = MessageType.CONFIGURATIONSTORAGE;
-    private Map<Resource, Integer> Resource;
+    private Map<Resource, Integer> resource;
 
 
 
     public StorageConfigMessage(Map<Resource, Integer> availableResources) {
-        Resource=new HashMap<>();
-        this.Resource=availableResources;
+        resource=new HashMap<>();
+        this.resource=availableResources;
 
     }
 
@@ -37,6 +37,6 @@ public class StorageConfigMessage extends Message {
 
 
     public Map<Resource, Integer> getResource() {
-        return Resource;
+        return resource;
     }
 }
