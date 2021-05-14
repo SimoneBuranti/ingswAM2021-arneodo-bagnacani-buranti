@@ -8,6 +8,7 @@ import it.polimi.ingsw.server.virtualview.VirtualView;
 
 import java.io.*;
 import java.net.Socket;
+import java.util.concurrent.Executor;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -89,7 +90,8 @@ public class ClientHandler implements Runnable {
                 server.setSendRestartQuestion();
             }
 
-            (new ScheduledThreadPoolExecutor(1)).scheduleAtFixedRate( () -> {
+            ScheduledThreadPoolExecutor pinger = new ScheduledThreadPoolExecutor(1);
+            pinger.scheduleAtFixedRate( () -> {
 
                 try {
                     sendMessage(new PingMessage());
@@ -108,8 +110,11 @@ public class ClientHandler implements Runnable {
                 if (!getPongo()){
                     try {
                         disconnect();
+                        System.out.println("Ho disconnesso client - pinger");
                     } catch (IOException e) {
                         e.printStackTrace();
+                    } finally {
+                        pinger.shutdownNow();
                     }
                 }
 
@@ -125,11 +130,7 @@ public class ClientHandler implements Runnable {
                 }
             }
         } catch (IOException | InterruptedException e) {
-            try {
-                disconnect();
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
+            Thread.currentThread().interrupt();
         }
     }
 
@@ -154,7 +155,7 @@ public class ClientHandler implements Runnable {
 
         if (inputStream != null) inputStream.close();
         if (outputStream != null) outputStream.close();
-        System.out.println("Ho disconnesso il client");
+        System.out.println("Ho disconnesso client - general call");
         socketClient.close();
     }
 
