@@ -391,7 +391,7 @@ public class ViewController implements MessageVisitor {
 
     @Override
     public void visit(FaithPathMessage msg) {
-        game.faithMove();
+        game.faithMove(msg.getFaithmove());
     }
 
     @Override
@@ -440,6 +440,11 @@ public class ViewController implements MessageVisitor {
     @Override
     public void visit(ProductionCardConfigMessage msg) {
         game.setProductionCardGameBoard(msg.getListOwnProductioncard());
+    }
+
+    @Override
+    public void visit(LorenzoMoveMessage msg) {
+        game.moveBlackCrossOnce();
     }
 
 

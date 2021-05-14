@@ -232,7 +232,7 @@ public class LightGame{
 
     }
 
-    public void faithMove(){
+    public void faithMove(int pos){
 
     }
 

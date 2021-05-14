@@ -46,8 +46,8 @@ public class LightFaithPath {
      * If the player moves on a papal event checkpoint position a CallForCouncilException is thrown
      * and it will be handled by Game which will manage papal cards of each player
      */
-    public void move(){
-        faithIndicator++;
+    public void move(int pos){
+        faithIndicator = faithIndicator + pos;
     }
 
 

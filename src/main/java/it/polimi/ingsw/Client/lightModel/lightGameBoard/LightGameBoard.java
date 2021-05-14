@@ -211,8 +211,8 @@ public class LightGameBoard {
         return strongbox.getResource(resource);
     }
 
-    public void moveFaithIndicator(){
-        faithPath.move();
+    public void moveFaithIndicator(int pos){
+        faithPath.move(pos);
     }
 
 

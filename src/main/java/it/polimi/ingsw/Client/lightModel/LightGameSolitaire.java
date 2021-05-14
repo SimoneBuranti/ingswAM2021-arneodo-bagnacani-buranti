@@ -142,8 +142,8 @@ public class LightGameSolitaire extends LightGame{
     }
 
     @Override
-    public void faithMove(){
-        gameBoardOfPlayer.moveFaithIndicator();
+    public void faithMove(int pos){
+        gameBoardOfPlayer.moveFaithIndicator(pos);
     }
 
     @Override
