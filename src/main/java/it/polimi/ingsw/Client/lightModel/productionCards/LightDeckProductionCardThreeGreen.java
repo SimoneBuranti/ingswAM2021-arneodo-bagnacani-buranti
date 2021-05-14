@@ -23,8 +23,8 @@ public class LightDeckProductionCardThreeGreen extends LightDeckProductionCard {
     public void setDeckProductionCard(ArrayList<Integer> listKey){
         deck = new ArrayList<>();
 
-        for(Integer key : listKey) {
-            deck.add(productionCards.productionCardByKey(key));
+        for(int i = 0; i < listKey.size(); i++) {
+            deck.add(productionCards.productionCardByKey(listKey.get(i)));
         }
     }
 }
