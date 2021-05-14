@@ -23,7 +23,7 @@ public interface MessageVisitor {
     void visit(RestartQuestionMessage msg);
     void visit(ChangeCurrentPlayerMessage msg);
 
-    void visit(EndOfTurnMessage msg);
+    void visit(EndOfTurnMessage msg) throws IOException, InterruptedException;
     void visit(LastTurnMessage msg);
 
     void visit(ReserveValueMessage msg);

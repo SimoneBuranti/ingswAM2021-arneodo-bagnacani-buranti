@@ -1,7 +1,6 @@
 package it.polimi.ingsw.server.model.productionCards;
 
 import com.google.gson.Gson;
-import it.polimi.ingsw.messages.observable.DeckProductionCardConfigMessage;
 import it.polimi.ingsw.server.model.colours.*;
 import it.polimi.ingsw.server.model.Mix;
 import it.polimi.ingsw.server.model.Resource;
@@ -105,22 +104,12 @@ public class DeckProductionCardOneBlu extends DeckProductionCard {
 
         }
 
-
-
-
-
-
-
-
-
-
-
-    /**
+        /**
      * save information of deck for a possible restart game
      */
     @Override
     public void saveInformationOfProductionDeck(){
-        Gson gson=deckSaving();
+        Gson gson= gsonForEveryoneDeckProduction();
 
         FileWriter config = null;
         String jsonStrin = gson.toJson(deck);
@@ -137,8 +126,6 @@ public class DeckProductionCardOneBlu extends DeckProductionCard {
             } catch (IOException e) {
                 e.printStackTrace();
             } } }
-
-
 
             /**
      * this constructor creates all the production cards and adds them to the list and shuffles the newly created deck

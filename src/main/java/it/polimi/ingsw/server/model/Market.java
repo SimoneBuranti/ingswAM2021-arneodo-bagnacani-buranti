@@ -236,32 +236,7 @@ public class Market extends Observable {
         latestMarbleList.add(getExtra());
 
 
-        RuntimeTypeAdapterFactory<Colour> adapterColour =
-                RuntimeTypeAdapterFactory
-                        .of(Colour.class)
-                        .registerSubtype(Green.class)
-                        .registerSubtype(Yellow.class)
-                        .registerSubtype(Blue.class)
-                        .registerSubtype(Violet.class);
-
-        RuntimeTypeAdapterFactory<Marble> adapterMarble =
-                RuntimeTypeAdapterFactory
-                        .of(Marble.class)
-                        .registerSubtype(Marble.class)
-                        .registerSubtype(GreyMarble.class)
-                        .registerSubtype(YellowMarble.class)
-                        .registerSubtype(BluMarble.class)
-                        .registerSubtype(WhiteMarble.class)
-                        .registerSubtype(PurpleMarble.class)
-                        .registerSubtype(RedMarble.class);
-
-
-
-        Gson gson=new GsonBuilder()
-                .registerTypeAdapterFactory(adapterMarble)
-                .registerTypeAdapterFactory(adapterColour)
-                .setPrettyPrinting()
-                .create();
+        Gson gson=gsonForEveryoneMArket();
 
 
         FileWriter config = null;
@@ -298,6 +273,36 @@ public class Market extends Observable {
     }
 
 
+public static Gson gsonForEveryoneMArket(){
+    RuntimeTypeAdapterFactory<Colour> adapterColour =
+            RuntimeTypeAdapterFactory
+                    .of(Colour.class)
+                    .registerSubtype(Green.class)
+                    .registerSubtype(Yellow.class)
+                    .registerSubtype(Blue.class)
+                    .registerSubtype(Violet.class);
 
+    RuntimeTypeAdapterFactory<Marble> adapterMarble =
+            RuntimeTypeAdapterFactory
+                    .of(Marble.class)
+                    .registerSubtype(Marble.class)
+                    .registerSubtype(GreyMarble.class)
+                    .registerSubtype(YellowMarble.class)
+                    .registerSubtype(BluMarble.class)
+                    .registerSubtype(WhiteMarble.class)
+                    .registerSubtype(PurpleMarble.class)
+                    .registerSubtype(RedMarble.class);
+
+
+
+    Gson gson=new GsonBuilder()
+            .registerTypeAdapterFactory(adapterMarble)
+            .registerTypeAdapterFactory(adapterColour)
+            .setPrettyPrinting()
+            .create();
+
+return gson;
+
+}
 
 }

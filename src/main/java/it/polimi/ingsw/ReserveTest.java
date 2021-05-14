@@ -95,6 +95,7 @@ public class ReserveTest {
         gameMultiPlayer3.saveInformation();
 
         ArrayList<ClientController> clientControllers2 = new ArrayList<>();
+
         GameMultiPlayer gameMultiPlayer4 =new GameMultiPlayer( 2,nickname,false, clientControllers);
 
         gameMultiPlayer4.saveInformation();
