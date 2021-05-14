@@ -2,6 +2,7 @@ package it.polimi.ingsw.server.model.gameBoard;
 
 import it.polimi.ingsw.server.model.Resource;
 import it.polimi.ingsw.server.model.exceptions.WhiteMarbleException;
+import it.polimi.ingsw.server.model.productionCards.ProductionCard;
 
 /**
  * This decorator adds functionality to the personal board when a player activates the first white marble-type leader card
@@ -30,6 +31,11 @@ public class WhiteMarbleGameBoard extends GameBoardDecorator{
     @Override
     public Resource getResourceTypeFirst() {
         return this.resourceTypeFirst;
+    }
+
+    @Override
+    public ProductionCard getdevelopmentBoardCell(int i, int j) {
+        return gameBoard.getdevelopmentBoardCell(i, j);
     }
 
     /**

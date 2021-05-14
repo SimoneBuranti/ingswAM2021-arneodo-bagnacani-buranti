@@ -102,10 +102,7 @@ public class Game extends Observable {
 
         if (newGame)
 
-        {
-
-
-        market = new Market();
+        { market = new Market();
         reserve = new Reserve();
 
         productionCardDecks = new ArrayList<>();
@@ -586,6 +583,12 @@ public class Game extends Observable {
     }
 
 
+    public void endOfTurn() throws IOException, InterruptedException { }
+
+
+
+
+
     /**
      * save information for a possible restart game
      */
@@ -615,7 +618,6 @@ public class Game extends Observable {
      * save information for a possible restart game
      */
     protected void restoreGame() throws IOException, InterruptedException {
-
 
         restoreInformationOfMarket();
         restoreInformationOfProductionDeck();
@@ -852,6 +854,8 @@ public class Game extends Observable {
      * restore information from backup
      */
   private void restoreInformationOfReserve() throws IOException, InterruptedException {
+
+
       RuntimeTypeAdapterFactory<Storage> adapterStorage =
               RuntimeTypeAdapterFactory
                       .of(Storage.class)

@@ -497,8 +497,8 @@ public class GameSolitaire extends Game {
         }
         RestoreActionMarker();
         player = new PlayerFirst(nickNamePlayer,this,false,clientController.getVirtualView());
-        RestoreActionMagnific();
         this.addObserver(clientController.getVirtualView());
+        RestoreActionMagnific();
         reConfigClient();
 
     }
@@ -510,7 +510,6 @@ public class GameSolitaire extends Game {
         FileWriter config = null;
         String jsonStrin = gson.toJson(nickNamePlayer);
         try {
-            // Constructs a FileWriter given a file name, using the platform's default charset
             config = new FileWriter("src/main/resources/InformationAboutTurn.json");
             config.write(jsonStrin);
         } catch (IOException e) {
@@ -597,4 +596,9 @@ public class GameSolitaire extends Game {
     public void endGame(){
         FileClass.FileDestroyer();
     }
+
+    @Override
+    public void endOfTurn() throws IOException, InterruptedException {
+        revealAndActivateActionMarker();
+        saveInformation(); }
 }

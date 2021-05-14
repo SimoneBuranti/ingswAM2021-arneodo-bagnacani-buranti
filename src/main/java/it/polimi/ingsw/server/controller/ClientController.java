@@ -99,7 +99,9 @@ public class ClientController implements MessageVisitor {
 
 
     @Override
-    public void visit(EndOfTurnMessage msg) {}
+    public void visit(EndOfTurnMessage msg) {
+        game.saveInformation();
+    }
 
     @Override
     public void visit(LastTurnMessage msg) {}
