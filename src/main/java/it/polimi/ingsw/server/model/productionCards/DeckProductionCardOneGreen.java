@@ -15,14 +15,12 @@ import java.util.*;
  */
 public class DeckProductionCardOneGreen extends DeckProductionCard {
 
-
-    private final int key=1;
     /**
      * this constructor creates all the production cards and adds them to the list and shuffles the newly created deck
      */
     public   DeckProductionCardOneGreen () throws IOException, InterruptedException {
-        Gson g = new Gson();
-        String JSONArray;
+
+        deckNumber = 3;
 
         Green green= new Green();
         deck = new ArrayList<>(4);
@@ -141,10 +139,6 @@ public class DeckProductionCardOneGreen extends DeckProductionCard {
             deck.add(deckRecover[i]);
 
 
-    }
-
-    public int getKey() {
-        return key;
     }
 
     @Override

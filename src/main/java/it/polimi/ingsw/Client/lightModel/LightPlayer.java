@@ -35,7 +35,7 @@ public class LightPlayer {
         gameBoard.setFaithPath(faithIndicator, currCall);
     }
 
-    public void setProductionCards(ProductionCard[][] productionCards){
+    public void setProductionCards(int[][] productionCards){
         gameBoard.setProductionCards(productionCards);
     }
     public void addProductionCard(int chosenColumn, ProductionCard productionCard){
@@ -50,29 +50,22 @@ public class LightPlayer {
         gameBoard.addLeaderCard(leaderCard);
     }
 
-    public void addLeaderCard(ArrayList<LeaderCard> leaderCard){
-        gameBoard.addLeaderCard(leaderCard);
+    public void addLeaderCard(ArrayList<Integer> leaderCardKeys){
+        gameBoard.addLeaderCard(leaderCardKeys);
     }
 
-    public void addLeaderCardActivated(ArrayList<LeaderCard> leaderCard){
-        gameBoard.addLeaderCardActivated(leaderCard);
+    public void addLeaderCardActivated(ArrayList<Integer> leaderCardKeys){
+        gameBoard.addLeaderCardActivated(leaderCardKeys);
     }
 
     public LeaderCard getLeaderCard(int index){
         return gameBoard.getLeaderCard(index);
     }
 
-    public void activateLeaderCard(LeaderCard leaderCard){
-       gameBoard.activateLeaderCard(leaderCard);
-    }
-
     public void activateLeaderCard(int index){
         gameBoard.activateLeaderCard(index);
     }
 
-    public void discardLeaderCard(LeaderCard leaderCard){
-        gameBoard.discardLeaderCard(leaderCard);
-    }
 
     public void discardLeaderCard(int index){
         gameBoard.discardLeaderCard(index);

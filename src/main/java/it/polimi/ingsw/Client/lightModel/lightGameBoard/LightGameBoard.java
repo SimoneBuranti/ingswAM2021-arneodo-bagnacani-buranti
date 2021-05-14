@@ -1,5 +1,6 @@
 package it.polimi.ingsw.Client.lightModel.lightGameBoard;
 
+import it.polimi.ingsw.Client.lightModel.productionCards.LightProductionCards;
 import it.polimi.ingsw.server.model.Resource;
 import it.polimi.ingsw.server.model.exceptions.EmptyColumnException;
 import it.polimi.ingsw.server.model.leaderCards.LeaderCard;
@@ -15,6 +16,8 @@ public class LightGameBoard {
     private final ProductionCard[][] productionCards;
     private final ArrayList<LeaderCard> leaderCards;
     private final ArrayList<LeaderCard> leaderCardsActivated;
+    private final LightProductionCards productionCardsByKey;
+    private final LightLeaderCards leaderCardsByKey;
 
     public LightGameBoard(){
         storage = new LightStorage();
@@ -23,16 +26,22 @@ public class LightGameBoard {
         productionCards = new ProductionCard[3][3];
         leaderCards = new ArrayList<>();
         leaderCardsActivated = new ArrayList<>();
+        productionCardsByKey = new LightProductionCards();
+        leaderCardsByKey = new LightLeaderCards();
     }
 
     public void setFaithPath(int faithIndicator, int currCall){
         this.faithPath.setFaithPath(faithIndicator, currCall);
     }
 
-    public void setProductionCards(ProductionCard[][] productionCards){
+    public void setProductionCards(int[][] keys){
         for(int i = 0; i < 3; i++){
             for(int j = 0; j < 3; j++){
-                this.productionCards[i][j] = productionCards[i][j];
+                if(keys[i][j] == 0){
+                    this.productionCards[i][j] = null;
+                }else {
+                    this.productionCards[i][j] = productionCardsByKey.productionCardByKey(keys[i][j]);
+                }
             }
         }
     }
@@ -71,29 +80,26 @@ public class LightGameBoard {
         leaderCards.add(leaderCard);
     }
 
-    public void addLeaderCard(ArrayList<LeaderCard> leaderCard){
-        leaderCards.addAll(leaderCard);
+    public void addLeaderCard(ArrayList<Integer> leaderCardKeys){
+       for(Integer key : leaderCardKeys){
+           leaderCards.add(leaderCardsByKey.leaderCardByKey(key));
+       }
     }
-    public void addLeaderCardActivated(ArrayList<LeaderCard> leaderCard){
-        leaderCardsActivated.addAll(leaderCard);
+    public void addLeaderCardActivated(ArrayList<Integer> leaderCardKeys){
+        for(Integer key : leaderCardKeys){
+            leaderCardsActivated.add(leaderCardsByKey.leaderCardByKey(key));
+        }
     }
 
     public LeaderCard getLeaderCard(int index){
         return leaderCards.get(index);
     }
 
-    public void activateLeaderCard(LeaderCard leaderCard){
-        leaderCards.remove(leaderCard);
-        leaderCardsActivated.add(leaderCard);
-    }
 
     public void activateLeaderCard(int index){
         leaderCardsActivated.add(leaderCards.remove(index));
     }
 
-    public void discardLeaderCard(LeaderCard leaderCard){
-        leaderCards.remove(leaderCard);
-    }
 
     public void discardLeaderCard(int index){
         leaderCards.remove(index);

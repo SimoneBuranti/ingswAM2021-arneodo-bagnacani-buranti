@@ -43,7 +43,7 @@ public class LightGameSolitaire extends LightGame{
     }
 
     @Override
-    public void setProductionCardGameBoard(String nickname, ProductionCard[][] productionCards){
+    public void setProductionCardGameBoard(String nickname, int[][] productionCards){
         if(nickname.equals(currentPlayer.getNickName())){
             currentPlayer.setProductionCards(productionCards);
         }
@@ -126,44 +126,24 @@ public class LightGameSolitaire extends LightGame{
     }
 
     @Override
-    public void addLeaderCard(String nickname, LeaderCard leaderCard){
+    public void addLeaderCard(String nickname, ArrayList<Integer> leaderCardKeys){
         if(nickname.equals(currentPlayer.getNickName())){
-            currentPlayer.addLeaderCard(leaderCard);
+            currentPlayer.addLeaderCard(leaderCardKeys);
         }
     }
 
     @Override
-    public void addLeaderCard(String nickname, ArrayList<LeaderCard> leaderCard){
+    public void addLeaderCardActivated(String nickname, ArrayList<Integer> leaderCardKeys){
         if(nickname.equals(currentPlayer.getNickName())){
-            currentPlayer.addLeaderCard(leaderCard);
+            currentPlayer.addLeaderCardActivated(leaderCardKeys);
         }
     }
 
-    @Override
-    public void addLeaderCardActivated(String nickname, ArrayList<LeaderCard> leaderCard){
-        if(nickname.equals(currentPlayer.getNickName())){
-            currentPlayer.addLeaderCardActivated(leaderCard);
-        }
-    }
-
-    @Override
-    public void activateLeaderCard(String nickname, LeaderCard leaderCard){
-        if(nickname.equals(currentPlayer.getNickName())){
-            currentPlayer.activateLeaderCard(leaderCard);
-        }
-    }
 
     @Override
     public void activateLeaderCard(String nickname, int index){
         if(nickname.equals(currentPlayer.getNickName())){
             currentPlayer.activateLeaderCard(index);
-        }
-    }
-
-    @Override
-    public void discardLeaderCard(String nickname, LeaderCard leaderCard){
-        if(nickname.equals(currentPlayer.getNickName())){
-            currentPlayer.discardLeaderCard(leaderCard);
         }
     }
 

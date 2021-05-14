@@ -260,7 +260,7 @@ public class ViewController implements MessageVisitor {
     @Override
     public void visit(UpdateInitLeaderMessage msg) {
         System.out.println(msg.getMessageType()+" : "+ msg.getLeaderCards());
-       // game.addLeaderCard(nickName, msg.getLeaderCards());
+        game.addLeaderCard(nickName, msg.getLeaderCards());
     }
 
     @Override
@@ -444,8 +444,8 @@ public class ViewController implements MessageVisitor {
 
     @Override
     public void visit(LeadercardconfigMessage msg) {
-       // game.addLeaderCard(nickName, msg.getNotActivated());
-       // game.addLeaderCardActivated(nickName, msg.getActivated());
+       game.addLeaderCard(nickName, msg.getNotActivated());
+       game.addLeaderCardActivated(nickName, msg.getActivated());
     }
 
     @Override

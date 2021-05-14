@@ -197,7 +197,7 @@ public class LightGame{
     public void setFaithPath(String nickname, int faithIndicator, int currCall){
     }
 
-    public void setProductionCardGameBoard(String nickname, ProductionCard[][] productionCards){
+    public void setProductionCardGameBoard(String nickname,int[][] productionCards){
 
     }
 
@@ -206,28 +206,19 @@ public class LightGame{
     public void setCurrentPlayer(){
     }
 
-    public void addLeaderCard(String nickname, LeaderCard leaderCard){
+
+    public void addLeaderCard(String nickname, ArrayList<Integer> leaderCardKeys){
+
+    }
+    public void addLeaderCardActivated(String nickname, ArrayList<Integer> leaderCardKeys){
 
     }
 
-    public void addLeaderCard(String nickname, ArrayList<LeaderCard> leaderCard){
-
-    }
-    public void addLeaderCardActivated(String nickname, ArrayList<LeaderCard> leaderCard){
-
-    }
-
-    public void activateLeaderCard(String nickname, LeaderCard leaderCard){
-
-    }
 
     public void activateLeaderCard(String nickname, int index){
 
     }
 
-    public void discardLeaderCard(String nickname, LeaderCard leaderCard){
-
-    }
 
     public void discardLeaderCard(String nickname, int index){
 

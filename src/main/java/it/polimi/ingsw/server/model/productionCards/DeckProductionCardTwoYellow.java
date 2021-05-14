@@ -13,7 +13,6 @@ import java.util.*;
  * this class represents the second level yellow production card deck
  */
 public class DeckProductionCardTwoYellow extends DeckProductionCard {
-    private final int key=11;
 
 
     /**
@@ -21,6 +20,7 @@ public class DeckProductionCardTwoYellow extends DeckProductionCard {
      */
     public DeckProductionCardTwoYellow () throws IOException, InterruptedException {
 
+        deckNumber = 10;
 
         Yellow yellow= new Yellow();
         deck = new ArrayList<>(4);
@@ -135,9 +135,6 @@ public class DeckProductionCardTwoYellow extends DeckProductionCard {
             deck.add(deckRecover[i]);
     }
 
-    public int getKey() {
-        return key;
-    }
 
     @Override
     public ArrayList<Integer> getDeck(){

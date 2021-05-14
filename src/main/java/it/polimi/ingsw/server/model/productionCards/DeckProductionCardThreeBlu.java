@@ -14,13 +14,12 @@ import java.util.*;
  * this class represents the third level blue production card deck
  */
 public class DeckProductionCardThreeBlu extends DeckProductionCard {
-    private final int key=4;
     /**
      * this constructor creates all the production cards and adds them to the list and shuffles the newly created deck
      */
     public  DeckProductionCardThreeBlu() throws IOException, InterruptedException {
-        Gson g = new Gson();
-        String JSONArray;
+
+        deckNumber = 2;
 
         Blue blue= new Blue();
         deck = new ArrayList<>(4);
@@ -134,10 +133,6 @@ public class DeckProductionCardThreeBlu extends DeckProductionCard {
         for(int i=0; i < l; i++)
             deck.add(deckRecover[i]);
 
-    }
-
-    public int getKey() {
-        return key;
     }
 
     @Override

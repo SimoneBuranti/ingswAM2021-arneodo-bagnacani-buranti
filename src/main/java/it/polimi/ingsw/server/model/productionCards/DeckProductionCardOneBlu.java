@@ -15,16 +15,12 @@ import java.util.*;
  */
 public class DeckProductionCardOneBlu extends DeckProductionCard {
 
-
-    private final int key=0;
-
-
     /**
      * this constructor creates all the production cards and adds them to the list and shuffles the newly created deck
      */
     public DeckProductionCardOneBlu() throws IOException, InterruptedException {
 
-
+        deckNumber = 0;
 
         Blue blue= new Blue();
         deck = new ArrayList<>(4);
@@ -154,11 +150,6 @@ public class DeckProductionCardOneBlu extends DeckProductionCard {
             deck.add(deckRecover[i]);
 
 
-    }
-
-@Override
-    public int getKey() {
-        return key;
     }
 
 @Override

@@ -14,12 +14,13 @@ import java.util.*;
  * this class represents the third level green production card deck
  */
 public class DeckProductionCardThreeGreen extends DeckProductionCard {
-    private final int key=5;
+
     /**
      * this constructor creates all the production cards and adds them to the list and shuffles the newly created deck
      */
     public  DeckProductionCardThreeGreen () throws IOException, InterruptedException {
 
+        deckNumber = 5;
 
         Green green = new Green();
         deck = new ArrayList<>(4);
@@ -133,9 +134,6 @@ public class DeckProductionCardThreeGreen extends DeckProductionCard {
             deck.add(deckRecover[i]);
     }
 
-    public int getKey() {
-        return key;
-    }
 
     @Override
     public ArrayList<Integer> getDeck(){

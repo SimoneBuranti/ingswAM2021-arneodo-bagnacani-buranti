@@ -88,6 +88,8 @@ public class Game extends Observable {
      */
     protected DeckProductionCard deckProductionCardThreeViolet ;
 
+    protected ArrayList<DeckProductionCard> productionCardDecks;
+
     /**
      * this attribute represents the game leader card deck
      */
@@ -106,6 +108,8 @@ public class Game extends Observable {
         market = new Market();
         reserve = new Reserve();
 
+        productionCardDecks = new ArrayList<>();
+
         deckProductionCardOneBlu = new DeckProductionCardOneBlu();
         deckProductionCardTwoBlu = new DeckProductionCardTwoBlu();
         deckProductionCardThreeBlu = new DeckProductionCardThreeBlu();
@@ -114,13 +118,27 @@ public class Game extends Observable {
         deckProductionCardTwoGreen = new DeckProductionCardTwoGreen();
         deckProductionCardThreeGreen = new DeckProductionCardThreeGreen();
 
+        deckProductionCardOneViolet = new DeckProductionCardOneViolet();
+        deckProductionCardTwoViolet = new DeckProductionCardTwoViolet();
+        deckProductionCardThreeViolet = new DeckProductionCardThreeViolet();
+
         deckProductionCardOneYellow = new DeckProductionCardOneYellow();
         deckProductionCardTwoYellow = new DeckProductionCardTwoYellow();
         deckProductionCardThreeYellow = new DeckProductionCardThreeYellow();
 
-        deckProductionCardOneViolet = new DeckProductionCardOneViolet();
-        deckProductionCardTwoViolet = new DeckProductionCardTwoViolet();
-        deckProductionCardThreeViolet = new DeckProductionCardThreeViolet();
+
+        productionCardDecks.add(deckProductionCardOneBlu);
+        productionCardDecks.add(deckProductionCardTwoBlu);
+        productionCardDecks.add(deckProductionCardThreeBlu);
+        productionCardDecks.add(deckProductionCardOneGreen);
+        productionCardDecks.add(deckProductionCardTwoGreen);
+        productionCardDecks.add(deckProductionCardThreeGreen);
+        productionCardDecks.add(deckProductionCardOneViolet);
+        productionCardDecks.add(deckProductionCardTwoViolet);
+        productionCardDecks.add(deckProductionCardThreeViolet);
+        productionCardDecks.add(deckProductionCardOneYellow);
+        productionCardDecks.add(deckProductionCardTwoYellow);
+        productionCardDecks.add(deckProductionCardThreeYellow);
 
         deckLeaderCard= new DeckLeaderCard();}
         else
@@ -185,67 +203,10 @@ public class Game extends Observable {
     }
 
     public DeckProductionCard deckFromDeckNumber(int deckNumber){
-        switch(deckNumber) {
-            case 0:
-                return deckProductionCardOneBlu;
-            case 1:
-                return deckProductionCardTwoBlu;
-            case 2:
-                return deckProductionCardThreeBlu;
-            case 3:
-                return deckProductionCardOneGreen;
-            case 4:
-                return deckProductionCardTwoGreen;
-            case 5:
-                return deckProductionCardThreeGreen;
-            case 6:
-                return deckProductionCardOneYellow;
-            case 7:
-                return deckProductionCardTwoYellow;
-            case 8:
-                return deckProductionCardThreeYellow;
-            case 9:
-                return deckProductionCardOneViolet;
-            case 10:
-                return deckProductionCardTwoViolet;
-            case 11:
-                return deckProductionCardThreeViolet;
-        }
-
+        for(DeckProductionCard deck : productionCardDecks)
+            if(deck.getDeckNumber() == deckNumber)
+                return deck;
         return null;
-    }
-
-
-    public int deckNumberFromDeck(DeckProductionCard deck){
-
-        if (deck instanceof DeckProductionCardOneBlu)
-            return 0;
-        if (deck instanceof DeckProductionCardTwoBlu)
-            return 1;
-        if (deck instanceof DeckProductionCardThreeBlu)
-            return 2;
-        if (deck instanceof DeckProductionCardOneGreen)
-            return 3;
-        if (deck instanceof DeckProductionCardTwoGreen)
-            return 4;
-        if (deck instanceof DeckProductionCardThreeGreen)
-            return 5;
-        if (deck instanceof DeckProductionCardOneYellow)
-            return 6;
-        if (deck instanceof DeckProductionCardTwoYellow)
-            return 7;
-        if (deck instanceof DeckProductionCardThreeYellow)
-            return 8;
-        if (deck instanceof DeckProductionCardOneViolet)
-            return 2;
-        if (deck instanceof DeckProductionCardTwoViolet)
-            return 2;
-        if (deck instanceof DeckProductionCardThreeViolet)
-            return 2;
-
-
-
-        return -1;
     }
 
     /**
@@ -261,9 +222,9 @@ public class Game extends Observable {
         } catch (EndGameException e) {
             exceptionHandler(e);
         }
-        notifyToOneObserver(new TakeCardMessage(deck.getKey(), chosenColumn));
-        notifyAllObserverLessOne(new TakeCardForNotCurrentMessage(currentPlayer,deck.getKey()));
-        notifyObserver(new DeckProductionCardMessage(deck.getKey()));
+        notifyToOneObserver(new TakeCardMessage(deck.getDeckNumber(), chosenColumn));
+        notifyAllObserverLessOne(new TakeCardForNotCurrentMessage(currentPlayer,deck.getDeckNumber()));
+        notifyObserver(new DeckProductionCardMessage(deck.getDeckNumber()));
     }
 
     /**
@@ -720,6 +681,7 @@ public class Game extends Observable {
                 .create();
         ProductionCard[] deck;
 
+        productionCardDecks = new ArrayList<>();
 
         try {
             deck = gson.fromJson(new FileReader("src/main/resources/DeckProductionCardOneBluLatest.json"), ProductionCard[].class);
@@ -798,6 +760,19 @@ public class Game extends Observable {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+
+        productionCardDecks.add(deckProductionCardOneBlu);
+        productionCardDecks.add(deckProductionCardTwoBlu);
+        productionCardDecks.add(deckProductionCardThreeBlu);
+        productionCardDecks.add(deckProductionCardOneGreen);
+        productionCardDecks.add(deckProductionCardTwoGreen);
+        productionCardDecks.add(deckProductionCardThreeGreen);
+        productionCardDecks.add(deckProductionCardOneViolet);
+        productionCardDecks.add(deckProductionCardTwoViolet);
+        productionCardDecks.add(deckProductionCardThreeViolet);
+        productionCardDecks.add(deckProductionCardOneYellow);
+        productionCardDecks.add(deckProductionCardTwoYellow);
+        productionCardDecks.add(deckProductionCardThreeYellow);
     }
 
 

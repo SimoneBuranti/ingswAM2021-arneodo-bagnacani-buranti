@@ -14,11 +14,13 @@ import java.util.*;
  * this class represents the second level violet production card deck
  */
 public class DeckProductionCardTwoViolet extends DeckProductionCard {
-    private final int key=10;
+
     /**
      * this constructor creates all the production cards and adds them to the list and shuffles the newly created deck
      */
     public DeckProductionCardTwoViolet () throws IOException, InterruptedException {
+
+        deckNumber = 7;
 
         Violet violet= new Violet();
         deck = new ArrayList<>(4);
@@ -132,9 +134,6 @@ public class DeckProductionCardTwoViolet extends DeckProductionCard {
 
 }
 
-    public int getKey() {
-        return key;
-    }
 
     @Override
     public ArrayList<Integer> getDeck(){

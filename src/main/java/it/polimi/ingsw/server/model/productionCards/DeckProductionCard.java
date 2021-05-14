@@ -28,6 +28,7 @@ public abstract class DeckProductionCard extends Observable {
      */
     protected ArrayList<ProductionCard> deck ;
 
+    protected int deckNumber;
 
     /**
      * this method returns the cost of the first deck card
@@ -130,8 +131,8 @@ public abstract class DeckProductionCard extends Observable {
         return gson;
     }
 
-    public int getKey() {
-        return 0;
+    public int getDeckNumber() {
+        return deckNumber;
     }
 
 

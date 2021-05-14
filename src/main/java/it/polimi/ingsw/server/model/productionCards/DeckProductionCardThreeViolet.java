@@ -14,13 +14,11 @@ import java.util.*;
  * this class represents the third level violet production card deck
  */
 public class DeckProductionCardThreeViolet extends DeckProductionCard {
-        private final int key=6;
         /**
          * this constructor creates all the production cards and adds them to the list and shuffles the newly created deck
          */
         public  DeckProductionCardThreeViolet () throws IOException, InterruptedException {
-                Gson g = new Gson();
-                String JSONArray;
+        deckNumber = 8;
 
         Violet violet= new Violet();
         deck = new ArrayList<>(4);
@@ -133,10 +131,6 @@ public class DeckProductionCardThreeViolet extends DeckProductionCard {
                 for(int i=0; i < l; i++)
                         deck.add(deckRecover[i]);
 
-        }
-
-        public int getKey() {
-                return key;
         }
 
         @Override

@@ -63,7 +63,7 @@ public class LightGameMultiPlayer extends LightGame{
     }
 
     @Override
-    public void setProductionCardGameBoard(String nickname, ProductionCard[][] productionCards){
+    public void setProductionCardGameBoard(String nickname, int[][] productionCards){
         for(LightPlayer player : players){
             if(nickname.equals(player.getNickName())){
                 player.setProductionCards(productionCards);
@@ -71,41 +71,25 @@ public class LightGameMultiPlayer extends LightGame{
         }
     }
 
+
     @Override
-    public void addLeaderCard(String nickname, LeaderCard leaderCard){
+    public void addLeaderCard(String nickname, ArrayList<Integer> leaderCardKeys){
         for(LightPlayer player : players){
             if(nickname.equals(player.getNickName())){
-                player.addLeaderCard(leaderCard);
+                player.addLeaderCard(leaderCardKeys);
             }
         }
     }
 
     @Override
-    public void addLeaderCard(String nickname, ArrayList<LeaderCard> leaderCard){
+    public void addLeaderCardActivated(String nickname, ArrayList<Integer> leaderCardKeys){
         for(LightPlayer player : players){
             if(nickname.equals(player.getNickName())){
-                player.addLeaderCard(leaderCard);
+                player.addLeaderCardActivated(leaderCardKeys);
             }
         }
     }
 
-    @Override
-    public void addLeaderCardActivated(String nickname, ArrayList<LeaderCard> leaderCard){
-        for(LightPlayer player : players){
-            if(nickname.equals(player.getNickName())){
-                player.addLeaderCardActivated(leaderCard);
-            }
-        }
-    }
-
-    @Override
-    public void activateLeaderCard(String nickname, LeaderCard leaderCard){
-        for(LightPlayer player : players){
-            if(nickname.equals(player.getNickName())){
-                player.activateLeaderCard(leaderCard);
-            }
-        }
-    }
 
     @Override
     public void activateLeaderCard(String nickname, int index){
@@ -116,14 +100,6 @@ public class LightGameMultiPlayer extends LightGame{
         }
     }
 
-    @Override
-    public void discardLeaderCard(String nickname, LeaderCard leaderCard){
-        for(LightPlayer player : players){
-            if(nickname.equals(player.getNickName())){
-                player.discardLeaderCard(leaderCard);
-            }
-        }
-    }
 
     @Override
     public void discardLeaderCard(String nickname, int index){

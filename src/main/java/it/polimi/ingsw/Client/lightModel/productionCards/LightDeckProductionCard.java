@@ -20,6 +20,8 @@ public abstract class LightDeckProductionCard {
 
     protected int numberDeck;
 
+    protected LightProductionCards productionCards = new LightProductionCards();
+
     public void setDeckProductionCard(ArrayList<Integer> listKey){
     }
     /**
