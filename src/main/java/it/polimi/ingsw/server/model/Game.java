@@ -947,19 +947,21 @@ public class Game extends Observable {
 
     protected void configClient() throws IOException, InterruptedException {
         notifyObserver(new DeckProductionCardConfigMessage(0,deckProductionCardOneBlu.getDeck()));
-        notifyObserver(new DeckProductionCardConfigMessage(1,deckProductionCardOneGreen.getDeck()));
-        notifyObserver(new DeckProductionCardConfigMessage(2,deckProductionCardOneViolet.getDeck()));
-        notifyObserver(new DeckProductionCardConfigMessage(3,deckProductionCardOneYellow.getDeck()));
+        notifyObserver(new DeckProductionCardConfigMessage(1,deckProductionCardTwoBlu.getDeck()));
+        notifyObserver(new DeckProductionCardConfigMessage(2,deckProductionCardThreeBlu.getDeck()));
 
-        notifyObserver(new DeckProductionCardConfigMessage(4,deckProductionCardTwoBlu.getDeck()));
-        notifyObserver(new DeckProductionCardConfigMessage(5,deckProductionCardTwoGreen.getDeck()));
-        notifyObserver(new DeckProductionCardConfigMessage(6,deckProductionCardTwoViolet.getDeck()));
-        notifyObserver(new DeckProductionCardConfigMessage(7,deckProductionCardTwoYellow.getDeck()));
+        notifyObserver(new DeckProductionCardConfigMessage(3,deckProductionCardOneGreen.getDeck()));
+        notifyObserver(new DeckProductionCardConfigMessage(4,deckProductionCardTwoGreen.getDeck()));
+        notifyObserver(new DeckProductionCardConfigMessage(5,deckProductionCardThreeGreen.getDeck()));
 
-        notifyObserver(new DeckProductionCardConfigMessage(8,deckProductionCardTwoBlu.getDeck()));
-        notifyObserver(new DeckProductionCardConfigMessage(9,deckProductionCardTwoBlu.getDeck()));
-        notifyObserver(new DeckProductionCardConfigMessage(10,deckProductionCardTwoBlu.getDeck()));
-        notifyObserver(new DeckProductionCardConfigMessage(11,deckProductionCardTwoBlu.getDeck()));
+        notifyObserver(new DeckProductionCardConfigMessage(6,deckProductionCardOneViolet.getDeck()));
+        notifyObserver(new DeckProductionCardConfigMessage(7,deckProductionCardTwoViolet.getDeck()));
+        notifyObserver(new DeckProductionCardConfigMessage(8,deckProductionCardThreeViolet.getDeck()));
+
+        notifyObserver(new DeckProductionCardConfigMessage(9,deckProductionCardOneYellow.getDeck()));
+        notifyObserver(new DeckProductionCardConfigMessage(10,deckProductionCardTwoYellow.getDeck()));
+        notifyObserver(new DeckProductionCardConfigMessage(11,deckProductionCardTwoYellow.getDeck()));
+
 
         notifyObserver(new ConfigurationMarketMessage(market.getInitialMarbleList()));
     }
