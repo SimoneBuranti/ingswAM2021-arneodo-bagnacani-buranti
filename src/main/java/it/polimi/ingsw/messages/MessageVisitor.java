@@ -111,6 +111,10 @@ public interface MessageVisitor {
 
     void visit(LorenzoMoveMessage msg);
 
+    void visit(YourTurnMessage msg);
+
+    void visit(ChangeTurnMessage msg);
+
 
 
 

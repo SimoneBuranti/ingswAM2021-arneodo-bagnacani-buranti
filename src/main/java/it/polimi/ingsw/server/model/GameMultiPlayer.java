@@ -700,9 +700,11 @@ public class GameMultiPlayer extends Game {
 
 
     @Override
-    public synchronized void endOfTurn() {
+    public synchronized void endOfTurn() throws IOException, InterruptedException {
         setCurrentPlayer();
-        saveInformation(); }
+        saveInformation();
+        notifyToOneObserver(new YourTurnMessage());
+        notifyAllObserverLessOne(new ChangeTurnMessage(currentPlayer.getNickName()));}
 
 }
 

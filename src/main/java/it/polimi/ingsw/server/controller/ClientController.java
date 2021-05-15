@@ -103,7 +103,7 @@ public class ClientController implements MessageVisitor {
         if(turnCheck())
             game.endOfTurn();
         else
-            System.out.println("non turno di "+ this.getNickname());
+            clientHandler.sendMessage(new NotYourTurnErrorMessage());
     }
 
     @Override
@@ -358,7 +358,6 @@ public class ClientController implements MessageVisitor {
 
     @Override
     public void visit(PongMessage msg) {
-        System.out.println("Ho rivecuto il pong");
         clientHandler.setPongo(true);
     }
 
@@ -549,6 +548,16 @@ public class ClientController implements MessageVisitor {
 
     @Override
     public void visit(LorenzoMoveMessage msg) {
+
+    }
+
+    @Override
+    public void visit(YourTurnMessage msg) {
+
+    }
+
+    @Override
+    public void visit(ChangeTurnMessage msg) {
 
     }
 }
