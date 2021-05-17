@@ -96,4 +96,5 @@ public enum MessageType {
     LORENZOMAGNIFICFAITHMOVE,
     YOURTURN,
     CHANGETURN,
+   GAMETYPE;
 }

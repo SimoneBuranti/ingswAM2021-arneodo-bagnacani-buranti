@@ -2,25 +2,30 @@ package it.polimi.ingsw.Client;
 
 import it.polimi.ingsw.Client.lightModel.LightGame;
 import it.polimi.ingsw.Client.lightModel.LightGameMultiPlayer;
+import it.polimi.ingsw.Client.lightModel.LightGameSolitaire;
+import it.polimi.ingsw.Client.View.View;
 import it.polimi.ingsw.messages.*;
 import it.polimi.ingsw.messages.observable.*;
-import it.polimi.ingsw.server.model.*;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class ViewController implements MessageVisitor {
     private final SocketClient socketClient;
-    private LightGame game = new LightGameMultiPlayer("Ali");
+    private LightGame game ;
     private String nickName = null;
+    private View view;
 
-    public ViewController(SocketClient socketClient){
+
+    public ViewController(SocketClient socketClient, View view){
         this.socketClient = socketClient;
-
+        this.view=view;
     }
 
-    public void setGame(LightGame game){
-        this.game = game;
+
+    public void setGame(boolean multiOrNot){
+        if(multiOrNot)
+            this.game=new LightGameMultiPlayer(nickName);
+        else
+            this.game=new LightGameSolitaire(nickName);
+        game.setObserver(view);
     }
 
     public void setNickName(String nickName) {
@@ -445,6 +450,21 @@ public class ViewController implements MessageVisitor {
     @Override
     public void visit(LorenzoMoveMessage msg) {
         game.moveBlackCrossOnce();
+    }
+
+    @Override
+    public void visit(YourTurnMessage msg) {
+
+    }
+
+    @Override
+    public void visit(ChangeTurnMessage msg) {
+
+    }
+
+    @Override
+    public void visit(GameTypeMessage msg) {
+        setGame(msg.isMultiOrNot());
     }
 
 

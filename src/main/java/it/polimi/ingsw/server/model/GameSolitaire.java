@@ -73,6 +73,7 @@ public class GameSolitaire extends Game {
     @Override
     public void configClient() throws IOException, InterruptedException {
         super.configClient();
+        notifyObserver(new GameTypeMessage(false));
         ArrayList<Integer> needForLeader = new ArrayList<>();
         for (int i=0; i<4;i++)
             needForLeader.add(player.getPersonalLeaderCard().get(i).getKey());
@@ -343,6 +344,7 @@ public class GameSolitaire extends Game {
     public void connectPlayer(String nickname) throws IOException, InterruptedException{
         if(player.getNickName().equals(nickname) && !(player.isConnected())){
             player.setConnected();
+            notifyObserver(new GameTypeMessage(false));
             ArrayList<Integer> needForLeader = new ArrayList<>();
             ArrayList<Integer> needForLeader2 = new ArrayList<>();
             notifyOnlyOneSpecificObserver(new StorageConfigMessage(player.getGameBoardOfPlayer().getStorageOfGameBoard().getStorageResource()), player.getNickName());
@@ -481,6 +483,7 @@ public class GameSolitaire extends Game {
     @Override
     public void saveInformation(){
        super.saveInformation();
+
         player.savePlayerInformation();
         deckActionMarker.saveInformationOfActionMarker();
         lorenzoTheMagnificent.saveInformationOfLorenzo();
@@ -502,6 +505,7 @@ public class GameSolitaire extends Game {
         RestoreActionMarker();
         player = new PlayerFirst(nickNamePlayer,this,false,clientController.getVirtualView());
         this.addObserver(clientController.getVirtualView());
+        notifyObserver(new GameTypeMessage(false));
         RestoreActionMagnific();
         reConfigClient();
 
@@ -605,4 +609,7 @@ public class GameSolitaire extends Game {
     public synchronized void endOfTurn() throws IOException, InterruptedException {
         revealAndActivateActionMarker();
         saveInformation(); }
+
+
+
 }

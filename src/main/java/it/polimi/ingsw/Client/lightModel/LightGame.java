@@ -2,6 +2,7 @@ package it.polimi.ingsw.Client.lightModel;
 
 import it.polimi.ingsw.Client.lightModel.lightGameBoard.LightGameBoard;
 import it.polimi.ingsw.Client.lightModel.productionCards.*;
+import it.polimi.ingsw.Observer.ViewObservable;
 import it.polimi.ingsw.server.model.Market;
 import it.polimi.ingsw.server.model.Reserve;
 import it.polimi.ingsw.server.model.Resource;
@@ -15,7 +16,7 @@ import it.polimi.ingsw.server.model.productionCards.*;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class LightGame{
+public class LightGame extends ViewObservable {
 
     /**
      * this attribute represents the game market
@@ -83,11 +84,15 @@ public class LightGame{
     protected String currentPlayer;
 
     protected LightGameBoard gameBoardOfPlayer;
+
+
     /**
      * this constructor instantiates all the game attributes
      */
     public LightGame(String nickname){
+
         listOfDeck = new ArrayList<>();
+
         deckProductionCardOneBlu = new LightDeckProductionCardOneBlu();
         listOfDeck.add(deckProductionCardOneBlu);
         deckProductionCardTwoBlu = new LightDeckProductionCardTwoBlu();

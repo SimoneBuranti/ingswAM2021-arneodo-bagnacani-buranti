@@ -1,8 +1,6 @@
 package it.polimi.ingsw;
 
-import com.google.gson.Gson;
 import it.polimi.ingsw.Client.SocketClient;
-import it.polimi.ingsw.messages.*;
 
 import java.io.*;
 
@@ -13,7 +11,7 @@ public class ProvaApp {
 
         try {
 
-            SocketClient socketClient = new SocketClient("127.0.0.1",1234);
+            SocketClient socketClient = new SocketClient("127.0.0.1",1234, cli);
 
             socketClient.readMessage();
 

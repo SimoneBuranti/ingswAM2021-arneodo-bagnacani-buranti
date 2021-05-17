@@ -13,7 +13,7 @@ public interface Observer {
 
     void updateOnlyCurrent(Message message) throws IOException, InterruptedException;
 
-    public void updateNotTheCurrent(Message message) throws IOException, InterruptedException;
+   void updateNotTheCurrent(Message message) throws IOException, InterruptedException;
 
 
     void updateOnlyObserverByNickname(Message message,String nickame) throws IOException, InterruptedException;

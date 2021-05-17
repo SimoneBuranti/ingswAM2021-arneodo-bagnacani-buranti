@@ -267,6 +267,9 @@ public abstract class Message{
             case LORENZOMAGNIFICFAITHMOVE:
                 return gson.fromJson(jsonObj, LorenzoMoveMessage.class);
 
+            case GAMETYPE:
+                return gson.fromJson(jsonObj, GameTypeMessage.class);
+
 
 
 

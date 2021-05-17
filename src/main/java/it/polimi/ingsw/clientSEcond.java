@@ -2,7 +2,6 @@ package it.polimi.ingsw;
 
 import it.polimi.ingsw.Client.SocketClient;
 import it.polimi.ingsw.messages.EndOfTurnMessage;
-import it.polimi.ingsw.messages.NumberPlayerMessage;
 import it.polimi.ingsw.messages.UsernameMessage;
 
 import java.io.IOException;
@@ -15,7 +14,7 @@ public class clientSEcond {
 
         int portNumber = 1234;
 
-        SocketClient socketClient = new SocketClient(hostName, portNumber);
+        SocketClient socketClient = new SocketClient(hostName, portNumber, cli);
 
         new Thread(){
             public void run(){

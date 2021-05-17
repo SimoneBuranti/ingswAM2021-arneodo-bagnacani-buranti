@@ -1,4 +1,5 @@
 package it.polimi.ingsw.Client;
+import it.polimi.ingsw.Client.View.View;
 import it.polimi.ingsw.messages.Message;
 
 import java.io.*;
@@ -7,14 +8,14 @@ import java.net.*;
 
 public class SocketClient {
     private final Socket serverSocket;
-    private it.polimi.ingsw.Client.ViewController viewController;
+    private ViewController viewController;
     private BufferedReader in;
     private PrintWriter out;
 
 
-    public SocketClient(String address, int port) throws IOException {
+    public SocketClient(String address, int port, View cli) throws IOException {
         this.serverSocket = new Socket(address, port);
-        viewController = new it.polimi.ingsw.Client.ViewController(this);
+        viewController = new ViewController(this,  cli);
         in = new BufferedReader(new InputStreamReader(serverSocket.getInputStream()));
         out = new PrintWriter(serverSocket.getOutputStream(), true);
 

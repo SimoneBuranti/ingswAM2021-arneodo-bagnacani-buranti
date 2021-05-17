@@ -98,6 +98,7 @@ public class GameMultiPlayer extends Game {
     @Override
     public void configClient() throws IOException, InterruptedException {
         super.configClient();
+        notifyObserver(new GameTypeMessage(true));
     if (numberOfPlayer==2)
     {
         ArrayList<Integer> needForLeader = new ArrayList<>();
@@ -315,6 +316,7 @@ public class GameMultiPlayer extends Game {
         for(Player p : playerList){
             if(p.getNickName().equals(nickname) && !(p.isConnected())){
                 p.setConnected();
+                notifyObserver(new GameTypeMessage(true));
                 ArrayList<Integer> needForLeader = new ArrayList<>();
                 ArrayList<Integer> needForLeader2 = new ArrayList<>();
 
@@ -453,12 +455,15 @@ public class GameMultiPlayer extends Game {
         for(Player p : playerList){
             p.savePlayerInformation();
         }
+
         saveInformationAboutTurn();
         saveInformationOfInkwel();
         saveInformationPlayerNumber();
         saveCurrentPosition();
         saveIfLastTurnOrNot();
     }
+
+
 
     private void saveInformationOfInkwel() { Gson gson = new Gson();
         FileWriter config = null;
@@ -577,6 +582,7 @@ public class GameMultiPlayer extends Game {
 
         addObservators();
         this.clientControllersInOrder=clientControllers;
+        notifyObserver(new GameTypeMessage(true));
         createPlayerRestore(numberOfPlayer,nickNameInOrder);
         reConfigClient();
         currentPlayer = playerList.get(currentPlayerPosition);

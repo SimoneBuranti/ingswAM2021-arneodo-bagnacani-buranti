@@ -115,6 +115,8 @@ public interface MessageVisitor {
 
     void visit(ChangeTurnMessage msg);
 
+    void visit(GameTypeMessage msg);
+
 
 
 
