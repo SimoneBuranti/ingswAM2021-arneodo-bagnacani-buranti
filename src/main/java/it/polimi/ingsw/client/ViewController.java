@@ -51,6 +51,7 @@ public class ViewController implements MessageVisitor {
 
     @Override
     public void visit(AlreadyUsedLeaderCardErrorMessage msg) {
+        //view.notifyError(msg.getErrorNotification());
 
     }
 
@@ -68,31 +69,36 @@ public class ViewController implements MessageVisitor {
 
     @Override
     public void visit(NotAvailableResourcesErrorMessage msg) {
+        //view.notifyError(msg.getErrorNotification());
 
     }
 
     @Override
     public void visit(NotEnoughSpaceErrorMessage msg) {
+        //view.notifyError(msg.getErrorNotification());
 
     }
 
     @Override
     public void visit(RequirementsErrorMessage msg) {
+        //view.notifyError(msg.getErrorNotification());
 
     }
 
     @Override
     public void visit(WrongColumnErrorMessage msg) {
-
+        //view.notifyError(msg.getErrorNotification());
     }
 
     @Override
     public void visit(NotYourTurnErrorMessage msg) {
+        //view.notifyError(msg.getErrorNotification());
 
     }
 
     @Override
     public void visit(BootingLobbyErrorMessage msg) {
+        //view.notifyError(msg.getErrorNotification());
 
     }
 
@@ -104,6 +110,7 @@ public class ViewController implements MessageVisitor {
     @Override
     public void visit(ChangeCurrentPlayerMessage msg) {
         game.setCurrentPlayer(msg.getNickname());
+      //  view.showChangeCurrent(msg.getNickname());
     }
 
 
@@ -115,6 +122,7 @@ public class ViewController implements MessageVisitor {
 
     @Override
     public void visit(LastTurnMessage msg) {
+        //  view.showLastTurn();
 
     }
 
@@ -140,6 +148,7 @@ public class ViewController implements MessageVisitor {
 
     @Override
     public void visit(PickedLeaderCardsMessage msg) {
+        //  view.showPersonalLeaderCardForConfig(msg.getlist);
 
     }
 
@@ -150,83 +159,56 @@ public class ViewController implements MessageVisitor {
 
     @Override
     public void visit(RestartAnswerMessage msg) {
+        //  view.showDoYouWantRestart();
 
     }
+
+
 
     @Override
-    public void visit(ActivateLeaderCardMessage msg) {
-
-    }
+    public void visit(ActivateLeaderCardMessage msg) { }
 
     @Override
-    public void visit(BaseProductionOnMessage msg) {
-
-    }
+    public void visit(BaseProductionOnMessage msg) {}
 
     @Override
-    public void visit(BuyProductionCardMessage msg) {
-
-    }
+    public void visit(BuyProductionCardMessage msg) {}
 
     @Override
-    public void visit(DiscardLeaderCardMessage msg) {
-
-    }
+    public void visit(DiscardLeaderCardMessage msg) {}
 
     @Override
-    public void visit(DoubleProductionOnMessage msg) {
-
-    }
+    public void visit(DoubleProductionOnMessage msg) {}
 
     @Override
-    public void visit(EndOfProductionMessage msg) {
-
-    }
+    public void visit(EndOfProductionMessage msg) {}
 
     @Override
-    public void visit(ExitMessage msg) {
-
-    }
+    public void visit(ExitMessage msg) {}
 
     @Override
-    public void visit(ExtraProductionOnMessage msg) {
-
-    }
+    public void visit(ExtraProductionOnMessage msg) {}
 
     @Override
-    public void visit(InitialResourcesMessage msg) {
-
-    }
+    public void visit(InitialResourcesMessage msg) {}
 
     @Override
-    public void visit(KeepLeaderCardsMessage msg) {
-
-    }
+    public void visit(KeepLeaderCardsMessage msg) {}
 
     @Override
-    public void visit(KeepResourcesMessage msg) {
-
-    }
+    public void visit(KeepResourcesMessage msg) {}
 
     @Override
-    public void visit(NumberPlayerMessage msg) {
-
-    }
+    public void visit(NumberPlayerMessage msg) {}
 
     @Override
-    public void visit(ProductionOnMessage msg) {
-
-    }
+    public void visit(ProductionOnMessage msg) {}
 
     @Override
-    public void visit(PushColumnMessage msg) {
-
-    }
+    public void visit(PushColumnMessage msg) {}
 
     @Override
-    public void visit(PushRowMessage msg) {
-
-    }
+    public void visit(PushRowMessage msg) {}
 
     @Override
     public void visit(UsernameMessage msg) {
@@ -234,9 +216,7 @@ public class ViewController implements MessageVisitor {
     }
 
     @Override
-    public void visit(WhiteMarbleChoosenResourcesMessage msg) {
-
-    }
+    public void visit(WhiteMarbleChoosenResourcesMessage msg) {}
 
     @Override
     public void visit(PingMessage msg) {
@@ -244,18 +224,13 @@ public class ViewController implements MessageVisitor {
     }
 
     @Override
-    public void visit(PongMessage msg) {
-
-    }
+    public void visit(PongMessage msg) {}
 
     @Override
-    public void visit(OkMessage msg) {
-
-    }
+    public void visit(OkMessage msg) {}
 
     @Override
     public void visit(NicknameStartedMessage msg) {
-        System.out.println(msg.getMessageType()+" : "+ msg.getNickname());
         game.setPlayersInOrder(msg.getNickname());
     }
 
@@ -309,7 +284,6 @@ public class ViewController implements MessageVisitor {
 
     @Override
     public void visit(DeckProductionCardConfigMessage msg) {
-        System.out.println(msg.getMessageType()+" : "+ msg.getDeck());
         game.setDeckProductionCard(msg.getNumberDeck(), msg.getDeck());
     }
 
@@ -331,7 +305,6 @@ public class ViewController implements MessageVisitor {
 
     @Override
     public void visit(ConfigurationMarketMessage msg) throws IOException, InterruptedException {
-        System.out.println(msg.getMessageType()+" : "+ msg.getMarbleList());
         game.setMarket(msg.getMarbleList());
     }
 
@@ -358,10 +331,9 @@ public class ViewController implements MessageVisitor {
     }
 
 
-
     @Override
     public void visit(MagnificentWinMessage msg) {
-
+       // view.magnificentWin();
     }
 
     @Override
@@ -371,6 +343,7 @@ public class ViewController implements MessageVisitor {
 
     @Override
     public void visit(MyVictoryMessage msg) {
+        // view.YouWin();
 
     }
 
@@ -389,32 +362,32 @@ public class ViewController implements MessageVisitor {
 
     @Override
     public void visit(ProductionMessageForNotCurrentMessage msg) throws IOException, InterruptedException {
-
+        // visit.negativeProductionOfAnotherPlayer();
         game.addResourceReserve(msg.getResource());
     }
 
     @Override
     public void visit(ProductionMessageForCurrentMessage msg) throws IOException, InterruptedException {
-
         game.addResourceReserve(msg.getResource());
         game.payResourcesProduction(msg.getResource());
     }
 
+
     @Override
     public void visit(ResultOfProductionMessage msg) throws IOException, InterruptedException {
-
         game.useResourceReserve(msg.getResource());
         game.addStrongbox(msg.getResource());
     }
 
     @Override
     public void visit(ResultOfProductionForNotCurrentMessage msg) throws IOException, InterruptedException {
-
+        // visit.positiveProductionOfAnotherPlayer();
         game.useResourceReserve(msg.getResource());
     }
 
     @Override
     public void visit(ActivationLeaderForNotCurrentMessage msg) {
+        // visit.leaderActivationOfAnotherPlayer();
 
     }
 
@@ -425,6 +398,7 @@ public class ViewController implements MessageVisitor {
 
     @Override
     public void visit(DiscardLeaderForNotCurrentMessage msg) {
+        // visit.leaderDiscardOfAnotherPlayer();
 
     }
 
@@ -452,6 +426,7 @@ public class ViewController implements MessageVisitor {
 
     @Override
     public void visit(FaithPathOpponentMessage msg) {
+        // visit.faithMoveOfAnotherPlayer();
 
     }
 
@@ -459,6 +434,7 @@ public class ViewController implements MessageVisitor {
 
     @Override
     public void visit(EndGamePlayerWinnerMessage msg) {
+        // visit.showWinner();
 
     }
 
@@ -553,6 +529,7 @@ public class ViewController implements MessageVisitor {
 
     @Override
     public void visit(YourTurnMessage msg) {
+        //visit.yourTurn();
 
     }
 
