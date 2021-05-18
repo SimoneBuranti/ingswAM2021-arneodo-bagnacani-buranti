@@ -115,7 +115,7 @@ public class ViewController implements MessageVisitor, ViewObserver {
 
     @Override
     public void visit(EndOfTurnMessage msg) {
-        socketClient.sendMessage(msg);
+
 
     }
 
@@ -159,94 +159,94 @@ public class ViewController implements MessageVisitor, ViewObserver {
 
     @Override
     public void visit(RestartAnswerMessage msg) {
-        socketClient.sendMessage(msg);
+
     }
 
 
 
     @Override
     public void visit(ActivateLeaderCardMessage msg) {
-        socketClient.sendMessage(msg);
+
     }
 
     @Override
     public void visit(BaseProductionOnMessage msg) {
-        socketClient.sendMessage(msg);
+
     }
 
     @Override
     public void visit(BuyProductionCardMessage msg) {
-        socketClient.sendMessage(msg);
+
     }
 
     @Override
     public void visit(DiscardLeaderCardMessage msg) {
-        socketClient.sendMessage(msg);
+
     }
 
     @Override
     public void visit(DoubleProductionOnMessage msg) {
-        socketClient.sendMessage(msg);
+
     }
 
     @Override
     public void visit(EndOfProductionMessage msg) {
-        socketClient.sendMessage(msg);
+
     }
 
     @Override
     public void visit(ExitMessage msg) {
-        socketClient.sendMessage(msg);
+
     }
 
     @Override
     public void visit(ExtraProductionOnMessage msg) {
-        socketClient.sendMessage(msg);
+
     }
 
     @Override
     public void visit(InitialResourcesMessage msg) {
-        socketClient.sendMessage(msg);
+
     }
 
     @Override
     public void visit(KeepLeaderCardsMessage msg) {
-        socketClient.sendMessage(msg);
+
     }
 
     @Override
     public void visit(KeepResourcesMessage msg) {
-        socketClient.sendMessage(msg);
+
     }
 
     @Override
     public void visit(NumberPlayerMessage msg) {
-        socketClient.sendMessage(msg);
+
     }
 
     @Override
     public void visit(ProductionOnMessage msg) {
-        socketClient.sendMessage(msg);
+
     }
 
     @Override
     public void visit(PushColumnMessage msg) {
-        socketClient.sendMessage(msg);
+
     }
 
     @Override
     public void visit(PushRowMessage msg) {
-        socketClient.sendMessage(msg);
+
     }
 
     @Override
     public void visit(UsernameMessage msg) {
-        socketClient.sendMessage(msg);
+        view.askNickname();
     }
 
     @Override
     public void visit(WhiteMarbleChoosenResourcesMessage msg) {
-        socketClient.sendMessage(msg);
+
     }
 
     @Override
@@ -576,14 +576,10 @@ public class ViewController implements MessageVisitor, ViewObserver {
         setGame(msg.isMultiOrNot());
     }
 
-    @Override
-    public void visit(RequestNicknameMessage message) {
-        view.askNickname();
-    }
 
 
     @Override
     public void update(Message message) throws IOException, InterruptedException {
-        message.accept(this);
+       socketClient.sendMessage(message);
     }
 }
