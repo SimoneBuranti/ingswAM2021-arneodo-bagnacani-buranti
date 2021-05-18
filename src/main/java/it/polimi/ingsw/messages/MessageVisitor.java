@@ -28,12 +28,12 @@ public interface MessageVisitor {
 
     void visit(ReserveValueMessage msg) throws IOException, InterruptedException;
     void visit(DoubleWhiteMarbleEffectMessage msg);
-    void visit(NPlayersMessage msg);
+    void visit(NPlayersMessage msg) throws IOException, InterruptedException;
     void visit(PickedLeaderCardsMessage msg);
     void visit(SetPapalsMessage msg);
 
     //Client to server
-    void visit(RestartAnswerMessage msg);
+    void visit(RestartAnswerMessage msg) throws IOException, InterruptedException;
     void visit(ActivateLeaderCardMessage msg) throws IOException, InterruptedException;
     void visit(BaseProductionOnMessage msg) throws IOException, InterruptedException;
     void visit(BuyProductionCardMessage msg) throws IOException, InterruptedException;

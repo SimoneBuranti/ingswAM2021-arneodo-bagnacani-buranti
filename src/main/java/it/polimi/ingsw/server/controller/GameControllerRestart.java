@@ -67,13 +67,14 @@ public class GameControllerRestart extends GameController {
     }
 
     @Override
-    public synchronized void handleMessage(RestartAnswerMessage msg, ClientController clientController) {
-        if(msg.getAnswer().equals("no")){
+    public synchronized void handleMessage(RestartAnswerMessage msg, ClientController clientController) throws IOException, InterruptedException {
+        if(!msg.getAnswer()){
             server.restartLobby();
             server.setGameController(new GameControllerEmpty(this.server));
         } else {
             restartAnswerReceived = true;
         }
+        clientController.getClientHandler().sendMessage(new UsernameMessage(null));
     }
 
 }

@@ -41,7 +41,7 @@ public abstract class GameController {
         this.game = game;
     }
 
-    public abstract void handleMessage(RestartAnswerMessage msg, ClientController clientController);
+    public abstract void handleMessage(RestartAnswerMessage msg, ClientController clientController) throws IOException, InterruptedException;
 
     /*void handleMessage(ActivateLeaderCardMessage msg);
     void handleMessage(BaseProductionOnMessage msg);

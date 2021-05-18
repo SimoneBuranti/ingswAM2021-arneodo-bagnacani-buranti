@@ -1,20 +1,22 @@
 package it.polimi.ingsw.messages;
 
+import java.io.IOException;
+
 public class RestartAnswerMessage extends Message{
     private final MessageType messageType = MessageType.RESTARTANSWERMESSAGE;
 
-    private String answer;
+    private boolean answer;
 
-    public RestartAnswerMessage(String answer) {
+    public RestartAnswerMessage(boolean answer) {
         this.answer = answer;
     }
 
-    public String getAnswer() {
+    public boolean getAnswer() {
         return answer;
     }
 
     @Override
-    public void accept(MessageVisitor v) {
+    public void accept(MessageVisitor v) throws IOException, InterruptedException {
         v.visit(this);
     }
 

@@ -3,6 +3,7 @@ package it.polimi.ingsw.server.network;
 import it.polimi.ingsw.messages.Message;
 import it.polimi.ingsw.messages.PingMessage;
 import it.polimi.ingsw.messages.RestartQuestionMessage;
+import it.polimi.ingsw.messages.UsernameMessage;
 import it.polimi.ingsw.server.controller.ClientController;
 import it.polimi.ingsw.server.virtualview.VirtualView;
 
@@ -88,6 +89,8 @@ public class ClientHandler implements Runnable {
             if(server.getSendRestartQuestion()){
                 sendMessage(new RestartQuestionMessage());
                 server.setSendRestartQuestion();
+            } else {
+                sendMessage(new UsernameMessage(null));
             }
 
             ScheduledThreadPoolExecutor pinger = new ScheduledThreadPoolExecutor(1);

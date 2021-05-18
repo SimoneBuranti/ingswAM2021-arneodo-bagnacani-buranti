@@ -19,6 +19,7 @@ public class ViewController implements MessageVisitor {
     public ViewController(SocketClient socketClient, View view){
         this.socketClient = socketClient;
         this.view=view;
+        this.view.setViewController(this);
     }
 
 
@@ -34,12 +35,18 @@ public class ViewController implements MessageVisitor {
         this.nickName = nickName;
     }
 
+    public void sendMessage(Message msg){
+        socketClient.sendMessage(msg);
+    }
+
     @Override
     public void visit(AlreadyActivatedErrorMessage msg) {
     }
 
     @Override
     public void visit(AlreadyExistingNickNameErrorMessage msg) {
+        //view.notifyError(msg.getErrorNotification());
+        view.askNickname();
     }
 
     @Override
@@ -49,12 +56,14 @@ public class ViewController implements MessageVisitor {
 
     @Override
     public void visit(CompleteRunningMatchErrorMessage msg) {
+        //view.notifyError(msg.getErrorNotification());
 
     }
 
     @Override
     public void visit(NoNicknameMessage msg) {
-
+        //view.notifyError(msg.getErrorNotification());
+        view.askNickname();
     }
 
     @Override
@@ -89,7 +98,7 @@ public class ViewController implements MessageVisitor {
 
     @Override
     public void visit(RestartQuestionMessage msg) {
-
+        view.askRestartGame();
     }
 
     @Override
@@ -121,8 +130,12 @@ public class ViewController implements MessageVisitor {
     }
 
     @Override
-    public void visit(NPlayersMessage msg) {
-
+    public void visit(NPlayersMessage msg) throws IOException, InterruptedException {
+        if (msg.getnOfPlayers() == -1){
+            view.askNumberOfPlayers();
+        } else {
+            // Show del numero di giocatori nella lobby / lobbysize
+        }
     }
 
     @Override
@@ -217,7 +230,7 @@ public class ViewController implements MessageVisitor {
 
     @Override
     public void visit(UsernameMessage msg) {
-
+        view.askNickname();
     }
 
     @Override

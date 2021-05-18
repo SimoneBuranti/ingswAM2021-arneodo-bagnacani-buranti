@@ -147,7 +147,7 @@ public class ClientController implements MessageVisitor {
     }
 
     @Override
-    public void visit(RestartAnswerMessage msg) { server.getGameController().handleMessage(msg, this); }
+    public void visit(RestartAnswerMessage msg) throws IOException, InterruptedException { server.getGameController().handleMessage(msg, this); }
 
 
     //-----------------------------Client Controller Handled ------------------------------------------------------

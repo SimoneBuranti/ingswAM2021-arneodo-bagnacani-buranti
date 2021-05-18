@@ -1,16 +1,27 @@
 package it.polimi.ingsw;
 
+import it.polimi.ingsw.messages.PingMessage;
+
+import java.io.IOException;
+import java.util.Scanner;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
+
 public class ProvaApp {
 
 
     public static void main(String[] args) {
 
-        for (int i = 0; i<256 ; i++){
-            System.out.println(i + " : " + (char) i);
+        (new ScheduledThreadPoolExecutor(1)).scheduleAtFixedRate( () -> {
+
+            System.out.println("****************************************");
+
+        },1000,500, TimeUnit.MILLISECONDS);
+
+        Scanner in = new Scanner(System.in);
+        while(true){
+            System.out.println(in.nextLine());
         }
-
-
-
     }
 }
 
