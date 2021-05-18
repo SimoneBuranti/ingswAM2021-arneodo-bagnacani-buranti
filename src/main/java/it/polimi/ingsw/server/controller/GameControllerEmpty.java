@@ -21,7 +21,7 @@ public class GameControllerEmpty extends GameController {
         System.out.println(msg.getnOfPlayers());
         if (server.getLobbySize()>0){
             if (msg.getnOfPlayers()== 1){
-                server.setGameController(new GameControllerSinglePlayer());
+                server.setGameController(new GameControllerSinglePlayer(server,server.getGame()));
                 server.initNewSolitaireGame();
             } else {
                 server.setGameController(new GameControllerLobby(this.server,msg.getnOfPlayers()));
@@ -33,7 +33,6 @@ public class GameControllerEmpty extends GameController {
     public void handleMessage(UsernameMessage msg, ClientController clientController) throws IOException, InterruptedException {
         if (server.getLobbySize()==0) {
             if (server.addPlayerToLobby(msg.getUsername())){
-                System.out.println(msg.getUsername());
                 clientController.setNickname(msg.getUsername());
                 clientController.getClientHandler().sendMessage(new NPlayersMessage(-1));
                 server.addClientController(clientController);
@@ -56,81 +55,5 @@ public class GameControllerEmpty extends GameController {
     public void handleMessage(RestartAnswerMessage msg, ClientController clientController) {
         //unreachable
     }
-
-
-
-
-    /*@Override
-    public void handleMessage(ActivateLeaderCardMessage msg) {
-
-    }
-
-    @Override
-    public void handleMessage(BaseProductionOnMessage msg) {
-
-    }
-
-    @Override
-    public void handleMessage(BuyProductionCardMessage msg) {
-
-    }
-
-    @Override
-    public void handleMessage(DiscardLeaderCardMessage msg) {
-
-    }
-
-    @Override
-    public void handleMessage(DoubleProductionOnMessage msg) {
-
-    }
-
-    @Override
-    public void handleMessage(EndOfProductionMessage msg) {
-
-    }
-
-    @Override
-    public void handleMessage(ExtraProductionOnMessage msg) {
-
-    }
-
-    @Override
-    public void handleMessage(InitialResourcesMessage msg) {
-
-    }
-
-    @Override
-    public void handleMessage(KeepLeaderCardsMessage msg) {
-
-    }
-
-    @Override
-    public void handleMessage(KeepResourcesMessage msg) {
-
-    }
-
-    @Override
-    public void handleMessage(ProductionOnMessage msg) {
-
-    }
-
-    @Override
-    public void handleMessage(PushColumnMessage msg) {
-
-    }
-
-    @Override
-    public void handleMessage(PushRowMessage msg) {
-
-    }
-
-
-    @Override
-    public void handleMessage(WhiteMarbleChoosenResources msg) {
-
-    }*/
-
-
 
 }

@@ -16,6 +16,8 @@ public class Server {
     private GameController gameController;
     private Game game;
     private ArrayList<ClientController> clientControllers = new ArrayList<>();
+
+    private ArrayList<ClientController> clientControllersDisconnected = new ArrayList<>();
     private VirtualView virtualView;
     private ArrayList<String> lobby;
     private boolean sendRestartQuestion;
@@ -72,7 +74,7 @@ public class Server {
     public void initNewSolitaireGame() throws IOException, InterruptedException {
         game = new GameSolitaire(lobby.get(0),true,clientControllers.get(0));
 
-        gameController = new GameControllerSinglePlayer();
+        gameController = new GameControllerSinglePlayer(this,this.getGame());
     }
 
 
@@ -153,4 +155,11 @@ public class Server {
         return client;
     }
 
+    public ArrayList<ClientController> getClientControllersDisconnected() {
+        return clientControllersDisconnected;
+    }
+
+    public void addClientControllersDisconnected(ClientController clientController){
+        clientControllers.add(clientController);
+    }
 }

@@ -7,12 +7,12 @@ import java.io.IOException;
 
 public interface MessageVisitor {
     //Error messages
-    void visit(AlreadyActivatedErrorMessage msg);
+    void visit(AlreadyActivatedErrorMessage msg) throws IOException, InterruptedException;
     void visit(AlreadyExistingNickNameErrorMessage msg);
-    void visit(AlreadyUsedLeaderCardErrorMessage msg);
+    void visit(AlreadyUsedLeaderCardErrorMessage msg) throws IOException, InterruptedException;
     void visit(CompleteRunningMatchErrorMessage msg);
     void visit(NoNicknameMessage msg);
-    void visit(NotAvailableResourcesErrorMessage msg);
+    void visit(NotAvailableResourcesErrorMessage msg) throws IOException, InterruptedException;
     void visit(NotEnoughSpaceErrorMessage msg);
     void visit(RequirementsErrorMessage msg);
     void visit(WrongColumnErrorMessage msg);
@@ -118,5 +118,5 @@ public interface MessageVisitor {
     void visit(GameTypeMessage msg) throws IOException, InterruptedException;
 
 
-    void visit(RequestNicknameMessage answerNicknameMessage);
+
 }

@@ -53,8 +53,7 @@ public class ClientHandler implements Runnable {
         readStream = new BufferedReader(new InputStreamReader(inputStream));
         writeStream = new PrintWriter(outputStream);
 
-        //testMode=false;
-    }
+        }
 
 
     /**
@@ -138,21 +137,12 @@ public class ClientHandler implements Runnable {
     }
 
     public void readMessageServer(String msg) throws IOException, InterruptedException {
-        System.out.println(msg);
             Message parsedMsg = Message.deserialize(msg);
             parsedMsg.accept(clientController);
 
     }
 
     public void sendMessage (Message msg) throws InterruptedException, IOException {
-        System.out.println("quante volte da client handler"+ clientController.getNickname());
-        /*if (testMode){
-            outputStreamForTests = msg.serialize();
-        } else {
-                writeStream.println(msg.serialize());
-                writeStream.flush();
-
-        }*/
         writeStream.println(msg.serialize());
         writeStream.flush();
 

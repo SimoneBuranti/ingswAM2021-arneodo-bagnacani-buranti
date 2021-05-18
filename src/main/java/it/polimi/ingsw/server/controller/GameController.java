@@ -5,6 +5,7 @@ import it.polimi.ingsw.server.model.Game;
 import it.polimi.ingsw.server.network.Server;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public abstract class GameController {
     protected int numberOfPlayers;
@@ -43,19 +44,5 @@ public abstract class GameController {
 
     public abstract void handleMessage(RestartAnswerMessage msg, ClientController clientController) throws IOException, InterruptedException;
 
-    /*void handleMessage(ActivateLeaderCardMessage msg);
-    void handleMessage(BaseProductionOnMessage msg);
-    void handleMessage(BuyProductionCardMessage msg);
-    void handleMessage(DiscardLeaderCardMessage msg);
-    void handleMessage(DoubleProductionOnMessage msg);
-    void handleMessage(EndOfProductionMessage msg);
-    void handleMessage(ExtraProductionOnMessage msg);
-    void handleMessage(InitialResourcesMessage msg);
-    void handleMessage(KeepLeaderCardsMessage msg);
-    void handleMessage(KeepResourcesMessage msg);
-    void handleMessage(ProductionOnMessage msg);
-    void handleMessage(PushColumnMessage msg);
-    void handleMessage(PushRowMessage msg);
-    void handleMessage(WhiteMarbleChoosenResources msg);*/
 
 }

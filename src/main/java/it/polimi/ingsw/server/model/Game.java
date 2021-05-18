@@ -137,8 +137,6 @@ public class Game extends Observable {
         else
             restoreGame();
 
-
-
     }
 
     /**
