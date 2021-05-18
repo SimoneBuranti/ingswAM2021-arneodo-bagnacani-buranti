@@ -1,4 +1,4 @@
-package it.polimi.ingsw.client.view.ligtModelNotification;
+package it.polimi.ingsw.client.ligtModelNotification;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;

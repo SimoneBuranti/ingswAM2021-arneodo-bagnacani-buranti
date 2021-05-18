@@ -1,4 +1,4 @@
-package it.polimi.ingsw.client.view.ligtModelNotification;
+package it.polimi.ingsw.client.ligtModelNotification;
 
 import it.polimi.ingsw.server.model.productionCards.ProductionCard;
 

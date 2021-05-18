@@ -1,9 +1,9 @@
 package it.polimi.ingsw.client.lightModel;
 
-import it.polimi.ingsw.client.view.ligtModelNotification.DeckListNotification;
-import it.polimi.ingsw.client.view.ligtModelNotification.ExtraMarketNotification;
-import it.polimi.ingsw.client.view.ligtModelNotification.MarketNotification;
-import it.polimi.ingsw.client.view.ligtModelNotification.ReserveNotification;
+import it.polimi.ingsw.client.ligtModelNotification.DeckListNotification;
+import it.polimi.ingsw.client.ligtModelNotification.ExtraMarketNotification;
+import it.polimi.ingsw.client.ligtModelNotification.MarketNotification;
+import it.polimi.ingsw.client.ligtModelNotification.ReserveNotification;
 import it.polimi.ingsw.client.lightModel.lightGameBoard.LightGameBoard;
 import it.polimi.ingsw.client.lightModel.productionCards.*;
 import it.polimi.ingsw.server.model.Resource;

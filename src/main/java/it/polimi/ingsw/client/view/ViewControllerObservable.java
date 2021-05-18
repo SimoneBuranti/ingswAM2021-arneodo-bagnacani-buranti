@@ -1,7 +1,5 @@
-package it.polimi.ingsw.client.view.cli;
+package it.polimi.ingsw.client.view;
 
-import it.polimi.ingsw.client.view.View;
-import it.polimi.ingsw.client.view.ViewController;
 import it.polimi.ingsw.messages.Message;
 
 import java.io.IOException;
