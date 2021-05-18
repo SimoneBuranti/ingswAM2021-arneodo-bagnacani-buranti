@@ -1,13 +1,13 @@
-package it.polimi.ingsw.client.view.ligtModelNotification;
+package it.polimi.ingsw.client.ligtModelNotification;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ReserveNotification extends Notification{
-    private final NotificationType notificationType = NotificationType.RESERVENOTIFY;
+public class StrongboxNotification extends Notification{
+    private final NotificationType notificationType = NotificationType.STRONGBOXNOTIFY;
     private Map map;
-    public ReserveNotification(Map map){
+    public StrongboxNotification(Map map){
         this.map =new HashMap();
         this.map =map;
     }

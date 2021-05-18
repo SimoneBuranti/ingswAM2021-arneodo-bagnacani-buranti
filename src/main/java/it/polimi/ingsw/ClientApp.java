@@ -1,7 +1,7 @@
 package it.polimi.ingsw;
 
+import it.polimi.ingsw.client.view.Cli;
 import it.polimi.ingsw.client.SocketClient;
-import it.polimi.ingsw.client.view.cli.Cli;
 import it.polimi.ingsw.client.view.View;
 import it.polimi.ingsw.messages.EndOfTurnMessage;
 import it.polimi.ingsw.messages.NumberPlayerMessage;

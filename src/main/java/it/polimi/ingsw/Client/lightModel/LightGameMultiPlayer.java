@@ -1,7 +1,7 @@
 package it.polimi.ingsw.client.lightModel;
 
 
-import it.polimi.ingsw.client.view.ligtModelNotification.*;
+import it.polimi.ingsw.client.ligtModelNotification.*;
 import it.polimi.ingsw.client.lightModel.productionCards.LightDeckProductionCard;
 import it.polimi.ingsw.server.model.Resource;
 import it.polimi.ingsw.server.model.productionCards.ProductionCard;

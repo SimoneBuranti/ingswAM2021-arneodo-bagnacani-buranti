@@ -8,10 +8,10 @@ import java.io.IOException;
 public interface MessageVisitor {
     //Error messages
     void visit(AlreadyActivatedErrorMessage msg) throws IOException, InterruptedException;
-    void visit(AlreadyExistingNickNameErrorMessage msg);
+    void visit(AlreadyExistingNickNameErrorMessage msg) throws IOException, InterruptedException;
     void visit(AlreadyUsedLeaderCardErrorMessage msg) throws IOException, InterruptedException;
     void visit(CompleteRunningMatchErrorMessage msg);
-    void visit(NoNicknameMessage msg);
+    void visit(NoNicknameMessage msg) throws IOException, InterruptedException;
     void visit(NotAvailableResourcesErrorMessage msg) throws IOException, InterruptedException;
     void visit(NotEnoughSpaceErrorMessage msg);
     void visit(RequirementsErrorMessage msg);
@@ -20,7 +20,7 @@ public interface MessageVisitor {
     void visit(BootingLobbyErrorMessage msg);
 
     //Server to client
-    void visit(RestartQuestionMessage msg);
+    void visit(RestartQuestionMessage msg) throws IOException, InterruptedException;
     void visit(ChangeCurrentPlayerMessage msg);
 
     void visit(EndOfTurnMessage msg) throws IOException, InterruptedException;
