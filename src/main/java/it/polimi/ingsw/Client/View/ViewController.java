@@ -241,7 +241,7 @@ public class ViewController implements MessageVisitor, ViewObserver {
 
     @Override
     public void visit(UsernameMessage msg) {
-        view.askNickname();
+        socketClient.sendMessage(msg);
     }
 
     @Override
@@ -425,6 +425,7 @@ public class ViewController implements MessageVisitor, ViewObserver {
 
     @Override
     public void visit(ActivationLeaderForCurrentMessage msg) {
+
         game.activateLeaderCard(msg.getIndex());
     }
 
@@ -576,8 +577,8 @@ public class ViewController implements MessageVisitor, ViewObserver {
     }
 
     @Override
-    public void visit(AnswerNicknameMessage message) {
-        socketClient.sendMessage(message);
+    public void visit(RequestNicknameMessage message) {
+        view.askNickname();
     }
 
 
