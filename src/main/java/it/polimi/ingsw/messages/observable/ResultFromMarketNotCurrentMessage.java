@@ -6,6 +6,7 @@ import it.polimi.ingsw.messages.MessageVisitor;
 import it.polimi.ingsw.server.model.Resource;
 import it.polimi.ingsw.server.model.players.Player;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class ResultFromMarketNotCurrentMessage extends Message {
@@ -27,7 +28,7 @@ public class ResultFromMarketNotCurrentMessage extends Message {
     }
 
     @Override
-    public void accept(MessageVisitor v) {
+    public void accept(MessageVisitor v) throws IOException, InterruptedException {
         v.visit(this);
     }
 

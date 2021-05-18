@@ -5,6 +5,8 @@ import it.polimi.ingsw.messages.MessageType;
 import it.polimi.ingsw.messages.MessageVisitor;
 import it.polimi.ingsw.server.model.leaderCards.LeaderCard;
 
+import java.io.IOException;
+
 public class UpdateChosenLeaderMessage extends Message {
     private final MessageType messageType = MessageType.UPDATECHOSENLEADERCARD;
 
@@ -28,7 +30,7 @@ public class UpdateChosenLeaderMessage extends Message {
     }
 
     @Override
-    public void accept(MessageVisitor v) {
+    public void accept(MessageVisitor v) throws IOException, InterruptedException {
         v.visit(this);
     }
 

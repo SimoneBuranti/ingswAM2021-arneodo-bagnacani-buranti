@@ -1,7 +1,7 @@
 package it.polimi.ingsw.server.model;
 
 import com.google.gson.Gson;
-import it.polimi.ingsw.Observer.Observable;
+import it.polimi.ingsw.observer.Observable;
 import it.polimi.ingsw.messages.observable.*;
 import it.polimi.ingsw.server.model.exceptions.*;
 import it.polimi.ingsw.server.model.leaderCards.*;

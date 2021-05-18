@@ -1,10 +1,8 @@
 package it.polimi.ingsw.server.virtualview;
 
-import it.polimi.ingsw.Observer.Observer;
+import it.polimi.ingsw.observer.Observer;
 import it.polimi.ingsw.messages.Message;
 import it.polimi.ingsw.server.controller.ClientController;
-import it.polimi.ingsw.server.model.Game;
-import it.polimi.ingsw.server.network.ClientHandler;
 
 import java.io.IOException;
 

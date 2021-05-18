@@ -1,7 +1,7 @@
 package it.polimi.ingsw.server.model;
 
 import com.google.gson.Gson;
-import it.polimi.ingsw.Observer.Observable;
+import it.polimi.ingsw.observer.Observable;
 import it.polimi.ingsw.messages.observable.LorenzoTheMagnificentConfigMessage;
 import it.polimi.ingsw.server.model.exceptions.CallForCouncilException;
 import it.polimi.ingsw.server.model.exceptions.EndOfSolitaireGame;

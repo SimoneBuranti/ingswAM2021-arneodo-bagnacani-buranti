@@ -5,6 +5,8 @@ import it.polimi.ingsw.messages.MessageType;
 import it.polimi.ingsw.messages.MessageVisitor;
 import it.polimi.ingsw.server.model.actionMarkers.ActionMarker;
 
+import java.io.IOException;
+
 public class UseActionMarkerMessage extends Message {
     private final MessageType messageType = MessageType.USEACTIONMARKER;
 
@@ -20,7 +22,7 @@ public class UseActionMarkerMessage extends Message {
     }
 
     @Override
-    public void accept(MessageVisitor v) {
+    public void accept(MessageVisitor v) throws IOException, InterruptedException {
         v.visit(this);
     }
 

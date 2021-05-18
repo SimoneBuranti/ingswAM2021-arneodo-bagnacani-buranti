@@ -20,9 +20,10 @@ public class GameTypeMessage extends Message {
     }
 
     @Override
-    public void accept(MessageVisitor v) {
+    public void accept(MessageVisitor v) throws IOException, InterruptedException {
         v.visit(this);
     }
+
     public boolean isMultiOrNot() {
         return multiOrNot;
     }

@@ -5,6 +5,7 @@ import it.polimi.ingsw.messages.MessageType;
 import it.polimi.ingsw.messages.MessageVisitor;
 import it.polimi.ingsw.server.model.marbles.Marble;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class ConfigurationMarketMessage extends Message {
@@ -28,7 +29,7 @@ public class ConfigurationMarketMessage extends Message {
     }
 
     @Override
-    public void accept(MessageVisitor v) {
+    public void accept(MessageVisitor v) throws IOException, InterruptedException {
         v.visit(this);
     }
 

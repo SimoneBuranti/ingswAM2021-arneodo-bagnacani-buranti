@@ -5,6 +5,7 @@ import it.polimi.ingsw.messages.MessageType;
 import it.polimi.ingsw.messages.MessageVisitor;
 import it.polimi.ingsw.server.model.productionCards.ProductionCard;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class DeckProductionCardConfigMessage extends Message {
@@ -29,7 +30,7 @@ public class DeckProductionCardConfigMessage extends Message {
     }
 
     @Override
-    public void accept(MessageVisitor v) {
+    public void accept(MessageVisitor v) throws IOException, InterruptedException {
         v.visit(this);
     }
 

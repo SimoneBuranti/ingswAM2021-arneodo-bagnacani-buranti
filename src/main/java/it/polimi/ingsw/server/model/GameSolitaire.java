@@ -2,7 +2,6 @@ package it.polimi.ingsw.server.model;
 
 
 import com.google.gson.Gson;
-import it.polimi.ingsw.Observer.Observable;
 import it.polimi.ingsw.messages.observable.*;
 import it.polimi.ingsw.server.controller.ClientController;
 import it.polimi.ingsw.server.model.actionMarkers.ActionMarker;

@@ -6,6 +6,7 @@ import it.polimi.ingsw.messages.MessageVisitor;
 import it.polimi.ingsw.server.model.Resource;
 import it.polimi.ingsw.server.model.gameBoard.GameBoardInterface;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -32,7 +33,7 @@ public class StrongboxConfigMessage extends Message {
     }
 
     @Override
-    public void accept(MessageVisitor v) {
+    public void accept(MessageVisitor v) throws IOException, InterruptedException {
         v.visit(this);
     }
 

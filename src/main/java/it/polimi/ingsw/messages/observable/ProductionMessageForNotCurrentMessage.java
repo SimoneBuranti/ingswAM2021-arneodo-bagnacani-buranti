@@ -7,6 +7,7 @@ import it.polimi.ingsw.server.model.Resource;
 import it.polimi.ingsw.server.model.actionMarkers.ActionMarker;
 import it.polimi.ingsw.server.model.players.Player;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class ProductionMessageForNotCurrentMessage extends Message {
@@ -30,7 +31,7 @@ public class ProductionMessageForNotCurrentMessage extends Message {
     }
 
     @Override
-    public void accept(MessageVisitor v) {
+    public void accept(MessageVisitor v) throws IOException, InterruptedException {
         v.visit(this);
     }
 

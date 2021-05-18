@@ -1,23 +1,14 @@
 package it.polimi.ingsw;
 
-import it.polimi.ingsw.Client.SocketClient;
-
-import java.io.*;
-
 public class ProvaApp {
 
 
     public static void main(String[] args) {
 
-        try {
-
-            SocketClient socketClient = new SocketClient("127.0.0.1",1234, cli);
-
-            socketClient.readMessage();
-
-        } catch (IOException e) {
-            e.printStackTrace();
+        for (int i = 0; i<256 ; i++){
+            System.out.println(i + " : " + (char) i);
         }
+
 
 
     }

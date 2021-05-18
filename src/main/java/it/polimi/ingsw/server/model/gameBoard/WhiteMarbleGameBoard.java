@@ -38,6 +38,7 @@ public class WhiteMarbleGameBoard extends GameBoardDecorator{
         return gameBoard.getDevelopmentBoardCell(i, j);
     }
 
+
     /**
      * Decorated game board method: it returns the type of resource to be exchanged with the white marble from the market
      * @return Resource : the type of resource to be exchanged with the white marble

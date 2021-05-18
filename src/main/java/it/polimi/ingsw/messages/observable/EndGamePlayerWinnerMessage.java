@@ -5,6 +5,8 @@ import it.polimi.ingsw.messages.MessageType;
 import it.polimi.ingsw.messages.MessageVisitor;
 import it.polimi.ingsw.server.model.players.Player;
 
+import java.io.IOException;
+
 public class EndGamePlayerWinnerMessage extends Message {
     private final MessageType messageType = MessageType.ENDGAMEWINNER;
    private String nickname;
@@ -19,7 +21,7 @@ public class EndGamePlayerWinnerMessage extends Message {
     }
 
     @Override
-    public void accept(MessageVisitor v) {
+    public void accept(MessageVisitor v) throws IOException, InterruptedException {
         v.visit(this);
     }
 

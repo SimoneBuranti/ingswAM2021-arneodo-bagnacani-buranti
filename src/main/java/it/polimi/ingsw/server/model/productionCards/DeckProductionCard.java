@@ -2,9 +2,7 @@ package it.polimi.ingsw.server.model.productionCards;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import it.polimi.ingsw.Observer.Observable;
-import it.polimi.ingsw.Observer.Observer;
-import it.polimi.ingsw.messages.observable.DeckProductionCardMessage;
+import it.polimi.ingsw.observer.Observable;
 import it.polimi.ingsw.server.model.RuntimeTypeAdapterFactory;
 import it.polimi.ingsw.server.model.Resource;
 import it.polimi.ingsw.server.model.colours.*;

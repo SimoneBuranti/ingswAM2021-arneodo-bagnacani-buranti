@@ -4,6 +4,8 @@ import it.polimi.ingsw.messages.Message;
 import it.polimi.ingsw.messages.MessageType;
 import it.polimi.ingsw.messages.MessageVisitor;
 
+import java.io.IOException;
+
 public class ChangeTurnMessage extends Message {
    private String nickName;
     public ChangeTurnMessage(String nickName) {
@@ -18,7 +20,7 @@ public class ChangeTurnMessage extends Message {
     }
 
     @Override
-    public void accept(MessageVisitor v) {
+    public void accept(MessageVisitor v) throws IOException, InterruptedException {
         v.visit(this);
     }
 

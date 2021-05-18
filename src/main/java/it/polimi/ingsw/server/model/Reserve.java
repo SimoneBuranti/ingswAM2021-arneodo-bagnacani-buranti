@@ -2,8 +2,7 @@ package it.polimi.ingsw.server.model;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import it.polimi.ingsw.Observer.Observable;
-import it.polimi.ingsw.messages.observable.ReserveValueMessage;
+import it.polimi.ingsw.observer.Observable;
 import it.polimi.ingsw.server.model.colours.*;
 import it.polimi.ingsw.server.model.exceptions.UnavailableResourceException;
 import it.polimi.ingsw.server.model.marbles.*;

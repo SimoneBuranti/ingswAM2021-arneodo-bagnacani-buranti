@@ -5,6 +5,7 @@ import it.polimi.ingsw.messages.MessageType;
 import it.polimi.ingsw.messages.MessageVisitor;
 import it.polimi.ingsw.server.model.Resource;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class ResultFromMarketMessage extends Message {
@@ -26,7 +27,7 @@ public class ResultFromMarketMessage extends Message {
     }
 
     @Override
-    public void accept(MessageVisitor v) {
+    public void accept(MessageVisitor v) throws IOException, InterruptedException {
         v.visit(this);
     }
 

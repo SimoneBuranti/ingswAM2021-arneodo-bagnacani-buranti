@@ -5,6 +5,7 @@ import it.polimi.ingsw.messages.MessageType;
 import it.polimi.ingsw.messages.MessageVisitor;
 import it.polimi.ingsw.server.model.Resource;
 
+import java.io.IOException;
 import java.util.Map;
 
 public class ReserveValueMessage extends Message {
@@ -27,7 +28,7 @@ public class ReserveValueMessage extends Message {
     }
 
     @Override
-    public void accept(MessageVisitor v) {
+    public void accept(MessageVisitor v) throws IOException, InterruptedException {
         v.visit(this);
     }
 }

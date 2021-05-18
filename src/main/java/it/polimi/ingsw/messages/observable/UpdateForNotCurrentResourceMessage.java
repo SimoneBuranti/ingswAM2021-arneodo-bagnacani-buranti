@@ -5,6 +5,8 @@ import it.polimi.ingsw.messages.MessageType;
 import it.polimi.ingsw.messages.MessageVisitor;
 import it.polimi.ingsw.server.model.Resource;
 
+import java.io.IOException;
+
 public class UpdateForNotCurrentResourceMessage extends Message {
     private final MessageType messageType = MessageType.OPPONENTUPDATEINITRESOURCE;
 
@@ -33,7 +35,7 @@ public class UpdateForNotCurrentResourceMessage extends Message {
     }
 
     @Override
-    public void accept(MessageVisitor v) {
+    public void accept(MessageVisitor v) throws IOException, InterruptedException {
         v.visit(this);
     }
 

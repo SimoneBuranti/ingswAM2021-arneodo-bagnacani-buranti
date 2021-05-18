@@ -6,6 +6,8 @@ import it.polimi.ingsw.messages.MessageVisitor;
 import it.polimi.ingsw.server.model.leaderCards.LeaderCard;
 import it.polimi.ingsw.server.model.players.Player;
 
+import java.io.IOException;
+
 public class ActivationLeaderForNotCurrentMessage extends Message {
     private final MessageType messageType = MessageType.ACTIVATIONLEADERCARDNOTIFICATION;
 
@@ -21,7 +23,7 @@ public class ActivationLeaderForNotCurrentMessage extends Message {
     }
 
     @Override
-    public void accept(MessageVisitor v) {
+    public void accept(MessageVisitor v) throws IOException, InterruptedException {
         v.visit(this);
     }
 
