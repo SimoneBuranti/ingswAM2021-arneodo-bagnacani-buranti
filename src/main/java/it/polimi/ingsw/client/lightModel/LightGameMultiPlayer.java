@@ -46,6 +46,7 @@ public class LightGameMultiPlayer extends LightGame{
     @Override
     public void addLeaderCard(ArrayList<Integer> leaderCardKeys) throws IOException, InterruptedException {
         gameBoardOfPlayer.addLeaderCard(leaderCardKeys);
+
         notifyObserver(new LeaderListCardNotification(gameBoardOfPlayer.getLeaderCards()).serialize());
     }
 

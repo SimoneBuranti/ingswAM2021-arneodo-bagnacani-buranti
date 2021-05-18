@@ -63,6 +63,7 @@ public class GameSolitaire extends Game {
         player = new PlayerFirst(nickName,this, clientController.getVirtualView());
         currentPlayer = player;
         this.addObserver(clientController.getVirtualView());
+        notifyObserver(new GameTypeMessage(false));
         configClient();}
         else
             restoreGameSolitaire(clientController);
@@ -72,7 +73,6 @@ public class GameSolitaire extends Game {
     @Override
     public void configClient() throws IOException, InterruptedException {
         super.configClient();
-        notifyObserver(new GameTypeMessage(false));
         ArrayList<Integer> needForLeader = new ArrayList<>();
         for (int i=0; i<4;i++)
             needForLeader.add(player.getPersonalLeaderCard().get(i).getKey());

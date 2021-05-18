@@ -254,8 +254,7 @@ public abstract class Message{
             case UPDATECHOSENLEADERCARD:
                 return gson.fromJson(jsonObj, UpdateChosenLeaderMessage.class);
 
-
-            case UPDATEINITRESOURCE:
+                case UPDATEINITRESOURCE:
                 return gson.fromJson(jsonObj, UpdateInitResourceMessage.class);
 
             case USEACTIONMARKER:
@@ -270,18 +269,7 @@ public abstract class Message{
             case GAMETYPE:
                 return gson.fromJson(jsonObj, GameTypeMessage.class);
 
-
-
-
-
-
-
-
-
-
-
-
-            default:
+                default:
                 throw new IllegalArgumentException("Invalid topic " + msgTopicString);
         }
     }

@@ -55,6 +55,9 @@ public abstract class Notification {
             case STRONGBOXNOTIFY:
                 return gson.fromJson(jsonObj, StrongboxNotification.class);
 
+            case ACTIVATELEADERLISTNOTIFY:
+                return gson.fromJson(jsonObj, LeaderListCardNotification.class);
+
 
 
 

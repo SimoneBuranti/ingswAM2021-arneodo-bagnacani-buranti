@@ -82,13 +82,13 @@ public class GameMultiPlayer extends Game {
         this.playerList= new ArrayList<>(numberOfPlayer);
         this.numberOfPlayer=numberOfPlayer;
         inkwell=createRandomNumber(numberOfPlayer);
-        System.out.println(inkwell);
         clientControllersInOrder=correctOrder(clientControllers,inkwell);
         createPlayer(numberOfPlayer,clientControllersInOrder);
         currentPlayer = playerList.get(currentPlayerPosition);
         nickNameInOrder= new ArrayList<>();
         createNickNameInOrder(clientControllersInOrder);
         addObservators();
+        notifyObserver(new GameTypeMessage(true));
         configClient();
         }
         else
@@ -98,7 +98,6 @@ public class GameMultiPlayer extends Game {
     @Override
     public void configClient() throws IOException, InterruptedException {
         super.configClient();
-        notifyObserver(new GameTypeMessage(true));
     if (numberOfPlayer==2)
     {
         ArrayList<Integer> needForLeader = new ArrayList<>();
