@@ -271,6 +271,11 @@ public abstract class Message{
                 return gson.fromJson(jsonObj, GameTypeMessage.class);
 
 
+            case USERNAMEANSWER:
+                return gson.fromJson(jsonObj, AnswerNicknameMessage.class);
+
+
+
 
 
 

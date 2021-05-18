@@ -1,12 +1,14 @@
 package it.polimi.ingsw.client.view.cli;
 
+import it.polimi.ingsw.client.view.ViewController;
+import it.polimi.ingsw.client.lightModel.ViewObservable;
 import  it.polimi.ingsw.client.view.*;
 import it.polimi.ingsw.client.view.ligtModelNotification.*;
 
 import java.io.IOException;
 
-public class Cli implements View, NotificatorVisitor {
-
+public class Cli extends ViewControllerObservable implements View, NotificatorVisitor {
+    private ViewController viewController;
 
 
     @Override
@@ -62,6 +64,32 @@ public class Cli implements View, NotificatorVisitor {
 
     @Override
     public void visit(FaithPathNotification faithPathNotification) {
+
+    }
+
+    @Override
+    public void setViewController(ViewController viewController){
+        this.viewController=viewController;
+        setObserver(viewController);
+    }
+
+    @Override
+    public void askNumberOfPlayers() throws IOException, InterruptedException {
+
+    }
+
+    @Override
+    public void askNickname() {
+
+    }
+
+    @Override
+    public void askRestartGame() {
+
+    }
+
+    @Override
+    public void notifyError(String error) {
 
     }
 }

@@ -1,5 +1,6 @@
 package it.polimi.ingsw.client;
 import it.polimi.ingsw.client.view.View;
+import it.polimi.ingsw.client.view.ViewController;
 import it.polimi.ingsw.messages.Message;
 
 import java.io.*;
@@ -52,7 +53,6 @@ public class SocketClient {
 
     public void sendMessage(Message message){
         String msg = message.serialize();
-        System.out.println(msg);
         out.println(msg);
     }
 
