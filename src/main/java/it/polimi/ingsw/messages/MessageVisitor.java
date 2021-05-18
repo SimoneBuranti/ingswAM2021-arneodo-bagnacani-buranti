@@ -26,7 +26,7 @@ public interface MessageVisitor {
     void visit(EndOfTurnMessage msg) throws IOException, InterruptedException;
     void visit(LastTurnMessage msg);
 
-    void visit(ReserveValueMessage msg);
+    void visit(ReserveValueMessage msg) throws IOException, InterruptedException;
     void visit(DoubleWhiteMarbleEffectMessage msg);
     void visit(NPlayersMessage msg);
     void visit(PickedLeaderCardsMessage msg);
@@ -60,21 +60,21 @@ public interface MessageVisitor {
 
     //Observer
     void visit(NicknameStartedMessage msg);
-    void visit(UpdateForNotCurrentResourceMessage msg);
-    void visit(UpdateInitResourceMessage msg);
+    void visit(UpdateForNotCurrentResourceMessage msg) throws IOException, InterruptedException;
+    void visit(UpdateInitResourceMessage msg) throws IOException, InterruptedException;
     void visit(UpdateInitLeaderMessage msg);
     void visit(UpdateChosenLeaderMessage msg);
 
-    void visit(DeckProductionCardMessage msg);
+    void visit(DeckProductionCardMessage msg) throws IOException, InterruptedException;
     void visit(DeckProductionCardConfigMessage msg);
     void visit(TakeCardMessage msg);
     void visit(TakeCardForNotCurrentMessage msg);
 
-    void visit(ConfigurationMarketMessage msg);
-    void visit(ChangeMarketMessageColumn msg);
-    void visit(ChangeMarketMessageRow msg);
-    void visit(ResultFromMarketMessage msg);
-    void visit(ResultFromMarketNotCurrentMessage msg);
+    void visit(ConfigurationMarketMessage msg) throws IOException, InterruptedException;
+    void visit(ChangeMarketMessageColumn msg) throws IOException, InterruptedException;
+    void visit(ChangeMarketMessageRow msg) throws IOException, InterruptedException;
+    void visit(ResultFromMarketMessage msg) throws IOException, InterruptedException;
+    void visit(ResultFromMarketNotCurrentMessage msg) throws IOException, InterruptedException;
 
 
     void visit(MagnificentWinMessage msg);
@@ -85,10 +85,10 @@ public interface MessageVisitor {
     void visit(UseActionMarkerMessage msg);
 
 
-    void visit(ProductionMessageForNotCurrentMessage msg);
-    void visit(ProductionMessageForCurrentMessage msg);
-    void visit(ResultOfProductionMessage msg);
-    void visit(ResultOfProductionForNotCurrentMessage msg);
+    void visit(ProductionMessageForNotCurrentMessage msg) throws IOException, InterruptedException;
+    void visit(ProductionMessageForCurrentMessage msg) throws IOException, InterruptedException;
+    void visit(ResultOfProductionMessage msg) throws IOException, InterruptedException;
+    void visit(ResultOfProductionForNotCurrentMessage msg) throws IOException, InterruptedException;
 
 
     void visit(ActivationLeaderForNotCurrentMessage msg);
@@ -115,7 +115,7 @@ public interface MessageVisitor {
 
     void visit(ChangeTurnMessage msg);
 
-    void visit(GameTypeMessage msg);
+    void visit(GameTypeMessage msg) throws IOException, InterruptedException;
 
 
 

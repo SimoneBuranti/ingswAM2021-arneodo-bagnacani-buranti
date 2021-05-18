@@ -78,4 +78,10 @@ public class LightReserve {
         return reservePools.get(resource);
     }
 
+
+
+    public Map getReserve(){
+        return reservePools;
+    }
+
 }

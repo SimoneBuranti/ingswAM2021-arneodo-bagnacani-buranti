@@ -1,18 +1,18 @@
 package it.polimi.ingsw.Client.lightModel;
 
+import it.polimi.ingsw.Client.View.LigtModelNotification.DeckListNotification;
+import it.polimi.ingsw.Client.View.LigtModelNotification.ExtraMarketNotification;
+import it.polimi.ingsw.Client.View.LigtModelNotification.MarketNotification;
+import it.polimi.ingsw.Client.View.LigtModelNotification.ReserveNotification;
 import it.polimi.ingsw.Client.lightModel.lightGameBoard.LightGameBoard;
 import it.polimi.ingsw.Client.lightModel.productionCards.*;
-import it.polimi.ingsw.Observer.ViewObservable;
-import it.polimi.ingsw.server.model.Market;
+import it.polimi.ingsw.Client.View.ViewObservable;
 import it.polimi.ingsw.server.model.Reserve;
 import it.polimi.ingsw.server.model.Resource;
-import it.polimi.ingsw.server.model.actionMarkers.ActionMarker;
-import it.polimi.ingsw.server.model.leaderCards.DeckLeaderCard;
-import it.polimi.ingsw.server.model.leaderCards.LeaderCard;
 import it.polimi.ingsw.server.model.marbles.Marble;
-import it.polimi.ingsw.server.model.players.Player;
-import it.polimi.ingsw.server.model.productionCards.*;
+import it.polimi.ingsw.server.model.productionCards.ProductionCard;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -126,12 +126,15 @@ public class LightGame extends ViewObservable {
         gameBoardOfPlayer = new LightGameBoard(nickname);
     }
 
-    public void setMarket(ArrayList<Marble> list) {
+    public void setMarket(ArrayList<Marble> list) throws IOException, InterruptedException {
         market = new LightMarket(list);
+        notifyObserver(new MarketNotification(market.getGrid()).serialize());
+        notifyObserver(new ExtraMarketNotification(market.getExtra()).serialize());
     }
 
-    public void setReserve(Map<Resource,Integer> map) {
+    public void setReserve(Map<Resource,Integer> map) throws IOException, InterruptedException {
         reserve.setLightReserve(map);
+        notifyObserver(new ReserveNotification(reserve.getReserve()).serialize());
     }
 
     public void setDeckProductionCard(int deckNumber, ArrayList<Integer> list){
@@ -143,57 +146,68 @@ public class LightGame extends ViewObservable {
 
     public void setPlayersInOrder(ArrayList<String> nicknames){}
 
-    public void removeOneProductionCard(int deckNumber){
+    public void removeOneProductionCard(int deckNumber) throws IOException, InterruptedException {
         for(LightDeckProductionCard deck : listOfDeck){
             if(deck.getNumberDeck() == deckNumber)
                 deck.removeOneCard();
         }
+        ArrayList<ProductionCard> list=deckNotification();
+        notifyObserver(new DeckListNotification(list).serialize());
     }
 
-    public void pushRow(int chosenRow){
+    public void pushRow(int chosenRow) throws IOException, InterruptedException {
         market.pushRow(chosenRow);
+        notifyObserver(new MarketNotification(market.getGrid()).serialize());
+        notifyObserver(new ExtraMarketNotification(market.getExtra()).serialize());
     }
 
-    public void pushColumn(int chosenColumn){
+    public void pushColumn(int chosenColumn) throws IOException, InterruptedException {
         market.pushColumn(chosenColumn);
+        notifyObserver(new MarketNotification(market.getGrid()).serialize());
+        notifyObserver(new ExtraMarketNotification(market.getExtra()).serialize());
+
     }
 
-    public void useResourceReserve(ArrayList<Resource> list){
+    public void useResourceReserve(ArrayList<Resource> list) throws IOException, InterruptedException {
         reserve.useResource(list);
+        notifyObserver(new ReserveNotification(reserve.getReserve()).serialize());
     }
 
-    public void useResourceReserve(Resource resource, int quantity){
+    public void useResourceReserve(Resource resource, int quantity) throws IOException, InterruptedException {
         reserve.useResource(resource, quantity);
+        notifyObserver(new ReserveNotification(reserve.getReserve()).serialize());
     }
 
-    public void addResourceReserve(ArrayList<Resource> list){
+    public void addResourceReserve(ArrayList<Resource> list) throws IOException, InterruptedException {
         reserve.addResource(list);
+        notifyObserver(new ReserveNotification(reserve.getReserve()).serialize());
     }
 
-    public void addResourceReserve(Resource resource, int quantity){
+    public void addResourceReserve(Resource resource, int quantity) throws IOException, InterruptedException {
         reserve.addResource(resource, quantity);
+        notifyObserver(new ReserveNotification(reserve.getReserve()).serialize());
     }
 
-    public void addStorage(Map<Resource, Integer> map){}
+    public void addStorage(Map<Resource, Integer> map) throws IOException, InterruptedException {}
 
-    public void addStorage(ArrayList<Resource> list){}
-    public void addStorage(Resource resource, int quantity){}
+    public void addStorage(ArrayList<Resource> list) throws IOException, InterruptedException {}
+    public void addStorage(Resource resource, int quantity) throws IOException, InterruptedException {}
 
-    public void removeStorage(Map<Resource, Integer> map){}
+    public void removeStorage(Map<Resource, Integer> map) throws IOException, InterruptedException {}
 
-    public void removeStorage(Resource resource, int quantity){}
+    public void removeStorage(Resource resource, int quantity) throws IOException, InterruptedException {}
 
-    public void addStrongbox(Map<Resource, Integer> map){}
+    public void addStrongbox(Map<Resource, Integer> map) throws IOException, InterruptedException {}
 
-    public void addStrongbox(ArrayList<Resource> list){}
+    public void addStrongbox(ArrayList<Resource> list) throws IOException, InterruptedException {}
 
-    public void addStrongbox(Resource resource, int quantity){}
+    public void addStrongbox(Resource resource, int quantity) throws IOException, InterruptedException {}
 
-    public void removeStrongbox(Map<Resource, Integer> map){}
+    public void removeStrongbox(Map<Resource, Integer> map) throws IOException, InterruptedException {}
 
-    public void removeStrongbox(Resource resource, int quantity){}
+    public void removeStrongbox(Resource resource, int quantity) throws IOException, InterruptedException {}
 
-    public void buyProductionCard(int deckNumber, int chosenColumn){
+    public void buyProductionCard(int deckNumber, int chosenColumn) throws IOException, InterruptedException {
 
     }
 
@@ -206,10 +220,10 @@ public class LightGame extends ViewObservable {
     public void setLorenzoTheMagnificent(int faithIndicator){
     }
 
-    public void setFaithPath(int faithIndicator, int currCall){
+    public void setFaithPath(int faithIndicator, int currCall) throws IOException, InterruptedException {
     }
 
-    public void setProductionCardGameBoard(int[][] productionCards){
+    public void setProductionCardGameBoard(int[][] productionCards) throws IOException, InterruptedException {
 
     }
 
@@ -220,10 +234,10 @@ public class LightGame extends ViewObservable {
     }
 
 
-    public void addLeaderCard(ArrayList<Integer> leaderCardKeys){
+    public void addLeaderCard(ArrayList<Integer> leaderCardKeys) throws IOException, InterruptedException {
 
     }
-    public void addLeaderCardActivated(ArrayList<Integer> leaderCardKeys){
+    public void addLeaderCardActivated(ArrayList<Integer> leaderCardKeys) throws IOException, InterruptedException {
 
     }
 
@@ -233,11 +247,11 @@ public class LightGame extends ViewObservable {
     }
 
 
-    public void discardLeaderCard(int index){
+    public void discardLeaderCard(int index) throws IOException, InterruptedException {
 
     }
 
-    public void faithMove(int pos){
+    public void faithMove(int pos) throws IOException, InterruptedException {
 
     }
 
@@ -246,6 +260,27 @@ public class LightGame extends ViewObservable {
     }
 
     public void moveBlackCrossOnce(){}
+
+    public ArrayList<ProductionCard> deckNotification(){
+        ArrayList<ProductionCard> list = new ArrayList<>();
+        list.add(deckProductionCardOneBlu.get(0));
+        list.add(deckProductionCardTwoBlu.get(0));
+        list.add(deckProductionCardThreeBlu.get(0));
+
+        list.add(deckProductionCardOneGreen.get(0));
+        list.add(deckProductionCardTwoGreen.get(0));
+        list.add(deckProductionCardThreeGreen.get(0));
+
+        list.add(deckProductionCardOneYellow.get(0));
+        list.add(deckProductionCardTwoYellow.get(0));
+        list.add(deckProductionCardThreeYellow.get(0));
+
+        list.add(deckProductionCardOneViolet.get(0));
+        list.add(deckProductionCardTwoViolet.get(0));
+        list.add(deckProductionCardThreeViolet.get(0));
+        return list;
+
+    }
 
 
 }

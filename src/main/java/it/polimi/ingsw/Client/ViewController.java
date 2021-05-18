@@ -7,6 +7,8 @@ import it.polimi.ingsw.Client.View.View;
 import it.polimi.ingsw.messages.*;
 import it.polimi.ingsw.messages.observable.*;
 
+import java.io.IOException;
+
 public class ViewController implements MessageVisitor {
     private final SocketClient socketClient;
     private LightGame game ;
@@ -20,7 +22,7 @@ public class ViewController implements MessageVisitor {
     }
 
 
-    public void setGame(boolean multiOrNot){
+    public void setGame(boolean multiOrNot) throws IOException, InterruptedException {
         if(multiOrNot)
             this.game=new LightGameMultiPlayer(nickName);
         else
@@ -109,7 +111,7 @@ public class ViewController implements MessageVisitor {
 
 
     @Override
-    public void visit(ReserveValueMessage msg) {
+    public void visit(ReserveValueMessage msg) throws IOException, InterruptedException {
         game.setReserve(msg.getReserve());
     }
 
@@ -245,14 +247,14 @@ public class ViewController implements MessageVisitor {
     }
 
     @Override
-    public void visit(UpdateForNotCurrentResourceMessage msg) {
+    public void visit(UpdateForNotCurrentResourceMessage msg) throws IOException, InterruptedException {
         game.useResourceReserve(msg.getR1(), 1);
         if(msg.getR2() != null)
             game.useResourceReserve(msg.getR2(), 1);
     }
 
     @Override
-    public void visit(UpdateInitResourceMessage msg) {
+    public void visit(UpdateInitResourceMessage msg) throws IOException, InterruptedException {
         game.useResourceReserve(msg.getR1(),1);
         game.addStorage(msg.getR1(), 1);
         if(msg.getR2() != null) {
@@ -276,7 +278,7 @@ public class ViewController implements MessageVisitor {
     }
 
     @Override
-    public void visit(DeckProductionCardMessage msg) {
+    public void visit(DeckProductionCardMessage msg) throws IOException, InterruptedException {
         game.removeOneProductionCard(msg.getNumberDeck());
     }
 
@@ -297,30 +299,30 @@ public class ViewController implements MessageVisitor {
     }
 
     @Override
-    public void visit(ConfigurationMarketMessage msg) {
+    public void visit(ConfigurationMarketMessage msg) throws IOException, InterruptedException {
         System.out.println(msg.getMessageType()+" : "+ msg.getMarbleList());
         game.setMarket(msg.getMarbleList());
     }
 
     @Override
-    public void visit(ChangeMarketMessageColumn msg) {
+    public void visit(ChangeMarketMessageColumn msg) throws IOException, InterruptedException {
         game.pushColumn(msg.getColumn());
     }
 
     @Override
-    public void visit(ChangeMarketMessageRow msg) {
+    public void visit(ChangeMarketMessageRow msg) throws IOException, InterruptedException {
         game.pushRow(msg.getRow());
     }
 
     @Override
-    public void visit(ResultFromMarketMessage msg) {
+    public void visit(ResultFromMarketMessage msg) throws IOException, InterruptedException {
         game.addStorage(msg.getResource());
         game.useResourceReserve(msg.getResource());
     }
 
 
     @Override
-    public void visit(ResultFromMarketNotCurrentMessage msg) {
+    public void visit(ResultFromMarketNotCurrentMessage msg) throws IOException, InterruptedException {
         game.useResourceReserve(msg.getResource());
     }
 
@@ -349,27 +351,27 @@ public class ViewController implements MessageVisitor {
 
 
     @Override
-    public void visit(ProductionMessageForNotCurrentMessage msg) {
+    public void visit(ProductionMessageForNotCurrentMessage msg) throws IOException, InterruptedException {
 
         game.addResourceReserve(msg.getResource());
     }
 
     @Override
-    public void visit(ProductionMessageForCurrentMessage msg) {
+    public void visit(ProductionMessageForCurrentMessage msg) throws IOException, InterruptedException {
 
         game.addResourceReserve(msg.getResource());
         game.payResourcesProduction(msg.getResource());
     }
 
     @Override
-    public void visit(ResultOfProductionMessage msg) {
+    public void visit(ResultOfProductionMessage msg) throws IOException, InterruptedException {
 
         game.useResourceReserve(msg.getResource());
         game.addStrongbox(msg.getResource());
     }
 
     @Override
-    public void visit(ResultOfProductionForNotCurrentMessage msg) {
+    public void visit(ResultOfProductionForNotCurrentMessage msg) throws IOException, InterruptedException {
 
         game.useResourceReserve(msg.getResource());
     }
@@ -463,7 +465,7 @@ public class ViewController implements MessageVisitor {
     }
 
     @Override
-    public void visit(GameTypeMessage msg) {
+    public void visit(GameTypeMessage msg) throws IOException, InterruptedException {
         setGame(msg.isMultiOrNot());
     }
 

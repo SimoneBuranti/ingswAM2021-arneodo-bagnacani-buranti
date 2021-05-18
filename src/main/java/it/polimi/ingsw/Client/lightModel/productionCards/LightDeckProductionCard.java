@@ -94,6 +94,10 @@ public abstract class LightDeckProductionCard {
     public int getNumberDeck(){
         return numberDeck;
     }
+
+    public ProductionCard get(int i) {
+        return  deck.get(i);
+    }
 }
 
 

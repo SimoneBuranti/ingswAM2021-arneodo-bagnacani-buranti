@@ -249,4 +249,18 @@ public class LightGameBoard {
     public int getPapalCard(int papalCardNumber){
         return faithPath.getPapalCard(papalCardNumber);
     }
+
+
+    public ProductionCard[][] getProductionCards() {
+        return productionCards;
+    }
+
+    public ArrayList<LeaderCard> getLeaderCards() {
+        return leaderCards;
+    }
+
+
+    public ArrayList<LeaderCard> getLeaderCardsActivated() {
+        return leaderCardsActivated;
+    }
 }
