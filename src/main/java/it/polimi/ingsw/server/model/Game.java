@@ -781,6 +781,28 @@ public class Game extends Observable {
         notifyObserver(new ConfigurationMarketMessage(market.getInitialMarbleList()));
     }
 
+    protected void configClientReconnected(String nickname) throws IOException, InterruptedException {
+        notifyOnlyOneSpecificObserver(new DeckProductionCardConfigMessage(0,deckProductionCardOneBlu.getDeck()), nickname);
+        notifyOnlyOneSpecificObserver(new DeckProductionCardConfigMessage(1,deckProductionCardTwoBlu.getDeck()), nickname);
+        notifyOnlyOneSpecificObserver(new DeckProductionCardConfigMessage(2,deckProductionCardThreeBlu.getDeck()), nickname);
+
+        notifyOnlyOneSpecificObserver(new DeckProductionCardConfigMessage(3,deckProductionCardOneGreen.getDeck()), nickname);
+        notifyOnlyOneSpecificObserver(new DeckProductionCardConfigMessage(4,deckProductionCardTwoGreen.getDeck()), nickname);
+        notifyOnlyOneSpecificObserver(new DeckProductionCardConfigMessage(5,deckProductionCardThreeGreen.getDeck()), nickname);
+
+        notifyOnlyOneSpecificObserver(new DeckProductionCardConfigMessage(6,deckProductionCardOneViolet.getDeck()), nickname);
+        notifyOnlyOneSpecificObserver(new DeckProductionCardConfigMessage(7,deckProductionCardTwoViolet.getDeck()), nickname);
+        notifyOnlyOneSpecificObserver(new DeckProductionCardConfigMessage(8,deckProductionCardThreeViolet.getDeck()), nickname);
+
+        notifyOnlyOneSpecificObserver(new DeckProductionCardConfigMessage(9,deckProductionCardOneYellow.getDeck()), nickname);
+        notifyOnlyOneSpecificObserver(new DeckProductionCardConfigMessage(10,deckProductionCardTwoYellow.getDeck()), nickname);
+        notifyOnlyOneSpecificObserver(new DeckProductionCardConfigMessage(11,deckProductionCardThreeYellow.getDeck()), nickname);
+
+
+        notifyOnlyOneSpecificObserver(new ConfigurationMarketMessage(market.getInitialMarbleList()), nickname);
+    }
+
+
     protected void reConfigClient() throws IOException, InterruptedException {
         configClient();
         notifyObserver(new ReserveValueMessage(reserve.getReservePool()));

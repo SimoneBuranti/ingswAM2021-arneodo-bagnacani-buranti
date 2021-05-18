@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public class VirtualView implements Observer {
 
-    private final ClientController clientController;
+    private ClientController clientController;
 
 
     /**
@@ -20,6 +20,9 @@ public class VirtualView implements Observer {
         this.clientController = clientController;
     }
 
+    public void setClientController(ClientController clientController) {
+        this.clientController = clientController;
+    }
 
     /**
     * Receives an update message from the model.

@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public abstract class GameController {
+    protected String gameControllerState;
     protected int numberOfPlayers;
     protected Game game;
     protected Server server;
@@ -45,4 +46,7 @@ public abstract class GameController {
     public abstract void handleMessage(RestartAnswerMessage msg, ClientController clientController) throws IOException, InterruptedException;
 
 
+    public String getGameControllerState(){
+        return gameControllerState;
+    }
 }

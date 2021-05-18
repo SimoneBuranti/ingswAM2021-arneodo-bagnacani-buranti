@@ -119,6 +119,7 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
             nOfPlayers =input.nextInt();
             if (nOfPlayers > 0 && nOfPlayers < 5){
                 notifyObserver(new NumberPlayerMessage(nOfPlayers));
+                return;
             } else {
                 System.out.println("Invalid number of players");
             }

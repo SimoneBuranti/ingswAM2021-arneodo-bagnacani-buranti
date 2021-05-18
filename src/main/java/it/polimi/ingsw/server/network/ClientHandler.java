@@ -5,6 +5,7 @@ import it.polimi.ingsw.messages.PingMessage;
 import it.polimi.ingsw.messages.RestartQuestionMessage;
 import it.polimi.ingsw.messages.UsernameMessage;
 import it.polimi.ingsw.server.controller.ClientController;
+import it.polimi.ingsw.server.controller.GameControllerDisconnection;
 import it.polimi.ingsw.server.virtualview.VirtualView;
 
 import java.io.*;
@@ -92,7 +93,7 @@ public class ClientHandler implements Runnable {
                 sendMessage(new UsernameMessage(null));
             }
 
-            ScheduledThreadPoolExecutor pinger = new ScheduledThreadPoolExecutor(1);
+            /*ScheduledThreadPoolExecutor pinger = new ScheduledThreadPoolExecutor(1);
             pinger.scheduleAtFixedRate( () -> {
 
                 try {
@@ -122,7 +123,7 @@ public class ClientHandler implements Runnable {
 
                 setPongo(false);
 
-            },1000,3000,TimeUnit.MILLISECONDS);
+            },1000,3000,TimeUnit.MILLISECONDS);*/
 
             while(true){
 
@@ -132,6 +133,12 @@ public class ClientHandler implements Runnable {
                 }
             }
         } catch (IOException | InterruptedException e) {
+            System.out.println("c'è un errore");
+            try {
+                disconnect();
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
             Thread.currentThread().interrupt();
         }
     }
@@ -143,13 +150,18 @@ public class ClientHandler implements Runnable {
     }
 
     public void sendMessage (Message msg) throws InterruptedException, IOException {
+        System.out.println(clientController.getNickname() + " " + msg.getMessageType());
         writeStream.println(msg.serialize());
         writeStream.flush();
 
     }
 
     public void disconnect() throws IOException {
-
+        if(server.getGameController().getGameControllerState().equals("MultiPlayer") || server.getGameController().getGameControllerState().equals("SinglePlayer") ) {
+            server.setGameController(new GameControllerDisconnection(server, clientController.getGame()));
+            clientController.getGame().disconnectPlayer(clientController.getNickname());
+            server.addClientControllersDisconnected(clientController);
+        }
         if (inputStream != null) inputStream.close();
         if (outputStream != null) outputStream.close();
         System.out.println("Ho disconnesso client - general call");

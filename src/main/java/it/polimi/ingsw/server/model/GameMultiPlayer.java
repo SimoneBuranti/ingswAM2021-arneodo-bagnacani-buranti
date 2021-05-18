@@ -315,7 +315,8 @@ public class GameMultiPlayer extends Game {
         for(Player p : playerList){
             if(p.getNickName().equals(nickname) && !(p.isConnected())){
                 p.setConnected();
-                notifyObserver(new GameTypeMessage(true));
+                notifyOnlyOneSpecificObserver(new GameTypeMessage(true), p.getNickName());
+                configClientReconnected(p.getNickName());
                 ArrayList<Integer> needForLeader = new ArrayList<>();
                 ArrayList<Integer> needForLeader2 = new ArrayList<>();
 

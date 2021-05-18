@@ -343,6 +343,7 @@ public class GameSolitaire extends Game {
         if(player.getNickName().equals(nickname) && !(player.isConnected())){
             player.setConnected();
             notifyObserver(new GameTypeMessage(false));
+            configClientReconnected(player.getNickName());
             ArrayList<Integer> needForLeader = new ArrayList<>();
             ArrayList<Integer> needForLeader2 = new ArrayList<>();
             notifyOnlyOneSpecificObserver(new StorageConfigMessage(player.getGameBoardOfPlayer().getStorageOfGameBoard().getStorageResource()), player.getNickName());

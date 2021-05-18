@@ -8,6 +8,7 @@ import java.io.IOException;
 public class GameControllerEmpty extends GameController {
 
     public GameControllerEmpty(Server server) {
+        this.gameControllerState = "Empty";
         this.server = server;
     }
 

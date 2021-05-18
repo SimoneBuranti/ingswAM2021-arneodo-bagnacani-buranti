@@ -11,6 +11,7 @@ public class GameControllerMultiplayer extends GameController {
 
 
     public GameControllerMultiplayer(Server server, Game game) {
+        this.gameControllerState = "MultiPlayer";
         this.server = server;
         this.game = game;
     }
@@ -20,7 +21,7 @@ public class GameControllerMultiplayer extends GameController {
      boolean flag = false;
      if(game.disconnectPlayer(clientController.getNickname())) {
       flag = true;
-      server.addClientController(clientController);
+      server.addClientControllersDisconnected(clientController);
      }
      try {
       clientController.getClientHandler().disconnect();

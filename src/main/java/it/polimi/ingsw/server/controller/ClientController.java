@@ -26,11 +26,12 @@ public class ClientController implements MessageVisitor {
         this.nickname = null;
     }
 
-    public void restoreClientController(ClientController clientController){
-        this.setNickname(clientController.nickname);
+    public void restoreClientController(ClientController clientController) throws IOException, InterruptedException {
+        this.setNickname(clientController.getNickname());
         this.virtualView=clientController.getVirtualView();
+        this.virtualView.setClientController(this);
         this.game=clientController.getGame();
-
+        //this.game.connectPlayer(nickname);
     }
 
     public Game getGame() {

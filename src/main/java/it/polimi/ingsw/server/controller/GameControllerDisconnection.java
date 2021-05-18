@@ -10,7 +10,9 @@ import java.util.ArrayList;
 public class GameControllerDisconnection extends GameController {
 
 
+
     public GameControllerDisconnection(Server server, Game game) {
+        this.gameControllerState = "Disconnection";
         this.server = server;
         this.game = game;
     }
@@ -18,7 +20,7 @@ public class GameControllerDisconnection extends GameController {
     @Override
     public void handleMessage(ExitMessage msg, ClientController clientController) {
         game.disconnectPlayer(clientController.getNickname());
-        server.addClientController(clientController);
+        server.addClientControllersDisconnected(clientController);
         try {
             clientController.getClientHandler().disconnect();
         } catch (IOException e) {

@@ -11,6 +11,7 @@ public class GameControllerSinglePlayer extends GameController {
 
 
     public GameControllerSinglePlayer(Server server, Game game) {
+        this.gameControllerState = "SinglePlayer";
           this.server = server;
         this.game = game;
     }
@@ -20,7 +21,7 @@ public class GameControllerSinglePlayer extends GameController {
         boolean flag = false;
         if(game.disconnectPlayer(clientController.getNickname())) {
             flag = true;
-            server.addClientController(clientController);
+            server.addClientControllersDisconnected(clientController);
         }
         try {
             clientController.getClientHandler().disconnect();

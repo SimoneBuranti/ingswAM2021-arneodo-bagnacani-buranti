@@ -13,6 +13,7 @@ public class GameControllerRestart extends GameController {
 
 
     public GameControllerRestart(Server server) {
+        this.gameControllerState = "Restart";
         this.server = server;
     }
 

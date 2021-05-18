@@ -10,6 +10,7 @@ public class GameControllerLobby extends GameController {
     private int lobbySize;
 
     public GameControllerLobby(Server server, int lobbySize) {
+        this.gameControllerState = "Lobby";
         this.server = server;
         this.lobbySize = lobbySize;
     }
