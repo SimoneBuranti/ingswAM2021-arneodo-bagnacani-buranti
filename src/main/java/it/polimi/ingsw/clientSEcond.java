@@ -23,7 +23,7 @@ public class clientSEcond {
             }
         }.start();
 
-        UsernameMessage msg1 = new UsernameMessage("bb");
+        /*UsernameMessage msg1 = new UsernameMessage("bb");
 
         socketClient.sendMessage(msg1);
 
@@ -39,7 +39,7 @@ public class clientSEcond {
 
         EndOfTurnMessage msg3 = new EndOfTurnMessage();
 
-        socketClient.sendMessage(msg3);
+        socketClient.sendMessage(msg3);*/
 
 
     }

@@ -72,6 +72,7 @@ public class Server {
     //--------------------------------------------------------------------
 
     public void initNewSolitaireGame() throws IOException, InterruptedException {
+
         game = new GameSolitaire(lobby.get(0),true,clientControllers.get(0));
 
         gameController = new GameControllerSinglePlayer(this,this.getGame());

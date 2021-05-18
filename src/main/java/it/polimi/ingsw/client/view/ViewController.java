@@ -38,65 +38,64 @@ public class ViewController implements MessageVisitor, ViewObserver {
 
     @Override
     public void visit(AlreadyActivatedErrorMessage msg) {
-        //view.notifyError(msg.getErrorNotification());
+        view.notifyError(msg);
     }
 
     @Override
     public void visit(AlreadyExistingNickNameErrorMessage msg) throws IOException, InterruptedException {
-        //view.notifyError(msg.getErrorNotification());
+        view.notifyError(msg);
         view.askNickname();
     }
 
     @Override
     public void visit(AlreadyUsedLeaderCardErrorMessage msg) {
-        //view.notifyError(msg.getErrorNotification());
-
+        view.notifyError(msg);
     }
 
     @Override
     public void visit(CompleteRunningMatchErrorMessage msg) {
-        //view.notifyError(msg.getErrorNotification());
+        view.notifyError(msg);
 
     }
 
     @Override
     public void visit(NoNicknameMessage msg) throws IOException, InterruptedException {
-        //view.notifyError(msg.getErrorNotification());
+        view.notifyError(msg);
         view.askNickname();
     }
 
     @Override
     public void visit(NotAvailableResourcesErrorMessage msg) {
-        //view.notifyError(msg.getErrorNotification());
+        view.notifyError(msg);
 
     }
 
     @Override
     public void visit(NotEnoughSpaceErrorMessage msg) {
-        //view.notifyError(msg.getErrorNotification());
+        view.notifyError(msg);
 
     }
 
     @Override
     public void visit(RequirementsErrorMessage msg) {
-        //view.notifyError(msg.getErrorNotification());
+        view.notifyError(msg);
 
     }
 
     @Override
     public void visit(WrongColumnErrorMessage msg) {
-        //view.notifyError(msg.getErrorNotification());
+        view.notifyError(msg);
     }
 
     @Override
     public void visit(NotYourTurnErrorMessage msg) {
-        //view.notifyError(msg.getErrorNotification());
+        view.notifyError(msg);
 
     }
 
     @Override
     public void visit(BootingLobbyErrorMessage msg) {
-        //view.notifyError(msg.getErrorNotification());
+        view.notifyError(msg);
 
     }
 
@@ -108,7 +107,7 @@ public class ViewController implements MessageVisitor, ViewObserver {
     @Override
     public void visit(ChangeCurrentPlayerMessage msg) {
         game.setCurrentPlayer(msg.getNickname());
-        //  view.showChangeCurrent(msg.getNickname());
+        //view.showChangeCurrent(msg.getNickname());
     }
 
 
@@ -141,7 +140,6 @@ public class ViewController implements MessageVisitor, ViewObserver {
         if (msg.getnOfPlayers() == -1){
             view.askNumberOfPlayers();
         } else {
-            setGame(true);
             // Show del numero di giocatori nella lobby / lobbysize
         }
     }
@@ -285,7 +283,6 @@ public class ViewController implements MessageVisitor, ViewObserver {
 
     @Override
     public void visit(UpdateInitLeaderMessage msg) {
-        System.out.println(msg.getMessageType()+" : "+ msg.getLeaderCards());
         try {
             game.addLeaderCard(msg.getLeaderCards());
         } catch (IOException e) {

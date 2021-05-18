@@ -22,7 +22,7 @@ public class LightGameSolitaire extends LightGame{
 
     public LightGameSolitaire(String nickname) throws IOException, InterruptedException {
         super(nickname);
-        configInit();
+        //configInit();
         lorenzoTheMagnificent = new LightLorenzoTheMagnificent();
         actionMarkerDeck = new LightActionMarkerDeck();
     }

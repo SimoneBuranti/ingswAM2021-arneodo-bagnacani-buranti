@@ -12,4 +12,9 @@ public class RequirementsErrorMessage extends Message {
     public void accept(MessageVisitor v) {
         v.visit(this);
     }
+
+    @Override
+    public String toString(){
+        return "Sorry, you don't meet the requirements to activate the leader card.";
+    }
 }

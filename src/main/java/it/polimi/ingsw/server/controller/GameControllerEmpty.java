@@ -41,11 +41,11 @@ public class GameControllerEmpty extends GameController {
             }
         } else {
             clientController.getClientHandler().sendMessage(new BootingLobbyErrorMessage());
-            try {
+            /*try {
                 clientController.getClientHandler().disconnect();
             } catch (IOException e) {
                 e.printStackTrace();
-            }
+            }*/
         }
 
 

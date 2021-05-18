@@ -1,5 +1,7 @@
 package it.polimi.ingsw.client.view;
 
+import it.polimi.ingsw.messages.Message;
+
 import java.io.IOException;
 
 public interface View  {
@@ -13,5 +15,5 @@ public interface View  {
 
     void askRestartGame() throws IOException, InterruptedException;
 
-    void notifyError(String error);
+    void notifyError(Message msg);
 }

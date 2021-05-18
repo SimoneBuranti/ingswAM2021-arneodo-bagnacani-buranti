@@ -78,7 +78,6 @@ public class GameSolitaire extends Game {
             needForLeader.add(player.getPersonalLeaderCard().get(i).getKey());
         notifyObserver(new UpdateInitLeaderMessage(needForLeader));
 
-
         }
 
     /**

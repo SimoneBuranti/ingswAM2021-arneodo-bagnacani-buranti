@@ -33,4 +33,6 @@ public class WhiteMarbleChoosenResourcesMessage extends Message {
     public void accept(MessageVisitor v) throws IOException, InterruptedException {
         v.visit(this);
     }
+
+
 }

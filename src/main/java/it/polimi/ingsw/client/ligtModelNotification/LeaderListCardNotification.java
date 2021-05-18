@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class LeaderListCardNotification extends Notification{
 
-    private final NotificationType notificationType = NotificationType.ACTIVATELEADERLISTNOTIFY;
+    private final NotificationType notificationType = NotificationType.LEADERLISTNOTIFY;
     private ArrayList<LeaderCard> listOfFirstCard;
     public LeaderListCardNotification(ArrayList<LeaderCard> listOfFirstCard){
         this.listOfFirstCard=new ArrayList<>();

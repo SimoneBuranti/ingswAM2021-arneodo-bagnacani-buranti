@@ -16,7 +16,7 @@ public class LightGameMultiPlayer extends LightGame{
     
     public LightGameMultiPlayer(String nickname) throws IOException, InterruptedException {
         super(nickname);
-        configInit();
+        //configInit();
     }
 
     private void configInit() throws IOException, InterruptedException {

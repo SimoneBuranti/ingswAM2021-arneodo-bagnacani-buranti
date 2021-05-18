@@ -107,24 +107,18 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
     }
 
     @Override
-    public void notifyError(String error) {
-
+    public void notifyError(Message msg) {
+        System.out.println(msg.toString());
     }
 
 
     public void askNumberOfPlayers() throws IOException, InterruptedException {
         int nOfPlayers;
-        System.out.println("How many players? [1 .. 4]");
+        System.out.println("How many players? [1...4]");
         while (input.hasNextInt()){
             nOfPlayers =input.nextInt();
-            if (nOfPlayers == 1){
-                viewController.setGame(false);
+            if (nOfPlayers > 0 && nOfPlayers < 5){
                 notifyObserver(new NumberPlayerMessage(nOfPlayers));
-                return;
-            } else if ( nOfPlayers <5 && nOfPlayers>1){
-                viewController.setGame(true);
-                notifyObserver(new NumberPlayerMessage(nOfPlayers));
-                return;
             } else {
                 System.out.println("Invalid number of players");
             }
@@ -135,7 +129,7 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
 
     public void askNickname() throws IOException, InterruptedException {
         String nickname;
-        System.out.println("What's your nickname?");
+        System.out.println("What's your username?");
         if (input.hasNextLine()){
             nickname =input.nextLine();
             viewController.setNickName(nickname);
