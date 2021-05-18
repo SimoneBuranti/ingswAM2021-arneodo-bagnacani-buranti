@@ -565,4 +565,9 @@ public class ClientController implements MessageVisitor {
     public void visit(GameTypeMessage msg) {
 
     }
+
+    @Override
+    public void visit(RequestNicknameMessage msg) {
+
+    }
 }

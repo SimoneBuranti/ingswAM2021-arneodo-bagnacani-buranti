@@ -118,5 +118,5 @@ public interface MessageVisitor {
     void visit(GameTypeMessage msg) throws IOException, InterruptedException;
 
 
-    void visit(AnswerNicknameMessage answerNicknameMessage);
+    void visit(RequestNicknameMessage answerNicknameMessage);
 }

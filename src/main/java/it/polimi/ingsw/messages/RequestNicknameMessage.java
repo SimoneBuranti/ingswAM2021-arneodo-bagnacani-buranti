@@ -2,15 +2,15 @@ package it.polimi.ingsw.messages;
 
 import java.io.IOException;
 
-public class AnswerNicknameMessage extends Message{
+public class RequestNicknameMessage extends Message{
     /**
  * type of message
  */
-private final MessageType messageType=MessageType.USERNAMEANSWER;
+private final MessageType messageType=MessageType.USERNAMEAREQUEST;
 
     private String username;
 
-    public AnswerNicknameMessage(String username) {
+    public RequestNicknameMessage(String username) {
         this.username = username;
     }
 

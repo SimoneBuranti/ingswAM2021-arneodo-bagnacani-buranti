@@ -272,7 +272,7 @@ public abstract class Message{
 
 
             case USERNAMEANSWER:
-                return gson.fromJson(jsonObj, AnswerNicknameMessage.class);
+                return gson.fromJson(jsonObj, RequestNicknameMessage.class);
 
 
 
