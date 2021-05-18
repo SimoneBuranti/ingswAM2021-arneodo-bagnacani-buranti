@@ -108,7 +108,7 @@ public class ViewController implements MessageVisitor, ViewObserver {
     @Override
     public void visit(ChangeCurrentPlayerMessage msg) {
         game.setCurrentPlayer(msg.getNickname());
-      //  view.showChangeCurrent(msg.getNickname());
+        //  view.showChangeCurrent(msg.getNickname());
     }
 
 
@@ -141,6 +141,7 @@ public class ViewController implements MessageVisitor, ViewObserver {
         if (msg.getnOfPlayers() == -1){
             view.askNumberOfPlayers();
         } else {
+            setGame(true);
             // Show del numero di giocatori nella lobby / lobbysize
         }
     }
@@ -365,7 +366,7 @@ public class ViewController implements MessageVisitor, ViewObserver {
 
     @Override
     public void visit(MagnificentWinMessage msg) {
-       // view.magnificentWin();
+        // view.magnificentWin();
     }
 
     @Override
@@ -580,6 +581,7 @@ public class ViewController implements MessageVisitor, ViewObserver {
 
     @Override
     public void update(Message message) throws IOException, InterruptedException {
-       socketClient.sendMessage(message);
+        socketClient.sendMessage(message);
     }
 }
+
