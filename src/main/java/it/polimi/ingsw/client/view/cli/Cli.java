@@ -194,4 +194,9 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
     public void showStartGame() {
         System.out.println("The game has started!");
     }
+
+    @Override
+    public void showRestartMessage() {
+        System.out.println("Enter your username of the previous game to resume the match...");
+    }
 }

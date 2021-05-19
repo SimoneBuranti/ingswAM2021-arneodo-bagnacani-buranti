@@ -91,9 +91,11 @@ public class ClientHandler implements Runnable {
             String msg;
 
             if(server.getSendRestartQuestion()){
-                sendMessage(new RestartQuestionMessage());
-                server.setSendRestartQuestion();
-            } else {
+                sendMessage(new RestartQuestionMessage(server.getClientController().size()));
+                //server.setSendRestartQuestion();
+            } else if(server.getGameController().getGameControllerState().equals("Disconnection")) {
+                sendMessage(new RestartQuestionMessage(1));
+            }else{
                 sendMessage(new UsernameMessage(null));
             }
 

@@ -108,7 +108,13 @@ public class ViewController implements MessageVisitor, ViewObserver {
 
     @Override
     public void visit(RestartQuestionMessage msg) throws IOException, InterruptedException {
-        view.askRestartGame();
+        if(msg.getLobbySize() == 0)
+            view.askRestartGame();
+        else {
+            view.showRestartMessage();
+            view.askNickname();
+        }
+
     }
 
     @Override

@@ -37,4 +37,6 @@ public interface View  {
     void showCallForCouncil(String nickname, int papalCard);
 
     void showStartGame();
+
+    void showRestartMessage();
 }
