@@ -1,5 +1,6 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.client.view;
 
+import it.polimi.ingsw.client.SocketClient;
 import it.polimi.ingsw.client.lightModel.LightGame;
 import it.polimi.ingsw.client.lightModel.LightGameMultiPlayer;
 import it.polimi.ingsw.client.lightModel.LightGameSolitaire;

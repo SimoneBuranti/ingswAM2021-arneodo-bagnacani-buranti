@@ -1,9 +1,9 @@
 package it.polimi.ingsw.client.view.cli;
 
 import it.polimi.ingsw.client.ligtModelNotification.*;
-import it.polimi.ingsw.View;
-import it.polimi.ingsw.ViewController;
-import it.polimi.ingsw.ViewControllerObservable;
+import it.polimi.ingsw.client.view.View;
+import it.polimi.ingsw.client.view.ViewController;
+import it.polimi.ingsw.client.view.ViewControllerObservable;
 import it.polimi.ingsw.messages.*;
 import it.polimi.ingsw.server.model.leaderCards.LeaderCard;
 
