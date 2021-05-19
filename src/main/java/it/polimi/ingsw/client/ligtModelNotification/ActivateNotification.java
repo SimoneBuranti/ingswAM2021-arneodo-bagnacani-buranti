@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class ActivateNotification extends Notification {
-    private final NotificationType notificationType = NotificationType.LEADERLISTNOTIFY;
+    private final NotificationType notificationType = NotificationType.ACTIVATELEADERLISTNOTIFY;
     private ArrayList<LeaderCard> listOfFirstCard;
     public ActivateNotification(ArrayList<LeaderCard> listOfFirstCard){
         this.listOfFirstCard=new ArrayList<>();

@@ -64,7 +64,10 @@ public abstract class Notification {
                 return gson.fromJson(jsonObj, StrongboxNotification.class);
 
             case ACTIVATELEADERLISTNOTIFY:
-                return gson.fromJson(jsonObj, LeaderListCardNotification.class);
+                return gson.fromJson(jsonObj, ActivateNotification.class);
+
+            case FAITHNOTIFY:
+                return gson.fromJson(jsonObj, FaithPathNotification.class);
 
 
 

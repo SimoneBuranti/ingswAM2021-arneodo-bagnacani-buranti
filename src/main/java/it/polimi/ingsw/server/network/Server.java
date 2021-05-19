@@ -160,7 +160,11 @@ public class Server {
         return clientControllersDisconnected;
     }
 
+    public ClientController removeClientControllersDisconnected(int i){
+        return clientControllersDisconnected.remove(i);
+    }
+
     public void addClientControllersDisconnected(ClientController clientController){
-        clientControllers.add(clientController);
+        clientControllersDisconnected.add(clientController);
     }
 }

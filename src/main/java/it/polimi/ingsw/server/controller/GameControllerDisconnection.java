@@ -36,9 +36,12 @@ public class GameControllerDisconnection extends GameController {
     @Override
     public void handleMessage(UsernameMessage msg, ClientController clientController) throws IOException, InterruptedException {
         if(game.checkNickname(msg.getUsername())){
-            for(int i=0; i<server.getClientControllersDisconnected().size();i++)
-                if (server.getClientControllersDisconnected().get(i).getNickname().equals(msg.getUsername()))
-                    clientController.restoreClientController(server.getClientControllersDisconnected().get(i));
+            for(int i=0; i<server.getClientControllersDisconnected().size();i++) {
+                if (server.getClientControllersDisconnected().get(i).getNickname().equals(msg.getUsername())) {
+                    clientController.restoreClientController(server.removeClientControllersDisconnected(i));
+                    server.addClientController(clientController);
+                }
+            }
             game.connectPlayer(msg.getUsername());
             if(game.numPlayersDisconnected() == 0)
                 if (numberOfPlayers!=1)

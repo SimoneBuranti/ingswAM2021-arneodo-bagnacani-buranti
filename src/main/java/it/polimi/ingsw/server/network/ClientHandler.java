@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit;
 public class ClientHandler implements Runnable {
 
     private final Socket socketClient;
-    private final ClientController clientController;
+    private ClientController clientController;
 
     private final InputStream inputStream;
     private final OutputStream outputStream;
@@ -71,6 +71,10 @@ public class ClientHandler implements Runnable {
         readStream = new BufferedReader(new InputStreamReader(inputStream));
         writeStream = new PrintWriter(outputStream);
         //testMode = true;
+    }
+
+    public void setClientController(ClientController clientController) {
+        this.clientController = clientController;
     }
 
     public InputStream getInputStream() {
@@ -150,7 +154,6 @@ public class ClientHandler implements Runnable {
     }
 
     public void sendMessage (Message msg) throws InterruptedException, IOException {
-        System.out.println(clientController.getNickname() + " " + msg.getMessageType());
         writeStream.println(msg.serialize());
         writeStream.flush();
 
@@ -159,9 +162,9 @@ public class ClientHandler implements Runnable {
     public void disconnect() throws IOException {
         if(server.getGameController().getGameControllerState().equals("MultiPlayer") || server.getGameController().getGameControllerState().equals("SinglePlayer") ) {
             server.setGameController(new GameControllerDisconnection(server, clientController.getGame()));
-            clientController.getGame().disconnectPlayer(clientController.getNickname());
-            server.addClientControllersDisconnected(clientController);
         }
+        clientController.getGame().disconnectPlayer(clientController.getNickname());
+        server.addClientControllersDisconnected(clientController);
         if (inputStream != null) inputStream.close();
         if (outputStream != null) outputStream.close();
         System.out.println("Ho disconnesso client - general call");
