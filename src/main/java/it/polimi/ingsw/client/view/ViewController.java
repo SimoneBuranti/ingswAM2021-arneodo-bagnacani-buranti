@@ -45,7 +45,7 @@ public class ViewController implements MessageVisitor, ViewObserver {
     }
 
     @Override
-    public void visit(AlreadyExistingNickNameErrorMessage msg) throws IOException, InterruptedException {
+    public void visit(AlreadyExistingNickNameErrorMessage msg) {
         //view.notifyError(msg.getErrorNotification());
         view.askNickname();
     }
@@ -63,7 +63,7 @@ public class ViewController implements MessageVisitor, ViewObserver {
     }
 
     @Override
-    public void visit(NoNicknameMessage msg) throws IOException, InterruptedException {
+    public void visit(NoNicknameMessage msg) {
         //view.notifyError(msg.getErrorNotification());
         view.askNickname();
     }
@@ -104,7 +104,7 @@ public class ViewController implements MessageVisitor, ViewObserver {
     }
 
     @Override
-    public void visit(RestartQuestionMessage msg) throws IOException, InterruptedException {
+    public void visit(RestartQuestionMessage msg) {
         view.askRestartGame();
     }
 
@@ -243,7 +243,7 @@ public class ViewController implements MessageVisitor, ViewObserver {
     }
 
     @Override
-    public void visit(UsernameMessage msg) throws IOException, InterruptedException {
+    public void visit(UsernameMessage msg) {
         view.askNickname();
     }
 
