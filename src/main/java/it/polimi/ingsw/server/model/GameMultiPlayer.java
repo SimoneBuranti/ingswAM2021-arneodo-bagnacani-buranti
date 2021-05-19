@@ -1,6 +1,7 @@
 package it.polimi.ingsw.server.model;
 
 import com.google.gson.Gson;
+import it.polimi.ingsw.messages.NoNicknameMessage;
 import it.polimi.ingsw.messages.observable.*;
 import it.polimi.ingsw.server.controller.ClientController;
 import it.polimi.ingsw.server.model.exceptions.CallForCouncilException;
@@ -89,6 +90,7 @@ public class GameMultiPlayer extends Game {
         createNickNameInOrder(clientControllersInOrder);
         addObservators();
         notifyObserver(new GameTypeMessage(true));
+        notifyObserver(new NicknameStartedMessage(nickNameInOrder));
         configClient();
         }
         else {
@@ -588,6 +590,7 @@ public class GameMultiPlayer extends Game {
         addObservators();
         //this.clientControllersInOrder=clientControllers;
         notifyObserver(new GameTypeMessage(true));
+        notifyObserver(new NicknameStartedMessage(nickNameInOrder));
         createPlayerRestore(numberOfPlayer,nickNameInOrder);
         reConfigClient();
         currentPlayer = playerList.get(currentPlayerPosition);
