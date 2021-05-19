@@ -12,4 +12,9 @@ public class BootingLobbyErrorMessage extends Message{
     public void accept(MessageVisitor v) {
         v.visit(this);
     }
+
+    @Override
+    public String toString(){
+        return "Initial lobby waiting for creation, please wait a few moments.";
+    }
 }

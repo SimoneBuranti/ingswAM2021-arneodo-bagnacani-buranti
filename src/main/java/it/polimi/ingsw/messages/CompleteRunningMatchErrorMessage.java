@@ -17,4 +17,9 @@ public class CompleteRunningMatchErrorMessage extends Message{
     public void accept(MessageVisitor v) {
         v.visit(this);
     }
+
+    @Override
+    public String toString(){
+        return "Sorry, the game is full!";
+    }
 }

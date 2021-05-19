@@ -85,6 +85,14 @@ public class Market extends Observable {
 
     }
 
+    public Market(Marble[] list) throws IOException, InterruptedException {
+
+        for(int i=0; i < 13; i++)
+            initialMarbleList.add(list[i]);
+        setGrid();
+        setExtra();
+    }
+
     /**
      * This method calls the marble's giveResource method for each marble in the market grid in the chosen row
      * to give the corresponding resource to the player. Then the method puts the extra marble in the last place
@@ -256,14 +264,6 @@ public class Market extends Observable {
 
 
 
-
-    public Market(Marble[] list) throws IOException, InterruptedException {
-
-        for(int i=0; i < 13; i++)
-            initialMarbleList.add(list[i]);
-        setGrid();
-        setExtra();
-    }
 
 
     public ArrayList<Marble> getInitialMarbleList(){

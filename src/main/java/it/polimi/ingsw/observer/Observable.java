@@ -31,7 +31,8 @@ public class Observable {
     protected void notifyObserver(Message message) throws IOException, InterruptedException {
         for (Observer observer : observers) {
             observer.update(message);
-        } }
+        }
+    }
 
     /**
      * Notifies the observer through the update method and passes message

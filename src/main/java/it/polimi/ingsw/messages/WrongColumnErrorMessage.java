@@ -14,4 +14,9 @@ public class WrongColumnErrorMessage extends Message {
     public void accept(MessageVisitor v) {
         v.visit(this);
     }
+
+    @Override
+    public String toString(){
+        return "the chosen column does not fit, try with another column or another action";
+    }
 }

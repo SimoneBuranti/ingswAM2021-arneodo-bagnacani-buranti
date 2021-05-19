@@ -28,4 +28,8 @@ public class NotEnoughSpaceErrorMessage extends Message {
         v.visit(this);
     }
 
+    @Override
+    public String toString(){
+        return "you don't have enough storage space, choose which resources to discard from the following : " + resources;
+    }
 }

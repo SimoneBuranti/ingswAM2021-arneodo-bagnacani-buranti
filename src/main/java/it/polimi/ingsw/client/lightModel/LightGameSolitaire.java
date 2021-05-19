@@ -1,7 +1,7 @@
 package it.polimi.ingsw.client.lightModel;
 
 
-import it.polimi.ingsw.client.view.ligtModelNotification.*;
+import it.polimi.ingsw.client.ligtModelNotification.*;
 import it.polimi.ingsw.client.lightModel.lightActionMarkers.LightActionMarkerDeck;
 import it.polimi.ingsw.client.lightModel.productionCards.LightDeckProductionCard;
 import it.polimi.ingsw.server.model.Resource;
@@ -22,7 +22,7 @@ public class LightGameSolitaire extends LightGame{
 
     public LightGameSolitaire(String nickname) throws IOException, InterruptedException {
         super(nickname);
-        configInit();
+        //configInit();
         lorenzoTheMagnificent = new LightLorenzoTheMagnificent();
         actionMarkerDeck = new LightActionMarkerDeck();
     }

@@ -1,5 +1,6 @@
-package it.polimi.ingsw.client.view;
+package it.polimi.ingsw.client.lightModel;
 
+import it.polimi.ingsw.client.view.View;
 import it.polimi.ingsw.messages.Message;
 
 import java.io.IOException;
@@ -13,8 +14,6 @@ public class ViewObservable {
      * Notifies all the current observers through the update method and passes to them a {@link Message}.
      *
      */
-
-
     protected void notifyObserver(String notification) throws IOException, InterruptedException {
             observer.update(notification);
          }

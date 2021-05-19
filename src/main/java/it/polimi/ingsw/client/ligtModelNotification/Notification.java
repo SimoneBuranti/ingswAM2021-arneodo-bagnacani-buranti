@@ -1,8 +1,14 @@
-package it.polimi.ingsw.client.view.ligtModelNotification;
+package it.polimi.ingsw.client.ligtModelNotification;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import it.polimi.ingsw.server.model.RuntimeTypeAdapterFactory;
+import it.polimi.ingsw.server.model.colours.*;
+import it.polimi.ingsw.server.model.gameBoard.*;
+import it.polimi.ingsw.server.model.leaderCards.*;
+import it.polimi.ingsw.server.model.requirements.*;
 
 import java.io.IOException;
 
@@ -28,6 +34,8 @@ public abstract class Notification {
         if (notificationTopicString == null) throw new IllegalArgumentException("Missing message topic");
 
         NotificationType notificationType = NotificationType.valueOf(notificationTopicString);
+
+        Gson gson = gsonAdapter();
 
         switch (notificationType) {
 
@@ -55,6 +63,12 @@ public abstract class Notification {
             case STRONGBOXNOTIFY:
                 return gson.fromJson(jsonObj, StrongboxNotification.class);
 
+            case ACTIVATELEADERLISTNOTIFY:
+                return gson.fromJson(jsonObj, ActivateNotification.class);
+
+            case FAITHNOTIFY:
+                return gson.fromJson(jsonObj, FaithPathNotification.class);
+
 
 
 
@@ -74,7 +88,44 @@ public abstract class Notification {
      * @return the string
      */
     public String serialize () {
+        Gson gson = gsonAdapter();
         return gson.toJson(this);
+    }
+
+    public static Gson gsonAdapter(){
+        RuntimeTypeAdapterFactory<Colour> adapterColour =
+                RuntimeTypeAdapterFactory
+                        .of(Colour.class)
+                        .registerSubtype(Green.class)
+                        .registerSubtype(Yellow.class)
+                        .registerSubtype(Blue.class)
+                        .registerSubtype(Violet.class);
+
+
+        RuntimeTypeAdapterFactory<Requirements> adapterRequirements =
+                RuntimeTypeAdapterFactory
+                        .of(Requirements.class)
+                        .registerSubtype(ResourceRequirement.class)
+                        .registerSubtype(SecondLevelRequirement.class)
+                        .registerSubtype(ThreeFlagsTwoColourRequirement.class)
+                        .registerSubtype(TwoFlagsTwoColourRequirement.class);
+
+        RuntimeTypeAdapterFactory<LeaderCard> adapterLeader =
+                RuntimeTypeAdapterFactory
+                        .of(LeaderCard.class)
+                        .registerSubtype(LeaderCardMarble.class)
+                        .registerSubtype(LeaderCardProduction.class)
+                        .registerSubtype(LeaderCardReduction.class)
+                        .registerSubtype(LeaderCardStorage.class);
+
+
+        Gson gson=new GsonBuilder().setPrettyPrinting()
+                .registerTypeAdapterFactory(adapterColour)
+                .registerTypeAdapterFactory(adapterRequirements)
+                .registerTypeAdapterFactory(adapterLeader)
+                .create();
+
+        return gson;
     }
 
 

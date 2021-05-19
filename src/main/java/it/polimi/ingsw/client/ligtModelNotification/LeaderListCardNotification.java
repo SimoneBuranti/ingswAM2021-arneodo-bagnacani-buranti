@@ -1,14 +1,15 @@
-package it.polimi.ingsw.client.view.ligtModelNotification;
+package it.polimi.ingsw.client.ligtModelNotification;
 
 import it.polimi.ingsw.server.model.leaderCards.LeaderCard;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class ActivateNotification extends Notification {
+public class LeaderListCardNotification extends Notification{
+
     private final NotificationType notificationType = NotificationType.LEADERLISTNOTIFY;
     private ArrayList<LeaderCard> listOfFirstCard;
-    public ActivateNotification(ArrayList<LeaderCard> listOfFirstCard){
+    public LeaderListCardNotification(ArrayList<LeaderCard> listOfFirstCard){
         this.listOfFirstCard=new ArrayList<>();
         this.listOfFirstCard=listOfFirstCard;
     }

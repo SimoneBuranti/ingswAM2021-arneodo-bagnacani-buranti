@@ -26,6 +26,13 @@ public class ClientController implements MessageVisitor {
         this.nickname = null;
     }
 
+    public void restoreClientController(ClientController clientController){
+        this.setNickname(clientController.getNickname());
+        this.virtualView=clientController.getVirtualView();
+        this.virtualView.setClientController(this);
+        this.game=clientController.getGame();
+    }
+
     public Game getGame() {
         return game;
     }
@@ -59,25 +66,37 @@ public class ClientController implements MessageVisitor {
     //---------------------------- From Server to Client ---------------------------------------
 
     @Override
-    public void visit(AlreadyActivatedErrorMessage msg) {}
+    public void visit(AlreadyActivatedErrorMessage msg) throws IOException, InterruptedException {
+
+    }
 
     @Override
-    public void visit(AlreadyExistingNickNameErrorMessage msg) {}
+    public void visit(AlreadyExistingNickNameErrorMessage msg) {
+    }
 
     @Override
-    public void visit(AlreadyUsedLeaderCardErrorMessage msg) {}
+    public void visit(AlreadyUsedLeaderCardErrorMessage msg) throws IOException, InterruptedException {
+
+    }
 
     @Override
-    public void visit(CompleteRunningMatchErrorMessage msg) {}
+    public void visit(CompleteRunningMatchErrorMessage msg) {
+    }
 
     @Override
-    public void visit(NoNicknameMessage msg) {}
+    public void visit(NoNicknameMessage msg) {
+
+    }
 
     @Override
-    public void visit(NotAvailableResourcesErrorMessage msg) {}
+    public void visit(NotAvailableResourcesErrorMessage msg) throws IOException, InterruptedException {
+
+    }
 
     @Override
-    public void visit(NotEnoughSpaceErrorMessage msg) {}
+    public void visit(NotEnoughSpaceErrorMessage msg) {
+
+    }
 
     @Override
     public void visit(RequirementsErrorMessage msg) {}
@@ -177,9 +196,6 @@ public class ClientController implements MessageVisitor {
             clientHandler.sendMessage(new NotYourTurnErrorMessage());
         }
     }
-
-
-
 
 
     @Override
@@ -565,4 +581,6 @@ public class ClientController implements MessageVisitor {
     public void visit(GameTypeMessage msg) {
 
     }
+
+
 }

@@ -1,5 +1,7 @@
 package it.polimi.ingsw.messages;
 
+import java.io.IOException;
+
 public class AlreadyActivatedErrorMessage extends Message {
 
     private final MessageType messageType = MessageType.ALREADYACTIVATEDERROR;
@@ -20,7 +22,12 @@ public class AlreadyActivatedErrorMessage extends Message {
     }
 
     @Override
-    public void accept(MessageVisitor v) {
+    public void accept(MessageVisitor v) throws IOException, InterruptedException {
         v.visit(this);
+    }
+
+    @Override
+    public String toString(){
+        return "production already activated, try with another one or end the action.";
     }
 }

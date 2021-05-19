@@ -1,7 +1,7 @@
 package it.polimi.ingsw.client.lightModel;
 
 
-import it.polimi.ingsw.client.view.ligtModelNotification.*;
+import it.polimi.ingsw.client.ligtModelNotification.*;
 import it.polimi.ingsw.client.lightModel.productionCards.LightDeckProductionCard;
 import it.polimi.ingsw.server.model.Resource;
 import it.polimi.ingsw.server.model.productionCards.ProductionCard;
@@ -16,7 +16,7 @@ public class LightGameMultiPlayer extends LightGame{
     
     public LightGameMultiPlayer(String nickname) throws IOException, InterruptedException {
         super(nickname);
-        configInit();
+        //configInit();
     }
 
     private void configInit() throws IOException, InterruptedException {
@@ -46,6 +46,7 @@ public class LightGameMultiPlayer extends LightGame{
     @Override
     public void addLeaderCard(ArrayList<Integer> leaderCardKeys) throws IOException, InterruptedException {
         gameBoardOfPlayer.addLeaderCard(leaderCardKeys);
+
         notifyObserver(new LeaderListCardNotification(gameBoardOfPlayer.getLeaderCards()).serialize());
     }
 

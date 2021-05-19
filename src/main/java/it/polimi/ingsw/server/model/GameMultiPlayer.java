@@ -82,23 +82,26 @@ public class GameMultiPlayer extends Game {
         this.playerList= new ArrayList<>(numberOfPlayer);
         this.numberOfPlayer=numberOfPlayer;
         inkwell=createRandomNumber(numberOfPlayer);
-        System.out.println(inkwell);
         clientControllersInOrder=correctOrder(clientControllers,inkwell);
         createPlayer(numberOfPlayer,clientControllersInOrder);
         currentPlayer = playerList.get(currentPlayerPosition);
         nickNameInOrder= new ArrayList<>();
         createNickNameInOrder(clientControllersInOrder);
         addObservators();
+        notifyObserver(new GameTypeMessage(true));
         configClient();
         }
-        else
-            restoreGameMultiPlayer(clientControllers); }
+        else {
+            restoreGameMultiPlayer(clientControllers);
+        }
+
+        saveInformation();
+    }
 
 
     @Override
     public void configClient() throws IOException, InterruptedException {
         super.configClient();
-        notifyObserver(new GameTypeMessage(true));
     if (numberOfPlayer==2)
     {
         ArrayList<Integer> needForLeader = new ArrayList<>();
@@ -161,8 +164,9 @@ public class GameMultiPlayer extends Game {
     }
 
     private void addObservators() {
-        for(int i=0; i<numberOfPlayer;i++)
+        for(int i=0; i<numberOfPlayer;i++) {
             this.addObserver(clientControllersInOrder.get(i).getVirtualView());
+        }
     }
 
     /**
@@ -316,7 +320,8 @@ public class GameMultiPlayer extends Game {
         for(Player p : playerList){
             if(p.getNickName().equals(nickname) && !(p.isConnected())){
                 p.setConnected();
-                notifyObserver(new GameTypeMessage(true));
+                notifyOnlyOneSpecificObserver(new GameTypeMessage(true), p.getNickName());
+                configClientReconnected(p.getNickName());
                 ArrayList<Integer> needForLeader = new ArrayList<>();
                 ArrayList<Integer> needForLeader2 = new ArrayList<>();
 
@@ -579,9 +584,9 @@ public class GameMultiPlayer extends Game {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-
-        addObservators();
         this.clientControllersInOrder=clientControllers;
+        addObservators();
+        //this.clientControllersInOrder=clientControllers;
         notifyObserver(new GameTypeMessage(true));
         createPlayerRestore(numberOfPlayer,nickNameInOrder);
         reConfigClient();

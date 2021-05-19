@@ -13,6 +13,7 @@ public class GameControllerRestart extends GameController {
 
 
     public GameControllerRestart(Server server) {
+        this.gameControllerState = "Restart";
         this.server = server;
     }
 
@@ -55,16 +56,19 @@ public class GameControllerRestart extends GameController {
 
             if (reconnected.size() == server.getLobbySize()){
                 if (numberOfPlayers==1){
-                    server.setGameController(new GameControllerSinglePlayer());
                     server.restoreGameSingleBackup();
+                    server.setGameController(new GameControllerSinglePlayer(server,server.getGame()));
+
                 } else {
-                    server.setGameController(new GameControllerMultiplayer(this.server,this.game));
                     server.restoreGameMultiBackup();
+                    server.setGameController(new GameControllerMultiplayer(this.server,this.game));
+
                 }
 
             }
         }
     }
+
 
     @Override
     public synchronized void handleMessage(RestartAnswerMessage msg, ClientController clientController) throws IOException, InterruptedException {

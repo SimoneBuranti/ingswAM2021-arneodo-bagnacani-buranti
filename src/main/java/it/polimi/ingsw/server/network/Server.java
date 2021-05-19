@@ -16,6 +16,8 @@ public class Server {
     private GameController gameController;
     private Game game;
     private ArrayList<ClientController> clientControllers = new ArrayList<>();
+
+    private ArrayList<ClientController> clientControllersDisconnected = new ArrayList<>();
     private VirtualView virtualView;
     private ArrayList<String> lobby;
     private boolean sendRestartQuestion;
@@ -70,9 +72,12 @@ public class Server {
     //--------------------------------------------------------------------
 
     public void initNewSolitaireGame() throws IOException, InterruptedException {
+
         game = new GameSolitaire(lobby.get(0),true,clientControllers.get(0));
 
-        gameController = new GameControllerSinglePlayer();
+        gameController = new GameControllerSinglePlayer(this,this.getGame());
+
+        clientControllers.get(0).setGame(this.game);
     }
 
 
@@ -88,11 +93,16 @@ public class Server {
 
     public void restoreGameSingleBackup() throws IOException, InterruptedException {
         this.game=new GameSolitaire(clientControllers.get(0).getNickname(),false,clientControllers.get(0));
+
+        clientControllers.get(0).setGame(this.game);
     }
 
     public void restoreGameMultiBackup() throws IOException, InterruptedException {
         this.clientControllers=orderRestart();
         this.game=new GameMultiPlayer(this.getLobbySize(),lobby,false,clientControllers);
+        for(ClientController client : clientControllers){
+            client.setGame(this.game);
+        }
     }
 
 
@@ -153,4 +163,15 @@ public class Server {
         return client;
     }
 
+    public ArrayList<ClientController> getClientControllersDisconnected() {
+        return clientControllersDisconnected;
+    }
+
+    public ClientController removeClientControllersDisconnected(int i){
+        return clientControllersDisconnected.remove(i);
+    }
+
+    public void addClientControllersDisconnected(ClientController clientController){
+        clientControllersDisconnected.add(clientController);
+    }
 }

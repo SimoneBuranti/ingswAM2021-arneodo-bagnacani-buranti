@@ -1,15 +1,15 @@
-package it.polimi.ingsw.client;
+package it.polimi.ingsw.client.view;
 
+import it.polimi.ingsw.client.SocketClient;
 import it.polimi.ingsw.client.lightModel.LightGame;
 import it.polimi.ingsw.client.lightModel.LightGameMultiPlayer;
 import it.polimi.ingsw.client.lightModel.LightGameSolitaire;
-import it.polimi.ingsw.client.view.View;
 import it.polimi.ingsw.messages.*;
 import it.polimi.ingsw.messages.observable.*;
 
 import java.io.IOException;
 
-public class ViewController implements MessageVisitor {
+public class ViewController implements MessageVisitor, ViewObserver {
     private final SocketClient socketClient;
     private LightGame game ;
     private String nickName = null;
@@ -35,75 +35,79 @@ public class ViewController implements MessageVisitor {
         this.nickName = nickName;
     }
 
-    public void sendMessage(Message msg){
-        socketClient.sendMessage(msg);
-    }
 
     @Override
     public void visit(AlreadyActivatedErrorMessage msg) {
+        view.notifyError(msg);
     }
 
     @Override
-    public void visit(AlreadyExistingNickNameErrorMessage msg) {
-        //view.notifyError(msg.getErrorNotification());
+    public void visit(AlreadyExistingNickNameErrorMessage msg) throws IOException, InterruptedException {
+        view.notifyError(msg);
         view.askNickname();
     }
 
     @Override
     public void visit(AlreadyUsedLeaderCardErrorMessage msg) {
-
+        view.notifyError(msg);
     }
 
     @Override
     public void visit(CompleteRunningMatchErrorMessage msg) {
-        //view.notifyError(msg.getErrorNotification());
+        view.notifyError(msg);
 
     }
 
     @Override
-    public void visit(NoNicknameMessage msg) {
-        //view.notifyError(msg.getErrorNotification());
+    public void visit(NoNicknameMessage msg) throws IOException, InterruptedException {
+        view.notifyError(msg);
         view.askNickname();
     }
 
     @Override
     public void visit(NotAvailableResourcesErrorMessage msg) {
+        view.notifyError(msg);
 
     }
 
     @Override
     public void visit(NotEnoughSpaceErrorMessage msg) {
+        view.notifyError(msg);
 
     }
 
     @Override
     public void visit(RequirementsErrorMessage msg) {
+        view.notifyError(msg);
 
     }
 
     @Override
     public void visit(WrongColumnErrorMessage msg) {
-
+        view.notifyError(msg);
     }
 
     @Override
     public void visit(NotYourTurnErrorMessage msg) {
+        view.notifyError(msg);
 
     }
 
     @Override
     public void visit(BootingLobbyErrorMessage msg) {
+        view.notifyError(msg);
 
     }
 
     @Override
-    public void visit(RestartQuestionMessage msg) {
+    public void visit(RestartQuestionMessage msg) throws IOException, InterruptedException {
         view.askRestartGame();
     }
 
     @Override
     public void visit(ChangeCurrentPlayerMessage msg) {
         game.setCurrentPlayer(msg.getNickname());
+        //view.showChangeCurrent(msg.getNickname());
     }
 
 
@@ -111,10 +115,12 @@ public class ViewController implements MessageVisitor {
     @Override
     public void visit(EndOfTurnMessage msg) {
 
+
     }
 
     @Override
     public void visit(LastTurnMessage msg) {
+        //  view.showLastTurn();
 
     }
 
@@ -140,11 +146,13 @@ public class ViewController implements MessageVisitor {
 
     @Override
     public void visit(PickedLeaderCardsMessage msg) {
+        //  view.showPersonalLeaderCardForConfig(msg.getlist);
 
     }
 
     @Override
     public void visit(SetPapalsMessage msg) {
+
         game.setPapalCards(msg.getCurrCall());
     }
 
@@ -152,6 +160,8 @@ public class ViewController implements MessageVisitor {
     public void visit(RestartAnswerMessage msg) {
 
     }
+
+
 
     @Override
     public void visit(ActivateLeaderCardMessage msg) {
@@ -229,7 +239,7 @@ public class ViewController implements MessageVisitor {
     }
 
     @Override
-    public void visit(UsernameMessage msg) {
+    public void visit(UsernameMessage msg) throws IOException, InterruptedException {
         view.askNickname();
     }
 
@@ -244,18 +254,13 @@ public class ViewController implements MessageVisitor {
     }
 
     @Override
-    public void visit(PongMessage msg) {
-
-    }
+    public void visit(PongMessage msg) {}
 
     @Override
-    public void visit(OkMessage msg) {
-
-    }
+    public void visit(OkMessage msg) {}
 
     @Override
     public void visit(NicknameStartedMessage msg) {
-        System.out.println(msg.getMessageType()+" : "+ msg.getNickname());
         game.setPlayersInOrder(msg.getNickname());
     }
 
@@ -278,7 +283,6 @@ public class ViewController implements MessageVisitor {
 
     @Override
     public void visit(UpdateInitLeaderMessage msg) {
-        System.out.println(msg.getMessageType()+" : "+ msg.getLeaderCards());
         try {
             game.addLeaderCard(msg.getLeaderCards());
         } catch (IOException e) {
@@ -309,7 +313,6 @@ public class ViewController implements MessageVisitor {
 
     @Override
     public void visit(DeckProductionCardConfigMessage msg) {
-        System.out.println(msg.getMessageType()+" : "+ msg.getDeck());
         game.setDeckProductionCard(msg.getNumberDeck(), msg.getDeck());
     }
 
@@ -326,12 +329,12 @@ public class ViewController implements MessageVisitor {
 
     @Override
     public void visit(TakeCardForNotCurrentMessage msg) {
+        // visit.takeCardProductionOfAnotherPlayer();
 
     }
 
     @Override
     public void visit(ConfigurationMarketMessage msg) throws IOException, InterruptedException {
-        System.out.println(msg.getMessageType()+" : "+ msg.getMarbleList());
         game.setMarket(msg.getMarbleList());
     }
 
@@ -358,10 +361,9 @@ public class ViewController implements MessageVisitor {
     }
 
 
-
     @Override
     public void visit(MagnificentWinMessage msg) {
-
+        // view.magnificentWin();
     }
 
     @Override
@@ -371,6 +373,7 @@ public class ViewController implements MessageVisitor {
 
     @Override
     public void visit(MyVictoryMessage msg) {
+        // view.YouWin();
 
     }
 
@@ -389,42 +392,44 @@ public class ViewController implements MessageVisitor {
 
     @Override
     public void visit(ProductionMessageForNotCurrentMessage msg) throws IOException, InterruptedException {
-
+        // visit.negativeProductionOfAnotherPlayer();
         game.addResourceReserve(msg.getResource());
     }
 
     @Override
     public void visit(ProductionMessageForCurrentMessage msg) throws IOException, InterruptedException {
-
         game.addResourceReserve(msg.getResource());
         game.payResourcesProduction(msg.getResource());
     }
 
+
     @Override
     public void visit(ResultOfProductionMessage msg) throws IOException, InterruptedException {
-
         game.useResourceReserve(msg.getResource());
         game.addStrongbox(msg.getResource());
     }
 
     @Override
     public void visit(ResultOfProductionForNotCurrentMessage msg) throws IOException, InterruptedException {
-
+        // visit.positiveProductionOfAnotherPlayer();
         game.useResourceReserve(msg.getResource());
     }
 
     @Override
     public void visit(ActivationLeaderForNotCurrentMessage msg) {
+        // visit.leaderActivationOfAnotherPlayer();
 
     }
 
     @Override
     public void visit(ActivationLeaderForCurrentMessage msg) {
+
         game.activateLeaderCard(msg.getIndex());
     }
 
     @Override
     public void visit(DiscardLeaderForNotCurrentMessage msg) {
+        // visit.leaderDiscardOfAnotherPlayer();
 
     }
 
@@ -452,6 +457,7 @@ public class ViewController implements MessageVisitor {
 
     @Override
     public void visit(FaithPathOpponentMessage msg) {
+        // visit.faithMoveOfAnotherPlayer();
 
     }
 
@@ -459,6 +465,7 @@ public class ViewController implements MessageVisitor {
 
     @Override
     public void visit(EndGamePlayerWinnerMessage msg) {
+        // visit.showWinner();
 
     }
 
@@ -553,6 +560,7 @@ public class ViewController implements MessageVisitor {
 
     @Override
     public void visit(YourTurnMessage msg) {
+        //visit.yourTurn();
 
     }
 
@@ -568,5 +576,9 @@ public class ViewController implements MessageVisitor {
 
 
 
-
+    @Override
+    public void update(Message message) throws IOException, InterruptedException {
+        socketClient.sendMessage(message);
+    }
 }
+

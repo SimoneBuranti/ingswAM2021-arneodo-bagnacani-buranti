@@ -5,11 +5,13 @@ import it.polimi.ingsw.server.model.Game;
 import it.polimi.ingsw.server.network.Server;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class GameControllerMultiplayer extends GameController {
 
 
     public GameControllerMultiplayer(Server server, Game game) {
+        this.gameControllerState = "MultiPlayer";
         this.server = server;
         this.game = game;
     }
@@ -19,6 +21,7 @@ public class GameControllerMultiplayer extends GameController {
      boolean flag = false;
      if(game.disconnectPlayer(clientController.getNickname())) {
       flag = true;
+      server.addClientControllersDisconnected(clientController);
      }
      try {
       clientController.getClientHandler().disconnect();
@@ -45,83 +48,10 @@ public class GameControllerMultiplayer extends GameController {
     }
     }
 
+
     @Override
     public void handleMessage(RestartAnswerMessage msg, ClientController clientController) {
     //unreachable
     }
 
-
-
-     /* @Override
-      public void handleMessage(ActivateLeaderCardMessage msg) {
-
-      }
-
-      @Override
-      public void handleMessage(BaseProductionOnMessage msg) {
-
-      }
-
-      @Override
-      public void handleMessage(BuyProductionCardMessage msg) {
-
-      }
-
-      @Override
-      public void handleMessage(DiscardLeaderCardMessage msg) {
-
-      }
-
-      @Override
-      public void handleMessage(DoubleProductionOnMessage msg) {
-
-      }
-
-      @Override
-      public void handleMessage(EndOfProductionMessage msg) {
-
-      }*/
-
-
-     /* @Override
-      public void handleMessage(ExtraProductionOnMessage msg) {
-
-      }
-
-      @Override
-      public void handleMessage(InitialResourcesMessage msg) {
-
-      }
-
-      @Override
-      public void handleMessage(KeepLeaderCardsMessage msg) {
-
-      }
-
-      @Override
-      public void handleMessage(KeepResourcesMessage msg) {
-
-      }*/
-
-
-     /* @Override
-      public void handleMessage(ProductionOnMessage msg) {
-
-      }
-
-      @Override
-      public void handleMessage(PushColumnMessage msg) {
-
-      }
-
-      @Override
-      public void handleMessage(PushRowMessage msg) {
-
-      }*/
-
-
-     /* @Override
-      public void handleMessage(WhiteMarbleChoosenResources msg) {
-
-      }*/
 }

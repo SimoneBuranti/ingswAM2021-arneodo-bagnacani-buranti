@@ -56,28 +56,30 @@ public class GameSolitaire extends Game {
     public GameSolitaire(String nickName, Boolean newGame,ClientController clientController) throws IOException, InterruptedException {
         super(newGame);
         if(newGame){
-        this.nickNamePlayer=nickName;
-        this.clientController=clientController;
-        deckActionMarker = new DeckActionMarker();
-        lorenzoTheMagnificent = new LorenzoTheMagnificent();
-        player = new PlayerFirst(nickName,this, clientController.getVirtualView());
-        currentPlayer = player;
-        this.addObserver(clientController.getVirtualView());
-        configClient();}
+            this.nickNamePlayer=nickName;
+            this.clientController=clientController;
+            deckActionMarker = new DeckActionMarker();
+            lorenzoTheMagnificent = new LorenzoTheMagnificent();
+            player = new PlayerFirst(nickName,this, clientController.getVirtualView());
+            currentPlayer = player;
+            this.addObserver(clientController.getVirtualView());
+            notifyObserver(new GameTypeMessage(false));
+            configClient();
+        }
         else
             restoreGameSolitaire(clientController);
+
+        saveInformation();
     }
 
 
     @Override
     public void configClient() throws IOException, InterruptedException {
         super.configClient();
-        notifyObserver(new GameTypeMessage(false));
         ArrayList<Integer> needForLeader = new ArrayList<>();
         for (int i=0; i<4;i++)
             needForLeader.add(player.getPersonalLeaderCard().get(i).getKey());
         notifyObserver(new UpdateInitLeaderMessage(needForLeader));
-
 
         }
 
@@ -344,6 +346,7 @@ public class GameSolitaire extends Game {
         if(player.getNickName().equals(nickname) && !(player.isConnected())){
             player.setConnected();
             notifyObserver(new GameTypeMessage(false));
+            configClientReconnected(player.getNickName());
             ArrayList<Integer> needForLeader = new ArrayList<>();
             ArrayList<Integer> needForLeader2 = new ArrayList<>();
             notifyOnlyOneSpecificObserver(new StorageConfigMessage(player.getGameBoardOfPlayer().getStorageOfGameBoard().getStorageResource()), player.getNickName());

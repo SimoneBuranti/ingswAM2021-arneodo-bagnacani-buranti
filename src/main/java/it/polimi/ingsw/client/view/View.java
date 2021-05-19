@@ -1,7 +1,6 @@
 package it.polimi.ingsw.client.view;
 
-import it.polimi.ingsw.client.ViewController;
-import it.polimi.ingsw.messages.*;
+import it.polimi.ingsw.messages.Message;
 
 import java.io.IOException;
 
@@ -12,9 +11,9 @@ public interface View  {
 
     void askNumberOfPlayers() throws IOException, InterruptedException;
 
-    void askNickname();
+    void askNickname() throws IOException, InterruptedException;
 
-    void askRestartGame();
+    void askRestartGame() throws IOException, InterruptedException;
 
-    void notifyError(String error);
+    void notifyError(Message msg);
 }
