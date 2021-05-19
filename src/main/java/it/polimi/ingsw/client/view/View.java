@@ -15,9 +15,11 @@ public interface View  {
 
     void askRestartGame() throws IOException, InterruptedException;
 
-    void myTurn();
-
     void showChangeCurrent(String currentNick);
 
+    void yourTurn();
+
     void notifyError(Message msg);
+
+
 }

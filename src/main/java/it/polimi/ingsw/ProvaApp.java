@@ -1,6 +1,7 @@
 package it.polimi.ingsw;
 
-import it.polimi.ingsw.messages.PingMessage;
+import it.polimi.ingsw.client.commands.*;
+import it.polimi.ingsw.client.view.ViewController;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -21,7 +22,13 @@ public class ProvaApp {
 
         Scanner in = new Scanner(System.in);
         String command = in.nextLine();
-        System.out.println((command.equals("ciao %c %d")));
+        try {
+            Command cmd = Command.parseCommand(command, null);
+            System.out.println(cmd);
+        } catch (InvalidCommandException e) {
+            e.printStackTrace();
+        }
+
 
     }
 }

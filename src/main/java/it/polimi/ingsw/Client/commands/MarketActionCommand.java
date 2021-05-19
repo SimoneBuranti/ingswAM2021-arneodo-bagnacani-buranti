@@ -16,12 +16,24 @@ public class MarketActionCommand extends Command {
         this.viewController = viewController;
     }
 
+    public char getRc() {
+        return rc;
+    }
+
+    public int getN() {
+        return n;
+    }
+
     public void commandOn(){
         if (rc=='c'){
             viewController.sendMessage(new PushColumnMessage(n));
         } else
             viewController.sendMessage(new PushRowMessage(n));
 
+    }
+
+    public String toString(){
+        return "market "+rc+" "+n;
     }
 
 }
