@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public class LightGame extends ViewObservable {
+    private boolean init;
 
     /**
      * this attribute represents the game market
@@ -88,6 +89,7 @@ public class LightGame extends ViewObservable {
      * this constructor instantiates all the game attributes
      */
     public LightGame(String nickname){
+        init=false;
 
         listOfDeck = new ArrayList<>();
 
@@ -281,4 +283,11 @@ public class LightGame extends ViewObservable {
     }
 
 
+    public boolean isInit() {
+        return init;
+    }
+
+    public void setInit(boolean init) {
+        this.init = init;
+    }
 }

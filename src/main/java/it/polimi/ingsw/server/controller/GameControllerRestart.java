@@ -1,6 +1,7 @@
 package it.polimi.ingsw.server.controller;
 
 import it.polimi.ingsw.messages.*;
+import it.polimi.ingsw.server.model.FileClass;
 import it.polimi.ingsw.server.network.Server;
 
 import java.io.IOException;
@@ -41,16 +42,19 @@ public class GameControllerRestart extends GameController {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        } else {
+        }
+        else {
             if (server.isInLobby(msg.getUsername())){
                 if (!reconnected.contains(msg.getUsername())){
                     clientController.setNickname(msg.getUsername());
                     reconnected.add(msg.getUsername());
                     server.addClientController(clientController);
-                } else {
+                }
+                else {
                     clientController.getClientHandler().sendMessage(new AlreadyExistingNickNameErrorMessage());
                 }
-            } else {
+            }
+            else {
                 clientController.getClientHandler().sendMessage(new NoNicknameMessage());
             }
 
@@ -75,9 +79,12 @@ public class GameControllerRestart extends GameController {
         if(!msg.getAnswer()){
             server.restartLobby();
             server.setGameController(new GameControllerEmpty(this.server));
-        } else {
-            restartAnswerReceived = true;
+            restartAnswerReceived = false;
         }
+        else
+            {
+            restartAnswerReceived = true;
+            }
         clientController.getClientHandler().sendMessage(new UsernameMessage(null));
     }
 

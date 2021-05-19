@@ -8,11 +8,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class NicknameStartedMessage extends Message {
-    private final MessageType messageType = MessageType.OPPONENTFAITHPATHMOVE;
+    private final MessageType messageType = MessageType.NICKNAME;
     private ArrayList<String> nickname;
 
     public NicknameStartedMessage(ArrayList<String> nickname){
-        nickname=new ArrayList<>();
+        this.nickname=new ArrayList<>();
 
         this.nickname=nickname;
     }

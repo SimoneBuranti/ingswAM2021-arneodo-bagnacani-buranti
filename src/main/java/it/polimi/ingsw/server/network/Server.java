@@ -5,6 +5,7 @@ import it.polimi.ingsw.server.controller.*;
 import it.polimi.ingsw.server.model.*;
 import it.polimi.ingsw.server.virtualview.*;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -19,7 +20,7 @@ public class Server {
 
     private ArrayList<ClientController> clientControllersDisconnected = new ArrayList<>();
     private VirtualView virtualView;
-    private ArrayList<String> lobby;
+    private ArrayList<String> lobby = new ArrayList<>();
     private boolean sendRestartQuestion;
 
 
@@ -27,15 +28,32 @@ public class Server {
     public Server() {
         try {
             ArrayList<String> nickNameInOrder;
+            String nickname;
             Gson gson = new Gson();
+            File f = new File("src/main/resources/MultiGame.json");
+            if (f.exists()){
+                nickNameInOrder = gson.fromJson(new FileReader("src/main/resources/InformationAboutTurn.json"),ArrayList.class);
+                this.gameController = new GameControllerRestart(this);
+                gameController.setServer(this);
+                lobby = nickNameInOrder;
+                sendRestartQuestion = true;
+                gameController.setNumberOfPlayers(nickNameInOrder.size());
+            }
+             else
+                {
+                    f = new File("src/main/resources/SingleGame.json");
+                    nickname = gson.fromJson(new FileReader("src/main/resources/InformationAboutTurn.json"),String.class);
+                    lobby.add(nickname);
+                    this.gameController = new GameControllerRestart(this);
+                    gameController.setServer(this);
+                    sendRestartQuestion = true;
+                    gameController.setNumberOfPlayers(1);
 
-            nickNameInOrder = gson.fromJson(new FileReader("src/main/resources/InformationAboutTurn.json"),ArrayList.class);
-            this.gameController = new GameControllerRestart(this);
-            gameController.setServer(this);
-            lobby = nickNameInOrder;
-            sendRestartQuestion = true;
 
-        } catch (FileNotFoundException e) {
+                }
+
+        }
+        catch (FileNotFoundException e) {
             this.gameController = new GameControllerEmpty(this);
             gameController.setServer(this);
             lobby = new ArrayList<>();

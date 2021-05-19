@@ -277,13 +277,7 @@ public class Market extends Observable {
 
 
 public static Gson gsonForEveryoneMArket(){
-    /*RuntimeTypeAdapterFactory<Colour> adapterColour =
-            RuntimeTypeAdapterFactory
-                    .of(Colour.class)
-                    .registerSubtype(Green.class)
-                    .registerSubtype(Yellow.class)
-                    .registerSubtype(Blue.class)
-                    .registerSubtype(Violet.class);*/
+
 
     RuntimeTypeAdapterFactory<Marble> adapterMarble =
             RuntimeTypeAdapterFactory
@@ -299,7 +293,6 @@ public static Gson gsonForEveryoneMArket(){
 
     Gson gson=new GsonBuilder()
             .registerTypeAdapterFactory(adapterMarble)
-            //.registerTypeAdapterFactory(adapterColour)
             .setPrettyPrinting()
             .create();
 

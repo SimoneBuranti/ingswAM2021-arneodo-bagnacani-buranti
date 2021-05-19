@@ -1,6 +1,7 @@
 package it.polimi.ingsw.server.model;
 
 import com.google.gson.Gson;
+import it.polimi.ingsw.messages.NoNicknameMessage;
 import it.polimi.ingsw.messages.observable.*;
 import it.polimi.ingsw.server.controller.ClientController;
 import it.polimi.ingsw.server.model.exceptions.CallForCouncilException;
@@ -89,6 +90,7 @@ public class GameMultiPlayer extends Game {
         createNickNameInOrder(clientControllersInOrder);
         addObservators();
         notifyObserver(new GameTypeMessage(true));
+        notifyObserver(new NicknameStartedMessage(nickNameInOrder));
         configClient();
         }
         else {
@@ -154,6 +156,7 @@ public class GameMultiPlayer extends Game {
             needForLeader.add(fourthPlayer.getPersonalLeaderCard().get(i).getKey());
         notifyOnlyOneSpecificObserver(new UpdateInitLeaderMessage(needForLeader),fourthPlayer.getNickName());
     }
+    notifyToOneObserver(new YourTurnMessage());
 
 
 }
@@ -460,7 +463,7 @@ public class GameMultiPlayer extends Game {
         for(Player p : playerList){
             p.savePlayerInformation();
         }
-
+        saveTypeMatch();
         saveInformationAboutTurn();
         saveInformationOfInkwel();
         saveInformationPlayerNumber();
@@ -586,8 +589,8 @@ public class GameMultiPlayer extends Game {
         }
         this.clientControllersInOrder=clientControllers;
         addObservators();
-        //this.clientControllersInOrder=clientControllers;
         notifyObserver(new GameTypeMessage(true));
+        notifyObserver(new NicknameStartedMessage(nickNameInOrder));
         createPlayerRestore(numberOfPlayer,nickNameInOrder);
         reConfigClient();
         currentPlayer = playerList.get(currentPlayerPosition);
@@ -716,6 +719,24 @@ public class GameMultiPlayer extends Game {
         saveInformation();
         notifyToOneObserver(new YourTurnMessage());
         notifyAllObserverLessOne(new ChangeTurnMessage(currentPlayer.getNickName()));}
+
+    private void saveTypeMatch() {
+        Gson gson = new Gson();
+        FileWriter config = null;
+        String jsonStrin = gson.toJson(nickNameInOrder);
+        try {
+            config = new FileWriter("src/main/resources/MultiGame.json");
+            config.write(jsonStrin);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                config.flush();
+                config.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } }
+    }
 
 }
 
