@@ -97,7 +97,6 @@ public class GameMultiPlayer extends Game {
         else {
             restoreGameMultiPlayer(clientControllers);
         }
-
         saveInformation();
     }
 
@@ -157,7 +156,8 @@ public class GameMultiPlayer extends Game {
             needForLeader.add(fourthPlayer.getPersonalLeaderCard().get(i).getKey());
         notifyOnlyOneSpecificObserver(new UpdateInitLeaderMessage(needForLeader),fourthPlayer.getNickName());
     }
-    notifyToOneObserver(new YourTurnMessage());
+
+    //notifyToOneObserver(new YourTurnMessage());
 
 
 }

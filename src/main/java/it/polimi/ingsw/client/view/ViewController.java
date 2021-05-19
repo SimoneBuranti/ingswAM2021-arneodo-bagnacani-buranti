@@ -39,9 +39,9 @@ public class ViewController implements MessageVisitor, ViewObserver {
         return nickName;
     }
 
-    /*public void sendMessage(Message msg) {
+    public void sendMessage(Message msg) {
         socketClient.sendMessage(msg);
-    }*/
+    }
 
     @Override
     public void visit(AlreadyActivatedErrorMessage msg) {
@@ -147,7 +147,8 @@ public class ViewController implements MessageVisitor, ViewObserver {
         if (msg.getnOfPlayers() == -1){
             view.askNumberOfPlayers();
         } else {
-            view.showLobby(msg.getnOfPlayers(), msg.getLobbySize());
+            if(msg.getnOfPlayers() < msg.getLobbySize())
+                view.showLobby(msg.getnOfPlayers(), msg.getLobbySize());
         }
     }
 
@@ -270,6 +271,7 @@ public class ViewController implements MessageVisitor, ViewObserver {
     @Override
     public void visit(NicknameStartedMessage msg) {
         game.setPlayersInOrder(msg.getNickname());
+        view.showPlayersOrder(msg.getNickname());
     }
 
     @Override
@@ -291,7 +293,6 @@ public class ViewController implements MessageVisitor, ViewObserver {
 
     @Override
     public void visit(UpdateInitLeaderMessage msg) {
-        System.out.println(msg.getMessageType()+" : "+ msg.getLeaderCards());
         try {
             game.addLeaderCard(msg.getLeaderCards());
         } catch (IOException e) {
@@ -588,6 +589,7 @@ public class ViewController implements MessageVisitor, ViewObserver {
     @Override
     public void visit(GameTypeMessage msg) throws IOException, InterruptedException {
         setGame(msg.isMultiOrNot());
+        view.showStartGame();
     }
 
 

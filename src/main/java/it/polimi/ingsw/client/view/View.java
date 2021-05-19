@@ -7,6 +7,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public interface View  {
+
+    void startView();
+
     void update(String notification) throws IOException, InterruptedException;
 
     void setViewController(ViewController viewController);
@@ -32,4 +35,6 @@ public interface View  {
     void askLeaderCardToKeep(ArrayList<LeaderCard> leaderCards);
 
     void showCallForCouncil(String nickname, int papalCard);
+
+    void showStartGame();
 }

@@ -37,11 +37,11 @@ public class GameControllerRestart extends GameController {
     public synchronized void handleMessage(UsernameMessage msg, ClientController clientController) throws IOException, InterruptedException {
         if (!restartAnswerReceived){
             clientController.getClientHandler().sendMessage(new BootingLobbyErrorMessage());
-            try {
+            /*try {
                 clientController.getClientHandler().disconnect();
             } catch (IOException e) {
                 e.printStackTrace();
-            }
+            }*/
         }
         else {
             if (server.isInLobby(msg.getUsername())){
@@ -49,6 +49,8 @@ public class GameControllerRestart extends GameController {
                     clientController.setNickname(msg.getUsername());
                     reconnected.add(msg.getUsername());
                     server.addClientController(clientController);
+                    for(ClientController c : server.getClientController())
+                        c.getClientHandler().sendMessage(new NPlayersMessage(reconnected.size(), server.getLobbySize()));
                 }
                 else {
                     clientController.getClientHandler().sendMessage(new AlreadyExistingNickNameErrorMessage());

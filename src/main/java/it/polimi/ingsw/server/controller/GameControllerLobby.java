@@ -35,8 +35,9 @@ public class GameControllerLobby extends GameController {
     public void handleMessage(UsernameMessage msg, ClientController clientController) throws IOException, InterruptedException {
         if (server.addPlayerToLobby(msg.getUsername())){
             clientController.setNickname(msg.getUsername());
-            clientController.getClientHandler().sendMessage(new NPlayersMessage(server.getLobbySize(),lobbySize));
             server.addClientController(clientController);
+            for(ClientController c : server.getClientController())
+                c.getClientHandler().sendMessage(new NPlayersMessage(server.getLobbySize(),lobbySize));
         } else {
             clientController.getClientHandler().sendMessage(new AlreadyExistingNickNameErrorMessage());
         }

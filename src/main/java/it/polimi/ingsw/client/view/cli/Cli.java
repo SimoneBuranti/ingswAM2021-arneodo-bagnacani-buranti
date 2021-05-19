@@ -22,10 +22,16 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
     }*/
 
 
+
     @Override
     public void setViewController(ViewController viewController){
         this.viewController=viewController;
         setObserver(viewController);
+    }
+
+    @Override
+    public void startView() {
+        System.out.println("Welcome to MASTERS OF THE RENAISSANCE!");
     }
 
     @Override
@@ -106,6 +112,8 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
             nOfPlayers =input.nextInt();
             if (nOfPlayers > 0 && nOfPlayers < 5){
                 notifyObserver(new NumberPlayerMessage(nOfPlayers));
+                if(nOfPlayers > 1)
+                    System.out.println("Please wait for the missing players to start the game...");
                 return;
             } else {
                 System.out.println("Invalid number of players, try with a number between 1 and 4");
@@ -166,7 +174,7 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
     }
     @Override
     public void showLobby(int playersInLobby, int playerInGame){
-        System.out.println("There are " + playersInLobby + "players in the lobby out of " + playerInGame +
+        System.out.println("There are " + playersInLobby + " players in the lobby out of " + playerInGame +
                 ", waiting for the missing players to start the game");
     }
     @Override
@@ -180,5 +188,10 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
         }else if (papalCard == 1){
             System.out.println("Player " + nickname + "activated the report in the Vatican : you got the papal favor card!");
         }
+    }
+
+    @Override
+    public void showStartGame() {
+        System.out.println("The game has started!");
     }
 }

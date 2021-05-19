@@ -19,7 +19,7 @@ public class ClientApp {
 
         View cli = new Cli();
         SocketClient socketClient = new SocketClient(hostName, portNumber, cli );
-
+        cli.startView();
         new Thread(){
             public void run(){
                 socketClient.readMessage();

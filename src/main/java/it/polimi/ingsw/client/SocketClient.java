@@ -47,7 +47,7 @@ public class SocketClient {
 
 
     public void readMessageClient(String msg) throws IOException, InterruptedException {
-        System.out.println(msg);
+        //System.out.println(msg);
         Message parsedMsg = Message.deserialize(msg);
         parsedMsg.accept(viewController);
     }

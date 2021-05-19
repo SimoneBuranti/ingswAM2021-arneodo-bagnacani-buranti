@@ -131,6 +131,10 @@ public class Server {
     public void removeClientController(ClientController clientController){
         clientControllers.remove(clientController);
     }
+
+    public ArrayList<ClientController> getClientController(){
+        return clientControllers;
+    }
     //------------------------Setter--------------------------------------
 
     public void setSendRestartQuestion(){
