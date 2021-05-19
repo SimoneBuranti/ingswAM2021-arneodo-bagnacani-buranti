@@ -35,83 +35,86 @@ public class ViewController implements MessageVisitor, ViewObserver {
         this.nickName = nickName;
     }
 
-    public void sendMessage(Message msg) {
-        socketClient.sendMessage(msg);
+    public String getNickName() {
+        return nickName;
     }
+
+    /*public void sendMessage(Message msg) {
+        socketClient.sendMessage(msg);
+    }*/
 
     @Override
     public void visit(AlreadyActivatedErrorMessage msg) {
-        //view.notifyError(msg.getErrorNotification());
+        view.notifyError(msg);
     }
 
     @Override
-    public void visit(AlreadyExistingNickNameErrorMessage msg) {
-        //view.notifyError(msg.getErrorNotification());
+    public void visit(AlreadyExistingNickNameErrorMessage msg) throws IOException, InterruptedException {
+        view.notifyError(msg);
         view.askNickname();
     }
 
     @Override
     public void visit(AlreadyUsedLeaderCardErrorMessage msg) {
-        //view.notifyError(msg.getErrorNotification());
-
+        view.notifyError(msg);
     }
 
     @Override
     public void visit(CompleteRunningMatchErrorMessage msg) {
-        //view.notifyError(msg.getErrorNotification());
+        view.notifyError(msg);
 
     }
 
     @Override
-    public void visit(NoNicknameMessage msg) {
-        //view.notifyError(msg.getErrorNotification());
+    public void visit(NoNicknameMessage msg) throws IOException, InterruptedException {
+        view.notifyError(msg);
         view.askNickname();
     }
 
     @Override
     public void visit(NotAvailableResourcesErrorMessage msg) {
-        //view.notifyError(msg.getErrorNotification());
+        view.notifyError(msg);
 
     }
 
     @Override
     public void visit(NotEnoughSpaceErrorMessage msg) {
-        //view.notifyError(msg.getErrorNotification());
+        view.notifyError(msg);
 
     }
 
     @Override
     public void visit(RequirementsErrorMessage msg) {
-        //view.notifyError(msg.getErrorNotification());
+        view.notifyError(msg);
 
     }
 
     @Override
     public void visit(WrongColumnErrorMessage msg) {
-        //view.notifyError(msg.getErrorNotification());
+        view.notifyError(msg);
     }
 
     @Override
     public void visit(NotYourTurnErrorMessage msg) {
-        //view.notifyError(msg.getErrorNotification());
+        view.notifyError(msg);
 
     }
 
     @Override
     public void visit(BootingLobbyErrorMessage msg) {
-        //view.notifyError(msg.getErrorNotification());
+        view.notifyError(msg);
 
     }
 
     @Override
-    public void visit(RestartQuestionMessage msg) {
+    public void visit(RestartQuestionMessage msg) throws IOException, InterruptedException {
         view.askRestartGame();
     }
 
     @Override
     public void visit(ChangeCurrentPlayerMessage msg) {
         game.setCurrentPlayer(msg.getNickname());
-      //  view.showChangeCurrent(msg.getNickname());
+        view.showChangeCurrent(msg.getNickname());
     }
 
 
@@ -124,7 +127,7 @@ public class ViewController implements MessageVisitor, ViewObserver {
 
     @Override
     public void visit(LastTurnMessage msg) {
-        //  view.showLastTurn();
+        view.showLastTurn(msg.getNickname());
 
     }
 
@@ -144,20 +147,21 @@ public class ViewController implements MessageVisitor, ViewObserver {
         if (msg.getnOfPlayers() == -1){
             view.askNumberOfPlayers();
         } else {
-            // Show del numero di giocatori nella lobby / lobbysize
+            view.showLobby(msg.getnOfPlayers(), msg.getLobbySize());
         }
     }
 
     @Override
     public void visit(PickedLeaderCardsMessage msg) {
-        //  view.showPersonalLeaderCardForConfig(msg.getlist);
-
+        view.askLeaderCardToKeep(game.getLeaderCards());
     }
 
     @Override
     public void visit(SetPapalsMessage msg) {
 
         game.setPapalCards(msg.getCurrCall());
+
+        view.showCallForCouncil(msg.getNickname(), game.getPapalCard(msg.getCurrCall()));
     }
 
     @Override
@@ -243,7 +247,7 @@ public class ViewController implements MessageVisitor, ViewObserver {
     }
 
     @Override
-    public void visit(UsernameMessage msg) {
+    public void visit(UsernameMessage msg) throws IOException, InterruptedException {
         view.askNickname();
     }
 
@@ -368,7 +372,7 @@ public class ViewController implements MessageVisitor, ViewObserver {
 
     @Override
     public void visit(MagnificentWinMessage msg) {
-       // view.magnificentWin();
+        // view.magnificentWin();
     }
 
     @Override
@@ -565,7 +569,14 @@ public class ViewController implements MessageVisitor, ViewObserver {
 
     @Override
     public void visit(YourTurnMessage msg) {
-        //visit.yourTurn();
+        if (!game.isInit()) {
+            //view.yourTurn();
+            //view.askInitResource();
+            //view.askInitResource();
+            game.setInit(true);
+        } else {
+            view.yourTurn();
+        }
 
     }
 
@@ -583,6 +594,6 @@ public class ViewController implements MessageVisitor, ViewObserver {
 
     @Override
     public void update(Message message) throws IOException, InterruptedException {
-       socketClient.sendMessage(message);
+        socketClient.sendMessage(message);
     }
 }

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public interface View  {
     void update(String notification) throws IOException, InterruptedException;
 
-    void setViewController(ViewController viewController);
+    void setViewController(it.polimi.ingsw.client.view.ViewController viewController);
 
     void askNumberOfPlayers() throws IOException, InterruptedException;
 
