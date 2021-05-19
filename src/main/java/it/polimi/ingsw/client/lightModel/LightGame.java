@@ -8,6 +8,7 @@ import it.polimi.ingsw.client.ligtModelNotification.ReserveNotification;
 import it.polimi.ingsw.client.lightModel.lightGameBoard.LightGameBoard;
 import it.polimi.ingsw.client.lightModel.productionCards.*;
 import it.polimi.ingsw.server.model.Resource;
+import it.polimi.ingsw.server.model.leaderCards.LeaderCard;
 import it.polimi.ingsw.server.model.marbles.Marble;
 import it.polimi.ingsw.server.model.productionCards.ProductionCard;
 
@@ -242,6 +243,9 @@ public class LightGame extends ViewObservable {
 
     }
 
+    public ArrayList<LeaderCard> getLeaderCards() {
+        return null;
+    }
 
     public void activateLeaderCard(int index){
 
@@ -258,6 +262,14 @@ public class LightGame extends ViewObservable {
 
     public void setPapalCards(int currCall){
 
+    }
+
+    public int getPapalCard(int currCall){
+        return 0;
+    }
+
+    public int[] getPapalCards(){
+        return null;
     }
 
     public void moveBlackCrossOnce(){}

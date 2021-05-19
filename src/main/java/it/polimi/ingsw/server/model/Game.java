@@ -478,7 +478,7 @@ public class Game extends Observable {
     protected void exceptionHandler(RequirementsException e) {
     }
 
-    protected void exceptionHandler(CallForCouncilException e) {
+    protected void exceptionHandler(CallForCouncilException e) throws IOException, InterruptedException {
     }
 
     protected void exceptionHandler(LastSpaceReachedException e) throws IOException, InterruptedException {

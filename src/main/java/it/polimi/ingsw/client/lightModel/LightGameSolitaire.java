@@ -9,6 +9,7 @@ import it.polimi.ingsw.server.model.colours.Blue;
 import it.polimi.ingsw.server.model.colours.Green;
 import it.polimi.ingsw.server.model.colours.Violet;
 import it.polimi.ingsw.server.model.colours.Yellow;
+import it.polimi.ingsw.server.model.leaderCards.LeaderCard;
 import it.polimi.ingsw.server.model.productionCards.ProductionCard;
 
 import java.io.IOException;
@@ -148,6 +149,18 @@ public class LightGameSolitaire extends LightGame{
         notifyObserver(new LeaderListCardNotification(gameBoardOfPlayer.getLeaderCardsActivated()).serialize());
     }
 
+    @Override
+    public ArrayList<LeaderCard> getLeaderCards() {
+        return gameBoardOfPlayer.getLeaderCards();
+    }
+
+    public int getPapalCard(int currCall){
+        return gameBoardOfPlayer.getPapalCard(currCall);
+    }
+
+    public int[] getPapalCards(){
+        return gameBoardOfPlayer.getPapalCards();
+    }
 
     @Override
     public void activateLeaderCard(int index){

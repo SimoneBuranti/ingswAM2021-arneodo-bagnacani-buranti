@@ -32,7 +32,7 @@ public class Player {
     /**
      * this attribute is the player's nickname
      */
-    private final String nickName;
+    protected final String nickName;
     /**
      * this attribute is a collection of the player's starting leader cards
      */
@@ -108,7 +108,16 @@ public class Player {
      * @throws LastSpaceReachedException : the exception which is thrown when the faith indicator has reached the last papal space
      */
     public void faithMove() throws CallForCouncilException, LastSpaceReachedException {
-        gameBoardOfPlayer.faithMove();
+        try {
+            getGameBoardOfPlayer().faithMove();
+        } catch (CallForCouncilException e) {
+            e.setNickName(nickName);
+            throw e;
+        } catch (LastSpaceReachedException e) {
+            e.setNickName(nickName);
+            throw e;
+        }
+
     }
 
     /**
@@ -168,10 +177,18 @@ public class Player {
      * @throws LeaderCardsGameBoardEmptyException : the exception which is thrown when there is no leader card in the position
      *                                              passed as a parameter
      */
-   public void discardLeaderCard(int index) throws CallForCouncilException, LastSpaceReachedException, LeaderCardsGameBoardEmptyException {
+   public void discardLeaderCard(int index) throws LeaderCardsGameBoardEmptyException, CallForCouncilException, LastSpaceReachedException {
         if (index < getGameBoardOfPlayer().leaderCardsSize()) {
             getGameBoardOfPlayer().removeLeaderCardToGameBoard(index);
-            getGameBoardOfPlayer().faithMove();
+            try {
+                getGameBoardOfPlayer().faithMove();
+            } catch (CallForCouncilException e) {
+                e.setNickName(nickName);
+                throw e;
+            } catch (LastSpaceReachedException e) {
+                e.setNickName(nickName);
+                throw e;
+            }
         }else
            throw new LeaderCardsGameBoardEmptyException();
    }
@@ -234,7 +251,15 @@ public class Player {
      * @throws LastSpaceReachedException : the exception which is thrown when the faith indicator has reached the last papal
      */
     public void productionOn(int chosenColumn) throws ImpossibleProductionException, EmptyColumnException, CallForCouncilException, LastSpaceReachedException {
-        gameBoardOfPlayer.productionOn(chosenColumn);
+        try {
+            gameBoardOfPlayer.productionOn(chosenColumn);
+        } catch (CallForCouncilException e) {
+            e.setNickName(nickName);
+            throw e;
+        } catch (LastSpaceReachedException e) {
+            e.setNickName(nickName);
+            throw e;
+        }
     }
 
     /**
@@ -257,7 +282,16 @@ public class Player {
      * @throws LastSpaceReachedException : the exception which is thrown when the faith indicator has reached the last papal space
      */
     public void extraProductionOn(Resource resource) throws LastSpaceReachedException, CallForCouncilException, ImpossibleProductionException {
-       gameBoardOfPlayer.extraProductionOn(resource);
+
+        try {
+            gameBoardOfPlayer.extraProductionOn(resource);
+        } catch (CallForCouncilException e) {
+            e.setNickName(nickName);
+            throw e;
+        } catch (LastSpaceReachedException e) {
+            e.setNickName(nickName);
+            throw e;
+        }
     }
 
     /**
@@ -269,13 +303,19 @@ public class Player {
      * @throws LastSpaceReachedException : the exception which is thrown when the faith indicator has reached the last papal space
      */
     public void anotherExtraProductionOn(Resource resource) throws LastSpaceReachedException, CallForCouncilException, ImpossibleProductionException {
-       gameBoardOfPlayer.anotherExtraProductionOn(resource);
+        try {
+            gameBoardOfPlayer.anotherExtraProductionOn(resource);
+        } catch (CallForCouncilException e) {
+            e.setNickName(nickName);
+            throw e;
+        } catch (LastSpaceReachedException e) {
+            e.setNickName(nickName);
+            throw e;
+        }
     }
 
     /**
      * this method calls the game board method to end the action of the productions
-     * @throws CallForCouncilException : the exception which is thrown when the faith indicator has reached the current papal space
-     * @throws LastSpaceReachedException : the exception which is thrown when the faith indicator has reached the last papal space
      */
     public void endOfProduction(){
        gameBoardOfPlayer.endOfProduction();

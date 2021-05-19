@@ -55,7 +55,15 @@ public class PlayerThird extends Player {
     @Override
     public void initResource(Resource resourceOne) throws CallForCouncilException, LastSpaceReachedException {
         getGameBoardOfPlayer().addToStorage(resourceOne);
-        getGameBoardOfPlayer().faithMove();
+        try {
+            getGameBoardOfPlayer().faithMove();
+        } catch (CallForCouncilException e) {
+            e.setNickName(nickName);
+            throw e;
+        } catch (LastSpaceReachedException e) {
+            e.setNickName(nickName);
+            throw e;
+        }
     }
 
     /**

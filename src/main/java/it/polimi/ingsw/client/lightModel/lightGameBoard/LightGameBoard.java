@@ -249,6 +249,9 @@ public class LightGameBoard {
         return faithPath.getPapalCard(papalCardNumber);
     }
 
+    public int[] getPapalCards(){
+        return faithPath.getPapalCards();
+    }
 
     public ProductionCard[][] getProductionCards() {
         return productionCards;
