@@ -1,0 +1,124 @@
+{
+  "type": "ReductionGameBoard",
+  "resourceTypeFirst": "COIN",
+  "gameBoard": {
+    "type": "GameBoard",
+    "developmentBoard": [
+      [
+        {
+          "faithPoint": 1,
+          "costProductionCard": {
+            "ROCK": 0,
+            "COIN": 0,
+            "SERVANT": 2,
+            "SHIELD": 0
+          },
+          "inputResources": {
+            "ROCK": 1,
+            "COIN": 0,
+            "SERVANT": 0,
+            "SHIELD": 0
+          },
+          "outputResources": {
+            "ROCK": 0,
+            "COIN": 0,
+            "SERVANT": 0,
+            "SHIELD": 0
+          },
+          "points": 1,
+          "level": 1,
+          "colour": {
+            "type": "Violet"
+          },
+          "key": 1
+        },
+        {
+          "faithPoint": 1,
+          "costProductionCard": {
+            "ROCK": 2,
+            "COIN": 0,
+            "SERVANT": 0,
+            "SHIELD": 0
+          },
+          "inputResources": {
+            "ROCK": 0,
+            "COIN": 0,
+            "SERVANT": 1,
+            "SHIELD": 0
+          },
+          "outputResources": {
+            "ROCK": 0,
+            "COIN": 0,
+            "SERVANT": 0,
+            "SHIELD": 0
+          },
+          "points": 1,
+          "level": 1,
+          "colour": {
+            "type": "Yellow"
+          },
+          "key": 1
+        },
+        null
+      ],
+      [
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null
+      ]
+    ],
+    "leaderCards": [],
+    "leaderCardsActivated": [
+      {
+        "type": "LeaderCardReduction",
+        "costReduction": "COIN",
+        "points": 3,
+        "requirements": {
+          "type": "TwoFlagsTwoColourRequirement",
+          "colourFirstRequirement": {
+            "type": "Yellow"
+          },
+          "colourSecondRequirement": {
+            "type": "Violet"
+          }
+        }
+      }
+    ],
+    "faithPathOfGameBoard": {
+      "faithIndicator": 0,
+      "papalCards": [
+        -1,
+        -1,
+        -1
+      ],
+      "currCall": 0
+    },
+    "storageOfGameBoard": {
+      "type": "Storage",
+      "storageResource": {
+        "ROCK": 0,
+        "COIN": 0,
+        "SERVANT": 0,
+        "SHIELD": 0
+      }
+    },
+    "strongboxOfGameBoard": {
+      "storageStrongBox": {
+        "ROCK": 0,
+        "COIN": 0,
+        "SERVANT": 0,
+        "SHIELD": 0
+      }
+    },
+    "productionBuffer": [],
+    "whiteMarbleCardActivated": 0,
+    "productionCardActivated": 0,
+    "reductionCardActivated": 1,
+    "storageCardActivated": 0
+  }
+}
