@@ -76,6 +76,8 @@ public class Server {
         game = new GameSolitaire(lobby.get(0),true,clientControllers.get(0));
 
         gameController = new GameControllerSinglePlayer(this,this.getGame());
+
+        clientControllers.get(0).setGame(this.game);
     }
 
 
@@ -91,11 +93,16 @@ public class Server {
 
     public void restoreGameSingleBackup() throws IOException, InterruptedException {
         this.game=new GameSolitaire(clientControllers.get(0).getNickname(),false,clientControllers.get(0));
+
+        clientControllers.get(0).setGame(this.game);
     }
 
     public void restoreGameMultiBackup() throws IOException, InterruptedException {
         this.clientControllers=orderRestart();
         this.game=new GameMultiPlayer(this.getLobbySize(),lobby,false,clientControllers);
+        for(ClientController client : clientControllers){
+            client.setGame(this.game);
+        }
     }
 
 

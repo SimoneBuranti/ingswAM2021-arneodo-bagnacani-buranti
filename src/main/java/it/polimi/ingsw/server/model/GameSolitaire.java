@@ -56,17 +56,20 @@ public class GameSolitaire extends Game {
     public GameSolitaire(String nickName, Boolean newGame,ClientController clientController) throws IOException, InterruptedException {
         super(newGame);
         if(newGame){
-        this.nickNamePlayer=nickName;
-        this.clientController=clientController;
-        deckActionMarker = new DeckActionMarker();
-        lorenzoTheMagnificent = new LorenzoTheMagnificent();
-        player = new PlayerFirst(nickName,this, clientController.getVirtualView());
-        currentPlayer = player;
-        this.addObserver(clientController.getVirtualView());
-        notifyObserver(new GameTypeMessage(false));
-        configClient();}
+            this.nickNamePlayer=nickName;
+            this.clientController=clientController;
+            deckActionMarker = new DeckActionMarker();
+            lorenzoTheMagnificent = new LorenzoTheMagnificent();
+            player = new PlayerFirst(nickName,this, clientController.getVirtualView());
+            currentPlayer = player;
+            this.addObserver(clientController.getVirtualView());
+            notifyObserver(new GameTypeMessage(false));
+            configClient();
+        }
         else
             restoreGameSolitaire(clientController);
+
+        saveInformation();
     }
 
 

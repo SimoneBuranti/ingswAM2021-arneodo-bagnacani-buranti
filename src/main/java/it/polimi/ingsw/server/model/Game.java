@@ -1,8 +1,10 @@
 package it.polimi.ingsw.server.model;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import it.polimi.ingsw.observer.Observable;
 import it.polimi.ingsw.messages.observable.*;
+import it.polimi.ingsw.server.model.colours.*;
 import it.polimi.ingsw.server.model.exceptions.*;
 import it.polimi.ingsw.server.model.leaderCards.*;
 import it.polimi.ingsw.server.model.marbles.*;
@@ -13,6 +15,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 
 /**
@@ -95,7 +98,6 @@ public class Game extends Observable {
      * this constructor instantiates all the game attributes
      */
     public Game(Boolean newGame) throws IOException, InterruptedException {
-
         if (newGame)
 
         { market = new Market();
@@ -134,8 +136,9 @@ public class Game extends Observable {
         productionCardDecks.add(deckProductionCardThreeYellow);
 
         deckLeaderCard= new DeckLeaderCard();}
-        else
+        else {
             restoreGame();
+        }
 
     }
 
@@ -713,16 +716,15 @@ public class Game extends Observable {
     private void restoreInformationOfMarket() throws IOException, InterruptedException {
 
         Gson gson=Market.gsonForEveryoneMArket();
+
         Marble[] list;
 
         try {
             list = gson.fromJson(new FileReader("src/main/resources/Market.json"),Marble[].class);
-
             market= new Market(list);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-
 
     }
 
@@ -781,6 +783,7 @@ public class Game extends Observable {
         notifyObserver(new ConfigurationMarketMessage(market.getInitialMarbleList()));
     }
 
+
     protected void configClientReconnected(String nickname) throws IOException, InterruptedException {
         notifyOnlyOneSpecificObserver(new DeckProductionCardConfigMessage(0,deckProductionCardOneBlu.getDeck()), nickname);
         notifyOnlyOneSpecificObserver(new DeckProductionCardConfigMessage(1,deckProductionCardTwoBlu.getDeck()), nickname);
@@ -804,7 +807,25 @@ public class Game extends Observable {
 
 
     protected void reConfigClient() throws IOException, InterruptedException {
-        configClient();
+        notifyObserver(new DeckProductionCardConfigMessage(0,deckProductionCardOneBlu.getDeck()));
+        notifyObserver(new DeckProductionCardConfigMessage(1,deckProductionCardTwoBlu.getDeck()));
+        notifyObserver(new DeckProductionCardConfigMessage(2,deckProductionCardThreeBlu.getDeck()));
+
+        notifyObserver(new DeckProductionCardConfigMessage(3,deckProductionCardOneGreen.getDeck()));
+        notifyObserver(new DeckProductionCardConfigMessage(4,deckProductionCardTwoGreen.getDeck()));
+        notifyObserver(new DeckProductionCardConfigMessage(5,deckProductionCardThreeGreen.getDeck()));
+
+        notifyObserver(new DeckProductionCardConfigMessage(6,deckProductionCardOneViolet.getDeck()));
+        notifyObserver(new DeckProductionCardConfigMessage(7,deckProductionCardTwoViolet.getDeck()));
+        notifyObserver(new DeckProductionCardConfigMessage(8,deckProductionCardThreeViolet.getDeck()));
+
+        notifyObserver(new DeckProductionCardConfigMessage(9,deckProductionCardOneYellow.getDeck()));
+        notifyObserver(new DeckProductionCardConfigMessage(10,deckProductionCardTwoYellow.getDeck()));
+        notifyObserver(new DeckProductionCardConfigMessage(11,deckProductionCardThreeYellow.getDeck()));
+
+
+        //notifyObserver(new ConfigurationMarketMessage(market.getInitialMarbleList()));
+
         notifyObserver(new ReserveValueMessage(reserve.getReservePool()));
     }
 

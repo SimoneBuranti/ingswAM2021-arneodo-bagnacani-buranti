@@ -91,8 +91,12 @@ public class GameMultiPlayer extends Game {
         notifyObserver(new GameTypeMessage(true));
         configClient();
         }
-        else
-            restoreGameMultiPlayer(clientControllers); }
+        else {
+            restoreGameMultiPlayer(clientControllers);
+        }
+
+        saveInformation();
+    }
 
 
     @Override
@@ -160,8 +164,9 @@ public class GameMultiPlayer extends Game {
     }
 
     private void addObservators() {
-        for(int i=0; i<numberOfPlayer;i++)
+        for(int i=0; i<numberOfPlayer;i++) {
             this.addObserver(clientControllersInOrder.get(i).getVirtualView());
+        }
     }
 
     /**
@@ -579,9 +584,9 @@ public class GameMultiPlayer extends Game {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-
-        addObservators();
         this.clientControllersInOrder=clientControllers;
+        addObservators();
+        //this.clientControllersInOrder=clientControllers;
         notifyObserver(new GameTypeMessage(true));
         createPlayerRestore(numberOfPlayer,nickNameInOrder);
         reConfigClient();

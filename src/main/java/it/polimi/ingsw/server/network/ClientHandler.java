@@ -154,6 +154,7 @@ public class ClientHandler implements Runnable {
     }
 
     public void sendMessage (Message msg) throws InterruptedException, IOException {
+        System.out.println(clientController + " " + msg.getMessageType());
         writeStream.println(msg.serialize());
         writeStream.flush();
 

@@ -269,7 +269,19 @@ public abstract class Message{
             case GAMETYPE:
                 return gson.fromJson(jsonObj, GameTypeMessage.class);
 
-                default:
+            case RESTARTQUESTIONMESSAGE:
+                return gson.fromJson(jsonObj, RestartQuestionMessage.class);
+
+            case RESTARTANSWERMESSAGE:
+                return gson.fromJson(jsonObj, RestartAnswerMessage.class);
+
+            case NOTYOURTURNERROR:
+                return gson.fromJson(jsonObj, NotYourTurnErrorMessage.class);
+
+            case YOURTURN:
+                return gson.fromJson(jsonObj, YourTurnMessage.class);
+
+            default:
                 throw new IllegalArgumentException("Invalid topic " + msgTopicString);
         }
     }

@@ -94,14 +94,14 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
         System.out.println("Do you want to resume the previous match? [yes / no]");
         while (input.hasNextLine()){
             answer =input.nextLine();
-            if (answer == "yes"){
+            if (answer.equals("yes")){
                 notifyObserver(new RestartAnswerMessage(true));
                 return;
-            } else if (answer == "no"){
+            } else if (answer.equals("no")){
                 notifyObserver(new RestartAnswerMessage(false));
                 return;
             } else {
-                System.out.println("Invalid command");
+                System.out.println("Invalid command, try again");
             }
         }
     }
@@ -121,7 +121,7 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
                 notifyObserver(new NumberPlayerMessage(nOfPlayers));
                 return;
             } else {
-                System.out.println("Invalid number of players");
+                System.out.println("Invalid number of players, try with a number between 1 and 4");
             }
         }
     }
