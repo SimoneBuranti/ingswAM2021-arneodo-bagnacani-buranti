@@ -2,6 +2,7 @@ package it.polimi.ingsw.server.model;
 
 
 import com.google.gson.Gson;
+import it.polimi.ingsw.messages.SetPapalsMessage;
 import it.polimi.ingsw.messages.observable.*;
 import it.polimi.ingsw.server.controller.ClientController;
 import it.polimi.ingsw.server.model.actionMarkers.ActionMarker;
@@ -408,9 +409,11 @@ public class GameSolitaire extends Game {
      * @param e : the exception to handle
      */
     @Override
-    protected void exceptionHandler(CallForCouncilException e) {
+    protected void exceptionHandler(CallForCouncilException e) throws IOException, InterruptedException {
         player.setPapal();
         lorenzoTheMagnificent.setCurrCall();
+
+        notifyObserver(new SetPapalsMessage(e.getCurrCall(), e.getNickName()));
     }
 
 
@@ -422,6 +425,8 @@ public class GameSolitaire extends Game {
     @Override
     protected void exceptionHandler(LastSpaceReachedException e) throws IOException, InterruptedException {
         player.setPapal();
+
+        notifyObserver(new SetPapalsMessage(e.getCurrCall(), e.getNickName()));
         notifyObserver(new MyVictoryMessage(player.playerScore()));
        endGame();
     }

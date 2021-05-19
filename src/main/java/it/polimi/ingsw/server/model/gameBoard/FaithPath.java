@@ -75,10 +75,16 @@ public class FaithPath {
         if (faithIndicator < PAPAL_POS[PAPAL_N-1])
             faithIndicator++;
 
-        if (currCall < (PAPAL_N-1) && faithIndicator == PAPAL_POS[currCall])
-            throw new CallForCouncilException();
-        else if ( currCall == PAPAL_N-1 && faithIndicator == PAPAL_POS[currCall])
-            throw new LastSpaceReachedException();
+        if (currCall < (PAPAL_N-1) && faithIndicator == PAPAL_POS[currCall]) {
+            CallForCouncilException exception = new CallForCouncilException();
+            exception.setCurrCall(currCall);
+            throw exception;
+        }
+        else if ( currCall == PAPAL_N-1 && faithIndicator == PAPAL_POS[currCall]) {
+            LastSpaceReachedException exception = new LastSpaceReachedException();
+            exception.setCurrCall(currCall);
+            throw exception;
+        }
     }
 
 

@@ -4,6 +4,7 @@ package it.polimi.ingsw.client.lightModel;
 import it.polimi.ingsw.client.ligtModelNotification.*;
 import it.polimi.ingsw.client.lightModel.productionCards.LightDeckProductionCard;
 import it.polimi.ingsw.server.model.Resource;
+import it.polimi.ingsw.server.model.leaderCards.LeaderCard;
 import it.polimi.ingsw.server.model.productionCards.ProductionCard;
 
 import java.io.IOException;
@@ -58,6 +59,11 @@ public class LightGameMultiPlayer extends LightGame{
 
 
     @Override
+    public ArrayList<LeaderCard> getLeaderCards() {
+        return gameBoardOfPlayer.getLeaderCards();
+    }
+
+    @Override
     public void activateLeaderCard(int index){
        gameBoardOfPlayer.activateLeaderCard(index);
     }
@@ -95,6 +101,14 @@ public class LightGameMultiPlayer extends LightGame{
     @Override
     public void setPapalCards(int currCall){
        gameBoardOfPlayer.setPapal(currCall);
+    }
+
+    public int getPapalCard(int currCall){
+        return gameBoardOfPlayer.getPapalCard(currCall);
+    }
+
+    public int[] getPapalCards(){
+        return gameBoardOfPlayer.getPapalCards();
     }
 
     @Override

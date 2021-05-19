@@ -10,6 +10,12 @@ public class LastTurnMessage extends Message {
 
     private final MessageType messageType = MessageType.LASTTURN;
 
+    private String nickname;
+
+    public LastTurnMessage(String nickName){
+        this.nickname = nickName;
+    }
+
     @Override
     public MessageType getMessageType() {
         return messageType;
@@ -18,5 +24,9 @@ public class LastTurnMessage extends Message {
     @Override
     public void accept(MessageVisitor v) throws IOException, InterruptedException {
         v.visit(this);
+    }
+
+    public String getNickname() {
+        return nickname;
     }
 }

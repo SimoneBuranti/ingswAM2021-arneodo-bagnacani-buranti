@@ -91,4 +91,7 @@ public class LightFaithPath {
         return papalCards[papalCardNumber];
     }
 
+    public int[] getPapalCards(){
+        return papalCards;
+    }
 }

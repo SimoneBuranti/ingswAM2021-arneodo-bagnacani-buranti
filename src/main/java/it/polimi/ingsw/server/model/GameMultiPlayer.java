@@ -2,6 +2,7 @@ package it.polimi.ingsw.server.model;
 
 import com.google.gson.Gson;
 import it.polimi.ingsw.messages.NoNicknameMessage;
+import it.polimi.ingsw.messages.SetPapalsMessage;
 import it.polimi.ingsw.messages.observable.*;
 import it.polimi.ingsw.server.controller.ClientController;
 import it.polimi.ingsw.server.model.exceptions.CallForCouncilException;
@@ -393,10 +394,11 @@ public class GameMultiPlayer extends Game {
      * @param e : the exception to handle
      */
     @Override
-    protected void exceptionHandler(CallForCouncilException e) {
+    protected void exceptionHandler(CallForCouncilException e) throws IOException, InterruptedException {
         for(Player p : playerList){
             p.setPapal();
         }
+        notifyObserver(new SetPapalsMessage(e.getCurrCall(), e.getNickName()));
     }
 
 
@@ -410,8 +412,9 @@ public class GameMultiPlayer extends Game {
         for(Player p : playerList){
             p.setPapal();
         }
+        notifyObserver(new SetPapalsMessage(e.getCurrCall(), e.getNickName()));
         lastTurn = true;
-        notifyObserver(new LastTurnMessage());
+        notifyObserver(new LastTurnMessage(currentPlayer.getNickName()));
     }
 
 
@@ -422,7 +425,7 @@ public class GameMultiPlayer extends Game {
     @Override
     protected void exceptionHandler(EndGameException e) throws IOException, InterruptedException {
         lastTurn = true;
-        notifyObserver(new LastTurnMessage());
+        notifyObserver(new LastTurnMessage(currentPlayer.getNickName()));
 
     }
 
