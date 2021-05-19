@@ -1,5 +1,6 @@
 package it.polimi.ingsw.client.lightModel;
 
+import it.polimi.ingsw.client.ViewObservable;
 import it.polimi.ingsw.client.ligtModelNotification.DeckListNotification;
 import it.polimi.ingsw.client.ligtModelNotification.ExtraMarketNotification;
 import it.polimi.ingsw.client.ligtModelNotification.MarketNotification;

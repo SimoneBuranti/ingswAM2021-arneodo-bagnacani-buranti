@@ -1,4 +1,4 @@
-package it.polimi.ingsw.client.lightModel;
+package it.polimi.ingsw.client;
 
 import it.polimi.ingsw.client.view.View;
 import it.polimi.ingsw.messages.Message;

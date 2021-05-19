@@ -1,4 +1,4 @@
-package it.polimi.ingsw.client.view.cli;
+package it.polimi.ingsw.client.ligtModelNotification;
 
 import it.polimi.ingsw.client.view.View;
 import it.polimi.ingsw.client.view.ViewController;

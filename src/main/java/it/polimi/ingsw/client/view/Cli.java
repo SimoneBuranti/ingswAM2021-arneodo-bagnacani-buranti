@@ -1,12 +1,11 @@
 package it.polimi.ingsw.client.view;
 
-import it.polimi.ingsw.client.view.View;
-import it.polimi.ingsw.client.view.ViewController;
-import it.polimi.ingsw.client.view.ViewControllerObservable;
 import it.polimi.ingsw.client.ligtModelNotification.*;
 import it.polimi.ingsw.messages.*;
+import it.polimi.ingsw.server.model.leaderCards.LeaderCard;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Cli extends ViewControllerObservable implements View, NotificatorVisitor {
@@ -96,7 +95,7 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
         System.out.println(msg.toString());
     }
 
-
+    @Override
     public void askNumberOfPlayers() throws IOException, InterruptedException {
         int nOfPlayers;
         System.out.println("How many players? [1...4]");
@@ -112,7 +111,7 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
     }
 
 
-
+    @Override
     public void askNickname() throws IOException, InterruptedException {
         String nickname;
         System.out.println("What's your username?");
@@ -122,7 +121,7 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
             notifyObserver(new UsernameMessage(nickname));
         }
     }
-
+    @Override
     public void askRestartGame() throws IOException, InterruptedException {
         String answer;
         System.out.println("Do you want to resume the previous match? [yes / no]");
@@ -139,7 +138,7 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
             }
         }
     }
-
+    @Override
     public void yourTurn() {
 
         System.out.println("It's your turn");
@@ -151,5 +150,32 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
     @Override
     public void showChangeCurrent(String currentNick) {
         System.out.println("Current player: "+currentNick);
+    }
+
+    @Override
+    public void showPlayersOrder(ArrayList<String> nickName){
+        System.out.println("The players round is : " + nickName);
+    }
+
+    @Override
+    public void showLastTurn(String nickName){
+        System.out.println("Player " + nickName + " activated the last turn round");
+    }
+    @Override
+    public void showLobby(int playersInLobby, int playerInGame){
+        System.out.println("There are " + playersInLobby + "players in the lobby out of " + playerInGame +
+                ", waiting for the missing players to start the game");
+    }
+    @Override
+    public void askLeaderCardToKeep(ArrayList<LeaderCard> leaderCards){
+        System.out.println("Please choose 2 from the following leader cards to keep in your game board : " + leaderCards);
+    }
+    @Override
+    public void showCallForCouncil(String nickname, int papalCard){
+        if(papalCard == 0){
+            System.out.println("Player " + nickname + "activated the report in the Vatican : sorry, you didn't get the papal favor card");
+        }else if (papalCard == 1){
+            System.out.println("Player " + nickname + "activated the report in the Vatican : you got the papal favor card!");
+        }
     }
 }

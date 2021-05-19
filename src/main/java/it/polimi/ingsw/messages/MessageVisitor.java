@@ -30,7 +30,7 @@ public interface MessageVisitor {
     void visit(DoubleWhiteMarbleEffectMessage msg);
     void visit(NPlayersMessage msg) throws IOException, InterruptedException;
     void visit(PickedLeaderCardsMessage msg);
-    void visit(SetPapalsMessage msg);
+
 
     //Client to server
     void visit(RestartAnswerMessage msg) throws IOException, InterruptedException;
@@ -116,6 +116,10 @@ public interface MessageVisitor {
     void visit(ChangeTurnMessage msg);
 
     void visit(GameTypeMessage msg) throws IOException, InterruptedException;
+
+    void visit(SetPapalsMessage msg) throws IOException, InterruptedException;
+
+
 
 
 
