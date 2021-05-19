@@ -35,84 +35,101 @@ public class ViewController implements MessageVisitor, ViewObserver {
         this.nickName = nickName;
     }
 
-
-    @Override
-    public void visit(AlreadyActivatedErrorMessage msg) {
-        view.notifyError(msg);
+    public void sendMessage(Message msg) {
+        socketClient.sendMessage(msg);
     }
 
     @Override
-    public void visit(AlreadyExistingNickNameErrorMessage msg) throws IOException, InterruptedException {
-        view.notifyError(msg);
-        view.askNickname();
+    public void visit(AlreadyActivatedErrorMessage msg) {
+        //view.notifyError(msg.getErrorNotification());
+    }
+
+    @Override
+    public void visit(AlreadyExistingNickNameErrorMessage msg) {
+        //view.notifyError(msg.getErrorNotification());
+        try {
+            view.askNickname();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void visit(AlreadyUsedLeaderCardErrorMessage msg) {
-        view.notifyError(msg);
+        //view.notifyError(msg.getErrorNotification());
+
     }
 
     @Override
     public void visit(CompleteRunningMatchErrorMessage msg) {
-        view.notifyError(msg);
+        //view.notifyError(msg.getErrorNotification());
 
     }
 
     @Override
-    public void visit(NoNicknameMessage msg) throws IOException, InterruptedException {
-        view.notifyError(msg);
-        view.askNickname();
+    public void visit(NoNicknameMessage msg) {
+        //view.notifyError(msg.getErrorNotification());
+        try {
+            view.askNickname();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void visit(NotAvailableResourcesErrorMessage msg) {
-        view.notifyError(msg);
+        //view.notifyError(msg.getErrorNotification());
 
     }
 
     @Override
     public void visit(NotEnoughSpaceErrorMessage msg) {
-        view.notifyError(msg);
+        //view.notifyError(msg.getErrorNotification());
 
     }
 
     @Override
     public void visit(RequirementsErrorMessage msg) {
-        view.notifyError(msg);
+        //view.notifyError(msg.getErrorNotification());
 
     }
 
     @Override
     public void visit(WrongColumnErrorMessage msg) {
-        view.notifyError(msg);
+        //view.notifyError(msg.getErrorNotification());
     }
 
     @Override
     public void visit(NotYourTurnErrorMessage msg) {
-        view.notifyError(msg);
+        //view.notifyError(msg.getErrorNotification());
 
     }
 
     @Override
     public void visit(BootingLobbyErrorMessage msg) {
-        view.notifyError(msg);
+        //view.notifyError(msg.getErrorNotification());
 
     }
 
     @Override
-    public void visit(RestartQuestionMessage msg) throws IOException, InterruptedException {
-        view.askRestartGame();
+    public void visit(RestartQuestionMessage msg) {
+        try {
+            view.askRestartGame();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void visit(ChangeCurrentPlayerMessage msg) {
         game.setCurrentPlayer(msg.getNickname());
-        if (msg.getMessageType().equals(this.nickName)){
-            view.myTurn();
-        } else {
-            view.showChangeCurrent(msg.getNickname());
-        }
-
+      //  view.showChangeCurrent(msg.getNickname());
     }
 
 
@@ -244,8 +261,14 @@ public class ViewController implements MessageVisitor, ViewObserver {
     }
 
     @Override
-    public void visit(UsernameMessage msg) throws IOException, InterruptedException {
-        view.askNickname();
+    public void visit(UsernameMessage msg) {
+        try {
+            view.askNickname();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -288,6 +311,7 @@ public class ViewController implements MessageVisitor, ViewObserver {
 
     @Override
     public void visit(UpdateInitLeaderMessage msg) {
+        System.out.println(msg.getMessageType()+" : "+ msg.getLeaderCards());
         try {
             game.addLeaderCard(msg.getLeaderCards());
         } catch (IOException e) {
@@ -368,7 +392,7 @@ public class ViewController implements MessageVisitor, ViewObserver {
 
     @Override
     public void visit(MagnificentWinMessage msg) {
-        // view.magnificentWin();
+       // view.magnificentWin();
     }
 
     @Override
@@ -583,11 +607,6 @@ public class ViewController implements MessageVisitor, ViewObserver {
 
     @Override
     public void update(Message message) throws IOException, InterruptedException {
-        socketClient.sendMessage(message);
-    }
-
-    public void sendMessage(Message msg){
-        socketClient.sendMessage(msg);
+       socketClient.sendMessage(message);
     }
 }
-
