@@ -1,6 +1,6 @@
-package it.polimi.ingsw.client;
-import it.polimi.ingsw.client.view.View;
-import it.polimi.ingsw.client.view.ViewController;
+package it.polimi.ingsw;
+import it.polimi.ingsw.View;
+import it.polimi.ingsw.ViewController;
 import it.polimi.ingsw.messages.Message;
 
 import java.io.*;

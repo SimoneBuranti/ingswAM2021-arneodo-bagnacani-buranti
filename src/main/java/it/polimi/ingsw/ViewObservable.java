@@ -1,6 +1,6 @@
-package it.polimi.ingsw.client;
+package it.polimi.ingsw;
 
-import it.polimi.ingsw.client.view.View;
+import it.polimi.ingsw.View;
 import it.polimi.ingsw.messages.Message;
 
 import java.io.IOException;

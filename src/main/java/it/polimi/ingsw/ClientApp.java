@@ -1,8 +1,6 @@
 package it.polimi.ingsw;
 
-import it.polimi.ingsw.client.SocketClient;
 import it.polimi.ingsw.client.view.cli.Cli;
-import it.polimi.ingsw.client.view.View;
 
 import java.io.IOException;
 

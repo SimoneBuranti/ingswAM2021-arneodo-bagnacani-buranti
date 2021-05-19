@@ -1,4 +1,4 @@
-package it.polimi.ingsw.client.view;
+package it.polimi.ingsw;
 
 import it.polimi.ingsw.messages.Message;
 import it.polimi.ingsw.server.model.leaderCards.LeaderCard;
@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public interface View  {
     void update(String notification) throws IOException, InterruptedException;
 
-    void setViewController(it.polimi.ingsw.client.view.ViewController viewController);
+    void setViewController(ViewController viewController);
 
     void askNumberOfPlayers() throws IOException, InterruptedException;
 

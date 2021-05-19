@@ -1,4 +1,4 @@
-package it.polimi.ingsw.client.view;
+package it.polimi.ingsw;
 
 import it.polimi.ingsw.messages.Message;
 

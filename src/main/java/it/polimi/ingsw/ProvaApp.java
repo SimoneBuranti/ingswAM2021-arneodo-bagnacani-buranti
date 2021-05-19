@@ -1,12 +1,8 @@
 package it.polimi.ingsw;
 
 import it.polimi.ingsw.client.commands.*;
-import it.polimi.ingsw.client.view.ViewController;
 
-import java.io.IOException;
 import java.util.Scanner;
-import java.util.concurrent.ScheduledThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
 
 public class ProvaApp {
 

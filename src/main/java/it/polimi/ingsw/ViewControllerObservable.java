@@ -1,7 +1,5 @@
-package it.polimi.ingsw.client.ligtModelNotification;
+package it.polimi.ingsw;
 
-import it.polimi.ingsw.client.view.View;
-import it.polimi.ingsw.client.view.ViewController;
 import it.polimi.ingsw.messages.Message;
 
 import java.io.IOException;
