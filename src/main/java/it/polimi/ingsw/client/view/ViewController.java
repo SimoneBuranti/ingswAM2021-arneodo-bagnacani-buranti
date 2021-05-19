@@ -107,6 +107,9 @@ public class ViewController implements MessageVisitor, ViewObserver {
     @Override
     public void visit(ChangeCurrentPlayerMessage msg) {
         game.setCurrentPlayer(msg.getNickname());
+        if (msg.getMessageType().equals(this.nickName)){
+            view.myTurn();
+        }
         //view.showChangeCurrent(msg.getNickname());
     }
 

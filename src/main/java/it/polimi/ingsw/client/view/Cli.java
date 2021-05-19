@@ -89,22 +89,7 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
     }
 
 
-    public void askRestartGame() throws IOException, InterruptedException {
-        String answer;
-        System.out.println("Do you want to resume the previous match? [yes / no]");
-        while (input.hasNextLine()){
-            answer =input.nextLine();
-            if (answer.equals("yes")){
-                notifyObserver(new RestartAnswerMessage(true));
-                return;
-            } else if (answer.equals("no")){
-                notifyObserver(new RestartAnswerMessage(false));
-                return;
-            } else {
-                System.out.println("Invalid command, try again");
-            }
-        }
-    }
+
 
     @Override
     public void notifyError(Message msg) {
@@ -136,5 +121,28 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
             viewController.setNickName(nickname);
             notifyObserver(new UsernameMessage(nickname));
         }
+    }
+
+    public void askRestartGame() throws IOException, InterruptedException {
+        String answer;
+        System.out.println("Do you want to resume the previous match? [yes / no]");
+        while (input.hasNextLine()){
+            answer =input.nextLine();
+            if (answer.equals("yes")){
+                notifyObserver(new RestartAnswerMessage(true));
+                return;
+            } else if (answer.equals("no")){
+                notifyObserver(new RestartAnswerMessage(false));
+                return;
+            } else {
+                System.out.println("Invalid command, try again");
+            }
+        }
+    }
+
+    public void myTurn() {
+
+
+        System.out.println("E' il tuo turno ");
     }
 }

@@ -15,5 +15,7 @@ public interface View  {
 
     void askRestartGame() throws IOException, InterruptedException;
 
+    void myTurn();
+
     void notifyError(Message msg);
 }
