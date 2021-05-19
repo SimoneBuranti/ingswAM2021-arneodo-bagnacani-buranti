@@ -1,9 +1,7 @@
 package it.polimi.ingsw;
 
 import it.polimi.ingsw.client.SocketClient;
-import it.polimi.ingsw.client.view.Cli;
-import it.polimi.ingsw.messages.EndOfTurnMessage;
-import it.polimi.ingsw.messages.UsernameMessage;
+import it.polimi.ingsw.client.view.cli.Cli;
 
 import java.io.IOException;
 
