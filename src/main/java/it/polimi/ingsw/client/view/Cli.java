@@ -142,7 +142,14 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
 
     public void myTurn() {
 
+        System.out.println("It's your turn");
 
-        System.out.println("E' il tuo turno ");
+
+
+    }
+
+    @Override
+    public void showChangeCurrent(String currentNick) {
+        System.out.println("Current player: "+currentNick);
     }
 }

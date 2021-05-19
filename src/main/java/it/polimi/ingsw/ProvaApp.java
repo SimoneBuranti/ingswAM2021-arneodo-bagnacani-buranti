@@ -12,16 +12,17 @@ public class ProvaApp {
 
     public static void main(String[] args) {
 
-        (new ScheduledThreadPoolExecutor(1)).scheduleAtFixedRate( () -> {
+        /*(new ScheduledThreadPoolExecutor(1)).scheduleAtFixedRate( () -> {
 
             System.out.println("****************************************");
 
-        },1000,500, TimeUnit.MILLISECONDS);
+        },1000,500, TimeUnit.MILLISECONDS);*/
+
 
         Scanner in = new Scanner(System.in);
-        while(true){
-            System.out.println(in.nextLine());
-        }
+        String command = in.nextLine();
+        System.out.println((command.equals("ciao %c %d")));
+
     }
 }
 

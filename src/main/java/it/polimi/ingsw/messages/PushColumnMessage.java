@@ -6,7 +6,12 @@ public class PushColumnMessage extends Message{
     private final MessageType messageType = MessageType.PUSHCOLUMN;
 
     private int columnNumber;
-@Override
+
+    public PushColumnMessage(int columnNumber) {
+        this.columnNumber = columnNumber;
+    }
+
+    @Override
     public MessageType getMessageType() {
         return messageType;
     }

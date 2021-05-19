@@ -109,8 +109,10 @@ public class ViewController implements MessageVisitor, ViewObserver {
         game.setCurrentPlayer(msg.getNickname());
         if (msg.getMessageType().equals(this.nickName)){
             view.myTurn();
+        } else {
+            view.showChangeCurrent(msg.getNickname());
         }
-        //view.showChangeCurrent(msg.getNickname());
+
     }
 
 
@@ -582,6 +584,10 @@ public class ViewController implements MessageVisitor, ViewObserver {
     @Override
     public void update(Message message) throws IOException, InterruptedException {
         socketClient.sendMessage(message);
+    }
+
+    public void sendMessage(Message msg){
+        socketClient.sendMessage(msg);
     }
 }
 

@@ -17,5 +17,7 @@ public interface View  {
 
     void myTurn();
 
+    void showChangeCurrent(String currentNick);
+
     void notifyError(Message msg);
 }
