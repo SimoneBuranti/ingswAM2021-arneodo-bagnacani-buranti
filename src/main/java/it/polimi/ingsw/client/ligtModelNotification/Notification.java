@@ -69,15 +69,7 @@ public abstract class Notification {
             case FAITHNOTIFY:
                 return gson.fromJson(jsonObj, FaithPathNotification.class);
 
-
-
-
-
-
-
-
-
-            default:
+                default:
                 throw new IllegalArgumentException("Invalid topic " + notificationType);
         }
     }

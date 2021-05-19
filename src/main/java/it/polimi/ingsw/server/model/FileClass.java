@@ -4,7 +4,6 @@ import java.io.File;
 
 public class FileClass {
     public static void FileDestroyer(){
-
         File f = new File("src/main/resources/GameInit.json");
         if (f.exists())
             f.delete();
@@ -25,6 +24,10 @@ public class FileClass {
         if (f.exists())
             f.delete();
         f = new File("src/main/resources/DeckProductionCardOneVioletLatest.json");
+        if (f.exists())
+            f.delete();
+
+        f = new File("src/main/resources/InformationaboutNickname.json");
         if (f.exists())
             f.delete();
 
@@ -109,6 +112,19 @@ public class FileClass {
         f = new File("src/main/resources/lastTurn.json");
         if (f.exists())
             f.delete();
+
+        f = new File("src/main/resources/DeckActionMarker.json");
+        if (f.exists())
+            f.delete();
+
+        f = new File("src/main/resources/MultiGame.json");
+        if (f.exists())
+            f.delete();
+
+        f = new File("src/main/resources/SingleGame.json");
+        if (f.exists())
+            f.delete();
+
 
     }
 }

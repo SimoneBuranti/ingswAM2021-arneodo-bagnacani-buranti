@@ -156,6 +156,7 @@ public class GameMultiPlayer extends Game {
             needForLeader.add(fourthPlayer.getPersonalLeaderCard().get(i).getKey());
         notifyOnlyOneSpecificObserver(new UpdateInitLeaderMessage(needForLeader),fourthPlayer.getNickName());
     }
+    notifyToOneObserver(new YourTurnMessage());
 
 
 }
@@ -462,7 +463,7 @@ public class GameMultiPlayer extends Game {
         for(Player p : playerList){
             p.savePlayerInformation();
         }
-
+        saveTypeMatch();
         saveInformationAboutTurn();
         saveInformationOfInkwel();
         saveInformationPlayerNumber();
@@ -588,7 +589,6 @@ public class GameMultiPlayer extends Game {
         }
         this.clientControllersInOrder=clientControllers;
         addObservators();
-        //this.clientControllersInOrder=clientControllers;
         notifyObserver(new GameTypeMessage(true));
         notifyObserver(new NicknameStartedMessage(nickNameInOrder));
         createPlayerRestore(numberOfPlayer,nickNameInOrder);
@@ -719,6 +719,24 @@ public class GameMultiPlayer extends Game {
         saveInformation();
         notifyToOneObserver(new YourTurnMessage());
         notifyAllObserverLessOne(new ChangeTurnMessage(currentPlayer.getNickName()));}
+
+    private void saveTypeMatch() {
+        Gson gson = new Gson();
+        FileWriter config = null;
+        String jsonStrin = gson.toJson(nickNameInOrder);
+        try {
+            config = new FileWriter("src/main/resources/MultiGame.json");
+            config.write(jsonStrin);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                config.flush();
+                config.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } }
+    }
 
 }
 

@@ -130,9 +130,9 @@ public class Reserve extends Observable {
 
 
         Gson gson=new GsonBuilder()
+                .setPrettyPrinting()
                 .registerTypeAdapterFactory(adapterMarble)
                 .registerTypeAdapterFactory(adapterColour)
-                .setPrettyPrinting()
                 .create();
 
         return gson;

@@ -560,7 +560,17 @@ public class ViewController implements MessageVisitor, ViewObserver {
 
     @Override
     public void visit(YourTurnMessage msg) {
-        //visit.yourTurn();
+        if (!game.isInit())
+        {
+            //view.showyourTurn();
+            //view.askInitResource();
+            //view.askInitResource();
+            game.setInit(true);
+        }
+        else {//view.showyourTurn();}
+        }
+
+
 
     }
 
