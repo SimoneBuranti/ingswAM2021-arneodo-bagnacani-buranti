@@ -824,7 +824,7 @@ public class Game extends Observable {
         notifyObserver(new DeckProductionCardConfigMessage(11,deckProductionCardThreeYellow.getDeck()));
 
 
-        //notifyObserver(new ConfigurationMarketMessage(market.getInitialMarbleList()));
+        notifyObserver(new ConfigurationMarketMessage(market.getInitialMarbleList()));
 
         notifyObserver(new ReserveValueMessage(reserve.getReservePool()));
     }
