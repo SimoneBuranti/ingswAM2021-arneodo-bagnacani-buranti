@@ -140,13 +140,13 @@ public class LightGameSolitaire extends LightGame{
     @Override
     public void addLeaderCard(ArrayList<Integer> leaderCardKeys) throws IOException, InterruptedException {
         gameBoardOfPlayer.addLeaderCard(leaderCardKeys);
-        notifyObserver(new LeaderListCardNotification(gameBoardOfPlayer.getLeaderCards()).serialize());
+
     }
 
     @Override
     public void addLeaderCardActivated(ArrayList<Integer> leaderCardKeys) throws IOException, InterruptedException {
         gameBoardOfPlayer.addLeaderCardActivated(leaderCardKeys);
-        notifyObserver(new LeaderListCardNotification(gameBoardOfPlayer.getLeaderCardsActivated()).serialize());
+        notifyObserver(new LeaderListCardNotification(gameBoardOfPlayer.getLeaderCardsActivated(),true).serialize());
     }
 
     @Override
@@ -170,7 +170,7 @@ public class LightGameSolitaire extends LightGame{
     @Override
     public void discardLeaderCard(int index) throws IOException, InterruptedException {
         gameBoardOfPlayer.discardLeaderCard(index);
-        notifyObserver(new LeaderListCardNotification(gameBoardOfPlayer.getLeaderCards()).serialize());
+        notifyObserver(new LeaderListCardNotification(gameBoardOfPlayer.getLeaderCards(),false).serialize());
     }
 
     @Override

@@ -9,9 +9,11 @@ public class LeaderListCardNotification extends Notification{
 
     private final NotificationType notificationType = NotificationType.LEADERLISTNOTIFY;
     private ArrayList<LeaderCard> listOfFirstCard;
-    public LeaderListCardNotification(ArrayList<LeaderCard> listOfFirstCard){
+    private boolean activated;
+    public LeaderListCardNotification(ArrayList<LeaderCard> listOfFirstCard,boolean activated){
         this.listOfFirstCard=new ArrayList<>();
         this.listOfFirstCard=listOfFirstCard;
+        this.activated=activated;
     }
     @Override
     public void accept(NotificatorVisitor v) throws IOException, InterruptedException {
@@ -24,5 +26,9 @@ public class LeaderListCardNotification extends Notification{
 
     public ArrayList<LeaderCard> getListOfFirstCard() {
         return listOfFirstCard;
+    }
+
+    public boolean isActivated() {
+        return activated;
     }
 }

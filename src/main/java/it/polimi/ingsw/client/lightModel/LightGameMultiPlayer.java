@@ -48,13 +48,12 @@ public class LightGameMultiPlayer extends LightGame{
     public void addLeaderCard(ArrayList<Integer> leaderCardKeys) throws IOException, InterruptedException {
         gameBoardOfPlayer.addLeaderCard(leaderCardKeys);
 
-        notifyObserver(new LeaderListCardNotification(gameBoardOfPlayer.getLeaderCards()).serialize());
     }
 
     @Override
     public void addLeaderCardActivated(ArrayList<Integer> leaderCardKeys) throws IOException, InterruptedException {
        gameBoardOfPlayer.addLeaderCardActivated(leaderCardKeys);
-        notifyObserver(new LeaderListCardNotification(gameBoardOfPlayer.getLeaderCardsActivated()).serialize());
+        notifyObserver(new LeaderListCardNotification(gameBoardOfPlayer.getLeaderCardsActivated(),true).serialize());
     }
 
 
@@ -72,7 +71,7 @@ public class LightGameMultiPlayer extends LightGame{
     @Override
     public void discardLeaderCard(int index) throws IOException, InterruptedException {
        gameBoardOfPlayer.discardLeaderCard(index);
-        notifyObserver(new LeaderListCardNotification(gameBoardOfPlayer.getLeaderCards()).serialize());
+        notifyObserver(new LeaderListCardNotification(gameBoardOfPlayer.getLeaderCards(),false).serialize());
 
     }
 

@@ -618,7 +618,7 @@ public class GameMultiPlayer extends Game {
 
             ArrayList<Integer> needForLeaderInitial = new ArrayList<>();
             for (int i=0; i<4;i++)
-                needForLeaderInitial.add(firstPlayer.getPersonalLeaderCard().get(i).getKey());
+                needForLeaderInitial.add(p.getPersonalLeaderCard().get(i).getKey());
             notifyOnlyOneSpecificObserver(new UpdateInitLeaderMessage(needForLeaderInitial), p.getNickName());
 
 
