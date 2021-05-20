@@ -23,6 +23,8 @@ import java.util.Map;
  */
 public class Game extends Observable {
 
+    private boolean isOver;
+
     /**
      * this attribute represents the game market
      */
@@ -139,6 +141,7 @@ public class Game extends Observable {
         else {
             restoreGame();
         }
+        this.isOver=false;
 
     }
 
@@ -830,7 +833,11 @@ public class Game extends Observable {
     }
 
 
+    public boolean isOver() {
+        return isOver;
+    }
 
-
-
+    public void setOver(boolean bool) {
+        this.isOver=bool;
+    }
 }

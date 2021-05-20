@@ -728,6 +728,7 @@ public class GameMultiPlayer extends Game {
     public void endGame() throws IOException, InterruptedException {
         notifyObserver(new EndGamePlayerWinnerMessage(theWinnerIs().getNickName()));
         FileClass.FileDestroyer();
+        setOver(true);
     }
 
 

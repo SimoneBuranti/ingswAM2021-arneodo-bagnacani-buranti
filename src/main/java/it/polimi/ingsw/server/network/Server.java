@@ -22,7 +22,6 @@ public class Server {
     private ArrayList<ClientController> tempClientController = new ArrayList<>();
 
     private ArrayList<ClientController> clientControllersDisconnected = new ArrayList<>();
-    private VirtualView virtualView;
     private ArrayList<String> lobby = new ArrayList<>();
     private boolean sendRestartQuestion;
     private int restartQuestion;
@@ -255,5 +254,19 @@ public class Server {
 
     public void addClientControllersDisconnected(ClientController clientController){
         clientControllersDisconnected.add(clientController);
+    }
+    public void resetInfo(){
+         this.game=null;
+        clientControllers = new ArrayList<>();
+        tempClientController = new ArrayList<>();
+        clientControllersDisconnected = new ArrayList<>();
+        lobby = new ArrayList<>();
+        sendRestartQuestion=false;
+        restartQuestion=0;
+        restartAnswerReceived=false;
+        restartAnswer=false;
+        restartQuestionSent=false;
+        this.gameController = new GameControllerEmpty(this);
+        gameController.setServer(this);
     }
 }

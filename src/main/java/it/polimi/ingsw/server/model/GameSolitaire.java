@@ -643,6 +643,7 @@ public class GameSolitaire extends Game {
     @Override
     public void endGame(){
         FileClass.FileDestroyer();
+        setOver(true);
     }
 
     @Override

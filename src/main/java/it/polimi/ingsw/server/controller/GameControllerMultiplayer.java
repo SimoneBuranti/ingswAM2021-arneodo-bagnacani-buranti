@@ -18,6 +18,7 @@ public class GameControllerMultiplayer extends GameController {
 
     @Override
     public void handleMessage(ExitMessage msg, ClientController clientController){
+        if(!server.getGame().isOver()){
      boolean flag = false;
      if(game.disconnectPlayer(clientController.getNickname())) {
       flag = true;
@@ -30,7 +31,12 @@ public class GameControllerMultiplayer extends GameController {
     }
      if(flag) {
       server.setGameController(new GameControllerDisconnection(this.server,this.game));
-     }
+     }}
+        else
+        {server.addClientControllersDisconnected(clientController);
+            if (server.getClientControllersDisconnected().size()==server.getClientController().size())
+            { server.resetInfo(); }
+        }
     }
 
     @Override

@@ -146,6 +146,11 @@ public class ClientController implements MessageVisitor {
     @Override
     public void visit(SetPapalsMessage msg) {}
 
+    @Override
+    public void visit(UpdateInitBooleanMessage msg) {
+
+    }
+
     //***********************************************************************************************************
 
 
