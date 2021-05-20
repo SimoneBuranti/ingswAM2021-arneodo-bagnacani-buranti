@@ -3,15 +3,12 @@ package it.polimi.ingsw.server.network;
 import com.google.gson.Gson;
 import it.polimi.ingsw.server.controller.*;
 import it.polimi.ingsw.server.model.*;
-import it.polimi.ingsw.server.virtualview.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 
 public class Server {
@@ -31,13 +28,14 @@ public class Server {
 
 
 
-    public Server() {
-        try {
+    public Server() throws FileNotFoundException {
             ArrayList<String> nickNameInOrder;
             String nickname;
             Gson gson = new Gson();
-            File f = new File("src/main/resources/MultiGame.json");
-            if (f.exists()){
+            File fmulti = new File("src/main/resources/MultiGame.json");
+            File fsingle = new File("src/main/resources/SingleGame.json");
+
+            if (fmulti.exists()){
                 nickNameInOrder = gson.fromJson(new FileReader("src/main/resources/InformationAboutTurn.json"),ArrayList.class);
                 this.gameController = new GameControllerRestart(this);
                 gameController.setServer(this);
@@ -48,21 +46,16 @@ public class Server {
                 restartQuestionSent = false;
                 gameController.setNumberOfPlayers(nickNameInOrder.size());
             }
-             else
-                {
-                    f = new File("src/main/resources/SingleGame.json");
-                    nickname = gson.fromJson(new FileReader("src/main/resources/InformationAboutTurn.json"),String.class);
+             else if (fsingle.exists())
+
+                { nickname = gson.fromJson(new FileReader("src/main/resources/InformationAboutTurn.json"),String.class);
                     lobby.add(nickname);
                     this.gameController = new GameControllerRestart(this);
                     gameController.setServer(this);
                     sendRestartQuestion = true;
                     gameController.setNumberOfPlayers(1);
-
-
                 }
-
-        }
-        catch (FileNotFoundException e) {
+        else{
             this.gameController = new GameControllerEmpty(this);
             gameController.setServer(this);
             lobby = new ArrayList<>();

@@ -17,7 +17,7 @@ public class GameControllerTest {
 
     @Test
     @DisplayName("GameControllerEmpty -1- one connection only")
-    public void gameControllerEmptyTest1() throws InterruptedException {
+    public void gameControllerEmptyTest1() throws InterruptedException, FileNotFoundException {
         Server server = new Server();
 
         Message parsedMsg;
@@ -51,7 +51,7 @@ public class GameControllerTest {
 
     @Test
     @DisplayName("GameControllerEmpty -2- one connection and other during lobby booting")
-    public void gameControllerEmptyTest2() throws InterruptedException {
+    public void gameControllerEmptyTest2() throws InterruptedException, FileNotFoundException {
         Server server = new Server();
         Message msg;
 
@@ -137,7 +137,7 @@ public class GameControllerTest {
 
     @Test
     @DisplayName("GameControllerEmpty -3- single player correct messages")
-    public void gameControllerEmptyTest3() throws InterruptedException {
+    public void gameControllerEmptyTest3() throws InterruptedException, FileNotFoundException {
         Server server = new Server();
 
         Message msg;
@@ -173,7 +173,7 @@ public class GameControllerTest {
 
     @Test
     @DisplayName("GameControllerEmpty -4- single player correct messages and then more connection requests")
-    public void gameControllerEmptyTest4() throws InterruptedException {
+    public void gameControllerEmptyTest4() throws InterruptedException, FileNotFoundException {
         Server server = new Server();
 
         Message msg;
@@ -226,7 +226,7 @@ public class GameControllerTest {
 
     @Test
     @DisplayName("GameControllerEmpty -5- multiplayer general messages and disconnection requests")
-    public void gameControllerEmptyTest5() throws InterruptedException {
+    public void gameControllerEmptyTest5() throws InterruptedException, FileNotFoundException {
         Server server = new Server();
 
         Message msg;
