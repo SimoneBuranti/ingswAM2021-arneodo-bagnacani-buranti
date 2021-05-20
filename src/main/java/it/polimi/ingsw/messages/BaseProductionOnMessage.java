@@ -16,6 +16,12 @@ public class BaseProductionOnMessage extends Message{
 
     private Resource outputResource;
 
+    public BaseProductionOnMessage(Resource i1, Resource i2, Resource o) {
+        this.firstInputResource = i1;
+        this.secondInputResource = i2;
+        this.outputResource = o;
+    }
+
     /**
      */
     @Override

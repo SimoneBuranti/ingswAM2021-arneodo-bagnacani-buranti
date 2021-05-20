@@ -5,7 +5,7 @@ import it.polimi.ingsw.client.view.ViewController;
 import it.polimi.ingsw.messages.EndOfProductionMessage;
 import it.polimi.ingsw.messages.Message;
 
-public class EndOfProductionCommand {
+public class EndOfProductionCommand extends Command {
 
     private ViewController viewController;
 

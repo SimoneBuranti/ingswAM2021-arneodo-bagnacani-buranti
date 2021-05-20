@@ -1,7 +1,11 @@
 package it.polimi.ingsw.client.commands;
 
 import it.polimi.ingsw.client.view.ViewController;
+import it.polimi.ingsw.messages.BaseProductionOnMessage;
 import it.polimi.ingsw.messages.Message;
+import it.polimi.ingsw.server.model.Resource;
+
+import java.util.Scanner;
 
 public class BaseProductionCommand extends Command {
     private ViewController viewController;
@@ -11,7 +15,42 @@ public class BaseProductionCommand extends Command {
     }
 
     public Message commandOn(){
-        return null;
+        Resource i1;
+        Resource i2;
+        Resource o;
+        Scanner in = new Scanner(System.in);
+
+        System.out.println("COIN: 'coin'        ROCK: 'rock'        SHIELD: 'shield'        SERVANT: 'servant'");
+        System.out.println("First input resource type: ");
+        while ((i1 = fromStringToResource(in.nextLine())) == null){
+            System.out.println("Invalid resource type");
+        }
+        System.out.println("Second input resource type: ");
+        while ((i2 = fromStringToResource(in.nextLine())) == null){
+            System.out.println("Invalid resource type");
+        }
+        System.out.println("Output resource type: ");
+        while ((o = fromStringToResource(in.nextLine())) == null){
+            System.out.println("Invalid resource type");
+        }
+
+        return new BaseProductionOnMessage(i1,i2,o);
+
+    }
+
+    private Resource fromStringToResource(String resource){
+        switch (resource) {
+            case "coin":
+                return Resource.COIN;
+            case "rock":
+                return Resource.ROCK;
+            case "shield":
+                return Resource.SHIELD;
+            case "servant":
+                return Resource.SERVANT;
+            default :
+                return null;
+        }
     }
 
     public static String defToString(){

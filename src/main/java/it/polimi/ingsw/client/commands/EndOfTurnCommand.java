@@ -7,7 +7,7 @@ import it.polimi.ingsw.messages.EndOfTurnMessage;
 import it.polimi.ingsw.messages.ExitMessage;
 import it.polimi.ingsw.messages.Message;
 
-public class EndOfTurnCommand {
+public class EndOfTurnCommand extends Command {
 
 
     private ViewController viewController;

@@ -12,7 +12,7 @@ public class ProvaApp {
     public static void main(String[] args) {
 
 
-        System.out.println((new Blue()) instanceof Blue);
+        (new HelpCommand()).commandOn();
 
 
     }
