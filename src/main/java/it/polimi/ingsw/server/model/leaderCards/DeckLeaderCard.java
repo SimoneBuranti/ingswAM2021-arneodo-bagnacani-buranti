@@ -16,6 +16,8 @@ public class DeckLeaderCard {
      */
     private static  ArrayList<LeaderCard> deckLeaderCard;
 
+    private static ArrayList<LeaderCard> cloneOfLeadercard=new ArrayList<>();
+
     /**
      * this constructor creates all the leader cards and adds them to the list and shuffles the newly created deck
      */
@@ -106,6 +108,14 @@ public class DeckLeaderCard {
 
         Mix.MIXED(deckLeaderCard);
 
+        copyAll(deckLeaderCard);
+
+
+    }
+
+    private void copyAll(ArrayList<LeaderCard> deckLeaderCard) {
+        for(int i=0; i<deckLeaderCard.size();i++)
+            cloneOfLeadercard.add(deckLeaderCard.get(i));
     }
 
 
@@ -138,6 +148,14 @@ public class DeckLeaderCard {
                 deckLeaderCard.set(i,deckLeaderCard.get(i+1));
         deckLeaderCard.remove(deckLeaderCard.size()-1);
         return tempLeaderCard;
+    }
+
+
+    public static LeaderCard controlKey(int key){
+       for(int i=0; i<cloneOfLeadercard.size(); i++)
+           if (key==cloneOfLeadercard.get(i).key)
+               return cloneOfLeadercard.get(i);
+       return null;
     }
 }
 

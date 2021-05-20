@@ -19,6 +19,7 @@ import java.util.ArrayList;
  * this class represents the player of the game
  */
 public class Player {
+    protected boolean init;
 
     private VirtualView virtualView;
     /**
@@ -48,6 +49,11 @@ public class Player {
 
 
     protected boolean newMatch;
+
+    /**
+     * this attribute is a collection of the player's starting leader cards
+     */
+    protected int[] leaderCard=new int[4];
 
 
 
@@ -460,4 +466,40 @@ public class Player {
     {
         return personalLeaderCard;
     }
+
+    public boolean isInit() {
+        return init;
+    }
+
+    public void setInit(boolean init) {
+        this.init = init;
+    }
+
+    public void getPersonalLeaderCardAskey()
+    {
+        int k=0;
+
+        for(int i=0; i<getPersonalLeaderCard().size(); i++)
+        {
+            this.leaderCard[k]=getPersonalLeaderCard().get(i).getKey();
+            k++; }
+    }
+
+    public int[] getLeaderCard() {
+        return leaderCard;
+    }
+
+    public void reverseAddPersonalLeaderCardAskey()
+    {
+        int k=0;
+
+        for(int i=0; i<getLeaderCard().length; i++)
+        {
+            this.personalLeaderCard.add(DeckLeaderCard.controlKey(leaderCard[i]));
+        }
+    }
+
+
+
+
 }

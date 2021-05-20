@@ -190,6 +190,11 @@ public class ViewController implements MessageVisitor, ViewObserver {
     }
 
     @Override
+    public void visit(UpdateInitBooleanMessage msg) {
+        game.setInit(msg.isInit());
+    }
+
+    @Override
     public void visit(RestartAnswerMessage msg) {
 
     }

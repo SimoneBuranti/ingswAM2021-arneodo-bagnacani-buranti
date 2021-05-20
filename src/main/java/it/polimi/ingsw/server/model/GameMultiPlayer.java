@@ -1,7 +1,6 @@
 package it.polimi.ingsw.server.model;
 
 import com.google.gson.Gson;
-import it.polimi.ingsw.messages.NoNicknameMessage;
 import it.polimi.ingsw.messages.SetPapalsMessage;
 import it.polimi.ingsw.messages.observable.*;
 import it.polimi.ingsw.server.controller.ClientController;
@@ -606,8 +605,23 @@ public class GameMultiPlayer extends Game {
     public void reConfigClient() throws IOException, InterruptedException {
         super.reConfigClient();
         for(Player p : playerList){
-                ArrayList<Integer> needForLeader = new ArrayList<>();
+
+            ArrayList<Integer> needForLeaderInitial = new ArrayList<>();
+            for (int i=0; i<4;i++)
+                needForLeaderInitial.add(firstPlayer.getPersonalLeaderCard().get(i).getKey());
+            notifyOnlyOneSpecificObserver(new UpdateInitLeaderMessage(needForLeaderInitial), p.getNickName());
+
+
+
+            notifyOnlyOneSpecificObserver(new UpdateInitBooleanMessage(p.isInit()), p.getNickName());
+
+
+
+
+            ArrayList<Integer> needForLeader = new ArrayList<>();
                 ArrayList<Integer> needForLeader2 = new ArrayList<>();
+
+
 
                 notifyOnlyOneSpecificObserver(new StorageConfigMessage(p.getGameBoardOfPlayer().getStorageOfGameBoard().getStorageResource()), p.getNickName());
 

@@ -126,5 +126,47 @@ public class FileClass {
             f.delete();
 
 
+        f = new File("src/main/resources/fileInformationLeaderInitPlayerFourth.json");
+        if (f.exists())
+            f.delete();
+
+        f = new File("src/main/resources/fileInformationInitPlayerFourth.json");
+        if (f.exists())
+            f.delete();
+
+
+        f = new File("src/main/resources/fileInformationLeaderInitPlayerFirst.json");
+        if (f.exists())
+            f.delete();
+
+        f = new File("src/main/resources/fileInformationInitPlayerFirst.json");
+        if (f.exists())
+            f.delete();
+
+
+        f = new File("src/main/resources/fileInformationLeaderInitPlayerSecond.json");
+        if (f.exists())
+            f.delete();
+
+        f = new File("src/main/resources/fileInformationInitPlayerSecond.json");
+        if (f.exists())
+            f.delete();
+
+
+        f = new File("src/main/resources/fileInformationLeaderInitPlayerThird.json");
+        if (f.exists())
+            f.delete();
+
+        f = new File("src/main/resources/fileInformationInitPlayerThird.json");
+        if (f.exists())
+            f.delete();
+
+
+
+
+
+
+
+
     }
 }

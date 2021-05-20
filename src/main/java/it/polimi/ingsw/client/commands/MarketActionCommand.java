@@ -27,9 +27,9 @@ public class MarketActionCommand extends Command {
 
     public Message commandOn(){
         /*if (rc=='c'){
-            viewController.sendMessage(new PushColumnMessage(n));
-        } else
-            viewController.sendMessage(new PushRowMessage(n));
+            //viewController.sendMessage(new PushColumnMessage(n));
+        } else{}
+            //viewController.sendMessage(new PushRowMessage(n));
         */
         return null;
     }

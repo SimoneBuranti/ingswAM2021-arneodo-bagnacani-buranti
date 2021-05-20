@@ -119,6 +119,8 @@ public interface MessageVisitor {
 
     void visit(SetPapalsMessage msg) throws IOException, InterruptedException;
 
+    void visit(UpdateInitBooleanMessage msg);
+
 
 
 

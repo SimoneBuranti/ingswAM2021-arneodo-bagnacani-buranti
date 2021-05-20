@@ -40,7 +40,18 @@ public class PlayerSecond extends Player{
         super(nickName,game,newmatch,virtualView);
         Gson gson=gsonForEveryone();
         try {
-            this.gameBoardOfPlayer = gson.fromJson(new FileReader("src/main/resources/fileInformationPlayerSecond.json"),GameBoardInterface.class);
+            this.gameBoardOfPlayer= gson.fromJson(new FileReader("src/main/resources/fileInformationPlayerSecond.json"),GameBoardInterface.class);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        try {
+            this.leaderCard= gson.fromJson(new FileReader("src/main/resources/fileInformationLeaderInitPlayerSecond.json"),int[].class);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        reverseAddPersonalLeaderCardAskey();
+        try {
+            this.init= gson.fromJson(new FileReader("src/main/resources/fileInformationInitPlayerSecond.json"),boolean.class);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -66,10 +77,10 @@ public class PlayerSecond extends Player{
         Gson gson= gsonForEveryone();
         String jsonStrin = gson.toJson(getGameBoardOfPlayer(),GameBoardInterface.class);
         try {
-
             fileInformatioPlayerSecond = new FileWriter("src/main/resources/fileInformationPlayerSecond.json");
             fileInformatioPlayerSecond.write(jsonStrin);
         } catch (IOException e) {
+
             e.printStackTrace();
 
         } finally {
@@ -82,6 +93,42 @@ public class PlayerSecond extends Player{
                 e.printStackTrace();
             }
         }
+        String jsonStrin2 = gson.toJson(isInit(),boolean.class);
+        try {
+            fileInformatioPlayerSecond = new FileWriter("src/main/resources/fileInformationInitPlayerSecond.json");
+            fileInformatioPlayerSecond.write(jsonStrin2);
+        } catch (IOException e) {
 
-    }
+            e.printStackTrace();
+
+        } finally {
+
+            try {
+                fileInformatioPlayerSecond.flush();
+                fileInformatioPlayerSecond.close();
+            } catch (IOException e) {
+
+                e.printStackTrace();
+            }
+        }
+        getPersonalLeaderCardAskey();
+
+        String jsonStrin3 = gson.toJson(getLeaderCard(),int[].class);
+        try {
+            fileInformatioPlayerSecond = new FileWriter("src/main/resources/fileInformationLeaderInitPlayerSecond.json");
+            fileInformatioPlayerSecond.write(jsonStrin3);
+        } catch (IOException e) {
+
+            e.printStackTrace();
+
+        } finally {
+
+            try {
+                fileInformatioPlayerSecond.flush();
+                fileInformatioPlayerSecond.close();
+            } catch (IOException e) {
+
+                e.printStackTrace();
+            }
+        } }
 }
