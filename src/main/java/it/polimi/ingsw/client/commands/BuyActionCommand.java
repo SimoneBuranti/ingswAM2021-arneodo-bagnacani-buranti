@@ -10,8 +10,9 @@ public class BuyActionCommand extends Command {
     private int columnNumber;
     private ViewController viewController;
 
-    public BuyActionCommand(char colour, int level, ViewController viewController) {
+    public BuyActionCommand(int deckNumber, int column, ViewController viewController) {
         this.deckNumber = deckNumber;
+        this.columnNumber = column;
         this.viewController = viewController;
     }
 
@@ -19,7 +20,7 @@ public class BuyActionCommand extends Command {
 
     public Message commandOn() throws SpentTokenException {
         if(viewController.isActionToken()){
-            viewController.spendActionToken();
+            viewController.setActionToken(false);
             return new BuyProductionCardMessage(this.deckNumber,this.columnNumber);
         }
         throw new SpentTokenException();

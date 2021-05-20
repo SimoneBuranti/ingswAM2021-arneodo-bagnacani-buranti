@@ -16,6 +16,9 @@ public class ViewController implements MessageVisitor, ViewObserver {
     private String nickName = null;
     private View view;
 
+    public LightGame getGame() {
+        return game;
+    }
 
     public ViewController(SocketClient socketClient, View view){
         this.socketClient = socketClient;
@@ -48,13 +51,10 @@ public class ViewController implements MessageVisitor, ViewObserver {
         return game.isActionToken();
     }
 
-    public void spendActionToken(){
-        game.spendActionToken();
+    public void setActionToken(boolean flag){
+        game.setActionToken(flag);
     }
 
-    public void giveActionToken(){
-        game.giveActionToken();
-    }
 
     @Override
     public void visit(AlreadyActivatedErrorMessage msg) {

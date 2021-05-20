@@ -2,6 +2,9 @@ package it.polimi.ingsw.client.commands;
 
 
 import it.polimi.ingsw.client.view.ViewController;
+import it.polimi.ingsw.messages.ActivateLeaderCardMessage;
+import it.polimi.ingsw.messages.BuyProductionCardMessage;
+import it.polimi.ingsw.messages.DiscardLeaderCardMessage;
 import it.polimi.ingsw.messages.Message;
 
 public class LeaderCardActionCommand extends Command{
@@ -24,10 +27,10 @@ public class LeaderCardActionCommand extends Command{
         return n;
     }
 
-    public Message commandOn(){
-
-        return null;
-
+    public Message commandOn() throws SpentTokenException {
+        if (ad == 'a')
+            return new ActivateLeaderCardMessage(n);
+        return new DiscardLeaderCardMessage(n);
     }
 
     public static String defToString(){

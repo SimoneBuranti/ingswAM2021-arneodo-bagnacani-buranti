@@ -6,6 +6,11 @@ import it.polimi.ingsw.messages.Message;
 
 public class ExtraProductionCommand extends Command {
 
+    private ViewController viewController;
+
+    public ExtraProductionCommand(ViewController viewController) {
+        this.viewController = viewController;
+    }
 
     public Message commandOn(){
 

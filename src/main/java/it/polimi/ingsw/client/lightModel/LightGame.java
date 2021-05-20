@@ -90,6 +90,7 @@ public class LightGame extends ViewObservable {
 
     protected boolean actionToken;
 
+    protected boolean[] productionTokens = {true,true,true,true,true,true};
 
     /**
      * this constructor instantiates all the game attributes
@@ -136,13 +137,24 @@ public class LightGame extends ViewObservable {
         return actionToken;
     }
 
-    public void spendActionToken(){
-        actionToken = false;
+    public void setActionToken(boolean actionToken) {
+        this.actionToken = actionToken;
     }
 
-    public void giveActionToken(){
-        actionToken = true;
+    public boolean isProductionToken(int n){
+        return productionTokens[n];
     }
+
+    public void setProductionToken(int n,boolean token){
+        this.productionTokens[n] = token;
+    }
+
+    public void resetProductionTokens(){
+        for (int i = 0;i<6;i++){
+            setProductionToken(i,true);
+        }
+    }
+
 
 
     public void setMarket(ArrayList<Marble> list) throws IOException, InterruptedException {

@@ -8,6 +8,10 @@ public class ActivateLeaderCardMessage extends Message {
 
     private int cardNumber;
 
+    public ActivateLeaderCardMessage(int cardNumber) {
+        this.cardNumber = cardNumber;
+    }
+
     @Override
     public MessageType getMessageType() {
         return messageType;

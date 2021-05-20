@@ -67,40 +67,36 @@ public abstract class Command {
                 return new MarketActionCommand(ad,n,viewController);
             }
             case "baseProductionOn" : {
-                return new BaseProductionCommand();
+                return new BaseProductionCommand(viewController);
             }
             case "productionOn" : {
-                return new ProductionCommand();
+                return new ProductionCommand(viewController);
             }
             case "extraProductionOn" : {
-                return new ExtraProductionCommand();
+                return new ExtraProductionCommand(viewController);
             }
             case "buy" : {
-                char colour = 'b';
                 int column = 0;
-                int level = 0;
+                int deckNumber = 0;
                 int cont = 0;
 
                 for(int i = 0;i<suffix.length();i++){
                     if (cont == 0 && (suffix.charAt(i) == 'b' || suffix.charAt(i)=='g' || suffix.charAt(i)=='y' || suffix.charAt(i)=='v')){
-                        colour = suffix.charAt(i);
+                        deckNumber = suffix.charAt(i+1) - '0';
                         cont++;
                     } else if (cont == 1 && suffix.charAt(i)==' '){
                         cont++;
-                        level = suffix.charAt(i+1) - '0';
-                    } else if (cont == 2 && suffix.charAt(i)==' '){
-                        cont++;
-                        level = suffix.charAt(i+1) - '0';
+                        column = suffix.charAt(i+1) - '0';
                     }
 
                 }
 
-                if (cont != 3 || level<1 || level>3 || column<1 || column>3)
+                if (cont != 3 || deckNumber<1 || deckNumber>12 || column<1 || column>3)
                     throw new InvalidCommandException();
-                return new BuyActionCommand(colour,level, viewController);
+                return new BuyActionCommand(deckNumber,column, viewController);
             }
             case "help" : {
-
+                return new ExitCommand();
             }
             default: {
                 throw new InvalidCommandException();
