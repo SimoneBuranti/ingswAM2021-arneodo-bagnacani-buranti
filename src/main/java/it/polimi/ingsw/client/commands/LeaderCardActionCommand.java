@@ -2,6 +2,7 @@ package it.polimi.ingsw.client.commands;
 
 
 import it.polimi.ingsw.client.view.ViewController;
+import it.polimi.ingsw.messages.Message;
 
 public class LeaderCardActionCommand extends Command{
 
@@ -23,7 +24,9 @@ public class LeaderCardActionCommand extends Command{
         return n;
     }
 
-    public void commandOn(){
+    public Message commandOn(){
+
+        return null;
 
     }
 

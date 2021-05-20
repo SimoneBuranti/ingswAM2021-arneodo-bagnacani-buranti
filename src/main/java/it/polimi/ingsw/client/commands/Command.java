@@ -77,6 +77,7 @@ public abstract class Command {
             }
             case "buy" : {
                 char colour = 'b';
+                int column = 0;
                 int level = 0;
                 int cont = 0;
 
@@ -87,13 +88,16 @@ public abstract class Command {
                     } else if (cont == 1 && suffix.charAt(i)==' '){
                         cont++;
                         level = suffix.charAt(i+1) - '0';
+                    } else if (cont == 2 && suffix.charAt(i)==' '){
+                        cont++;
+                        level = suffix.charAt(i+1) - '0';
                     }
 
                 }
 
-                if (cont != 2 || level<1 || level>3)
+                if (cont != 3 || level<1 || level>3 || column<1 || column>3)
                     throw new InvalidCommandException();
-                return new BuyActionCommand(colour,level);
+                return new BuyActionCommand(colour,level, viewController);
             }
             case "help" : {
 
@@ -105,10 +109,16 @@ public abstract class Command {
 
     }
 
-    public static void commandOn(Message msg){}
+    public Message commandOn() throws SpentTokenException {
+        return null;
+    }
 
     public static String defToString(){
         return "";
+    }
+
+    public String toString(){
+        return defToString();
     }
 
 

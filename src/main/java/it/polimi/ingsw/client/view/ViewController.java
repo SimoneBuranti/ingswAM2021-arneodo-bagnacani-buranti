@@ -6,6 +6,7 @@ import it.polimi.ingsw.client.lightModel.LightGameMultiPlayer;
 import it.polimi.ingsw.client.lightModel.LightGameSolitaire;
 import it.polimi.ingsw.messages.*;
 import it.polimi.ingsw.messages.observable.*;
+import it.polimi.ingsw.server.model.colours.Colour;
 
 import java.io.IOException;
 
@@ -41,6 +42,18 @@ public class ViewController implements MessageVisitor, ViewObserver {
 
     public void sendMessage(Message msg) {
         socketClient.sendMessage(msg);
+    }
+
+    public boolean isActionToken() {
+        return game.isActionToken();
+    }
+
+    public void spendActionToken(){
+        game.spendActionToken();
+    }
+
+    public void giveActionToken(){
+        game.giveActionToken();
     }
 
     @Override
@@ -609,4 +622,9 @@ public class ViewController implements MessageVisitor, ViewObserver {
     public void update(Message message) throws IOException, InterruptedException {
         socketClient.sendMessage(message);
     }
+
+    /*public int getDeckNumberFormColourAndLevel(char c, int level) {
+
+        return game.getDeckNumberFormColourAndLevel(c,level);
+    }*/
 }

@@ -8,8 +8,10 @@ import it.polimi.ingsw.client.ligtModelNotification.ReserveNotification;
 import it.polimi.ingsw.client.lightModel.lightGameBoard.LightGameBoard;
 import it.polimi.ingsw.client.lightModel.productionCards.*;
 import it.polimi.ingsw.server.model.Resource;
+import it.polimi.ingsw.server.model.colours.Colour;
 import it.polimi.ingsw.server.model.leaderCards.LeaderCard;
 import it.polimi.ingsw.server.model.marbles.Marble;
+import it.polimi.ingsw.server.model.productionCards.DeckProductionCard;
 import it.polimi.ingsw.server.model.productionCards.ProductionCard;
 
 import java.io.IOException;
@@ -141,6 +143,7 @@ public class LightGame extends ViewObservable {
     public void giveActionToken(){
         actionToken = true;
     }
+
 
     public void setMarket(ArrayList<Marble> list) throws IOException, InterruptedException {
         market = new LightMarket(list);
@@ -317,4 +320,14 @@ public class LightGame extends ViewObservable {
     public void setInit(boolean init) {
         this.init = init;
     }
+
+    /*public int getDeckNumberFormColourAndLevel(char c, int level) {
+
+        for (LightDeckProductionCard deck : listOfDeck) {
+            if (level == deck.getLevel() && deck.getColour().equals(c)){
+                return deck.getNumberDeck();
+            }
+        }
+        return 0;
+    }*/
 }

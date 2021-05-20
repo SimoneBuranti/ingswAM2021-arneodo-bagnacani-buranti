@@ -1,8 +1,12 @@
 package it.polimi.ingsw.client.commands;
 
+import it.polimi.ingsw.messages.Message;
+
 public class ProductionCommand extends Command {
 
-    public void commandOn(){
+    public Message commandOn(){
+
+        return null;
 
     }
 

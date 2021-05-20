@@ -1,26 +1,36 @@
 package it.polimi.ingsw.client.commands;
 
+import it.polimi.ingsw.client.view.ViewController;
+import it.polimi.ingsw.messages.BuyProductionCardMessage;
+import it.polimi.ingsw.messages.Message;
+
 public class BuyActionCommand extends Command {
-    private char colour;
-    private int level;
 
-    public BuyActionCommand(char colour, int level) {
-        this.colour = colour;
-        this.level = level;
+    private int deckNumber;
+    private int columnNumber;
+    private ViewController viewController;
+
+    public BuyActionCommand(char colour, int level, ViewController viewController) {
+        this.deckNumber = deckNumber;
+        this.viewController = viewController;
     }
 
-    public char getColour() {
-        return colour;
-    }
 
-    public int getLevel() {
-        return level;
+
+    public Message commandOn() throws SpentTokenException {
+        if(viewController.isActionToken()){
+            viewController.spendActionToken();
+            return new BuyProductionCardMessage(this.deckNumber,this.columnNumber);
+        }
+        throw new SpentTokenException();
+
     }
 
     public String toString(){
-        return "buy "+colour+" "+level;
+        return "buy "+deckNumber+" "+columnNumber;
     }
+
     public static String defToString(){
-        return "buy b/g/y/v 1/2/3";
+        return "buy [1..12] [1..3]";
     }
 }

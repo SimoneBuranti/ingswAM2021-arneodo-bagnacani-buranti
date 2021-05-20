@@ -1,6 +1,8 @@
 package it.polimi.ingsw;
 
 import it.polimi.ingsw.client.commands.*;
+import it.polimi.ingsw.server.model.colours.Blue;
+import it.polimi.ingsw.server.model.colours.Green;
 
 import java.util.Scanner;
 
@@ -10,7 +12,7 @@ public class ProvaApp {
     public static void main(String[] args) {
 
 
-        (new HelpCommand()).commandOn();
+        System.out.println((new Blue()) instanceof Blue);
 
 
     }

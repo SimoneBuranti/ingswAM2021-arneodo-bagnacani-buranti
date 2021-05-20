@@ -1,5 +1,8 @@
 package it.polimi.ingsw.client.view.cli;
 
+import it.polimi.ingsw.client.commands.Command;
+import it.polimi.ingsw.client.commands.InvalidCommandException;
+import it.polimi.ingsw.client.commands.SpentTokenException;
 import it.polimi.ingsw.client.ligtModelNotification.*;
 import it.polimi.ingsw.client.view.View;
 import it.polimi.ingsw.client.view.ViewController;
@@ -7,9 +10,12 @@ import it.polimi.ingsw.client.view.ViewControllerObservable;
 import it.polimi.ingsw.messages.*;
 import it.polimi.ingsw.server.model.leaderCards.LeaderCard;
 
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
 
 public class Cli extends ViewControllerObservable implements View, NotificatorVisitor {
     private ViewController viewController;
@@ -17,9 +23,34 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
     private Scanner input = new Scanner(System.in);
 
 
+
     /*public Cli(){
 
     }*/
+
+
+    public void readCommand(){
+
+        (new Thread( () -> {
+                                try {
+                                    Message msg = (Command.parseCommand(input.nextLine(),this.viewController)).commandOn();
+                                    if (msg != null) {
+                                        this.notifyObserver(msg);
+                                    } else
+                                        readCommand();
+                                } catch (InvalidCommandException e) {
+                                    System.out.println("Invalid command, type 'help' to check the command list");
+                                    readCommand();
+                                } catch (InterruptedException | IOException e) {
+                                    e.printStackTrace();
+                                } catch (SpentTokenException e) {
+                                    System.out.println("Impossible request, you have already done an action");
+                                }
+        }
+                    )
+        ).start();
+
+    }
 
 
 
@@ -89,14 +120,6 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
     public void visit(FaithPathNotification faithPathNotification) {
 
     }
-
-
-    public String readCommand(){
-        (new Thread()).start();
-        return null;
-    }
-
-
 
 
     @Override

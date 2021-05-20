@@ -1,9 +1,11 @@
 package it.polimi.ingsw.client.commands;
 
+import it.polimi.ingsw.messages.Message;
+
 public class BaseProductionCommand extends Command {
 
-    public void commandOn(){
-
+    public Message commandOn(){
+        return null;
     }
 
     public static String defToString(){

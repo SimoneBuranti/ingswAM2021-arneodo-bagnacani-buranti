@@ -1,5 +1,7 @@
 package it.polimi.ingsw.client.commands;
 
+import it.polimi.ingsw.messages.Message;
+
 import java.util.ArrayList;
 
 public class HelpCommand extends Command{
@@ -25,7 +27,7 @@ public class HelpCommand extends Command{
                                         };
 
 
-    public void commandOn(){
+    public Message commandOn(){
         for (int i = 0; i < commands.length ;i++){
             if (i%4==0){
                 System.out.println("");
@@ -34,6 +36,7 @@ public class HelpCommand extends Command{
             for(int j = 0;j<(space-commands[i].length());j++)
                 System.out.print(" ");
         }
+        return null;
     }
 
     public static String defToString(){

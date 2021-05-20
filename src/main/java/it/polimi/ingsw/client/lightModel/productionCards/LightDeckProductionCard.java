@@ -1,6 +1,7 @@
 package it.polimi.ingsw.client.lightModel.productionCards;
 
 import it.polimi.ingsw.server.model.Resource;
+import it.polimi.ingsw.server.model.colours.Colour;
 import it.polimi.ingsw.server.model.productionCards.ProductionCard;
 
 import java.util.ArrayList;
@@ -67,6 +68,14 @@ public abstract class LightDeckProductionCard {
      */
     public int getLevel(){
         return deck.get(0).getLevel();
+    }
+
+    /**
+     * Getter method for the top card victory colour
+     * @return Colour : colour of the first production card of the deck
+     */
+    public Colour getColour(){
+        return deck.get(0).getColour();
     }
 
     /**
