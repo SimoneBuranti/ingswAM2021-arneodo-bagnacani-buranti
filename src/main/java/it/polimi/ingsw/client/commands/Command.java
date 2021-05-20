@@ -1,6 +1,7 @@
 package it.polimi.ingsw.client.commands;
 
 import it.polimi.ingsw.client.view.*;
+import it.polimi.ingsw.messages.*;
 
 public abstract class Command {
 
@@ -20,6 +21,7 @@ public abstract class Command {
         }
 
         //System.out.println(prefix);
+
         if (prefix == null)
             throw new InvalidCommandException();
 
@@ -44,13 +46,63 @@ public abstract class Command {
                     throw new InvalidCommandException();
                 return new MarketActionCommand(rc,n,viewController);
             }
-            case "" : {
+            case "leader" : {
+                char ad = 'a';
+                int n = 0;
+                int cont = 0;
 
+                for(int i = 0;i<suffix.length();i++){
+                    if (cont == 0 && (suffix.charAt(i) == 'x' || suffix.charAt(i)=='a')){
+                        ad = suffix.charAt(i);
+                        cont++;
+                    } else if (cont == 1 && suffix.charAt(i)==' '){
+                        cont++;
+                        n = suffix.charAt(i+1) - '0';
+                    }
+
+                }
+
+                if (cont != 2 || n<0 || n>1)
+                    throw new InvalidCommandException();
+                return new MarketActionCommand(ad,n,viewController);
             }
-            default : {
+            case "baseProductionOn" : {
+                return new BaseProductionCommand();
+            }
+            case "productionOn" : {
+                return new ProductionCommand();
+            }
+            case "extraProductionOn" : {
+                return new ExtraProductionCommand();
+            }
+            case "buy" : {
+                char colour = 'b';
+                int level = 0;
+                int cont = 0;
+
+                for(int i = 0;i<suffix.length();i++){
+                    if (cont == 0 && (suffix.charAt(i) == 'b' || suffix.charAt(i)=='g' || suffix.charAt(i)=='y' || suffix.charAt(i)=='v')){
+                        colour = suffix.charAt(i);
+                        cont++;
+                    } else if (cont == 1 && suffix.charAt(i)==' '){
+                        cont++;
+                        level = suffix.charAt(i+1) - '0';
+                    }
+
+                }
+
+                if (cont != 2 || level<1 || level>3)
+                    throw new InvalidCommandException();
+                return new BuyActionCommand(colour,level);
+            }
+            default: {
                 throw new InvalidCommandException();
             }
         }
+
+    }
+
+    public void commandOn(Message msg) {
 
     }
 

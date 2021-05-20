@@ -25,11 +25,15 @@ public class MarketActionCommand extends Command {
     }
 
     public void commandOn(){
-        if (rc=='c'){
+        /*if (rc=='c'){
             viewController.sendMessage(new PushColumnMessage(n));
         } else
             viewController.sendMessage(new PushRowMessage(n));
+        */
+    }
 
+    public String defToString(){
+        return "market r/c n";
     }
 
     public String toString(){
