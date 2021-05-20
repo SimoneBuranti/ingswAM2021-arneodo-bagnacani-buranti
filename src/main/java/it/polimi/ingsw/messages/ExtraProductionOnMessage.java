@@ -15,6 +15,10 @@ public class ExtraProductionOnMessage extends Message {
 
     private Resource outputResource;
 
+    public ExtraProductionOnMessage(Resource o) {
+        this.outputResource = o;
+    }
+
     public Resource getOutputResource() {
         return outputResource;
     }

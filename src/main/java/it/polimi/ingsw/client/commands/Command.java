@@ -2,6 +2,7 @@ package it.polimi.ingsw.client.commands;
 
 import it.polimi.ingsw.client.view.*;
 import it.polimi.ingsw.messages.*;
+import it.polimi.ingsw.server.model.Resource;
 
 public abstract class Command {
 
@@ -63,6 +64,9 @@ public abstract class Command {
             case "extraProductionOn" : {
                 return new ExtraProductionCommand(viewController);
             }
+            case "help" : {
+                return new HelpCommand();
+            }
             case "market": {
                 char rc = 'c';
                 int n = 0;
@@ -105,9 +109,6 @@ public abstract class Command {
             case "productionOn" : {
                 return new ProductionCommand(viewController);
             }
-            case "help" : {
-                return new HelpCommand();
-            }
             default: {
                 throw new InvalidCommandException();
             }
@@ -121,6 +122,21 @@ public abstract class Command {
 
     public static String defToString(){
         return "";
+    }
+
+    public static Resource fromStringToResource(String resource){
+        switch (resource) {
+            case "coin":
+                return Resource.COIN;
+            case "rock":
+                return Resource.ROCK;
+            case "shield":
+                return Resource.SHIELD;
+            case "servant":
+                return Resource.SERVANT;
+            default :
+                return null;
+        }
     }
 
     public String toString(){

@@ -345,6 +345,11 @@ public class LightGame extends ViewObservable {
         this.init = init;
     }
 
+    public ArrayList<LeaderCard> getLeaderCardActivated(){
+        return gameBoardOfPlayer.getLeaderCardActivated();
+    }
+
+
     /*public int getDeckNumberFormColourAndLevel(char c, int level) {
 
         for (LightDeckProductionCard deck : listOfDeck) {

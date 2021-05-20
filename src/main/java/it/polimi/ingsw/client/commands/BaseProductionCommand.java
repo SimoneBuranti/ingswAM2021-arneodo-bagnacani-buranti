@@ -34,23 +34,10 @@ public class BaseProductionCommand extends Command {
             System.out.println("Invalid resource type");
         }
 
+        viewController.getGame().setProductionToken(0,false);
+
         return new BaseProductionOnMessage(i1,i2,o);
 
-    }
-
-    private Resource fromStringToResource(String resource){
-        switch (resource) {
-            case "coin":
-                return Resource.COIN;
-            case "rock":
-                return Resource.ROCK;
-            case "shield":
-                return Resource.SHIELD;
-            case "servant":
-                return Resource.SERVANT;
-            default :
-                return null;
-        }
     }
 
     public static String defToString(){

@@ -22,6 +22,7 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
 
     private Scanner input = new Scanner(System.in);
 
+    //private final static int offset = 20;
 
 
     /*public Cli(){
@@ -73,9 +74,10 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
 
     @Override
     public void visit(DeckListNotification deckListNotification) {
+
         System.out.println("Production card decks:" );
-        System.out.println("                              green                                            blue                                         yellow                                       violet");
-        System.out.println("                              green                                            blue                                         yellow                                       violet");
+
+        System.out.print("                              green                                            blue                                         yellow                                       violet");
         System.out.println("Level 3:   cost = " + deckListNotification.getListOfFirstCard().get(5).getCost() + "         cost =" +deckListNotification.getListOfFirstCard().get(2).getCost() + "                   cost =" +deckListNotification.getListOfFirstCard().get(8).getCost() + "                   cost = " + deckListNotification.getListOfFirstCard().get(11).getCost());
         System.out.println("           production input = " + deckListNotification.getListOfFirstCard().get(5).getIn() + "                        production input =" +deckListNotification.getListOfFirstCard().get(2).getIn() +"                   production input =" +deckListNotification.getListOfFirstCard().get(8).getIn() + "                   production input = " + deckListNotification.getListOfFirstCard().get(11).getIn());
         System.out.println("           production output = " + deckListNotification.getListOfFirstCard().get(5).getOut() + "                            production output =" +deckListNotification.getListOfFirstCard().get(2).getOut() +"                   production output =" +deckListNotification.getListOfFirstCard().get(8).getOut() + "                   production output = " + deckListNotification.getListOfFirstCard().get(11).getOut());

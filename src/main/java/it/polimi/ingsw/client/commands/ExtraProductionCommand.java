@@ -2,7 +2,14 @@ package it.polimi.ingsw.client.commands;
 
 
 import it.polimi.ingsw.client.view.ViewController;
+import it.polimi.ingsw.messages.BaseProductionOnMessage;
+import it.polimi.ingsw.messages.ExtraProductionOnMessage;
 import it.polimi.ingsw.messages.Message;
+import it.polimi.ingsw.server.model.Resource;
+import it.polimi.ingsw.server.model.leaderCards.LeaderCard;
+
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class ExtraProductionCommand extends Command {
 
@@ -12,9 +19,41 @@ public class ExtraProductionCommand extends Command {
         this.viewController = viewController;
     }
 
-    public Message commandOn(){
+    public Message commandOn() throws InvalidCommandException {
 
-        return null;
+        int cardNumber;
+        Resource o;
+        Scanner in = new Scanner(System.in);
+
+        ArrayList<LeaderCard> activated = viewController.getGame().getLeaderCardActivated();
+
+        if (activated.size() == 0)
+            throw new InvalidCommandException();
+        if (activated.size() == 1) {
+            System.out.println("COIN: 'coin'        ROCK: 'rock'        SHIELD: 'shield'        SERVANT: 'servant'");
+            System.out.println("Output resource type: ");
+            while ((o = fromStringToResource(in.nextLine())) == null){
+                System.out.println("Invalid resource type");
+            }
+
+            viewController.getGame().setProductionToken(4,false);
+
+            return new ExtraProductionOnMessage(o);
+        }
+
+        System.out.println("COIN: 'coin'        ROCK: 'rock'        SHIELD: 'shield'        SERVANT: 'servant'");
+        System.out.println("Output resource type: ");
+        while ((o = fromStringToResource(in.nextLine())) == null){
+            System.out.println("Invalid resource type");
+        }
+
+        viewController.getGame().setProductionToken(4,false);
+
+        return new ExtraProductionOnMessage(o);
+
+
+
+
 
     }
 

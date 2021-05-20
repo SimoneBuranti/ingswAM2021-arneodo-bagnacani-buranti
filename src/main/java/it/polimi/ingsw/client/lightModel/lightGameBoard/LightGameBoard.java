@@ -114,6 +114,10 @@ public class LightGameBoard {
         return leaderCardsActivated.get(index);
     }
 
+    public ArrayList<LeaderCard> getLeaderCardActivated(){
+        return (ArrayList) leaderCardsActivated.clone();
+    }
+
     public void payResourcesProduction(ArrayList<Resource> list){
         strongbox.removeResource(storage.removeAvailableResource(fromListToMap(list)));
     }
