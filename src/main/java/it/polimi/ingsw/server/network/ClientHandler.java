@@ -1,9 +1,6 @@
 package it.polimi.ingsw.server.network;
 
-import it.polimi.ingsw.messages.Message;
-import it.polimi.ingsw.messages.PingMessage;
-import it.polimi.ingsw.messages.RestartQuestionMessage;
-import it.polimi.ingsw.messages.UsernameMessage;
+import it.polimi.ingsw.messages.*;
 import it.polimi.ingsw.server.controller.ClientController;
 import it.polimi.ingsw.server.controller.GameControllerDisconnection;
 import it.polimi.ingsw.server.virtualview.VirtualView;
@@ -90,10 +87,21 @@ public class ClientHandler implements Runnable {
         try {
             String msg;
 
-            if(server.getSendRestartQuestion()){
-                sendMessage(new RestartQuestionMessage(server.getClientController().size()));
+            if(server.getSendRestartQuestion() && !server.isRestartQuestionSent()){
+                sendMessage(new RestartQuestionMessage(server.getRestartQuestion()));
+                if(server.getRestartQuestion() == 0)
+                    server.setRestartQuestion();
+                server.setRestartQuestionSent(true);
                 //server.setSendRestartQuestion();
-            } else if(server.getGameController().getGameControllerState().equals("Disconnection")) {
+            }else if(server.getSendRestartQuestion() && server.isRestartQuestionSent() && !server.isRestartAnswerReceived()) {
+                sendMessage(new BootingLobbyErrorMessage());
+                server.addTempClientController(clientController);
+            }else if(server.getSendRestartQuestion() && server.isRestartQuestionSent() && server.isRestartAnswerReceived()){
+                if(server.isRestartAnswer())
+                    sendMessage(new RestartQuestionMessage(server.getRestartQuestion()));
+                else
+                    sendMessage(new UsernameMessage(null));
+            }else if(server.getGameController().getGameControllerState().equals("Disconnection")) {
                 sendMessage(new RestartQuestionMessage(1));
             }else{
                 sendMessage(new UsernameMessage(null));
@@ -165,9 +173,13 @@ public class ClientHandler implements Runnable {
     public void disconnect() throws IOException {
         if(server.getGameController().getGameControllerState().equals("MultiPlayer") || server.getGameController().getGameControllerState().equals("SinglePlayer") ) {
             server.setGameController(new GameControllerDisconnection(server, clientController.getGame()));
+            clientController.getGame().disconnectPlayer(clientController.getNickname());
+            server.addClientControllersDisconnected(clientController);
+        }else if(server.getGameController().getGameControllerState().equals("Disconnection")){
+            clientController.getGame().disconnectPlayer(clientController.getNickname());
+            server.addClientControllersDisconnected(clientController);
         }
-        clientController.getGame().disconnectPlayer(clientController.getNickname());
-        server.addClientControllersDisconnected(clientController);
+
         if (inputStream != null) inputStream.close();
         if (outputStream != null) outputStream.close();
         System.out.println("Ho disconnesso client - general call");

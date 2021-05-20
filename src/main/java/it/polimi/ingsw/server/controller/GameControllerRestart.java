@@ -1,7 +1,6 @@
 package it.polimi.ingsw.server.controller;
 
 import it.polimi.ingsw.messages.*;
-import it.polimi.ingsw.server.model.FileClass;
 import it.polimi.ingsw.server.network.Server;
 
 import java.io.IOException;
@@ -11,11 +10,21 @@ public class GameControllerRestart extends GameController {
 
     private ArrayList<String> reconnected = new ArrayList<>();
     private boolean restartAnswerReceived = false;
+    private ArrayList<String> tempLobbyName = new ArrayList<>();
+    private ArrayList<ClientController> tempLobbyController = new ArrayList<>();
 
 
     public GameControllerRestart(Server server) {
         this.gameControllerState = "Restart";
         this.server = server;
+    }
+
+    public boolean isInTempLobby(String nickname){
+        for(String nick : tempLobbyName)
+            if(nick.equals(nickname))
+                return true;
+
+        return false;
     }
 
     @Override
@@ -37,6 +46,16 @@ public class GameControllerRestart extends GameController {
     public synchronized void handleMessage(UsernameMessage msg, ClientController clientController) throws IOException, InterruptedException {
         if (!restartAnswerReceived){
             clientController.getClientHandler().sendMessage(new BootingLobbyErrorMessage());
+            /*if(server.isInLobby(msg.getUsername()) && !isInTempLobby(msg.getUsername()) ){
+                tempLobbyName.add(msg.getUsername());
+                tempLobbyController.add(clientController);
+                clientController.getClientHandler().sendMessage(new BootingLobbyErrorMessage());
+            }else if(server.isInLobby(msg.getUsername()) && isInTempLobby(msg.getUsername())){
+                clientController.getClientHandler().sendMessage(new AlreadyExistingNickNameErrorMessage());
+            }else if(!server.isInLobby(msg.getUsername())){
+                clientController.getClientHandler().sendMessage(new NoNicknameMessage());
+            }*/
+
             /*try {
                 clientController.getClientHandler().disconnect();
             } catch (IOException e) {
@@ -78,16 +97,27 @@ public class GameControllerRestart extends GameController {
 
     @Override
     public synchronized void handleMessage(RestartAnswerMessage msg, ClientController clientController) throws IOException, InterruptedException {
+        server.setRestartAnswerReceived(true);
+        server.setRestartAnswer(msg.getAnswer());
         if(!msg.getAnswer()){
+            server.setSendRestartQuestion();
             server.restartLobby();
-            server.setGameController(new GameControllerEmpty(this.server));
+            server.setGameController(new GameControllerEmpty(this.server, clientController));
             restartAnswerReceived = false;
         }
         else
             {
             restartAnswerReceived = true;
+            if(server.tempClientControllerSize() > 0)
+                reconnectionLobby();
             }
         clientController.getClientHandler().sendMessage(new UsernameMessage(null));
+    }
+
+    public void reconnectionLobby() throws IOException, InterruptedException {
+        for(ClientController c : server.getTempClientController()){
+            c.getClientHandler().sendMessage(new RestartQuestionMessage(1));
+        }
     }
 
 }

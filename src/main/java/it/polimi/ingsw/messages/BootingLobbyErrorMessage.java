@@ -15,6 +15,6 @@ public class BootingLobbyErrorMessage extends Message{
 
     @Override
     public String toString(){
-        return "Initial lobby waiting for creation, please wait a few moments.";
+        return "Initial lobby waiting for creation, please wait a few moments...";
     }
 }

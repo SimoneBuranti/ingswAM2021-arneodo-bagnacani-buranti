@@ -10,6 +10,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class Server {
@@ -17,11 +19,16 @@ public class Server {
     private GameController gameController;
     private Game game;
     private ArrayList<ClientController> clientControllers = new ArrayList<>();
+    private ArrayList<ClientController> tempClientController = new ArrayList<>();
 
     private ArrayList<ClientController> clientControllersDisconnected = new ArrayList<>();
     private VirtualView virtualView;
     private ArrayList<String> lobby = new ArrayList<>();
     private boolean sendRestartQuestion;
+    private int restartQuestion;
+    private boolean restartAnswerReceived;
+    private boolean restartAnswer;
+    private boolean restartQuestionSent;
 
 
 
@@ -37,6 +44,9 @@ public class Server {
                 gameController.setServer(this);
                 lobby = nickNameInOrder;
                 sendRestartQuestion = true;
+                restartQuestion = 0;
+                setRestartAnswerReceived(false);
+                restartQuestionSent = false;
                 gameController.setNumberOfPlayers(nickNameInOrder.size());
             }
              else
@@ -78,6 +88,29 @@ public class Server {
         return sendRestartQuestion;
     }
 
+    public ArrayList<ClientController> getTempClientController() {
+        return tempClientController;
+    }
+
+    public int tempClientControllerSize() {
+        return tempClientController.size();
+    }
+
+    public int getRestartQuestion(){
+        return restartQuestion;
+    }
+
+    public boolean isRestartAnswer() {
+        return restartAnswer;
+    }
+
+    public boolean isRestartAnswerReceived() {
+        return restartAnswerReceived;
+    }
+
+    public boolean isRestartQuestionSent() {
+        return restartQuestionSent;
+    }
 
     public boolean isInLobby(String nickname){
         for (String nick : lobby){
@@ -139,6 +172,33 @@ public class Server {
 
     public void setSendRestartQuestion(){
         sendRestartQuestion = false;
+    }
+
+    public void setRestartAnswerReceived(boolean restartAnswerReceived) {
+        this.restartAnswerReceived = restartAnswerReceived;
+    }
+
+    public void setRestartQuestionSent(boolean restartQuestionSent) {
+        this.restartQuestionSent = restartQuestionSent;
+    }
+
+    public void setRestartAnswer(boolean restartAnswer) {
+        this.restartAnswer = restartAnswer;
+    }
+
+    public void addTempClientController(ClientController clientController){
+        tempClientController.add(clientController);
+    }
+
+    public void removeTempClientController(ClientController clientController){
+        tempClientController.remove(clientController);
+    }
+
+    public void setRestartQuestion(){
+        if(restartQuestion == 0)
+            restartQuestion = 1;
+        else
+            restartQuestion = 0;
     }
 
     public synchronized void  setGameController(GameController gameController) {

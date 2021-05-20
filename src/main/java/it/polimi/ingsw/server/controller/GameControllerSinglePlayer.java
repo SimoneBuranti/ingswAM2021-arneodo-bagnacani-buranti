@@ -9,11 +9,41 @@ import java.util.ArrayList;
 
 public class GameControllerSinglePlayer extends GameController {
 
+    private ArrayList<String> tempLobbyName = new ArrayList<>();
+    private ArrayList<ClientController> tempLobbyController = new ArrayList<>();
+
 
     public GameControllerSinglePlayer(Server server, Game game) {
         this.gameControllerState = "SinglePlayer";
           this.server = server;
         this.game = game;
+    }
+
+    public GameControllerSinglePlayer(Server server, Game game, ArrayList<String> tempLobbyName, ArrayList<ClientController> tempLobbyController) {
+        this.gameControllerState = "SinglePlayer";
+        this.server = server;
+        this.game = game;
+        this.tempLobbyName = tempLobbyName;
+        this.tempLobbyController = tempLobbyController;
+
+
+        for(int i = 0; i < tempLobbyName.size(); i++){
+            try {
+                tempLobbyController.get(i).getClientHandler().sendMessage(new CompleteRunningMatchErrorMessage());
+                try {
+                    tempLobbyController.get(i).getClientHandler().disconnect();
+                    System.out.println("sono qui");
+                } catch (IOException e) {
+                    //messaggio di errore
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        this.tempLobbyName = new ArrayList<>();
+        this.tempLobbyController = new ArrayList<>();
     }
 
     @Override

@@ -62,6 +62,11 @@ public class ViewController implements MessageVisitor, ViewObserver {
     @Override
     public void visit(CompleteRunningMatchErrorMessage msg) {
         view.notifyError(msg);
+        try {
+            socketClient.disconnect();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 

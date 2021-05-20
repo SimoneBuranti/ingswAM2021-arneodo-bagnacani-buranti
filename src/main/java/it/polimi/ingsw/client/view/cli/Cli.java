@@ -175,7 +175,7 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
     @Override
     public void showLobby(int playersInLobby, int playerInGame){
         System.out.println("There are " + playersInLobby + " players in the lobby out of " + playerInGame +
-                ", waiting for the missing players to start the game");
+                ", waiting for the missing players to start the game...");
     }
     @Override
     public void askLeaderCardToKeep(ArrayList<LeaderCard> leaderCards){
