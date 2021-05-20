@@ -74,15 +74,220 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
 
     @Override
     public void visit(DeckListNotification deckListNotification) {
-
+        
+        int spaces = 42;
+        int chars;
+        int faithPoint;
+        String temp;
         System.out.println("Production card decks:" );
 
-        System.out.print("                              green                                            blue                                         yellow                                       violet");
-        System.out.println("Level 3:   cost = " + deckListNotification.getListOfFirstCard().get(5).getCost() + "         cost =" +deckListNotification.getListOfFirstCard().get(2).getCost() + "                   cost =" +deckListNotification.getListOfFirstCard().get(8).getCost() + "                   cost = " + deckListNotification.getListOfFirstCard().get(11).getCost());
-        System.out.println("           production input = " + deckListNotification.getListOfFirstCard().get(5).getIn() + "                        production input =" +deckListNotification.getListOfFirstCard().get(2).getIn() +"                   production input =" +deckListNotification.getListOfFirstCard().get(8).getIn() + "                   production input = " + deckListNotification.getListOfFirstCard().get(11).getIn());
-        System.out.println("           production output = " + deckListNotification.getListOfFirstCard().get(5).getOut() + "                            production output =" +deckListNotification.getListOfFirstCard().get(2).getOut() +"                   production output =" +deckListNotification.getListOfFirstCard().get(8).getOut() + "                   production output = " + deckListNotification.getListOfFirstCard().get(11).getOut());
-        System.out.println("           faith points = " + deckListNotification.getListOfFirstCard().get(5).isFaithPoint() + "                                         faith points =" +deckListNotification.getListOfFirstCard().get(2).isFaithPoint() +"                   faith points =" +deckListNotification.getListOfFirstCard().get(8).isFaithPoint() + "                   faith points = " + deckListNotification.getListOfFirstCard().get(11).isFaithPoint());
-        System.out.println("           victory points = " + deckListNotification.getListOfFirstCard().get(5).getPoints() + "                                   victory points =" +deckListNotification.getListOfFirstCard().get(2).getPoints() +"                   victory points =" +deckListNotification.getListOfFirstCard().get(8).getPoints() + "                   victory points = " + deckListNotification.getListOfFirstCard().get(11).getPoints());
+        System.out.print("               green" +
+                "                                    blue" +
+                "                                    yellow" +
+                "                                    violet\n");
+
+        for(int i = 0;i<3;i++){
+            System.out.println("\nLevel "+(3-i)+":");
+
+
+            //-----------------------------------
+            System.out.print("        ");
+            for(int k = 0;k<spaces;k++){
+                System.out.print("-");
+            }
+
+            for(int k = 0;k<spaces;k++){
+                System.out.print("-");
+            }
+
+            for(int k = 0;k<spaces;k++){
+                System.out.print("-");
+            }
+
+            for(int k = 0;k<spaces;k++){
+                System.out.print("-");
+            }
+
+            System.out.println("");
+
+            //---------------------------
+
+            System.out.print("        ");
+            temp = "| c= " + deckListNotification.getListOfFirstCard().get(5).getCost();
+            chars = temp.length();
+            System.out.print(temp);
+            for(int k = 0;k<spaces-chars;k++){
+                System.out.print(" ");
+            }
+
+
+            temp = "| c= " + deckListNotification.getListOfFirstCard().get(2-i).getCost();
+            chars = temp.length();
+            System.out.print(temp);
+            for(int k = 0;k<spaces-chars;k++){
+                System.out.print(" ");
+            }
+
+            temp = "| c= " + deckListNotification.getListOfFirstCard().get(8-i).getCost();
+            chars = temp.length();
+            System.out.print(temp);
+            for(int k = 0;k<spaces-chars;k++){
+                System.out.print(" ");
+            }
+
+            temp = "| c= " + deckListNotification.getListOfFirstCard().get(11-i).getCost();
+            chars = temp.length();
+            System.out.print(temp);
+            for(int k = 0;k<spaces-chars;k++){
+                System.out.print(" ");
+            }
+            System.out.println("");
+
+
+
+            //-----------------------------------
+
+            System.out.print("        ");
+            temp = "| i= " + deckListNotification.getListOfFirstCard().get(5-i).getIn().toString();
+            chars = temp.length();
+            System.out.print(temp);
+            for(int k = 0;k<spaces-chars;k++){
+                System.out.print(" ");
+            }
+
+            temp = "| i= " + deckListNotification.getListOfFirstCard().get(2-i).getIn().toString();
+            chars = temp.length();
+            System.out.print(temp);
+            for(int k = 0;k<spaces-chars;k++){
+                System.out.print(" ");
+            }
+
+            temp = "| i= " + deckListNotification.getListOfFirstCard().get(8-i).getIn().toString();
+            chars = temp.length();
+            System.out.print(temp);
+            for(int k = 0;k<spaces-chars;k++){
+                System.out.print(" ");
+            }
+
+            temp = "| i= " + deckListNotification.getListOfFirstCard().get(11-i).getIn().toString();
+            chars = temp.length();
+            System.out.print(temp);
+            for(int k = 0;k<spaces-chars;k++){
+                System.out.print(" ");
+            }
+                System.out.println("");
+            //-------------------------------------------------
+            System.out.print("        ");
+            temp = "| o= " + deckListNotification.getListOfFirstCard().get(5-i).getOut().toString();
+            chars = temp.length();
+            System.out.print(temp);
+            for(int k = 0;k<spaces-chars;k++){
+                System.out.print(" ");
+            }
+
+            temp = "| o= " + deckListNotification.getListOfFirstCard().get(2-i).getOut().toString();
+            chars = temp.length();
+            System.out.print(temp);
+            for(int k = 0;k<spaces-chars;k++){
+                System.out.print(" ");
+            }
+
+            temp = "| o= " + deckListNotification.getListOfFirstCard().get(8-i).getOut().toString();
+            chars = temp.length();
+            System.out.print(temp);
+            for(int k = 0;k<spaces-chars;k++){
+                System.out.print(" ");
+            }
+
+            temp = "| o= " + deckListNotification.getListOfFirstCard().get(11-i).getOut().toString();
+            chars = temp.length();
+            System.out.print(temp);
+            for(int k = 0;k<spaces-chars;k++){
+                System.out.print(" ");
+            }
+            System.out.println("");
+            //-----------------------------------------
+            System.out.print("        ");
+            temp = "| faith points= " + deckListNotification.getListOfFirstCard().get(5).isFaithPoint();
+            chars = temp.length();
+            System.out.print(temp);
+            for(int k = 0;k<spaces-chars;k++){
+                System.out.print(" ");
+            }
+
+            temp = "| faith points= " + deckListNotification.getListOfFirstCard().get(2-i).isFaithPoint();
+            chars = temp.length();
+            System.out.print(temp);
+            for(int k = 0;k<spaces-chars;k++){
+                System.out.print(" ");
+            }
+
+            temp = "| faith points= " + deckListNotification.getListOfFirstCard().get(8-i).isFaithPoint();
+            chars = temp.length();
+            System.out.print(temp);
+            for(int k = 0;k<spaces-chars;k++){
+                System.out.print(" ");
+            }
+
+            temp = "| faith points= " + deckListNotification.getListOfFirstCard().get(11-i).isFaithPoint();
+            chars = temp.length();
+            System.out.print(temp);
+            for(int k = 0;k<spaces-chars;k++){
+                System.out.print(" ");
+            }
+            System.out.println("");
+            //---------------------------------------
+            System.out.print("        ");
+            temp = "| victory points= " + deckListNotification.getListOfFirstCard().get(5-i).getPoints();
+            chars = temp.length();
+            System.out.print(temp);
+            for(int k = 0;k<spaces-chars;k++){
+                System.out.print(" ");
+            }
+
+            temp = "| victory points= " + deckListNotification.getListOfFirstCard().get(2-i).getPoints();
+            chars = temp.length();
+            System.out.print(temp);
+            for(int k = 0;k<spaces-chars;k++){
+                System.out.print(" ");
+            }
+
+            temp = "| victory points= " + deckListNotification.getListOfFirstCard().get(8-i).getPoints();
+            chars = temp.length();
+            System.out.print(temp);
+            for(int k = 0;k<spaces-chars;k++){
+                System.out.print(" ");
+            }
+
+            temp = "| victory points= " + deckListNotification.getListOfFirstCard().get(11-i).getPoints();
+            chars = temp.length();
+            System.out.print(temp);
+            for(int k = 0;k<spaces-chars;k++){
+                System.out.print(" ");
+            }
+            System.out.println("");
+
+            //----------------------------------
+            System.out.print("        ");
+            for(int k = 0;k<spaces;k++){
+                System.out.print("-");
+            }
+
+            for(int k = 0;k<spaces;k++){
+                System.out.print("-");
+            }
+
+            for(int k = 0;k<spaces;k++){
+                System.out.print("-");
+            }
+
+            for(int k = 0;k<spaces;k++){
+                System.out.print("-");
+            }
+
+            System.out.println("");
+
+        }
         //System.out.println(deckListNotification.getListOfFirstCard());
     }
 
