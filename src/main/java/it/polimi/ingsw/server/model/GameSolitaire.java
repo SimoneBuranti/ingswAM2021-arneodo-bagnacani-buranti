@@ -71,6 +71,7 @@ public class GameSolitaire extends Game {
             restoreGameSolitaire(clientController);
 
         saveInformation();
+        notifyObserver(new YourTurnMessage());
     }
 
 

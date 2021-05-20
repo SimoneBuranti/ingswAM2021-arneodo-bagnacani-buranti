@@ -92,7 +92,7 @@ public class VirtualView implements Observer {
      */
     @Override
     public void updateAllObserverLessOneByNickname(Message message,String nickame) throws IOException, InterruptedException {
-        if (clientController.getNickname().equals(nickame))
+        if (!clientController.getNickname().equals(nickame))
             clientController.getClientHandler().sendMessage(message);
     }
 

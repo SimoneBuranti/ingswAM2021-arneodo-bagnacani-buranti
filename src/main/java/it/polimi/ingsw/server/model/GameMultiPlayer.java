@@ -89,14 +89,24 @@ public class GameMultiPlayer extends Game {
         nickNameInOrder= new ArrayList<>();
         createNickNameInOrder(clientControllersInOrder);
         addObservators();
+
         notifyObserver(new GameTypeMessage(true));
+
         notifyObserver(new NicknameStartedMessage(nickNameInOrder));
         configClient();
         }
-        else {
+
+        else
+            {
             restoreGameMultiPlayer(clientControllers);
         }
+
+
         saveInformation();
+
+        notifyOnlyOneSpecificObserver(new YourTurnMessage(),currentPlayer.getNickName());
+
+
     }
 
 

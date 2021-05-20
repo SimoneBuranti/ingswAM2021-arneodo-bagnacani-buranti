@@ -81,7 +81,7 @@ public class Observable {
 
     protected void notifyAllObserverLessOneByNickname(Message message,String nickname) throws IOException, InterruptedException {
         for (Observer observer : observers) {
-            observer.updateOnlyObserverByNickname(message,nickname);
+            observer.updateAllObserverLessOneByNickname(message,nickname);
         }
     }
 

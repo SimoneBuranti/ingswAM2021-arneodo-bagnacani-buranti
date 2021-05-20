@@ -176,9 +176,6 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
     public void yourTurn() {
 
         System.out.println("It's your turn");
-
-
-
     }
 
     @Override
