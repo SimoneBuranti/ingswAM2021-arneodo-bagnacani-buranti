@@ -10,7 +10,7 @@ public class ExtraProductionCommand extends Command {
 
     }
 
-    public String defToString(){
+    public static String defToString(){
         return "extraProductionOn";
     }
 

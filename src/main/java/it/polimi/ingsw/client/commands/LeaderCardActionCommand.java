@@ -27,8 +27,8 @@ public class LeaderCardActionCommand extends Command{
 
     }
 
-    public String defToString(){
-        return "leader a/x[a=activate;x=discard] n";
+    public static String defToString(){
+        return "leader a/x n";
     }
     public String toString(){
         return "leader "+ad+" "+n;

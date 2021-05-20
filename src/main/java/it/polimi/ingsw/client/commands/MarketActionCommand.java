@@ -32,7 +32,7 @@ public class MarketActionCommand extends Command {
         */
     }
 
-    public String defToString(){
+    public static String defToString(){
         return "market r/c n";
     }
 

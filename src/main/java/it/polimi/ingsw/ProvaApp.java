@@ -9,21 +9,8 @@ public class ProvaApp {
 
     public static void main(String[] args) {
 
-        /*(new ScheduledThreadPoolExecutor(1)).scheduleAtFixedRate( () -> {
 
-            System.out.println("****************************************");
-
-        },1000,500, TimeUnit.MILLISECONDS);*/
-
-
-        Scanner in = new Scanner(System.in);
-        String command = in.nextLine();
-        try {
-            Command cmd = Command.parseCommand(command, null);
-            System.out.println(cmd);
-        } catch (InvalidCommandException e) {
-            e.printStackTrace();
-        }
+        (new HelpCommand()).commandOn();
 
 
     }

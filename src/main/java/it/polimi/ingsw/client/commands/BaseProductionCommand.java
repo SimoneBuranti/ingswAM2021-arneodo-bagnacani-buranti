@@ -6,10 +6,11 @@ public class BaseProductionCommand extends Command {
 
     }
 
-    public String defToString(){
+    public static String defToString(){
         return "extraProductionOn";
     }
+
     public String toString(){
-        return "extraProductionOn";
+        return defToString();
     }
 }

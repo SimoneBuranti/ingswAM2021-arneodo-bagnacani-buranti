@@ -6,7 +6,7 @@ public class ProductionCommand extends Command {
 
     }
 
-    public String defToString(){
+    public static String defToString(){
         return "extraProductionOn";
     }
     public String toString(){

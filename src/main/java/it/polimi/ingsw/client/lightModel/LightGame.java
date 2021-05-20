@@ -86,6 +86,8 @@ public class LightGame extends ViewObservable {
 
     protected LightGameBoard gameBoardOfPlayer;
 
+    protected boolean actionToken;
+
 
     /**
      * this constructor instantiates all the game attributes
@@ -126,6 +128,18 @@ public class LightGame extends ViewObservable {
         reserve = new LightReserve();
 
         gameBoardOfPlayer = new LightGameBoard(nickname);
+    }
+
+    public boolean isActionToken() {
+        return actionToken;
+    }
+
+    public void spendActionToken(){
+        actionToken = false;
+    }
+
+    public void giveActionToken(){
+        actionToken = true;
     }
 
     public void setMarket(ArrayList<Marble> list) throws IOException, InterruptedException {

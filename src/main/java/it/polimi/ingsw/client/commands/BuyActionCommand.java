@@ -20,7 +20,7 @@ public class BuyActionCommand extends Command {
     public String toString(){
         return "buy "+colour+" "+level;
     }
-    public String defToString(){
+    public static String defToString(){
         return "buy b/g/y/v 1/2/3";
     }
 }

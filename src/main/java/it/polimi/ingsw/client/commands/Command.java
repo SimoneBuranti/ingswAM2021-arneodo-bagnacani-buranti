@@ -95,6 +95,9 @@ public abstract class Command {
                     throw new InvalidCommandException();
                 return new BuyActionCommand(colour,level);
             }
+            case "help" : {
+
+            }
             default: {
                 throw new InvalidCommandException();
             }
@@ -102,8 +105,10 @@ public abstract class Command {
 
     }
 
-    public void commandOn(Message msg) {
+    public static void commandOn(Message msg){}
 
+    public static String defToString(){
+        return "";
     }
 
 
