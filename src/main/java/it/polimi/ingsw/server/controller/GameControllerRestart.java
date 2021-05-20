@@ -48,21 +48,6 @@ public class GameControllerRestart extends GameController {
     public synchronized void handleMessage(UsernameMessage msg, ClientController clientController) throws IOException, InterruptedException {
         if (!restartAnswerReceived){
             clientController.getClientHandler().sendMessage(new BootingLobbyErrorMessage());
-            /*if(server.isInLobby(msg.getUsername()) && !isInTempLobby(msg.getUsername()) ){
-                tempLobbyName.add(msg.getUsername());
-                tempLobbyController.add(clientController);
-                clientController.getClientHandler().sendMessage(new BootingLobbyErrorMessage());
-            }else if(server.isInLobby(msg.getUsername()) && isInTempLobby(msg.getUsername())){
-                clientController.getClientHandler().sendMessage(new AlreadyExistingNickNameErrorMessage());
-            }else if(!server.isInLobby(msg.getUsername())){
-                clientController.getClientHandler().sendMessage(new NoNicknameMessage());
-            }*/
-
-            /*try {
-                clientController.getClientHandler().disconnect();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }*/
         }
         else {
             if(server.isInLobby(msg.getUsername()) && !firstName){

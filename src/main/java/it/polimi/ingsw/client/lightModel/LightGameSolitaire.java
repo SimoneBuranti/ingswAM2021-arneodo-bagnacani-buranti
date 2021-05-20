@@ -28,7 +28,7 @@ public class LightGameSolitaire extends LightGame{
         actionMarkerDeck = new LightActionMarkerDeck();
     }
 
-    private void configInit() throws IOException, InterruptedException {
+    public void configInit() throws IOException, InterruptedException {
         ArrayList<ProductionCard> list = new ArrayList<>();
         list=deckNotification();
         notifyObserver(new DeckListNotification(list).serialize());

@@ -9,9 +9,10 @@ public class DeckListNotification extends Notification{
 
     private final NotificationType notificationType = NotificationType.DECKLISTNOTIFY;
     private ArrayList<ProductionCard> listOfFirstCard;
+
     public DeckListNotification(ArrayList<ProductionCard> listOfFirstCard){
-   this.listOfFirstCard=new ArrayList<>();
-   this.listOfFirstCard=listOfFirstCard;
+        this.listOfFirstCard=new ArrayList<>();
+        this.listOfFirstCard=listOfFirstCard;
     }
     @Override
     public void accept(NotificatorVisitor v) throws IOException, InterruptedException {

@@ -73,7 +73,15 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
 
     @Override
     public void visit(DeckListNotification deckListNotification) {
-
+        System.out.println("Production card decks:" );
+        System.out.println("                              green                                            blue                                         yellow                                       violet");
+        System.out.println("                              green                                            blue                                         yellow                                       violet");
+        System.out.println("Level 3:   cost = " + deckListNotification.getListOfFirstCard().get(5).getCost() + "         cost =" +deckListNotification.getListOfFirstCard().get(2).getCost() + "                   cost =" +deckListNotification.getListOfFirstCard().get(8).getCost() + "                   cost = " + deckListNotification.getListOfFirstCard().get(11).getCost());
+        System.out.println("           production input = " + deckListNotification.getListOfFirstCard().get(5).getIn() + "                        production input =" +deckListNotification.getListOfFirstCard().get(2).getIn() +"                   production input =" +deckListNotification.getListOfFirstCard().get(8).getIn() + "                   production input = " + deckListNotification.getListOfFirstCard().get(11).getIn());
+        System.out.println("           production output = " + deckListNotification.getListOfFirstCard().get(5).getOut() + "                            production output =" +deckListNotification.getListOfFirstCard().get(2).getOut() +"                   production output =" +deckListNotification.getListOfFirstCard().get(8).getOut() + "                   production output = " + deckListNotification.getListOfFirstCard().get(11).getOut());
+        System.out.println("           faith points = " + deckListNotification.getListOfFirstCard().get(5).isFaithPoint() + "                                         faith points =" +deckListNotification.getListOfFirstCard().get(2).isFaithPoint() +"                   faith points =" +deckListNotification.getListOfFirstCard().get(8).isFaithPoint() + "                   faith points = " + deckListNotification.getListOfFirstCard().get(11).isFaithPoint());
+        System.out.println("           victory points = " + deckListNotification.getListOfFirstCard().get(5).getPoints() + "                                   victory points =" +deckListNotification.getListOfFirstCard().get(2).getPoints() +"                   victory points =" +deckListNotification.getListOfFirstCard().get(8).getPoints() + "                   victory points = " + deckListNotification.getListOfFirstCard().get(11).getPoints());
+        //System.out.println(deckListNotification.getListOfFirstCard());
     }
 
     @Override

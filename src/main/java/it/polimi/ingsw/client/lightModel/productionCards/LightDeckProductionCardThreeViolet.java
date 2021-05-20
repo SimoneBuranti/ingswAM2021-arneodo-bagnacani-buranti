@@ -13,7 +13,6 @@ public class LightDeckProductionCardThreeViolet extends LightDeckProductionCard 
 
         @Override
         public void setDeckProductionCard(ArrayList<Integer> listKey){
-                deck = new ArrayList<>();
 
                 for(int i = 0; i < listKey.size(); i++) {
                         deck.add(productionCards.productionCardByKey(listKey.get(i)));

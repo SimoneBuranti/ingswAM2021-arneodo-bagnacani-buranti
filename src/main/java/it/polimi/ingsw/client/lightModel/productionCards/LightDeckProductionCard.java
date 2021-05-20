@@ -15,7 +15,7 @@ public abstract class LightDeckProductionCard {
     /**
      * this attribute collects the production cards of the deck
      */
-    protected ArrayList<ProductionCard> deck ;
+    protected ArrayList<ProductionCard> deck = new ArrayList<>();
 
     protected int numberDeck;
 

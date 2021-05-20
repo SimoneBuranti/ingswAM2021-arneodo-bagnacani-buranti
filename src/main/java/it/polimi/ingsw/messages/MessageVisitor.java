@@ -66,7 +66,7 @@ public interface MessageVisitor {
     void visit(UpdateChosenLeaderMessage msg);
 
     void visit(DeckProductionCardMessage msg) throws IOException, InterruptedException;
-    void visit(DeckProductionCardConfigMessage msg);
+    void visit(DeckProductionCardConfigMessage msg) throws IOException, InterruptedException;
     void visit(TakeCardMessage msg);
     void visit(TakeCardForNotCurrentMessage msg);
 

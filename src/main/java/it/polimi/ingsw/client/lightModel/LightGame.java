@@ -133,6 +133,9 @@ public class LightGame extends ViewObservable {
         gameBoardOfPlayer = new LightGameBoard(nickname);
     }
 
+    public void configInit() throws IOException, InterruptedException {
+    }
+
     public boolean isActionToken() {
         return actionToken;
     }
@@ -302,6 +305,15 @@ public class LightGame extends ViewObservable {
     }
 
     public void moveBlackCrossOnce(){}
+
+    public boolean isEachDeckFull(){
+        for(LightDeckProductionCard deck : listOfDeck){
+            if(deck.isEmpty())
+                return false;
+        }
+
+        return true;
+    }
 
     public ArrayList<ProductionCard> deckNotification(){
         ArrayList<ProductionCard> list = new ArrayList<>();
