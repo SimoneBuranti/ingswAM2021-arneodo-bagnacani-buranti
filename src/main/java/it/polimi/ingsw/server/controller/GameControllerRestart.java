@@ -9,6 +9,8 @@ import java.util.ArrayList;
 public class GameControllerRestart extends GameController {
 
     private ArrayList<String> reconnected = new ArrayList<>();
+    private ClientController firstClientController;
+    private boolean firstName = false;
     private boolean restartAnswerReceived = false;
     private ArrayList<String> tempLobbyName = new ArrayList<>();
     private ArrayList<ClientController> tempLobbyController = new ArrayList<>();
@@ -63,7 +65,24 @@ public class GameControllerRestart extends GameController {
             }*/
         }
         else {
-            if (server.isInLobby(msg.getUsername())){
+            if(server.isInLobby(msg.getUsername()) && !firstName){
+                if(clientController != firstClientController){
+                    if(!isInTempLobby(msg.getUsername())) {
+                        tempLobbyName.add(msg.getUsername());
+                        tempLobbyController.add(clientController);
+                        clientController.getClientHandler().sendMessage(new BootingLobbyErrorMessage());
+                    }else
+                        clientController.getClientHandler().sendMessage(new AlreadyExistingNickNameErrorMessage());
+                }else if(clientController == firstClientController){
+                    if (!reconnected.contains(msg.getUsername())) {
+                        clientController.setNickname(msg.getUsername());
+                        reconnected.add(msg.getUsername());
+                        server.addClientController(clientController);
+                        firstName = true;
+                        reconnectionTempLobby();
+                    }
+                }
+            }else if(server.isInLobby(msg.getUsername()) && firstName){
                 if (!reconnected.contains(msg.getUsername())){
                     clientController.setNickname(msg.getUsername());
                     reconnected.add(msg.getUsername());
@@ -111,6 +130,7 @@ public class GameControllerRestart extends GameController {
             if(server.tempClientControllerSize() > 0)
                 reconnectionLobby();
             }
+        firstClientController = clientController;
         clientController.getClientHandler().sendMessage(new UsernameMessage(null));
     }
 
@@ -118,6 +138,37 @@ public class GameControllerRestart extends GameController {
         for(ClientController c : server.getTempClientController()){
             c.getClientHandler().sendMessage(new RestartQuestionMessage(1));
         }
+    }
+
+    public void reconnectionTempLobby() throws IOException, InterruptedException {
+        int i = 0;
+        for(; i < tempLobbyName.size(); i++){
+            if (!reconnected.contains(tempLobbyName.get(i))){
+                tempLobbyController.get(i).setNickname(tempLobbyName.get(i));
+                reconnected.add(tempLobbyName.get(i));
+                server.addClientController(tempLobbyController.get(i));
+                for(ClientController c : server.getClientController())
+                    c.getClientHandler().sendMessage(new NPlayersMessage(reconnected.size(), server.getLobbySize()));
+            }
+            else {
+                tempLobbyController.get(i).getClientHandler().sendMessage(new AlreadyExistingNickNameErrorMessage());
+                tempLobbyName.set(i, null);
+            }
+            if (reconnected.size() == server.getLobbySize()){
+                for(int j = 0; j < i; j++)
+                    if(tempLobbyName.get(j) == null) {
+                        tempLobbyController.get(j).getClientHandler().sendMessage(new CompleteRunningMatchErrorMessage());
+                    }
+                break;
+            }
+        }
+
+        for(i++ ; i < tempLobbyName.size(); i++){
+            tempLobbyController.get(i).getClientHandler().sendMessage(new CompleteRunningMatchErrorMessage());
+        }
+
+
+
     }
 
 }
