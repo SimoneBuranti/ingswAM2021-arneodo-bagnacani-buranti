@@ -1,14 +1,9 @@
 package it.polimi.ingsw.server.model.players;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import it.polimi.ingsw.server.model.RuntimeTypeAdapterFactory;
 import it.polimi.ingsw.server.model.*;
-import it.polimi.ingsw.server.model.colours.*;
 import it.polimi.ingsw.server.model.exceptions.*;
 import it.polimi.ingsw.server.model.gameBoard.*;
-import it.polimi.ingsw.server.model.leaderCards.*;
-import it.polimi.ingsw.server.model.requirements.*;
 import it.polimi.ingsw.server.virtualview.VirtualView;
 
 import java.io.FileNotFoundException;
@@ -28,35 +23,6 @@ public class PlayerFourth extends Player {
     public PlayerFourth(String nickName, Game game, VirtualView virtualView){
         super(nickName, game,virtualView );
     }
-
-    /**
-     * Restore constructor that calls the super class constructor
-     * @param nickName : the nickname chosen by the player
-     */
-
-    public PlayerFourth(String nickName, Game game, boolean newmatch,VirtualView virtualView){
-        super(nickName,game,newmatch,virtualView);
-        Gson gson=gsonForEveryone();
-
-        try {
-            this.gameBoardOfPlayer= gson.fromJson(new FileReader("src/main/resources/fileInformationPlayerFourth.json"),GameBoardInterface.class);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        try {
-            this.leaderCard= gson.fromJson(new FileReader("src/main/resources/fileInformationLeaderInitPlayerFourth.json"),int[].class);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        reverseAddPersonalLeaderCardAskey();
-        try {
-            this.init= gson.fromJson(new FileReader("src/main/resources/fileInformationInitPlayerFourth.json"),boolean.class);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
-
-
     /**
      * This method initializes the second player's storage with the resources passed as a parameter
      * and moves the player's faith indicator one position forward
@@ -79,6 +45,43 @@ public class PlayerFourth extends Player {
             throw e;
         }
     }
+
+    /**
+     * Restore constructor that calls the super class constructor
+     * @param nickName : the nickname chosen by the player
+     */
+
+    public PlayerFourth(String nickName, Game game, boolean newmatch,VirtualView virtualView){
+        super(nickName,game,newmatch,virtualView);
+
+        Gson gson=gsonForEveryone();
+        try {
+            this.gameBoardOfPlayer= gson.fromJson(new FileReader("src/main/resources/fileInformationPlayerFourth.json"),GameBoardInterface.class);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        try {
+            this.leaderCard= gson.fromJson(new FileReader("src/main/resources/fileInformationLeaderInitLeaderPlayerFourth.json"),int[].class);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        reverseAddPersonalLeaderCardAskey();
+        try {
+            this.initLeader = gson.fromJson(new FileReader("src/main/resources/fileInformationInitOnLeaderPlayerFourth.json"),boolean.class);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            this.initResource = gson.fromJson(new FileReader("src/main/resources/fileInformationInitOnResourcePlayerFourth.json"),boolean.class);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+
 
     /**
      * save information for a possible restart game
@@ -104,9 +107,9 @@ public class PlayerFourth extends Player {
                 e.printStackTrace();
             }
         }
-        String jsonStrin2 = gson.toJson(isInit(),boolean.class);
+        String jsonStrin2 = gson.toJson(isInitLeader(),boolean.class);
         try {
-            fileInformatioPlayerFourth = new FileWriter("src/main/resources/fileInformationInitPlayerFourth.json");
+            fileInformatioPlayerFourth = new FileWriter("src/main/resources/fileInformationInitOnLeaderPlayerFourth.json");
             fileInformatioPlayerFourth.write(jsonStrin2);
         } catch (IOException e) {
 
@@ -122,11 +125,11 @@ public class PlayerFourth extends Player {
                 e.printStackTrace();
             }
         }
-        getPersonalLeaderCardAskey();
 
+        getPersonalLeaderCardAskey();
         String jsonStrin3 = gson.toJson(getLeaderCard(),int[].class);
         try {
-            fileInformatioPlayerFourth = new FileWriter("src/main/resources/fileInformationLeaderInitPlayerFourth.json");
+            fileInformatioPlayerFourth = new FileWriter("src/main/resources/fileInformationLeaderInitLeaderPlayerFourth.json");
             fileInformatioPlayerFourth.write(jsonStrin3);
         } catch (IOException e) {
 
@@ -141,4 +144,24 @@ public class PlayerFourth extends Player {
 
                 e.printStackTrace();
             }
-        } }}
+        }
+        String jsonStrin4 = gson.toJson(isInitResource(),boolean.class);
+        try {
+            fileInformatioPlayerFourth = new FileWriter("src/main/resources/fileInformationInitOnResourcePlayerFourth.json");
+            fileInformatioPlayerFourth.write(jsonStrin4);
+        } catch (IOException e) {
+
+            e.printStackTrace();
+
+        } finally {
+
+            try {
+                fileInformatioPlayerFourth.flush();
+                fileInformatioPlayerFourth.close();
+            } catch (IOException e) {
+
+                e.printStackTrace();
+            }
+        }
+    }
+}

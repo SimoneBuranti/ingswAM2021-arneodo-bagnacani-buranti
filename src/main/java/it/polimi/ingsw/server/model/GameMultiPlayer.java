@@ -80,24 +80,24 @@ public class GameMultiPlayer extends Game {
     public GameMultiPlayer(int numberOfPlayer, ArrayList<String> nickName, Boolean newGame, ArrayList<ClientController> clientControllers) throws IOException, InterruptedException {
         super(newGame);
         if(newGame){
-        this.playerList= new ArrayList<>(numberOfPlayer);
-        this.numberOfPlayer=numberOfPlayer;
-        inkwell=createRandomNumber(numberOfPlayer);
-        clientControllersInOrder=correctOrder(clientControllers,inkwell);
-        createPlayer(numberOfPlayer,clientControllersInOrder);
-        currentPlayer = playerList.get(currentPlayerPosition);
-        nickNameInOrder= new ArrayList<>();
-        createNickNameInOrder(clientControllersInOrder);
-        addObservators();
+            this.playerList= new ArrayList<>(numberOfPlayer);
+            this.numberOfPlayer=numberOfPlayer;
+            inkwell=createRandomNumber(numberOfPlayer);
+            clientControllersInOrder=correctOrder(clientControllers,inkwell);
+            createPlayer(numberOfPlayer,clientControllersInOrder);
+            currentPlayer = playerList.get(currentPlayerPosition);
+            nickNameInOrder= new ArrayList<>();
+            createNickNameInOrder(clientControllersInOrder);
+            addObservators();
 
-        notifyObserver(new GameTypeMessage(true));
+            notifyObserver(new GameTypeMessage(true));
 
-        notifyObserver(new NicknameStartedMessage(nickNameInOrder));
-        configClient();
+            notifyObserver(new NicknameStartedMessage(nickNameInOrder));
+            configClient();
         }
 
         else
-            {
+        {
             restoreGameMultiPlayer(clientControllers);
         }
 
@@ -113,63 +113,63 @@ public class GameMultiPlayer extends Game {
     @Override
     public void configClient() throws IOException, InterruptedException {
         super.configClient();
-    if (numberOfPlayer==2)
-    {
-        ArrayList<Integer> needForLeader = new ArrayList<>();
-        for (int i=0; i<4;i++)
-            needForLeader.add(firstPlayer.getPersonalLeaderCard().get(i).getKey());
-        notifyOnlyOneSpecificObserver(new UpdateInitLeaderMessage(needForLeader), firstPlayer.getNickName());
+        if (numberOfPlayer==2)
+        {
+            ArrayList<Integer> needForLeader = new ArrayList<>();
+            for (int i=0; i<4;i++)
+                needForLeader.add(firstPlayer.getPersonalLeaderCard().get(i).getKey());
+            notifyOnlyOneSpecificObserver(new UpdateInitLeaderMessage(needForLeader), firstPlayer.getNickName());
 
-        needForLeader = new ArrayList<>();
-        for (int i=0; i<4;i++)
-            needForLeader.add(secondPlayer.getPersonalLeaderCard().get(i).getKey());
-        notifyOnlyOneSpecificObserver(new UpdateInitLeaderMessage(needForLeader), secondPlayer.getNickName());
+            needForLeader = new ArrayList<>();
+            for (int i=0; i<4;i++)
+                needForLeader.add(secondPlayer.getPersonalLeaderCard().get(i).getKey());
+            notifyOnlyOneSpecificObserver(new UpdateInitLeaderMessage(needForLeader), secondPlayer.getNickName());
+        }
+
+        else if (numberOfPlayer==3)
+        {   ArrayList<Integer> needForLeader = new ArrayList<>();
+            for (int i=0; i<4;i++)
+                needForLeader.add(firstPlayer.getPersonalLeaderCard().get(i).getKey());
+            notifyOnlyOneSpecificObserver(new UpdateInitLeaderMessage(needForLeader), firstPlayer.getNickName());
+
+            needForLeader = new ArrayList<>();
+            for (int i=0; i<4;i++)
+                needForLeader.add(secondPlayer.getPersonalLeaderCard().get(i).getKey());
+            notifyOnlyOneSpecificObserver(new UpdateInitLeaderMessage(needForLeader), secondPlayer.getNickName());
+
+            needForLeader = new ArrayList<>();
+            for (int i=0; i<4;i++)
+                needForLeader.add(thirdPlayer.getPersonalLeaderCard().get(i).getKey());
+            notifyOnlyOneSpecificObserver(new UpdateInitLeaderMessage(needForLeader),thirdPlayer.getNickName());
+
+        }
+        else if (numberOfPlayer==4)
+        {
+            ArrayList<Integer> needForLeader = new ArrayList<>();
+            for (int i=0; i<4;i++)
+                needForLeader.add(firstPlayer.getPersonalLeaderCard().get(i).getKey());
+            notifyOnlyOneSpecificObserver(new UpdateInitLeaderMessage(needForLeader), firstPlayer.getNickName());
+
+            needForLeader = new ArrayList<>();
+            for (int i=0; i<4;i++)
+                needForLeader.add(secondPlayer.getPersonalLeaderCard().get(i).getKey());
+            notifyOnlyOneSpecificObserver(new UpdateInitLeaderMessage(needForLeader), secondPlayer.getNickName());
+
+            needForLeader = new ArrayList<>();
+            for (int i=0; i<4;i++)
+                needForLeader.add(thirdPlayer.getPersonalLeaderCard().get(i).getKey());
+            notifyOnlyOneSpecificObserver(new UpdateInitLeaderMessage(needForLeader),thirdPlayer.getNickName());
+
+            needForLeader = new ArrayList<>();
+            for (int i=0; i<4;i++)
+                needForLeader.add(fourthPlayer.getPersonalLeaderCard().get(i).getKey());
+            notifyOnlyOneSpecificObserver(new UpdateInitLeaderMessage(needForLeader),fourthPlayer.getNickName());
+        }
+
+        //notifyToOneObserver(new YourTurnMessage());
+
+
     }
-
-    else if (numberOfPlayer==3)
-    {   ArrayList<Integer> needForLeader = new ArrayList<>();
-        for (int i=0; i<4;i++)
-            needForLeader.add(firstPlayer.getPersonalLeaderCard().get(i).getKey());
-        notifyOnlyOneSpecificObserver(new UpdateInitLeaderMessage(needForLeader), firstPlayer.getNickName());
-
-        needForLeader = new ArrayList<>();
-        for (int i=0; i<4;i++)
-            needForLeader.add(secondPlayer.getPersonalLeaderCard().get(i).getKey());
-        notifyOnlyOneSpecificObserver(new UpdateInitLeaderMessage(needForLeader), secondPlayer.getNickName());
-
-        needForLeader = new ArrayList<>();
-        for (int i=0; i<4;i++)
-            needForLeader.add(thirdPlayer.getPersonalLeaderCard().get(i).getKey());
-        notifyOnlyOneSpecificObserver(new UpdateInitLeaderMessage(needForLeader),thirdPlayer.getNickName());
-
-    }
-    else if (numberOfPlayer==4)
-    {
-        ArrayList<Integer> needForLeader = new ArrayList<>();
-        for (int i=0; i<4;i++)
-            needForLeader.add(firstPlayer.getPersonalLeaderCard().get(i).getKey());
-        notifyOnlyOneSpecificObserver(new UpdateInitLeaderMessage(needForLeader), firstPlayer.getNickName());
-
-        needForLeader = new ArrayList<>();
-        for (int i=0; i<4;i++)
-            needForLeader.add(secondPlayer.getPersonalLeaderCard().get(i).getKey());
-        notifyOnlyOneSpecificObserver(new UpdateInitLeaderMessage(needForLeader), secondPlayer.getNickName());
-
-        needForLeader = new ArrayList<>();
-        for (int i=0; i<4;i++)
-            needForLeader.add(thirdPlayer.getPersonalLeaderCard().get(i).getKey());
-        notifyOnlyOneSpecificObserver(new UpdateInitLeaderMessage(needForLeader),thirdPlayer.getNickName());
-
-        needForLeader = new ArrayList<>();
-        for (int i=0; i<4;i++)
-            needForLeader.add(fourthPlayer.getPersonalLeaderCard().get(i).getKey());
-        notifyOnlyOneSpecificObserver(new UpdateInitLeaderMessage(needForLeader),fourthPlayer.getNickName());
-    }
-
-    //notifyToOneObserver(new YourTurnMessage());
-
-
-}
 
     private void createNickNameInOrder(ArrayList<ClientController> clientControllers) {
         for(int i=0; i<numberOfPlayer;i++)
@@ -192,16 +192,15 @@ public class GameMultiPlayer extends Game {
     /**
      * this method creates all the players in the game starting from the number of players and their nicknames
      * @param numberOfPlayer : the number of players in the game
-
      */
     private void createPlayer(int numberOfPlayer,ArrayList<ClientController> clientControllersInOrder) throws IOException, InterruptedException {
-       if (numberOfPlayer==2)
+        if (numberOfPlayer==2)
         {
             firstPlayer=new PlayerFirst(clientControllersInOrder.get(0).getNickname(),this,clientControllersInOrder.get(0).getVirtualView());
             secondPlayer= new PlayerSecond(clientControllersInOrder.get(1).getNickname(),this,clientControllersInOrder.get(1).getVirtualView());
             playerList.add(firstPlayer);
             playerList.add(secondPlayer);
-             }
+        }
 
         else if (numberOfPlayer==3)
         {
@@ -211,8 +210,8 @@ public class GameMultiPlayer extends Game {
             playerList.add(firstPlayer);
             playerList.add(secondPlayer);
             playerList.add(thirdPlayer);
-             }
-       else if (numberOfPlayer==4)
+        }
+        else if (numberOfPlayer==4)
         {
             firstPlayer=new PlayerFirst(clientControllersInOrder.get(0).getNickname(),this,clientControllersInOrder.get(0).getVirtualView());
             secondPlayer= new PlayerSecond(clientControllersInOrder.get(1).getNickname(),this,clientControllersInOrder.get(1).getVirtualView());
@@ -222,7 +221,7 @@ public class GameMultiPlayer extends Game {
             playerList.add(secondPlayer);
             playerList.add(thirdPlayer);
             playerList.add(fourthPlayer);
-             }
+        }
 
     }
 
@@ -333,46 +332,8 @@ public class GameMultiPlayer extends Game {
         for(Player p : playerList){
             if(p.getNickName().equals(nickname) && !(p.isConnected())){
                 p.setConnected();
-                notifyOnlyOneSpecificObserver(new GameTypeMessage(true), p.getNickName());
-                notifyOnlyOneSpecificObserver(new NicknameStartedMessage(nickNameInOrder), p.getNickName());
-                configClientReconnected(p.getNickName());
-                ArrayList<Integer> needForLeader = new ArrayList<>();
-                ArrayList<Integer> needForLeader2 = new ArrayList<>();
-
-                notifyOnlyOneSpecificObserver(new StorageConfigMessage(p.getGameBoardOfPlayer().getStorageOfGameBoard().getStorageResource()), p.getNickName());
-
-                notifyOnlyOneSpecificObserver(new StrongboxConfigMessage(p.getGameBoardOfPlayer().getStrongboxOfGameBoard().getStrongBoxResource()), p.getNickName());
-
-
-                for (int i=0; i<p.getGameBoardOfPlayer().getLeaderCards().size();i++)
-                    needForLeader.add(p.getGameBoardOfPlayer().getLeaderCards().get(i).getKey());
-                for (int i=0; i<p.getGameBoardOfPlayer().getLeaderCardsActivated().size();i++)
-                    needForLeader2.add(p.getGameBoardOfPlayer().getLeaderCardsActivated().get(i).getKey());
-                notifyOnlyOneSpecificObserver(new LeadercardconfigMessage(needForLeader,needForLeader2), p.getNickName());
-
-                notifyOnlyOneSpecificObserver(new FaithConfigMessage(p.getGameBoardOfPlayer().getIndicator(),p.getGameBoardOfPlayer().getCurrCall()), p.getNickName());
-
-                int[][] list = new int[3][3];
-                for (int i=0; i<3;i++)
-                    for (int j=0; i<3;i++)
-                        if (p.getGameBoardOfPlayer().getDevelopmentBoardCell(i,j)==null)
-                            list[i][j]=0;
-                        else
-                            list[i][j]=p.getGameBoardOfPlayer().getDevelopmentBoardCell(i,j).getKey();
-
-                notifyOnlyOneSpecificObserver(new ProductionCardConfigMessage(list),p.getNickName());
-
-                if(p.getGameBoardOfPlayer().getLeaderCardsActivated().size() != 0){
-                    if (p.getGameBoardOfPlayer().getLeaderCardsActivated().get(0)!=null){
-                        if(p.getGameBoardOfPlayer().getLeaderCardsActivated().get(0) instanceof LeaderCardProduction)
-                            notifyOnlyOneSpecificObserver(new StorageExtraConfig(p.getGameBoardOfPlayer().getStorageOfGameBoard().getNumExtraFirstAvailable(),((LeaderCardProduction) p.getGameBoardOfPlayer().getLeaderCardsActivated().get(0)).getResourceProduction()), p.getNickName());
-                    }
-                    if(p.getGameBoardOfPlayer().getLeaderCardsActivated()!=null && p.getGameBoardOfPlayer().getLeaderCardsActivated().get(1)!=null){
-                        if(p.getGameBoardOfPlayer().getLeaderCardsActivated().get(1) instanceof LeaderCardProduction)
-                            notifyOnlyOneSpecificObserver(new StorageExtraDoubleConfig(p.getGameBoardOfPlayer().getStorageOfGameBoard().getNumExtraFirstAvailable(),((LeaderCardProduction) p.getGameBoardOfPlayer().getLeaderCardsActivated().get(1)).getResourceProduction()), p.getNickName());
-                    }
-                }
-            }
+                super.configClientReconnected(p.getNickName());
+                configWhitPlayerInfo(p);}
         }
     }
 
@@ -472,7 +433,7 @@ public class GameMultiPlayer extends Game {
      */
     @Override
     public void saveInformation(){
-       super.saveInformation();
+        super.saveInformation();
         for(Player p : playerList){
             p.savePlayerInformation();
         }
@@ -545,7 +506,7 @@ public class GameMultiPlayer extends Game {
 
 
 
-            private void saveInformationAboutTurn() {
+    private void saveInformationAboutTurn() {
         Gson gson = new Gson();
         FileWriter config = null;
         String jsonStrin = gson.toJson(nickNameInOrder);
@@ -596,7 +557,7 @@ public class GameMultiPlayer extends Game {
             e.printStackTrace();
         }
         try {
-           lastTurn= gson.fromJson(new FileReader("src/main/resources/lastTurn.json"),Boolean.class);
+            lastTurn= gson.fromJson(new FileReader("src/main/resources/lastTurn.json"),Boolean.class);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -605,7 +566,7 @@ public class GameMultiPlayer extends Game {
         notifyObserver(new GameTypeMessage(true));
         notifyObserver(new NicknameStartedMessage(nickNameInOrder));
         createPlayerRestore(numberOfPlayer,nickNameInOrder);
-        reConfigClient();
+        this.reConfigClient();
         currentPlayer = playerList.get(currentPlayerPosition);
     }
 
@@ -613,59 +574,9 @@ public class GameMultiPlayer extends Game {
 
 
     public void reConfigClient() throws IOException, InterruptedException {
-        super.reConfigClient();
+        super.configClient();
         for(Player p : playerList){
-
-            ArrayList<Integer> needForLeaderInitial = new ArrayList<>();
-            for (int i=0; i<4;i++)
-                needForLeaderInitial.add(p.getPersonalLeaderCard().get(i).getKey());
-            notifyOnlyOneSpecificObserver(new UpdateInitLeaderMessage(needForLeaderInitial), p.getNickName());
-
-
-
-            notifyOnlyOneSpecificObserver(new UpdateInitBooleanMessage(p.isInit()), p.getNickName());
-
-
-
-
-            ArrayList<Integer> needForLeader = new ArrayList<>();
-                ArrayList<Integer> needForLeader2 = new ArrayList<>();
-
-
-
-                notifyOnlyOneSpecificObserver(new StorageConfigMessage(p.getGameBoardOfPlayer().getStorageOfGameBoard().getStorageResource()), p.getNickName());
-
-                notifyOnlyOneSpecificObserver(new StrongboxConfigMessage(p.getGameBoardOfPlayer().getStrongboxOfGameBoard().getStrongBoxResource()), p.getNickName());
-
-
-                for (int i=0; i<p.getGameBoardOfPlayer().getLeaderCards().size();i++)
-                    needForLeader.add(p.getGameBoardOfPlayer().getLeaderCards().get(i).getKey());
-                for (int i=0; i<p.getGameBoardOfPlayer().getLeaderCardsActivated().size();i++)
-                    needForLeader2.add(p.getGameBoardOfPlayer().getLeaderCardsActivated().get(i).getKey());
-                notifyOnlyOneSpecificObserver(new LeadercardconfigMessage(needForLeader,needForLeader2), p.getNickName());
-
-                notifyOnlyOneSpecificObserver(new FaithConfigMessage(p.getGameBoardOfPlayer().getIndicator(),p.getGameBoardOfPlayer().getCurrCall()), p.getNickName());
-
-            int[][] list = new int[3][3];
-            for (int i=0; i<3;i++)
-                for (int j=0; i<3;i++)
-                    if (p.getGameBoardOfPlayer().getDevelopmentBoardCell(i,j)==null)
-                        list[i][j]=0;
-                    else
-                        list[i][j]=p.getGameBoardOfPlayer().getDevelopmentBoardCell(i,j).getKey();
-
-            notifyOnlyOneSpecificObserver(new ProductionCardConfigMessage(list),p.getNickName());
-                if(p.getGameBoardOfPlayer().getLeaderCardsActivated().size() != 0){
-                    if (p.getGameBoardOfPlayer().getLeaderCardsActivated().get(0)!=null){
-                        if(p.getGameBoardOfPlayer().getLeaderCardsActivated().get(0) instanceof LeaderCardProduction)
-                            notifyOnlyOneSpecificObserver(new StorageExtraConfig(p.getGameBoardOfPlayer().getStorageOfGameBoard().getNumExtraFirstAvailable(),((LeaderCardProduction) p.getGameBoardOfPlayer().getLeaderCardsActivated().get(0)).getResourceProduction()), p.getNickName());
-                    }
-                    if(p.getGameBoardOfPlayer().getLeaderCardsActivated()!=null && p.getGameBoardOfPlayer().getLeaderCardsActivated().get(1)!=null){
-                        if(p.getGameBoardOfPlayer().getLeaderCardsActivated().get(1) instanceof LeaderCardProduction)
-                            notifyOnlyOneSpecificObserver(new StorageExtraDoubleConfig(p.getGameBoardOfPlayer().getStorageOfGameBoard().getNumExtraFirstAvailable(),((LeaderCardProduction) p.getGameBoardOfPlayer().getLeaderCardsActivated().get(1)).getResourceProduction()), p.getNickName());
-                    }
-                }
-            } }
+            configWhitPlayerInfo(p);}}
 
 
     /**
@@ -783,12 +694,12 @@ public class GameMultiPlayer extends Game {
 
 
             notifyOnlyOneSpecificObserver(new ShowAllOfPlayerMessage(list,
-                                                                    needForLeader2,
-                                                                    playerList.get(n-1).getGameBoardOfPlayer().getStorageOfGameBoard().getStorageResource(),
-                                                                    playerList.get(n-1).getGameBoardOfPlayer().getStrongboxOfGameBoard().getStrongBoxResource(),
-                                                                    playerList.get(n-1).getGameBoardOfPlayer().getIndicator(),
-                                                                    playerList.get(n-1).isConnected(),
-                                                                    playerList.get(n-1).getNickName()),nickname);
+                    needForLeader2,
+                    playerList.get(n-1).getGameBoardOfPlayer().getStorageOfGameBoard().getStorageResource(),
+                    playerList.get(n-1).getGameBoardOfPlayer().getStrongboxOfGameBoard().getStrongBoxResource(),
+                    playerList.get(n-1).getGameBoardOfPlayer().getIndicator(),
+                    playerList.get(n-1).isConnected(),
+                    playerList.get(n-1).getNickName()),nickname);
 
 
         }
@@ -796,7 +707,46 @@ public class GameMultiPlayer extends Game {
             notifyOnlyOneSpecificObserver(new NoPlayersErrorMessage(),nickname);
     }
 
-}
+    public void configWhitPlayerInfo(Player p) throws IOException, InterruptedException {
+        notifyOnlyOneSpecificObserver(new UpdateInitBooleanMessage(p.isInitLeader(),p.isInitResource()),p.getNickName());
+        if(!p.isInitLeader()){
+            ArrayList<Integer> needForLeaderInitial = new ArrayList<>();
+            for (int i=0; i<4;i++)
+                needForLeaderInitial.add(p.getPersonalLeaderCard().get(i).getKey());
+            notifyOnlyOneSpecificObserver(new UpdateInitLeaderMessage(needForLeaderInitial), p.getNickName());}
+        else{
+            ArrayList<Integer> needForLeader = new ArrayList<>();
+            ArrayList<Integer> needForLeader2 = new ArrayList<>();
+            notifyOnlyOneSpecificObserver(new StorageConfigMessage(p.getGameBoardOfPlayer().getStorageOfGameBoard().getStorageResource()), p.getNickName());
+            notifyOnlyOneSpecificObserver(new StrongboxConfigMessage(p.getGameBoardOfPlayer().getStrongboxOfGameBoard().getStrongBoxResource()), p.getNickName());
+            for (int i=0; i<p.getGameBoardOfPlayer().getLeaderCards().size();i++)
+                needForLeader.add(p.getGameBoardOfPlayer().getLeaderCards().get(i).getKey());
+            for (int i=0; i<p.getGameBoardOfPlayer().getLeaderCardsActivated().size();i++)
+                needForLeader2.add(p.getGameBoardOfPlayer().getLeaderCardsActivated().get(i).getKey());
+            notifyOnlyOneSpecificObserver(new LeadercardconfigMessage(needForLeader,needForLeader2), p.getNickName());
+            notifyOnlyOneSpecificObserver(new FaithConfigMessage(p.getGameBoardOfPlayer().getIndicator(),p.getGameBoardOfPlayer().getCurrCall()), p.getNickName());
+
+            int[][] list = new int[3][3];
+            for (int i=0; i<3;i++){
+                for (int j=0; j<3;j++){
+                    if (p.getGameBoardOfPlayer().getDevelopmentBoardCell(i,j)==null)
+                        list[i][j]=0;
+                    else
+                        list[i][j]=p.getGameBoardOfPlayer().getDevelopmentBoardCell(i,j).getKey();}}
+
+            notifyOnlyOneSpecificObserver(new ProductionCardConfigMessage(list),p.getNickName());
+            if(p.getGameBoardOfPlayer().getLeaderCardsActivated().size() != 0){
+                if (p.getGameBoardOfPlayer().getLeaderCardsActivated().get(0)!=null){
+                    if(p.getGameBoardOfPlayer().getLeaderCardsActivated().get(0) instanceof LeaderCardProduction)
+                        notifyOnlyOneSpecificObserver(new StorageExtraConfig(p.getGameBoardOfPlayer().getStorageOfGameBoard().getNumExtraFirstAvailable(),((LeaderCardProduction) p.getGameBoardOfPlayer().getLeaderCardsActivated().get(0)).getResourceProduction()), p.getNickName());
+                }
+                if(p.getGameBoardOfPlayer().getLeaderCardsActivated()!=null && p.getGameBoardOfPlayer().getLeaderCardsActivated().get(1)!=null){
+                    if(p.getGameBoardOfPlayer().getLeaderCardsActivated().get(1) instanceof LeaderCardProduction)
+                        notifyOnlyOneSpecificObserver(new StorageExtraDoubleConfig(p.getGameBoardOfPlayer().getStorageOfGameBoard().getNumExtraFirstAvailable(),((LeaderCardProduction) p.getGameBoardOfPlayer().getLeaderCardsActivated().get(1)).getResourceProduction()), p.getNickName());
+                } } } }
+
+
+    }
 
 
 

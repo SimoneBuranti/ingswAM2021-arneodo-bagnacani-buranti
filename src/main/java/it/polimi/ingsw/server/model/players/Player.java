@@ -19,7 +19,10 @@ import java.util.ArrayList;
  * this class represents the player of the game
  */
 public class Player {
-    protected boolean init;
+
+    protected boolean initLeader=false;
+
+    protected boolean initResource=false;
 
     private VirtualView virtualView;
     /**
@@ -75,6 +78,7 @@ public class Player {
         this.game = game;
         this.connected = true;
         this.newMatch=true;
+
     }
 
 
@@ -467,12 +471,12 @@ public class Player {
         return personalLeaderCard;
     }
 
-    public boolean isInit() {
-        return init;
+    public boolean isInitLeader() {
+        return initLeader;
     }
 
-    public void setInit(boolean init) {
-        this.init = init;
+    public void setInitLeader(boolean initLeader) {
+        this.initLeader = initLeader;
     }
 
     public void getPersonalLeaderCardAskey()
@@ -499,7 +503,11 @@ public class Player {
         }
     }
 
+    public boolean isInitResource() {
+        return initResource;
+    }
 
-
-
+    public void setInitResource(boolean initResource) {
+        this.initResource = initResource;
+    }
 }

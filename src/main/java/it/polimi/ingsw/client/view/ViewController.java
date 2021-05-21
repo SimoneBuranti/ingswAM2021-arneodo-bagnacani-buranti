@@ -190,7 +190,7 @@ public class ViewController implements MessageVisitor, ViewObserver {
 
     @Override
     public void visit(UpdateInitBooleanMessage msg) {
-        game.setInit(msg.isInit());
+        game.setInitLeader(msg.isInitResource());
     }
 
     @Override
@@ -616,17 +616,20 @@ public class ViewController implements MessageVisitor, ViewObserver {
 
     @Override
     public void visit(YourTurnMessage msg) {
-        /*if (!game.isInit()) {
-            //view.yourTurn();
-            //view.askInitResource();
-            //view.askInitResource();
-            game.setInit(true);
-        } else {
+        if (!game.isInitLeader() && !game.isInitResource()) {
             view.yourTurn();
-        }*/
-        view.yourTurn();
-
-    }
+            view.askLeaderCardToKeep(null);
+            game.setInitLeader(true);
+            view.askInitResource();
+            game.setInitResource(true);
+        }
+        else if(game.isInitLeader()&&!game.isInitResource()){
+            view.yourTurn();
+            view.askInitResource();
+            game.setInitResource(true);
+        }
+        else
+            view.yourTurn(); }
 
     @Override
     public void visit(ChangeTurnMessage msg) {

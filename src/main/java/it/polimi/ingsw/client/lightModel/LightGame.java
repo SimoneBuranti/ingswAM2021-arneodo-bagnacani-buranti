@@ -8,10 +8,8 @@ import it.polimi.ingsw.client.ligtModelNotification.ReserveNotification;
 import it.polimi.ingsw.client.lightModel.lightGameBoard.LightGameBoard;
 import it.polimi.ingsw.client.lightModel.productionCards.*;
 import it.polimi.ingsw.server.model.Resource;
-import it.polimi.ingsw.server.model.colours.Colour;
 import it.polimi.ingsw.server.model.leaderCards.LeaderCard;
 import it.polimi.ingsw.server.model.marbles.Marble;
-import it.polimi.ingsw.server.model.productionCards.DeckProductionCard;
 import it.polimi.ingsw.server.model.productionCards.ProductionCard;
 
 import java.io.IOException;
@@ -19,7 +17,8 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public class LightGame extends ViewObservable {
-    private boolean init;
+    private boolean initLeader;
+    private boolean initResource;
 
     /**
      * this attribute represents the game market
@@ -96,7 +95,7 @@ public class LightGame extends ViewObservable {
      * this constructor instantiates all the game attributes
      */
     public LightGame(String nickname){
-        init=false;
+        initLeader =false;
 
         listOfDeck = new ArrayList<>();
 
@@ -337,16 +336,24 @@ public class LightGame extends ViewObservable {
     }
 
 
-    public boolean isInit() {
-        return init;
+    public boolean isInitLeader() {
+        return initLeader;
     }
 
-    public void setInit(boolean init) {
-        this.init = init;
+    public void setInitLeader(boolean initLeader) {
+        this.initLeader = initLeader;
     }
 
     public ArrayList<LeaderCard> getLeaderCardActivated(){
         return gameBoardOfPlayer.getLeaderCardActivated();
+    }
+
+    public boolean isInitResource() {
+        return initResource;
+    }
+
+    public void setInitResource(boolean initResource) {
+        this.initResource = initResource;
     }
 
 

@@ -42,4 +42,6 @@ public interface View  {
     void showRestartMessage();
 
     void showPlayerInfo(ShowAllOfPlayerMessage msg);
+
+    void askInitResource();
 }

@@ -1,10 +1,8 @@
 package it.polimi.ingsw.server.model;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import it.polimi.ingsw.observer.Observable;
 import it.polimi.ingsw.messages.observable.*;
-import it.polimi.ingsw.server.model.colours.*;
 import it.polimi.ingsw.server.model.exceptions.*;
 import it.polimi.ingsw.server.model.leaderCards.*;
 import it.polimi.ingsw.server.model.marbles.*;
@@ -15,7 +13,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Map;
 
 /**
@@ -174,6 +171,7 @@ public class Game extends Observable {
         } catch (LastSpaceReachedException e) {
             exceptionHandler(e);
         }
+        currentPlayer.setInitResource(true);
         notifyToOneObserver(new UpdateInitResourceMessage(resource));
         notifyAllObserverLessOne(new UpdateForNotCurrentResourceMessage(resource));
 
@@ -194,6 +192,7 @@ public class Game extends Observable {
         } catch (LastSpaceReachedException e) {
             exceptionHandler(e);
         }
+        currentPlayer.setInitResource(true);
         notifyToOneObserver(new UpdateInitResourceMessage(resourceOne,resourceTwo));
         notifyAllObserverLessOne(new UpdateForNotCurrentResourceMessage(resourceOne,resourceTwo));
 
@@ -341,6 +340,7 @@ public class Game extends Observable {
     public void saveLeaderCardChosen(int index1, int index2) throws IOException, InterruptedException {
 
         currentPlayer.saveLeaderCard(index1,index2);
+        currentPlayer.setInitLeader(true);
         notifyToOneObserver(new UpdateChosenLeaderMessage(index1,index2));
     }
 
@@ -784,6 +784,8 @@ public class Game extends Observable {
 
 
         notifyObserver(new ConfigurationMarketMessage(market.getInitialMarbleList()));
+
+        notifyObserver(new ReserveValueMessage(reserve.getReservePool()));
     }
 
 
@@ -808,30 +810,7 @@ public class Game extends Observable {
         notifyOnlyOneSpecificObserver(new ConfigurationMarketMessage(market.getInitialMarbleList()), nickname);
     }
 
-
-    protected void reConfigClient() throws IOException, InterruptedException {
-        notifyObserver(new DeckProductionCardConfigMessage(0,deckProductionCardOneBlu.getDeck()));
-        notifyObserver(new DeckProductionCardConfigMessage(1,deckProductionCardTwoBlu.getDeck()));
-        notifyObserver(new DeckProductionCardConfigMessage(2,deckProductionCardThreeBlu.getDeck()));
-
-        notifyObserver(new DeckProductionCardConfigMessage(3,deckProductionCardOneGreen.getDeck()));
-        notifyObserver(new DeckProductionCardConfigMessage(4,deckProductionCardTwoGreen.getDeck()));
-        notifyObserver(new DeckProductionCardConfigMessage(5,deckProductionCardThreeGreen.getDeck()));
-
-        notifyObserver(new DeckProductionCardConfigMessage(6,deckProductionCardOneViolet.getDeck()));
-        notifyObserver(new DeckProductionCardConfigMessage(7,deckProductionCardTwoViolet.getDeck()));
-        notifyObserver(new DeckProductionCardConfigMessage(8,deckProductionCardThreeViolet.getDeck()));
-
-        notifyObserver(new DeckProductionCardConfigMessage(9,deckProductionCardOneYellow.getDeck()));
-        notifyObserver(new DeckProductionCardConfigMessage(10,deckProductionCardTwoYellow.getDeck()));
-        notifyObserver(new DeckProductionCardConfigMessage(11,deckProductionCardThreeYellow.getDeck()));
-
-
-        notifyObserver(new ConfigurationMarketMessage(market.getInitialMarbleList()));
-
-        notifyObserver(new ReserveValueMessage(reserve.getReservePool()));
-    }
-
+////
 
     public boolean isOver() {
         return isOver;

@@ -126,43 +126,64 @@ public class FileClass {
             f.delete();
 
 
-        f = new File("src/main/resources/fileInformationLeaderInitPlayerFourth.json");
+        f = new File("src/main/resources/fileInformationLeaderInitLeaderPlayerFirst.json");
         if (f.exists())
             f.delete();
 
-        f = new File("src/main/resources/fileInformationInitPlayerFourth.json");
+        f = new File("src/main/resources/fileInformationInitOnLeaderPlayerFirst.json");
         if (f.exists())
             f.delete();
 
+        
 
-        f = new File("src/main/resources/fileInformationLeaderInitPlayerFirst.json");
-        if (f.exists())
-            f.delete();
-
-        f = new File("src/main/resources/fileInformationInitPlayerFirst.json");
-        if (f.exists())
-            f.delete();
-
-
-        f = new File("src/main/resources/fileInformationLeaderInitPlayerSecond.json");
-        if (f.exists())
-            f.delete();
-
-        f = new File("src/main/resources/fileInformationInitPlayerSecond.json");
+        f = new File("src/main/resources/fileInformationInitOnResourcePlayerFirst.json");
         if (f.exists())
             f.delete();
 
 
-        f = new File("src/main/resources/fileInformationLeaderInitPlayerThird.json");
+        f = new File("src/main/resources/fileInformationLeaderInitLeaderPlayerSecond.json");
         if (f.exists())
             f.delete();
 
-        f = new File("src/main/resources/fileInformationInitPlayerThird.json");
+        f = new File("src/main/resources/fileInformationInitOnLeaderPlayerSecond.json");
         if (f.exists())
             f.delete();
 
 
 
+        f = new File("src/main/resources/fileInformationInitOnResourcePlayerSecond.json");
+        if (f.exists())
+            f.delete();
+
+
+        f = new File("src/main/resources/fileInformationLeaderInitLeaderPlayerThird.json");
+        if (f.exists())
+            f.delete();
+
+        f = new File("src/main/resources/fileInformationInitOnLeaderPlayerThird.json");
+        if (f.exists())
+            f.delete();
+
+
+
+        f = new File("src/main/resources/fileInformationInitOnResourcePlayerThird.json");
+        if (f.exists())
+            f.delete();
+
+
+        f = new File("src/main/resources/fileInformationLeaderInitLeaderPlayerFourth.json");
+        if (f.exists())
+            f.delete();
+
+        f = new File("src/main/resources/fileInformationInitOnLeaderPlayerFourth.json");
+        if (f.exists())
+            f.delete();
+
+
+
+        f = new File("src/main/resources/fileInformationInitOnResourcePlayerFourth.json");
+        if (f.exists())
+            f.delete();
 
 
 

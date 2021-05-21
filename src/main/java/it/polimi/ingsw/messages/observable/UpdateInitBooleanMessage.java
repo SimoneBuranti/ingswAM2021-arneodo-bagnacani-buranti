@@ -7,14 +7,17 @@ import it.polimi.ingsw.messages.MessageVisitor;
 import java.io.IOException;
 
 public class UpdateInitBooleanMessage extends Message {
-    private boolean init;
+    private boolean initResource;
     private final MessageType messageType = MessageType.INIT;
-    public UpdateInitBooleanMessage(boolean init) {
-        this.init=init;
+    private boolean initLeader;
+
+    public UpdateInitBooleanMessage(boolean initResource,boolean initLeader) {
+        this.initResource = initResource;
+        this.initLeader = initLeader;
     }
 
-    public boolean isInit() {
-        return init;
+    public boolean isInitResource() {
+        return initResource;
     }
 
 
@@ -26,5 +29,9 @@ public class UpdateInitBooleanMessage extends Message {
     @Override
     public MessageType getMessageType() {
         return messageType;
+    }
+
+    public boolean isInitLeader() {
+        return initLeader;
     }
 }
