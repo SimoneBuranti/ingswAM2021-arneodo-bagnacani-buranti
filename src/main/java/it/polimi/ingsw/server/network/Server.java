@@ -209,8 +209,10 @@ public class Server {
 
     public synchronized void removePlayerToLobby(String nickname){
         for(int i=0;i<lobby.size();i++){
-            if (lobby.get(i).equals(nickname))
+            if (lobby.get(i).equals(nickname)) {
                 lobby.remove(i);
+                break;
+            }
         }
     }
 

@@ -456,7 +456,14 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
         else
             System.out.println("The leader cards you can activate or discard: ");
 
-        for(int i = 0; i < leaderListCardNotification.getListOfFirstCard().size(); i++){
+        if(leaderListCardNotification.getListOfFirstCard().size() > 0){
+            showLeaderCards(leaderListCardNotification.getListOfFirstCard());
+        }
+
+    }
+
+    public void showLeaderCards(ArrayList<LeaderCard> leaderCards){
+        for(int i = 0; i < leaderCards.size(); i++){
             System.out.print("        ");
             System.out.println("--------------------------------------------------------------------------------------------");
 
@@ -464,14 +471,14 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
             System.out.println( i+1 + " leader card");
 
             System.out.print("        ");
-            System.out.println(leaderListCardNotification.getListOfFirstCard().get(i).getRequirements().toString());
+            System.out.println(leaderCards.get(i).getRequirements().toString());
 
             System.out.print("        ");
-            System.out.println(leaderListCardNotification.getListOfFirstCard().get(i).toString());
+            System.out.println(leaderCards.get(i).toString());
 
             System.out.print("        ");
             System.out.print("Victory points: ");
-            System.out.println(leaderListCardNotification.getListOfFirstCard().get(i).getPoints());
+            System.out.println(leaderCards.get(i).getPoints());
         }
         System.out.print("        ");
         System.out.println("--------------------------------------------------------------------------------------------");
@@ -566,16 +573,22 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
     public void askNumberOfPlayers() throws IOException, InterruptedException {
         int nOfPlayers;
         System.out.println("How many players? [1...4]");
-        while (input.hasNextInt()){
-            nOfPlayers =input.nextInt();
-            if (nOfPlayers > 0 && nOfPlayers < 5){
-                notifyObserver(new NumberPlayerMessage(nOfPlayers));
-                if(nOfPlayers > 1)
-                    System.out.println("Please wait for the missing players to start the game...");
-                return;
-            } else {
-                System.out.println("Invalid number of players, try with a number between 1 and 4");
+        while (input.hasNext()){
+            if(input.hasNextInt()) {
+                nOfPlayers = input.nextInt();
+                if (nOfPlayers > 0 && nOfPlayers < 5) {
+                    notifyObserver(new NumberPlayerMessage(nOfPlayers));
+                    if (nOfPlayers > 1)
+                        System.out.println("Please wait for the missing players to start the game...");
+                    return;
+                } else {
+                    System.out.println("Invalid number of players, try with a number between 1 and 4");
+                }
+            }else if(input.hasNextLine()){
+                String line = input.nextLine();
+                System.out.println("Invalid command of players, try with a number between 1 and 4");
             }
+
         }
     }
 
@@ -634,7 +647,8 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
     }
     @Override
     public void askLeaderCardToKeep(ArrayList<LeaderCard> leaderCards){
-        System.out.println("Please choose 2 from the following leader cards to keep in your game board : " + leaderCards);
+        System.out.println("Please choose 2 from the following leader cards to keep in your game board : ");
+        showLeaderCards(leaderCards);
     }
     @Override
     public void showCallForCouncil(String nickname, int papalCard){
@@ -673,5 +687,10 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
         System.out.println(msg.getStrongBox());
         System.out.println(msg.getStorage());
         System.out.println(msg.getFaithIndicator());
+    }
+
+    @Override
+    public void askInitResource() {
+
     }
 }

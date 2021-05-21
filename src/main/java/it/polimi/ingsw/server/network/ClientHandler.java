@@ -147,10 +147,9 @@ public class ClientHandler implements Runnable {
                 }
             }
         } catch (IOException | InterruptedException e) {
-            System.out.println("c'è un errore");
             try {
                 disconnect();
-            } catch (IOException ioException) {
+            } catch (IOException | InterruptedException ioException) {
                 ioException.printStackTrace();
             }
             Thread.currentThread().interrupt();
@@ -170,15 +169,48 @@ public class ClientHandler implements Runnable {
 
     }
 
-    public void disconnect() throws IOException {
-        if(server.getGameController().getGameControllerState().equals("MultiPlayer") || server.getGameController().getGameControllerState().equals("SinglePlayer") ) {
-            server.setGameController(new GameControllerDisconnection(server, clientController.getGame()));
-            clientController.getGame().disconnectPlayer(clientController.getNickname());
-            server.addClientControllersDisconnected(clientController);
-        }else if(server.getGameController().getGameControllerState().equals("Disconnection")){
-            clientController.getGame().disconnectPlayer(clientController.getNickname());
-            server.addClientControllersDisconnected(clientController);
+    public void pingDisconnection() throws IOException, InterruptedException {
+        switch (server.getGameController().getGameControllerState()) {
+            case "Empty":
+                if(server.getGameController().isFirstClient(clientController)){
+                    server.removePlayerToLobby(clientController.getNickname());
+                    server.removeClientController(clientController);
+                    server.getGameController().disconnectFirstClient();
+                }else{
+                    server.getGameController().disconnectClientTempLobby(clientController);
+                }
+                break;
+
+            case "Lobby":
+                server.removePlayerToLobby(clientController.getNickname());
+                server.removeClientController(clientController);
+                for(ClientController c : server.getClientController())
+                    c.getClientHandler().sendMessage(new NPlayersMessage(server.getLobbySize(),server.getGameController().getLobbySize()));
+                break;
+            case "Restart":
+                if(server.getGameController().thereIsTempLobby()){
+                    server.getGameController().disconnectClientTempLobby(clientController);
+                }else {
+                    server.getGameController().removeNameFromReconnected(clientController.getNickname());
+                    server.removeClientController(clientController);
+                    for (ClientController c : server.getClientController())
+                        c.getClientHandler().sendMessage(new NPlayersMessage(server.getGameController().getLobbySize(), server.getLobbySize()));
+                }
+                break;
+            case "MultiPlayer":
+            case "SinglePlayer":
+                server.setGameController(new GameControllerDisconnection(server, clientController.getGame()));
+                clientController.getGame().disconnectPlayer(clientController.getNickname());
+                server.addClientControllersDisconnected(clientController);
+                break;
+            case "Disconnection":
+                clientController.getGame().disconnectPlayer(clientController.getNickname());
+                server.addClientControllersDisconnected(clientController);
+                break;
         }
+    }
+    public void disconnect() throws IOException, InterruptedException {
+        pingDisconnection();
 
         if (inputStream != null) inputStream.close();
         if (outputStream != null) outputStream.close();

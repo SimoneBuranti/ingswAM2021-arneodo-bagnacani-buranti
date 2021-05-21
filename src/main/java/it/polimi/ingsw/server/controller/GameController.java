@@ -14,7 +14,7 @@ public abstract class GameController {
     protected Server server;
 
     //Client to server
-    public abstract void handleMessage(ExitMessage msg, ClientController clientController);
+    public abstract void handleMessage(ExitMessage msg, ClientController clientController) throws IOException, InterruptedException;
     public abstract void handleMessage(NumberPlayerMessage msg, ClientController clientController) throws IOException, InterruptedException;
     public abstract void handleMessage(UsernameMessage msg, ClientController clientController) throws IOException, InterruptedException;
 
@@ -45,6 +45,17 @@ public abstract class GameController {
 
     public abstract void handleMessage(RestartAnswerMessage msg, ClientController clientController) throws IOException, InterruptedException;
 
+    public abstract boolean isFirstClient(ClientController clientController);
+
+    public abstract void disconnectFirstClient();
+
+    public abstract void disconnectClientTempLobby(ClientController clientController);
+
+    public abstract void removeNameFromReconnected(String nickname);
+
+    public abstract int getLobbySize();
+
+    public abstract boolean thereIsTempLobby();
 
     public String getGameControllerState(){
         return gameControllerState;

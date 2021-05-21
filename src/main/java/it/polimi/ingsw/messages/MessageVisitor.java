@@ -40,7 +40,7 @@ public interface MessageVisitor {
     void visit(DiscardLeaderCardMessage msg) throws IOException, InterruptedException;
     void visit(DoubleProductionOnMessage msg) throws IOException, InterruptedException;
     void visit(EndOfProductionMessage msg) throws IOException, InterruptedException;
-    void visit(ExitMessage msg);
+    void visit(ExitMessage msg) throws IOException, InterruptedException;
     void visit(ExtraProductionOnMessage msg) throws IOException, InterruptedException;
     void visit(InitialResourcesMessage msg) throws IOException, InterruptedException;
     void visit(KeepLeaderCardsMessage msg) throws IOException, InterruptedException;

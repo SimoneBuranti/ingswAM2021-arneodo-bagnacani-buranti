@@ -30,13 +30,16 @@ public class GameControllerRestart extends GameController {
     }
 
     @Override
-    public synchronized void handleMessage(ExitMessage msg, ClientController clientController) {
-        try {
-            clientController.getClientHandler().disconnect();
-            reconnected.remove(clientController.getNickname());
-        } catch (IOException e) {
-            e.printStackTrace();
+    public synchronized void handleMessage(ExitMessage msg, ClientController clientController) throws IOException, InterruptedException {
+        if(thereIsTempLobby()){
+            disconnectClientTempLobby(clientController);
+        }else {
+            removeNameFromReconnected(clientController.getNickname());
+            server.removeClientController(clientController);
+            for (ClientController c : server.getClientController())
+                c.getClientHandler().sendMessage(new NPlayersMessage(server.getGameController().getLobbySize(), server.getLobbySize()));
         }
+        clientController.getClientHandler().disconnect();
     }
 
     @Override
@@ -117,6 +120,49 @@ public class GameControllerRestart extends GameController {
             }
         firstClientController = clientController;
         clientController.getClientHandler().sendMessage(new UsernameMessage(null));
+    }
+
+    @Override
+    public boolean isFirstClient(ClientController clientController) {
+        return false;
+    }
+
+    @Override
+    public void disconnectFirstClient() {
+
+    }
+
+    @Override
+    public int getLobbySize() {
+        return reconnected.size();
+    }
+
+    @Override
+    public boolean thereIsTempLobby() {
+        if(tempLobbyName.size() > 0)
+            return true;
+        return false;
+    }
+
+    @Override
+    public void disconnectClientTempLobby(ClientController clientController) {
+        for(int i = 0; i < tempLobbyController.size(); i++){
+            if(tempLobbyController.get(i) == clientController){
+                tempLobbyController.remove(i);
+                tempLobbyName.remove(i);
+                break;
+            }
+        }
+    }
+
+    @Override
+    public void removeNameFromReconnected(String nickname) {
+        for(int i = 0; i < reconnected.size(); i++){
+            if(reconnected.get(i).equals(nickname)){
+                reconnected.remove(i);
+                break;
+            }
+        }
     }
 
     public void reconnectionLobby() throws IOException, InterruptedException {

@@ -118,13 +118,13 @@ public class GameControllerLobby extends GameController {
 
     }
     @Override
-    public void handleMessage(ExitMessage msg, ClientController clientController) {
-        try {
-            clientController.getClientHandler().disconnect();
-            server.removePlayerToLobby(clientController.getNickname());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void handleMessage(ExitMessage msg, ClientController clientController) throws IOException, InterruptedException {
+
+        server.removePlayerToLobby(clientController.getNickname());
+        server.removeClientController(clientController);
+        for(ClientController c : server.getClientController())
+            c.getClientHandler().sendMessage(new NPlayersMessage(server.getLobbySize(),server.getGameController().getLobbySize()));
+        clientController.getClientHandler().disconnect();
     }
 
     @Override
@@ -153,6 +153,35 @@ public class GameControllerLobby extends GameController {
         //unreachable
     }
 
+    @Override
+    public boolean isFirstClient(ClientController clientController) {
+        return false;
+    }
+
+    @Override
+    public void disconnectFirstClient() {
+
+    }
+
+    @Override
+    public void disconnectClientTempLobby(ClientController clientController) {
+
+    }
+
+    @Override
+    public void removeNameFromReconnected(String nickname) {
+
+    }
+
+    @Override
+    public int getLobbySize() {
+        return lobbySize;
+    }
+
+    @Override
+    public boolean thereIsTempLobby() {
+        return false;
+    }
 
 
 }

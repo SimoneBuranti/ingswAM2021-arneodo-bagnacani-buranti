@@ -618,7 +618,7 @@ public class ViewController implements MessageVisitor, ViewObserver {
     public void visit(YourTurnMessage msg) {
         if (!game.isInitLeader() && !game.isInitResource()) {
             view.yourTurn();
-            view.askLeaderCardToKeep(null);
+            view.askLeaderCardToKeep(game.getLeaderCards());
             game.setInitLeader(true);
             view.askInitResource();
             game.setInitResource(true);

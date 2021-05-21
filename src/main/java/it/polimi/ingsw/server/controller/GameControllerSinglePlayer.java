@@ -56,7 +56,7 @@ public class GameControllerSinglePlayer extends GameController {
         }
         try {
             clientController.getClientHandler().disconnect();
-        } catch (IOException e) {
+        } catch (IOException | InterruptedException e) {
             //messaggio di errore
         }
         if(flag) {
@@ -85,5 +85,35 @@ public class GameControllerSinglePlayer extends GameController {
     @Override
     public void handleMessage(RestartAnswerMessage msg, ClientController clientController) {
         //unreachable
+    }
+
+    @Override
+    public boolean isFirstClient(ClientController clientController) {
+        return false;
+    }
+
+    @Override
+    public void disconnectFirstClient() {
+
+    }
+
+    @Override
+    public void disconnectClientTempLobby(ClientController clientController) {
+
+    }
+
+    @Override
+    public void removeNameFromReconnected(String nickname) {
+
+    }
+
+    @Override
+    public int getLobbySize() {
+        return 0;
+    }
+
+    @Override
+    public boolean thereIsTempLobby() {
+        return false;
     }
 }
