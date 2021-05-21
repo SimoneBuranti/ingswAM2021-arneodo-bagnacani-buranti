@@ -74,4 +74,8 @@ public class ResourceRequirement extends Requirements{
     public Colour getColourSecondRequirement() {
         return null;
     }
+
+    public String toString(){
+        return "Requirements : 5 " + resourceRequirement;
+    }
 }

@@ -78,4 +78,8 @@ public class SecondLevelRequirement extends Requirements {
     public Colour getColourSecondRequirement() {
         return null;
     }
+
+    public String toString(){
+        return "Requirements : 1 second level " + colourRequirement.getColour() + " production card";
+    }
 }

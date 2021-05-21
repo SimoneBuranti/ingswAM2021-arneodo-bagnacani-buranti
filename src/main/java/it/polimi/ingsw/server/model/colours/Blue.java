@@ -5,4 +5,7 @@ package it.polimi.ingsw.server.model.colours;
  */
 public class Blue extends Colour {
 
+    public Blue(){
+        this.colour = "Blue";
+    }
 }

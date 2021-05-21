@@ -58,4 +58,8 @@ public class LeaderCardReduction extends LeaderCard{
             return false;
         else return gameBoard.colourQuantity(requirements.getColourSecondRequirement()) >= 1;
     }
+
+    public String toString(){
+        return "Ability: you can subtract a " + costReduction + " from the cost of production cards";
+    }
 }

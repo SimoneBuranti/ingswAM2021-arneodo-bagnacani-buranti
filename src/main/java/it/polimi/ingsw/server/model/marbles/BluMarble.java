@@ -8,17 +8,9 @@ import it.polimi.ingsw.server.model.players.Player;
  */
 public class BluMarble extends Marble {
 
-    /**
-     * colour marble
-     */
-    private String colour= "blue";
 
-
-
-
-    @Override
-    public String getColour() {
-        return colour;
+    public BluMarble(){
+        this.colour = "blue";
     }
 
 

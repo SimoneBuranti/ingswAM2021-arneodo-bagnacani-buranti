@@ -32,4 +32,6 @@ public abstract class Requirements {
      * getter method not implemented for specific requirement attribute
      */
     public abstract Colour getColourSecondRequirement();
+
+    public abstract String toString();
 }

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class LightLeaderCards {
 
-    private static ArrayList<LeaderCard>  leaderCards;
+    static ArrayList<LeaderCard>  leaderCards;
 
     public LightLeaderCards() {
         Colour blue = new Blue();

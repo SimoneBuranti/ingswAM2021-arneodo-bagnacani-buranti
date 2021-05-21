@@ -478,7 +478,7 @@ public class ViewController implements MessageVisitor, ViewObserver {
     }
 
     @Override
-    public void visit(ActivationLeaderForCurrentMessage msg) {
+    public void visit(ActivationLeaderForCurrentMessage msg) throws IOException, InterruptedException {
 
         game.activateLeaderCard(msg.getIndex());
     }
@@ -539,7 +539,7 @@ public class ViewController implements MessageVisitor, ViewObserver {
     @Override
     public void visit(StrongboxConfigMessage msg) {
         try {
-            game.addStorage(msg.getStrongBoxResource());
+            game.addStrongbox(msg.getStrongBoxResource());
         } catch (IOException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {

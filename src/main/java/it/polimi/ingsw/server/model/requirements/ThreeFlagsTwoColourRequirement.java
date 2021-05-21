@@ -80,4 +80,8 @@ public class ThreeFlagsTwoColourRequirement extends Requirements{
     public Colour getColourSecondRequirement() {
         return null;
     }
+
+    public String toString(){
+        return "Requirements : 1 " + colourSingleRequirement.getColour() + " and 2 " + colourDoubleRequirement.getColour() + " production cards";
+    }
 }

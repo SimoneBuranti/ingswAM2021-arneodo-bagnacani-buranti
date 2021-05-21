@@ -9,6 +9,8 @@ import it.polimi.ingsw.server.model.exceptions.WhiteMarbleException;
  * this class represents the marble of the market and it is the super class of all marbles
  */
 public class Marble {
+
+    protected String colour = null;
     /**
      * not implemented method that gives the player the resource corresponding to the marble and spreads tre exception
      * @param player : the one that has bought from the market
@@ -21,5 +23,5 @@ public class Marble {
     /**
      * @return colour marble
      */
-    public String getColour(){return null;}
+    public String getColour(){return colour;}
 }

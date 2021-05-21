@@ -82,7 +82,6 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
         
         int spaces = 42;
         int chars;
-        int faithPoint;
         String temp;
         System.out.println("Production card decks:" );
 
@@ -118,7 +117,7 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
             //---------------------------
 
             System.out.print("        ");
-            temp = "| c= " + deckListNotification.getListOfFirstCard().get(5).getCost();
+            temp = "| c= " + deckListNotification.getListOfFirstCard().get(5-i).getCost();
             chars = temp.length();
             System.out.print(temp);
             for(int k = 0;k<spaces-chars;k++){
@@ -146,6 +145,7 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
             for(int k = 0;k<spaces-chars;k++){
                 System.out.print(" ");
             }
+            System.out.print("|");
             System.out.println("");
 
 
@@ -180,6 +180,7 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
             for(int k = 0;k<spaces-chars;k++){
                 System.out.print(" ");
             }
+            System.out.print("|");
                 System.out.println("");
             //-------------------------------------------------
             System.out.print("        ");
@@ -210,10 +211,11 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
             for(int k = 0;k<spaces-chars;k++){
                 System.out.print(" ");
             }
+            System.out.print("|");
             System.out.println("");
             //-----------------------------------------
             System.out.print("        ");
-            temp = "| faith points= " + deckListNotification.getListOfFirstCard().get(5).isFaithPoint();
+            temp = "| faith points= " + deckListNotification.getListOfFirstCard().get(5-i).isFaithPoint();
             chars = temp.length();
             System.out.print(temp);
             for(int k = 0;k<spaces-chars;k++){
@@ -240,6 +242,7 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
             for(int k = 0;k<spaces-chars;k++){
                 System.out.print(" ");
             }
+            System.out.print("|");
             System.out.println("");
             //---------------------------------------
             System.out.print("        ");
@@ -270,6 +273,7 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
             for(int k = 0;k<spaces-chars;k++){
                 System.out.print(" ");
             }
+            System.out.print("|");
             System.out.println("");
 
             //----------------------------------
@@ -293,42 +297,558 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
             System.out.println("");
 
         }
-        //System.out.println(deckListNotification.getListOfFirstCard());
     }
 
     @Override
     public void visit(GameboardListNotification gameboardListNotification) {
+        int spaces = 50;
+        int chars;
+        String temp;
+        System.out.println("Production cards of your game board:" );
 
+        //-----------------------------------
+        System.out.print("        ");
+        for(int k = 0;k<spaces;k++){
+            System.out.print("-");
+        }
+
+        for(int k = 0;k<spaces;k++){
+            System.out.print("-");
+        }
+
+        for(int k = 0;k<spaces;k++){
+            System.out.print("-");
+        }
+
+        System.out.println("");
+
+        //---------------------------
+        for(int i = 0 ; i < 3; i++) {
+            System.out.print("        ");
+            if (gameboardListNotification.getListOfFirstCard()[i][0] != null) {
+                temp = "| level= " + gameboardListNotification.getListOfFirstCard()[i][0].getLevel();
+                chars = temp.length();
+                System.out.print(temp);
+                for (int k = 0; k < spaces - chars; k++) {
+                    System.out.print(" ");
+                }
+            } else {
+                temp = "| ";
+                chars = temp.length();
+                System.out.print(temp);
+                for (int k = 0; k < spaces - chars; k++) {
+                    System.out.print(" ");
+                }
+            }
+
+            if (gameboardListNotification.getListOfFirstCard()[i][1] != null) {
+                temp = "| level= " + gameboardListNotification.getListOfFirstCard()[i][1].getLevel();
+                chars = temp.length();
+                System.out.print(temp);
+                for (int k = 0; k < spaces - chars; k++) {
+                    System.out.print(" ");
+                }
+            } else {
+                temp = "| ";
+                chars = temp.length();
+                System.out.print(temp);
+                for (int k = 0; k < spaces - chars; k++) {
+                    System.out.print(" ");
+                }
+            }
+
+            if (gameboardListNotification.getListOfFirstCard()[i][2] != null) {
+                temp = "| level= " + gameboardListNotification.getListOfFirstCard()[i][2].getLevel();
+                chars = temp.length();
+                System.out.print(temp);
+                for (int k = 0; k < spaces - chars; k++) {
+                    System.out.print(" ");
+                }
+            } else {
+                temp = "| ";
+                chars = temp.length();
+                System.out.print(temp);
+                for (int k = 0; k < spaces - chars; k++) {
+                    System.out.print(" ");
+                }
+            }
+            System.out.print("|");
+
+            System.out.println("");
+
+            //-----------------------------------
+
+
+            System.out.print("        ");
+            if (gameboardListNotification.getListOfFirstCard()[i][0] != null) {
+                temp = "| colour= " + gameboardListNotification.getListOfFirstCard()[i][0].getColour().getColour();
+                chars = temp.length();
+                System.out.print(temp);
+                for (int k = 0; k < spaces - chars; k++) {
+                    System.out.print(" ");
+                }
+            } else {
+                temp = "| ";
+                chars = temp.length();
+                System.out.print(temp);
+                for (int k = 0; k < spaces - chars; k++) {
+                    System.out.print(" ");
+                }
+            }
+
+            if (gameboardListNotification.getListOfFirstCard()[i][1] != null) {
+                temp = "| colour= " + gameboardListNotification.getListOfFirstCard()[i][1].getColour().getColour();
+                chars = temp.length();
+                System.out.print(temp);
+                for (int k = 0; k < spaces - chars; k++) {
+                    System.out.print(" ");
+                }
+            } else {
+                temp = "| ";
+                chars = temp.length();
+                System.out.print(temp);
+                for (int k = 0; k < spaces - chars; k++) {
+                    System.out.print(" ");
+                }
+            }
+
+            if (gameboardListNotification.getListOfFirstCard()[i][2] != null) {
+                temp = "| colour= " + gameboardListNotification.getListOfFirstCard()[i][2].getColour().getColour();
+                chars = temp.length();
+                System.out.print(temp);
+                for (int k = 0; k < spaces - chars; k++) {
+                    System.out.print(" ");
+                }
+            } else {
+                temp = "| ";
+                chars = temp.length();
+                System.out.print(temp);
+                for (int k = 0; k < spaces - chars; k++) {
+                    System.out.print(" ");
+                }
+            }
+            System.out.print("|");
+
+            System.out.println("");
+
+            //-----------------------------------
+
+            System.out.print("        ");
+            if (gameboardListNotification.getListOfFirstCard()[i][0] != null) {
+                temp = "| cost= " + gameboardListNotification.getListOfFirstCard()[i][0].getCost().toString();
+                chars = temp.length();
+                System.out.print(temp);
+                for (int k = 0; k < spaces - chars; k++) {
+                    System.out.print(" ");
+                }
+            } else {
+                temp = "| ";
+                chars = temp.length();
+                System.out.print(temp);
+                for (int k = 0; k < spaces - chars; k++) {
+                    System.out.print(" ");
+                }
+            }
+
+            if (gameboardListNotification.getListOfFirstCard()[i][1] != null) {
+                temp = "| cost= " + gameboardListNotification.getListOfFirstCard()[i][1].getCost().toString();
+                chars = temp.length();
+                System.out.print(temp);
+                for (int k = 0; k < spaces - chars; k++) {
+                    System.out.print(" ");
+                }
+            } else {
+                temp = "| ";
+                chars = temp.length();
+                System.out.print(temp);
+                for (int k = 0; k < spaces - chars; k++) {
+                    System.out.print(" ");
+                }
+            }
+
+            if (gameboardListNotification.getListOfFirstCard()[i][2] != null) {
+                temp = "| cost= " + gameboardListNotification.getListOfFirstCard()[i][2].getCost().toString();
+                chars = temp.length();
+                System.out.print(temp);
+                for (int k = 0; k < spaces - chars; k++) {
+                    System.out.print(" ");
+                }
+            } else {
+                temp = "| ";
+                chars = temp.length();
+                System.out.print(temp);
+                for (int k = 0; k < spaces - chars; k++) {
+                    System.out.print(" ");
+                }
+            }
+            System.out.print("|");
+
+            System.out.println("");
+
+            //-----------------------------------
+
+            System.out.print("        ");
+            if (gameboardListNotification.getListOfFirstCard()[i][0] != null) {
+                temp = "| i= " + gameboardListNotification.getListOfFirstCard()[i][0].getIn().toString();
+                chars = temp.length();
+                System.out.print(temp);
+                for (int k = 0; k < spaces - chars; k++) {
+                    System.out.print(" ");
+                }
+            } else {
+                temp = "| ";
+                chars = temp.length();
+                System.out.print(temp);
+                for (int k = 0; k < spaces - chars; k++) {
+                    System.out.print(" ");
+                }
+            }
+
+            if (gameboardListNotification.getListOfFirstCard()[i][1] != null) {
+                temp = "| i= " + gameboardListNotification.getListOfFirstCard()[i][1].getIn().toString();
+                chars = temp.length();
+                System.out.print(temp);
+                for (int k = 0; k < spaces - chars; k++) {
+                    System.out.print(" ");
+                }
+            } else {
+                temp = "| ";
+                chars = temp.length();
+                System.out.print(temp);
+                for (int k = 0; k < spaces - chars; k++) {
+                    System.out.print(" ");
+                }
+            }
+
+            if (gameboardListNotification.getListOfFirstCard()[i][2] != null) {
+                temp = "| i= " + gameboardListNotification.getListOfFirstCard()[i][2].getIn().toString();
+                chars = temp.length();
+                System.out.print(temp);
+                for (int k = 0; k < spaces - chars; k++) {
+                    System.out.print(" ");
+                }
+            } else {
+                temp = "| ";
+                chars = temp.length();
+                System.out.print(temp);
+                for (int k = 0; k < spaces - chars; k++) {
+                    System.out.print(" ");
+                }
+            }
+            System.out.print("|");
+
+            System.out.println("");
+
+            //-----------------------------------
+
+            System.out.print("        ");
+            if (gameboardListNotification.getListOfFirstCard()[i][0] != null) {
+                temp = "| o= " + gameboardListNotification.getListOfFirstCard()[i][0].getOut().toString();
+                chars = temp.length();
+                System.out.print(temp);
+                for (int k = 0; k < spaces - chars; k++) {
+                    System.out.print(" ");
+                }
+            } else {
+                temp = "| ";
+                chars = temp.length();
+                System.out.print(temp);
+                for (int k = 0; k < spaces - chars; k++) {
+                    System.out.print(" ");
+                }
+            }
+
+            if (gameboardListNotification.getListOfFirstCard()[i][1] != null) {
+                temp = "| o= " + gameboardListNotification.getListOfFirstCard()[i][1].getOut().toString();
+                chars = temp.length();
+                System.out.print(temp);
+                for (int k = 0; k < spaces - chars; k++) {
+                    System.out.print(" ");
+                }
+            } else {
+                temp = "| ";
+                chars = temp.length();
+                System.out.print(temp);
+                for (int k = 0; k < spaces - chars; k++) {
+                    System.out.print(" ");
+                }
+            }
+
+            if (gameboardListNotification.getListOfFirstCard()[i][2] != null) {
+                temp = "| o= " + gameboardListNotification.getListOfFirstCard()[i][2].getOut().toString();
+                chars = temp.length();
+                System.out.print(temp);
+                for (int k = 0; k < spaces - chars; k++) {
+                    System.out.print(" ");
+                }
+            } else {
+                temp = "| ";
+                chars = temp.length();
+                System.out.print(temp);
+                for (int k = 0; k < spaces - chars; k++) {
+                    System.out.print(" ");
+                }
+            }
+            System.out.print("|");
+
+            System.out.println("");
+
+            //-----------------------------------
+
+            System.out.print("        ");
+            if (gameboardListNotification.getListOfFirstCard()[i][0] != null) {
+                temp = "| faith points= " + gameboardListNotification.getListOfFirstCard()[i][0].isFaithPoint();
+                chars = temp.length();
+                System.out.print(temp);
+                for (int k = 0; k < spaces - chars; k++) {
+                    System.out.print(" ");
+                }
+            } else {
+                temp = "| ";
+                chars = temp.length();
+                System.out.print(temp);
+                for (int k = 0; k < spaces - chars; k++) {
+                    System.out.print(" ");
+                }
+            }
+
+            if (gameboardListNotification.getListOfFirstCard()[i][1] != null) {
+                temp = "| faith points= " + gameboardListNotification.getListOfFirstCard()[i][1].isFaithPoint();
+                chars = temp.length();
+                System.out.print(temp);
+                for (int k = 0; k < spaces - chars; k++) {
+                    System.out.print(" ");
+                }
+            } else {
+                temp = "| ";
+                chars = temp.length();
+                System.out.print(temp);
+                for (int k = 0; k < spaces - chars; k++) {
+                    System.out.print(" ");
+                }
+            }
+
+            if (gameboardListNotification.getListOfFirstCard()[i][2] != null) {
+                temp = "| faith points= " + gameboardListNotification.getListOfFirstCard()[i][2].isFaithPoint();
+                chars = temp.length();
+                System.out.print(temp);
+                for (int k = 0; k < spaces - chars; k++) {
+                    System.out.print(" ");
+                }
+            } else {
+                temp = "| ";
+                chars = temp.length();
+                System.out.print(temp);
+                for (int k = 0; k < spaces - chars; k++) {
+                    System.out.print(" ");
+                }
+            }
+            System.out.print("|");
+
+            System.out.println("");
+
+            //-----------------------------------
+
+            System.out.print("        ");
+            if (gameboardListNotification.getListOfFirstCard()[i][0] != null) {
+                temp = "| victory points= " + gameboardListNotification.getListOfFirstCard()[i][0].getPoints();
+                chars = temp.length();
+                System.out.print(temp);
+                for (int k = 0; k < spaces - chars; k++) {
+                    System.out.print(" ");
+                }
+            } else {
+                temp = "| ";
+                chars = temp.length();
+                System.out.print(temp);
+                for (int k = 0; k < spaces - chars; k++) {
+                    System.out.print(" ");
+                }
+            }
+
+            if (gameboardListNotification.getListOfFirstCard()[i][1] != null) {
+                temp = "| victory points= " + gameboardListNotification.getListOfFirstCard()[i][1].getPoints();
+                chars = temp.length();
+                System.out.print(temp);
+                for (int k = 0; k < spaces - chars; k++) {
+                    System.out.print(" ");
+                }
+            } else {
+                temp = "| ";
+                chars = temp.length();
+                System.out.print(temp);
+                for (int k = 0; k < spaces - chars; k++) {
+                    System.out.print(" ");
+                }
+            }
+
+            if (gameboardListNotification.getListOfFirstCard()[i][2] != null) {
+                temp = "| victory points= " + gameboardListNotification.getListOfFirstCard()[i][2].getPoints();
+                chars = temp.length();
+                System.out.print(temp);
+                for (int k = 0; k < spaces - chars; k++) {
+                    System.out.print(" ");
+                }
+            } else {
+                temp = "| ";
+                chars = temp.length();
+                System.out.print(temp);
+                for (int k = 0; k < spaces - chars; k++) {
+                    System.out.print(" ");
+                }
+            }
+            System.out.print("|");
+
+            System.out.println("");
+
+            System.out.print("        ");
+            for(int k = 0;k<spaces;k++){
+                System.out.print("-");
+            }
+
+            for(int k = 0;k<spaces;k++){
+                System.out.print("-");
+            }
+
+            for(int k = 0;k<spaces;k++){
+                System.out.print("-");
+            }
+
+            System.out.println("");
+        }
     }
 
     @Override
     public void visit(LeaderListCardNotification leaderListCardNotification) {
+        if(leaderListCardNotification.isActivated())
+            System.out.println("The leader cards you activated: ");
+        else
+            System.out.println("The leader cards you can activate or discard: ");
 
+        for(int i = 0; i < leaderListCardNotification.getListOfFirstCard().size(); i++){
+            System.out.print("        ");
+            System.out.println("--------------------------------------------------------------------------------------------");
+
+            System.out.print("        ");
+            System.out.println( i+1 + " leader card");
+
+            System.out.print("        ");
+            System.out.println(leaderListCardNotification.getListOfFirstCard().get(i).getRequirements().toString());
+
+            System.out.print("        ");
+            System.out.println(leaderListCardNotification.getListOfFirstCard().get(i).toString());
+
+            System.out.print("        ");
+            System.out.print("Victory points: ");
+            System.out.println(leaderListCardNotification.getListOfFirstCard().get(i).getPoints());
+        }
+        System.out.print("        ");
+        System.out.println("--------------------------------------------------------------------------------------------");
     }
 
     @Override
     public void visit(StorageNotification storageNotification) {
-
+        System.out.println("Your storage now contains: " + storageNotification.getMap());
     }
 
     @Override
     public void visit(StrongboxNotification strongboxNotification) {
-
+        System.out.println("Your strongbox now contains: " + strongboxNotification.getMap());
     }
 
     @Override
     public void visit(ReserveNotification reserveNotification) {
-
+        System.out.println("The reserve now contains: " + reserveNotification.getMap());
     }
 
     @Override
     public void visit(MarketNotification marketNotification) {
+        int spaces = 10;
+        int chars;
+        String temp;
+        System.out.println("The market now is: ");
+
+        //-----------------------------------
+        System.out.print("        ");
+        for (int k = 0; k < spaces; k++) {
+            System.out.print("-");
+        }
+
+        for (int k = 0; k < spaces; k++) {
+            System.out.print("-");
+        }
+
+        for (int k = 0; k < spaces; k++) {
+            System.out.print("-");
+        }
+
+        for (int k = 0; k < spaces; k++) {
+            System.out.print("-");
+        }
+
+        System.out.println("");
+
+        //---------------------------
+
+        for (int i = 0; i < 3; i++) {
+            System.out.print("        ");
+
+            temp = "| " + marketNotification.getList()[i][0].getColour();
+            chars = temp.length();
+            System.out.print(temp);
+            for (int k = 0; k < spaces - chars; k++) {
+                System.out.print(" ");
+            }
+
+            temp = "| " + marketNotification.getList()[i][1].getColour();
+            chars = temp.length();
+            System.out.print(temp);
+            for (int k = 0; k < spaces - chars; k++) {
+                System.out.print(" ");
+            }
+
+            temp = "| " + marketNotification.getList()[i][2].getColour();
+            chars = temp.length();
+            System.out.print(temp);
+            for (int k = 0; k < spaces - chars; k++) {
+                System.out.print(" ");
+            }
+
+            temp = "| " + marketNotification.getList()[i][3].getColour();
+            chars = temp.length();
+            System.out.print(temp);
+            for (int k = 0; k < spaces - chars; k++) {
+                System.out.print(" ");
+            }
+            System.out.print("|");
+
+            System.out.println("");
+        }
+
+        System.out.print("        ");
+        for (int k = 0; k < spaces; k++) {
+            System.out.print("-");
+        }
+
+        for (int k = 0; k < spaces; k++) {
+            System.out.print("-");
+        }
+
+        for (int k = 0; k < spaces; k++) {
+            System.out.print("-");
+        }
+
+        for (int k = 0; k < spaces; k++) {
+            System.out.print("-");
+        }
+
+        System.out.println("");
 
     }
 
     @Override
     public void visit(ExtraMarketNotification extraMarketNotification) {
-
+        System.out.println("The extra marble of the market now is: " + extraMarketNotification.getMarble().getColour());
     }
 
     @Override
@@ -338,7 +858,7 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
 
     @Override
     public void visit(FaithPathNotification faithPathNotification) {
-
+        System.out.println("Your faith indicator position in the faith track is: " + faithPathNotification.getI());
     }
 
 

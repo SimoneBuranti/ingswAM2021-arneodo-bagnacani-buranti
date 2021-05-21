@@ -1,14 +1,16 @@
 package it.polimi.ingsw.client.ligtModelNotification;
 
+import it.polimi.ingsw.server.model.Resource;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 public class StorageNotification extends Notification{
     private final NotificationType notificationType = NotificationType.STORAGENOTIFY;
-    private Map map;
-    public StorageNotification(Map map){
-        this.map =new HashMap();
+    private Map<Resource,Integer> map;
+    public StorageNotification(Map<Resource,Integer> map){
+        this.map =new HashMap<>();
         this.map =map;
     }
     @Override
@@ -21,7 +23,7 @@ public class StorageNotification extends Notification{
     }
 
 
-    public Map getMap() {
+    public Map<Resource,Integer> getMap() {
         return map;
     }
 }

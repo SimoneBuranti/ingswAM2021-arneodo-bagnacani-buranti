@@ -48,7 +48,15 @@ public class LeaderCard {
         return null;
     }
 
+    public Requirements getRequirements(){
+        return requirements;
+    }
+
     public int getKey(){
         return key;
+    }
+
+    public String toString(){
+        return null;
     }
 }

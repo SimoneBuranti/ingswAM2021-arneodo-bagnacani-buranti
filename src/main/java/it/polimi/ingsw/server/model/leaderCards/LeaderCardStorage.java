@@ -50,4 +50,8 @@ public class LeaderCardStorage extends LeaderCard {
     public boolean check(GameBoardInterface gameBoard){
         return gameBoard.resourceQuantity(requirements.getResourceRequirement()) >= 5;
     }
+
+    public String toString(){
+        return "Ability: an extra storage where you can put 2 " + specialStorage;
+    }
 }

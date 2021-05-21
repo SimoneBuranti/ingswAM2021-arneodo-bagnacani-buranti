@@ -279,7 +279,7 @@ public class LightGame extends ViewObservable {
         return null;
     }
 
-    public void activateLeaderCard(int index){
+    public void activateLeaderCard(int index) throws IOException, InterruptedException {
 
     }
 

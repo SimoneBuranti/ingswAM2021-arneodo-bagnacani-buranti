@@ -61,7 +61,7 @@ public class LightGameBoard {
     public int lastRowOccupied(int chosenColumn) {
         int i=0;
 
-        for(; i<3; i++)
+        for(; i< 3; i++)
             if(productionCards[i][chosenColumn]==null)
                 return i-1;
 
@@ -259,6 +259,19 @@ public class LightGameBoard {
 
     public ProductionCard[][] getProductionCards() {
         return productionCards;
+    }
+
+    public ProductionCard[] getFirstProductionCards(){
+        int row;
+        ProductionCard[] cards = new ProductionCard[3];
+        for(int i = 0; i < 3; i++){
+            row = lastRowOccupied(i);
+            if(row == -1)
+                cards[i] = null;
+            else
+                cards[i] = productionCards[row][i];
+        }
+        return cards;
     }
 
     public ArrayList<LeaderCard> getLeaderCards() {

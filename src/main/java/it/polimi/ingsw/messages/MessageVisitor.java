@@ -92,7 +92,7 @@ public interface MessageVisitor {
 
 
     void visit(ActivationLeaderForNotCurrentMessage msg);
-    void visit(ActivationLeaderForCurrentMessage msg);
+    void visit(ActivationLeaderForCurrentMessage msg) throws IOException, InterruptedException;
     void visit(DiscardLeaderForNotCurrentMessage msg);
     void visit(DiscardLeaderForCurrentMessage msg);
 

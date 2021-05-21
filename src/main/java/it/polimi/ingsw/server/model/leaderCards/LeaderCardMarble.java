@@ -60,4 +60,8 @@ public class LeaderCardMarble extends LeaderCard{
             return false;
         }else return gameBoard.colourQuantity(requirements.getColourSingleRequirement()) >= 1;
     }
+
+    public String toString(){
+        return "Ability: white marble exchange with " + whiteMarble + " resource";
+    }
 }

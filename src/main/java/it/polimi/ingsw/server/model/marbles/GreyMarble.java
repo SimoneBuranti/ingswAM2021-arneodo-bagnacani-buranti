@@ -7,16 +7,10 @@ import it.polimi.ingsw.server.model.Resource;
  * this class represents the grey marble
  */
 public class GreyMarble extends Marble {
-    /**
-     * colour marble
-     */
-    private String colour= "grey";
 
 
-
-   @Override
-    public String getColour() {
-        return colour;
+    public GreyMarble(){
+        this.colour = "grey";
     }
 
     /**
