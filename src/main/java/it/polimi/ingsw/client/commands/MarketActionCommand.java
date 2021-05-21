@@ -2,8 +2,6 @@ package it.polimi.ingsw.client.commands;
 
 import it.polimi.ingsw.client.view.*;
 import it.polimi.ingsw.messages.Message;
-import it.polimi.ingsw.messages.PushColumnMessage;
-import it.polimi.ingsw.messages.PushRowMessage;
 
 public class MarketActionCommand extends Command {
 

@@ -6,7 +6,6 @@ import it.polimi.ingsw.client.lightModel.LightGameMultiPlayer;
 import it.polimi.ingsw.client.lightModel.LightGameSolitaire;
 import it.polimi.ingsw.messages.*;
 import it.polimi.ingsw.messages.observable.*;
-import it.polimi.ingsw.server.model.colours.Colour;
 
 import java.io.IOException;
 
@@ -192,6 +191,22 @@ public class ViewController implements MessageVisitor, ViewObserver {
     @Override
     public void visit(UpdateInitBooleanMessage msg) {
         game.setInit(msg.isInit());
+    }
+
+    @Override
+    public void visit(AskInformationMessage msg) {
+
+    }
+
+    @Override
+    public void visit(NoPlayersErrorMessage msg) {
+        view.notifyError(msg);
+    }
+
+    @Override
+    public void visit(ShowAllOfPlayerMessage msg) {
+        view.showPlayerInfo(msg);
+
     }
 
     @Override

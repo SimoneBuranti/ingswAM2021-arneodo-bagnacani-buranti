@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LightProductionCards {
-    private final ArrayList<ProductionCard> productionCards;
+    private static ArrayList<ProductionCard> productionCards ;
 
     public LightProductionCards(){
         productionCards = new ArrayList<>();
@@ -890,7 +890,7 @@ public class LightProductionCards {
 
     }
 
-    public ProductionCard productionCardByKey(int key){
+    public static ProductionCard productionCardByKey(int key){
         return productionCards.get(key-1);
     }
 }

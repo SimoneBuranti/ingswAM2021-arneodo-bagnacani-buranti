@@ -1,6 +1,7 @@
 package it.polimi.ingsw.client.view;
 
 import it.polimi.ingsw.messages.Message;
+import it.polimi.ingsw.messages.observable.ShowAllOfPlayerMessage;
 import it.polimi.ingsw.server.model.leaderCards.LeaderCard;
 
 import java.io.IOException;
@@ -39,4 +40,6 @@ public interface View  {
     void showStartGame();
 
     void showRestartMessage();
+
+    void showPlayerInfo(ShowAllOfPlayerMessage msg);
 }

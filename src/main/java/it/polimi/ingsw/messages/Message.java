@@ -281,6 +281,15 @@ public abstract class Message{
             case YOURTURN:
                 return gson.fromJson(jsonObj, YourTurnMessage.class);
 
+            case ASKINFO:
+                return gson.fromJson(jsonObj, AskInformationMessage.class);
+
+            case ALLOFPLAYER:
+                return gson.fromJson(jsonObj, ShowAllOfPlayerMessage.class);
+
+            case NOTPLAYERSERROR:
+                return gson.fromJson(jsonObj, NoPlayersErrorMessage.class);
+
             default:
                 throw new IllegalArgumentException("Invalid topic " + msgTopicString);
         }

@@ -1,10 +1,7 @@
 package it.polimi.ingsw.client.commands;
 
-import it.polimi.ingsw.client.lightModel.LightGame;
 import it.polimi.ingsw.client.view.ViewController;
 import it.polimi.ingsw.messages.EndOfProductionMessage;
-import it.polimi.ingsw.messages.EndOfTurnMessage;
-import it.polimi.ingsw.messages.ExitMessage;
 import it.polimi.ingsw.messages.Message;
 
 public class EndOfTurnCommand extends Command {

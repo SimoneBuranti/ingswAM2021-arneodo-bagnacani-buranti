@@ -840,4 +840,6 @@ public class Game extends Observable {
     public void setOver(boolean bool) {
         this.isOver=bool;
     }
+
+    public void askInfoOnPlayer(int n, String nickname) throws IOException, InterruptedException {}
 }

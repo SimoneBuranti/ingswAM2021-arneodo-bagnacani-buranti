@@ -12,7 +12,7 @@ public class clientSEcond {
         String hostName = "127.0.0.1";
 
 
-        int portNumber = 1235;
+        int portNumber = 1234;
 
         View cli = new Cli();
         SocketClient socketClient = new SocketClient(hostName, portNumber, cli );

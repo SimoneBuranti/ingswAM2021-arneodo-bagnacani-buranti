@@ -1,7 +1,7 @@
 package it.polimi.ingsw.client.commands;
 
 import it.polimi.ingsw.client.view.*;
-import it.polimi.ingsw.messages.*;
+import it.polimi.ingsw.messages.Message;
 import it.polimi.ingsw.server.model.Resource;
 
 public abstract class Command {
@@ -109,6 +109,31 @@ public abstract class Command {
             case "productionOn" : {
                 return new ProductionCommand(viewController);
             }
+
+            case "showPlayer" : {
+
+                int n = 0;
+                int cont = 0;
+
+                for(int i = 0;i<suffix.length();i++){
+                    if (cont == 0 ){
+                        cont++;
+                    } else if (cont == 1 && suffix.charAt(i)==' '){
+                        cont++;
+                        n = suffix.charAt(i+1) - '0';
+                    }
+
+                }
+                if ( n<0 || n>4)
+                    throw new InvalidCommandException();
+                return new ShowPlayerCommand(n,viewController);
+
+            }
+
+
+
+
+
             default: {
                 throw new InvalidCommandException();
             }

@@ -2,7 +2,6 @@ package it.polimi.ingsw.client.commands;
 
 
 import it.polimi.ingsw.client.view.ViewController;
-import it.polimi.ingsw.messages.BaseProductionOnMessage;
 import it.polimi.ingsw.messages.ExtraProductionOnMessage;
 import it.polimi.ingsw.messages.Message;
 import it.polimi.ingsw.server.model.Resource;

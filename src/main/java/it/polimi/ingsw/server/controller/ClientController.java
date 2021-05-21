@@ -151,6 +151,21 @@ public class ClientController implements MessageVisitor {
 
     }
 
+    @Override
+    public void visit(AskInformationMessage askInformationmessage) throws IOException, InterruptedException {
+    server.getGame().askInfoOnPlayer(askInformationmessage.getN(),clientHandler.getClientController().getNickname());
+    }
+
+    @Override
+    public void visit(NoPlayersErrorMessage noPlayersErrorMessage) {
+
+    }
+
+    @Override
+    public void visit(ShowAllOfPlayerMessage showAllOfPlayerMessage) {
+
+    }
+
     //***********************************************************************************************************
 
 

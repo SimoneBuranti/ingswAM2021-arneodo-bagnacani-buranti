@@ -122,7 +122,9 @@ public interface MessageVisitor {
     void visit(UpdateInitBooleanMessage msg);
 
 
+    void visit(AskInformationMessage askInformationmessage) throws IOException, InterruptedException;
 
+    void visit(NoPlayersErrorMessage noPlayersErrorMessage);
 
-
+    void visit(ShowAllOfPlayerMessage showAllOfPlayerMessage);
 }

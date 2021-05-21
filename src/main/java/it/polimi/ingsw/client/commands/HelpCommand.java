@@ -2,8 +2,6 @@ package it.polimi.ingsw.client.commands;
 
 import it.polimi.ingsw.messages.Message;
 
-import java.util.ArrayList;
-
 public class HelpCommand extends Command{
 
     private static final int space = 25;

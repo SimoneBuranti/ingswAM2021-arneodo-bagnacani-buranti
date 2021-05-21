@@ -767,6 +767,35 @@ public class GameMultiPlayer extends Game {
             } }
     }
 
+
+    public void askInfoOnPlayer(int n, String nickname) throws IOException, InterruptedException {
+        if(n<numberOfPlayer || n==numberOfPlayer){
+            int[][] list = new int[3][3];
+            for (int i=0; i<3;i++)
+                for (int j=0; i<3;i++)
+                    if (playerList.get(n-1).getGameBoardOfPlayer().getDevelopmentBoardCell(i,j)==null)
+                        list[i][j]=0;
+                    else
+                        list[i][j]=playerList.get(n-1).getGameBoardOfPlayer().getDevelopmentBoardCell(i,j).getKey();
+            ArrayList<Integer> needForLeader2 = new ArrayList<>();
+            for (int i=0; i<playerList.get(n-1).getGameBoardOfPlayer().getLeaderCardsActivated().size();i++)
+                needForLeader2.add(playerList.get(n-1).getGameBoardOfPlayer().getLeaderCardsActivated().get(i).getKey());
+
+
+            notifyOnlyOneSpecificObserver(new ShowAllOfPlayerMessage(list,
+                                                                    needForLeader2,
+                                                                    playerList.get(n-1).getGameBoardOfPlayer().getStorageOfGameBoard().getStorageResource(),
+                                                                    playerList.get(n-1).getGameBoardOfPlayer().getStrongboxOfGameBoard().getStrongBoxResource(),
+                                                                    playerList.get(n-1).getGameBoardOfPlayer().getIndicator(),
+                                                                    playerList.get(n-1).isConnected(),
+                                                                    playerList.get(n-1).getNickName()),nickname);
+
+
+        }
+        else
+            notifyOnlyOneSpecificObserver(new NoPlayersErrorMessage(),nickname);
+    }
+
 }
 
 

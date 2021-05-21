@@ -1,6 +1,5 @@
 package it.polimi.ingsw.client.commands;
 
-import it.polimi.ingsw.messages.BuyProductionCardMessage;
 import it.polimi.ingsw.messages.ExitMessage;
 import it.polimi.ingsw.messages.Message;
 

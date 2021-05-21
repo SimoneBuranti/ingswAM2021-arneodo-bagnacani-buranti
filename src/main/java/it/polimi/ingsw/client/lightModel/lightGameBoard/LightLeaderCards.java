@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class LightLeaderCards {
 
-    ArrayList<LeaderCard> leaderCards;
+    private static ArrayList<LeaderCard>  leaderCards;
 
     public LightLeaderCards() {
         Colour blue = new Blue();
@@ -89,7 +89,7 @@ public class LightLeaderCards {
         leaderCards.add(leaderCardSixteen);
     }
 
-    public LeaderCard leaderCardByKey(int key){
+    public static LeaderCard leaderCardByKey(int key){
         return leaderCards.get(key);
     }
 }

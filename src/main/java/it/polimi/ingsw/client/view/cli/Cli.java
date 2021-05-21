@@ -3,16 +3,21 @@ package it.polimi.ingsw.client.view.cli;
 import it.polimi.ingsw.client.commands.Command;
 import it.polimi.ingsw.client.commands.InvalidCommandException;
 import it.polimi.ingsw.client.commands.SpentTokenException;
+import it.polimi.ingsw.client.lightModel.lightGameBoard.LightLeaderCards;
+import it.polimi.ingsw.client.lightModel.productionCards.LightProductionCards;
 import it.polimi.ingsw.client.ligtModelNotification.*;
 import it.polimi.ingsw.client.view.View;
 import it.polimi.ingsw.client.view.ViewController;
 import it.polimi.ingsw.client.view.ViewControllerObservable;
 import it.polimi.ingsw.messages.*;
+import it.polimi.ingsw.messages.observable.ShowAllOfPlayerMessage;
+import it.polimi.ingsw.server.model.Resource;
 import it.polimi.ingsw.server.model.leaderCards.LeaderCard;
 
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -433,5 +438,25 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
     @Override
     public void showRestartMessage() {
         System.out.println("Enter your username of the previous game to resume the match...");
+    }
+
+    @Override
+    public void showPlayerInfo(ShowAllOfPlayerMessage msg) {
+        System.out.println(msg.getNickname());
+        System.out.println(msg.isConnected());
+        int[][] productioncard=msg.getProductioncard();
+        for (int i=0; i<3;i++)
+            for (int j=0; i<3;i++)
+                if (productioncard[i][j]==0)
+                    System.out.println("");
+                else
+                    System.out.println(LightProductionCards.productionCardByKey(productioncard[i][j]));
+        ArrayList<Integer> listLeaderActivated=msg.getListLeaderActivated();
+        for (int i=0; i<listLeaderActivated.size();i++)
+            System.out.println(LightLeaderCards.leaderCardByKey(listLeaderActivated.get(i)));
+
+        System.out.println(msg.getStrongBox());
+        System.out.println(msg.getStorage());
+        System.out.println(msg.getFaithIndicator());
     }
 }
