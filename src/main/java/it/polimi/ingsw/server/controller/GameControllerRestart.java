@@ -68,6 +68,8 @@ public class GameControllerRestart extends GameController {
                         server.addClientController(clientController);
                         firstName = true;
                         reconnectionTempLobby();
+                        for(ClientController c : server.getClientController())
+                            c.getClientHandler().sendMessage(new NPlayersMessage(reconnected.size(), server.getLobbySize()));
                     }
                 }
             }else if(server.isInLobby(msg.getUsername()) && firstName){
@@ -178,8 +180,8 @@ public class GameControllerRestart extends GameController {
                 tempLobbyController.get(i).setNickname(tempLobbyName.get(i));
                 reconnected.add(tempLobbyName.get(i));
                 server.addClientController(tempLobbyController.get(i));
-                for(ClientController c : server.getClientController())
-                    c.getClientHandler().sendMessage(new NPlayersMessage(reconnected.size(), server.getLobbySize()));
+                /*for(ClientController c : server.getClientController())
+                    c.getClientHandler().sendMessage(new NPlayersMessage(reconnected.size(), server.getLobbySize()));*/
             }
             else {
                 tempLobbyController.get(i).getClientHandler().sendMessage(new AlreadyExistingNickNameErrorMessage());

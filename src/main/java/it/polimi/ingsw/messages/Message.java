@@ -299,7 +299,6 @@ public abstract class Message{
             case CHANGETURN:
                 return gson.fromJson(jsonObj, ChangeTurnMessage.class);
 
-
             default:
                 throw new IllegalArgumentException("Invalid topic " + msgTopicString);
         }

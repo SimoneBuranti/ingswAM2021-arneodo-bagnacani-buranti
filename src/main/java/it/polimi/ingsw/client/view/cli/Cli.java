@@ -11,6 +11,8 @@ import it.polimi.ingsw.messages.*;
 import it.polimi.ingsw.messages.observable.ShowAllOfPlayerMessage;
 import it.polimi.ingsw.server.model.Resource;
 import it.polimi.ingsw.server.model.leaderCards.LeaderCard;
+import it.polimi.ingsw.server.model.marbles.Marble;
+import it.polimi.ingsw.server.model.productionCards.ProductionCard;
 
 
 import java.io.IOException;
@@ -89,94 +91,13 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
 
     @Override
     public void visit(DeckListNotification deckListNotification) {
-        
-        int spaces = 42;
-        System.out.println("Production card decks:" );
+        showDeckProductionCards(deckListNotification.getListOfFirstCard());
 
-        System.out.print("               green" +
-                "                                    blue" +
-                "                                    yellow" +
-                "                                    violet\n");
-
-        for(int i = 0;i<3;i++){
-            System.out.println("\nLevel "+(3-i)+":");
-
-            System.out.print("        ");
-            for(int z = 0; z < 4; z++) {
-                for (int k = 0; k < spaces; k++) {
-                    System.out.print("-");
-                }
-            }
-            System.out.println("");
-
-            //---------------------------
-
-            System.out.print("        ");
-            showCostProductionCard(deckListNotification, 5, i);
-            showCostProductionCard(deckListNotification, 2, i);
-            showCostProductionCard(deckListNotification, 8, i);
-            showCostProductionCard(deckListNotification, 11, i);
-
-            System.out.print("|");
-            System.out.println("");
-
-            //-----------------------------------
-
-            System.out.print("        ");
-            showInputProductionCard(deckListNotification, 5, i);
-            showInputProductionCard(deckListNotification, 2, i);
-            showInputProductionCard(deckListNotification, 8, i);
-            showInputProductionCard(deckListNotification, 11, i);
-
-            System.out.print("|");
-                System.out.println("");
-            //-------------------------------------------------
-            System.out.print("        ");
-            showOutputProductionCard(deckListNotification, 5, i);
-            showOutputProductionCard(deckListNotification, 2, i);
-            showOutputProductionCard(deckListNotification, 8, i);
-            showOutputProductionCard(deckListNotification, 11, i);
-
-            System.out.print("|");
-            System.out.println("");
-            //-----------------------------------------
-            System.out.print("        ");
-
-            showFaithPointProductionCard(deckListNotification, 5, i);
-            showFaithPointProductionCard(deckListNotification, 2, i);
-            showFaithPointProductionCard(deckListNotification, 8, i);
-            showFaithPointProductionCard(deckListNotification, 11, i);
-
-            System.out.print("|");
-            System.out.println("");
-            //---------------------------------------
-            System.out.print("        ");
-
-            showVictoryPointProductionCard(deckListNotification, 5, i);
-            showVictoryPointProductionCard(deckListNotification, 2, i);
-            showVictoryPointProductionCard(deckListNotification, 8, i);
-            showVictoryPointProductionCard(deckListNotification, 11, i);
-
-            System.out.print("|");
-            System.out.println("");
-
-            //----------------------------------
-            System.out.print("        ");
-
-            for(int z = 0; z < 4; z++) {
-                for (int k = 0; k < spaces; k++) {
-                    System.out.print("-");
-                }
-            }
-
-            System.out.println("");
-
-        }
     }
 
-    public void showCostProductionCard(DeckListNotification deckListNotification, int numDeck, int i){
+    public void showCostProductionCard(ArrayList<ProductionCard> productionCards, int numDeck, int i){
         int spaces = 42;
-        String temp = "| c= " + deckListNotification.getListOfFirstCard().get(numDeck-i).getCost();
+        String temp = "| c= " + productionCards.get(numDeck-i).getCost();
         int chars = temp.length();
         System.out.print(temp);
         for(int k = 0;k<spaces-chars;k++){
@@ -184,9 +105,9 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
         }
     }
 
-    public void showInputProductionCard(DeckListNotification deckListNotification, int numDeck, int i){
+    public void showInputProductionCard(ArrayList<ProductionCard> productionCards, int numDeck, int i){
         int spaces = 42;
-        String temp = "| i= " + deckListNotification.getListOfFirstCard().get(numDeck-i).getIn().toString();
+        String temp = "| i= " + productionCards.get(numDeck-i).getIn().toString();
         int chars = temp.length();
         System.out.print(temp);
         for(int k = 0;k<spaces-chars;k++){
@@ -194,9 +115,9 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
         }
     }
 
-    public void showOutputProductionCard(DeckListNotification deckListNotification, int numDeck, int i){
+    public void showOutputProductionCard(ArrayList<ProductionCard> productionCards, int numDeck, int i){
         int spaces = 42;
-        String temp = "| o= " + deckListNotification.getListOfFirstCard().get(numDeck-i).getOut().toString();
+        String temp = "| o= " + productionCards.get(numDeck-i).getOut().toString();
         int chars = temp.length();
         System.out.print(temp);
         for(int k = 0;k<spaces-chars;k++){
@@ -204,9 +125,9 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
         }
     }
 
-    public void showFaithPointProductionCard(DeckListNotification deckListNotification, int numDeck, int i){
+    public void showFaithPointProductionCard(ArrayList<ProductionCard> productionCards, int numDeck, int i){
         int spaces = 42;
-        String temp = "| faith points= " + deckListNotification.getListOfFirstCard().get(numDeck-i).isFaithPoint();
+        String temp = "| faith points= " + productionCards.get(numDeck-i).isFaithPoint();
         int chars = temp.length();
         System.out.print(temp);
         for(int k = 0;k<spaces-chars;k++){
@@ -214,9 +135,9 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
         }
     }
 
-    public void showVictoryPointProductionCard(DeckListNotification deckListNotification, int numDeck, int i){
+    public void showVictoryPointProductionCard(ArrayList<ProductionCard> productionCards, int numDeck, int i){
         int spaces = 42;
-        String temp = "| victory points= " + deckListNotification.getListOfFirstCard().get(numDeck-i).getPoints();
+        String temp = "| victory points= " + productionCards.get(numDeck-i).getPoints();
         int chars = temp.length();
         System.out.print(temp);
         for(int k = 0;k<spaces-chars;k++){
@@ -226,98 +147,16 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
 
     @Override
     public void visit(GameboardListNotification gameboardListNotification) {
-        int spaces = 50;
         System.out.println("Production cards of your game board:" );
-
-        //-----------------------------------
-        System.out.print("        ");
-        for(int i = 0; i < 3; i++){
-            for (int k = 0; k < spaces; k++) {
-                System.out.print("-");
-            }
-        }
-
-        System.out.println("");
-
-        //---------------------------
-        for(int i = 0 ; i < 3; i++) {
-            System.out.print("        ");
-            for(int j = 0; j < 3; j++){
-                showLevelProductionCard(gameboardListNotification, i, j);
-            }
-            System.out.print("|");
-            System.out.println("");
-
-            //-----------------------------------
-
-            System.out.print("        ");
-            for(int j = 0; j < 3; j++){
-                showColourProductionCard(gameboardListNotification, i, j);
-            }
-            System.out.print("|");
-            System.out.println("");
-
-            //-----------------------------------
-
-            System.out.print("        ");
-            for(int j = 0; j < 3; j++){
-                showCostProductionCard(gameboardListNotification, i, j);
-            }
-            System.out.print("|");
-            System.out.println("");
-
-            //-----------------------------------
-
-            System.out.print("        ");
-            for(int j = 0; j < 3; j++){
-                showInputProductionCard(gameboardListNotification, i, j);
-            }
-            System.out.print("|");
-            System.out.println("");
-
-            //-----------------------------------
-
-            System.out.print("        ");
-            for(int j = 0; j < 3; j++){
-                showOutputProductionCard(gameboardListNotification, i, j);
-            }
-            System.out.print("|");
-            System.out.println("");
-
-            //-----------------------------------
-
-            System.out.print("        ");
-            for(int j = 0; j < 3; j++){
-                showFaithPointProductionCard(gameboardListNotification, i, j);
-            }
-            System.out.print("|");
-            System.out.println("");
-
-            //-----------------------------------
-
-            System.out.print("        ");
-            for(int j = 0; j < 3; j++){
-                showVictoryPointProductionCard(gameboardListNotification, i, j);
-            }
-            System.out.print("|");
-            System.out.println("");
-
-            System.out.print("        ");
-            for(int z = 0; z < 3; z++){
-                for (int k = 0; k < spaces; k++) {
-                    System.out.print("-");
-                }
-            }
-            System.out.println("");
-        }
+        showGameBoardProductionCards(gameboardListNotification.getListOfFirstCard());
     }
 
-    public void showLevelProductionCard(GameboardListNotification gameboardListNotification, int i, int j){
+    public void showLevelProductionCard(ProductionCard[][] productionCards, int i, int j){
         int spaces = 50;
         String temp;
         int chars;
-        if (gameboardListNotification.getListOfFirstCard()[i][j] != null) {
-            temp = "| level= " + gameboardListNotification.getListOfFirstCard()[i][j].getLevel();
+        if (productionCards[i][j] != null) {
+            temp = "| level= " + productionCards[i][j].getLevel();
             chars = temp.length();
             System.out.print(temp);
             for (int k = 0; k < spaces - chars; k++) {
@@ -333,12 +172,12 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
         }
     }
 
-    public void showColourProductionCard(GameboardListNotification gameboardListNotification, int i, int j){
+    public void showColourProductionCard(ProductionCard[][] productionCards, int i, int j){
         int spaces = 50;
         String temp;
         int chars;
-        if (gameboardListNotification.getListOfFirstCard()[i][j] != null) {
-            temp = "| colour= " + gameboardListNotification.getListOfFirstCard()[i][j].getColour().getColour();
+        if (productionCards[i][j] != null) {
+            temp = "| colour= " + productionCards[i][j].getColour().getColour();
             chars = temp.length();
             System.out.print(temp);
             for (int k = 0; k < spaces - chars; k++) {
@@ -354,12 +193,12 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
         }
     }
 
-    public void showCostProductionCard(GameboardListNotification gameboardListNotification, int i, int j){
+    public void showCostProductionCard(ProductionCard[][] productionCards, int i, int j){
         int spaces = 50;
         String temp;
         int chars;
-        if (gameboardListNotification.getListOfFirstCard()[i][j] != null) {
-            temp = "| cost= " + gameboardListNotification.getListOfFirstCard()[i][j].getCost().toString();
+        if (productionCards[i][j] != null) {
+            temp = "| cost= " + productionCards[i][j].getCost().toString();
             chars = temp.length();
             System.out.print(temp);
             for (int k = 0; k < spaces - chars; k++) {
@@ -375,12 +214,12 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
         }
     }
 
-    public void showInputProductionCard(GameboardListNotification gameboardListNotification, int i, int j){
+    public void showInputProductionCard(ProductionCard[][] productionCards, int i, int j){
         int spaces = 50;
         String temp;
         int chars;
-        if (gameboardListNotification.getListOfFirstCard()[i][j] != null) {
-            temp = "| i= " + gameboardListNotification.getListOfFirstCard()[i][j].getIn().toString();
+        if (productionCards[i][j] != null) {
+            temp = "| i= " + productionCards[i][j].getIn().toString();
             chars = temp.length();
             System.out.print(temp);
             for (int k = 0; k < spaces - chars; k++) {
@@ -396,12 +235,12 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
         }
     }
 
-    public void showOutputProductionCard(GameboardListNotification gameboardListNotification, int i, int j){
+    public void showOutputProductionCard(ProductionCard[][] productionCards, int i, int j){
         int spaces = 50;
         String temp;
         int chars;
-        if (gameboardListNotification.getListOfFirstCard()[i][j] != null) {
-            temp = "| o= " + gameboardListNotification.getListOfFirstCard()[i][j].getOut().toString();
+        if (productionCards[i][j] != null) {
+            temp = "| o= " + productionCards[i][j].getOut().toString();
             chars = temp.length();
             System.out.print(temp);
             for (int k = 0; k < spaces - chars; k++) {
@@ -417,12 +256,12 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
         }
     }
 
-    public void showFaithPointProductionCard(GameboardListNotification gameboardListNotification, int i, int j){
+    public void showFaithPointProductionCard(ProductionCard[][] productionCards, int i, int j){
         int spaces = 50;
         String temp;
         int chars;
-        if (gameboardListNotification.getListOfFirstCard()[i][j] != null) {
-            temp = "| faith points= " + gameboardListNotification.getListOfFirstCard()[i][j].isFaithPoint();
+        if (productionCards[i][j] != null) {
+            temp = "| faith points= " + productionCards[i][j].isFaithPoint();
             chars = temp.length();
             System.out.print(temp);
             for (int k = 0; k < spaces - chars; k++) {
@@ -438,12 +277,12 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
         }
     }
 
-    public void showVictoryPointProductionCard(GameboardListNotification gameboardListNotification, int i, int j){
+    public void showVictoryPointProductionCard(ProductionCard[][] productionCards, int i, int j){
         int spaces = 50;
         String temp;
         int chars;
-        if (gameboardListNotification.getListOfFirstCard()[i][j] != null) {
-            temp = "| victory points= " + gameboardListNotification.getListOfFirstCard()[i][j].getPoints();
+        if (productionCards[i][j] != null) {
+            temp = "| victory points= " + productionCards[i][j].getPoints();
             chars = temp.length();
             System.out.print(temp);
             for (int k = 0; k < spaces - chars; k++) {
@@ -496,81 +335,38 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
 
     @Override
     public void visit(StorageNotification storageNotification) {
-        System.out.println("Your storage now contains: " + storageNotification.getMap());
+        System.out.print("Your storage now contains: ");
+        showResourceMap(storageNotification.getMap());
     }
 
     @Override
     public void visit(StrongboxNotification strongboxNotification) {
-        System.out.println("Your strongbox now contains: " + strongboxNotification.getMap());
+        System.out.print("Your strongbox now contains: ");
+        showResourceMap(strongboxNotification.getMap());
     }
 
     @Override
     public void visit(ReserveNotification reserveNotification) {
-        System.out.println("The reserve now contains: " + reserveNotification.getMap());
+        System.out.print("The reserve now contains: ");
+        showResourceMap(reserveNotification.getMap());
     }
 
     @Override
     public void visit(MarketNotification marketNotification) {
-        int spaces = 10;
-        int chars;
-        String temp;
         System.out.println("The market now is: ");
-
-        //-----------------------------------
-        System.out.print("        ");
-
-        for(int i = 0; i < 4; i++){
-            for (int k = 0; k < spaces; k++) {
-                System.out.print("-");
-            }
-        }
-
-        System.out.println("");
-
-        //---------------------------
-
-        for (int i = 0; i < 3; i++) {
-            System.out.print("        ");
-
-            for(int j = 0; j < 4; j++){
-                temp = "| " + marketNotification.getList()[i][j].getColour();
-                chars = temp.length();
-                System.out.print(temp);
-                for (int k = 0; k < spaces - chars; k++) {
-                    System.out.print(" ");
-                }
-            }
-
-            System.out.print("|");
-
-            System.out.println("");
-        }
-
-        System.out.print("        ");
-
-        for(int i = 0; i < 4; i++){
-            for (int k = 0; k < spaces; k++) {
-                System.out.print("-");
-            }
-        }
-
-        System.out.println("");
-
+        showMarketGrid(marketNotification.getList());
     }
 
     @Override
     public void visit(ExtraMarketNotification extraMarketNotification) {
-        System.out.println("The extra marble of the market now is: " + extraMarketNotification.getMarble().getColour());
-    }
-
-    @Override
-    public void visit(ActivateNotification activateNotification) {
-
+        System.out.print("The extra marble of the market now is: ");
+        showMarketExtra(extraMarketNotification.getMarble());
     }
 
     @Override
     public void visit(FaithPathNotification faithPathNotification) {
-        System.out.println("Your faith indicator position in the faith track is: " + faithPathNotification.getI());
+        System.out.println("Your faith indicator position in the faith track is: ");
+        showFaithIndicator(faithPathNotification.getI());
     }
 
 
@@ -683,7 +479,7 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
             }
             else if(input.hasNextLine()){
                 String line = input.nextLine();
-                System.out.println("Invalid command for keep leadercard");
+                System.out.println("Invalid command for keep leader card");
             }
         }
     }
@@ -710,22 +506,36 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
 
     @Override
     public void showPlayerInfo(ShowAllOfPlayerMessage msg) {
-        System.out.println(msg.getNickname());
-        System.out.println(msg.isConnected());
-        int[][] productioncard=msg.getProductioncard();
+        System.out.println("Player" + msg.getNickname() + "game board information : ");
+        if(msg.isConnected())
+            System.out.println("the player is connected to the game");
+        else
+            System.out.println("the player is NOT connected to the game");
+
+        System.out.println("> production cards : ");
+        ProductionCard[][] gameBoardProductionCards = new ProductionCard[3][3];
+
         for (int i=0; i<3;i++)
             for (int j=0; i<3;i++)
-                if (productioncard[i][j]==0)
-                    System.out.println("");
+                if (msg.getProductioncard()[i][j]==0)
+                    gameBoardProductionCards[i][j] = null;
                 else
-                    System.out.println(LightProductionCards.productionCardByKey(productioncard[i][j]));
-        ArrayList<Integer> listLeaderActivated=msg.getListLeaderActivated();
-        for (int i=0; i<listLeaderActivated.size();i++)
-            System.out.println(LightLeaderCards.leaderCardByKey(listLeaderActivated.get(i)));
+                    gameBoardProductionCards[i][j] = LightProductionCards.productionCardByKey(msg.getProductioncard()[i][j]);
 
-        System.out.println(msg.getStrongBox());
-        System.out.println(msg.getStorage());
-        System.out.println(msg.getFaithIndicator());
+        showGameBoardProductionCards(gameBoardProductionCards);
+
+        System.out.println("> leader cards activated : ");
+        ArrayList<LeaderCard> leaderCards = new ArrayList<>();
+        for (int i=0; i<msg.getListLeaderActivated().size();i++)
+            leaderCards.add(LightLeaderCards.leaderCardByKey(msg.getListLeaderActivated().get(i)));
+        showLeaderCards(leaderCards);
+
+        System.out.println("> strongbox : ");
+        showResourceMap(msg.getStrongBox());
+        System.out.println("> storage : ");
+        showResourceMap(msg.getStorage());
+        System.out.println("> faith indicator : ");
+        showFaithIndicator(msg.getFaithIndicator());
     }
 
     @Override
@@ -777,6 +587,240 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
             } }
 
 
+    }
+
+    @Override
+    public void showGameBoardProductionCards(ProductionCard[][] productionCards) {
+        int spaces = 50;
+
+        System.out.print("        ");
+        for(int i = 0; i < 3; i++){
+            for (int k = 0; k < spaces; k++) {
+                System.out.print("-");
+            }
+        }
+
+        System.out.println("");
+
+        //---------------------------
+        for(int i = 0 ; i < 3; i++) {
+            System.out.print("        ");
+            for(int j = 0; j < 3; j++){
+                showLevelProductionCard(productionCards, i, j);
+            }
+            System.out.print("|");
+            System.out.println("");
+
+            //-----------------------------------
+
+            System.out.print("        ");
+            for(int j = 0; j < 3; j++){
+                showColourProductionCard(productionCards, i, j);
+            }
+            System.out.print("|");
+            System.out.println("");
+
+            //-----------------------------------
+
+            System.out.print("        ");
+            for(int j = 0; j < 3; j++){
+                showCostProductionCard(productionCards, i, j);
+            }
+            System.out.print("|");
+            System.out.println("");
+
+            //-----------------------------------
+
+            System.out.print("        ");
+            for(int j = 0; j < 3; j++){
+                showInputProductionCard(productionCards, i, j);
+            }
+            System.out.print("|");
+            System.out.println("");
+
+            //-----------------------------------
+
+            System.out.print("        ");
+            for(int j = 0; j < 3; j++){
+                showOutputProductionCard(productionCards, i, j);
+            }
+            System.out.print("|");
+            System.out.println("");
+
+            //-----------------------------------
+
+            System.out.print("        ");
+            for(int j = 0; j < 3; j++){
+                showFaithPointProductionCard(productionCards, i, j);
+            }
+            System.out.print("|");
+            System.out.println("");
+
+            //-----------------------------------
+
+            System.out.print("        ");
+            for(int j = 0; j < 3; j++){
+                showVictoryPointProductionCard(productionCards, i, j);
+            }
+            System.out.print("|");
+            System.out.println("");
+
+            System.out.print("        ");
+            for(int z = 0; z < 3; z++){
+                for (int k = 0; k < spaces; k++) {
+                    System.out.print("-");
+                }
+            }
+            System.out.println("");
+        }
+    }
+
+    @Override
+    public void showMarketGrid(Marble[][] grid) {
+        int spaces = 10;
+        int chars;
+        String temp;
+
+        //-----------------------------------
+        System.out.print("        ");
+
+        for(int i = 0; i < 4; i++){
+            for (int k = 0; k < spaces; k++) {
+                System.out.print("-");
+            }
+        }
+
+        System.out.println("");
+
+        //---------------------------
+
+        for (int i = 0; i < 3; i++) {
+            System.out.print("        ");
+
+            for(int j = 0; j < 4; j++){
+                temp = "| " + grid[i][j].getColour();
+                chars = temp.length();
+                System.out.print(temp);
+                for (int k = 0; k < spaces - chars; k++) {
+                    System.out.print(" ");
+                }
+            }
+
+            System.out.print("|");
+
+            System.out.println("");
+        }
+
+        System.out.print("        ");
+
+        for(int i = 0; i < 4; i++){
+            for (int k = 0; k < spaces; k++) {
+                System.out.print("-");
+            }
+        }
+
+        System.out.println("");
+    }
+
+    @Override
+    public void showMarketExtra(Marble extra) {
+        System.out.println(extra.getColour());
+    }
+
+    @Override
+    public void showResourceMap(Map<Resource, Integer> map) {
+        System.out.println(map);
+    }
+
+    @Override
+    public void showFaithIndicator(int pos) {
+        System.out.println(pos);
+    }
+
+    @Override
+    public void showDeckProductionCards(ArrayList<ProductionCard> productionCards) {
+        int spaces = 42;
+        System.out.println("Production card decks:" );
+
+        System.out.print("               green" +
+                "                                    blue" +
+                "                                    yellow" +
+                "                                    violet\n");
+
+        for(int i = 0;i<3;i++){
+            System.out.println("\nLevel "+(3-i)+":");
+
+            System.out.print("        ");
+            for(int z = 0; z < 4; z++) {
+                for (int k = 0; k < spaces; k++) {
+                    System.out.print("-");
+                }
+            }
+            System.out.println("");
+
+            //---------------------------
+
+            System.out.print("        ");
+            showCostProductionCard(productionCards, 5, i);
+            showCostProductionCard(productionCards, 2, i);
+            showCostProductionCard(productionCards, 8, i);
+            showCostProductionCard(productionCards, 11, i);
+
+            System.out.print("|");
+            System.out.println("");
+
+            //-----------------------------------
+
+            System.out.print("        ");
+            showInputProductionCard(productionCards, 5, i);
+            showInputProductionCard(productionCards, 2, i);
+            showInputProductionCard(productionCards, 8, i);
+            showInputProductionCard(productionCards, 11, i);
+
+            System.out.print("|");
+            System.out.println("");
+            //-------------------------------------------------
+            System.out.print("        ");
+            showOutputProductionCard(productionCards, 5, i);
+            showOutputProductionCard(productionCards, 2, i);
+            showOutputProductionCard(productionCards, 8, i);
+            showOutputProductionCard(productionCards, 11, i);
+
+            System.out.print("|");
+            System.out.println("");
+            //-----------------------------------------
+            System.out.print("        ");
+
+            showFaithPointProductionCard(productionCards, 5, i);
+            showFaithPointProductionCard(productionCards, 2, i);
+            showFaithPointProductionCard(productionCards, 8, i);
+            showFaithPointProductionCard(productionCards, 11, i);
+
+            System.out.print("|");
+            System.out.println("");
+            //---------------------------------------
+            System.out.print("        ");
+
+            showVictoryPointProductionCard(productionCards, 5, i);
+            showVictoryPointProductionCard(productionCards, 2, i);
+            showVictoryPointProductionCard(productionCards, 8, i);
+            showVictoryPointProductionCard(productionCards, 11, i);
+
+            System.out.print("|");
+            System.out.println("");
+
+            //----------------------------------
+            System.out.print("        ");
+
+            for(int z = 0; z < 4; z++) {
+                for (int k = 0; k < spaces; k++) {
+                    System.out.print("-");
+                }
+            }
+
+            System.out.println("");
+
+        }
     }
 
 }

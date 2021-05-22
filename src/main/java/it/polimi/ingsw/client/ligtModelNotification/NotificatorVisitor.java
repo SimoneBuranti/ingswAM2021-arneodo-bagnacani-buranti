@@ -18,7 +18,5 @@ public interface NotificatorVisitor {
 
     void visit(ExtraMarketNotification extraMarketNotification);
 
-    void visit(ActivateNotification activateNotification);
-
     void visit(FaithPathNotification faithPathNotification);
 }

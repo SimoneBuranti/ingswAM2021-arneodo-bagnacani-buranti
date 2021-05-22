@@ -40,7 +40,7 @@ public class Player {
     /**
      * this attribute is a collection of the player's starting leader cards
      */
-    private final ArrayList<LeaderCard> personalLeaderCard;
+    private ArrayList<LeaderCard> personalLeaderCard;
     /**
      * this attribute is a collection of the resources taken from the market
      */
@@ -69,7 +69,7 @@ public class Player {
         this.virtualView=virtualView;
         buffer= new ArrayList<>();
         gameBoardOfPlayer = new GameBoard();
-        personalLeaderCard=new ArrayList<>(4);
+        personalLeaderCard=new ArrayList<>();
         personalLeaderCard.add(DeckLeaderCard.arrangeDeckLeaderCards());
         personalLeaderCard.add(DeckLeaderCard.arrangeDeckLeaderCards());
         personalLeaderCard.add(DeckLeaderCard.arrangeDeckLeaderCards());
@@ -91,7 +91,7 @@ public class Player {
         this.virtualView=virtualView;
         buffer= new ArrayList<>();
         gameBoardOfPlayer = new GameBoard();
-        personalLeaderCard=new ArrayList<>(4);
+        personalLeaderCard=new ArrayList<>();
         this.newMatch=false;
         this.nickName = nickName;
         this.game = game;
@@ -466,9 +466,9 @@ public class Player {
         return  buffer;
     }
 
-    public ArrayList<LeaderCard> getPersonalLeaderCard()
-    {
-        return personalLeaderCard;
+    public ArrayList<LeaderCard> getPersonalLeaderCard(){
+        ArrayList<LeaderCard> leaderCard = personalLeaderCard;
+        return leaderCard;
     }
 
     public boolean isInitLeader() {

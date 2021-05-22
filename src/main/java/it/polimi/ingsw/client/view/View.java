@@ -2,10 +2,14 @@ package it.polimi.ingsw.client.view;
 
 import it.polimi.ingsw.messages.Message;
 import it.polimi.ingsw.messages.observable.ShowAllOfPlayerMessage;
+import it.polimi.ingsw.server.model.Resource;
 import it.polimi.ingsw.server.model.leaderCards.LeaderCard;
+import it.polimi.ingsw.server.model.marbles.Marble;
+import it.polimi.ingsw.server.model.productionCards.ProductionCard;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Map;
 
 public interface View  {
 
@@ -44,4 +48,16 @@ public interface View  {
     void showPlayerInfo(ShowAllOfPlayerMessage msg);
 
     void askInitResource() throws IOException, InterruptedException;
+
+    void showGameBoardProductionCards(ProductionCard[][] productionCards);
+
+    void showMarketGrid(Marble[][] grid);
+
+    void showMarketExtra(Marble extra);
+
+    void showResourceMap(Map<Resource, Integer> map);
+
+    void showFaithIndicator(int pos);
+
+    void showDeckProductionCards(ArrayList<ProductionCard> productionCards);
 }
