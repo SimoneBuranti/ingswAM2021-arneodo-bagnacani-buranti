@@ -1,8 +1,6 @@
 package it.polimi.ingsw.client.view.cli;
 
-import it.polimi.ingsw.client.commands.Command;
-import it.polimi.ingsw.client.commands.InvalidCommandException;
-import it.polimi.ingsw.client.commands.SpentTokenException;
+import it.polimi.ingsw.client.commands.*;
 import it.polimi.ingsw.client.lightModel.lightGameBoard.LightLeaderCards;
 import it.polimi.ingsw.client.lightModel.productionCards.LightProductionCards;
 import it.polimi.ingsw.client.ligtModelNotification.*;
@@ -27,13 +25,21 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
 
     private Scanner input = new Scanner(System.in);
 
-    //private final static int offset = 20;
 
+    public static int readInt() throws NotIntException {
+        Scanner in = new Scanner(System.in);
+        String input;
+        input = in.nextLine();
+        int n = 0;
+        for (int i = 0; i<input.length();i++){
+            if(input.charAt(i) - '0' >9)
+                throw new NotIntException();
+            n*=10;
+            n+= input.charAt(i) - '0';
+        }
 
-    /*public Cli(){
-
-    }*/
-
+        return n;
+    }
 
     public void readCommand(){
 
@@ -47,10 +53,14 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
                                 } catch (InvalidCommandException e) {
                                     System.out.println("Invalid command, type 'help' to check the command list");
                                     readCommand();
-                                } catch (InterruptedException | IOException e) {
-                                    e.printStackTrace();
                                 } catch (SpentTokenException e) {
                                     System.out.println("Impossible request, you have already done an action");
+                                    readCommand();
+                                } catch (AlreadyActivatedProductionException e) {
+                                    System.out.println("Impossible request, you have already activated this production");
+                                    readCommand();
+                                } catch (InterruptedException | IOException e) {
+                                    e.printStackTrace();
                                 }
         }
                     )

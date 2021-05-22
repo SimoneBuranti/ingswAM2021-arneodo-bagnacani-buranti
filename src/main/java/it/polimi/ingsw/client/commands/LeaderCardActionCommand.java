@@ -27,14 +27,19 @@ public class LeaderCardActionCommand extends Command{
     }
 
     public Message commandOn() throws SpentTokenException {
+
         if (ad == 'a')
             return new ActivateLeaderCardMessage(n);
+
         return new DiscardLeaderCardMessage(n);
     }
+
+
 
     public static String defToString(){
         return "leader a/x n";
     }
+
     public String toString(){
         return "leader "+ad+" "+n;
     }

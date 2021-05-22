@@ -1,8 +1,12 @@
 package it.polimi.ingsw.client.commands;
 
-public class ShowMarketCommand {
+public class ShowMarketCommand extends Command {
 
     public static String defToString(){
-        return "exit";
+        return "showMarket";
+    }
+
+    public String toString() {
+        return defToString();
     }
 }

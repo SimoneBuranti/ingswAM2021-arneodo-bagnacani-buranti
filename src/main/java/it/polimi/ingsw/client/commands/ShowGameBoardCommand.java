@@ -1,8 +1,14 @@
 package it.polimi.ingsw.client.commands;
 
-public class ShowGameBoardCommand {
+public class ShowGameBoardCommand extends Command {
+
+
 
     public static String defToString(){
-        return "exit";
+        return "showGameboard";
+    }
+
+    public String toString(){
+        return defToString();
     }
 }

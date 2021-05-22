@@ -20,4 +20,6 @@ public class ShowPlayerCommand extends Command {
     public static String defToString(){
         return "showPlayer";
     }
+
+
 }

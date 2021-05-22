@@ -157,7 +157,9 @@ public class LightGame extends ViewObservable {
         }
     }
 
-
+    public ArrayList<Integer> getAvailableProductionCards(){
+        return gameBoardOfPlayer.getAvailableProductionCards();
+    }
 
     public void setMarket(ArrayList<Marble> list) throws IOException, InterruptedException {
         market = new LightMarket(list);

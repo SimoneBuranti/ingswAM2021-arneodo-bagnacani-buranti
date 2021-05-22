@@ -2,12 +2,13 @@ package it.polimi.ingsw.client.commands;
 
 import it.polimi.ingsw.client.view.*;
 import it.polimi.ingsw.messages.Message;
+import it.polimi.ingsw.messages.*;
 
 public class MarketActionCommand extends Command {
 
-    private char rc;
-    private int n;
-    private ViewController viewController;
+    private final char rc;
+    private final int n;
+    private final ViewController viewController;
 
     public MarketActionCommand(char rc, int i, ViewController viewController) {
         this.rc = rc;
@@ -23,13 +24,20 @@ public class MarketActionCommand extends Command {
         return n;
     }
 
-    public Message commandOn(){
-        /*if (rc=='c'){
-            //viewController.sendMessage(new PushColumnMessage(n));
-        } else{}
-            //viewController.sendMessage(new PushRowMessage(n));
-        */
-        return null;
+    public Message commandOn() throws SpentTokenException {
+
+        if(viewController.isActionToken()){
+            viewController.setActionToken(false);
+
+            if (rc=='c'){
+                return new PushColumnMessage(n);
+            }
+            if (rc=='r'){
+                return new PushRowMessage(n);
+            }
+
+        }
+        throw new SpentTokenException();
     }
 
     public static String defToString(){

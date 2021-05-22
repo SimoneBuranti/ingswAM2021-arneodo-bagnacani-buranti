@@ -4,6 +4,8 @@ import it.polimi.ingsw.client.view.*;
 import it.polimi.ingsw.messages.Message;
 import it.polimi.ingsw.server.model.Resource;
 
+import java.util.Scanner;
+
 public abstract class Command {
 
 
@@ -23,7 +25,7 @@ public abstract class Command {
 
         //System.out.println(prefix);
 
-        if (prefix == null)
+        if (prefix.equals(""))
             throw new InvalidCommandException();
 
         switch(prefix){
@@ -67,25 +69,6 @@ public abstract class Command {
             case "help" : {
                 return new HelpCommand();
             }
-            case "market": {
-                char rc = 'c';
-                int n = 0;
-                int cont = 0;
-
-                for(int i = 0;i<suffix.length();i++){
-                    if (cont == 0 && (suffix.charAt(i) == 'r' || suffix.charAt(i)=='c')){
-                        rc = suffix.charAt(i);
-                        cont++;
-                    } else if (cont == 1 && suffix.charAt(i)==' '){
-                        cont++;
-                        n = suffix.charAt(i+1) - '0';
-                    }
-
-                }
-                if (cont != 2 || n<1 || n>3)
-                    throw new InvalidCommandException();
-                return new MarketActionCommand(rc,n,viewController);
-            }
             case "leader" : {
                 char ad = 'a';
                 int n = 0;
@@ -106,10 +89,34 @@ public abstract class Command {
                     throw new InvalidCommandException();
                 return new MarketActionCommand(ad,n,viewController);
             }
+            case "market": {
+                char rc = 'c';
+                int n = 0;
+                int cont = 0;
+
+                for(int i = 0;i<suffix.length();i++){
+                    if (cont == 0 && (suffix.charAt(i) == 'r' || suffix.charAt(i)=='c')){
+                        rc = suffix.charAt(i);
+                        cont++;
+                    } else if (cont == 1 && suffix.charAt(i)==' '){
+                        cont++;
+                        n = suffix.charAt(i+1) - '0';
+                    }
+
+                }
+                if (cont != 2 || n<1 || n>3)
+                    throw new InvalidCommandException();
+                return new MarketActionCommand(rc,n,viewController);
+            }
             case "productionOn" : {
                 return new ProductionCommand(viewController);
             }
-
+            case "showGameboard" : {
+                return new ShowGameBoardCommand();
+            }
+            case "showMarket" : {
+                return new ShowMarketCommand();
+            }
             case "showPlayer" : {
 
                 int n = 0;
@@ -129,11 +136,9 @@ public abstract class Command {
                 return new ShowPlayerCommand(n,viewController);
 
             }
-
-
-
-
-
+            case "showReserve" : {
+                return new ShowReserveCommand();
+            }
             default: {
                 throw new InvalidCommandException();
             }
@@ -141,7 +146,7 @@ public abstract class Command {
 
     }
 
-    public Message commandOn() throws SpentTokenException, InvalidCommandException {
+    public Message commandOn() throws SpentTokenException, InvalidCommandException, AlreadyActivatedProductionException {
         return null;
     }
 
@@ -164,9 +169,32 @@ public abstract class Command {
         }
     }
 
+    public static Resource askForOutputResource(){
+        Scanner in = new Scanner(System.in);
+        Resource o;
+        System.out.println("COIN: 'coin'        ROCK: 'rock'        SHIELD: 'shield'        SERVANT: 'servant'");
+        System.out.println("Output resource type: ");
+        while ((o = fromStringToResource(in.nextLine())) == null){
+            System.out.println("Invalid resource type");
+        }
+        return o;
+    }
+
+    public static Resource askForInputResource(){
+        Scanner in = new Scanner(System.in);
+        Resource i;
+        System.out.println("COIN: 'coin'        ROCK: 'rock'        SHIELD: 'shield'        SERVANT: 'servant'");
+        System.out.println("Output input type: ");
+        while ((i = fromStringToResource(in.nextLine())) == null){
+            System.out.println("Invalid resource type");
+        }
+        return i;
+    }
+
     public String toString(){
         return defToString();
     }
 
-
 }
+
+

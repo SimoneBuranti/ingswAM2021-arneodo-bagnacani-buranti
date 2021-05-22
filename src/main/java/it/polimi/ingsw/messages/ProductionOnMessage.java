@@ -20,6 +20,9 @@ public class ProductionOnMessage extends Message {
 
     private int faithMove;
 
+    public ProductionOnMessage(int choosenColumn) {
+        this.columnNumber = choosenColumn;
+    }
 
 
     /**

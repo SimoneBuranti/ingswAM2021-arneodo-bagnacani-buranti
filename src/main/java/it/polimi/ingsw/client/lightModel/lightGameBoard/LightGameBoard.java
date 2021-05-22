@@ -39,6 +39,18 @@ public class LightGameBoard {
         this.faithPath.setFaithPath(faithIndicator, currCall);
     }
 
+    public ArrayList<Integer> getAvailableProductionCards(){
+        ArrayList<Integer> available = new ArrayList<>();
+        for(int i= 0;i<3;i++){
+            for (int j = 0;j<3;j++){
+                if ((productionCards[i][j] == null && j!=0) || (productionCards[i][j] != null && j==2))
+                    available.add(i+1);
+            }
+        }
+        return available;
+    }
+
+
     public void setProductionCards(int[][] keys){
         for(int i = 0; i < 3; i++){
             for(int j = 0; j < 3; j++){

@@ -15,7 +15,9 @@ public class DoubleProductionOnMessage extends Message {
 
    private Resource resourceLeader;
 
-
+    public DoubleProductionOnMessage(Resource o) {
+        this.outputResource = o;
+    }
 
 
     public Resource getOutputResource() {

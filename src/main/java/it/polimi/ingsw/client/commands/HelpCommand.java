@@ -12,7 +12,6 @@ public class HelpCommand extends Command{
                                         EndOfProductionCommand.defToString(),
                                         BuyActionCommand.defToString(),
                                         MarketActionCommand.defToString(),
-                                        KeepResourcesCommand.defToString(),
                                         LeaderCardActionCommand.defToString(),
                                         EndOfTurnCommand.defToString(),
                                         HelpCommand.defToString(),
