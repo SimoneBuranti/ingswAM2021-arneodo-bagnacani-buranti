@@ -14,6 +14,11 @@ public class InitialResourcesMessage extends Message {
 
     private ArrayList<Resource> resources;
 
+    public InitialResourcesMessage(ArrayList<Resource> resources) {
+
+        resources=new ArrayList<>();
+        this.resources=resources;}
+
     /**
      */@Override
     public MessageType getMessageType() {

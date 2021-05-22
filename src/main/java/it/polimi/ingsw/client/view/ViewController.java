@@ -176,7 +176,7 @@ public class ViewController implements MessageVisitor, ViewObserver {
     }
 
     @Override
-    public void visit(PickedLeaderCardsMessage msg) {
+    public void visit(PickedLeaderCardsMessage msg) throws IOException, InterruptedException {
         view.askLeaderCardToKeep(game.getLeaderCards());
     }
 
@@ -190,7 +190,8 @@ public class ViewController implements MessageVisitor, ViewObserver {
 
     @Override
     public void visit(UpdateInitBooleanMessage msg) {
-        game.setInitLeader(msg.isInitResource());
+        game.setInitResource(msg.isInitResource());
+        game.setInitLeader(msg.isInitLeader());
     }
 
     @Override
@@ -207,6 +208,11 @@ public class ViewController implements MessageVisitor, ViewObserver {
     public void visit(ShowAllOfPlayerMessage msg) {
         view.showPlayerInfo(msg);
 
+    }
+
+    @Override
+    public void visit(PositionMessage msg) {
+        game.setPosition(msg.getPos());
     }
 
     @Override
@@ -348,17 +354,8 @@ public class ViewController implements MessageVisitor, ViewObserver {
 
     @Override
     public void visit(UpdateChosenLeaderMessage msg) {
-        for(int i = 0; i < 4; i++){
-            if(i != msg.getCardFirst() && i != msg.getCardSec());
-            try {
-                game.discardLeaderCard(i);
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-    }
+        game.getGameBoardOfPlayer().setLeaderPersonal(msg.getCardFirst(),msg.getCardSec()); }
+
 
     @Override
     public void visit(DeckProductionCardMessage msg) throws IOException, InterruptedException {
@@ -615,7 +612,7 @@ public class ViewController implements MessageVisitor, ViewObserver {
     }
 
     @Override
-    public void visit(YourTurnMessage msg) {
+    public void visit(YourTurnMessage msg) throws IOException, InterruptedException {
         if (!game.isInitLeader() && !game.isInitResource()) {
             view.yourTurn();
             view.askLeaderCardToKeep(game.getLeaderCards());
@@ -649,8 +646,4 @@ public class ViewController implements MessageVisitor, ViewObserver {
         socketClient.sendMessage(message);
     }
 
-    /*public int getDeckNumberFormColourAndLevel(char c, int level) {
-
-        return game.getDeckNumberFormColourAndLevel(c,level);
-    }*/
 }

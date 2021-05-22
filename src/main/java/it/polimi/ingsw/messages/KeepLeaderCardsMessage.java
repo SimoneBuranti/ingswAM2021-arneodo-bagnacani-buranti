@@ -8,7 +8,13 @@ public class KeepLeaderCardsMessage extends Message{
      */
     private final MessageType messageType=MessageType.KEEPLEADERCARDS;
 
-    private int[] chosenLeaderCards;
+    private int[] chosenLeaderCards= new int[2];
+
+    public KeepLeaderCardsMessage(int contOne, int contSecond) {
+        chosenLeaderCards[0]=contOne;
+        chosenLeaderCards[1]=contSecond;
+
+    }
 
 
     /**

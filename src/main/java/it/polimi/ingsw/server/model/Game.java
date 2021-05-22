@@ -622,70 +622,70 @@ public class Game extends Observable {
         productionCardDecks = new ArrayList<>();
 
         try {
-            deck = gson.fromJson(new FileReader("src/main/resources/DeckProductionCardOneBluLatest.json"), ProductionCard[].class);
+            deck = gson.fromJson(new FileReader("src/main/resources/fileConfiguration/DeckProductionCardOneBluLatest.json"), ProductionCard[].class);
             deckProductionCardOneBlu = new DeckProductionCardOneBlu(deck);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
 
         try {
-            deck = gson.fromJson(new FileReader("src/main/resources/DeckProductionCardTwoBluLatest.json"), ProductionCard[].class);
+            deck = gson.fromJson(new FileReader("src/main/resources/fileConfiguration/DeckProductionCardTwoBluLatest.json"), ProductionCard[].class);
             deckProductionCardTwoBlu = new DeckProductionCardTwoBlu(deck);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
         try {
-            deck = gson.fromJson(new FileReader("src/main/resources/DeckProductionCardThreeBluLatest.json"), ProductionCard[].class);
+            deck = gson.fromJson(new FileReader("src/main/resources/fileConfiguration/DeckProductionCardThreeBluLatest.json"), ProductionCard[].class);
             deckProductionCardThreeBlu = new DeckProductionCardThreeBlu(deck);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
         try {
-            deck = gson.fromJson(new FileReader("src/main/resources/DeckProductionCardOneGreenLatest.json"), ProductionCard[].class);
+            deck = gson.fromJson(new FileReader("src/main/resources/fileConfiguration/DeckProductionCardOneGreenLatest.json"), ProductionCard[].class);
             deckProductionCardOneGreen = new DeckProductionCardOneGreen(deck);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
         try {
-            deck = gson.fromJson(new FileReader("src/main/resources/DeckProductionCardTwoGreenLatest.json"), ProductionCard[].class);
+            deck = gson.fromJson(new FileReader("src/main/resources/fileConfiguration/DeckProductionCardTwoGreenLatest.json"), ProductionCard[].class);
             deckProductionCardTwoGreen = new DeckProductionCardTwoGreen(deck);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
 
         try {
-            deck = gson.fromJson(new FileReader("src/main/resources/DeckProductionCardThreeGreenLatest.json"), ProductionCard[].class);
+            deck = gson.fromJson(new FileReader("src/main/resources/fileConfiguration/DeckProductionCardThreeGreenLatest.json"), ProductionCard[].class);
             deckProductionCardThreeGreen = new DeckProductionCardThreeGreen(deck);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
 
         try {
-            deck = gson.fromJson(new FileReader("src/main/resources/DeckProductionCardOneYellowLatest.json"), ProductionCard[].class);
+            deck = gson.fromJson(new FileReader("src/main/resources/fileConfiguration/DeckProductionCardOneYellowLatest.json"), ProductionCard[].class);
             deckProductionCardOneYellow = new DeckProductionCardOneYellow(deck);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
         try {
-            deck = gson.fromJson(new FileReader("src/main/resources/DeckProductionCardTwoYellowLatest.json"), ProductionCard[].class);
+            deck = gson.fromJson(new FileReader("src/main/resources/fileConfiguration/DeckProductionCardTwoYellowLatest.json"), ProductionCard[].class);
             deckProductionCardTwoYellow = new DeckProductionCardTwoYellow(deck);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
         try {
-            deck = gson.fromJson(new FileReader("src/main/resources/DeckProductionCardThreeYellowLatest.json"), ProductionCard[].class);
+            deck = gson.fromJson(new FileReader("src/main/resources/fileConfiguration/DeckProductionCardThreeYellowLatest.json"), ProductionCard[].class);
             deckProductionCardThreeYellow = new DeckProductionCardThreeYellow(deck);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
         try {
-            deck = gson.fromJson(new FileReader("src/main/resources/DeckProductionCardOneVioletLatest.json"), ProductionCard[].class);
+            deck = gson.fromJson(new FileReader("src/main/resources/fileConfiguration/DeckProductionCardOneVioletLatest.json"), ProductionCard[].class);
             deckProductionCardOneViolet = new DeckProductionCardOneViolet(deck);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
         try {
-            deck = gson.fromJson(new FileReader("src/main/resources/DeckProductionCardTwoVioletLatest.json"), ProductionCard[].class);
+            deck = gson.fromJson(new FileReader("src/main/resources/fileConfiguration/DeckProductionCardTwoVioletLatest.json"), ProductionCard[].class);
             deckProductionCardTwoViolet = new DeckProductionCardTwoViolet(deck);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -693,7 +693,7 @@ public class Game extends Observable {
 
 
         try {
-            deck = gson.fromJson(new FileReader("src/main/resources/DeckProductionCardThreeVioletLatest.json"), ProductionCard[].class);
+            deck = gson.fromJson(new FileReader("src/main/resources/fileConfiguration/DeckProductionCardThreeVioletLatest.json"), ProductionCard[].class);
             deckProductionCardThreeViolet = new DeckProductionCardThreeViolet(deck);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -723,7 +723,7 @@ public class Game extends Observable {
         Marble[] list;
 
         try {
-            list = gson.fromJson(new FileReader("src/main/resources/Market.json"),Marble[].class);
+            list = gson.fromJson(new FileReader("src/main/resources/fileConfiguration/Market.json"),Marble[].class);
             market= new Market(list);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -740,7 +740,7 @@ public class Game extends Observable {
       Gson gson=Reserve.gsonForEveryoneReserve();
         Map map;
         try {
-            map = gson.fromJson(new FileReader("src/main/resources/Reserve.json"),Map.class);
+            map = gson.fromJson(new FileReader("src/main/resources/fileConfiguration/Reserve.json"),Map.class);
             reserve= new Reserve(map);
         } catch (FileNotFoundException e) {
             e.printStackTrace();

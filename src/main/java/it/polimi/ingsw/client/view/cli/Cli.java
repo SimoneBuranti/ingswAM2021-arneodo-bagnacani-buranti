@@ -656,10 +656,39 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
                 ", waiting for the missing players to start the game...");
     }
     @Override
-    public void askLeaderCardToKeep(ArrayList<LeaderCard> leaderCards){
+    public void askLeaderCardToKeep(ArrayList<LeaderCard> leaderCards)  throws IOException, InterruptedException {
         System.out.println("Please choose 2 from the following leader cards to keep in your game board : ");
         showLeaderCards(leaderCards);
+        int contOne =0;
+        int contSecond=0;
+        int cont=0;
+        while (input.hasNext()){
+
+            if(input.hasNextInt()) {
+                cont++;
+                if (cont == 2)
+                {
+                    contSecond = input.nextInt() - 1;
+                    if (contSecond>4 || contSecond<0)
+                        System.out.println("Invalid command, try again");
+                    notifyObserver(new KeepLeaderCardsMessage(contOne,contSecond));
+                    String line = input.nextLine();
+                    return;
+                }
+                else
+                { contOne = input.nextInt() - 1;
+                    if (contOne>4 || contOne<0)
+                        System.out.println("Invalid command, try again");
+                }
+            }
+            else if(input.hasNextLine()){
+                String line = input.nextLine();
+                System.out.println("Invalid command for keep leadercard");
+            }
+        }
     }
+
+
     @Override
     public void showCallForCouncil(String nickname, int papalCard){
         if(papalCard == 0){
@@ -700,7 +729,54 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
     }
 
     @Override
-    public void askInitResource() {
+    public void askInitResource() throws IOException, InterruptedException {
+        Resource msg=null;
+        Resource msg2=null;
+        String s=null;
+        int count=0;
+        ArrayList<Resource> resources=new ArrayList<>();
+        int cont=0;
+        System.out.println("for resource [coin,rock,servant,shield]");
+        if(viewController.getGame().getPosition()==1){
+            System.out.println("hey my Lord you can't take any init resource");
+        }
+        else if(viewController.getGame().getPosition()==2)
+        {
+            System.out.println(" hey " + viewController.getNickName() +" please say me your favourite resource ");
+            while (input.hasNextLine())
+            {
+                s=input.nextLine();
+                if ((Command.fromStringToResource(s) instanceof Resource))
+                {   msg = (Command.fromStringToResource(s));
+                    resources.add(msg);
+                    notifyObserver(new InitialResourcesMessage(resources));
+                    return;
+                }
+                else
+                { System.out.println("Invalid resource ,**** try again"); }
+            }
+        }
+        else {
+            System.out.println("hey " + viewController.getNickName() +" please say me two resource for be happy, after first press enter");
+            while (input.hasNextLine())
+            {
+                s=input.nextLine();
+                if (Command.fromStringToResource(s) instanceof Resource)
+                {
+                    msg = (Command.fromStringToResource(s));
+                    resources.add(msg);
+                    cont++;
+                    if (cont==2)
+                    {
+                        notifyObserver(new InitialResourcesMessage(resources));
+                        return;
+                    }
+                }
+                else
+                { System.out.println("Invalid resource, try again"); }
+            } }
+
 
     }
+
 }

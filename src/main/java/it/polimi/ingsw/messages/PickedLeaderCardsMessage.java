@@ -2,6 +2,7 @@ package it.polimi.ingsw.messages;
 
 import it.polimi.ingsw.server.model.leaderCards.LeaderCard;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class PickedLeaderCardsMessage extends Message{
@@ -30,7 +31,7 @@ public class PickedLeaderCardsMessage extends Message{
     }
 
     @Override
-    public void accept(MessageVisitor v) {
+    public void accept(MessageVisitor v) throws IOException, InterruptedException {
         v.visit(this);
     }
 }

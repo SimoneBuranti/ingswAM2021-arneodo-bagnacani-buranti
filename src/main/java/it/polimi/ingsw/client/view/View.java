@@ -33,7 +33,7 @@ public interface View  {
 
     void showLobby(int playersInLobby, int playerInGame);
 
-    void askLeaderCardToKeep(ArrayList<LeaderCard> leaderCards);
+    void askLeaderCardToKeep(ArrayList<LeaderCard> leaderCards) throws IOException, InterruptedException;
 
     void showCallForCouncil(String nickname, int papalCard);
 
@@ -43,5 +43,5 @@ public interface View  {
 
     void showPlayerInfo(ShowAllOfPlayerMessage msg);
 
-    void askInitResource();
+    void askInitResource() throws IOException, InterruptedException;
 }

@@ -29,7 +29,7 @@ public interface MessageVisitor {
     void visit(ReserveValueMessage msg) throws IOException, InterruptedException;
     void visit(DoubleWhiteMarbleEffectMessage msg);
     void visit(NPlayersMessage msg) throws IOException, InterruptedException;
-    void visit(PickedLeaderCardsMessage msg);
+    void visit(PickedLeaderCardsMessage msg) throws IOException, InterruptedException;
 
 
     //Client to server
@@ -111,7 +111,7 @@ public interface MessageVisitor {
 
     void visit(LorenzoMoveMessage msg);
 
-    void visit(YourTurnMessage msg);
+    void visit(YourTurnMessage msg) throws IOException, InterruptedException;
 
     void visit(ChangeTurnMessage msg);
 
@@ -127,4 +127,6 @@ public interface MessageVisitor {
     void visit(NoPlayersErrorMessage noPlayersErrorMessage);
 
     void visit(ShowAllOfPlayerMessage showAllOfPlayerMessage);
+
+    void visit(PositionMessage positionMessage);
 }

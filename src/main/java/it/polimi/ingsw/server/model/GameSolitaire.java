@@ -2,6 +2,7 @@ package it.polimi.ingsw.server.model;
 
 
 import com.google.gson.Gson;
+import it.polimi.ingsw.messages.PositionMessage;
 import it.polimi.ingsw.messages.SetPapalsMessage;
 import it.polimi.ingsw.messages.observable.*;
 import it.polimi.ingsw.server.controller.ClientController;
@@ -66,11 +67,16 @@ public class GameSolitaire extends Game {
             this.addObserver(clientController.getVirtualView());
             notifyObserver(new GameTypeMessage(false));
             configClient();
+            ArrayList<Integer> needForLeaderInitial = new ArrayList<>();
+            for (int i=0; i<4;i++)
+                needForLeaderInitial.add(player.getPersonalLeaderCard().get(i).getKey());
+            notifyObserver(new UpdateInitLeaderMessage(needForLeaderInitial));
         }
         else
             restoreGameSolitaire(clientController);
 
         saveInformation();
+        notifyObserver(new PositionMessage(1));
         notifyObserver(new YourTurnMessage());
     }
 
@@ -337,6 +343,7 @@ public class GameSolitaire extends Game {
     public void connectPlayer(String nickname) throws IOException, InterruptedException{
         if(player.getNickName().equals(nickname) && !(player.isConnected())) {
             player.setConnected();
+            notifyObserver(new GameTypeMessage(false));
             this.reConfigClient();
         }
         }
@@ -464,7 +471,7 @@ public class GameSolitaire extends Game {
         FileWriter config = null;
         String jsonStrin = gson.toJson(strings);
         try {
-            config = new FileWriter("src/main/resources/SingleGame.json");
+            config = new FileWriter("src/main/resources/fileConfiguration/SingleGame.json");
             config.write(jsonStrin);
         } catch (IOException e) {
             e.printStackTrace();
@@ -483,7 +490,7 @@ public class GameSolitaire extends Game {
         Gson gson=new Gson();
 
         try {
-            nickNamePlayer= gson.fromJson(new FileReader("src/main/resources/InformationAboutNickname.json"), String.class);
+            nickNamePlayer= gson.fromJson(new FileReader("src/main/resources/fileConfiguration/InformationAboutNickname.json"), String.class);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -504,7 +511,7 @@ public class GameSolitaire extends Game {
         FileWriter config = null;
         String jsonStrin = gson.toJson(nickNamePlayer);
         try {
-            config = new FileWriter("src/main/resources/InformationAboutTurn.json");
+            config = new FileWriter("src/main/resources/fileConfiguration/InformationAboutTurn.json");
             config.write(jsonStrin);
         } catch (IOException e) {
             e.printStackTrace();
@@ -517,7 +524,7 @@ public class GameSolitaire extends Game {
             } }
 
         try {
-            config = new FileWriter("src/main/resources/InformationaboutNickname.json");
+            config = new FileWriter("src/main/resources/fileConfiguration/InformationaboutNickname.json");
             config.write(jsonStrin);
         } catch (IOException e) {
             e.printStackTrace();
@@ -539,7 +546,7 @@ public class GameSolitaire extends Game {
         int[] servList;
 
         try {
-            servList = gson.fromJson(new FileReader("src/main/resources/LoriMagnific.json"),int[].class);
+            servList = gson.fromJson(new FileReader("src/main/resources/fileConfiguration/LoriMagnific.json"),int[].class);
             lorenzoTheMagnificent=new LorenzoTheMagnificent(servList);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -553,7 +560,7 @@ public class GameSolitaire extends Game {
         Gson gson=new Gson();
         ActionMarker[] servList;
         try {
-            servList= gson.fromJson(new FileReader("src/main/resources/DeckActionMarker.json"),ActionMarker[].class);
+            servList= gson.fromJson(new FileReader("src/main/resources/fileConfiguration/DeckActionMarker.json"),ActionMarker[].class);
             this.deckActionMarker = new DeckActionMarker(servList);
         } catch (FileNotFoundException e) {
             e.printStackTrace();

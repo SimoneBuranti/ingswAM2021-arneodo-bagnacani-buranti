@@ -166,7 +166,7 @@ public class App
 
         try {
 
-            cofiguration = new FileWriter("src/main/resources/ConfigurationTry.json");
+            cofiguration = new FileWriter("src/main/resources/fileConfiguration/ConfigurationTry.json");
             cofiguration.write(jsonStrin);
 
 
@@ -186,7 +186,7 @@ public class App
 
 
 
-            GameBoardInterface gameBoardOne = gson.fromJson(new FileReader("src/main/resources/ConfigurationTry.json"),GameBoardInterface.class);
+            GameBoardInterface gameBoardOne = gson.fromJson(new FileReader("src/main/resources/fileConfiguration/ConfigurationTry.json"),GameBoardInterface.class);
 
 
             System.out.println(gameBoardOne.getClass());

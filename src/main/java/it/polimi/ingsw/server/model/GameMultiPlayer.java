@@ -1,6 +1,7 @@
 package it.polimi.ingsw.server.model;
 
 import com.google.gson.Gson;
+import it.polimi.ingsw.messages.PositionMessage;
 import it.polimi.ingsw.messages.SetPapalsMessage;
 import it.polimi.ingsw.messages.observable.*;
 import it.polimi.ingsw.server.controller.ClientController;
@@ -91,7 +92,6 @@ public class GameMultiPlayer extends Game {
             addObservators();
 
             notifyObserver(new GameTypeMessage(true));
-
             notifyObserver(new NicknameStartedMessage(nickNameInOrder));
             configClient();
         }
@@ -103,7 +103,6 @@ public class GameMultiPlayer extends Game {
 
 
         saveInformation();
-
         notifyOnlyOneSpecificObserver(new YourTurnMessage(),currentPlayer.getNickName());
 
 
@@ -119,11 +118,13 @@ public class GameMultiPlayer extends Game {
             for (int i=0; i<4;i++)
                 needForLeader.add(firstPlayer.getPersonalLeaderCard().get(i).getKey());
             notifyOnlyOneSpecificObserver(new UpdateInitLeaderMessage(needForLeader), firstPlayer.getNickName());
+            notifyOnlyOneSpecificObserver(new PositionMessage(1), firstPlayer.getNickName());
 
             needForLeader = new ArrayList<>();
             for (int i=0; i<4;i++)
                 needForLeader.add(secondPlayer.getPersonalLeaderCard().get(i).getKey());
             notifyOnlyOneSpecificObserver(new UpdateInitLeaderMessage(needForLeader), secondPlayer.getNickName());
+            notifyOnlyOneSpecificObserver(new PositionMessage(2), secondPlayer.getNickName());
         }
 
         else if (numberOfPlayer==3)
@@ -131,17 +132,18 @@ public class GameMultiPlayer extends Game {
             for (int i=0; i<4;i++)
                 needForLeader.add(firstPlayer.getPersonalLeaderCard().get(i).getKey());
             notifyOnlyOneSpecificObserver(new UpdateInitLeaderMessage(needForLeader), firstPlayer.getNickName());
-
+            notifyOnlyOneSpecificObserver(new PositionMessage(1), firstPlayer.getNickName());
             needForLeader = new ArrayList<>();
             for (int i=0; i<4;i++)
                 needForLeader.add(secondPlayer.getPersonalLeaderCard().get(i).getKey());
             notifyOnlyOneSpecificObserver(new UpdateInitLeaderMessage(needForLeader), secondPlayer.getNickName());
+            notifyOnlyOneSpecificObserver(new PositionMessage(2), secondPlayer.getNickName());
 
             needForLeader = new ArrayList<>();
             for (int i=0; i<4;i++)
                 needForLeader.add(thirdPlayer.getPersonalLeaderCard().get(i).getKey());
             notifyOnlyOneSpecificObserver(new UpdateInitLeaderMessage(needForLeader),thirdPlayer.getNickName());
-
+            notifyOnlyOneSpecificObserver(new PositionMessage(3), thirdPlayer.getNickName());
         }
         else if (numberOfPlayer==4)
         {
@@ -149,24 +151,25 @@ public class GameMultiPlayer extends Game {
             for (int i=0; i<4;i++)
                 needForLeader.add(firstPlayer.getPersonalLeaderCard().get(i).getKey());
             notifyOnlyOneSpecificObserver(new UpdateInitLeaderMessage(needForLeader), firstPlayer.getNickName());
-
+            notifyOnlyOneSpecificObserver(new PositionMessage(1), firstPlayer.getNickName());
             needForLeader = new ArrayList<>();
             for (int i=0; i<4;i++)
                 needForLeader.add(secondPlayer.getPersonalLeaderCard().get(i).getKey());
             notifyOnlyOneSpecificObserver(new UpdateInitLeaderMessage(needForLeader), secondPlayer.getNickName());
+            notifyOnlyOneSpecificObserver(new PositionMessage(2), secondPlayer.getNickName());
 
             needForLeader = new ArrayList<>();
             for (int i=0; i<4;i++)
                 needForLeader.add(thirdPlayer.getPersonalLeaderCard().get(i).getKey());
             notifyOnlyOneSpecificObserver(new UpdateInitLeaderMessage(needForLeader),thirdPlayer.getNickName());
-
+            notifyOnlyOneSpecificObserver(new PositionMessage(3), thirdPlayer.getNickName());
             needForLeader = new ArrayList<>();
             for (int i=0; i<4;i++)
                 needForLeader.add(fourthPlayer.getPersonalLeaderCard().get(i).getKey());
             notifyOnlyOneSpecificObserver(new UpdateInitLeaderMessage(needForLeader),fourthPlayer.getNickName());
+            notifyOnlyOneSpecificObserver(new PositionMessage(4), fourthPlayer.getNickName());
         }
 
-        //notifyToOneObserver(new YourTurnMessage());
 
 
     }
@@ -329,11 +332,12 @@ public class GameMultiPlayer extends Game {
 
     @Override
     public void connectPlayer(String nickname) throws IOException, InterruptedException {
-        for(Player p : playerList){
-            if(p.getNickName().equals(nickname) && !(p.isConnected())){
-                p.setConnected();
-                super.configClientReconnected(p.getNickName());
-                configWhitPlayerInfo(p);}
+        for(int i=0; i<playerList.size(); i++){
+            if(playerList.get(i).getNickName().equals(nickname) && !(playerList.get(i).isConnected())){
+                playerList.get(i).setConnected();
+                notifyOnlyOneSpecificObserver(new GameTypeMessage(true),playerList.get(i).getNickName());
+                super.configClientReconnected(playerList.get(i).getNickName());
+                configWhitPlayerInfo(playerList.get(i),i+1);}
         }
     }
 
@@ -452,7 +456,7 @@ public class GameMultiPlayer extends Game {
         String jsonStrin = gson.toJson(inkwell);
         try {
 
-            config = new FileWriter("src/main/resources/InformationAboutInkwell.json");
+            config = new FileWriter("src/main/resources/fileConfiguration/InformationAboutInkwell.json");
             config.write(jsonStrin);
         } catch (IOException e) {
             e.printStackTrace();
@@ -472,7 +476,7 @@ public class GameMultiPlayer extends Game {
         String jsonStrin = gson.toJson(currentPlayerPosition);
         try {
 
-            config = new FileWriter("src/main/resources/InformationAboutCurrentPosition.json");
+            config = new FileWriter("src/main/resources/fileConfiguration/InformationAboutCurrentPosition.json");
             config.write(jsonStrin);
         } catch (IOException e) {
             e.printStackTrace();
@@ -492,7 +496,7 @@ public class GameMultiPlayer extends Game {
         String jsonStrin = gson.toJson(lastTurn);
         try {
 
-            config = new FileWriter("src/main/resources/lastTurn.json");
+            config = new FileWriter("src/main/resources/fileConfiguration/lastTurn.json");
             config.write(jsonStrin);
         } catch (IOException e) {
             e.printStackTrace();
@@ -511,7 +515,7 @@ public class GameMultiPlayer extends Game {
         FileWriter config = null;
         String jsonStrin = gson.toJson(nickNameInOrder);
         try {
-            config = new FileWriter("src/main/resources/InformationAboutTurn.json");
+            config = new FileWriter("src/main/resources/fileConfiguration/InformationAboutTurn.json");
             config.write(jsonStrin);
         } catch (IOException e) {
             e.printStackTrace();
@@ -541,23 +545,23 @@ public class GameMultiPlayer extends Game {
         Gson gson=new Gson();
 
         try {
-            nickNameInOrder = gson.fromJson(new FileReader("src/main/resources/InformationAboutTurn.json"),ArrayList.class);
+            nickNameInOrder = gson.fromJson(new FileReader("src/main/resources/fileConfiguration/InformationAboutTurn.json"),ArrayList.class);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
 
         try {
-            numberOfPlayer = gson.fromJson(new FileReader("src/main/resources/InformationAboutTurnPlayerNumber.json"),Integer.class);
+            numberOfPlayer = gson.fromJson(new FileReader("src/main/resources/fileConfiguration/InformationAboutTurnPlayerNumber.json"),Integer.class);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
         try {
-            currentPlayerPosition= gson.fromJson(new FileReader("src/main/resources/InformationAboutCurrentPosition.json"),Integer.class);
+            currentPlayerPosition= gson.fromJson(new FileReader("src/main/resources/fileConfiguration/InformationAboutCurrentPosition.json"),Integer.class);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
         try {
-            lastTurn= gson.fromJson(new FileReader("src/main/resources/lastTurn.json"),Boolean.class);
+            lastTurn= gson.fromJson(new FileReader("src/main/resources/fileConfiguration/lastTurn.json"),Boolean.class);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -575,8 +579,8 @@ public class GameMultiPlayer extends Game {
 
     public void reConfigClient() throws IOException, InterruptedException {
         super.configClient();
-        for(Player p : playerList){
-            configWhitPlayerInfo(p);}}
+        for(int i=0; i<playerList.size(); i++){
+            configWhitPlayerInfo(playerList.get(i), i + 1);}}
 
 
     /**
@@ -628,7 +632,7 @@ public class GameMultiPlayer extends Game {
         FileWriter config = null;
         String jsonStrin = gson.toJson(numberOfPlayer);
         try {
-            config = new FileWriter("src/main/resources/InformationAboutTurnPlayerNumber.json");
+            config = new FileWriter("src/main/resources/fileConfiguration/InformationAboutTurnPlayerNumber.json");
             config.write(jsonStrin);
         } catch (IOException e) {
             e.printStackTrace();
@@ -665,7 +669,7 @@ public class GameMultiPlayer extends Game {
         FileWriter config = null;
         String jsonStrin = gson.toJson(nickNameInOrder);
         try {
-            config = new FileWriter("src/main/resources/MultiGame.json");
+            config = new FileWriter("src/main/resources/fileConfiguration/MultiGame.json");
             config.write(jsonStrin);
         } catch (IOException e) {
             e.printStackTrace();
@@ -707,7 +711,8 @@ public class GameMultiPlayer extends Game {
             notifyOnlyOneSpecificObserver(new NoPlayersErrorMessage(),nickname);
     }
 
-    public void configWhitPlayerInfo(Player p) throws IOException, InterruptedException {
+    public void configWhitPlayerInfo(Player p, int pos) throws IOException, InterruptedException {
+        notifyOnlyOneSpecificObserver(new PositionMessage(pos), p.getNickName());
         notifyOnlyOneSpecificObserver(new UpdateInitBooleanMessage(p.isInitLeader(),p.isInitResource()),p.getNickName());
         if(!p.isInitLeader()){
             ArrayList<Integer> needForLeaderInitial = new ArrayList<>();

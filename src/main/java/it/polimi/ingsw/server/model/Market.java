@@ -252,7 +252,7 @@ public class Market extends Observable {
 
         try {
 
-            config = new FileWriter("src/main/resources/Market.json");
+            config = new FileWriter("src/main/resources/fileConfiguration/Market.json");
             config.write(jsonStrin);
         } catch (IOException e) {
             e.printStackTrace();

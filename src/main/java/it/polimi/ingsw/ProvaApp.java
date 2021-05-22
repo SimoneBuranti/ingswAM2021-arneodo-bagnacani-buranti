@@ -19,11 +19,11 @@ public class ProvaApp {
 }
 
         /*Gson g = new Gson();
-        Message message = g.fromJson(new FileReader("src/main/resources/prova.json"),Message.class);
+        Message message = g.fromJson(new FileReader("src/main/resources/fileConfiguration/prova.json"),Message.class);
 
         /*System.out.println(message.getMessageType() +" "+ message.getNickname());
 
-        message = g.fromJson(new FileReader("src/main/resources/prova2.json"),Message.class);
+        message = g.fromJson(new FileReader("src/main/resources/fileConfiguration/prova2.json"),Message.class);
 
         System.out.println(message.getMessageType() +" "+ message.getResources().get(0));*/
 
@@ -39,7 +39,7 @@ public class ProvaApp {
         System.out.println(message.getMessageType() +" "+ message.getNickname());
 
 
-        File file = new File("src/main/resources/modelState.json");
+        File file = new File("src/main/resources/fileConfiguration/modelState.json");
 
         System.out.println(file.exists());
 

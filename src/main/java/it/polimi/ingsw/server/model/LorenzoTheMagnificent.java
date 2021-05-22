@@ -94,7 +94,7 @@ public class LorenzoTheMagnificent extends Observable {
         String jsonStrin = gson.toJson(servList);
         try {
             // Constructs a FileWriter given a file name, using the platform's default charset
-            config = new FileWriter("src/main/resources/LoriMagnific.json");
+            config = new FileWriter("src/main/resources/fileConfiguration/LoriMagnific.json");
             config.write(jsonStrin);
         } catch (IOException e) {
             e.printStackTrace();

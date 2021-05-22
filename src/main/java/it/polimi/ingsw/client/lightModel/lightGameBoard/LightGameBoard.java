@@ -15,7 +15,7 @@ public class LightGameBoard {
     private final LightStrongbox strongbox;
     private final LightFaithPath faithPath;
     private final ProductionCard[][] productionCards;
-    private final ArrayList<LeaderCard> leaderCards;
+    private ArrayList<LeaderCard> leaderCards;
     private final ArrayList<LeaderCard> leaderCardsActivated;
     private final LightProductionCards productionCardsByKey;
     private final LightLeaderCards leaderCardsByKey;
@@ -293,5 +293,12 @@ public class LightGameBoard {
 
     public ArrayList<LeaderCard> getLeaderCardsActivated() {
         return leaderCardsActivated;
+    }
+
+    public void setLeaderPersonal(int cardFirst, int cardSec) {
+        ArrayList<LeaderCard> arrayList = new ArrayList<>();
+        arrayList.add(LightLeaderCards.leaderCardByKey(leaderCards.get(cardFirst).getKey()));
+        arrayList.add(LightLeaderCards.leaderCardByKey(leaderCards.get(cardFirst).getKey()));
+        leaderCards=arrayList;
     }
 }

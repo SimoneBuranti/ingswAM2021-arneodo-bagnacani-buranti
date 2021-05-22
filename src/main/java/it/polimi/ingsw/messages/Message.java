@@ -290,6 +290,16 @@ public abstract class Message{
             case NOTPLAYERSERROR:
                 return gson.fromJson(jsonObj, NoPlayersErrorMessage.class);
 
+            case POSITION:
+                return gson.fromJson(jsonObj, PositionMessage.class);
+
+            case INIT:
+                return gson.fromJson(jsonObj, UpdateInitBooleanMessage.class);
+
+            case CHANGETURN:
+                return gson.fromJson(jsonObj, ChangeTurnMessage.class);
+
+
             default:
                 throw new IllegalArgumentException("Invalid topic " + msgTopicString);
         }

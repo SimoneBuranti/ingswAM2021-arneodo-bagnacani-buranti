@@ -113,7 +113,7 @@ public class DeckProductionCardTwoViolet extends DeckProductionCard {
         String jsonStrin = gson.toJson(deck);
         try {
             // Constructs a FileWriter given a file name, using the platform's default charset
-            config = new FileWriter("src/main/resources/DeckProductionCardTwoVioletLatest.json");
+            config = new FileWriter("src/main/resources/fileConfiguration/DeckProductionCardTwoVioletLatest.json");
             config.write(jsonStrin);
         } catch (IOException e) {
             e.printStackTrace();

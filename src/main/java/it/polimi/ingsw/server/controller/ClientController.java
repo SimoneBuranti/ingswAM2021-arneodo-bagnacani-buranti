@@ -166,6 +166,11 @@ public class ClientController implements MessageVisitor {
 
     }
 
+    @Override
+    public void visit(PositionMessage positionMessage) {
+
+    }
+
     //***********************************************************************************************************
 
 
