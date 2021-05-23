@@ -1,6 +1,7 @@
 package it.polimi.ingsw.client.view.cli;
 
 import it.polimi.ingsw.client.commands.*;
+import it.polimi.ingsw.client.commands.commandParsers.*;
 import it.polimi.ingsw.client.lightModel.lightGameBoard.LightLeaderCards;
 import it.polimi.ingsw.client.lightModel.productionCards.LightProductionCards;
 import it.polimi.ingsw.client.ligtModelNotification.*;
@@ -23,7 +24,10 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 
 public class Cli extends ViewControllerObservable implements View, NotificatorVisitor {
+
     private ViewController viewController;
+
+    private CommandParser commandParser = new StandardParser();
 
     private Scanner input = new Scanner(System.in);
 
@@ -45,29 +49,31 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
         return n;
     }
 
-    public void readCommand(){
+    public void commandThread(){
 
         (new Thread( () -> {
-                                try {
-                                    this.notifyObserver((Command.parseCommand(input.nextLine(),this.viewController,this).commandOn()));
-                                } catch (InvalidCommandException e) {
-                                    System.out.println("Invalid command, type 'help' to check the command list");
-                                    readCommand();
-                                } catch (SpentTokenException e) {
-                                    System.out.println("Impossible request, you have already done an action");
-                                    readCommand();
-                                } catch (AlreadyActivatedProductionException e) {
-                                    System.out.println("Impossible request, you have already activated this production");
-                                    readCommand();
-                                } catch (InterruptedException | IOException e) {
-                                    e.printStackTrace();
-                                } catch (NoMessageReturnException e) {
-                                    readCommand();
+                                while(true){
+                                    try {
+                                        this.notifyObserver((commandParser.parseCommand(input.nextLine(),this.viewController,this).commandOn()));
+                                    } catch (InvalidCommandException e) {
+                                        System.out.println("Invalid command, type 'help' to check the command list");
+                                    } catch (SpentTokenException e) {
+                                        System.out.println("Impossible request, you have already done an action");
+                                    } catch (AlreadyActivatedProductionException e) {
+                                        System.out.println("Impossible request, you have already activated this production");
+                                    } catch (InterruptedException | IOException e) {
+                                        e.printStackTrace();
+                                    } catch (NoMessageReturnException ignored) {}
                                 }
-        }
+
+                            }
                     )
         ).start();
 
+    }
+
+    public void changeCommandParser(CommandParser commandParser){
+        this.commandParser = commandParser;
     }
 
 

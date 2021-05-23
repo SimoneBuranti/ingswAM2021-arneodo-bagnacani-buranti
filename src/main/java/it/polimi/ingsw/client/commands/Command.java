@@ -9,7 +9,59 @@ import java.util.Scanner;
 public abstract class Command {
 
 
-    public static Command parseCommand(String commandText, ViewController viewController,View view) throws InvalidCommandException {
+    public Message commandOn() throws SpentTokenException, InvalidCommandException, AlreadyActivatedProductionException, NoMessageReturnException {
+        throw new NoMessageReturnException();
+    }
+
+    public static String defToString(){
+        return "";
+    }
+
+    public static Resource fromStringToResource(String resource){
+        switch (resource) {
+            case "coin":
+                return Resource.COIN;
+            case "rock":
+                return Resource.ROCK;
+            case "shield":
+                return Resource.SHIELD;
+            case "servant":
+                return Resource.SERVANT;
+            default :
+                return null;
+        }
+    }
+
+    public static Resource askForOutputResource(){
+        Scanner in = new Scanner(System.in);
+        Resource o;
+        System.out.println("COIN: 'coin'        ROCK: 'rock'        SHIELD: 'shield'        SERVANT: 'servant'");
+        System.out.println("Output resource type: ");
+        while ((o = fromStringToResource(in.nextLine())) == null){
+            System.out.println("Invalid resource type");
+        }
+        return o;
+    }
+
+    public static Resource askForInputResource(){
+        Scanner in = new Scanner(System.in);
+        Resource i;
+        System.out.println("COIN: 'coin'        ROCK: 'rock'        SHIELD: 'shield'        SERVANT: 'servant'");
+        System.out.println("Output input type: ");
+        while ((i = fromStringToResource(in.nextLine())) == null){
+            System.out.println("Invalid resource type");
+        }
+        return i;
+    }
+
+    public String toString(){
+        return defToString();
+    }
+
+}
+
+
+/*public static Command parseCommand(String commandText, ViewController viewController,View view) throws InvalidCommandException {
 
         String prefix = "";
         String suffix = "";
@@ -29,7 +81,6 @@ public abstract class Command {
             throw new InvalidCommandException();
 
         switch(prefix){
-
 
             case "baseProductionOn" : {
                 return new BaseProductionCommand(viewController);
@@ -137,7 +188,7 @@ public abstract class Command {
 
             }
             case "showDecks" : {
-                return new ShowReserveCommand(view);
+                return new ShowProductionDeckCommand(view);
             }
             case "showReserve" : {
                 return new ShowReserveCommand(view);
@@ -147,57 +198,4 @@ public abstract class Command {
             }
         }
 
-    }
-
-    public Message commandOn() throws SpentTokenException, InvalidCommandException, AlreadyActivatedProductionException, NoMessageReturnException {
-        throw new NoMessageReturnException();
-    }
-
-    public static String defToString(){
-        return "";
-    }
-
-    public static Resource fromStringToResource(String resource){
-        switch (resource) {
-            case "coin":
-                return Resource.COIN;
-            case "rock":
-                return Resource.ROCK;
-            case "shield":
-                return Resource.SHIELD;
-            case "servant":
-                return Resource.SERVANT;
-            default :
-                return null;
-        }
-    }
-
-    public static Resource askForOutputResource(){
-        Scanner in = new Scanner(System.in);
-        Resource o;
-        System.out.println("COIN: 'coin'        ROCK: 'rock'        SHIELD: 'shield'        SERVANT: 'servant'");
-        System.out.println("Output resource type: ");
-        while ((o = fromStringToResource(in.nextLine())) == null){
-            System.out.println("Invalid resource type");
-        }
-        return o;
-    }
-
-    public static Resource askForInputResource(){
-        Scanner in = new Scanner(System.in);
-        Resource i;
-        System.out.println("COIN: 'coin'        ROCK: 'rock'        SHIELD: 'shield'        SERVANT: 'servant'");
-        System.out.println("Output input type: ");
-        while ((i = fromStringToResource(in.nextLine())) == null){
-            System.out.println("Invalid resource type");
-        }
-        return i;
-    }
-
-    public String toString(){
-        return defToString();
-    }
-
-}
-
-
+    }*/
