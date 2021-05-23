@@ -446,7 +446,9 @@ public class LightGame extends ViewObservable {
         return market.getExtra();
     }
 
-
+    public int getLorenzoPosition(){
+        return 0;
+    }
 
 
 

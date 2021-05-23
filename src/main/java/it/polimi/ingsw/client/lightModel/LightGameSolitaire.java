@@ -261,4 +261,9 @@ public class LightGameSolitaire extends LightGame{
         gameBoardOfPlayer.removeResourceStrongbox(resource, quantity);
         notifyObserver(new StrongboxNotification(gameBoardOfPlayer.getStrongbox()).serialize());
     }
+
+    @Override
+    public int getLorenzoPosition(){
+        return lorenzoTheMagnificent.getFaithIndicator();
+    }
 }

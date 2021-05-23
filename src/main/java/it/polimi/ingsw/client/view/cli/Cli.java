@@ -378,10 +378,12 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
             }
             case "ActionMarkerForCrossDouble":{
                 System.out.println("has moved by two position in the faith path.");
+                showFaithIndicator(viewController.getGame().getLorenzoPosition());
                 return;
             }
             case "ActionMarkerForCrossOnce":{
                 System.out.println("has moved by one position in the faith path.");
+                showFaithIndicator(viewController.getGame().getLorenzoPosition());
                 return;
             }
         }
@@ -589,6 +591,7 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
             else
                 System.out.print("0");
         }
+        System.out.println("");
 
         //second line-------------
 
@@ -608,6 +611,7 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
             System.out.print((char) 165);
         else
             System.out.print("0");
+        System.out.println("");
 
         // third line ---------------
 
@@ -625,6 +629,7 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
             else
                 System.out.print("0");
         }
+        System.out.println("");
     }
 
 
