@@ -9,20 +9,16 @@ import it.polimi.ingsw.server.model.requirements.Requirements;
  * this class represents the production-type leader card
  */
 public class LeaderCardProduction extends LeaderCard {
-    /**
-     * this attribute indicates the type of resource that can be used to activate the extra production of the leader card
-     */
-    private final Resource resourceProduction;
+
 
     /**
      * Default constructor
      * @param requirements : the type of card requirement
-     * @param point : the card victory points
-     * @param resourceProduction : the type of resource that can be used to activate the extra production
+     * @param points : the card victory points
+     * @param resourceEffect : the type of resource that can be used to activate the extra production
      */
-    public LeaderCardProduction(Requirements requirements, int point , Resource resourceProduction,int key){
-        super(requirements,point,key);
-        this.resourceProduction=resourceProduction;
+    public LeaderCardProduction(Requirements requirements, int points , Resource resourceEffect,int key){
+        super(requirements,points,resourceEffect,key);
     }
 
     /**
@@ -37,10 +33,10 @@ public class LeaderCardProduction extends LeaderCard {
 
         if(check(gameBoard)){
             if(gameBoard.getProductionCardActivated() == 0) {
-                newGameBoard = new ProductionGameBoard(gameBoard, resourceProduction);
+                newGameBoard = new ProductionGameBoard(gameBoard, resourceEffect);
                 newGameBoard.setProductionCardActivated();
             }else
-                newGameBoard = new ProductionGameBoardDouble(gameBoard, gameBoard.getResourceTypeFirst(), resourceProduction);
+                newGameBoard = new ProductionGameBoardDouble(gameBoard, gameBoard.getResourceTypeFirst(), resourceEffect);
             return newGameBoard;
         }else
             throw new RequirementsException();
@@ -57,10 +53,10 @@ public class LeaderCardProduction extends LeaderCard {
 
 
     public Resource getResourceProduction(){
-        return resourceProduction;
+        return resourceEffect;
     }
 
     public String toString(){
-        return "Ability: extra production with input = 1 " + resourceProduction + ", output = 1 resource of your choice and 1 faith point";
+        return "Ability: extra production with input = 1 " + resourceEffect + ", output = 1 resource of your choice and 1 faith point";
     }
 }

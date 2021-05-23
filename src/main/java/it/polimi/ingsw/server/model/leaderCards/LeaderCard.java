@@ -1,5 +1,6 @@
 package it.polimi.ingsw.server.model.leaderCards;
 
+import it.polimi.ingsw.server.model.Resource;
 import it.polimi.ingsw.server.model.exceptions.RequirementsException;
 import it.polimi.ingsw.server.model.gameBoard.GameBoardInterface;
 import it.polimi.ingsw.server.model.requirements.Requirements;
@@ -18,6 +19,8 @@ public class LeaderCard {
      */
     protected Requirements requirements;
 
+    protected final Resource resourceEffect;
+
     protected  int key;
 
     /**
@@ -25,9 +28,10 @@ public class LeaderCard {
      * @param requirements : the type of card requirement
      * @param points : the card victory points
      */
-    public LeaderCard(Requirements requirements,int points,int key) {
+    public LeaderCard(Requirements requirements,int points,Resource resourceEffect,int key) {
         this.points = points;
         this.requirements=requirements;
+        this.resourceEffect = resourceEffect;
         this.key=key;
     }
 
@@ -54,6 +58,10 @@ public class LeaderCard {
 
     public int getKey(){
         return key;
+    }
+
+    public Resource getResourceEffect(){
+        return resourceEffect;
     }
 
     public String toString(){

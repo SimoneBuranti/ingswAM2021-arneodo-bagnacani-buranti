@@ -1,6 +1,7 @@
 package it.polimi.ingsw.client.view;
 
 import it.polimi.ingsw.messages.Message;
+import it.polimi.ingsw.messages.NotEnoughSpaceErrorMessage;
 import it.polimi.ingsw.messages.observable.ShowAllOfPlayerMessage;
 import it.polimi.ingsw.server.model.Resource;
 import it.polimi.ingsw.server.model.leaderCards.LeaderCard;
@@ -67,4 +68,12 @@ public interface View  {
     void showReserve();
 
     void showMarket();
+
+    void showWhiteMarbleResources(int n,ArrayList<Resource> whiteMarbleResourceTypes);
+
+    void showSpaceError(NotEnoughSpaceErrorMessage msg);
+
+    void checkThreadRestart();
+
+    void showActionMarker(String actionType);
 }

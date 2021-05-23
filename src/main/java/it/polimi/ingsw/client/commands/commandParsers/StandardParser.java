@@ -3,12 +3,13 @@ package it.polimi.ingsw.client.commands.commandParsers;
 import it.polimi.ingsw.client.commands.*;
 import it.polimi.ingsw.client.view.View;
 import it.polimi.ingsw.client.view.ViewController;
+import it.polimi.ingsw.client.view.cli.Cli;
 
 public class StandardParser implements CommandParser{
 
 
     @Override
-    public Command parseCommand(String commandText, ViewController viewController, View view) throws InvalidCommandException {
+    public Command parseCommand(String commandText, ViewController viewController, Cli cli) throws InvalidCommandException {
 
         String prefix = "";
         String suffix = "";
@@ -35,10 +36,10 @@ public class StandardParser implements CommandParser{
                 return new HelpCommand();
             }
             case "showGameboard" : {
-                return new ShowGameBoardCommand(view);
+                return new ShowGameBoardCommand(cli);
             }
             case "showMarket" : {
-                return new ShowMarketCommand(view);
+                return new ShowMarketCommand(cli);
             }
             case "showPlayer" : {
 
@@ -60,10 +61,10 @@ public class StandardParser implements CommandParser{
 
             }
             case "showDecks" : {
-                return new ShowProductionDeckCommand(view);
+                return new ShowProductionDeckCommand(cli);
             }
             case "showReserve" : {
-                return new ShowReserveCommand(view);
+                return new ShowReserveCommand(cli);
             }
             default: {
                 throw new InvalidCommandException();

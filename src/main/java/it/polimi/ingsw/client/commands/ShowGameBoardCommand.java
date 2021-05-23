@@ -1,19 +1,20 @@
 package it.polimi.ingsw.client.commands;
 
 import it.polimi.ingsw.client.view.View;
+import it.polimi.ingsw.client.view.cli.Cli;
 import it.polimi.ingsw.messages.Message;
 
 public class ShowGameBoardCommand extends Command {
 
-    private View view;
+    private Cli cli;
 
-    public ShowGameBoardCommand(View view) {
-        this.view = view;
+    public ShowGameBoardCommand(Cli cli) {
+        this.cli = cli;
     }
 
     public Message commandOn() throws NoMessageReturnException {
 
-        view.showGameBoardOfPlayer();
+        cli.showGameBoardOfPlayer();
 
         throw new NoMessageReturnException();
     }

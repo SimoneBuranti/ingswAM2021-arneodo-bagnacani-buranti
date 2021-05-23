@@ -12,7 +12,7 @@ public class ProvaApp {
     public static void main(String[] args) {
 
 
-        (new HelpCommand()).commandOn();
+        //(new HelpCommand()).commandOn();
 
 
     }

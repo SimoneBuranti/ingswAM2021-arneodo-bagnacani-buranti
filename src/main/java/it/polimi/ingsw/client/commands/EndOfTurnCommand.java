@@ -1,24 +1,31 @@
 package it.polimi.ingsw.client.commands;
 
+import it.polimi.ingsw.client.commands.commandParsers.StandardParser;
 import it.polimi.ingsw.client.view.ViewController;
+import it.polimi.ingsw.client.view.cli.Cli;
 import it.polimi.ingsw.messages.EndOfProductionMessage;
+import it.polimi.ingsw.messages.EndOfTurnMessage;
 import it.polimi.ingsw.messages.Message;
 
 public class EndOfTurnCommand extends Command {
 
+    private Cli cli;
 
-    private ViewController viewController;
-
-    public EndOfTurnCommand(ViewController viewController) {
+    public EndOfTurnCommand(Cli cli, ViewController viewController) {
+        this.cli = cli;
         this.viewController = viewController;
     }
 
+    private ViewController viewController;
+
     public Message commandOn() throws SpentTokenException, InvalidCommandException {
 
-        if(!viewController.isActionToken())
-            return new EndOfProductionMessage();
+        if(viewController.isActionToken())
+            throw new InvalidCommandException();
 
-        throw new InvalidCommandException();
+        cli.changeCommandParser(new StandardParser());
+
+        return new EndOfTurnMessage();
     }
 
 

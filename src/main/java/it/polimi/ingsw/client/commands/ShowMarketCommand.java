@@ -1,19 +1,20 @@
 package it.polimi.ingsw.client.commands;
 
 import it.polimi.ingsw.client.view.View;
+import it.polimi.ingsw.client.view.cli.Cli;
 import it.polimi.ingsw.messages.Message;
 
 public class ShowMarketCommand extends Command {
 
-    private View view;
+    private Cli cli;
 
-    public ShowMarketCommand(View view) {
-        this.view = view;
+    public ShowMarketCommand(Cli cli) {
+        this.cli = cli;
     }
 
     public Message commandOn() throws NoMessageReturnException {
 
-        view.showMarket();
+        cli.showMarket();
 
         throw new NoMessageReturnException();
     }

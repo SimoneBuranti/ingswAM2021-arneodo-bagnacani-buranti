@@ -3,10 +3,11 @@ package it.polimi.ingsw.client.commands.commandParsers;
 import it.polimi.ingsw.client.commands.*;
 import it.polimi.ingsw.client.view.View;
 import it.polimi.ingsw.client.view.ViewController;
+import it.polimi.ingsw.client.view.cli.Cli;
 
 public class MyTurnParser implements CommandParser {
     @Override
-    public Command parseCommand(String commandText, ViewController viewController, View view) throws InvalidCommandException {
+    public Command parseCommand(String commandText, ViewController viewController, Cli cli) throws InvalidCommandException {
         String prefix = "";
         String suffix = "";
 
@@ -53,7 +54,7 @@ public class MyTurnParser implements CommandParser {
                 return new EndOfProductionCommand(viewController);
             }
             case "endTurn": {
-                return new EndOfTurnCommand(viewController);
+                return new EndOfTurnCommand(cli,viewController);
             }
             case "exit": {
                 return new ExitCommand();
@@ -107,10 +108,10 @@ public class MyTurnParser implements CommandParser {
                 return new ProductionCommand(viewController);
             }
             case "showGameboard": {
-                return new ShowGameBoardCommand(view);
+                return new ShowGameBoardCommand(cli);
             }
             case "showMarket": {
-                return new ShowMarketCommand(view);
+                return new ShowMarketCommand(cli);
             }
             case "showPlayer": {
 
@@ -132,10 +133,10 @@ public class MyTurnParser implements CommandParser {
 
             }
             case "showDecks": {
-                return new ShowProductionDeckCommand(view);
+                return new ShowProductionDeckCommand(cli);
             }
             case "showReserve": {
-                return new ShowReserveCommand(view);
+                return new ShowReserveCommand(cli);
             }
             default: {
                 throw new InvalidCommandException();

@@ -22,4 +22,8 @@ public class DoubleWhiteMarbleEffectMessage extends Message {
     public void accept(MessageVisitor v) {
         v.visit(this);
     }
+
+    public String toString(){
+        return "There are "+whiteMarbleNumber+" white marble, choose a resource type for each one";
+    }
 }

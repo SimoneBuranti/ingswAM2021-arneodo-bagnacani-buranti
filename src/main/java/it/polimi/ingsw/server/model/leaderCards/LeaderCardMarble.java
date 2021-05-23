@@ -11,20 +11,15 @@ import it.polimi.ingsw.server.model.requirements.Requirements;
  * this class represents the white marble-type leader card
  */
 public class LeaderCardMarble extends LeaderCard{
-    /**
-     * this attribute indicates the type of resource that can be taken through the white marble in the market action
-     */
-    private final Resource whiteMarble;
 
     /**
      * Default constructor
      * @param requirements : the type of card requirement
-     * @param point : the card victory points
-     * @param whiteMarble : the type of resource that can be taken through the white marble
+     * @param points : the card victory points
+     * @param resourceEffect : the type of resource that can be taken through the white marble
      */
-    public LeaderCardMarble(Requirements requirements, int point , Resource whiteMarble,int key){
-        super(requirements,point, key);
-        this.whiteMarble=whiteMarble;
+    public LeaderCardMarble(Requirements requirements,int points,Resource resourceEffect,int key){
+        super(requirements,points,resourceEffect,key);
     }
 
 
@@ -40,10 +35,10 @@ public class LeaderCardMarble extends LeaderCard{
 
         if(check(gameBoard)){
             if(gameBoard.getWhiteMarbleCardActivated() == 0) {
-                newGameBoard = new WhiteMarbleGameBoard(gameBoard, whiteMarble);
+                newGameBoard = new WhiteMarbleGameBoard(gameBoard, resourceEffect);
                 newGameBoard.setWhiteMarbleCardActivated();
             }else
-                newGameBoard = new WhiteMarbleGameBoardDouble(gameBoard, gameBoard.getResourceTypeFirst(), whiteMarble);
+                newGameBoard = new WhiteMarbleGameBoardDouble(gameBoard, gameBoard.getResourceTypeFirst(), resourceEffect);
             return newGameBoard;
         }else
             throw new RequirementsException();
@@ -62,6 +57,6 @@ public class LeaderCardMarble extends LeaderCard{
     }
 
     public String toString(){
-        return "Ability: white marble exchange with " + whiteMarble + " resource";
+        return "Ability: white marble exchange with " + resourceEffect + " resource";
     }
 }

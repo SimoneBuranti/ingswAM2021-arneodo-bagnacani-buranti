@@ -9,21 +9,15 @@ import it.polimi.ingsw.server.model.Resource;
  * this class represents the storage-type leader card
  */
 public class LeaderCardStorage extends LeaderCard {
-    /**
-     * this attribute indicates the type of resource that can be contained in the extra storage
-     * obtained by activating this card
-     */
-    private final Resource specialStorage;
 
     /**
      * Default constructor
      * @param requirements : the type of card requirement
-     * @param point : the card victory points
-     * @param specialStorage : the type of resource that can be contained in the extra storage
+     * @param points : the card victory points
+     * @param resourceEffect : the type of resource that can be contained in the extra storage
      */
-    public LeaderCardStorage(Requirements requirements, int point, Resource specialStorage,int key) {
-        super(requirements, point,key);
-        this.specialStorage=specialStorage;
+    public LeaderCardStorage(Requirements requirements, int points, Resource resourceEffect,int key) {
+        super(requirements, points,resourceEffect,key);
     }
 
     /**
@@ -35,7 +29,7 @@ public class LeaderCardStorage extends LeaderCard {
     @Override
     public GameBoardInterface abilityActivation(GameBoardInterface gameBoard) throws RequirementsException {
         if(check(gameBoard)){
-            gameBoard.setStorageExtra(specialStorage);
+            gameBoard.setStorageExtra(resourceEffect);
             gameBoard.setStorageCardActivated();
             return gameBoard;
         }else
@@ -52,6 +46,6 @@ public class LeaderCardStorage extends LeaderCard {
     }
 
     public String toString(){
-        return "Ability: an extra storage where you can put 2 " + specialStorage;
+        return "Ability: an extra storage where you can put 2 " + resourceEffect;
     }
 }

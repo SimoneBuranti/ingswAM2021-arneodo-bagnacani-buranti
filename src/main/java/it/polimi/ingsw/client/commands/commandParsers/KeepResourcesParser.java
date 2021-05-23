@@ -5,6 +5,7 @@ import it.polimi.ingsw.client.commands.InvalidCommandException;
 import it.polimi.ingsw.client.commands.WhiteMarbleCommand;
 import it.polimi.ingsw.client.view.View;
 import it.polimi.ingsw.client.view.ViewController;
+import it.polimi.ingsw.client.view.cli.Cli;
 import it.polimi.ingsw.server.model.Resource;
 
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ public class KeepResourcesParser implements CommandParser{
 
 
     @Override
-    public Command parseCommand(String commandText, ViewController viewController, View view) throws InvalidCommandException {
+    public Command parseCommand(String commandText, ViewController viewController, Cli cli) throws InvalidCommandException {
 
         Map<Resource,Integer> choosen = new HashMap<>();
         Map<Resource,Integer> picked = new HashMap<>();

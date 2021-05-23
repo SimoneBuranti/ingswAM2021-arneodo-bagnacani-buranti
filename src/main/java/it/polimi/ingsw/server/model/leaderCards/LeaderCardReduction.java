@@ -9,20 +9,15 @@ import it.polimi.ingsw.server.model.requirements.Requirements;
  * this class represents the reduction-type leader card
  */
 public class LeaderCardReduction extends LeaderCard{
-    /**
-     * this attribute indicates the type of resource that can be subtracted from the cost of production cards
-     */
-    private final Resource costReduction;
 
     /**
      * Default constructor
      * @param requirements : the type of card requirement
-     * @param point : the card victory points
-     * @param costReduction : the type of resource that can be subtracted from the cost of production cards
+     * @param points : the card victory points
+     * @param resourceEffect : the type of resource that can be subtracted from the cost of production cards
      */
-    public LeaderCardReduction(Requirements requirements, int point , Resource costReduction,int key){
-        super(requirements,point,key);
-        this.costReduction=costReduction;
+    public LeaderCardReduction(Requirements requirements,int points,Resource resourceEffect,int key){
+        super(requirements,points,resourceEffect,key);
     }
 
 
@@ -38,10 +33,10 @@ public class LeaderCardReduction extends LeaderCard{
 
         if(check(gameBoard)){
             if(gameBoard.getReductionCardActivated() == 0) {
-                newGameBoard = new ReductionGameBoard(gameBoard, costReduction);
+                newGameBoard = new ReductionGameBoard(gameBoard, resourceEffect);
                 newGameBoard.setReductionCardActivated();
             }else
-                newGameBoard = new ReductionGameBoardDouble(gameBoard, gameBoard.getResourceTypeFirst(), costReduction);
+                newGameBoard = new ReductionGameBoardDouble(gameBoard, gameBoard.getResourceTypeFirst(), resourceEffect);
             return newGameBoard;
         }else
             throw new RequirementsException();
@@ -60,6 +55,6 @@ public class LeaderCardReduction extends LeaderCard{
     }
 
     public String toString(){
-        return "Ability: you can subtract a " + costReduction + " from the cost of production cards";
+        return "Ability: you can subtract a " + resourceEffect + " from the cost of production cards";
     }
 }

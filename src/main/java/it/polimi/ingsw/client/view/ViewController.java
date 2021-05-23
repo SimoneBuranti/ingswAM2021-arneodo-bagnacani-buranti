@@ -96,8 +96,7 @@ public class ViewController implements MessageVisitor, ViewObserver {
 
     @Override
     public void visit(NotEnoughSpaceErrorMessage msg) {
-        view.notifyError(msg);
-
+        view.showSpaceError(msg);
     }
 
     @Override
@@ -162,7 +161,8 @@ public class ViewController implements MessageVisitor, ViewObserver {
 
     @Override
     public void visit(DoubleWhiteMarbleEffectMessage msg) {
-
+        view.notifyError(msg);
+        view.showWhiteMarbleResources(msg.getWhiteMarbleNumber(),game.getWhiteMarbleResourceTypes());
     }
 
     @Override
@@ -192,6 +192,7 @@ public class ViewController implements MessageVisitor, ViewObserver {
     public void visit(UpdateInitBooleanMessage msg) {
         game.setInitResource(msg.isInitResource());
         game.setInitLeader(msg.isInitLeader());
+        view.checkThreadRestart();
     }
 
     @Override
@@ -435,6 +436,7 @@ public class ViewController implements MessageVisitor, ViewObserver {
     public void visit(UseActionMarkerMessage msg) {
         try {
             game.actionMarkerEffect(msg.getActionType());
+            view.showActionMarker(msg.getActionType());
         } catch (IOException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
@@ -625,8 +627,10 @@ public class ViewController implements MessageVisitor, ViewObserver {
             view.askInitResource();
             game.setInitResource(true);
         }
-        else
-            view.yourTurn(); }
+        else{
+            view.yourTurn();
+        }
+    }
 
     @Override
     public void visit(ChangeTurnMessage msg) {

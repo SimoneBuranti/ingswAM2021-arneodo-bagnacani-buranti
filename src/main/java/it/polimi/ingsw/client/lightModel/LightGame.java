@@ -158,6 +158,15 @@ public class LightGame extends ViewObservable {
         }
     }
 
+    public ArrayList<Resource> getWhiteMarbleResourceTypes(){
+        ArrayList<Resource> resourceTypes = new ArrayList<>();
+        ArrayList<LeaderCard> leaderCards = getLeaderCardActivated();
+        for(LeaderCard lc : leaderCards){
+            resourceTypes.add(lc.getResourceEffect());
+        }
+        return resourceTypes;
+    }
+
     public ArrayList<Integer> getAvailableProductionCards(){
         return gameBoardOfPlayer.getAvailableProductionCards();
     }

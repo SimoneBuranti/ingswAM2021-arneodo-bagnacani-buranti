@@ -27,7 +27,7 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
 
     private ViewController viewController;
 
-    private CommandParser commandParser = new StandardParser();
+    private CommandParser commandParser;
 
     private Scanner input = new Scanner(System.in);
 
@@ -238,7 +238,7 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
     }
     @Override
     public void yourTurn() {
-
+        changeCommandParser(new MyTurnParser());
         System.out.println("It's your turn");
     }
 
@@ -263,7 +263,7 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
     }
     @Override
     public void askLeaderCardToKeep(ArrayList<LeaderCard> leaderCards)  throws IOException, InterruptedException {
-        System.out.println("Please choose 2 from the following leader cards to keep in your game board : ");
+        System.out.println("Please choose 2 from the following leader cards to keep in your game board [card1 card2]: ");
         showLeaderCards(leaderCards);
         int contOne =0;
         int contSecond=0;
@@ -349,6 +349,45 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
     }
 
     @Override
+    public void checkThreadRestart(){
+        if (viewController.getGame().isInitResource()){
+            changeCommandParser(new StandardParser());
+            commandThread();
+        }
+    }
+
+    @Override
+    public void showActionMarker(String actionType) {
+        System.out.print("Lorenzo the Magnificient ");
+        switch (actionType) {
+            case "ActionMarkerProductionYellow":{
+                System.out.println("has picked two cards from yellow production decks.");
+                return;
+            }
+            case "ActionMarkerProductionBlue":{
+                System.out.println("has picked two cards from blue production decks.");
+                return;
+            }
+            case "ActionMarkerProductionGreen":{
+                System.out.println("has picked two cards from green production decks.");
+                return;
+            }
+            case "ActionMarkerProductionViolet":{
+                System.out.println("has picked two cards from violet production decks.");
+                return;
+            }
+            case "ActionMarkerForCrossDouble":{
+                System.out.println("has moved by two position in the faith path.");
+                return;
+            }
+            case "ActionMarkerForCrossOnce":{
+                System.out.println("has moved by one position in the faith path.");
+                return;
+            }
+        }
+    }
+
+    @Override
     public void askInitResource() throws IOException, InterruptedException {
         Resource msg=null;
         Resource msg2=null;
@@ -359,6 +398,9 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
         System.out.println("for resource [coin,rock,servant,shield]");
         if(viewController.getGame().getPosition()==1){
             System.out.println("hey my Lord you can't take any init resource");
+            notifyObserver(new EndOfTurnMessage());
+            changeCommandParser(new StandardParser());
+            commandThread();
         }
         else if(viewController.getGame().getPosition()==2)
         {
@@ -370,6 +412,9 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
                 {   msg = (Command.fromStringToResource(s));
                     resources.add(msg);
                     notifyObserver(new InitialResourcesMessage(resources));
+                    notifyObserver(new EndOfTurnMessage());
+                    changeCommandParser(new StandardParser());
+                    commandThread();
                     return;
                 }
                 else
@@ -389,14 +434,15 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
                     if (cont==2)
                     {
                         notifyObserver(new InitialResourcesMessage(resources));
+                        notifyObserver(new EndOfTurnMessage());
+                        changeCommandParser(new StandardParser());
+                        commandThread();
                         return;
                     }
                 }
                 else
                 { System.out.println("Invalid resource, try again"); }
             } }
-
-
     }
 
 
@@ -805,6 +851,18 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
         showMarketGrid(viewController.getGame().getMarketGrid());
         System.out.print("Extra marble: ");
         showMarketExtra(viewController.getGame().getMarketExtra());
+    }
+
+    @Override
+    public void showWhiteMarbleResources(int n,ArrayList<Resource> whiteMarbleResourceTypes) {
+        System.out.println("You can exchange white marbles with "+ whiteMarbleResourceTypes);
+        changeCommandParser(new WhiteMarbleParser(n,whiteMarbleResourceTypes));
+    }
+
+    @Override
+    public void showSpaceError(NotEnoughSpaceErrorMessage msg) {
+        System.out.println(msg.toString());
+        changeCommandParser(new KeepResourcesParser(msg.getReources()));
     }
 
     public void showResourceBox(Map<Resource,Integer> resourceBox) {

@@ -2,6 +2,7 @@ package it.polimi.ingsw.client.commands.commandParsers;
 
 import it.polimi.ingsw.client.commands.*;
 import it.polimi.ingsw.client.view.*;
+import it.polimi.ingsw.client.view.cli.Cli;
 import it.polimi.ingsw.messages.WhiteMarbleChoosenResourcesMessage;
 import it.polimi.ingsw.server.model.Resource;
 
@@ -19,7 +20,7 @@ public class WhiteMarbleParser implements CommandParser {
     }
 
     @Override
-    public Command parseCommand(String commandText, ViewController viewController, View view) throws InvalidCommandException {
+    public Command parseCommand(String commandText, ViewController viewController, Cli cli) throws InvalidCommandException {
 
         String word = "";
         Resource resource;

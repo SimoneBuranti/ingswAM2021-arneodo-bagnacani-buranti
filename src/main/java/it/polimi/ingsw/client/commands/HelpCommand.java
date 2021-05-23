@@ -23,7 +23,7 @@ public class HelpCommand extends Command{
                                         };
 
 
-    public Message commandOn(){
+    public Message commandOn() throws NoMessageReturnException {
         for (int i = 0; i < commands.length ;i++){
             if (i%4==0){
                 System.out.println("");
@@ -32,7 +32,7 @@ public class HelpCommand extends Command{
             for(int j = 0;j<(space-commands[i].length());j++)
                 System.out.print(" ");
         }
-        return null;
+        throw new NoMessageReturnException();
     }
 
     public static String defToString(){
