@@ -131,6 +131,8 @@ public class LightGame extends ViewObservable {
         reserve = new LightReserve();
 
         gameBoardOfPlayer = new LightGameBoard(nickname);
+
+        actionToken = true;
     }
 
     public void configInit() throws IOException, InterruptedException {

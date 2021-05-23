@@ -8,8 +8,11 @@ import it.polimi.ingsw.client.view.cli.Cli;
 public class MyTurnParser implements CommandParser {
     @Override
     public Command parseCommand(String commandText, ViewController viewController, Cli cli) throws InvalidCommandException {
+
         String prefix = "";
         String suffix = "";
+
+        System.out.println("Sono in command parser e hai scritto : "+commandText);
 
         for (int i = 0; i < commandText.length(); i++) {
             if (commandText.charAt(i) != ' ') {
@@ -94,12 +97,12 @@ public class MyTurnParser implements CommandParser {
                     if (cont == 0 && (suffix.charAt(i) == 'r' || suffix.charAt(i) == 'c')) {
                         rc = suffix.charAt(i);
                         cont++;
-                    } else if (cont == 1 && suffix.charAt(i) == ' ') {
+                    } else if (cont == 1 && suffix.charAt(i) != ' ') {
                         cont++;
-                        n = suffix.charAt(i + 1) - '0';
+                        n = suffix.charAt(i) - '0';
                     }
-
                 }
+                System.out.println(prefix + " " + suffix + " "+ rc+n);
                 if (cont != 2 || n < 1 || n > 3)
                     throw new InvalidCommandException();
                 return new MarketActionCommand(rc, n, viewController);

@@ -282,9 +282,10 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
                     return;
                 }
                 else
-                { contOne = input.nextInt() - 1;
+                {   contOne = input.nextInt() - 1;
                     if (contOne>4 || contOne<0)
                         System.out.println("Invalid command, try again");
+                    //String line = input.nextLine();
                 }
             }
             else if(input.hasNextLine()){

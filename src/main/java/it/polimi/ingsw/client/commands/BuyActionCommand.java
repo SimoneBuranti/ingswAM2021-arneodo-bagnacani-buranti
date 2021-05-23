@@ -24,7 +24,6 @@ public class BuyActionCommand extends Command {
             return new BuyProductionCardMessage(this.deckNumber,this.columnNumber);
         }
         throw new SpentTokenException();
-
     }
 
     public String toString(){

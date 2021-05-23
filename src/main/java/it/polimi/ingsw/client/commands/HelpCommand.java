@@ -32,6 +32,7 @@ public class HelpCommand extends Command{
             for(int j = 0;j<(space-commands[i].length());j++)
                 System.out.print(" ");
         }
+        System.out.println("");
         throw new NoMessageReturnException();
     }
 

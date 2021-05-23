@@ -630,6 +630,8 @@ public class ViewController implements MessageVisitor, ViewObserver {
         else{
             view.yourTurn();
         }
+        game.setActionToken(true);
+        game.resetProductionTokens();
     }
 
     @Override
