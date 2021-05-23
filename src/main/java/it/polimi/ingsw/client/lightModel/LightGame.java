@@ -319,21 +319,58 @@ public class LightGame extends ViewObservable {
 
     public ArrayList<ProductionCard> deckNotification(){
         ArrayList<ProductionCard> list = new ArrayList<>();
-        list.add(deckProductionCardOneBlu.get(0));
-        list.add(deckProductionCardTwoBlu.get(0));
-        list.add(deckProductionCardThreeBlu.get(0));
+        if(!deckProductionCardOneBlu.isEmpty()) {
+            list.add(deckProductionCardOneBlu.get(0));
+        }else
+            list.add(null);
+        if(!deckProductionCardTwoBlu.isEmpty()) {
+            list.add(deckProductionCardTwoBlu.get(0));
+        }else
+            list.add(null);
+        if(!deckProductionCardThreeBlu.isEmpty()) {
+            list.add(deckProductionCardThreeBlu.get(0));
+        }else
+            list.add(null);
 
-        list.add(deckProductionCardOneGreen.get(0));
-        list.add(deckProductionCardTwoGreen.get(0));
-        list.add(deckProductionCardThreeGreen.get(0));
+        if(!deckProductionCardOneGreen.isEmpty()) {
+            list.add(deckProductionCardOneGreen.get(0));
+        }else
+            list.add(null);
+        if(!deckProductionCardTwoGreen.isEmpty()) {
+            list.add(deckProductionCardTwoGreen.get(0));
+        }else
+            list.add(null);
+        if(!deckProductionCardThreeGreen.isEmpty()) {
+            list.add(deckProductionCardThreeGreen.get(0));
+        }else
+            list.add(null);
 
-        list.add(deckProductionCardOneYellow.get(0));
-        list.add(deckProductionCardTwoYellow.get(0));
-        list.add(deckProductionCardThreeYellow.get(0));
+        if(!deckProductionCardOneYellow.isEmpty()) {
+            list.add(deckProductionCardOneYellow.get(0));
+        }else
+            list.add(null);
+        if(!deckProductionCardTwoYellow.isEmpty()) {
+            list.add(deckProductionCardTwoYellow.get(0));
+        }else
+            list.add(null);
+        if(!deckProductionCardThreeYellow.isEmpty()) {
+            list.add(deckProductionCardThreeYellow.get(0));
+        }else
+            list.add(null);
 
-        list.add(deckProductionCardOneViolet.get(0));
-        list.add(deckProductionCardTwoViolet.get(0));
-        list.add(deckProductionCardThreeViolet.get(0));
+
+        if(!deckProductionCardOneViolet.isEmpty()) {
+            list.add(deckProductionCardOneViolet.get(0));
+        }else
+            list.add(null);
+        if(!deckProductionCardTwoViolet.isEmpty()) {
+            list.add(deckProductionCardTwoViolet.get(0));
+        }else
+            list.add(null);
+        if(!deckProductionCardThreeViolet.isEmpty()) {
+            list.add(deckProductionCardThreeViolet.get(0));
+        }else
+            list.add(null);
         return list;
 
     }
