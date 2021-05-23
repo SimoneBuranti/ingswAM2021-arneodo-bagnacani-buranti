@@ -12,7 +12,7 @@ public class MyTurnParser implements CommandParser {
         String prefix = "";
         String suffix = "";
 
-        System.out.println("Sono in command parser e hai scritto : "+commandText);
+        System.out.println(this+": "+commandText);
 
         for (int i = 0; i < commandText.length(); i++) {
             if (commandText.charAt(i) != ' ') {

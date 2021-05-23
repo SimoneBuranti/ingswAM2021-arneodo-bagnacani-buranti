@@ -14,6 +14,7 @@ public class StandardParser implements CommandParser{
         String prefix = "";
         String suffix = "";
 
+        System.out.println(this+": "+commandText);
         for (int i = 0;i<commandText.length();i++){
             if (commandText.charAt(i) != ' '){
                 prefix = prefix + commandText.charAt(i);

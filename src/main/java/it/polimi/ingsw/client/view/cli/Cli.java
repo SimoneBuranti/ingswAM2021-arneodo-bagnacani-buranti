@@ -52,9 +52,11 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
     public void commandThread(){
 
         (new Thread( () -> {
+                                String commandText;
                                 while(true){
                                     try {
-                                        this.notifyObserver((commandParser.parseCommand(input.nextLine(),this.viewController,this).commandOn()));
+                                        commandText = input.nextLine();
+                                        this.notifyObserver((commandParser.parseCommand(commandText,this.viewController,this).commandOn()));
                                     } catch (InvalidCommandException e) {
                                         System.out.println("Invalid command, type 'help' to check the command list");
                                     } catch (SpentTokenException e) {

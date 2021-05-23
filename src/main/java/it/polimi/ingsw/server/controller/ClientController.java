@@ -194,19 +194,6 @@ public class ClientController implements MessageVisitor {
     public void visit(RestartAnswerMessage msg) throws IOException, InterruptedException { server.getGameController().handleMessage(msg, this); }
 
 
-    //-----------------------------Client Controller Handled ------------------------------------------------------
-
-    /*
-        if (turnCheck()){
-
-        } else {
-            clientHandler.sendMessage(new NotYourTurnErrorMessage());
-        }
-     */
-
-    //***********************************************************************************************************
-
-
     @Override
     public void visit(ActivateLeaderCardMessage msg) throws IOException, InterruptedException {
         if (turnCheck()){
@@ -353,7 +340,7 @@ public class ClientController implements MessageVisitor {
     public void visit(PushRowMessage msg) throws IOException, InterruptedException {
         if (turnCheck()){
             try {
-                game.pushColumnInMarket(msg.getRowNumber());
+                game.pushRowInMarket(msg.getRowNumber());
             } catch (NotEnoughSpaceInStorageException e) {
                 clientHandler.sendMessage(new NotEnoughSpaceErrorMessage(e.getResources()));
             } catch (WhiteMarbleException e) {
@@ -609,3 +596,16 @@ public class ClientController implements MessageVisitor {
 
 
 }
+
+
+//-----------------------------Client Controller Handled ------------------------------------------------------
+
+    /*
+        if (turnCheck()){
+
+        } else {
+            clientHandler.sendMessage(new NotYourTurnErrorMessage());
+        }
+     */
+
+//***********************************************************************************************************

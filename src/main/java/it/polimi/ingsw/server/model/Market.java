@@ -111,7 +111,7 @@ public class Market extends Observable {
 
         for(j=0; j<4; j++)
             try {
-                grid[chosenRow][j].giveResource(player);
+                grid[j][chosenRow].giveResource(player);
             }catch(WhiteMarbleException e){
                 exception.increase();
         }
@@ -119,8 +119,8 @@ public class Market extends Observable {
         temp=extra;
         extra=grid[chosenRow][0];
         for(j=1; j<4; j++)
-            grid[chosenRow][j-1]=grid[chosenRow][j];
-        grid[chosenRow][3]=temp;
+            grid[j-1][chosenRow]=grid[j][chosenRow];
+        grid[3][chosenRow]=temp;
 
         if(exception.getN() == 0)
             player.takeFromMarket();

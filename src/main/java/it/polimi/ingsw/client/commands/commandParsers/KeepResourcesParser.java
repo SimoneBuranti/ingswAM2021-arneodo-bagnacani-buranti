@@ -24,6 +24,7 @@ public class KeepResourcesParser implements CommandParser{
     @Override
     public Command parseCommand(String commandText, ViewController viewController, Cli cli) throws InvalidCommandException {
 
+        System.out.println(this+": "+commandText);
         Map<Resource,Integer> choosen = new HashMap<>();
         Map<Resource,Integer> picked = new HashMap<>();
 

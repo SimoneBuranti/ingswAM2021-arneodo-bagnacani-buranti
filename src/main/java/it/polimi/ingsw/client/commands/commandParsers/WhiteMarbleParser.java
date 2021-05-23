@@ -22,6 +22,7 @@ public class WhiteMarbleParser implements CommandParser {
     @Override
     public Command parseCommand(String commandText, ViewController viewController, Cli cli) throws InvalidCommandException {
 
+        System.out.println(this+": "+commandText);
         String word = "";
         Resource resource;
 

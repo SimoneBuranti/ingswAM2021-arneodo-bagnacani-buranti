@@ -6,21 +6,36 @@ public class HelpCommand extends Command{
 
     private static final int space = 25;
 
-    private final String[] commands = { BaseProductionCommand.defToString(),
-                                        ProductionCommand.defToString(),
-                                        ExtraProductionCommand.defToString(),
-                                        EndOfProductionCommand.defToString(),
-                                        BuyActionCommand.defToString(),
-                                        MarketActionCommand.defToString(),
-                                        LeaderCardActionCommand.defToString(),
-                                        EndOfTurnCommand.defToString(),
-                                        HelpCommand.defToString(),
-                                        ShowMarketCommand.defToString(),
-                                        ShowReserveCommand.defToString(),
-                                        ShowGameBoardCommand.defToString(),
-                                        ShowPlayerCommand.defToString(),
-                                        ExitCommand.defToString(),
-                                        };
+    private final String[] commands = {
+
+            HelpCommand.defToString(),
+
+            ProductionCommand.defToString(),
+            BaseProductionCommand.defToString(),
+            ExtraProductionCommand.defToString(),
+            EndOfProductionCommand.defToString(),
+
+            BuyActionCommand.defToString(),
+
+            MarketActionCommand.defToString(),
+
+            LeaderCardActionCommand.defToString(),
+
+            EndOfTurnCommand.defToString(),
+
+            ExitCommand.defToString(),
+
+            KeepResourcesCommand.defToString(),
+            WhiteMarbleCommand.defToString(),
+
+            ShowGameBoardCommand.defToString(),
+            ShowMarketCommand.defToString(),
+            ShowPlayerCommand.defToString(),
+            ShowProductionDeckCommand.defToString(),
+            ShowReserveCommand.defToString(),
+
+
+        };
 
 
     public Message commandOn() throws NoMessageReturnException {

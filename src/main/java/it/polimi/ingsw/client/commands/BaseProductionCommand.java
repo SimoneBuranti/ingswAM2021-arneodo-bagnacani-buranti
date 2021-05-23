@@ -27,7 +27,7 @@ public class BaseProductionCommand extends Command {
     }
 
     public static String defToString(){
-        return "extraProductionOn";
+        return "baseProductionOn";
     }
 
     public String toString(){
