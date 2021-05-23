@@ -37,6 +37,5 @@ public class LightActionMarkerProductionViolet extends LightActionMarker {
      */
     public void actionMarkerEffect(LightGameSolitaire game) throws IOException, InterruptedException {
         game.removeProductionCard(new Violet());
-        game.removeProductionCard(new Violet());
     }
 }

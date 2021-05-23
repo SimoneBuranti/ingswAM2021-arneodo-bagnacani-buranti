@@ -125,24 +125,28 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
 
     public void showLeaderCards(ArrayList<LeaderCard> leaderCards){
         for(int i = 0; i < leaderCards.size(); i++){
-            System.out.print("        ");
-            System.out.println("--------------------------------------------------------------------------------------------");
+            printSpaces(8);
+            printDash(92);
+            System.out.println();
 
-            System.out.print("        ");
+            printSpaces(8);
             System.out.println( i+1 + " leader card");
 
-            System.out.print("        ");
+            printSpaces(8);
             System.out.println(leaderCards.get(i).getRequirements().toString());
 
-            System.out.print("        ");
+            printSpaces(8);
             System.out.println(leaderCards.get(i).toString());
 
-            System.out.print("        ");
+            printSpaces(8);
             System.out.print("Victory points: ");
             System.out.println(leaderCards.get(i).getPoints());
         }
-        System.out.print("        ");
-        System.out.println("--------------------------------------------------------------------------------------------");
+        if(leaderCards.size() > 0) {
+            printSpaces(8);
+            printDash(92);
+            System.out.println();
+        }
     }
 
     @Override
@@ -456,6 +460,10 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
         int spaces = 50;
         int n = 8;
 
+        System.out.print("                          column 0" +
+                "                                            column 1" +
+                "                                            column 2\n");
+
         printSpaces(n);
         printDash(spaces * 3);
 
@@ -641,6 +649,7 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
     public void showDeckProductionCards(ArrayList<ProductionCard> productionCards) {
         int spaces = 42;
         int n = 8;
+        int numDeck = 1;
         System.out.println("Production card decks:" );
 
         System.out.print("               green" +
@@ -653,6 +662,15 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
 
             printSpaces(n);
             printDash(spaces * 4);
+            System.out.println();
+
+            printSpaces(n);
+            for(int j = 0; j < 4; j++) {
+                showNumDeck(numDeck, spaces);
+                numDeck++;
+            }
+
+            System.out.print("|");
             System.out.println();
 
             //---------------------------
@@ -714,6 +732,15 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
             System.out.println();
 
         }
+    }
+
+    public void showNumDeck(int numDeck, int spaces){
+        String temp;
+        int chars;
+        temp = "| deck number = " + numDeck;
+        chars = temp.length();
+        System.out.print(temp);
+        printSpaces(spaces - chars);
     }
 
     public void showLevelProductionCard(ProductionCard productionCard, int spaces){

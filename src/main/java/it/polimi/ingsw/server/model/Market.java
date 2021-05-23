@@ -104,27 +104,29 @@ public class Market extends Observable {
      * @throws LastSpaceReachedException : the exception which is thrown when the faith indicator has reached the last papal space
      * @throws WhiteMarbleException : the exception which is thrown when the player has activated two white marble-type leader cards
      */
-    public void pushRow(int chosenRow, Player player) throws CallForCouncilException, LastSpaceReachedException, WhiteMarbleException, NotEnoughSpaceInStorageException {
+    public void pushRow(int chosenRow, Player player, Game game) throws CallForCouncilException, LastSpaceReachedException, WhiteMarbleException, NotEnoughSpaceInStorageException {
         int j;
         WhiteMarbleException exception = new WhiteMarbleException(0);
         Marble temp;
 
-        for(j=0; j<4; j++)
+        for(j=0; j<4; j++) {
             try {
-                grid[j][chosenRow].giveResource(player);
-            }catch(WhiteMarbleException e){
+                grid[chosenRow][j].giveResource(player);
+            } catch (WhiteMarbleException e) {
                 exception.increase();
+            }
         }
 
         temp=extra;
         extra=grid[chosenRow][0];
         for(j=1; j<4; j++)
-            grid[j-1][chosenRow]=grid[j][chosenRow];
-        grid[3][chosenRow]=temp;
+            grid[chosenRow][j-1]=grid[chosenRow][j];
+        grid[chosenRow][3]=temp;
 
-        if(exception.getN() == 0)
+        if(exception.getN() == 0) {
+            game.notifyResultFromMarket(player.getBuffer());
             player.takeFromMarket();
-        else
+        }else
             throw exception;
       }
 
@@ -141,7 +143,7 @@ public class Market extends Observable {
      * @throws LastSpaceReachedException : the exception which is thrown when the faith indicator has reached the last papal space
      * @throws WhiteMarbleException : the exception which is thrown when the player has activated two white marble-type leader cards
      */
-    public void pushColumn(int chosenColumn, Player player) throws CallForCouncilException, LastSpaceReachedException, WhiteMarbleException, NotEnoughSpaceInStorageException {
+    public void pushColumn(int chosenColumn, Player player, Game game) throws CallForCouncilException, LastSpaceReachedException, WhiteMarbleException, NotEnoughSpaceInStorageException {
         int i;
         WhiteMarbleException exception = new WhiteMarbleException(0);
         Marble temp;
@@ -153,17 +155,20 @@ public class Market extends Observable {
             }
         }
 
-        temp=extra;
-        extra=grid[0][chosenColumn];
+        temp = extra;
+        extra = grid[0][chosenColumn];
         for(i=1; i<3; i++)
             grid[i-1][chosenColumn]=grid[i][chosenColumn];
         grid[2][chosenColumn]=temp;
 
-        if(exception.getN() == 0)
+
+        if(exception.getN() == 0) {
+            game.notifyResultFromMarket(player.getBuffer());
             player.takeFromMarket();
-        else
+        }else
             throw exception;
     }
+
 
     /**
      * this method initialises grid with the first 12 elements of the ArrayList passed as a parameter

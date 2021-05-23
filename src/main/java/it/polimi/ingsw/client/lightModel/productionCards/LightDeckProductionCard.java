@@ -19,6 +19,8 @@ public abstract class LightDeckProductionCard {
 
     protected int numberDeck;
 
+    protected boolean isConfig = false;
+
     protected LightProductionCards productionCards = new LightProductionCards();
 
     public void setDeckProductionCard(ArrayList<Integer> listKey){
@@ -104,6 +106,10 @@ public abstract class LightDeckProductionCard {
 
     public ProductionCard get(int i) {
         return  deck.get(i);
+    }
+
+    public boolean isConfig(){
+        return isConfig;
     }
 }
 

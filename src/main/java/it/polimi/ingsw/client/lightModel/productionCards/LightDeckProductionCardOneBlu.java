@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class LightDeckProductionCardOneBlu extends LightDeckProductionCard {
 
     public LightDeckProductionCardOneBlu(){
-        numberDeck = 0;
+        numberDeck = 10;
     }
     /**
      * this constructor creates all the production cards and adds them to the list and shuffles the newly created deck
@@ -16,6 +16,7 @@ public class LightDeckProductionCardOneBlu extends LightDeckProductionCard {
 
     @Override
     public void setDeckProductionCard(ArrayList<Integer> listKey){
+        isConfig = true;
         for(int i = 0; i < listKey.size(); i++) {
             deck.add(productionCards.productionCardByKey(listKey.get(i)));
         }

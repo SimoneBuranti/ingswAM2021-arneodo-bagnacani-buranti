@@ -61,7 +61,7 @@ public class StandardParser implements CommandParser{
                 return new ShowPlayerCommand(n,viewController);
 
             }
-            case "showDecks" : {
+            case "showProductionDecks" : {
                 return new ShowProductionDeckCommand(cli);
             }
             case "showReserve" : {

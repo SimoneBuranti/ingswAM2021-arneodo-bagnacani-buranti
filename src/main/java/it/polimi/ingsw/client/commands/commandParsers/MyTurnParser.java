@@ -103,8 +103,9 @@ public class MyTurnParser implements CommandParser {
                     }
                 }
                 System.out.println(prefix + " " + suffix + " "+ rc+n);
-                if (cont != 2 || n < 1 || n > 3)
+                if (cont != 2 || n < 0 || n > 3) {
                     throw new InvalidCommandException();
+                }
                 return new MarketActionCommand(rc, n, viewController);
             }
             case "productionOn": {
@@ -135,7 +136,7 @@ public class MyTurnParser implements CommandParser {
                 return new ShowPlayerCommand(n, viewController);
 
             }
-            case "showDecks": {
+            case "showProductionDecks": {
                 return new ShowProductionDeckCommand(cli);
             }
             case "showReserve": {

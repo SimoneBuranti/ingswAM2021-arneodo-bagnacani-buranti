@@ -319,14 +319,6 @@ public class LightGame extends ViewObservable {
 
     public void moveBlackCrossOnce(){}
 
-    public boolean isEachDeckFull(){
-        for(LightDeckProductionCard deck : listOfDeck){
-            if(deck.isEmpty())
-                return false;
-        }
-
-        return true;
-    }
 
     public ArrayList<ProductionCard> deckNotification(){
         ArrayList<ProductionCard> list = new ArrayList<>();
@@ -450,6 +442,15 @@ public class LightGame extends ViewObservable {
 
     public int getLorenzoPosition(){
         return 0;
+    }
+
+    public boolean isEachDeckConfig() {
+        for(LightDeckProductionCard deck : listOfDeck){
+            if(!deck.isConfig())
+                return false;
+        }
+
+        return true;
     }
 
 

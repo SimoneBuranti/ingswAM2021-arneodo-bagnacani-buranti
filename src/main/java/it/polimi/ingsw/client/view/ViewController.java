@@ -366,7 +366,7 @@ public class ViewController implements MessageVisitor, ViewObserver {
     @Override
     public void visit(DeckProductionCardConfigMessage msg) throws IOException, InterruptedException {
         game.setDeckProductionCard(msg.getNumberDeck(), msg.getDeck());
-        if(game.isEachDeckFull())
+        if(game.isEachDeckConfig())
             game.configInit();
     }
 

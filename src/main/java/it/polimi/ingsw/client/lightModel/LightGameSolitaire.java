@@ -80,12 +80,14 @@ public class LightGameSolitaire extends LightGame{
      * @param blue : the colour of the decks
      */
     public void removeProductionCard(Blue blue) throws IOException, InterruptedException {
-        if(!deckProductionCardOneBlu.isEmpty())
-            deckProductionCardOneBlu.removeOneCard();
-        else if(!deckProductionCardTwoBlu.isEmpty())
-            deckProductionCardTwoBlu.removeOneCard();
-        else
-            deckProductionCardThreeBlu.removeOneCard();
+        for(int i = 0; i < 2; i++) {
+            if (!deckProductionCardOneBlu.isEmpty())
+                deckProductionCardOneBlu.removeOneCard();
+            else if (!deckProductionCardTwoBlu.isEmpty())
+                deckProductionCardTwoBlu.removeOneCard();
+            else
+                deckProductionCardThreeBlu.removeOneCard();
+        }
 
         ArrayList<ProductionCard> list=deckNotification();
         notifyObserver(new DeckListNotification(list).serialize());
@@ -96,12 +98,14 @@ public class LightGameSolitaire extends LightGame{
      * @param yellow : the colour of the decks
      */
     public void removeProductionCard(Yellow yellow) throws IOException, InterruptedException {
-        if(!deckProductionCardOneYellow.isEmpty())
-            deckProductionCardOneYellow.removeOneCard();
-        else if(!deckProductionCardTwoYellow.isEmpty())
-            deckProductionCardTwoYellow.removeOneCard();
-        else
-            deckProductionCardThreeYellow.removeOneCard();
+        for(int i = 0; i < 2; i++) {
+            if (!deckProductionCardOneYellow.isEmpty())
+                deckProductionCardOneYellow.removeOneCard();
+            else if (!deckProductionCardTwoYellow.isEmpty())
+                deckProductionCardTwoYellow.removeOneCard();
+            else
+                deckProductionCardThreeYellow.removeOneCard();
+        }
         ArrayList<ProductionCard> list=deckNotification();
         notifyObserver(new DeckListNotification(list).serialize());
     }
@@ -111,12 +115,14 @@ public class LightGameSolitaire extends LightGame{
      * @param green : the colour of the decks
      */
     public void removeProductionCard(Green green) throws IOException, InterruptedException {
-        if(!deckProductionCardOneGreen.isEmpty())
-            deckProductionCardOneGreen.removeOneCard();
-        else if(!deckProductionCardTwoGreen.isEmpty())
-            deckProductionCardTwoGreen.removeOneCard();
-        else
-            deckProductionCardThreeGreen.removeOneCard();
+        for(int i = 0; i < 2; i++) {
+            if (!deckProductionCardOneGreen.isEmpty())
+                deckProductionCardOneGreen.removeOneCard();
+            else if (!deckProductionCardTwoGreen.isEmpty())
+                deckProductionCardTwoGreen.removeOneCard();
+            else
+                deckProductionCardThreeGreen.removeOneCard();
+        }
 
         ArrayList<ProductionCard> list=deckNotification();
         notifyObserver(new DeckListNotification(list).serialize());
@@ -127,12 +133,14 @@ public class LightGameSolitaire extends LightGame{
      * @param violet : the colour of the decks
      */
     public void removeProductionCard(Violet violet) throws IOException, InterruptedException {
-        if(!deckProductionCardOneViolet.isEmpty())
-            deckProductionCardOneViolet.removeOneCard();
-        else if(!deckProductionCardTwoViolet.isEmpty())
-            deckProductionCardTwoViolet.removeOneCard();
-        else
-            deckProductionCardThreeViolet.removeOneCard();
+        for(int i = 0; i < 2; i++) {
+            if (!deckProductionCardOneViolet.isEmpty())
+                deckProductionCardOneViolet.removeOneCard();
+            else if (!deckProductionCardTwoViolet.isEmpty())
+                deckProductionCardTwoViolet.removeOneCard();
+            else
+                deckProductionCardThreeViolet.removeOneCard();
+        }
         ArrayList<ProductionCard> list=deckNotification();
         notifyObserver(new DeckListNotification(list).serialize());
     }

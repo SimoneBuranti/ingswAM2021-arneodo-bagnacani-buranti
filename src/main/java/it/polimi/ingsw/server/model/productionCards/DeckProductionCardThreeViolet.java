@@ -17,7 +17,7 @@ public class DeckProductionCardThreeViolet extends DeckProductionCard {
          * this constructor creates all the production cards and adds them to the list and shuffles the newly created deck
          */
         public  DeckProductionCardThreeViolet () throws IOException, InterruptedException {
-        deckNumber = 8;
+        deckNumber = 4;
 
         Violet violet= new Violet();
         deck = new ArrayList<>(4);

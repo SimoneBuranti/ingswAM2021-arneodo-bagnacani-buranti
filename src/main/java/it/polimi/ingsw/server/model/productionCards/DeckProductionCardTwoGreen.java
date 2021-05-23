@@ -19,7 +19,7 @@ public class DeckProductionCardTwoGreen extends DeckProductionCard {
      */
     public DeckProductionCardTwoGreen () throws IOException, InterruptedException {
 
-        deckNumber = 4;
+        deckNumber = 5;
 
         Green green= new Green();
         deck  = new ArrayList<>(4);

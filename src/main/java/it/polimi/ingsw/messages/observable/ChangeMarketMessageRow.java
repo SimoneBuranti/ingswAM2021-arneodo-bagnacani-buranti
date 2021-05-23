@@ -7,7 +7,7 @@ import it.polimi.ingsw.messages.MessageVisitor;
 import java.io.IOException;
 
 public class ChangeMarketMessageRow extends Message {
-    private final MessageType messageType = MessageType.CHANGEMARKETMESSAGECOLUMN;
+    private final MessageType messageType = MessageType.CHANGEMARKETMESSAGEROW;
     private int row;
     public ChangeMarketMessageRow(int row){
         this.row =row;

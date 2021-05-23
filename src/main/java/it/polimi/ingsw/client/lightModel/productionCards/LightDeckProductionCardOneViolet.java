@@ -9,12 +9,12 @@ import java.util.ArrayList;
 public class LightDeckProductionCardOneViolet extends LightDeckProductionCard {
 
     public LightDeckProductionCardOneViolet(){
-        numberDeck = 6;
+        numberDeck = 12;
     }
 
     @Override
     public void setDeckProductionCard(ArrayList<Integer> listKey){
-
+        isConfig = true;
         for(int i = 0; i < listKey.size(); i++) {
             deck.add(productionCards.productionCardByKey(listKey.get(i)));
         }

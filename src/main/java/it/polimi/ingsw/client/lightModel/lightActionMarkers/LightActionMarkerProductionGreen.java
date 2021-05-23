@@ -35,6 +35,5 @@ public class LightActionMarkerProductionGreen extends LightActionMarker {
      */
     public void actionMarkerEffect(LightGameSolitaire game) throws IOException, InterruptedException {
         game.removeProductionCard(new Green());
-        game.removeProductionCard(new Green());
     }
 }
