@@ -9,7 +9,7 @@ import java.util.Scanner;
 public abstract class Command {
 
 
-    public static Command parseCommand(String commandText, ViewController viewController) throws InvalidCommandException {
+    public static Command parseCommand(String commandText, ViewController viewController,View view) throws InvalidCommandException {
 
         String prefix = "";
         String suffix = "";
@@ -112,10 +112,10 @@ public abstract class Command {
                 return new ProductionCommand(viewController);
             }
             case "showGameboard" : {
-                return new ShowGameBoardCommand();
+                return new ShowGameBoardCommand(view);
             }
             case "showMarket" : {
-                return new ShowMarketCommand();
+                return new ShowMarketCommand(view);
             }
             case "showPlayer" : {
 
@@ -136,8 +136,11 @@ public abstract class Command {
                 return new ShowPlayerCommand(n,viewController);
 
             }
+            case "showDecks" : {
+                return new ShowReserveCommand(view);
+            }
             case "showReserve" : {
-                return new ShowReserveCommand();
+                return new ShowReserveCommand(view);
             }
             default: {
                 throw new InvalidCommandException();
@@ -146,8 +149,8 @@ public abstract class Command {
 
     }
 
-    public Message commandOn() throws SpentTokenException, InvalidCommandException, AlreadyActivatedProductionException {
-        return null;
+    public Message commandOn() throws SpentTokenException, InvalidCommandException, AlreadyActivatedProductionException, NoMessageReturnException {
+        throw new NoMessageReturnException();
     }
 
     public static String defToString(){

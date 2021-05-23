@@ -372,6 +372,35 @@ public class LightGame extends ViewObservable {
         return gameBoardOfPlayer;
     }
 
+    public int getFaithIndicator() {
+        return gameBoardOfPlayer.getIndicator();
+    }
+
+    public ProductionCard[][] getProductionCards() {
+        return gameBoardOfPlayer.getProductionCards();
+    }
+
+    public Map<Resource, Integer> getStorage() {
+        return gameBoardOfPlayer.getStorage();
+    }
+
+    public Map<Resource, Integer> getStrongbox() {
+        return gameBoardOfPlayer.getStrongbox();
+    }
+
+    public Map<Resource, Integer> getReserve() {
+        return reserve.getReserve();
+    }
+
+    public Marble[][] getMarketGrid() {
+        return market.getGrid();
+    }
+
+    public Marble getMarketExtra() {
+        return market.getExtra();
+    }
+
+
 
 
 

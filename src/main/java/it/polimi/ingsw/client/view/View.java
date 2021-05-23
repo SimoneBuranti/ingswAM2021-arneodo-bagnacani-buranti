@@ -55,9 +55,16 @@ public interface View  {
 
     void showMarketExtra(Marble extra);
 
-    void showResourceMap(Map<Resource, Integer> map);
 
     void showFaithIndicator(int pos);
 
     void showDeckProductionCards(ArrayList<ProductionCard> productionCards);
+
+    void showGameBoardOfPlayer();
+
+    void showProductionDecks();
+
+    void showReserve();
+
+    void showMarket();
 }

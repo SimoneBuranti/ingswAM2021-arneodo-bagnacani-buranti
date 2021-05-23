@@ -27,6 +27,8 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
 
     private Scanner input = new Scanner(System.in);
 
+    public static final Resource[] resourceTypes = {Resource.COIN,Resource.ROCK,Resource.SHIELD,Resource.SERVANT};
+
 
     public static int readInt() throws NotIntException {
         Scanner in = new Scanner(System.in);
@@ -47,11 +49,7 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
 
         (new Thread( () -> {
                                 try {
-                                    Message msg = (Command.parseCommand(input.nextLine(),this.viewController)).commandOn();
-                                    if (msg != null) {
-                                        this.notifyObserver(msg);
-                                    } else
-                                        readCommand();
+                                    this.notifyObserver((Command.parseCommand(input.nextLine(),this.viewController,this).commandOn()));
                                 } catch (InvalidCommandException e) {
                                     System.out.println("Invalid command, type 'help' to check the command list");
                                     readCommand();
@@ -63,6 +61,8 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
                                     readCommand();
                                 } catch (InterruptedException | IOException e) {
                                     e.printStackTrace();
+                                } catch (NoMessageReturnException e) {
+                                    readCommand();
                                 }
         }
                     )
@@ -335,20 +335,20 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
 
     @Override
     public void visit(StorageNotification storageNotification) {
-        System.out.print("Your storage now contains: ");
-        showResourceMap(storageNotification.getMap());
+        System.out.println("Your storage now contains: ");
+        showResourceBox(storageNotification.getMap());
     }
 
     @Override
     public void visit(StrongboxNotification strongboxNotification) {
-        System.out.print("Your strongbox now contains: ");
-        showResourceMap(strongboxNotification.getMap());
+        System.out.println("Your strongbox now contains: ");
+        showResourceBox(strongboxNotification.getMap());
     }
 
     @Override
     public void visit(ReserveNotification reserveNotification) {
-        System.out.print("The reserve now contains: ");
-        showResourceMap(reserveNotification.getMap());
+        System.out.println("The reserve now contains: ");
+        showResourceBox(reserveNotification.getMap());
     }
 
     @Override
@@ -531,9 +531,9 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
         showLeaderCards(leaderCards);
 
         System.out.println("> strongbox : ");
-        showResourceMap(msg.getStrongBox());
+        showResourceBox(msg.getStrongBox());
         System.out.println("> storage : ");
-        showResourceMap(msg.getStorage());
+        showResourceBox(msg.getStorage());
         System.out.println("> faith indicator : ");
         showFaithIndicator(msg.getFaithIndicator());
     }
@@ -588,6 +588,7 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
 
 
     }
+
 
     @Override
     public void showGameBoardProductionCards(ProductionCard[][] productionCards) {
@@ -728,14 +729,70 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
     }
 
     @Override
-    public void showResourceMap(Map<Resource, Integer> map) {
-        System.out.println(map);
+    public void showProductionDecks(){
+        ArrayList<ProductionCard> deckList = viewController.getGame().deckNotification();
+        showDeckProductionCards(deckList);
     }
 
     @Override
     public void showFaithIndicator(int pos) {
-        System.out.println(pos);
+        int cornerOffset = 10;
+
+        // first line--------------------
+        printSpaces(cornerOffset);
+        printSpaces(2);
+        for(int i = 4;i<10;i++){
+            if(pos==i)
+                System.out.print((char) 165);
+            else
+                System.out.print("0");
+        }
+        printSpaces(4);
+        for(int i = 18;i<25;i++){
+            if(pos==i)
+                System.out.print((char) 165);
+            else
+                System.out.print("0");
+        }
+
+        //second line-------------
+
+        printSpaces(cornerOffset);
+        printSpaces(2);
+        if(pos==3)
+            System.out.print((char) 165);
+        else
+            System.out.print("0");
+        printSpaces(4);
+        if(pos==10)
+            System.out.print((char) 165);
+        else
+            System.out.print("0");
+        printSpaces(4);
+        if(pos==17)
+            System.out.print((char) 165);
+        else
+            System.out.print("0");
+
+        // third line ---------------
+
+        printSpaces(cornerOffset);
+        for(int i = 0;i<3;i++){
+            if(pos==i)
+                System.out.print((char) 165);
+            else
+                System.out.print("0");
+        }
+        printSpaces(4);
+        for(int i = 11;i<17;i++){
+            if(pos==i)
+                System.out.print((char) 165);
+            else
+                System.out.print("0");
+        }
     }
+
+
 
     @Override
     public void showDeckProductionCards(ArrayList<ProductionCard> productionCards) {
@@ -821,6 +878,71 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
             System.out.println("");
 
         }
+    }
+
+    @Override
+    public void showGameBoardOfPlayer() {
+
+        int spaces = 50;
+
+        System.out.println("Your FaithPath:");
+        showFaithIndicator(viewController.getGame().getFaithIndicator());
+        System.out.println("Your Production cards:");
+        showGameBoardProductionCards(viewController.getGame().getProductionCards());
+
+        System.out.println("Your Storage:");
+        showResourceBox(viewController.getGame().getStorage());
+        System.out.println("Your Strongbox:");
+        showResourceBox(viewController.getGame().getStrongbox());
+
+        System.out.println("Your Activated LeaderCards:");
+        showLeaderCards(viewController.getGame().getLeaderCardActivated());
+        System.out.println("Your Inactive LeaderCards:");
+        showLeaderCards(viewController.getGame().getLeaderCards());
+
+    }
+
+
+    public void showReserve(){
+        showResourceBox(viewController.getGame().getReserve());
+    }
+
+    @Override
+    public void showMarket() {
+        System.out.println("Market grid:");
+        showMarketGrid(viewController.getGame().getMarketGrid());
+        System.out.print("Extra marble: ");
+        showMarketExtra(viewController.getGame().getMarketExtra());
+    }
+
+    public void showResourceBox(Map<Resource,Integer> resourceBox) {
+
+        int n = 10;
+
+        printSpaces(n);
+        System.out.print("+----------+----------+----------+----------+\n");
+        printSpaces(n);
+        for(int i = 0; i< resourceTypes.length;i++){
+            System.out.print("|"+resourceTypes[i]);
+            printSpaces(n-resourceTypes[i].toString().length());
+        }
+        System.out.println("|");
+        printSpaces(n);
+        System.out.print("|----------|----------|----------|----------|\n");
+        printSpaces(n);
+        for(int i = 0; i< resourceTypes.length;i++){
+            System.out.print("|"+resourceBox.get(resourceTypes[i]));
+            printSpaces(n-resourceBox.get(resourceTypes[i]).toString().length());
+        }
+        System.out.println("|");
+        printSpaces(n);
+        System.out.print("+----------+----------+----------+----------+\n");
+
+    }
+
+    public void printSpaces(int n){
+        for(int i=0;i<n;i++)
+            System.out.print(" ");
     }
 
 }
