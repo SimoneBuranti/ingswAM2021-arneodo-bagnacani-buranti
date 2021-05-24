@@ -594,5 +594,69 @@ class KeepResourcesParserTest {
         }
     }
 
+    @Test
+    @DisplayName("KeepResourcesParser - keepResourcesCommand")
+    public void KeepResourcesCommandTest2(){
+
+        ArrayList<Resource> chosenResources = new ArrayList<>();
+        CommandParser commandParser = new KeepResourcesParser(pickedResources);
+        Scanner in = new Scanner(System.in);
+        String commandText;
+        Command command;
+
+        try {
+            command = commandParser.parseCommand("coin shield servant rock",viewController,cli);
+            chosenResources = new ArrayList<>();
+            assertTrue(false);
+        } catch (InvalidCommandException e) {
+            System.out.println("Invalid command exception");
+        }
+
+
+        try {
+            command = commandParser.parseCommand("coin servant rock",viewController,cli);
+            assertTrue(command instanceof KeepResourcesCommand);
+            chosenResources = new ArrayList<>();
+            chosenResources.add(Resource.COIN);
+            chosenResources.add(Resource.SERVANT);
+            chosenResources.add(Resource.ROCK);
+            assertTrue(false);
+            assertEquals(((KeepResourcesCommand) command).getResources(),chosenResources);
+        } catch (InvalidCommandException e) {
+            System.out.println("Invalid command exception");
+        }
+
+        try {
+            command = commandParser.parseCommand("coin rock",viewController,cli);
+            assertTrue(command instanceof KeepResourcesCommand);
+            chosenResources = new ArrayList<>();
+            chosenResources.add(Resource.COIN);
+            chosenResources.add(Resource.ROCK);
+            assertEquals(((KeepResourcesCommand) command).getResources(),chosenResources);
+        } catch (InvalidCommandException e) {
+            assertTrue(false);
+            System.out.println("Invalid command exception");
+        }
+
+        try {
+            command = commandParser.parseCommand("rock",viewController,cli);
+            assertTrue(command instanceof KeepResourcesCommand);
+            chosenResources = new ArrayList<>();
+            chosenResources.add(Resource.ROCK);
+            assertEquals(((KeepResourcesCommand) command).getResources(),chosenResources);
+        } catch (InvalidCommandException e) {
+            assertTrue(false);
+            System.out.println("Invalid command exception");
+        }
+
+        try {
+            command = commandParser.parseCommand("",viewController,cli);
+            assertTrue(command instanceof KeepResourcesCommand);
+            assertTrue(false);
+            assertEquals(((KeepResourcesCommand) command).getResources(),chosenResources);
+        } catch (InvalidCommandException e) {
+            System.out.println("Invalid command exception");
+        }
+    }
 
 }

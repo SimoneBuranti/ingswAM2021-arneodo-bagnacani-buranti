@@ -1,13 +1,8 @@
 package it.polimi.ingsw.client.commands;
 
 import it.polimi.ingsw.client.view.ViewController;
-import it.polimi.ingsw.messages.DoubleProductionOnMessage;
-import it.polimi.ingsw.messages.ExtraProductionOnMessage;
 import it.polimi.ingsw.messages.Message;
 import it.polimi.ingsw.messages.ProductionOnMessage;
-import it.polimi.ingsw.server.model.Resource;
-import it.polimi.ingsw.server.model.leaderCards.LeaderCard;
-import it.polimi.ingsw.server.model.leaderCards.LeaderCardProduction;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -33,7 +28,6 @@ public class ProductionCommand extends Command {
 
         while(!exitFlag){
             System.out.println("Insert column between"+available);
-            System.out.println(available);
             input = in.nextLine();
             choosenColumn = input.charAt(0) - '0';
             for (Integer i : available)

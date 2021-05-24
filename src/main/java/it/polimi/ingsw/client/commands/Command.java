@@ -55,6 +55,15 @@ public abstract class Command {
         return i;
     }
 
+    public static String deleteInitSpaces(String word){
+        for(int s = 0; s <word.length();s++){
+            if(word.charAt(s)!=' '){
+                return word.substring(s);
+            }
+        }
+        return "";
+    }
+
     public String toString(){
         return defToString();
     }

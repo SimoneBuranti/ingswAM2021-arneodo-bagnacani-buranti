@@ -12,10 +12,10 @@ import java.util.Map;
 
 public class KeepResourcesParser implements CommandParser{
 
-    private ArrayList<Resource> resources;
+    private ArrayList<Resource> choosableResources;
 
     public KeepResourcesParser(ArrayList<Resource> resources) {
-        this.resources = resources;
+        this.choosableResources = resources;
     }
 
 
@@ -25,19 +25,13 @@ public class KeepResourcesParser implements CommandParser{
         String prefix = "";
         String suffix = "";
         boolean found = false;
+
         if (commandText.length() == 0)
             throw new InvalidCommandException();
+        commandText = Command.deleteInitSpaces(commandText);
 
         System.out.println(this+": "+commandText);
 
-        for(int s = 0; s <commandText.length() && !found;s++){
-            if(commandText.charAt(s)!=' '){
-                commandText = commandText.substring(s);
-                found = true;
-            }
-        }
-
-        System.out.println(this+": "+commandText);
         for (int i = 0;i<commandText.length();i++){
             if (commandText.charAt(i) != ' '){
                 prefix = prefix + commandText.charAt(i);
@@ -49,49 +43,52 @@ public class KeepResourcesParser implements CommandParser{
 
         if (prefix.equals("coin") || prefix.equals("rock") || prefix.equals("shield") || prefix.equals("servant")){
 
-            Map<Resource,Integer> choosen = new HashMap<>();
+            ArrayList<Resource> localResources = new ArrayList<>();
+            localResources.add(Command.fromStringToResource(prefix));
+
+            Map<Resource,Integer> chosen = new HashMap<>();
             Map<Resource,Integer> picked = new HashMap<>();
+            chosen.put(Resource.COIN,0);
+            chosen.put(Resource.ROCK,0);
+            chosen.put(Resource.SHIELD,0);
+            chosen.put(Resource.SERVANT,0);
 
-            String word = "";
+            picked.put(Resource.COIN,0);
+            picked.put(Resource.ROCK,0);
+            picked.put(Resource.SHIELD,0);
+            picked.put(Resource.SERVANT,0);
+
             Resource r;
-
-            ArrayList<Resource> resources = new ArrayList<>();
-            resources.add(Command.fromStringToResource(prefix));
-
+            String word = "";
             for (int i = 0;i<suffix.length();i++){
                 if (suffix.charAt(i) != ' '){
-                    word = word + commandText.charAt(i);
+                    word = word + suffix.charAt(i);
                 } else {
                     r = Command.fromStringToResource(word);
                     if(r != null)
-                        resources.add(r);
+                        localResources.add(r);
                     word = "";
                 }
             }
+            r = Command.fromStringToResource(word);
+            if(r != null)
+                localResources.add(r);
 
-            for(Resource k : this.resources){
-                if (picked.get(k) == null)
-                    picked.put(k,0);
-                else
-                    picked.put(k,picked.remove(k));
+            for(Resource k : this.choosableResources){
+                    picked.put(k,picked.remove(k)+1);
             }
-
-            for(Resource k : resources){
-                if (choosen.get(k) == null)
-                    choosen.put(k,0);
-                else
-                    choosen.put(k,picked.remove(k));
+            for(Resource k : localResources){
+                    chosen.put(k,chosen.remove(k)+1);
             }
 
             for(Resource k : picked.keySet()){
-                if (choosen.get(k) > picked.get(k))
+                if (chosen.get(k) > picked.get(k))
                     throw new InvalidCommandException();
             }
 
-            if (choosen.equals(picked))
+            if (chosen.equals(picked))
                 throw new InvalidCommandException();
-
-            return new WhiteMarbleCommand(resources);
+            return new KeepResourcesCommand(localResources);
         } else {
 
             switch (prefix) {
@@ -140,4 +137,6 @@ public class KeepResourcesParser implements CommandParser{
             }
         }
     }
+
+
 }

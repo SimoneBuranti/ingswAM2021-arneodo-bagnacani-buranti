@@ -2,13 +2,9 @@ package it.polimi.ingsw.client.commands.commandParsers;
 
 import it.polimi.ingsw.client.SocketClient;
 import it.polimi.ingsw.client.commands.*;
-import it.polimi.ingsw.client.view.View;
 import it.polimi.ingsw.client.view.ViewController;
-import it.polimi.ingsw.client.view.cli.Cli;
-import it.polimi.ingsw.server.model.leaderCards.LeaderCardReduction;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import it.polimi.ingsw.client.view.cli.*;
+import org.junit.jupiter.api.*;
 
 import java.io.IOException;
 import java.util.Scanner;

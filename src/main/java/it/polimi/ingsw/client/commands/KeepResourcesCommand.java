@@ -14,6 +14,7 @@ public class KeepResourcesCommand extends Command{
     private ArrayList<Resource> resources;
 
     public KeepResourcesCommand(ArrayList<Resource> resources) {
+
         this.resources = resources;
     }
 
@@ -24,6 +25,9 @@ public class KeepResourcesCommand extends Command{
         return new KeepResourcesMessage(resources);
     }
 
+    public ArrayList<Resource> getResources() {
+        return resources;
+    }
 
     public static String defToString(){
         return "[ResourceType] [ResourceType] .. ";
