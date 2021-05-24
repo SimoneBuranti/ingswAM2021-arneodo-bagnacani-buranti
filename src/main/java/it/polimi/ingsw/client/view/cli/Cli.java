@@ -65,14 +65,16 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
                                         System.out.println("Impossible request, you have already activated this production");
                                     } catch (InterruptedException | IOException e) {
                                         e.printStackTrace();
-                                    } catch (NoMessageReturnException ignored) {} catch (EndAfterThisException e) {
+                                    } catch (EndAfterThisException e) {
                                         try {
                                             notifyObserver(e.getExtraMessage());
                                             notifyObserver(new EndOfTurnMessage());
                                         } catch (IOException | InterruptedException ioException) {
                                             ioException.printStackTrace();
                                         }
+                                    } catch (NoMessageReturnException ignored) {
                                     }
+
                                 }
 
                             }
