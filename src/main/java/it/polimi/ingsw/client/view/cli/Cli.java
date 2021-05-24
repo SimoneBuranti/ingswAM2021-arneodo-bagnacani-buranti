@@ -65,7 +65,14 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
                                         System.out.println("Impossible request, you have already activated this production");
                                     } catch (InterruptedException | IOException e) {
                                         e.printStackTrace();
-                                    } catch (NoMessageReturnException ignored) {}
+                                    } catch (NoMessageReturnException ignored) {} catch (EndAfterThisException e) {
+                                        try {
+                                            notifyObserver(e.getExtraMessage());
+                                            notifyObserver(new EndOfTurnMessage());
+                                        } catch (IOException | InterruptedException ioException) {
+                                            ioException.printStackTrace();
+                                        }
+                                    }
                                 }
 
                             }
@@ -219,17 +226,21 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
     public void askNickname() throws IOException, InterruptedException {
         String nickname;
         System.out.println("What's your username?");
-        if (input.hasNextLine()){
+
+        changeCommandParser(new NickNameParser());
+        /*if (input.hasNextLine()){
             nickname =input.nextLine();
             viewController.setNickName(nickname);
             notifyObserver(new UsernameMessage(nickname));
-        }
+        }*/
     }
     @Override
     public void askRestartGame() throws IOException, InterruptedException {
         String answer;
         System.out.println("Do you want to resume the previous match? [yes / no]");
-        while (input.hasNextLine()){
+
+        changeCommandParser(new ResumeGameParser());
+        /*while (input.hasNextLine()){
             answer =input.nextLine();
             if (answer.equals("yes")){
                 notifyObserver(new RestartAnswerMessage(true));
@@ -240,7 +251,7 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
             } else {
                 System.out.println("Invalid command, try again");
             }
-        }
+        }*/
     }
     @Override
     public void yourTurn() {
@@ -274,7 +285,9 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
         int contOne =0;
         int contSecond=0;
         int cont=0;
-        while (input.hasNext()){
+
+        changeCommandParser(new InitLeaderCardParser());
+        /*while (input.hasNext()){
 
             if(input.hasNextInt()) {
                 cont++;
@@ -298,7 +311,7 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
                 String line = input.nextLine();
                 System.out.println("Invalid command for keep leader card");
             }
-        }
+        }*/
     }
 
 
@@ -414,6 +427,16 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
         else if(viewController.getGame().getPosition()==2)
         {
             System.out.println(" hey " + viewController.getNickName() +" please say me your favourite resource ");
+            changeCommandParser(new InitResourceParser(1));
+        }
+        else {
+            System.out.println("hey " + viewController.getNickName() +" please say me two resource for be happy, after first press enter");
+            changeCommandParser(new InitResourceParser(2));
+        }
+
+        /*else if(viewController.getGame().getPosition()==2)
+        {
+            System.out.println(" hey " + viewController.getNickName() +" please say me your favourite resource ");
             while (input.hasNextLine())
             {
                 s=input.nextLine();
@@ -451,8 +474,9 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
                 }
                 else
                 { System.out.println("Invalid resource, try again"); }
-            } }
+            } }*/
     }
+
 
 
     @Override

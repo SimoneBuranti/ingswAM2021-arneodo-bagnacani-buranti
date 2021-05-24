@@ -9,7 +9,7 @@ import java.util.Scanner;
 public abstract class Command {
 
 
-    public Message commandOn() throws SpentTokenException, InvalidCommandException, AlreadyActivatedProductionException, NoMessageReturnException {
+    public Message commandOn() throws SpentTokenException, InvalidCommandException, AlreadyActivatedProductionException, NoMessageReturnException, EndAfterThisException {
         throw new NoMessageReturnException();
     }
 

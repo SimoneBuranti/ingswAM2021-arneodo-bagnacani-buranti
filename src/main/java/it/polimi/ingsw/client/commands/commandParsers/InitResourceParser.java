@@ -44,7 +44,7 @@ public class InitResourceParser implements CommandParser{
         if (chosenResources.size() != nOfResources)
             throw new InvalidCommandException();
 
-        return new InitResourceCommand(chosenResources);
+        return new InitResourceCommand(chosenResources,cli);
     }
 
 

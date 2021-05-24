@@ -1,5 +1,7 @@
 package it.polimi.ingsw.client.commands;
 
+import it.polimi.ingsw.client.commands.commandParsers.StandardParser;
+import it.polimi.ingsw.client.view.cli.Cli;
 import it.polimi.ingsw.messages.InitialResourcesMessage;
 import it.polimi.ingsw.messages.Message;
 import it.polimi.ingsw.messages.MessageVisitor;
@@ -11,9 +13,12 @@ import java.util.ArrayList;
 public class InitResourceCommand extends Command{
 
 
+    private Cli cli;
     private ArrayList<Resource> initResources;
 
-    public InitResourceCommand(ArrayList<Resource> resources) {
+    public InitResourceCommand(ArrayList<Resource> resources,Cli cli) {
+
+        this.cli = cli;
         this.initResources=resources;
     }
 
@@ -22,7 +27,9 @@ public class InitResourceCommand extends Command{
     }
 
     @Override
-    public Message commandOn(){
-        return new InitialResourcesMessage(initResources);
+    public Message commandOn() throws EndAfterThisException {
+
+        cli.changeCommandParser(new StandardParser());
+        throw new EndAfterThisException(new InitialResourcesMessage(initResources));
     }
 }
