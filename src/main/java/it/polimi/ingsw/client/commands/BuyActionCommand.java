@@ -26,6 +26,14 @@ public class BuyActionCommand extends Command {
         throw new SpentTokenException();
     }
 
+    public int getDeckNumber() {
+        return deckNumber;
+    }
+
+    public int getColumnNumber() {
+        return columnNumber;
+    }
+
     public String toString(){
         return "buy "+deckNumber+" "+columnNumber;
     }

@@ -81,7 +81,7 @@ public class ExtraProductionCommand extends Command {
     }
 
     public String toString(){
-        return "extraProductionOn";
+        return defToString();
     }
 
 }

@@ -66,11 +66,11 @@ public class ProductionCommand extends Command {
     }
 
     public static String defToString(){
-        return "extraProductionOn";
+        return "productionOn";
     }
 
     public String toString(){
-        return "extraProductionOn";
+        return defToString();
     }
 
 }

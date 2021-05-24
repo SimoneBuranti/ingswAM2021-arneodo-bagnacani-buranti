@@ -12,7 +12,10 @@ public class ProvaApp {
     public static void main(String[] args) {
 
 
-        //(new HelpCommand()).commandOn();
+        Scanner in = new Scanner(System.in);
+        String input = in.nextLine();
+
+        System.out.println(input.substring(1));
 
 
     }

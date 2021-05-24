@@ -8,9 +8,14 @@ public class ShowPlayerCommand extends Command {
     private ViewController viewController;
 
     private int numberPlayer;
+
     public ShowPlayerCommand(int n, ViewController viewController) {
         this.numberPlayer=n;
         this.viewController=viewController;
+    }
+
+    public int getNumberPlayer() {
+        return numberPlayer;
     }
 
     public Message commandOn(){

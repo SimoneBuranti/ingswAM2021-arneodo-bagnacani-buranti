@@ -18,7 +18,7 @@ public class MyTurnParser implements CommandParser {
             if (commandText.charAt(i) != ' ') {
                 prefix = prefix + commandText.charAt(i);
             } else {
-                for (i++; i < commandText.length(); i++)
+                for (i++; i<commandText.length();i++)
                     suffix = suffix + commandText.charAt(i);
             }
         }
@@ -35,23 +35,48 @@ public class MyTurnParser implements CommandParser {
             }
             case "buy": {
                 int column = 0;
+                int temp;
                 int deckNumber = 0;
-                int cont = 0;
+                boolean found = false;
 
-                for (int i = 0; i < suffix.length(); i++) {
-                    if (cont == 0 && (suffix.charAt(i) == 'b' || suffix.charAt(i) == 'g' || suffix.charAt(i) == 'y' || suffix.charAt(i) == 'v')) {
-                        deckNumber = suffix.charAt(i + 1) - '0';
-                        cont++;
-                    } else if (cont == 1 && suffix.charAt(i) == ' ') {
-                        cont++;
-                        column = suffix.charAt(i + 1) - '0';
+                for(int s = 0; s <suffix.length() && !found;s++){
+                    if(suffix.charAt(s)!=' '){
+                        suffix = suffix.substring(s);
+                        found = true;
                     }
-
                 }
-
-                if (cont != 3 || deckNumber < 1 || deckNumber > 12 || column < 1 || column > 3)
+                found = false;
+                for (int i = 0; i < suffix.length() && !found; i++) {
+                    if (suffix.charAt(i)!=' '){
+                        temp = suffix.charAt(i) -'0';
+                        if (temp <0 || temp > 9)
+                            throw new InvalidCommandException();
+                        deckNumber = temp + deckNumber*10;
+                    } else{
+                        suffix = suffix.substring(i);
+                        found = true;
+                    }
+                }
+                found = false;
+                for(int s = 0; s <suffix.length() && !found;s++){
+                    if(suffix.charAt(s)!=' '){
+                        suffix = suffix.substring(s);
+                        found = true;
+                    }
+                }
+                found = false;
+                for (int i = 0; i < suffix.length() && !found; i++) {
+                    if (suffix.charAt(i)!=' '){
+                        temp = suffix.charAt(i) -'0';
+                        if (temp <1 || temp > 3)
+                            throw new InvalidCommandException();
+                        column = temp;
+                        found = true;
+                    }
+                }
+                if( deckNumber <1 || deckNumber >12 || column >3 || column<1)
                     throw new InvalidCommandException();
-                return new BuyActionCommand(deckNumber, column, viewController);
+                return new BuyActionCommand(deckNumber-1, column-1, viewController);
             }
             case "endProduction": {
                 return new EndOfProductionCommand(viewController);
@@ -83,29 +108,42 @@ public class MyTurnParser implements CommandParser {
                     }
 
                 }
-
+                n--;
                 if (cont != 2 || n < 0 || n > 1)
                     throw new InvalidCommandException();
-                return new MarketActionCommand(ad, n, viewController);
+                return new LeaderCardActionCommand(ad, n, viewController);
             }
             case "market": {
                 char rc = 'c';
                 int n = 0;
                 int cont = 0;
+                boolean found = false;
 
-                for (int i = 0; i < suffix.length(); i++) {
-                    if (cont == 0 && (suffix.charAt(i) == 'r' || suffix.charAt(i) == 'c')) {
+                for (int i = 0; i < suffix.length() && !found; i++) {
+                    if ((suffix.charAt(i) == 'r' || suffix.charAt(i) == 'c')) {
                         rc = suffix.charAt(i);
-                        cont++;
-                    } else if (cont == 1 && suffix.charAt(i) != ' ') {
-                        cont++;
-                        n = suffix.charAt(i) - '0';
+                        found = true;
+
+                        suffix = suffix.substring(i+1);
                     }
                 }
-                System.out.println(prefix + " " + suffix + " "+ rc+n);
-                if (cont != 2 || n < 0 || n > 3) {
+                found = false;
+                for (int i = 0; i < suffix.length() && !found; i++) {
+                    n = suffix.charAt(i) - '0';
+                    if ((n < 10 && n >=0)) {
+                        found = true;
+                        suffix = suffix.substring(i+1);
+                    }
+                }
+
+                n--;
+                if (rc == 'c' && (n < 0 || n >3)) {
                     throw new InvalidCommandException();
                 }
+                if (rc == 'r' && (n < 0 || n >2)) {
+                    throw new InvalidCommandException();
+                }
+                System.out.println(prefix + " " + suffix + " "+ rc+n);
                 return new MarketActionCommand(rc, n, viewController);
             }
             case "productionOn": {
@@ -118,22 +156,23 @@ public class MyTurnParser implements CommandParser {
                 return new ShowMarketCommand(cli);
             }
             case "showPlayer": {
-
                 int n = 0;
-                int cont = 0;
+                int temp;
+                boolean found = false;
 
-                for (int i = 0; i < suffix.length(); i++) {
-                    if (cont == 0) {
-                        cont++;
-                    } else if (cont == 1 && suffix.charAt(i) == ' ') {
-                        cont++;
-                        n = suffix.charAt(i + 1) - '0';
+                for (int i = 0; i < suffix.length() && !found; i++) {
+                    if ( suffix.charAt(i) != ' '){
+                        temp = suffix.charAt(i) -'0';
+                        if (temp < 0 || temp > 9)
+                            throw new InvalidCommandException();
+                        n = temp;
+                        found = true;
                     }
 
                 }
-                if (n < 0 || n > 4)
+                if (n < 1 || n > 4)
                     throw new InvalidCommandException();
-                return new ShowPlayerCommand(n, viewController);
+                return new ShowPlayerCommand(n-1, viewController);
 
             }
             case "showProductionDecks": {
