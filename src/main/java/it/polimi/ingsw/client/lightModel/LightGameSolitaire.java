@@ -215,8 +215,8 @@ public class LightGameSolitaire extends LightGame{
     }
 
     @Override
-    public void setPapalCards(int currCall){
-        gameBoardOfPlayer.setPapal(currCall);
+    public void setPapalCards(int papalCard){
+        gameBoardOfPlayer.setPapal(papalCard);
     }
 
     @Override

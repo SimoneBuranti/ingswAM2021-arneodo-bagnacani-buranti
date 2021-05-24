@@ -47,4 +47,9 @@ public class UpdateForNotCurrentResourceMessage extends Message {
     public Resource getR2() {
         return r2;
     }
+
+    @Override
+    public String toString(){
+        return "the current player took the initial resources";
+    }
 }

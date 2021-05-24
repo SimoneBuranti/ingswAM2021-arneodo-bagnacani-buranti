@@ -382,7 +382,7 @@ public class GameSolitaire extends Game {
         player.setPapal();
         lorenzoTheMagnificent.setCurrCall();
 
-        notifyObserver(new SetPapalsMessage(e.getCurrCall(), e.getNickName()));
+        notifyObserver(new SetPapalsMessage(player.getPapalCard(e.getCurrCall()), e.getNickName()));
     }
 
 
@@ -395,9 +395,9 @@ public class GameSolitaire extends Game {
     protected void exceptionHandler(LastSpaceReachedException e) throws IOException, InterruptedException {
         player.setPapal();
 
-        notifyObserver(new SetPapalsMessage(e.getCurrCall(), e.getNickName()));
+        notifyObserver(new SetPapalsMessage(player.getPapalCard(e.getCurrCall()), e.getNickName()));
         notifyObserver(new MyVictoryMessage(player.playerScore()));
-       endGame();
+        endGame();
     }
 
 
@@ -407,8 +407,14 @@ public class GameSolitaire extends Game {
      * @param e : the exception to handle
      */
     @Override
-    protected void exceptionHandler(EndOfSolitaireGame e) throws IOException, InterruptedException {
+    public void exceptionHandler(EndOfSolitaireGame e) throws IOException, InterruptedException {
         notifyObserver(new MagnificentWinMessage());
+        endGame();
+    }
+
+    @Override
+    public void exceptionHandler(EndGameException e) throws IOException, InterruptedException {
+        notifyObserver(new MyVictoryMessage(player.playerScore()));
         endGame();
     }
 

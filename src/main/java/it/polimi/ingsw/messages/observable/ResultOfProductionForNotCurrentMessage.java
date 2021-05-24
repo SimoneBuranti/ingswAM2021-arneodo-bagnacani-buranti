@@ -37,4 +37,9 @@ public class ResultOfProductionForNotCurrentMessage extends Message {
     public ArrayList<Resource> getResource() {
         return resource;
     }
+
+    @Override
+    public String toString(){
+        return player.getNickName() +" has activated the end of production";
+    }
 }

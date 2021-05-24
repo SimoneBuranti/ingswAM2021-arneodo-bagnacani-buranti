@@ -1,5 +1,6 @@
 package it.polimi.ingsw.messages.observable;
 
+import it.polimi.ingsw.client.commands.commandParsers.StandardParser;
 import it.polimi.ingsw.messages.Message;
 import it.polimi.ingsw.messages.MessageType;
 import it.polimi.ingsw.messages.MessageVisitor;
@@ -38,5 +39,10 @@ public class ProductionMessageForNotCurrentMessage extends Message {
 
     public ArrayList<Resource> getResource() {
         return resource;
+    }
+
+    @Override
+    public String toString(){
+        return player.getNickName() +" has activated a production";
     }
 }

@@ -29,6 +29,7 @@ public class ProductionGameBoard extends GameBoardDecorator {
         this.resourceTypeFirst = resourceTypeFirst;
     }
 
+
     /**
      * Decorated game board method: it represents the gameBoard's function of extra production.
      * The method uses as input of the extra production the type of resource defined by the leader card and

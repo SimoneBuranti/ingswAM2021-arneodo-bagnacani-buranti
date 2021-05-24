@@ -10,7 +10,7 @@ public class MyVictoryMessage extends Message {
     private final MessageType messageType = MessageType.MYVICTORY;
 
     int score;
-public MyVictoryMessage(int score)
+    public MyVictoryMessage(int score)
 {
     this.score=score;
 }

@@ -305,7 +305,7 @@ public class LightGame extends ViewObservable {
 
     }
 
-    public void setPapalCards(int currCall){
+    public void setPapalCards(int papalCard){
 
     }
 

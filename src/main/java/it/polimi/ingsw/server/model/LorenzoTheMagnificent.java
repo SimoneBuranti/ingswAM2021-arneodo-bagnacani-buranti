@@ -51,8 +51,11 @@ public class LorenzoTheMagnificent extends Observable {
     public void moveBlackCross() throws CallForCouncilException, EndOfSolitaireGame{
         faithIndicator++;
 
-        if (currCall < PAPAL_N-1 && faithIndicator == PAPAL_POS[currCall] )
-            throw new CallForCouncilException();
+        if (currCall < PAPAL_N-1 && faithIndicator == PAPAL_POS[currCall] ){
+            CallForCouncilException callForCouncilException = new CallForCouncilException();
+            callForCouncilException.setNickName("Lorenzo the Magnificent");
+            throw callForCouncilException;
+        }
         else if(currCall == PAPAL_N-1 && faithIndicator == PAPAL_POS[currCall])
             throw new EndOfSolitaireGame();
 

@@ -41,6 +41,9 @@ public abstract class GameBoardDecorator extends GameBoardInterface {
     }
 
     @Override
+    public int getPapalCard(int papalCardNumber){return gameBoard.getPapalCard(papalCardNumber);}
+
+    @Override
     public void faithMove() throws CallForCouncilException, LastSpaceReachedException {
         gameBoard.faithMove();
     }

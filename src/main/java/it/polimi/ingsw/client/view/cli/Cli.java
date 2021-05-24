@@ -320,9 +320,9 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
     @Override
     public void showCallForCouncil(String nickname, int papalCard){
         if(papalCard == 0){
-            System.out.println("Player " + nickname + "activated the report in the Vatican : sorry, you didn't get the papal favor card");
+            System.out.println(nickname + " activated the report in the Vatican : sorry, you didn't get the papal favor card");
         }else if (papalCard == 1){
-            System.out.println("Player " + nickname + "activated the report in the Vatican : you got the papal favor card!");
+            System.out.println(nickname + " activated the report in the Vatican : you got the papal favor card!");
         }
     }
 
@@ -380,7 +380,7 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
 
     @Override
     public void showActionMarker(String actionType) {
-        System.out.print("Lorenzo the Magnificient ");
+        System.out.print("Lorenzo the Magnificent ");
         switch (actionType) {
             case "ActionMarkerProductionYellow":{
                 System.out.println("has picked two cards from yellow production decks.");
@@ -409,6 +409,30 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
                 return;
             }
         }
+    }
+
+    @Override
+    public void youWin(int score) {
+        System.out.println("YOU WIN !!!");
+        System.out.println("Your score is : " + score);
+        changeCommandParser(new StandardParser());
+    }
+
+    @Override
+    public void lorenzoWin() {
+        System.out.println("YOU LOSE :(");
+        changeCommandParser(new StandardParser());
+    }
+
+    @Override
+    public void showWinner(String nickname) {
+        System.out.println("The winner is : " + nickname);
+        changeCommandParser(new StandardParser());
+    }
+
+    @Override
+    public void showOpponentAction(Message msg) {
+        System.out.println(msg.toString());
     }
 
     @Override

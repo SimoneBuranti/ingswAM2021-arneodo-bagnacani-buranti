@@ -56,14 +56,9 @@ public class LightFaithPath {
      * and the related papal cards will be assigned or not depending on player position
      * It also increases the currCall attribute
      */
-    public void setPapal(int currCall) {
-
-        if (VATICAN_POS[currCall] <= faithIndicator) {
-            papalCards[currCall] = 1;
-        } else
-            papalCards[currCall] = 0;
-
-        this.currCall = currCall + 1;
+    public void setPapal(int papalCard) {
+        papalCards[currCall] = papalCard;
+        currCall++;
     }
 
     /**
