@@ -1,6 +1,8 @@
 package it.polimi.ingsw.client.lightModel.lightGameBoard;
 
+import it.polimi.ingsw.server.model.Reserve;
 import it.polimi.ingsw.server.model.Resource;
+import it.polimi.ingsw.server.model.exceptions.UnavailableResourceException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -55,17 +57,17 @@ public class LightStorage {
         }
     }
 
-    public Map<Resource,Integer> removeAvailableResource(Map<Resource,Integer> map){
-        for(Resource key :map.keySet()){
-            if(storageResource.get(key) >= map.get(key)) {
-                storageResource.put(key, storageResource.remove(key) - map.get(key));
-                map.remove(key);
-            }else{
-                storageResource.put(key, 0);
-                map.put(key, map.get(key) - storageResource.remove(key));
-            }
+    public ArrayList<Resource> removeAvailableResource(ArrayList<Resource> cost){
+        ArrayList<Resource> unpaid = new ArrayList<>();
+
+        for(Resource resource : cost){
+            if(storageResource.get(resource) > 0)
+                useResource(resource);
+            else
+                unpaid.add(resource);
         }
-        return map;
+
+        return unpaid;
     }
 
     public void removeResource(ArrayList<Resource> list){
@@ -93,6 +95,11 @@ public class LightStorage {
 
     public int getResource(Resource resource){
         return storageResource.get(resource);
+    }
+
+    public void useResource(Resource resource) {
+        int value = storageResource.get(resource) - 1;
+        storageResource.put(resource, value);
     }
 
 

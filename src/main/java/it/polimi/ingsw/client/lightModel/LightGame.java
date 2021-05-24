@@ -258,7 +258,7 @@ public class LightGame extends ViewObservable {
 
     }
 
-    public void payResourcesProduction(ArrayList<Resource> list){
+    public void payResourcesProduction(ArrayList<Resource> list) throws IOException, InterruptedException {
 
     }
 

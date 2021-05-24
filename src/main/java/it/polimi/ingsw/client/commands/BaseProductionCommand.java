@@ -14,15 +14,19 @@ public class BaseProductionCommand extends Command {
         this.viewController = viewController;
     }
 
-    public Message commandOn(){
-        Resource i1;
-        Resource i2;
-        Resource o;
-        Scanner in = new Scanner(System.in);
+    public Message commandOn() throws AlreadyActivatedProductionException {
+        if(viewController.isProductionToken(0) && viewController.isActionToken()) {
+            Resource i1;
+            Resource i2;
+            Resource o;
+            Scanner in = new Scanner(System.in);
 
-        viewController.getGame().setProductionToken(0,false);
+            viewController.getGame().setProductionToken(0, false);
 
-        return new BaseProductionOnMessage(askForInputResource(),askForInputResource(),askForOutputResource());
+            return new BaseProductionOnMessage(askForInputResource(), askForInputResource(), askForOutputResource());
+        }else{
+            throw new AlreadyActivatedProductionException();
+        }
 
     }
 

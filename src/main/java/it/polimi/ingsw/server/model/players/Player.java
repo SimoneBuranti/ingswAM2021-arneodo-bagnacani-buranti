@@ -244,9 +244,10 @@ public class Player {
     }
 
 
-    public void takeFromMarket() throws NotEnoughSpaceInStorageException {
+    public void takeFromMarket() throws NotEnoughSpaceInStorageException, IOException, InterruptedException {
         Resource resource;
             gameBoardOfPlayer.takeFromMarket((ArrayList<Resource>)buffer.clone());
+            game.notifyResultFromMarket(buffer);
             buffer = new ArrayList<>();
     }
 

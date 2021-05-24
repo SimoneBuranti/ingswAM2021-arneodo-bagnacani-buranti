@@ -192,17 +192,26 @@ public class LightGameSolitaire extends LightGame{
     @Override
     public void buyProductionCard(int deckNumber, int chosenColumn) throws IOException, InterruptedException {
         for(LightDeckProductionCard deck : listOfDeck){
-            if(deck.getNumberDeck() == deckNumber)
-                gameBoardOfPlayer.addProductionCard(chosenColumn, deck.pickUpFirstCard());
+            if(deck.getNumberDeck() == deckNumber) {
+                ProductionCard productionCard = deck.pickUpFirstCard();
+                gameBoardOfPlayer.addProductionCard(chosenColumn, productionCard);
+                ArrayList<Resource> list = gameBoardOfPlayer.payResourcesBuy(productionCard.getCost());
+                reserve.addResource(list);
+            }
         }
-        ArrayList<ProductionCard> list=deckNotification();
-        notifyObserver(new DeckListNotification(list).serialize());
+        //ArrayList<ProductionCard> list=deckNotification();
+        //notifyObserver(new DeckListNotification(list).serialize());
         notifyObserver(new GameboardListNotification(gameBoardOfPlayer.getProductionCards()).serialize());
+        notifyObserver(new StorageNotification(gameBoardOfPlayer.getStorage()).serialize());
+        notifyObserver(new StrongboxNotification(gameBoardOfPlayer.getStrongbox()).serialize());
+        notifyObserver((new ReserveNotification(reserve.getReserve())).serialize());
     }
 
     @Override
-    public void payResourcesProduction(ArrayList<Resource> list){
+    public void payResourcesProduction(ArrayList<Resource> list) throws IOException, InterruptedException {
         gameBoardOfPlayer.payResourcesProduction(list);
+        notifyObserver(new StorageNotification(gameBoardOfPlayer.getStorage()).serialize());
+        notifyObserver(new StrongboxNotification(gameBoardOfPlayer.getStrongbox()).serialize());
     }
 
     @Override

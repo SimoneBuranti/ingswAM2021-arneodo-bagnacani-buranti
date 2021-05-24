@@ -20,44 +20,47 @@ public class ExtraProductionCommand extends Command {
         this.viewController = viewController;
     }
 
-    public Message commandOn() throws InvalidCommandException, AlreadyActivatedProductionException {
-        Scanner in = new Scanner(System.in);
-        String input = null;
-        int cont = 0;
-        Resource o;
+    public Message commandOn() throws InvalidCommandException, AlreadyActivatedProductionException, SpentTokenException {
+        if(viewController.isActionToken()) {
+            Scanner in = new Scanner(System.in);
+            String input = null;
+            int cont = 0;
+            Resource o;
 
-        ArrayList<LeaderCard> activated = viewController.getGame().getLeaderCardActivated();
+            ArrayList<LeaderCard> activated = viewController.getGame().getLeaderCardActivated();
 
-        for(LeaderCard card : activated){
-            if (card instanceof LeaderCardProduction)
-                cont++;
-        }
-
-        if (cont == 0)
-            throw new InvalidCommandException();
-        if (cont == 1) {
-            if (getExtraProductionToken(1))
-                throw new AlreadyActivatedProductionException();
-            o = askForOutputResource();
-            setFalseProductionBools(1);
-            return new ExtraProductionOnMessage(o);
-
-        } else {
-
-            while(!input.equals("1") && !input.equals("2") ){
-                System.out.println("Insert the number of the activated production card you want to use (1/2): ");
-                input = in.nextLine();
+            for (LeaderCard card : activated) {
+                if (card instanceof LeaderCardProduction)
+                    cont++;
             }
-            setFalseProductionBools((input.charAt(0) - '0'));
 
-            if (getExtraProductionToken((input.charAt(0) - '0')))
-                throw new AlreadyActivatedProductionException();
+            if (cont == 0)
+                throw new InvalidCommandException();
+            if (cont == 1) {
+                if (getExtraProductionToken(1))
+                    throw new AlreadyActivatedProductionException();
+                o = askForOutputResource();
+                setFalseProductionBools(1);
+                return new ExtraProductionOnMessage(o);
 
-            if ((input.charAt(0) - '0') == 1){
-                return new ExtraProductionOnMessage(askForOutputResource());
+            } else {
+
+                while (!input.equals("1") && !input.equals("2")) {
+                    System.out.println("Insert the number of the activated production card you want to use (1/2): ");
+                    input = in.nextLine();
+                }
+                setFalseProductionBools((input.charAt(0) - '0'));
+
+                if (getExtraProductionToken((input.charAt(0) - '0')))
+                    throw new AlreadyActivatedProductionException();
+
+                if ((input.charAt(0) - '0') == 1) {
+                    return new ExtraProductionOnMessage(askForOutputResource());
+                }
+                return new DoubleProductionOnMessage(askForOutputResource());
             }
-            return new DoubleProductionOnMessage(askForOutputResource());
-        }
+        }else
+            throw new SpentTokenException();
     }
 
     public void setFalseProductionBools(int choosenLeaderCard){

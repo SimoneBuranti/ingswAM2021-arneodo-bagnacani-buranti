@@ -460,9 +460,9 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
         int spaces = 50;
         int n = 8;
 
-        System.out.print("                          column 0" +
-                "                                            column 1" +
-                "                                            column 2\n");
+        System.out.print("                          column 1" +
+                "                                            column 2" +
+                "                                            column 3\n");
 
         printSpaces(n);
         printDash(spaces * 3);
@@ -545,13 +545,26 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
         int chars;
         String temp;
 
+        printSpaces(12);
+        for(int j = 0; j < 4; j++){
+            temp = "c " + (j+1);
+            chars = temp.length();
+            System.out.print(temp);
+            printSpaces(spaces - chars);
+        }
+        System.out.println();
+
+
         printSpaces(n);
         printDash(spaces * 4);
         System.out.println();
 
 
         for (int i = 0; i < 3; i++) {
-            printSpaces(n);
+            temp = "r " + (i +1);
+            chars = temp.length();
+            System.out.print(temp);
+            printSpaces(n - chars);
             for(int j = 0; j < 4; j++){
                 temp = "| " + grid[i][j].getColour();
                 chars = temp.length();

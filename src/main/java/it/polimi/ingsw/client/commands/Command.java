@@ -48,7 +48,7 @@ public abstract class Command {
         Scanner in = new Scanner(System.in);
         Resource i;
         System.out.println("COIN: 'coin'        ROCK: 'rock'        SHIELD: 'shield'        SERVANT: 'servant'");
-        System.out.println("Output input type: ");
+        System.out.println("Input resource type: ");
         while ((i = fromStringToResource(in.nextLine())) == null){
             System.out.println("Invalid resource type");
         }

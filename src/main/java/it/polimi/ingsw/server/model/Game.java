@@ -237,14 +237,15 @@ public class Game extends Observable {
      */
     public void productionOn(int chosenColumn, ArrayList<Resource> list, int faithMove) throws ImpossibleProductionException, EmptyColumnException, IOException, InterruptedException {
         try {
+            ProductionCard productionCard = currentPlayer.getGameBoardOfPlayer().getDevelopmentBoardCell(currentPlayer.getGameBoardOfPlayer().lastRowOccupied(chosenColumn),chosenColumn);
 
-            notifyToOneObserver(new ProductionMessageForCurrentMessage(list));
-            notifyAllObserverLessOne(new ProductionMessageForNotCurrentMessage(currentPlayer,list) );
+            notifyToOneObserver(new ProductionMessageForCurrentMessage(productionCard.getIn()));
+            notifyAllObserverLessOne(new ProductionMessageForNotCurrentMessage(currentPlayer,productionCard.getIn()) );
             currentPlayer.productionOn(chosenColumn);
             //if (faithMove)
             {
-                notifyToOneObserver(new FaithPathMessage(faithMove));
-                notifyAllObserverLessOne(new FaithPathOpponentMessage(currentPlayer.getNickName(),faithMove));
+                notifyToOneObserver(new FaithPathMessage(productionCard.isFaithPoint()));
+                notifyAllObserverLessOne(new FaithPathOpponentMessage(currentPlayer.getNickName(),productionCard.isFaithPoint()));
 
             }
 
@@ -393,7 +394,7 @@ public class Game extends Observable {
                 notifyAllObserverLessOneByNickname(new FaithPathOpponentMessage(currentPlayer.getNickName(), 1),currentPlayer.getNickName());
             }
 
-            market.pushRow(chosenRow,currentPlayer, this);
+            market.pushRow(chosenRow,currentPlayer);
 
 
         } catch (CallForCouncilException e) {
@@ -417,7 +418,7 @@ public class Game extends Observable {
                 notifyToOneObserver(new FaithPathMessage(1));
                 notifyAllObserverLessOneByNickname(new FaithPathOpponentMessage(currentPlayer.getNickName(), 1),currentPlayer.getNickName());
             }
-            market.pushColumn(chosenColumn,currentPlayer, this);
+            market.pushColumn(chosenColumn,currentPlayer);
         } catch (CallForCouncilException e) {
             exceptionHandler(e);
         } catch (LastSpaceReachedException e) {
@@ -426,15 +427,9 @@ public class Game extends Observable {
         notifyObserver(new ChangeMarketMessageColumn(chosenColumn));
     }
 
-    public void notifyResultFromMarket(ArrayList<Resource> buffer){
-        try {
-            notifyToOneObserver(new ResultFromMarketMessage(buffer) );
-            notifyAllObserverLessOne(new ResultFromMarketNotCurrentMessage(currentPlayer,buffer) );
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+    public void notifyResultFromMarket(ArrayList<Resource> buffer) throws IOException, InterruptedException {
+        notifyToOneObserver(new ResultFromMarketMessage(buffer) );
+        notifyAllObserverLessOne(new ResultFromMarketNotCurrentMessage(currentPlayer,buffer) );
     }
 
     /**
@@ -763,7 +758,7 @@ public class Game extends Observable {
         currentPlayer.takeResourceFromClientToGameboard(list);
     }
 
-    public void continueTakeFromMarketAfterChoosenWhiteMarble(ArrayList<Resource> whiteMarbleList) throws NotEnoughSpaceInStorageException {
+    public void continueTakeFromMarketAfterChoosenWhiteMarble(ArrayList<Resource> whiteMarbleList) throws NotEnoughSpaceInStorageException, IOException, InterruptedException {
         for(Resource r : whiteMarbleList){
             currentPlayer.addToBuffer(r);
         }
