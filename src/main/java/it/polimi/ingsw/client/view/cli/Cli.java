@@ -202,7 +202,9 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
     public void askNumberOfPlayers() throws IOException, InterruptedException {
         int nOfPlayers;
         System.out.println("How many players? [1...4]");
-        while (input.hasNext()){
+
+        changeCommandParser(new HowManyPlayerParser());
+        /*while (input.hasNext()){
             if(input.hasNextInt()) {
                 nOfPlayers = input.nextInt();
                 if (nOfPlayers > 0 && nOfPlayers < 5) {
@@ -218,7 +220,7 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
                 System.out.println("Invalid command of players, try with a number between 1 and 4");
             }
 
-        }
+        }*/
     }
 
 
