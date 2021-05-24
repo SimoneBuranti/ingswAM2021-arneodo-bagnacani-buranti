@@ -64,6 +64,16 @@ public abstract class Command {
         return "";
     }
 
+    public static int fromStringToInt(String number){
+        int n = 0;
+
+        for(int i = 0;i<number.length();i++){
+            n*=10;
+            n+= number.charAt(0) -'0';
+        }
+        return n;
+    }
+
     public String toString(){
         return defToString();
     }
