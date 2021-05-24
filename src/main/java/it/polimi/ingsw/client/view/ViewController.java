@@ -54,6 +54,10 @@ public class ViewController implements MessageVisitor, ViewObserver {
         game.setActionToken(flag);
     }
 
+    public boolean isProductionToken(int n) {
+        return game.isProductionToken(n);
+    }
+
 
     @Override
     public void visit(AlreadyActivatedErrorMessage msg) {

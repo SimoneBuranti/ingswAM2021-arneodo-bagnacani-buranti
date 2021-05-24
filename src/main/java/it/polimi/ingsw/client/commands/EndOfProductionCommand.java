@@ -18,8 +18,10 @@ public class EndOfProductionCommand extends Command {
         LightGame game = viewController.getGame();
 
         for (int i = 0; i<6;i++){
-            if(!game.isProductionToken(i))
-            return new EndOfProductionMessage();
+            if(!game.isProductionToken(i)) {
+                viewController.setActionToken(false);
+                return new EndOfProductionMessage();
+            }
         }
 
         throw new InvalidCommandException();
