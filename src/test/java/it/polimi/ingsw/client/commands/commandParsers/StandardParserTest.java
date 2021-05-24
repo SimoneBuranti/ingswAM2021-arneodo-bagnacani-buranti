@@ -2,11 +2,8 @@ package it.polimi.ingsw.client.commands.commandParsers;
 
 import it.polimi.ingsw.client.SocketClient;
 import it.polimi.ingsw.client.commands.*;
-import it.polimi.ingsw.client.view.View;
 import it.polimi.ingsw.client.view.ViewController;
 import it.polimi.ingsw.client.view.cli.Cli;
-import it.polimi.ingsw.server.model.leaderCards.LeaderCardReduction;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -15,20 +12,20 @@ import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class MyTurnParserTest {
+class StandardParserTest {
 
     public Cli cli;
     public ViewController viewController;
 
-    MyTurnParserTest() throws IOException {
+    StandardParserTest() throws IOException {
         cli = new Cli();
         viewController= new ViewController(new SocketClient("127.0.0.1",1234,cli),cli);
     }
 
     @Test
-    @DisplayName("MyTurnParser - Market action")
-    public void myTurnParserTest1(){
-        CommandParser commandParser = new MyTurnParser();
+    @DisplayName("standardParser - Market action")
+    public void standardParserTest1(){
+        CommandParser commandParser = new StandardParser();
         Scanner in = new Scanner(System.in);
         String commandText;
         Command command;
@@ -36,9 +33,7 @@ class MyTurnParserTest {
         try {
             command = commandParser.parseCommand("market r 1",viewController,cli);
 
-            assertTrue(command instanceof MarketActionCommand);
-            assertEquals(0,((MarketActionCommand) command).getN());
-            assertEquals('r',((MarketActionCommand) command).getRc());
+            assertTrue(false);
         } catch (InvalidCommandException e) {
             System.out.println("Invalid command exception");
         }
@@ -46,9 +41,7 @@ class MyTurnParserTest {
         try {
             command = commandParser.parseCommand("market r 2",viewController,cli);
 
-            assertTrue(command instanceof MarketActionCommand);
-            assertEquals(1,((MarketActionCommand) command).getN());
-            assertEquals('r',((MarketActionCommand) command).getRc());
+            assertTrue(false);
         } catch (InvalidCommandException e) {
             System.out.println("Invalid command exception");
         }
@@ -56,9 +49,7 @@ class MyTurnParserTest {
         try {
             command = commandParser.parseCommand("market r 3",viewController,cli);
 
-            assertTrue(command instanceof MarketActionCommand);
-            assertEquals(2,((MarketActionCommand) command).getN());
-            assertEquals('r',((MarketActionCommand) command).getRc());
+            assertTrue(false);
         } catch (InvalidCommandException e) {
             System.out.println("Invalid command exception");
         }
@@ -66,9 +57,7 @@ class MyTurnParserTest {
         try {
             command = commandParser.parseCommand("market c 1",viewController,cli);
 
-            assertTrue(command instanceof MarketActionCommand);
-            assertEquals(0,((MarketActionCommand) command).getN());
-            assertEquals('c',((MarketActionCommand) command).getRc());
+            assertTrue(false);
         } catch (InvalidCommandException e) {
             System.out.println("Invalid command exception");
         }
@@ -76,9 +65,7 @@ class MyTurnParserTest {
         try {
             command = commandParser.parseCommand("market c 2",viewController,cli);
 
-            assertTrue(command instanceof MarketActionCommand);
-            assertEquals(1,((MarketActionCommand) command).getN());
-            assertEquals('c',((MarketActionCommand) command).getRc());
+            assertTrue(false);
         } catch (InvalidCommandException e) {
             System.out.println("Invalid command exception");
         }
@@ -86,9 +73,7 @@ class MyTurnParserTest {
         try {
             command = commandParser.parseCommand("market c 3",viewController,cli);
 
-            assertTrue(command instanceof MarketActionCommand);
-            assertEquals(2,((MarketActionCommand) command).getN());
-            assertEquals('c',((MarketActionCommand) command).getRc());
+            assertTrue(false);
         } catch (InvalidCommandException e) {
             System.out.println("Invalid command exception");
         }
@@ -96,9 +81,7 @@ class MyTurnParserTest {
         try {
             command = commandParser.parseCommand("market c 4",viewController,cli);
 
-            assertTrue(command instanceof MarketActionCommand);
-            assertEquals(3,((MarketActionCommand) command).getN());
-            assertEquals('c',((MarketActionCommand) command).getRc());
+            assertTrue(false);
         } catch (InvalidCommandException e) {
             System.out.println("Invalid command exception");
         }
@@ -152,9 +135,9 @@ class MyTurnParserTest {
 
 
     @Test
-    @DisplayName("MyTurnParser - Base Production On")
-    public void myTurnParserTest2(){
-        CommandParser commandParser = new MyTurnParser();
+    @DisplayName("standardParser - Base Production On")
+    public void standardParserTest2(){
+        CommandParser commandParser = new StandardParser();
         Scanner in = new Scanner(System.in);
         String commandText;
         Command command;
@@ -162,7 +145,7 @@ class MyTurnParserTest {
         try {
             command = commandParser.parseCommand("baseProductionOn",viewController,cli);
 
-            assertTrue(command instanceof BaseProductionCommand);
+            assertTrue(false);
         } catch (InvalidCommandException e) {
             System.out.println("Invalid command exception");
         }
@@ -178,9 +161,9 @@ class MyTurnParserTest {
     }
 
     @Test
-    @DisplayName("MyTurnParser - End Production")
-    public void myTurnParserTest3(){
-        CommandParser commandParser = new MyTurnParser();
+    @DisplayName("standardParser - End Production")
+    public void standardParserTest3(){
+        CommandParser commandParser = new StandardParser();
         Scanner in = new Scanner(System.in);
         String commandText;
         Command command;
@@ -188,7 +171,7 @@ class MyTurnParserTest {
         try {
             command = commandParser.parseCommand("endProduction",viewController,cli);
 
-            assertTrue(command instanceof EndOfProductionCommand);
+            assertTrue(false);
         } catch (InvalidCommandException e) {
             System.out.println("Invalid command exception");
         }
@@ -204,9 +187,9 @@ class MyTurnParserTest {
     }
 
     @Test
-    @DisplayName("MyTurnParser - Buy action")
-    public void myTurnParserTest4(){
-        CommandParser commandParser = new MyTurnParser();
+    @DisplayName("standardParser - Buy action")
+    public void standardParserTest4(){
+        CommandParser commandParser = new StandardParser();
         Scanner in = new Scanner(System.in);
         String commandText;
         Command command;
@@ -214,54 +197,42 @@ class MyTurnParserTest {
         try {
             command = commandParser.parseCommand("buy 1 1",viewController,cli);
 
-            assertTrue(command instanceof BuyActionCommand);
-            assertEquals(0,((BuyActionCommand) command).getDeckNumber());
-            assertEquals(0,((BuyActionCommand) command).getColumnNumber());
+            assertTrue(false);
         } catch (InvalidCommandException e) {
             System.out.println("Invalid command exception");
         }
         try {
             command = commandParser.parseCommand("buy 12 2",viewController,cli);
 
-            assertTrue(command instanceof BuyActionCommand);
-            assertEquals(11,((BuyActionCommand) command).getDeckNumber());
-            assertEquals(1,((BuyActionCommand) command).getColumnNumber());
+            assertTrue(false);
         } catch (InvalidCommandException e) {
             System.out.println("Invalid command exception");
         }
         try {
             command = commandParser.parseCommand("buy 11 3",viewController,cli);
 
-            assertTrue(command instanceof BuyActionCommand);
-            assertEquals(10,((BuyActionCommand) command).getDeckNumber());
-            assertEquals(2,((BuyActionCommand) command).getColumnNumber());
+            assertTrue(false);
         } catch (InvalidCommandException e) {
             System.out.println("Invalid command exception");
         }
         try {
             command = commandParser.parseCommand("buy 10 3",viewController,cli);
 
-            assertTrue(command instanceof BuyActionCommand);
-            assertEquals(9,((BuyActionCommand) command).getDeckNumber());
-            assertEquals(2,((BuyActionCommand) command).getColumnNumber());
+            assertTrue(false);
         } catch (InvalidCommandException e) {
             System.out.println("Invalid command exception");
         }
         try {
             command = commandParser.parseCommand("buy 9 3",viewController,cli);
 
-            assertTrue(command instanceof BuyActionCommand);
-            assertEquals(8,((BuyActionCommand) command).getDeckNumber());
-            assertEquals(2,((BuyActionCommand) command).getColumnNumber());
+            assertTrue(false);
         } catch (InvalidCommandException e) {
             System.out.println("Invalid command exception");
         }
         try {
             command = commandParser.parseCommand("buy 7 3",viewController,cli);
 
-            assertTrue(command instanceof BuyActionCommand);
-            assertEquals(6,((BuyActionCommand) command).getDeckNumber());
-            assertEquals(2,((BuyActionCommand) command).getColumnNumber());
+            assertTrue(false);
         } catch (InvalidCommandException e) {
             System.out.println("Invalid command exception");
         }
@@ -297,9 +268,9 @@ class MyTurnParserTest {
     }
 
     @Test
-    @DisplayName("MyTurnParser - End turn")
-    public void myTurnParserTest5(){
-        CommandParser commandParser = new MyTurnParser();
+    @DisplayName("standardParser - End turn")
+    public void standardParserTest5(){
+        CommandParser commandParser = new StandardParser();
         Scanner in = new Scanner(System.in);
         String commandText;
         Command command;
@@ -307,7 +278,7 @@ class MyTurnParserTest {
         try {
             command = commandParser.parseCommand("endTurn",viewController,cli);
 
-            assertTrue(command instanceof EndOfTurnCommand);
+            assertTrue(false);
         } catch (InvalidCommandException e) {
             System.out.println("Invalid command exception");
         }
@@ -322,9 +293,9 @@ class MyTurnParserTest {
 
     }
     @Test
-    @DisplayName("MyTurnParser - Exit")
-    public void myTurnParserTest6(){
-        CommandParser commandParser = new MyTurnParser();
+    @DisplayName("standardParser - Exit")
+    public void standardParserTest6(){
+        CommandParser commandParser = new StandardParser();
         Scanner in = new Scanner(System.in);
         String commandText;
         Command command;
@@ -347,9 +318,9 @@ class MyTurnParserTest {
 
     }
     @Test
-    @DisplayName("MyTurnParser - ExtraProduction")
-    public void myTurnParserTest7(){
-        CommandParser commandParser = new MyTurnParser();
+    @DisplayName("standardParser - ExtraProduction")
+    public void standardParserTest7(){
+        CommandParser commandParser = new StandardParser();
         Scanner in = new Scanner(System.in);
         String commandText;
         Command command;
@@ -357,7 +328,7 @@ class MyTurnParserTest {
         try {
             command = commandParser.parseCommand("extraProductionOn",viewController,cli);
 
-            assertTrue(command instanceof ExtraProductionCommand);
+            assertTrue(false);
         } catch (InvalidCommandException e) {
             System.out.println("Invalid command exception");
         }
@@ -371,9 +342,9 @@ class MyTurnParserTest {
 
     }
     @Test
-    @DisplayName("MyTurnParser - Help")
-    public void myTurnParserTest8(){
-        CommandParser commandParser = new MyTurnParser();
+    @DisplayName("standardParser - Help")
+    public void standardParserTest8(){
+        CommandParser commandParser = new StandardParser();
         Scanner in = new Scanner(System.in);
         String commandText;
         Command command;
@@ -396,9 +367,9 @@ class MyTurnParserTest {
     }
 
     @Test
-    @DisplayName("MyTurnParser - ProductionOn")
-    public void myTurnParserTest10(){
-        CommandParser commandParser = new MyTurnParser();
+    @DisplayName("standardParser - ProductionOn")
+    public void standardParserTest10(){
+        CommandParser commandParser = new StandardParser();
         Scanner in = new Scanner(System.in);
         String commandText;
         Command command;
@@ -406,7 +377,7 @@ class MyTurnParserTest {
         try {
             command = commandParser.parseCommand("productionOn",viewController,cli);
 
-            assertTrue(command instanceof ProductionCommand);
+            assertTrue(false);
         } catch (InvalidCommandException e) {
             System.out.println("Invalid command exception");
         }
@@ -419,9 +390,9 @@ class MyTurnParserTest {
         }
     }
     @Test
-    @DisplayName("MyTurnParser - ShowGameBoard")
-    public void myTurnParserTest11(){
-        CommandParser commandParser = new MyTurnParser();
+    @DisplayName("standardParser - ShowGameBoard")
+    public void standardParserTest11(){
+        CommandParser commandParser = new StandardParser();
         Scanner in = new Scanner(System.in);
         String commandText;
         Command command;
@@ -442,9 +413,9 @@ class MyTurnParserTest {
         }
     }
     @Test
-    @DisplayName("MyTurnParser - ShowMarket")
-    public void myTurnParserTest12(){
-        CommandParser commandParser = new MyTurnParser();
+    @DisplayName("standardParser - ShowMarket")
+    public void standardParserTest12(){
+        CommandParser commandParser = new StandardParser();
         Scanner in = new Scanner(System.in);
         String commandText;
         Command command;
@@ -465,9 +436,9 @@ class MyTurnParserTest {
         }
     }
     @Test
-    @DisplayName("MyTurnParser - showProductionDecks")
-    public void myTurnParserTest13(){
-        CommandParser commandParser = new MyTurnParser();
+    @DisplayName("standardParser - showProductionDecks")
+    public void standardParserTest13(){
+        CommandParser commandParser = new StandardParser();
         Scanner in = new Scanner(System.in);
         String commandText;
         Command command;
@@ -488,9 +459,9 @@ class MyTurnParserTest {
         }
     }
     @Test
-    @DisplayName("MyTurnParser - showReserve")
-    public void myTurnParserTest14(){
-        CommandParser commandParser = new MyTurnParser();
+    @DisplayName("standardParser - showReserve")
+    public void standardParserTest14(){
+        CommandParser commandParser = new StandardParser();
         Scanner in = new Scanner(System.in);
         String commandText;
         Command command;
@@ -511,9 +482,9 @@ class MyTurnParserTest {
         }
     }
     @Test
-    @DisplayName("MyTurnParser - leader")
-    public void myTurnParserTest9(){
-        CommandParser commandParser = new MyTurnParser();
+    @DisplayName("standardParser - leader")
+    public void standardParserTest9(){
+        CommandParser commandParser = new StandardParser();
         Scanner in = new Scanner(System.in);
         String commandText;
         Command command;
@@ -521,36 +492,28 @@ class MyTurnParserTest {
         try {
             command = commandParser.parseCommand("leader a 1",viewController,cli);
 
-            assertTrue(command instanceof LeaderCardActionCommand);
-            assertEquals('a',((LeaderCardActionCommand) command).getAd());
-            assertEquals(0,((LeaderCardActionCommand) command).getN());
+            assertTrue(false);
         } catch (InvalidCommandException e) {
             System.out.println("Invalid command exception");
         }
         try {
             command = commandParser.parseCommand("leader x 1",viewController,cli);
 
-            assertTrue(command instanceof LeaderCardActionCommand);
-            assertEquals('x',((LeaderCardActionCommand) command).getAd());
-            assertEquals(0,((LeaderCardActionCommand) command).getN());
+            assertTrue(false);
         } catch (InvalidCommandException e) {
             System.out.println("Invalid command exception");
         }
         try {
             command = commandParser.parseCommand("leader a 2",viewController,cli);
 
-            assertTrue(command instanceof LeaderCardActionCommand);
-            assertEquals('a',((LeaderCardActionCommand) command).getAd());
-            assertEquals(1,((LeaderCardActionCommand) command).getN());
+            assertTrue(false);
         } catch (InvalidCommandException e) {
             System.out.println("Invalid command exception");
         }
         try {
             command = commandParser.parseCommand("leader x 2",viewController,cli);
 
-            assertTrue(command instanceof LeaderCardActionCommand);
-            assertEquals('x',((LeaderCardActionCommand) command).getAd());
-            assertEquals(1,((LeaderCardActionCommand) command).getN());
+            assertTrue(false);
         } catch (InvalidCommandException e) {
             System.out.println("Invalid command exception");
         }
@@ -564,10 +527,10 @@ class MyTurnParserTest {
     }
 
     @Test
-    @DisplayName("MyTurnParser - showPlayer")
-    public void myTurnParserTest15(){
+    @DisplayName("standardParser - showPlayer")
+    public void standardParserTest15(){
 
-        CommandParser commandParser = new MyTurnParser();
+        CommandParser commandParser = new StandardParser();
         Scanner in = new Scanner(System.in);
         String commandText;
         Command command;
@@ -613,5 +576,6 @@ class MyTurnParserTest {
             System.out.println("Invalid command exception");
         }
     }
+
 
 }

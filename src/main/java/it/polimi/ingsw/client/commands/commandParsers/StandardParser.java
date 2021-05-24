@@ -45,20 +45,22 @@ public class StandardParser implements CommandParser{
             case "showPlayer" : {
 
                 int n = 0;
-                int cont = 0;
+                int temp;
+                boolean found = false;
 
-                for(int i = 0;i<suffix.length();i++){
-                    if (cont == 0 ){
-                        cont++;
-                    } else if (cont == 1 && suffix.charAt(i)==' '){
-                        cont++;
-                        n = suffix.charAt(i+1) - '0';
+                for (int i = 0; i < suffix.length() && !found; i++) {
+                    if ( suffix.charAt(i) != ' '){
+                        temp = suffix.charAt(i) -'0';
+                        if (temp < 0 || temp > 9)
+                            throw new InvalidCommandException();
+                        n = temp;
+                        found = true;
                     }
 
                 }
-                if ( n<0 || n>4)
+                if (n < 1 || n > 4)
                     throw new InvalidCommandException();
-                return new ShowPlayerCommand(n,viewController);
+                return new ShowPlayerCommand(n-1, viewController);
 
             }
             case "showProductionDecks" : {
