@@ -32,8 +32,8 @@ public class ProductionCommand extends Command {
             throw new InvalidCommandException();
 
         while(!exitFlag){
-            System.out.println("Insert column between"+available);
-            System.out.println(available);
+            System.out.println("Insert column between : "+available);
+            //System.out.println(available);
             input = in.nextLine();
             choosenColumn = input.charAt(0) - '0';
             for (Integer i : available)
@@ -46,7 +46,7 @@ public class ProductionCommand extends Command {
 
         setFalseProductionBools(choosenColumn);
 
-        return new ProductionOnMessage(choosenColumn);
+        return new ProductionOnMessage(choosenColumn-1);
     }
 
     public void setFalseProductionBools(int choosenLeaderCard){

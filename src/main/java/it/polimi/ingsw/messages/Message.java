@@ -169,7 +169,7 @@ public abstract class Message{
             case DECKPRODUCTIONCARDCONFIG:
                 return gson.fromJson(jsonObj, DeckProductionCardConfigMessage.class);
 
-            case DECKPRODUCTIONCARD:
+            case REMOVECARD:
                 return gson.fromJson(jsonObj, DeckProductionCardMessage.class);
 
             case DISCARDLEADERCARDRESPONSE:

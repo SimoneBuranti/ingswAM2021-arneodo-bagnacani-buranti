@@ -48,6 +48,8 @@ public class GameSolitaire extends Game {
 
     private ClientController clientController;
 
+    private boolean isFirstTurn = true;
+
 
     /**
      * the constructor calls the super class constructor and instantiates the attributes of the solitaire game
@@ -622,7 +624,12 @@ public class GameSolitaire extends Game {
 
     @Override
     public synchronized void endOfTurn() throws IOException, InterruptedException {
-        revealAndActivateActionMarker();
+        if(isFirstTurn){
+            isFirstTurn = false;
+            notifyObserver(new YourTurnMessage());
+        }else {
+            revealAndActivateActionMarker();
+        }
         saveInformation(); }
 
 

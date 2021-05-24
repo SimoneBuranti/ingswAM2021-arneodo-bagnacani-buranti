@@ -3,6 +3,7 @@ package it.polimi.ingsw.client.lightModel.lightGameBoard;
 import it.polimi.ingsw.client.lightModel.productionCards.LightProductionCards;
 import it.polimi.ingsw.server.model.Resource;
 import it.polimi.ingsw.server.model.leaderCards.LeaderCard;
+import it.polimi.ingsw.server.model.leaderCards.LeaderCardReduction;
 import it.polimi.ingsw.server.model.productionCards.ProductionCard;
 
 import java.util.ArrayList;
@@ -42,10 +43,12 @@ public class LightGameBoard {
     public ArrayList<Integer> getAvailableProductionCards(){
         ArrayList<Integer> available = new ArrayList<>();
         for(int i= 0;i<3;i++){
-            for (int j = 0;j<3;j++){
-                if ((productionCards[i][j] == null && j!=0) || (productionCards[i][j] != null && j==2))
-                    available.add(i+1);
-            }
+            if(productionCards[0][i] != null)
+                available.add(i+1);
+            /*for (int j = 0;j<3;j++){
+                if ((productionCards[j][i] == null && i!=0) || (productionCards[i][j] != null && j==2))
+                    available.add();
+            }*/
         }
         return available;
     }
@@ -131,19 +134,39 @@ public class LightGameBoard {
     }
 
     public void payResourcesProduction(ArrayList<Resource> list){
-        strongbox.removeResource(storage.removeAvailableResource(fromListToMap(list)));
+        strongbox.removeResource(storage.removeAvailableResource(list));
     }
 
-    public Map<Resource, Integer> fromListToMap(ArrayList<Resource> list){
-        Map<Resource,Integer> map = new HashMap<>();
-        for(Resource resource : list){
+    public ArrayList<Resource> payResourcesBuy(Map<Resource, Integer> map){
+        ArrayList<Resource> list = fromMapToList(map);
+        for(LeaderCard lc : leaderCardsActivated){
+            if(lc instanceof LeaderCardReduction){
+                list.remove(lc.getResourceEffect());
+                //if(map.get(lc.getResourceEffect()) > 0)
+                //    map.put(lc.getResourceEffect(), map.remove(lc.getResourceEffect())-1);
+            }
+        }
+        strongbox.removeResource(storage.removeAvailableResource(list));
+
+        return list;
+    }
+
+    public ArrayList<Resource> fromMapToList(Map<Resource, Integer> map){
+        ArrayList<Resource> list = new ArrayList<>();
+        for(Resource resource : map.keySet()){
+            for(int i = 0; i < map.get(resource); i++){
+                list.add(resource);
+            }
+        }
+        /*for(Resource resource : list){
             if(map.containsKey(resource)){
                 map.put(resource, map.remove(resource)+1);
             }else{
                 map.put(resource, 1);
             }
         }
-        return map;
+        return map;*/
+        return list;
     }
 
     public void addResourceStorage(Resource resource){
@@ -170,8 +193,8 @@ public class LightGameBoard {
         storage.removeResource(map);
     }
 
-    public Map<Resource,Integer> removeAvailableResourceStorage(Map<Resource,Integer> map){
-        return storage.removeAvailableResource(map);
+    public  ArrayList<Resource> removeAvailableResourceStorage(Map<Resource,Integer> map){
+        return storage.removeAvailableResource(fromMapToList(map));
     }
 
     public void removeResourceStorage(ArrayList<Resource> list){
@@ -298,7 +321,7 @@ public class LightGameBoard {
     public void setLeaderPersonal(int cardFirst, int cardSec) {
         ArrayList<LeaderCard> arrayList = new ArrayList<>();
         arrayList.add(LightLeaderCards.leaderCardByKey(leaderCards.get(cardFirst).getKey()));
-        arrayList.add(LightLeaderCards.leaderCardByKey(leaderCards.get(cardFirst).getKey()));
+        arrayList.add(LightLeaderCards.leaderCardByKey(leaderCards.get(cardSec).getKey()));
         leaderCards=arrayList;
     }
 }

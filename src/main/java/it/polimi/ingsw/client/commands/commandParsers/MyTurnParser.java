@@ -12,7 +12,7 @@ public class MyTurnParser implements CommandParser {
         String prefix = "";
         String suffix = "";
 
-        System.out.println(this+": "+commandText);
+        //System.out.println(this+": "+commandText);
 
         for (int i = 0; i < commandText.length(); i++) {
             if (commandText.charAt(i) != ' ') {
@@ -76,7 +76,7 @@ public class MyTurnParser implements CommandParser {
                 }
                 if( deckNumber <1 || deckNumber >12 || column >3 || column<1)
                     throw new InvalidCommandException();
-                return new BuyActionCommand(deckNumber-1, column-1, viewController);
+                return new BuyActionCommand(deckNumber, column-1, viewController);
             }
             case "endProduction": {
                 return new EndOfProductionCommand(viewController);

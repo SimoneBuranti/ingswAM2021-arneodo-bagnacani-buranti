@@ -39,6 +39,6 @@ public class BuyActionCommand extends Command {
     }
 
     public static String defToString(){
-        return "buy [1..12] [0..2]";
+        return "buy [1..12] [1..3]";
     }
 }
