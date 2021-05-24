@@ -23,6 +23,9 @@ public class WhiteMarbleCommand extends Command {
         return new WhiteMarbleChoosenResourcesMessage(resources);
     }
 
+    public ArrayList<Resource> getResources() {
+        return resources;
+    }
 
     public static String defToString(){
         return "[ResourceType] [ResourceType] .. ";

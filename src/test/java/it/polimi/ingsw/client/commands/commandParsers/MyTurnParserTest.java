@@ -40,6 +40,7 @@ class MyTurnParserTest {
             assertEquals(0,((MarketActionCommand) command).getN());
             assertEquals('r',((MarketActionCommand) command).getRc());
         } catch (InvalidCommandException e) {
+            assertTrue(false);
             System.out.println("Invalid command exception");
         }
 
@@ -50,6 +51,7 @@ class MyTurnParserTest {
             assertEquals(1,((MarketActionCommand) command).getN());
             assertEquals('r',((MarketActionCommand) command).getRc());
         } catch (InvalidCommandException e) {
+            assertTrue(false);
             System.out.println("Invalid command exception");
         }
 
@@ -60,6 +62,7 @@ class MyTurnParserTest {
             assertEquals(2,((MarketActionCommand) command).getN());
             assertEquals('r',((MarketActionCommand) command).getRc());
         } catch (InvalidCommandException e) {
+            assertTrue(false);
             System.out.println("Invalid command exception");
         }
 
@@ -70,6 +73,7 @@ class MyTurnParserTest {
             assertEquals(0,((MarketActionCommand) command).getN());
             assertEquals('c',((MarketActionCommand) command).getRc());
         } catch (InvalidCommandException e) {
+            assertTrue(false);
             System.out.println("Invalid command exception");
         }
 
@@ -80,6 +84,7 @@ class MyTurnParserTest {
             assertEquals(1,((MarketActionCommand) command).getN());
             assertEquals('c',((MarketActionCommand) command).getRc());
         } catch (InvalidCommandException e) {
+            assertTrue(false);
             System.out.println("Invalid command exception");
         }
 
@@ -90,6 +95,7 @@ class MyTurnParserTest {
             assertEquals(2,((MarketActionCommand) command).getN());
             assertEquals('c',((MarketActionCommand) command).getRc());
         } catch (InvalidCommandException e) {
+            assertTrue(false);
             System.out.println("Invalid command exception");
         }
 
@@ -100,6 +106,7 @@ class MyTurnParserTest {
             assertEquals(3,((MarketActionCommand) command).getN());
             assertEquals('c',((MarketActionCommand) command).getRc());
         } catch (InvalidCommandException e) {
+            assertTrue(false);
             System.out.println("Invalid command exception");
         }
 
@@ -164,6 +171,7 @@ class MyTurnParserTest {
 
             assertTrue(command instanceof BaseProductionCommand);
         } catch (InvalidCommandException e) {
+            assertTrue(false);
             System.out.println("Invalid command exception");
         }
 
@@ -190,6 +198,7 @@ class MyTurnParserTest {
 
             assertTrue(command instanceof EndOfProductionCommand);
         } catch (InvalidCommandException e) {
+            assertTrue(false);
             System.out.println("Invalid command exception");
         }
 
@@ -218,6 +227,7 @@ class MyTurnParserTest {
             assertEquals(0,((BuyActionCommand) command).getDeckNumber());
             assertEquals(0,((BuyActionCommand) command).getColumnNumber());
         } catch (InvalidCommandException e) {
+            assertTrue(false);
             System.out.println("Invalid command exception");
         }
         try {
@@ -227,6 +237,7 @@ class MyTurnParserTest {
             assertEquals(11,((BuyActionCommand) command).getDeckNumber());
             assertEquals(1,((BuyActionCommand) command).getColumnNumber());
         } catch (InvalidCommandException e) {
+            assertTrue(false);
             System.out.println("Invalid command exception");
         }
         try {
@@ -236,6 +247,7 @@ class MyTurnParserTest {
             assertEquals(10,((BuyActionCommand) command).getDeckNumber());
             assertEquals(2,((BuyActionCommand) command).getColumnNumber());
         } catch (InvalidCommandException e) {
+            assertTrue(false);
             System.out.println("Invalid command exception");
         }
         try {
@@ -245,6 +257,7 @@ class MyTurnParserTest {
             assertEquals(9,((BuyActionCommand) command).getDeckNumber());
             assertEquals(2,((BuyActionCommand) command).getColumnNumber());
         } catch (InvalidCommandException e) {
+            assertTrue(false);
             System.out.println("Invalid command exception");
         }
         try {
@@ -254,6 +267,7 @@ class MyTurnParserTest {
             assertEquals(8,((BuyActionCommand) command).getDeckNumber());
             assertEquals(2,((BuyActionCommand) command).getColumnNumber());
         } catch (InvalidCommandException e) {
+            assertTrue(false);
             System.out.println("Invalid command exception");
         }
         try {
@@ -263,6 +277,7 @@ class MyTurnParserTest {
             assertEquals(6,((BuyActionCommand) command).getDeckNumber());
             assertEquals(2,((BuyActionCommand) command).getColumnNumber());
         } catch (InvalidCommandException e) {
+            assertTrue(false);
             System.out.println("Invalid command exception");
         }
 
@@ -309,6 +324,7 @@ class MyTurnParserTest {
 
             assertTrue(command instanceof EndOfTurnCommand);
         } catch (InvalidCommandException e) {
+            assertTrue(false);
             System.out.println("Invalid command exception");
         }
 
@@ -334,6 +350,7 @@ class MyTurnParserTest {
 
             assertTrue(command instanceof ExitCommand);
         } catch (InvalidCommandException e) {
+            assertTrue(false);
             System.out.println("Invalid command exception");
         }
 
@@ -359,6 +376,7 @@ class MyTurnParserTest {
 
             assertTrue(command instanceof ExtraProductionCommand);
         } catch (InvalidCommandException e) {
+            assertTrue(false);
             System.out.println("Invalid command exception");
         }
 
@@ -383,6 +401,7 @@ class MyTurnParserTest {
 
             assertTrue(command instanceof HelpCommand);
         } catch (InvalidCommandException e) {
+            assertTrue(false);
             System.out.println("Invalid command exception");
         }
 
@@ -408,6 +427,7 @@ class MyTurnParserTest {
 
             assertTrue(command instanceof ProductionCommand);
         } catch (InvalidCommandException e) {
+            assertTrue(false);
             System.out.println("Invalid command exception");
         }
 
@@ -431,6 +451,7 @@ class MyTurnParserTest {
 
             assertTrue(command instanceof ShowGameBoardCommand);
         } catch (InvalidCommandException e) {
+            assertTrue(false);
             System.out.println("Invalid command exception");
         }
 
@@ -454,6 +475,7 @@ class MyTurnParserTest {
 
             assertTrue(command instanceof ShowMarketCommand);
         } catch (InvalidCommandException e) {
+            assertTrue(false);
             System.out.println("Invalid command exception");
         }
 
@@ -477,6 +499,7 @@ class MyTurnParserTest {
 
             assertTrue(command instanceof ShowProductionDeckCommand);
         } catch (InvalidCommandException e) {
+            assertTrue(false);
             System.out.println("Invalid command exception");
         }
 
@@ -500,6 +523,7 @@ class MyTurnParserTest {
 
             assertTrue(command instanceof ShowReserveCommand);
         } catch (InvalidCommandException e) {
+            assertTrue(false);
             System.out.println("Invalid command exception");
         }
 
@@ -525,6 +549,7 @@ class MyTurnParserTest {
             assertEquals('a',((LeaderCardActionCommand) command).getAd());
             assertEquals(0,((LeaderCardActionCommand) command).getN());
         } catch (InvalidCommandException e) {
+            assertTrue(false);
             System.out.println("Invalid command exception");
         }
         try {
@@ -534,6 +559,7 @@ class MyTurnParserTest {
             assertEquals('x',((LeaderCardActionCommand) command).getAd());
             assertEquals(0,((LeaderCardActionCommand) command).getN());
         } catch (InvalidCommandException e) {
+            assertTrue(false);
             System.out.println("Invalid command exception");
         }
         try {
@@ -543,6 +569,7 @@ class MyTurnParserTest {
             assertEquals('a',((LeaderCardActionCommand) command).getAd());
             assertEquals(1,((LeaderCardActionCommand) command).getN());
         } catch (InvalidCommandException e) {
+            assertTrue(false);
             System.out.println("Invalid command exception");
         }
         try {
@@ -552,6 +579,7 @@ class MyTurnParserTest {
             assertEquals('x',((LeaderCardActionCommand) command).getAd());
             assertEquals(1,((LeaderCardActionCommand) command).getN());
         } catch (InvalidCommandException e) {
+            assertTrue(false);
             System.out.println("Invalid command exception");
         }
 
@@ -578,6 +606,7 @@ class MyTurnParserTest {
             assertTrue(command instanceof ShowPlayerCommand);
             assertEquals(0,((ShowPlayerCommand) command).getNumberPlayer());
         } catch (InvalidCommandException e) {
+            assertTrue(false);
             System.out.println("Invalid command exception");
         }
         try {
@@ -586,6 +615,7 @@ class MyTurnParserTest {
             assertTrue(command instanceof ShowPlayerCommand);
             assertEquals(1,((ShowPlayerCommand) command).getNumberPlayer());
         } catch (InvalidCommandException e) {
+            assertTrue(false);
             System.out.println("Invalid command exception");
         }
         try {
@@ -594,6 +624,7 @@ class MyTurnParserTest {
             assertTrue(command instanceof ShowPlayerCommand);
             assertEquals(2,((ShowPlayerCommand) command).getNumberPlayer());
         } catch (InvalidCommandException e) {
+            assertTrue(false);
             System.out.println("Invalid command exception");
         }
         try {
@@ -602,6 +633,7 @@ class MyTurnParserTest {
             assertTrue(command instanceof ShowPlayerCommand);
             assertEquals(3,((ShowPlayerCommand) command).getNumberPlayer());
         } catch (InvalidCommandException e) {
+            assertTrue(false);
             System.out.println("Invalid command exception");
         }
         try {
@@ -610,6 +642,7 @@ class MyTurnParserTest {
             assertTrue(command instanceof ShowPlayerCommand);
             assertEquals(0,((ShowPlayerCommand) command).getNumberPlayer());
         } catch (InvalidCommandException e) {
+            assertTrue(false);
             System.out.println("Invalid command exception");
         }
     }

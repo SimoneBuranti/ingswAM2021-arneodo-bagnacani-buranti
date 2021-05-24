@@ -25,11 +25,18 @@ public class WhiteMarbleParser implements CommandParser {
         System.out.println(this+": "+commandText);
         String word = "";
         Resource resource;
-
+        boolean found = false;
         ArrayList<Resource> resources = new ArrayList<>();
 
         if (commandText.length() == 0)
             throw new InvalidCommandException();
+
+        for(int s = 0; s <commandText.length() && !found;s++){
+            if(commandText.charAt(s)!=' '){
+                commandText = commandText.substring(s);
+                found = true;
+            }
+        }
 
         for (int i = 0;i<commandText.length();i++){
             if (commandText.charAt(i) != ' '){
@@ -38,15 +45,20 @@ public class WhiteMarbleParser implements CommandParser {
                 resource = Command.fromStringToResource(word);
                 if(resource != null )
                     for(Resource r : possibleResources)
-                        if (r== resource)
-                            resources.add(r);
+                        if (r == resource)
+                            resources.add(resource);
                 word = "";
             }
         }
-
-        if (resources.size() != numberOfWhiteMarbles)
+        resource = Command.fromStringToResource(word);
+        if(resource != null )
+            for(Resource r : possibleResources)
+                if (r == resource)
+                    resources.add(resource);
+        //System.out.println(resources);
+        if (resources.size() != numberOfWhiteMarbles){
             throw new InvalidCommandException();
-
+        }
         return new WhiteMarbleCommand(resources);
     }
 }

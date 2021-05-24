@@ -305,6 +305,7 @@ class StandardParserTest {
 
             assertTrue(command instanceof ExitCommand);
         } catch (InvalidCommandException e) {
+            assertTrue(false);
             System.out.println("Invalid command exception");
         }
 
@@ -354,6 +355,7 @@ class StandardParserTest {
 
             assertTrue(command instanceof HelpCommand);
         } catch (InvalidCommandException e) {
+            assertTrue(false);
             System.out.println("Invalid command exception");
         }
 
@@ -402,6 +404,7 @@ class StandardParserTest {
 
             assertTrue(command instanceof ShowGameBoardCommand);
         } catch (InvalidCommandException e) {
+            assertTrue(false);
             System.out.println("Invalid command exception");
         }
 
@@ -425,6 +428,7 @@ class StandardParserTest {
 
             assertTrue(command instanceof ShowMarketCommand);
         } catch (InvalidCommandException e) {
+            assertTrue(false);
             System.out.println("Invalid command exception");
         }
 
@@ -448,6 +452,7 @@ class StandardParserTest {
 
             assertTrue(command instanceof ShowProductionDeckCommand);
         } catch (InvalidCommandException e) {
+            assertTrue(false);
             System.out.println("Invalid command exception");
         }
 
@@ -471,6 +476,7 @@ class StandardParserTest {
 
             assertTrue(command instanceof ShowReserveCommand);
         } catch (InvalidCommandException e) {
+            assertTrue(false);
             System.out.println("Invalid command exception");
         }
 
@@ -541,6 +547,7 @@ class StandardParserTest {
             assertTrue(command instanceof ShowPlayerCommand);
             assertEquals(0,((ShowPlayerCommand) command).getNumberPlayer());
         } catch (InvalidCommandException e) {
+            assertTrue(false);
             System.out.println("Invalid command exception");
         }
         try {
@@ -549,6 +556,7 @@ class StandardParserTest {
             assertTrue(command instanceof ShowPlayerCommand);
             assertEquals(1,((ShowPlayerCommand) command).getNumberPlayer());
         } catch (InvalidCommandException e) {
+            assertTrue(false);
             System.out.println("Invalid command exception");
         }
         try {
@@ -557,6 +565,7 @@ class StandardParserTest {
             assertTrue(command instanceof ShowPlayerCommand);
             assertEquals(2,((ShowPlayerCommand) command).getNumberPlayer());
         } catch (InvalidCommandException e) {
+            assertTrue(false);
             System.out.println("Invalid command exception");
         }
         try {
@@ -565,6 +574,7 @@ class StandardParserTest {
             assertTrue(command instanceof ShowPlayerCommand);
             assertEquals(3,((ShowPlayerCommand) command).getNumberPlayer());
         } catch (InvalidCommandException e) {
+            assertTrue(false);
             System.out.println("Invalid command exception");
         }
         try {
@@ -573,6 +583,7 @@ class StandardParserTest {
             assertTrue(command instanceof ShowPlayerCommand);
             assertEquals(0,((ShowPlayerCommand) command).getNumberPlayer());
         } catch (InvalidCommandException e) {
+            assertTrue(false);
             System.out.println("Invalid command exception");
         }
     }

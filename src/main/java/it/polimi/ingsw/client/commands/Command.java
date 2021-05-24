@@ -18,6 +18,7 @@ public abstract class Command {
     }
 
     public static Resource fromStringToResource(String resource){
+        //resource.toLowerCase();
         switch (resource) {
             case "coin":
                 return Resource.COIN;
