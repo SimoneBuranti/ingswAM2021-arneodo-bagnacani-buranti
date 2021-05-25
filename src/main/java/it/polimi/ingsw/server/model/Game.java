@@ -788,6 +788,8 @@ public class Game extends Observable {
         notifyObserver(new ConfigurationMarketMessage(market.getInitialMarbleList()));
 
         notifyObserver(new ReserveValueMessage(reserve.getReservePool()));
+
+
     }
 
 
@@ -808,6 +810,7 @@ public class Game extends Observable {
         notifyOnlyOneSpecificObserver(new DeckProductionCardConfigMessage(deckProductionCardOneViolet.getDeckNumber(),deckProductionCardOneViolet.getDeck()), nickname);
 
         notifyOnlyOneSpecificObserver(new ConfigurationMarketMessage(market.getInitialMarbleList()), nickname);
+
     }
 
 ////
