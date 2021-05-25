@@ -143,7 +143,7 @@ public class MyTurnParser implements CommandParser {
                 if (rc == 'r' && (n < 0 || n >2)) {
                     throw new InvalidCommandException();
                 }
-                System.out.println(prefix + " " + suffix + " "+ rc+n);
+                //System.out.println(prefix + " " + suffix + " "+ rc+n);
                 return new MarketActionCommand(rc, n, viewController);
             }
             case "productionOn": {

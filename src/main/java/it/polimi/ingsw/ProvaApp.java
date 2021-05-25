@@ -6,17 +6,22 @@ import it.polimi.ingsw.client.commands.commandParsers.CommandParser;
 import it.polimi.ingsw.client.commands.commandParsers.InitLeaderCardParser;
 import it.polimi.ingsw.client.view.ViewController;
 import it.polimi.ingsw.client.view.cli.Cli;
+import it.polimi.ingsw.server.model.Resource;
 import it.polimi.ingsw.server.model.colours.Blue;
 import it.polimi.ingsw.server.model.colours.Green;
+import it.polimi.ingsw.server.model.gameBoard.GameBoard;
+import it.polimi.ingsw.server.model.productionCards.ProductionCard;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class ProvaApp {
 
 
     public static void main(String[] args) {
-
         Cli cli = new Cli();
         ViewController viewController= null;
         try {

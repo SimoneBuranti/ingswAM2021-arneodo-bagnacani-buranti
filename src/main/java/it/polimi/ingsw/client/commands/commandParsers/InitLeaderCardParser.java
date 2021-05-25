@@ -49,28 +49,29 @@ public class InitLeaderCardParser implements CommandParser{
                 w = "";
             }
         }
-        System.out.println("Chosen dopo il for: "+chosenLeaderCards[0]+chosenLeaderCards[1]);
+        //System.out.println("Chosen dopo il for: "+chosenLeaderCards[0]+chosenLeaderCards[1]);
 
         if (chosenLeaderCards[1] == 0){
             System.out.println("You have to insert another leader card number to continue:");
             w = "";
             c = 0 ;
             while(c<1 || c>4){
-
                 w = in.nextLine();
                 if (w.equals("exit"))
                     return new ExitCommand();
                 c = Command.fromStringToInt(w);
-                if (c<1 || c>4)
+                if (c<1 || c>4){
                     System.out.println("Please type a number between 1 and 4...");
-                if (c == chosenLeaderCards[0])
+                } else if (c == chosenLeaderCards[0]){
                     System.out.println("You have already chosen this card, please type another number");
-
+                    c = 0;
+                } else {
+                    chosenLeaderCards[1] = c;
+                }
             }
-            chosenLeaderCards[1] = c;
         }
 
-        System.out.println("mo ritorno il command");
+        //System.out.println("mo ritorno il command");
         return new KeepLeaderCardsCommand(chosenLeaderCards,viewController);
     }
 }

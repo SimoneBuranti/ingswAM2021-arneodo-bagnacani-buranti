@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class MyTurnParserTest {
 
-    public Cli cli;
+    /*public Cli cli;
     public ViewController viewController;
 
     MyTurnParserTest() throws IOException {
@@ -641,6 +641,6 @@ class MyTurnParserTest {
             assertTrue(false);
             System.out.println("Invalid command exception");
         }
-    }
+    }*/
 
 }
