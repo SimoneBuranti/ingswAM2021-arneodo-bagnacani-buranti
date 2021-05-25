@@ -16,15 +16,19 @@ public class InitResourceParser implements CommandParser{
     }
 
     @Override
-    public Command parseCommand(String commandText, ViewController viewController, Cli cli) throws InvalidCommandException, NoMessageReturnException {
+    public Command parseCommand(String commandText, ViewController viewController, Cli cli) throws InvalidCommandException {
 
-        String w = " ";
+        String w = "";
         int c;
         ArrayList<Resource> chosenResources = new ArrayList<>();
 
         commandText = Command.deleteInitSpaces(commandText);
         if (commandText.length() == 0)
             throw new InvalidCommandException();
+
+        if (commandText.equals("exit"))
+            return new ExitCommand();
+
 
         Resource r;
         for (int i = 0;i<commandText.length();i++){
@@ -40,7 +44,7 @@ public class InitResourceParser implements CommandParser{
         r = Command.fromStringToResource(w);
         if(r != null)
             chosenResources.add(r);
-
+        System.out.println(chosenResources);
         if (chosenResources.size() != nOfResources)
             throw new InvalidCommandException();
 

@@ -10,7 +10,7 @@ public class ResumeAnswerCommand extends Command {
     private boolean answer;
     //private Cli cli;
 
-    public ResumeAnswerCommand(boolean answer,Cli cli) {
+    public ResumeAnswerCommand(boolean answer) {
         this.answer = answer;
         //this.cli = cli;
     }

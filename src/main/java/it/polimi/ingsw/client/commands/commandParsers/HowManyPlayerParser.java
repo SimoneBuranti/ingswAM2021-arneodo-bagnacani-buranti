@@ -13,11 +13,14 @@ public class HowManyPlayerParser implements CommandParser{
 
         int nOfplayers;
 
+        commandText = Command.deleteInitSpaces(commandText);
         if (commandText.length() == 0)
             throw new InvalidCommandException();
 
-        nOfplayers = Command.fromStringToInt(commandText);
+        if (commandText.equals("exit"))
+            return new ExitCommand();
 
+        nOfplayers = Command.fromStringToInt(commandText);
         if (nOfplayers<1 || nOfplayers > 4)
             throw new InvalidCommandException();
 

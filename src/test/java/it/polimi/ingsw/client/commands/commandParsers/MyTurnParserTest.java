@@ -220,7 +220,7 @@ class MyTurnParserTest {
             command = commandParser.parseCommand("buy 1 1",viewController,cli);
 
             assertTrue(command instanceof BuyActionCommand);
-            assertEquals(0,((BuyActionCommand) command).getDeckNumber());
+            assertEquals(1,((BuyActionCommand) command).getDeckNumber());
             assertEquals(0,((BuyActionCommand) command).getColumnNumber());
         } catch (InvalidCommandException e) {
             assertTrue(false);
@@ -230,7 +230,7 @@ class MyTurnParserTest {
             command = commandParser.parseCommand("buy 12 2",viewController,cli);
 
             assertTrue(command instanceof BuyActionCommand);
-            assertEquals(11,((BuyActionCommand) command).getDeckNumber());
+            assertEquals(12,((BuyActionCommand) command).getDeckNumber());
             assertEquals(1,((BuyActionCommand) command).getColumnNumber());
         } catch (InvalidCommandException e) {
             assertTrue(false);
@@ -240,7 +240,7 @@ class MyTurnParserTest {
             command = commandParser.parseCommand("buy 11 3",viewController,cli);
 
             assertTrue(command instanceof BuyActionCommand);
-            assertEquals(10,((BuyActionCommand) command).getDeckNumber());
+            assertEquals(11,((BuyActionCommand) command).getDeckNumber());
             assertEquals(2,((BuyActionCommand) command).getColumnNumber());
         } catch (InvalidCommandException e) {
             assertTrue(false);
@@ -250,7 +250,7 @@ class MyTurnParserTest {
             command = commandParser.parseCommand("buy 10 3",viewController,cli);
 
             assertTrue(command instanceof BuyActionCommand);
-            assertEquals(9,((BuyActionCommand) command).getDeckNumber());
+            assertEquals(10,((BuyActionCommand) command).getDeckNumber());
             assertEquals(2,((BuyActionCommand) command).getColumnNumber());
         } catch (InvalidCommandException e) {
             assertTrue(false);
@@ -260,7 +260,7 @@ class MyTurnParserTest {
             command = commandParser.parseCommand("buy 9 3",viewController,cli);
 
             assertTrue(command instanceof BuyActionCommand);
-            assertEquals(8,((BuyActionCommand) command).getDeckNumber());
+            assertEquals(9,((BuyActionCommand) command).getDeckNumber());
             assertEquals(2,((BuyActionCommand) command).getColumnNumber());
         } catch (InvalidCommandException e) {
             assertTrue(false);
@@ -270,7 +270,7 @@ class MyTurnParserTest {
             command = commandParser.parseCommand("buy 7 3",viewController,cli);
 
             assertTrue(command instanceof BuyActionCommand);
-            assertEquals(6,((BuyActionCommand) command).getDeckNumber());
+            assertEquals(7,((BuyActionCommand) command).getDeckNumber());
             assertEquals(2,((BuyActionCommand) command).getColumnNumber());
         } catch (InvalidCommandException e) {
             assertTrue(false);

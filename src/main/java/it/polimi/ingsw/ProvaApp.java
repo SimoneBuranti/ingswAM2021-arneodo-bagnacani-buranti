@@ -1,9 +1,15 @@
 package it.polimi.ingsw;
 
+import it.polimi.ingsw.client.SocketClient;
 import it.polimi.ingsw.client.commands.*;
+import it.polimi.ingsw.client.commands.commandParsers.CommandParser;
+import it.polimi.ingsw.client.commands.commandParsers.InitLeaderCardParser;
+import it.polimi.ingsw.client.view.ViewController;
+import it.polimi.ingsw.client.view.cli.Cli;
 import it.polimi.ingsw.server.model.colours.Blue;
 import it.polimi.ingsw.server.model.colours.Green;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class ProvaApp {
@@ -11,11 +17,31 @@ public class ProvaApp {
 
     public static void main(String[] args) {
 
-
+        Cli cli = new Cli();
+        ViewController viewController= null;
+        try {
+            viewController = new ViewController(new SocketClient("127.0.0.1",1234,cli),cli);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        int[] chosen = new int[2];
+        CommandParser commendParser = new InitLeaderCardParser();
         Scanner in = new Scanner(System.in);
-        String input = in.nextLine();
+        String commandText;
 
-        System.out.println(input.substring(1));
+        commandText = in.nextLine();
+
+
+        Command command = null;
+        try {
+            command = commendParser.parseCommand(commandText,viewController,cli);
+            System.out.println( command instanceof KeepLeaderCardsCommand);
+            System.out.println(((KeepLeaderCardsCommand) command).getChosenLeaderCards()[0] ==1);
+            System.out.println(((KeepLeaderCardsCommand) command).getChosenLeaderCards()[1] ==2);
+        } catch (InvalidCommandException e) {
+            e.printStackTrace();
+        }
+
 
 
     }

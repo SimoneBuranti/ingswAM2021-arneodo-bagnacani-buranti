@@ -8,5 +8,5 @@ import it.polimi.ingsw.client.view.ViewController;
 import it.polimi.ingsw.client.view.cli.Cli;
 
 public interface CommandParser {
-    Command parseCommand(String commandText, ViewController viewController, Cli cli) throws InvalidCommandException, NoMessageReturnException;
+    Command parseCommand(String commandText, ViewController viewController, Cli cli) throws InvalidCommandException;
 }
