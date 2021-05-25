@@ -30,8 +30,6 @@ public class KeepResourcesParser implements CommandParser{
             throw new InvalidCommandException();
         commandText = Command.deleteInitSpaces(commandText);
 
-        System.out.println(this+": "+commandText);
-
         for (int i = 0;i<commandText.length();i++){
             if (commandText.charAt(i) != ' '){
                 prefix = prefix + commandText.charAt(i);
@@ -40,6 +38,9 @@ public class KeepResourcesParser implements CommandParser{
                     suffix = suffix + commandText.charAt(i);
             }
         }
+
+        if(prefix.equals("none"))
+            return new KeepResourcesCommand(new ArrayList<>(),cli);
 
         if (prefix.equals("coin") || prefix.equals("rock") || prefix.equals("shield") || prefix.equals("servant")){
 
@@ -88,7 +89,8 @@ public class KeepResourcesParser implements CommandParser{
 
             if (chosen.equals(picked))
                 throw new InvalidCommandException();
-            return new KeepResourcesCommand(localResources);
+            System.out.println(this+": "+localResources);
+            return new KeepResourcesCommand(localResources,cli);
         } else {
 
             switch (prefix) {

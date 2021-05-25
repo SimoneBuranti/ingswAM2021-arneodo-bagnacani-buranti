@@ -12,6 +12,7 @@ public class KeepResourcesMessage extends Message{
     private ArrayList<Resource> choosenResources;
 
     public KeepResourcesMessage(ArrayList<Resource> choosenResources) {
+        System.out.println("Sono dentro al messaggio : "+ choosenResources);
         this.choosenResources = choosenResources;
     }
 

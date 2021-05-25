@@ -64,6 +64,11 @@ public class LightGameSolitaire extends LightGame{
     @Override
     public void moveBlackCrossOnce(){
         lorenzoTheMagnificent.moveBlackCross();
+        try {
+            notifyObserver((new FaithPathNotification(lorenzoTheMagnificent.getFaithIndicator(),true).serialize()));
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
