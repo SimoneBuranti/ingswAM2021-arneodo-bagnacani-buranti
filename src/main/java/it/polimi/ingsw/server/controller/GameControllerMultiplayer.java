@@ -37,6 +37,7 @@ public class GameControllerMultiplayer extends GameController {
             server.addClientControllersDisconnected(clientController);
             try {
                 clientController.getClientHandler().disconnect();
+                System.out.println("Ho disconnesso client - general call");
             } catch (IOException | InterruptedException e) {
                 //messaggio di errore
             }

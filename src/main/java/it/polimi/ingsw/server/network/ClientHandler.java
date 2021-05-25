@@ -30,6 +30,9 @@ public class ClientHandler implements Runnable {
 
     private int ack;
 
+    private boolean disconnectedDueExit;
+
+
     /**
      * This attribute is used in tests only in order to check the output messages without
      * any socket connection
@@ -113,9 +116,9 @@ public class ClientHandler implements Runnable {
             ScheduledThreadPoolExecutor pinger = new ScheduledThreadPoolExecutor(1);
             pinger.scheduleAtFixedRate( () -> {
 
-                try {
+                if(!disconnectedDueExit)
+                { try {
                     sendMessage(new PingMessage());
-
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } catch (IOException e) {
@@ -124,23 +127,23 @@ public class ClientHandler implements Runnable {
 
                 if (!getPongo()){
                     ack++;
-                    //System.out.println("ack error: " + ack);
+                    System.out.println("ack error: " + ack);
                     if(ack==8){
                     try {
-                        pingDisconnection();
-                        disconnect();
-                        System.out.println("Ho disconnesso client cause ping");
+                            pingDisconnection();
+                            disconnect();
+                            pinger.shutdown();
+
                     } catch (IOException | InterruptedException e) {
                         e.printStackTrace();
-                    } finally {
-                        pinger.shutdownNow();
                     }
                 }}
                 else{
-                    //System.out.println("resetto ack");
                     setPongo(false);
                     ack=0;
-                }
+                }}
+                else
+                    pinger.shutdown();
 
 
             },4000,4000,TimeUnit.MILLISECONDS);
@@ -165,13 +168,13 @@ public class ClientHandler implements Runnable {
     public synchronized void readMessageServer(String msg) throws IOException, InterruptedException {
 
             Message parsedMsg = Message.deserialize(msg);
-            System.out.println(clientController.getNickname() + " " + parsedMsg.getMessageType()+" leggo da server");
+            System.out.println(clientController.getNickname() + " " + parsedMsg.getMessageType()+"leggo da server");
             parsedMsg.accept(clientController);
 
     }
 
     public synchronized void sendMessage (Message msg) throws InterruptedException, IOException {
-        System.out.println(clientController.getNickname() + " " + msg.getMessageType()+" invio da server");
+        System.out.println(clientController.getNickname() + " " + msg.getMessageType()+"invio da server");
         writeStream.println(msg.serialize());
         writeStream.flush();
 
@@ -187,6 +190,7 @@ public class ClientHandler implements Runnable {
                 }else{
                     server.getGameController().disconnectClientTempLobby(clientController);
                 }
+                System.out.println("Ho disconnesso client cause ping");
                 break;
 
             case "Lobby":
@@ -194,6 +198,7 @@ public class ClientHandler implements Runnable {
                 server.removeClientController(clientController);
                 for(ClientController c : server.getClientController())
                     c.getClientHandler().sendMessage(new NPlayersMessage(server.getLobbySize(),server.getGameController().getLobbySize()));
+                System.out.println("Ho disconnesso client cause ping");
                 break;
             case "Restart":
                 if(server.getGameController().thereIsTempLobby()){
@@ -204,26 +209,34 @@ public class ClientHandler implements Runnable {
                     for (ClientController c : server.getClientController())
                         c.getClientHandler().sendMessage(new NPlayersMessage(server.getGameController().getLobbySize(), server.getLobbySize()));
                 }
+                System.out.println("Ho disconnesso client cause ping");
                 break;
             case "MultiPlayer":
             case "SinglePlayer":
                 server.setGameController(new GameControllerDisconnection(server, clientController.getGame()));
                 clientController.getGame().disconnectPlayer(clientController.getNickname());
                 server.addClientControllersDisconnected(clientController);
+                System.out.println("Ho disconnesso client cause ping");
                 break;
             case "Disconnection":
                 clientController.getGame().disconnectPlayer(clientController.getNickname());
                 server.addClientControllersDisconnected(clientController);
+                System.out.println("Ho disconnesso client cause ping");
                 break;
         }
     }
 
     public void disconnect() throws IOException, InterruptedException {
 
-        if (inputStream != null) inputStream.close();
+        if(!disconnectedDueExit)
+        {
+            if (inputStream != null) inputStream.close();
         if (outputStream != null) outputStream.close();
-        System.out.println("Ho disconnesso client - general call");
         socketClient.close();
+        disconnectedDueExit=true;
+        }
+
+
     }
 
     public Boolean getPongo() {

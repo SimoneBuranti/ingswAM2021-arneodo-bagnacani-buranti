@@ -40,6 +40,7 @@ public class GameControllerRestart extends GameController {
                 c.getClientHandler().sendMessage(new NPlayersMessage(server.getGameController().getLobbySize(), server.getLobbySize()));
         }
         clientController.getClientHandler().disconnect();
+        System.out.println("Ho disconnesso client - general call");
     }
 
     @Override

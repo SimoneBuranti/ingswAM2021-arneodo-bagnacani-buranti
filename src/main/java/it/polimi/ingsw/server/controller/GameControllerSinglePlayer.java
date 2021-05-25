@@ -53,6 +53,7 @@ public class GameControllerSinglePlayer extends GameController {
         if(game.disconnectPlayer(clientController.getNickname())) {
             flag = true;
             server.addClientControllersDisconnected(clientController);
+            System.out.println("Ho disconnesso client - general call");
         }
         try {
             clientController.getClientHandler().disconnect();
@@ -67,6 +68,7 @@ public class GameControllerSinglePlayer extends GameController {
             server.addClientControllersDisconnected(clientController);
             try {
                 clientController.getClientHandler().disconnect();
+                System.out.println("Ho disconnesso client - general call");
             } catch (IOException | InterruptedException e) {
                 //messaggio di errore
             }
@@ -84,6 +86,7 @@ public class GameControllerSinglePlayer extends GameController {
         clientController.getClientHandler().sendMessage(new CompleteRunningMatchErrorMessage());
         try {
             clientController.getClientHandler().disconnect();
+            System.out.println("Ho disconnesso client - general call");
         } catch (IOException e) {
             //messaggio di errore
         }

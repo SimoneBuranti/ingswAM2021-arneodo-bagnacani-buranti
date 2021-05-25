@@ -53,6 +53,7 @@ public class GameControllerEmpty extends GameController {
             disconnectClientTempLobby(clientController);
         }
         clientController.getClientHandler().disconnect();
+        System.out.println("Ho disconnesso client - general call");
     }
 
     @Override

@@ -125,6 +125,7 @@ public class GameControllerLobby extends GameController {
         for(ClientController c : server.getClientController())
             c.getClientHandler().sendMessage(new NPlayersMessage(server.getLobbySize(),server.getGameController().getLobbySize()));
         clientController.getClientHandler().disconnect();
+        System.out.println("Ho disconnesso client - general call");
     }
 
     @Override
