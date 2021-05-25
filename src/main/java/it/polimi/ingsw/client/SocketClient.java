@@ -33,16 +33,12 @@ public class SocketClient {
     public void readMessage(){
 
 
-
-
-
-
         ScheduledThreadPoolExecutor pinger = new ScheduledThreadPoolExecutor(1);
         pinger.scheduleAtFixedRate( () -> {
 
             if (!isCheckServer()){
                 ack++;
-                System.out.println("ack error: " + ack);
+                //System.out.println("ack error: " + ack);
                 if(ack==8){
                     try {
                         viewController.sayDisconnect();
@@ -54,7 +50,7 @@ public class SocketClient {
                     }
                 }}
             else{
-                System.out.println("resetto ack");
+                //System.out.println("resetto ack");
                 setCheckServer(false);
                 ack=0;
             }
@@ -82,7 +78,7 @@ public class SocketClient {
 
 
     public synchronized void readMessageClient(String msg) throws IOException, InterruptedException {
-        System.out.println(msg);
+        //System.out.println(msg);
         Message parsedMsg = Message.deserialize(msg);
         parsedMsg.accept(viewController);
     }
@@ -90,7 +86,7 @@ public class SocketClient {
     public synchronized void sendMessage(Message message){
 
         String msg = message.serialize();
-        System.out.println("esco: "+msg);
+        //System.out.println("esco: "+msg);
         out.println(msg);
     }
 

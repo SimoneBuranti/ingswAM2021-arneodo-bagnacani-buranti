@@ -456,13 +456,16 @@ public class Player {
      */
     public void takeResourceFromClientToGameboard(ArrayList<Resource> list) throws NotEnoughSpaceInStorageException, IOException, InterruptedException {
         int delta;
-        gameBoardOfPlayer.takeFromMarket(list);
+        try{
+            gameBoardOfPlayer.takeFromMarket(list);
+        } catch (NotEnoughSpaceInStorageException e){
+            throw new NotEnoughSpaceInStorageException(buffer);
+        }
         delta= buffer.size()-list.size();
         for(;delta>0;delta--)
             game.moveEveryoneExcept(this);
         game.notifyResultFromMarket(list);
         buffer = new ArrayList<>();
-
     }
 
 

@@ -1053,7 +1053,7 @@ class GameBoardTest {
         }
 
         try {
-            assertEquals(2,gameBoard.firstRowFree(2));
+            assertEquals(1,gameBoard.firstRowFree(2));
         } catch (FullColumnException e) {
             e.printStackTrace();
         }

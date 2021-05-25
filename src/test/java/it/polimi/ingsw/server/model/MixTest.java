@@ -147,7 +147,7 @@ public class MixTest {
         Mix.MIXED(List);
         List.add(6);
         assertEquals(6, (int) List.get(5));
-        assertNotEquals(5, List.get(4));
+        assertEquals(5, List.get(4));
 
 
 

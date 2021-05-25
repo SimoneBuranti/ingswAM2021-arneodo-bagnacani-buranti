@@ -15,7 +15,7 @@ public class ClientApp {
 
         /*InetAddress hostAddress = InetAddress.getByName("95.248.220.116");*/
 
-        int portNumber = 1238;
+        int portNumber = 1234;
 
         View cli = new Cli();
         SocketClient socketClient = new SocketClient(hostName, portNumber, cli );
