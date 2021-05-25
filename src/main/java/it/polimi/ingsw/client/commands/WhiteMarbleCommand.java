@@ -11,13 +11,15 @@ import java.util.ArrayList;
 public class WhiteMarbleCommand extends Command {
 
     private ArrayList<Resource> resources;
+    private Cli cli;
 
-    public WhiteMarbleCommand(ArrayList<Resource> resources) {
+    public WhiteMarbleCommand(ArrayList<Resource> resources,Cli cli) {
         this.resources = resources;
+        this.cli = cli;
     }
 
 
-    public Message commandOn(Cli cli ) throws SpentTokenException, InvalidCommandException, AlreadyActivatedProductionException, NoMessageReturnException {
+    public Message commandOn() throws SpentTokenException, InvalidCommandException, AlreadyActivatedProductionException, NoMessageReturnException {
         cli.changeCommandParser(new MyTurnParser());
 
         return new WhiteMarbleChoosenResourcesMessage(resources);

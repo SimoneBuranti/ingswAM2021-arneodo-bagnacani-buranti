@@ -72,7 +72,7 @@ public class WhiteMarbleParser implements CommandParser {
             if (resources.size() != numberOfWhiteMarbles){
                 throw new InvalidCommandException();
             }
-            return new WhiteMarbleCommand(resources);
+            return new WhiteMarbleCommand(resources,cli);
         } else {
             switch (prefix) {
                 case "exit": {

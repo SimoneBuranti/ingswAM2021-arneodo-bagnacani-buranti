@@ -15,11 +15,12 @@ public class NotEnoughSpaceInStorageException extends Exception {
         this.resources = resources;
     }
 
+    public NotEnoughSpaceInStorageException() {
+        this.resources = new ArrayList<>();
+    }
+
     public NotEnoughSpaceInStorageException(ArrayList<Resource> resources) {
         this.resources = resources;
-    }
-    public NotEnoughSpaceInStorageException() {
-
     }
 
     public ArrayList<Resource> getResources() {
