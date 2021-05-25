@@ -44,10 +44,10 @@ public class InitResourceParser implements CommandParser{
         r = Command.fromStringToResource(w);
         if(r != null)
             chosenResources.add(r);
-        System.out.println(chosenResources);
+
         if (chosenResources.size() != nOfResources)
             throw new InvalidCommandException();
-
+        System.out.println(chosenResources);
         return new InitResourceCommand(chosenResources,cli);
     }
 

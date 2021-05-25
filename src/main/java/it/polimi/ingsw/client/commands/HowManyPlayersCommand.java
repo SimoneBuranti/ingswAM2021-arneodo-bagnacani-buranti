@@ -17,6 +17,10 @@ public class HowManyPlayersCommand extends Command{
 
     @Override
     public Message commandOn(){
+
+        if(nOfPlayers > 1)
+            System.out.println("Please wait the missing players to start the game ...");
+
         return new NumberPlayerMessage(this.nOfPlayers);
     }
 }

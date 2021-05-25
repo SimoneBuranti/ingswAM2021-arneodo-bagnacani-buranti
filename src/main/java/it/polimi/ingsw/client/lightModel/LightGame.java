@@ -17,9 +17,10 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public class LightGame extends ViewObservable {
-    private boolean initLeader=false;
-    private boolean initResource=false;
-    private int position;
+
+    protected boolean initLeader=false;
+    protected boolean initResource=false;
+    protected int position;
 
     /**
      * this attribute represents the game market
@@ -452,7 +453,6 @@ public class LightGame extends ViewObservable {
 
         return true;
     }
-
 
 
     /*public int getDeckNumberFormColourAndLevel(char c, int level) {

@@ -17,7 +17,7 @@ public class InitResourceCommand extends Command{
     private ArrayList<Resource> initResources;
 
     public InitResourceCommand(ArrayList<Resource> resources,Cli cli) {
-
+        this.initResources = new ArrayList<>();
         this.cli = cli;
         this.initResources=resources;
     }
@@ -28,8 +28,6 @@ public class InitResourceCommand extends Command{
 
     @Override
     public Message commandOn() throws EndAfterThisException {
-
-        cli.changeCommandParser(new StandardParser());
         throw new EndAfterThisException(new InitialResourcesMessage(initResources));
     }
 }

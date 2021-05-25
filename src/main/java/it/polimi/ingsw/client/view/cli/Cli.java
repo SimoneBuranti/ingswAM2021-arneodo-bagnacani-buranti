@@ -34,6 +34,11 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
     public static final Resource[] resourceTypes = {Resource.COIN,Resource.ROCK,Resource.SHIELD,Resource.SERVANT};
 
 
+    public Cli() {
+        this.commandParser = new ExitOnlyParser();
+        commandThread();
+    }
+
     public static int readInt() throws NotIntException {
         Scanner in = new Scanner(System.in);
         String input;
@@ -67,14 +72,23 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
                                         e.printStackTrace();
                                     } catch (EndAfterThisException e) {
                                         try {
+                                            //System.out.println(e.getExtraMessage());
                                             notifyObserver(e.getExtraMessage());
                                             notifyObserver(new EndOfTurnMessage());
                                         } catch (IOException | InterruptedException ioException) {
                                             ioException.printStackTrace();
                                         }
+                                        changeCommandParser(new StandardParser());
                                     } catch (NoMessageReturnException ignored) {
+                                    } catch (InitLeaderCardsException e) {
+                                        viewController.getGame().setInitLeader(true);
+                                        try {
+                                            notifyObserver(e.getInitLeaderCardsMessage());
+                                            askInitResource();
+                                        } catch (IOException | InterruptedException ioException) {
+                                            ioException.printStackTrace();
+                                        }
                                     }
-
                                 }
 
                             }
@@ -241,9 +255,10 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
     @Override
     public void askRestartGame() throws IOException, InterruptedException {
         String answer;
+        changeCommandParser(new ResumeGameParser());
+
         System.out.println("Do you want to resume the previous match? [yes / no]");
 
-        changeCommandParser(new ResumeGameParser());
         /*while (input.hasNextLine()){
             answer =input.nextLine();
             if (answer.equals("yes")){
@@ -284,13 +299,14 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
     }
     @Override
     public void askLeaderCardToKeep(ArrayList<LeaderCard> leaderCards)  throws IOException, InterruptedException {
-        System.out.println("Please choose 2 from the following leader cards to keep in your game board [card1 card2]: ");
-        showLeaderCards(leaderCards);
+
         int contOne =0;
         int contSecond=0;
         int cont=0;
 
         changeCommandParser(new InitLeaderCardParser());
+        System.out.println("Please choose 2 from the following leader cards to keep in your game board [card1 card2]: ");
+        showLeaderCards(leaderCards);
         /*while (input.hasNext()){
 
             if(input.hasNextInt()) {
@@ -331,6 +347,7 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
     @Override
     public void showStartGame() {
         System.out.println("The game has started!");
+        this.commandParser = new StandardParser();
     }
 
     @Override
@@ -376,7 +393,6 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
     public void checkThreadRestart(){
         if (viewController.getGame().isInitResource()){
             changeCommandParser(new StandardParser());
-            commandThread();
         }
     }
 
@@ -443,6 +459,8 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
         Resource msg2=null;
         String s=null;
         int count=0;
+
+
         ArrayList<Resource> resources=new ArrayList<>();
         int cont=0;
         System.out.println("for resource [coin,rock,servant,shield]");
@@ -450,7 +468,6 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
             System.out.println("hey my Lord you can't take any init resource");
             notifyObserver(new EndOfTurnMessage());
             changeCommandParser(new StandardParser());
-            commandThread();
         }
         else if(viewController.getGame().getPosition()==2)
         {

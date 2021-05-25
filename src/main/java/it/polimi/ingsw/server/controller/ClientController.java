@@ -291,6 +291,7 @@ public class ClientController implements MessageVisitor {
     @Override
     public void visit(InitialResourcesMessage msg) throws IOException, InterruptedException {
         if (turnCheck()){
+            System.out.println("Sono dentro : "+ msg.getResources());
             if(msg.getResources().size()==1){
                 game.initResourceOfPlayer(msg.getResources().get(0));
             } else {

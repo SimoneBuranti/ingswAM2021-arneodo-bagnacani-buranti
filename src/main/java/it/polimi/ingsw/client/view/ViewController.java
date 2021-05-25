@@ -624,8 +624,6 @@ public class ViewController implements MessageVisitor, ViewObserver {
         if (!game.isInitLeader() && !game.isInitResource()) {
             view.yourTurn();
             view.askLeaderCardToKeep(game.getLeaderCards());
-            game.setInitLeader(true);
-            view.askInitResource();
             game.setInitResource(true);
         }
         else if(game.isInitLeader()&&!game.isInitResource()){
@@ -655,7 +653,9 @@ public class ViewController implements MessageVisitor, ViewObserver {
 
     @Override
     public void update(Message message) throws IOException, InterruptedException {
+        //System.out.println("prima della send : "+ message.toString());
         socketClient.sendMessage(message);
+        //System.out.println("dopo la send : "+ message.toString());
     }
 
 }

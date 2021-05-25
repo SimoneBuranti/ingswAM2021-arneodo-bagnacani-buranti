@@ -1,5 +1,7 @@
 package it.polimi.ingsw.client.commands;
 
+import it.polimi.ingsw.client.view.ViewController;
+import it.polimi.ingsw.client.view.cli.Cli;
 import it.polimi.ingsw.messages.KeepLeaderCardsMessage;
 import it.polimi.ingsw.messages.Message;
 import it.polimi.ingsw.messages.NumberPlayerMessage;
@@ -7,8 +9,10 @@ import it.polimi.ingsw.messages.NumberPlayerMessage;
 public class KeepLeaderCardsCommand extends Command{
 
     private int[] chosenLeaderCards;
+    private ViewController viewController;
 
-    public KeepLeaderCardsCommand(int[] chosenLeaderCards) {
+    public KeepLeaderCardsCommand(int[] chosenLeaderCards, ViewController viewController) {
+        this.viewController = viewController;
         this.chosenLeaderCards = chosenLeaderCards;
     }
 
@@ -17,7 +21,7 @@ public class KeepLeaderCardsCommand extends Command{
     }
 
     @Override
-    public Message commandOn(){
-        return new KeepLeaderCardsMessage(chosenLeaderCards[0],chosenLeaderCards[1]);
+    public Message commandOn() throws InitLeaderCardsException {
+        throw new InitLeaderCardsException(new KeepLeaderCardsMessage(chosenLeaderCards[0]-1,chosenLeaderCards[1]-1));
     }
 }

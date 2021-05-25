@@ -19,7 +19,7 @@ public class NickNameParser implements CommandParser{
         if (commandText.equals("exit"))
             return new ExitCommand();
 
-        return new UsernameCommand(Command.deleteInitSpaces(commandText));
+        return new UsernameCommand(Command.deleteInitSpaces(commandText),viewController);
     }
 
 }

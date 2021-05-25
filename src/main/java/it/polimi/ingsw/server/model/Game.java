@@ -165,6 +165,7 @@ public class Game extends Observable {
      */
     public void initResourceOfPlayer(Resource resource) throws IOException, InterruptedException {
         try {
+            //System.out.println("Curent player "+ currentPlayer);
             currentPlayer.initResource(resource);
         } catch (CallForCouncilException e) {
             exceptionHandler(e);
