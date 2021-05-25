@@ -63,7 +63,15 @@ public class GameControllerSinglePlayer extends GameController {
             server.setGameController(new GameControllerDisconnection(this.server,this.game));
         }}
         else
-        { server.resetInfo(); }
+        { game.disconnectPlayer(clientController.getNickname());
+            server.addClientControllersDisconnected(clientController);
+            try {
+                clientController.getClientHandler().disconnect();
+            } catch (IOException | InterruptedException e) {
+                //messaggio di errore
+            }
+            server.resetInfo();
+        }
     }
 
     @Override

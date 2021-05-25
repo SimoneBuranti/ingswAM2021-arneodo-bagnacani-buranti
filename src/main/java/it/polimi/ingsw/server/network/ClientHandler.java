@@ -28,6 +28,8 @@ public class ClientHandler implements Runnable {
 
     private Boolean pongo = false;
 
+    private int ack;
+
     /**
      * This attribute is used in tests only in order to check the output messages without
      * any socket connection
@@ -50,6 +52,7 @@ public class ClientHandler implements Runnable {
 
         readStream = new BufferedReader(new InputStreamReader(inputStream));
         writeStream = new PrintWriter(outputStream);
+        ack=0;
 
         }
 
@@ -107,7 +110,7 @@ public class ClientHandler implements Runnable {
                 sendMessage(new UsernameMessage(null));
             }
 
-            /*ScheduledThreadPoolExecutor pinger = new ScheduledThreadPoolExecutor(1);
+            ScheduledThreadPoolExecutor pinger = new ScheduledThreadPoolExecutor(1);
             pinger.scheduleAtFixedRate( () -> {
 
                 try {
@@ -118,26 +121,33 @@ public class ClientHandler implements Runnable {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-
                 try {
-                    Thread.sleep(1000);
+                    Thread.sleep(500);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
                 if (!getPongo()){
+                    ack++;
+                    System.out.println("ack error: " + ack);
+                    if(ack==3){
                     try {
+                        pingDisconnection();
                         disconnect();
-                        System.out.println("Ho disconnesso client - pinger");
-                    } catch (IOException e) {
+                        System.out.println("Ho disconnesso client cause ping");
+                    } catch (IOException | InterruptedException e) {
                         e.printStackTrace();
                     } finally {
                         pinger.shutdownNow();
                     }
+                }}
+                else{
+                    System.out.println("resetto ack");
+                    setPongo(false);
+                    ack=0;
                 }
 
-                setPongo(false);
 
-            },1000,3000,TimeUnit.MILLISECONDS);*/
+            },2000,3000,TimeUnit.MILLISECONDS);
 
             while(true){
 
@@ -156,13 +166,15 @@ public class ClientHandler implements Runnable {
         }
     }
 
-    public void readMessageServer(String msg) throws IOException, InterruptedException {
+    public synchronized void readMessageServer(String msg) throws IOException, InterruptedException {
+
             Message parsedMsg = Message.deserialize(msg);
+            System.out.println(clientController.getNickname() + " " + parsedMsg.getMessageType());
             parsedMsg.accept(clientController);
 
     }
 
-    public void sendMessage (Message msg) throws InterruptedException, IOException {
+    public synchronized void sendMessage (Message msg) throws InterruptedException, IOException {
         System.out.println(clientController.getNickname() + " " + msg.getMessageType());
         writeStream.println(msg.serialize());
         writeStream.flush();
@@ -209,8 +221,8 @@ public class ClientHandler implements Runnable {
                 break;
         }
     }
+
     public void disconnect() throws IOException, InterruptedException {
-        pingDisconnection();
 
         if (inputStream != null) inputStream.close();
         if (outputStream != null) outputStream.close();

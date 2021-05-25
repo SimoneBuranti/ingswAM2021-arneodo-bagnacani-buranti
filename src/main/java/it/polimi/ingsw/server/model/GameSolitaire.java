@@ -466,31 +466,10 @@ public class GameSolitaire extends Game {
     public void saveInformation(){
        super.saveInformation();
 
-        saveTypeMatch();
        player.savePlayerInformation();
         deckActionMarker.saveInformationOfActionMarker();
         lorenzoTheMagnificent.saveInformationOfLorenzo();
         saveNickNamePlayer();
-    }
-
-    private void saveTypeMatch() {
-        Gson gson = new Gson();
-        ArrayList<String> strings = new ArrayList<>();
-        strings.add(nickNamePlayer);
-        FileWriter config = null;
-        String jsonStrin = gson.toJson(strings);
-        try {
-            config = new FileWriter("src/main/resources/fileConfiguration/SingleGame.json");
-            config.write(jsonStrin);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                config.flush();
-                config.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } }
     }
 
 
@@ -518,7 +497,9 @@ public class GameSolitaire extends Game {
         Gson gson = new Gson();
 
         FileWriter config = null;
-        String jsonStrin = gson.toJson(nickNamePlayer);
+        ArrayList<String> strings= new ArrayList<>();
+        strings.add(nickNamePlayer);
+        String jsonStrin = gson.toJson(strings);
         try {
             config = new FileWriter("src/main/resources/fileConfiguration/InformationAboutTurn.json");
             config.write(jsonStrin);

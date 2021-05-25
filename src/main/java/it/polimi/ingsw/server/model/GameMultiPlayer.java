@@ -169,9 +169,6 @@ public class GameMultiPlayer extends Game {
             notifyOnlyOneSpecificObserver(new UpdateInitLeaderMessage(needForLeader),fourthPlayer.getNickName());
             notifyOnlyOneSpecificObserver(new PositionMessage(4), fourthPlayer.getNickName());
         }
-
-
-
     }
 
     private void createNickNameInOrder(ArrayList<ClientController> clientControllers) {
@@ -441,7 +438,6 @@ public class GameMultiPlayer extends Game {
         for(Player p : playerList){
             p.savePlayerInformation();
         }
-        saveTypeMatch();
         saveInformationAboutTurn();
         saveInformationOfInkwel();
         saveInformationPlayerNumber();
@@ -664,23 +660,6 @@ public class GameMultiPlayer extends Game {
         notifyToOneObserver(new YourTurnMessage());
         notifyAllObserverLessOne(new ChangeTurnMessage(currentPlayer.getNickName()));}
 
-    private void saveTypeMatch() {
-        Gson gson = new Gson();
-        FileWriter config = null;
-        String jsonStrin = gson.toJson(nickNameInOrder);
-        try {
-            config = new FileWriter("src/main/resources/fileConfiguration/MultiGame.json");
-            config.write(jsonStrin);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                config.flush();
-                config.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } }
-    }
 
 
     public void askInfoOnPlayer(int n, String nickname) throws IOException, InterruptedException {
