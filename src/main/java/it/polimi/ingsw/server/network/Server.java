@@ -32,10 +32,10 @@ public class Server {
             ArrayList<String> nickNameInOrder;
             String nickname;
             Gson gson = new Gson();
-            File fmulti = new File("src/main/resources/fileConfiguration/MultiGame.json");
-            File fsingle = new File("src/main/resources/fileConfiguration/SingleGame.json");
+            File f = new File("src/main/resources/fileConfiguration/InformationAboutTurn.json");
 
-            if (fmulti.exists()){
+
+            if (f.exists()){
                 nickNameInOrder = gson.fromJson(new FileReader("src/main/resources/fileConfiguration/InformationAboutTurn.json"),ArrayList.class);
                 this.gameController = new GameControllerRestart(this);
                 gameController.setServer(this);
@@ -46,15 +46,6 @@ public class Server {
                 restartQuestionSent = false;
                 gameController.setNumberOfPlayers(nickNameInOrder.size());
             }
-             else if (fsingle.exists())
-
-                { nickname = gson.fromJson(new FileReader("src/main/resources/fileConfiguration/InformationAboutTurn.json"),String.class);
-                    lobby.add(nickname);
-                    this.gameController = new GameControllerRestart(this);
-                    gameController.setServer(this);
-                    sendRestartQuestion = true;
-                    gameController.setNumberOfPlayers(1);
-                }
         else{
             this.gameController = new GameControllerEmpty(this);
             gameController.setServer(this);

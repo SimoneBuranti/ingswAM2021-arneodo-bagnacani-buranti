@@ -33,7 +33,13 @@ public class GameControllerMultiplayer extends GameController {
       server.setGameController(new GameControllerDisconnection(this.server,this.game));
      }}
         else
-        {server.addClientControllersDisconnected(clientController);
+        {game.disconnectPlayer(clientController.getNickname());
+            server.addClientControllersDisconnected(clientController);
+            try {
+                clientController.getClientHandler().disconnect();
+            } catch (IOException | InterruptedException e) {
+                //messaggio di errore
+            }
             if (server.getClientControllersDisconnected().size()==server.getClientController().size())
             { server.resetInfo(); }
         }

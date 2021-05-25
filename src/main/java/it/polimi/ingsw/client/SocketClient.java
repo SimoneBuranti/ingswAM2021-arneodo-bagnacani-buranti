@@ -46,14 +46,16 @@ public class SocketClient {
     }
 
 
-    public void readMessageClient(String msg) throws IOException, InterruptedException {
-        //System.out.println(msg);
+    public synchronized void readMessageClient(String msg) throws IOException, InterruptedException {
+        System.out.println(msg);
         Message parsedMsg = Message.deserialize(msg);
         parsedMsg.accept(viewController);
     }
 
-    public void sendMessage(Message message){
+    public synchronized void sendMessage(Message message){
+
         String msg = message.serialize();
+        System.out.println("esco: "+msg);
         out.println(msg);
     }
 

@@ -117,14 +117,6 @@ public class FileClass {
         if (f.exists())
             f.delete();
 
-        f = new File("src/main/resources/fileConfiguration/MultiGame.json");
-        if (f.exists())
-            f.delete();
-
-        f = new File("src/main/resources/fileConfiguration/SingleGame.json");
-        if (f.exists())
-            f.delete();
-
 
         f = new File("src/main/resources/fileConfiguration/fileInformationLeaderInitLeaderPlayerFirst.json");
         if (f.exists())
