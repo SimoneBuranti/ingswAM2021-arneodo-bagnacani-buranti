@@ -458,6 +458,11 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
     }
 
     @Override
+    public void sayDisconnect() {
+        System.out.println(" Server is crashed, please try again after few minutes");
+    }
+
+    @Override
     public void askInitResource() throws IOException, InterruptedException {
         Resource msg=null;
         Resource msg2=null;

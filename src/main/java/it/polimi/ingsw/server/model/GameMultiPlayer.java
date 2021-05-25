@@ -8,6 +8,7 @@ import it.polimi.ingsw.server.controller.ClientController;
 import it.polimi.ingsw.server.model.exceptions.CallForCouncilException;
 import it.polimi.ingsw.server.model.exceptions.EndGameException;
 import it.polimi.ingsw.server.model.exceptions.LastSpaceReachedException;
+import it.polimi.ingsw.server.model.leaderCards.DeckLeaderCard;
 import it.polimi.ingsw.server.model.leaderCards.LeaderCardProduction;
 import it.polimi.ingsw.server.model.players.*;
 
@@ -329,12 +330,14 @@ public class GameMultiPlayer extends Game {
 
     @Override
     public void connectPlayer(String nickname) throws IOException, InterruptedException {
+        this.deckLeaderCard=new DeckLeaderCard();
         for(int i=0; i<playerList.size(); i++){
             if(playerList.get(i).getNickName().equals(nickname) && !(playerList.get(i).isConnected())){
                 playerList.get(i).setConnected();
                 notifyOnlyOneSpecificObserver(new GameTypeMessage(true),playerList.get(i).getNickName());
                 super.configClientReconnected(playerList.get(i).getNickName());
-                configWhitPlayerInfo(playerList.get(i),i+1);}
+                configWhitPlayerInfo(playerList.get(i),i+1);
+            }
         }
     }
 

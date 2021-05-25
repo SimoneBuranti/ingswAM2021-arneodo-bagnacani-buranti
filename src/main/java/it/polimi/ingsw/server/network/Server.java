@@ -44,8 +44,7 @@ public class Server {
                 restartQuestion = 0;
                 setRestartAnswerReceived(false);
                 restartQuestionSent = false;
-                gameController.setNumberOfPlayers(nickNameInOrder.size());
-            }
+                gameController.setNumberOfPlayers(nickNameInOrder.size());}
         else{
             this.gameController = new GameControllerEmpty(this);
             gameController.setServer(this);

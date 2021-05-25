@@ -606,7 +606,7 @@ public class Game extends Observable {
      * save information for a possible restart game
      */
     protected void restoreGame() throws IOException, InterruptedException {
-
+        deckLeaderCard=new DeckLeaderCard();
         restoreInformationOfMarket();
         restoreInformationOfProductionDeck();
         restoreInformationOfReserve();
@@ -785,6 +785,8 @@ public class Game extends Observable {
         notifyObserver(new ConfigurationMarketMessage(market.getInitialMarbleList()));
 
         notifyObserver(new ReserveValueMessage(reserve.getReservePool()));
+
+
     }
 
 
@@ -805,6 +807,7 @@ public class Game extends Observable {
         notifyOnlyOneSpecificObserver(new DeckProductionCardConfigMessage(deckProductionCardOneViolet.getDeckNumber(),deckProductionCardOneViolet.getDeck()), nickname);
 
         notifyOnlyOneSpecificObserver(new ConfigurationMarketMessage(market.getInitialMarbleList()), nickname);
+
     }
 
 ////

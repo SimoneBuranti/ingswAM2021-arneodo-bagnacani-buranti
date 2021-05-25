@@ -503,8 +503,6 @@ public class Player {
 
     public void reverseAddPersonalLeaderCardAskey()
     {
-        int k=0;
-
         for(int i=0; i<getLeaderCard().length; i++)
         {
             this.personalLeaderCard.add(DeckLeaderCard.controlKey(leaderCard[i]));

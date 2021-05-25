@@ -14,6 +14,7 @@ import it.polimi.ingsw.server.model.colours.Violet;
 import it.polimi.ingsw.server.model.colours.Yellow;
 import it.polimi.ingsw.server.model.exceptions.*;
 import it.polimi.ingsw.server.model.gameBoard.GameBoardInterface;
+import it.polimi.ingsw.server.model.leaderCards.DeckLeaderCard;
 import it.polimi.ingsw.server.model.leaderCards.LeaderCardProduction;
 import it.polimi.ingsw.server.model.players.Player;
 import it.polimi.ingsw.server.model.players.PlayerFirst;
@@ -75,7 +76,10 @@ public class GameSolitaire extends Game {
             notifyObserver(new UpdateInitLeaderMessage(needForLeaderInitial));
         }
         else
+        {
+
             restoreGameSolitaire(clientController);
+        }
 
         saveInformation();
         notifyObserver(new PositionMessage(1));
@@ -344,6 +348,7 @@ public class GameSolitaire extends Game {
 
     @Override
     public void connectPlayer(String nickname) throws IOException, InterruptedException{
+        this.deckLeaderCard=new DeckLeaderCard();
         if(player.getNickName().equals(nickname) && !(player.isConnected())) {
             player.setConnected();
             notifyObserver(new GameTypeMessage(false));
@@ -474,20 +479,32 @@ public class GameSolitaire extends Game {
 
 
     public void  restoreGameSolitaire(ClientController clientController) throws IOException, InterruptedException {
-        currentPlayer = player;
+
         Gson gson=new Gson();
+        ArrayList<String> strings= new ArrayList<>();
 
         try {
-            nickNamePlayer= gson.fromJson(new FileReader("src/main/resources/fileConfiguration/InformationAboutNickname.json"), String.class);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+            strings= gson.fromJson(new FileReader("src/main/resources/fileConfiguration/InformationAboutNickname.json"), ArrayList.class);
+
+            nickNamePlayer=strings.get(0);
+
         RestoreActionMarker();
+
         player = new PlayerFirst(nickNamePlayer,this,false,clientController.getVirtualView());
+
+        currentPlayer = player;
         this.addObserver(clientController.getVirtualView());
+
         notifyObserver(new GameTypeMessage(false));
+
         RestoreActionMagnific();
+
         reConfigClient();
+
+
+    } catch (FileNotFoundException e) {
+        e.printStackTrace();
+    }
 
     }
 
@@ -499,7 +516,7 @@ public class GameSolitaire extends Game {
         FileWriter config = null;
         ArrayList<String> strings= new ArrayList<>();
         strings.add(nickNamePlayer);
-        String jsonStrin = gson.toJson(strings);
+        String jsonStrin = gson.toJson(strings,ArrayList.class);
         try {
             config = new FileWriter("src/main/resources/fileConfiguration/InformationAboutTurn.json");
             config.write(jsonStrin);
@@ -512,6 +529,7 @@ public class GameSolitaire extends Game {
             } catch (IOException e) {
                 e.printStackTrace();
             } }
+
 
         try {
             config = new FileWriter("src/main/resources/fileConfiguration/InformationaboutNickname.json");
@@ -562,8 +580,10 @@ public class GameSolitaire extends Game {
         notifyObserver(new UpdateInitBooleanMessage(player.isInitLeader(),player.isInitResource()));
         if(!player.isInitLeader()){
             ArrayList<Integer> needForLeaderInitial = new ArrayList<>();
-            for (int i=0; i<4;i++)
+            for (int i=0; i<4;i++){
+                System.out.println("try to restore for please");
                 needForLeaderInitial.add(player.getPersonalLeaderCard().get(i).getKey());
+            }
             notifyObserver(new UpdateInitLeaderMessage(needForLeaderInitial));}
         else{
             ArrayList<Integer> needForLeader = new ArrayList<>();

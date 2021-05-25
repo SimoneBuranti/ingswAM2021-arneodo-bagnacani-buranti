@@ -314,6 +314,7 @@ public class ViewController implements MessageVisitor, ViewObserver {
 
     @Override
     public void visit(PingMessage msg) {
+        socketClient.setCheckServer(true);
         socketClient.sendMessage(new PongMessage());
     }
 
@@ -658,4 +659,7 @@ public class ViewController implements MessageVisitor, ViewObserver {
         //System.out.println("dopo la send : "+ message.toString());
     }
 
+    public void sayDisconnect() {
+        view.sayDisconnect();
+    }
 }

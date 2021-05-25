@@ -48,7 +48,7 @@ public class GameControllerRestart extends GameController {
     }
 
     @Override
-    public synchronized void handleMessage(UsernameMessage msg, ClientController clientController) throws IOException, InterruptedException {
+    public void handleMessage(UsernameMessage msg, ClientController clientController) throws IOException, InterruptedException {
         if (!restartAnswerReceived){
             clientController.getClientHandler().sendMessage(new BootingLobbyErrorMessage());
         }
@@ -61,18 +61,22 @@ public class GameControllerRestart extends GameController {
                         clientController.getClientHandler().sendMessage(new BootingLobbyErrorMessage());
                     }else
                         clientController.getClientHandler().sendMessage(new AlreadyExistingNickNameErrorMessage());
-                }else if(clientController == firstClientController){
+                }
+                else if(clientController == firstClientController){
+                    System.out.println("first connected");
                     if (!reconnected.contains(msg.getUsername())) {
                         clientController.setNickname(msg.getUsername());
                         reconnected.add(msg.getUsername());
                         server.addClientController(clientController);
                         firstName = true;
                         reconnectionTempLobby();
+                        System.out.println("first connected");
                         for(ClientController c : server.getClientController())
                             c.getClientHandler().sendMessage(new NPlayersMessage(reconnected.size(), server.getLobbySize()));
                     }
                 }
-            }else if(server.isInLobby(msg.getUsername()) && firstName){
+            }
+            else if(server.isInLobby(msg.getUsername()) && firstName){
                 if (!reconnected.contains(msg.getUsername())){
                     clientController.setNickname(msg.getUsername());
                     reconnected.add(msg.getUsername());
@@ -90,6 +94,7 @@ public class GameControllerRestart extends GameController {
 
             if (reconnected.size() == server.getLobbySize()){
                 if (numberOfPlayers==1){
+                    System.out.println("try to restart all*******");
                     server.restoreGameSingleBackup();
                     server.setGameController(new GameControllerSinglePlayer(server,server.getGame()));
 
