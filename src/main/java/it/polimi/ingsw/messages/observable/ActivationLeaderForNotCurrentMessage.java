@@ -30,4 +30,9 @@ public class ActivationLeaderForNotCurrentMessage extends Message {
     public Player getPlayer() {
         return player;
     }
+
+    @Override
+    public String toString(){
+        return player.getNickName() +" has activated a leader card";
+    }
 }

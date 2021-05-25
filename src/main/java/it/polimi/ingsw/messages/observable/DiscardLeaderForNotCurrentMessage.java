@@ -29,4 +29,9 @@ public class DiscardLeaderForNotCurrentMessage extends Message {
     public Player getPlayer() {
         return player;
     }
+
+    @Override
+    public String toString(){
+        return player.getNickName() +" has discarded a leader card";
+    }
 }

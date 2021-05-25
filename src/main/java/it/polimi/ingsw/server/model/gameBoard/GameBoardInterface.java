@@ -23,6 +23,8 @@ public abstract class GameBoardInterface {
 
     public abstract void setPapal();
 
+    public abstract int getPapalCard(int papalCardNumber);
+
     public abstract Resource whiteExchange() throws BlockedWhiteMarbleEffectException, WhiteMarbleException;
 
     public abstract void extraProductionOn(Resource resource) throws ImpossibleProductionException, CallForCouncilException, LastSpaceReachedException;

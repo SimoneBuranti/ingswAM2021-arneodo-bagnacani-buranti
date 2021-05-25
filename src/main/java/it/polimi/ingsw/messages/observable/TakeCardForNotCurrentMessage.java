@@ -10,7 +10,7 @@ import java.io.IOException;
 public class TakeCardForNotCurrentMessage extends Message {
     private final MessageType messageType = MessageType.TAKECARDFORNOTCURRENT;
 
-    private int NumberDeck;
+    private int numberDeck;
 
 
     private Player player;
@@ -18,7 +18,7 @@ public class TakeCardForNotCurrentMessage extends Message {
 
     public TakeCardForNotCurrentMessage(Player player,int numberDeck){
         this.player=player;
-        this.NumberDeck=numberDeck;
+        this.numberDeck=numberDeck;
 
     }
 
@@ -38,6 +38,11 @@ public class TakeCardForNotCurrentMessage extends Message {
     }
 
     public int getNumberDeck() {
-        return NumberDeck;
+        return numberDeck;
+    }
+
+    @Override
+    public String toString(){
+        return player.getNickName() +" bought a card from the deck " + numberDeck;
     }
 }

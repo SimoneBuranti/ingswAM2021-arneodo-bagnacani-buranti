@@ -16,9 +16,6 @@ public class ProductionOnMessage extends Message {
      */
     private final MessageType messageType=MessageType.PRODUCTIONON;
 
-    private ArrayList<Resource> list;
-
-    private int faithMove;
 
     public ProductionOnMessage(int choosenColumn) {
         this.columnNumber = choosenColumn;
@@ -42,22 +39,5 @@ public class ProductionOnMessage extends Message {
     @Override
     public void accept(MessageVisitor v) throws IOException, InterruptedException {
         v.visit(this);
-    }
-
-
-    public ArrayList<Resource> getList() {
-        return list;
-    }
-
-    public void setList() {
-        this.list=list;
-    }
-
-    public int getFaithMove() {
-        return faithMove;
-    }
-
-    public void setFaithMove(int faithMove) {
-        this.faithMove = faithMove;
     }
 }

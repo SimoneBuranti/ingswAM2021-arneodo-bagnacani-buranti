@@ -8,24 +8,26 @@ import java.io.IOException;
 
 public class SetPapalsMessage extends Message {
     private final MessageType messageType = MessageType.SETPAPALS;
-    private int currCall;
+    //private int currCall;
     private String nickname;
+    private int papalCard;
 
-    public SetPapalsMessage(int currCall, String nickname){
-        this.currCall = currCall;
+    public SetPapalsMessage(int papalCard, String nickname){
+        this.papalCard = papalCard;
+        //this.currCall = currCall;
         this.nickname = nickname;
     }
 
-    public int getCurrCall() {
-        return currCall;
+    public int getPapalCard() {
+        return papalCard;
     }
+
+    /*public int getCurrCall() {
+        return currCall;
+    }*/
 
     public String getNickname() {
         return nickname;
-    }
-
-    public void setCurrCall(int currCall) {
-        this.currCall = currCall;
     }
 
     @Override

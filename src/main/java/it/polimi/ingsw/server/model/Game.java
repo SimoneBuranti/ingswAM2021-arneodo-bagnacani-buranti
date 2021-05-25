@@ -235,25 +235,22 @@ public class Game extends Observable {
      * When the exceptions are caught, the method calls the exceptionHandler method.
      * @param chosenColumn : the game board column where the card the player wants to active is situated
      */
-    public void productionOn(int chosenColumn, ArrayList<Resource> list, int faithMove) throws ImpossibleProductionException, EmptyColumnException, IOException, InterruptedException {
+    public void productionOn(int chosenColumn) throws ImpossibleProductionException, EmptyColumnException, IOException, InterruptedException {
         try {
-            ProductionCard productionCard = currentPlayer.getGameBoardOfPlayer().getDevelopmentBoardCell(currentPlayer.getGameBoardOfPlayer().lastRowOccupied(chosenColumn),chosenColumn);
-
-            notifyToOneObserver(new ProductionMessageForCurrentMessage(productionCard.getIn()));
-            notifyAllObserverLessOne(new ProductionMessageForNotCurrentMessage(currentPlayer,productionCard.getIn()) );
             currentPlayer.productionOn(chosenColumn);
-            //if (faithMove)
-            {
-                notifyToOneObserver(new FaithPathMessage(productionCard.isFaithPoint()));
-                notifyAllObserverLessOne(new FaithPathOpponentMessage(currentPlayer.getNickName(),productionCard.isFaithPoint()));
-
-            }
 
         } catch (CallForCouncilException e) {
             exceptionHandler(e);
         } catch (LastSpaceReachedException e) {
             exceptionHandler(e);
         }
+        ProductionCard productionCard = currentPlayer.getGameBoardOfPlayer().getDevelopmentBoardCell(currentPlayer.getGameBoardOfPlayer().lastRowOccupied(chosenColumn),chosenColumn);
+
+        notifyToOneObserver(new ProductionMessageForCurrentMessage(productionCard.getIn()));
+        notifyAllObserverLessOne(new ProductionMessageForNotCurrentMessage(currentPlayer,productionCard.getIn()) );
+
+        notifyToOneObserver(new FaithPathMessage(productionCard.isFaithPoint()));
+        notifyAllObserverLessOne(new FaithPathOpponentMessage(currentPlayer.getNickName(),productionCard.isFaithPoint()));
 
     }
 
@@ -280,22 +277,21 @@ public class Game extends Observable {
      * When the exception is caught, the method calls the exceptionHandler method.
      * @param resource : the resource type of the first extra production output
      */
-    public void extraProductionOn(Resource resource, Resource resourceLeader) throws IOException, InterruptedException {
+    public void extraProductionOn(Resource resource, Resource resourceLeader) throws IOException, InterruptedException, ImpossibleProductionException {
         try {
-            ArrayList<Resource> list =new ArrayList<>();
-            list.add(resourceLeader);
-            notifyToOneObserver(new ProductionMessageForCurrentMessage(list));
-            notifyAllObserverLessOne(new ProductionMessageForNotCurrentMessage(currentPlayer, list) );
-            notifyToOneObserver(new FaithPathMessage(1));
-            notifyAllObserverLessOne(new FaithPathOpponentMessage(currentPlayer.getNickName(), 1));
             currentPlayer.extraProductionOn(resource);
         } catch (LastSpaceReachedException e) {
             exceptionHandler(e);
         } catch (CallForCouncilException e) {
             exceptionHandler(e);
-        } catch (ImpossibleProductionException e) {
-            exceptionHandler(e);
         }
+
+        ArrayList<Resource> list =new ArrayList<>();
+        list.add(resourceLeader);
+        notifyToOneObserver(new ProductionMessageForCurrentMessage(list));
+        notifyAllObserverLessOne(new ProductionMessageForNotCurrentMessage(currentPlayer, list) );
+        notifyToOneObserver(new FaithPathMessage(1));
+        notifyAllObserverLessOne(new FaithPathOpponentMessage(currentPlayer.getNickName(), 1));
     }
 
     /**
@@ -306,18 +302,19 @@ public class Game extends Observable {
      */
     public void anotherExtraProductionOn(Resource resource, Resource resourceLeader) throws ImpossibleProductionException, IOException, InterruptedException {
         try {
-            ArrayList<Resource> list =new ArrayList<>();
-            list.add(resourceLeader);
-            notifyToOneObserver(new ProductionMessageForCurrentMessage(list));
-            notifyAllObserverLessOne(new ProductionMessageForNotCurrentMessage(currentPlayer, list) );
-            notifyToOneObserver(new FaithPathMessage(1));
-            notifyAllObserverLessOne(new FaithPathOpponentMessage(currentPlayer.getNickName(), 1));
             currentPlayer.anotherExtraProductionOn(resource);
         } catch (LastSpaceReachedException e) {
             exceptionHandler(e);
         } catch (CallForCouncilException e) {
             exceptionHandler(e);
         }
+
+        ArrayList<Resource> list =new ArrayList<>();
+        list.add(resourceLeader);
+        notifyToOneObserver(new ProductionMessageForCurrentMessage(list));
+        notifyAllObserverLessOne(new ProductionMessageForNotCurrentMessage(currentPlayer, list) );
+        notifyToOneObserver(new FaithPathMessage(1));
+        notifyAllObserverLessOne(new FaithPathOpponentMessage(currentPlayer.getNickName(), 1));
     }
 
     /**

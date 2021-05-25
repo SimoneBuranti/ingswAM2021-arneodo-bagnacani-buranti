@@ -30,4 +30,9 @@ public class FaithPathOpponentMessage extends Message {
     public void accept(MessageVisitor v) throws IOException, InterruptedException {
         v.visit(this);
     }
+
+    @Override
+    public String toString(){
+        return nickname +" moved ahead of " + faithMove + " positions in the faith path.";
+    }
 }

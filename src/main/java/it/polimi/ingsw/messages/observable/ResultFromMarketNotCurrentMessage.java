@@ -37,7 +37,13 @@ public class ResultFromMarketNotCurrentMessage extends Message {
         return resource;
     }
 
+
     public Player getPlayer() {
         return player;
+    }
+
+    @Override
+    public String toString(){
+        return player.getNickName() +" made a market action";
     }
 }

@@ -259,8 +259,8 @@ public class LightGameBoard {
      * and the related papal cards will be assigned or not depending on player position
      * It also increases the currCall attribute
      */
-    public void setPapal(int currCall) {
-        faithPath.setPapal(currCall);
+    public void setPapal(int papalCard) {
+        faithPath.setPapal(papalCard);
     }
 
     /**

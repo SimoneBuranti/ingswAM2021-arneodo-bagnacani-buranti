@@ -76,4 +76,12 @@ public interface View  {
     void checkThreadRestart();
 
     void showActionMarker(String actionType);
+
+    void youWin(int score);
+
+    void lorenzoWin();
+
+    void showWinner(String nickname);
+
+    void showOpponentAction(Message msg);
 }

@@ -372,8 +372,8 @@ public class GameMultiPlayer extends Game {
     protected void exceptionHandler(CallForCouncilException e) throws IOException, InterruptedException {
         for(Player p : playerList){
             p.setPapal();
+            notifyOnlyOneSpecificObserver(new SetPapalsMessage(p.getPapalCard(e.getCurrCall()), e.getNickName()), p.getNickName());
         }
-        notifyObserver(new SetPapalsMessage(e.getCurrCall(), e.getNickName()));
     }
 
 
@@ -386,8 +386,8 @@ public class GameMultiPlayer extends Game {
     protected void exceptionHandler(LastSpaceReachedException e) throws IOException, InterruptedException {
         for(Player p : playerList){
             p.setPapal();
+            notifyOnlyOneSpecificObserver(new SetPapalsMessage(p.getPapalCard(e.getCurrCall()), e.getNickName()), p.getNickName());
         }
-        notifyObserver(new SetPapalsMessage(e.getCurrCall(), e.getNickName()));
         lastTurn = true;
         notifyObserver(new LastTurnMessage(currentPlayer.getNickName()));
     }

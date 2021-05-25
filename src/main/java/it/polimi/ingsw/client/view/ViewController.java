@@ -187,9 +187,9 @@ public class ViewController implements MessageVisitor, ViewObserver {
     @Override
     public void visit(SetPapalsMessage msg) {
 
-        game.setPapalCards(msg.getCurrCall());
+        game.setPapalCards(msg.getPapalCard());
 
-        view.showCallForCouncil(msg.getNickname(), game.getPapalCard(msg.getCurrCall()));
+        view.showCallForCouncil(msg.getNickname(), msg.getPapalCard());
     }
 
     @Override
@@ -334,6 +334,7 @@ public class ViewController implements MessageVisitor, ViewObserver {
         game.useResourceReserve(msg.getR1(), 1);
         if(msg.getR2() != null)
             game.useResourceReserve(msg.getR2(), 1);
+        view.showOpponentAction(msg);
     }
 
     @Override
@@ -387,7 +388,7 @@ public class ViewController implements MessageVisitor, ViewObserver {
 
     @Override
     public void visit(TakeCardForNotCurrentMessage msg) {
-        // visit.takeCardProductionOfAnotherPlayer();
+        view.showOpponentAction(msg);
 
     }
 
@@ -416,12 +417,13 @@ public class ViewController implements MessageVisitor, ViewObserver {
     @Override
     public void visit(ResultFromMarketNotCurrentMessage msg) throws IOException, InterruptedException {
         game.useResourceReserve(msg.getResource());
+        view.showOpponentAction(msg);
     }
 
 
     @Override
     public void visit(MagnificentWinMessage msg) {
-        // view.magnificentWin();
+        view.lorenzoWin();
     }
 
     @Override
@@ -431,7 +433,7 @@ public class ViewController implements MessageVisitor, ViewObserver {
 
     @Override
     public void visit(MyVictoryMessage msg) {
-        // view.YouWin();
+        view.youWin(msg.getScore());
 
     }
 
@@ -451,7 +453,7 @@ public class ViewController implements MessageVisitor, ViewObserver {
 
     @Override
     public void visit(ProductionMessageForNotCurrentMessage msg) throws IOException, InterruptedException {
-        // visit.negativeProductionOfAnotherPlayer();
+        view.showOpponentAction(msg);
         game.addResourceReserve(msg.getResource());
     }
 
@@ -470,13 +472,13 @@ public class ViewController implements MessageVisitor, ViewObserver {
 
     @Override
     public void visit(ResultOfProductionForNotCurrentMessage msg) throws IOException, InterruptedException {
-        // visit.positiveProductionOfAnotherPlayer();
+        view.showOpponentAction(msg);
         game.useResourceReserve(msg.getResource());
     }
 
     @Override
     public void visit(ActivationLeaderForNotCurrentMessage msg) {
-        // visit.leaderActivationOfAnotherPlayer();
+        view.showOpponentAction(msg);
 
     }
 
@@ -488,7 +490,7 @@ public class ViewController implements MessageVisitor, ViewObserver {
 
     @Override
     public void visit(DiscardLeaderForNotCurrentMessage msg) {
-        // visit.leaderDiscardOfAnotherPlayer();
+        view.showOpponentAction(msg);
 
     }
 
@@ -516,7 +518,7 @@ public class ViewController implements MessageVisitor, ViewObserver {
 
     @Override
     public void visit(FaithPathOpponentMessage msg) {
-        // visit.faithMoveOfAnotherPlayer();
+        view.showOpponentAction(msg);
 
     }
 
@@ -524,7 +526,7 @@ public class ViewController implements MessageVisitor, ViewObserver {
 
     @Override
     public void visit(EndGamePlayerWinnerMessage msg) {
-        // visit.showWinner();
+        view.showWinner(msg.getNickname());
 
     }
 

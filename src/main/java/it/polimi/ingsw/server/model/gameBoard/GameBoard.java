@@ -133,6 +133,11 @@ public class  GameBoard extends GameBoardInterface{
         faithPathOfGameBoard.setPapal();
     }
 
+    @Override
+    public int getPapalCard(int papalCardNumber) {
+        return faithPathOfGameBoard.getPapalCard(papalCardNumber);
+    }
+
     /**
      * This method represents the white marble upgrade due to the respective leader card activation. When it is not
      * upgraded yet a null reaction is needed. The method throws the BlockedWhiteMarbleEffectException which will be

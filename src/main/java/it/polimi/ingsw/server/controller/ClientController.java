@@ -278,7 +278,11 @@ public class ClientController implements MessageVisitor {
     @Override
     public void visit(ExtraProductionOnMessage msg) throws IOException, InterruptedException {
         if (turnCheck()){
-            game.extraProductionOn(msg.getOutputResource(),msg.getResourceLeader());
+            try {
+                game.extraProductionOn(msg.getOutputResource(),msg.getResourceLeader());
+            } catch (ImpossibleProductionException e) {
+                clientHandler.sendMessage(new NotAvailableResourcesErrorMessage());
+            }
         } else {
             clientHandler.sendMessage(new NotYourTurnErrorMessage());
         }
@@ -310,7 +314,7 @@ public class ClientController implements MessageVisitor {
     public void visit(ProductionOnMessage msg) throws IOException, InterruptedException {
         if (turnCheck()){
             try {
-                game.productionOn(msg.getColumnNumber(),msg.getList(), msg.getFaithMove());
+                game.productionOn(msg.getColumnNumber());
             } catch (ImpossibleProductionException e) {
                 clientHandler.sendMessage(new NotAvailableResourcesErrorMessage());
             } catch (EmptyColumnException e) {

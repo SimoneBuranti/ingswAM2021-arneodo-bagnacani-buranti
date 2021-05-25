@@ -238,6 +238,10 @@ public class Player {
         gameBoardOfPlayer.setPapal();
     }
 
+    public int getPapalCard(int papalCardNumber){
+        return gameBoardOfPlayer.getPapalCard(papalCardNumber);
+    }
+
     public void discardResource(Resource resource) throws IOException, InterruptedException {
         Reserve.addResource(resource);
         game.moveEveryoneExcept(this);
