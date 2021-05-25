@@ -84,4 +84,6 @@ public interface View  {
     void showWinner(String nickname);
 
     void showOpponentAction(Message msg);
+
+    void sayDisconnect();
 }

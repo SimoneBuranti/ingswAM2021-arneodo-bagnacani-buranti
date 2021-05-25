@@ -609,7 +609,7 @@ public class Game extends Observable {
      * save information for a possible restart game
      */
     protected void restoreGame() throws IOException, InterruptedException {
-
+        deckLeaderCard=new DeckLeaderCard();
         restoreInformationOfMarket();
         restoreInformationOfProductionDeck();
         restoreInformationOfReserve();
