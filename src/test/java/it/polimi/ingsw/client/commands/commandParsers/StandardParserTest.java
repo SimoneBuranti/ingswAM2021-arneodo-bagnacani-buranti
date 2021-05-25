@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class StandardParserTest {
 
-    /*public Cli cli;
+    public Cli cli;
     public ViewController viewController;
 
     StandardParserTest() throws IOException {
@@ -586,7 +586,7 @@ class StandardParserTest {
             assertTrue(false);
             System.out.println("Invalid command exception");
         }
-    }*/
+    }
 
 
 }

@@ -48,7 +48,7 @@ public class GameControllerRestart extends GameController {
     }
 
     @Override
-    public void handleMessage(UsernameMessage msg, ClientController clientController) throws IOException, InterruptedException {
+    public synchronized void handleMessage(UsernameMessage msg, ClientController clientController) throws IOException, InterruptedException {
         if (!restartAnswerReceived){
             clientController.getClientHandler().sendMessage(new BootingLobbyErrorMessage());
         }

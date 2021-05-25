@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class KeepResourcesParserTest {
 
-    /*public Cli cli;
+    public Cli cli;
     public ViewController viewController;
     public ArrayList<Resource> pickedResources;
 
@@ -657,6 +657,6 @@ class KeepResourcesParserTest {
         } catch (InvalidCommandException e) {
             System.out.println("Invalid command exception");
         }
-    }*/
+    }
 
 }
