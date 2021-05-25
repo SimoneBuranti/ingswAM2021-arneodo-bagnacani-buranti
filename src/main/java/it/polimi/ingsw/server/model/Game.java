@@ -340,7 +340,10 @@ public class Game extends Observable {
 
         currentPlayer.saveLeaderCard(index1,index2);
         currentPlayer.setInitLeader(true);
-        notifyToOneObserver(new UpdateChosenLeaderMessage(index1,index2));
+        if(index1 < index2)
+            notifyToOneObserver(new UpdateChosenLeaderMessage(index1,index2));
+        else
+            notifyToOneObserver(new UpdateChosenLeaderMessage(index2,index1));
     }
 
     /**

@@ -484,7 +484,7 @@ public class  GameBoard extends GameBoardInterface{
 
         for(int i=0;i<3;i++){
             for(int j = 0; j<3;j++){
-                if (developmentBoard[i][j]!=null && developmentBoard[i][j].getColour() == colour){
+                if (developmentBoard[i][j]!=null && developmentBoard[i][j].getColour().getColour().equals(colour.getColour())){
                     quantity++;
                 }
             }
@@ -504,7 +504,7 @@ public class  GameBoard extends GameBoardInterface{
         int quantity = 0;
 
         for(int i = 0; i < 3; i++){
-            if(developmentBoard[level-1][i]!=null && developmentBoard[level-1][i].getColour() == colour)
+            if(developmentBoard[level-1][i]!=null && developmentBoard[level-1][i].getColour().getColour().equals(colour.getColour()))
                 quantity++;
         }
 

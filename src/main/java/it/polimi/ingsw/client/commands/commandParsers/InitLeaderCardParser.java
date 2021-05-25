@@ -49,7 +49,7 @@ public class InitLeaderCardParser implements CommandParser{
                 w = "";
             }
         }
-        System.out.println("Chosen dopo il for: "+chosenLeaderCards[0]+chosenLeaderCards[1]);
+        //System.out.println("Chosen dopo il for: "+chosenLeaderCards[0]+chosenLeaderCards[1]);
 
         if (chosenLeaderCards[1] == 0){
             System.out.println("You have to insert another leader card number to continue:");
@@ -70,7 +70,7 @@ public class InitLeaderCardParser implements CommandParser{
             chosenLeaderCards[1] = c;
         }
 
-        System.out.println("mo ritorno il command");
+        //System.out.println("mo ritorno il command");
         return new KeepLeaderCardsCommand(chosenLeaderCards,viewController);
     }
 }

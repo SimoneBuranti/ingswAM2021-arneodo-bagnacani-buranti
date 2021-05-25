@@ -49,9 +49,10 @@ public class LeaderCardReduction extends LeaderCard{
      * @return boolean : true if the game board meets the requirements, false otherwise
      */
     public boolean check(GameBoardInterface gameBoard){
-        if(gameBoard.colourQuantity(requirements.getColourFirstRequirement()) < 1)
+        if(gameBoard.colourQuantity(requirements.getColourFirstRequirement()) < 1) {
             return false;
-        else return gameBoard.colourQuantity(requirements.getColourSecondRequirement()) >= 1;
+        }
+        return gameBoard.colourQuantity(requirements.getColourSecondRequirement()) >= 1;
     }
 
     public String toString(){

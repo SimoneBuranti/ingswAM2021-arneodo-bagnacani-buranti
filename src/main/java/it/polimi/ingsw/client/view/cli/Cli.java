@@ -33,7 +33,6 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
 
     public static final Resource[] resourceTypes = {Resource.COIN,Resource.ROCK,Resource.SHIELD,Resource.SERVANT};
 
-
     public Cli() {
         this.commandParser = new ExitOnlyParser();
         commandThread();

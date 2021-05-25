@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class WhiteMarbleParserTest {
 
-    public Cli cli;
+    /*public Cli cli;
     public ViewController viewController;
 
     WhiteMarbleParserTest() throws IOException {
@@ -799,5 +799,5 @@ class WhiteMarbleParserTest {
             System.out.println("Invalid command exception");
         }
     }
-
+*/
 }
