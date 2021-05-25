@@ -501,6 +501,7 @@ public class GameSolitaire extends Game {
 
         reConfigClient();
 
+            System.out.println("try to restore for please 10");
 
     } catch (FileNotFoundException e) {
         e.printStackTrace();
@@ -581,22 +582,26 @@ public class GameSolitaire extends Game {
         if(!player.isInitLeader()){
             ArrayList<Integer> needForLeaderInitial = new ArrayList<>();
             for (int i=0; i<4;i++){
-                System.out.println("try to restore for please");
+
                 needForLeaderInitial.add(player.getPersonalLeaderCard().get(i).getKey());
             }
             notifyObserver(new UpdateInitLeaderMessage(needForLeaderInitial));}
         else{
+
             ArrayList<Integer> needForLeader = new ArrayList<>();
             ArrayList<Integer> needForLeader2 = new ArrayList<>();
             notifyObserver(new StorageConfigMessage(player.getGameBoardOfPlayer().getStorageOfGameBoard().getStorageResource()));
 
             notifyObserver(new StrongboxConfigMessage(player.getGameBoardOfPlayer().getStrongboxOfGameBoard().getStrongBoxResource()));
 
+
             for (int i=0; i<player.getGameBoardOfPlayer().getLeaderCards().size();i++)
                 needForLeader.add(player.getGameBoardOfPlayer().getLeaderCards().get(i).getKey());
+
             for (int i=0; i<player.getGameBoardOfPlayer().getLeaderCardsActivated().size();i++)
                 needForLeader2.add(player.getGameBoardOfPlayer().getLeaderCardsActivated().get(i).getKey());
             notifyObserver(new LeadercardconfigMessage(needForLeader,needForLeader2));
+
 
             notifyObserver(new FaithConfigMessage(player.getGameBoardOfPlayer().getIndicator(),player.getGameBoardOfPlayer().getCurrCall()));
 
@@ -609,14 +614,20 @@ public class GameSolitaire extends Game {
                         list[i][j]=player.getGameBoardOfPlayer().getDevelopmentBoardCell(i,j).getKey();}}
 
             notifyObserver(new ProductionCardConfigMessage(list));
-            if(player.getGameBoardOfPlayer().getLeaderCardsActivated().get(0)!=null){
+
+            if(player.getGameBoardOfPlayer().getLeaderCardsActivated().size()>0){
+
                 if(player.getGameBoardOfPlayer().getLeaderCardsActivated().get(0) instanceof LeaderCardProduction)
+
                     notifyObserver(new StorageExtraConfig(player.getGameBoardOfPlayer().getStorageOfGameBoard().getNumExtraFirstAvailable(),((LeaderCardProduction) player.getGameBoardOfPlayer().getLeaderCardsActivated().get(0)).getResourceProduction()));
+
             }
-            if(player.getGameBoardOfPlayer().getLeaderCardsActivated().get(1)!=null){
+
+            if(player.getGameBoardOfPlayer().getLeaderCardsActivated().size()>1){
                 if(player.getGameBoardOfPlayer().getLeaderCardsActivated().get(1) instanceof LeaderCardProduction)
                     notifyObserver(new StorageExtraDoubleConfig(player.getGameBoardOfPlayer().getStorageOfGameBoard().getNumExtraFirstAvailable(),((LeaderCardProduction) player.getGameBoardOfPlayer().getLeaderCardsActivated().get(1)).getResourceProduction()));
             }
+
         }
     }
 

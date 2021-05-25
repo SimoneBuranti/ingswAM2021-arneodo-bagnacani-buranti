@@ -22,12 +22,12 @@ public class  GameBoard extends GameBoardInterface{
     /**
      * leaderCards references the ArrayList containing the player's set of leader cards to activate or discard
      */
-    private final ArrayList<LeaderCard> leaderCards = new ArrayList<>();
+    private ArrayList<LeaderCard> leaderCards = new ArrayList<>();
 
     /**
      * leaderCardsActivated references the ArrayList containing the activated leader card set of the player
      */
-    private final ArrayList<LeaderCard> leaderCardsActivated = new ArrayList<>();
+    private ArrayList<LeaderCard> leaderCardsActivated = new ArrayList<>();
 
     /**
      * faithPath is the private reference to the player's faith path
@@ -75,6 +75,9 @@ public class  GameBoard extends GameBoardInterface{
         strongboxOfGameBoard = new Strongbox();
         storageOfGameBoard = new Storage();
         this.productionBuffer = new ArrayList<>();
+        leaderCardsActivated=new ArrayList<>();
+        leaderCards=new ArrayList<>();
+
 
     }
 
@@ -685,10 +688,9 @@ public class  GameBoard extends GameBoardInterface{
 
     @Override
     public ArrayList<LeaderCard> getLeaderCardsActivated() {
-        ArrayList<LeaderCard> list = new ArrayList<>();
-        list.addAll(leaderCardsActivated);
+        System.out.println("are you looking here");
 
-        return list;
+        return leaderCardsActivated;
     }
 
 
