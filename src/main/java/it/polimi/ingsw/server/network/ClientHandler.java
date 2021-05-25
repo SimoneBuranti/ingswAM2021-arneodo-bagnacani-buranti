@@ -124,7 +124,7 @@ public class ClientHandler implements Runnable {
 
                 if (!getPongo()){
                     ack++;
-                    System.out.println("ack error: " + ack);
+                    //System.out.println("ack error: " + ack);
                     if(ack==8){
                     try {
                         pingDisconnection();
@@ -137,7 +137,7 @@ public class ClientHandler implements Runnable {
                     }
                 }}
                 else{
-                    System.out.println("resetto ack");
+                    //System.out.println("resetto ack");
                     setPongo(false);
                     ack=0;
                 }
@@ -165,13 +165,13 @@ public class ClientHandler implements Runnable {
     public synchronized void readMessageServer(String msg) throws IOException, InterruptedException {
 
             Message parsedMsg = Message.deserialize(msg);
-            System.out.println(clientController.getNickname() + " " + parsedMsg.getMessageType()+"leggo da server");
+            System.out.println(clientController.getNickname() + " " + parsedMsg.getMessageType()+" leggo da server");
             parsedMsg.accept(clientController);
 
     }
 
     public synchronized void sendMessage (Message msg) throws InterruptedException, IOException {
-        System.out.println(clientController.getNickname() + " " + msg.getMessageType()+"invio da server");
+        System.out.println(clientController.getNickname() + " " + msg.getMessageType()+" invio da server");
         writeStream.println(msg.serialize());
         writeStream.flush();
 

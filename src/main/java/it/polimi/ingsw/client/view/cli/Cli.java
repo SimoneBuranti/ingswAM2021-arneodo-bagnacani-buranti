@@ -203,9 +203,9 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
 
     @Override
     public void visit(FaithPathNotification faithPathNotification) {
-        if (faithPathNotification.isLorenzo())
-            System.out.println("Lorenzo's position in the faith track is: ");
-        else
+        //if (faithPathNotification.isLorenzo())
+        //    System.out.println("Lorenzo's position in the faith track is: ");
+       // else
             System.out.println("Your faith indicator position in the faith track is: ");
 
         showFaithIndicator(faithPathNotification.getI());

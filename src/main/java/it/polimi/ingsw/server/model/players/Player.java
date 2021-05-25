@@ -454,11 +454,11 @@ public class Player {
      * @param list
      * @throws NotEnoughSpaceInStorageException
      */
-    public void takeResourceFromClientToGameboard(ArrayList<Resource> list) throws NotEnoughSpaceInStorageException, IOException, InterruptedException {
+    public void takeResourceFromClientToGameboard(ArrayList<Resource> list) throws IOException, InterruptedException, NotEnoughSpaceInStorageException {
         int delta;
-        try{
+        try {
             gameBoardOfPlayer.takeFromMarket(list);
-        } catch (NotEnoughSpaceInStorageException e){
+        } catch (NotEnoughSpaceInStorageException e) {
             throw new NotEnoughSpaceInStorageException(buffer);
         }
         delta= buffer.size()-list.size();
@@ -466,6 +466,7 @@ public class Player {
             game.moveEveryoneExcept(this);
         game.notifyResultFromMarket(list);
         buffer = new ArrayList<>();
+
     }
 
 
