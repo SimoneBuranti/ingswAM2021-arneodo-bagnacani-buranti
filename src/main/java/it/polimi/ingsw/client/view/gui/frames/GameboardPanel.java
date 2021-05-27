@@ -1,5 +1,8 @@
 package it.polimi.ingsw.client.view.gui.frames;
 
+import it.polimi.ingsw.client.view.ViewController;
+import it.polimi.ingsw.messages.ProductionOnMessage;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -11,6 +14,8 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
 
     private static final int gameboardWidth = 800;
     private static final int gameboardHeight = 572;
+    private static final int faithPathWidth = 800;
+    private static final int faithPathHeight = 172;
     private static final int cardWidth = 140;
     private static final int cardHeight = 212;
     private static final int cardOffset = 38;
@@ -20,18 +25,49 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
     private final static int psy =226;
 
 
+    private ViewController viewController;
+
+
     private Image backgroundImage;
 
     private JLayeredPane[] productionSpaces;
     private JLabel[][] productionCards;
+    private JButton[] productionButtons;
+    private FaithPathPane faithPathPane;
+
 
     public GameboardPanel(){
+
+        this.viewController = viewController;
 
         initGameboardPanel();
 
         initProductionSpaces();
 
+        initButtons();
 
+        initFaithPathPane();
+
+        initStorage();
+
+        initStrongBox();
+
+
+
+        addProductionCard(1,0);
+        addProductionCard(8,0);
+        addProductionCard(12,0);
+
+        addProductionCard(13,1);
+        addProductionCard(20,1);
+
+        addProductionCard(26,2);
+    }
+
+
+
+    public void setViewController(ViewController viewController) {
+        this.viewController = viewController;
     }
 
     public void initGameboardPanel(){
@@ -64,15 +100,73 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
     }
 
 
-public void addProductionCard(int key,int column){
+    public void initButtons() {
+        this.productionButtons = new JButton[3];
 
+        for (int i = 0; i<3 ; i++){
 
+            productionButtons[i] = new JButton();
+            productionButtons[i].setOpaque(true);
+            productionButtons[i].setBounds(326+i*157,535,100,30);
+            productionButtons[i].setSize(108,20);
+            productionButtons[i].setEnabled(false);
+            int finalI = i;
+            productionButtons[i].addActionListener(e -> {
+                productionButtons[finalI].setEnabled(false);
+                viewController.sendMessage(new ProductionOnMessage(finalI));
+            });
 
-
-
+            this.add(productionButtons[i]);
+        }
     }
 
 
+    public void addProductionCard(int key,int column){
+
+        CardLabel cardLabel = new CardLabel(key);
+
+        for(int i = 0 ; i<3; i++){
+            if (productionCards[i][column] == null){
+
+                if (i == 0)
+                    productionButtons[column].setEnabled(true);
+
+                productionCards[i][column] = cardLabel;
+
+                cardLabel.setOpaque(true);
+                cardLabel.setBounds(2,12+(2-i)*(cardOffset),cardWidth,cardHeight);
+                productionSpaces[column].add(cardLabel,Integer.valueOf(i));
+
+                i = 3;
+            }
+        }
+    }
+
+
+    private void initStorage() {
+
+    }
+
+    private void initStrongBox() {
+    }
+
+    private void initFaithPathPane() {
+        this.faithPathPane = new FaithPathPane();
+        faithPathPane.setOpaque(false);
+        faithPathPane.setSize(faithPathWidth,faithPathHeight);
+        faithPathPane.setBounds(0,0,faithPathWidth,faithPathHeight);
+
+
+        JButton moveButton = new JButton();
+        moveButton.setSize(20,20);
+        moveButton.addActionListener(e -> {
+            faithPathPane.move();
+        });
+        moveButton.setBounds(20,20,20,20);
+        faithPathPane.add(moveButton);
+
+        add(faithPathPane);
+    }
 
 
 

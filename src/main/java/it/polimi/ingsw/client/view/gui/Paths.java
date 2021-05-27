@@ -6,7 +6,7 @@ public abstract class Paths {
 
 
 
-    public Image getProdImageFromKey(int key){
+    public static Image getProdImageFromKey(int key){
 
         String srcPath = "src/main/resources/resources/front/";
 
@@ -110,4 +110,11 @@ public abstract class Paths {
         }
         return null;
     }
+
+
+    public static Image getImageFromPath(String path){
+        return Toolkit.getDefaultToolkit().createImage(path+"Masters of Renaissance_Cards_FRONT_3mmBleed_1-48-1.png");
+
+    }
+
 }
