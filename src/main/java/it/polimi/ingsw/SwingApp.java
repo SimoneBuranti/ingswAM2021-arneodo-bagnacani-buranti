@@ -1,11 +1,13 @@
 package it.polimi.ingsw;
 
 import it.polimi.ingsw.client.view.gui.Gui;
+import it.polimi.ingsw.client.view.gui.PBackground;
 import it.polimi.ingsw.client.view.gui.frames.GameboardPanel;
 import it.polimi.ingsw.client.view.gui.frames.LobbyFrame;
 import it.polimi.ingsw.client.view.gui.frames.NickFrame;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class SwingApp {
 
@@ -13,18 +15,14 @@ public class SwingApp {
 
 
         JFrame frame = new JFrame();
-
-
-        GameboardPanel p = new GameboardPanel();
-
-
-        frame.setSize(500,500);
-        frame.add(p);
-
+        frame.setSize(800,572);
+        JPanel gameboard = new GameboardPanel();
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.setLayout(null);
+        frame.add(gameboard);
         frame.setVisible(true);
 
-
-
+        frame.repaint();
 
     }
 

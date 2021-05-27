@@ -179,7 +179,7 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
             yesButton.setSize(new Dimension(50,10));
 
 
-                noButton= new JButton("no");
+            noButton= new JButton("no");
             noButton.setSize(new Dimension(50,10));
 
 
@@ -192,11 +192,17 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
                 this.yesButton.addActionListener(eYES -> {
                     try {
+                        this.mainFrame.remove(yesButton);
+                        this.mainFrame.remove(noButton);
+                        this.mainFrame.remove(submitButton);
                         notifyObserver(new RestartAnswerMessage(true));
                     } catch (IOException | InterruptedException ioException) {
                         ioException.printStackTrace();}});
                this.noButton.addActionListener(eNO -> {
                     try {
+                        this.mainFrame.remove(yesButton);
+                        this.mainFrame.remove(noButton);
+                        this.mainFrame.remove(submitButton);
                         notifyObserver(new RestartAnswerMessage(false));
                     } catch (IOException | InterruptedException ioException) {
                         ioException.printStackTrace(); }});
