@@ -24,8 +24,10 @@ public class SwingApp {
 
         frame.repaint();
 
+
     }
 
+    //JOptionPane.showConfirmDialog(frame,"Error","Title",JOptionPane.ERROR_MESSAGE);
 
     /*
     frame.setTitle(String);
