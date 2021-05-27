@@ -5,6 +5,7 @@ import it.polimi.ingsw.client.view.ViewController;
 import it.polimi.ingsw.client.view.ViewControllerObservable;
 import it.polimi.ingsw.messages.Message;
 import it.polimi.ingsw.messages.NotEnoughSpaceErrorMessage;
+import it.polimi.ingsw.messages.NumberPlayerMessage;
 import it.polimi.ingsw.messages.RestartAnswerMessage;
 import it.polimi.ingsw.messages.observable.ShowAllOfPlayerMessage;
 import it.polimi.ingsw.server.model.Resource;
@@ -27,10 +28,17 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
     private JButton yesButton;
     private JButton noButton ;
 
-    public Gui() {
+    private JButton oneButton;
+    private JButton twoButton ;
+    private JButton threeButton;
+    private JButton fourButton ;
+
+    private JLabel lobbyLabel;
+
+    /*public Gui() {
 
         startView();
-    }
+    }*/
 
 
 
@@ -73,9 +81,77 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
     @Override
     public void askNumberOfPlayers() throws IOException, InterruptedException {
+        SwingUtilities.invokeLater(() -> {
+
+            clear(container);
+
+            container.setLayout(new FlowLayout());
+
+            submitButton= new JButton("How many players?");
+            submitButton.setSize(new Dimension(300,100));
+
+            oneButton= new JButton("1");
+            oneButton.setSize(new Dimension(10,5));
+
+            twoButton= new JButton("2");
+            twoButton.setSize(new Dimension(10,5));
+
+            threeButton= new JButton("3");
+            threeButton.setSize(new Dimension(10,5));
+
+            fourButton= new JButton("4");
+            fourButton.setSize(new Dimension(10,5));
+
+            container.add(submitButton);
+            container.add(oneButton);
+            container.add(twoButton);
+            container.add(threeButton);
+            container.add(fourButton);
+
+
+            mainFrame.setVisible(true);
+
+            this.oneButton.addActionListener(eONe -> {
+                sendNumberPlayersResponse(1);});
+            this.twoButton.addActionListener(eNO -> {
+                sendNumberPlayersResponse(2);});
+            this.threeButton.addActionListener(eYES -> {
+                sendNumberPlayersResponse(3);});
+            this.fourButton.addActionListener(eNO -> {
+                sendNumberPlayersResponse(4);});
+
+        applyChangesTo(container);
+
+
+        });
+    }
+
+    public void sendNumberPlayersResponse(int n){
+        try {
+            notifyObserver(new NumberPlayerMessage(n));
+        } catch (IOException | InterruptedException ioException) {
+            ioException.printStackTrace();
+        }
+        if(n > 1)
+            showLabel();
 
     }
 
+    public void showLabel(){
+        SwingUtilities.invokeLater(() -> {
+
+            clear(container);
+            container.setLayout(new FlowLayout());
+
+            lobbyLabel = new JLabel("Please wait for the missing players to start the game...");
+
+
+            container.add(lobbyLabel);
+
+            mainFrame.setVisible(true);
+            applyChangesTo(container);
+        });
+    }
     @Override
     public void askNickname() throws IOException, InterruptedException {
         SwingUtilities.invokeLater(() -> {
@@ -84,7 +160,8 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
 
             applyChangesTo(container);
-        });}
+        });
+    }
 
 
 
@@ -157,7 +234,19 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
     @Override
     public void showLobby(int playersInLobby, int playerInGame) {
+        SwingUtilities.invokeLater(() -> {
 
+            clear(container);
+            container.setLayout(new FlowLayout());
+
+            lobbyLabel = new JLabel("There are " + playersInLobby + " players in the lobby out of " + playerInGame +", waiting for the missing players to start the game...");
+
+
+            container.add(lobbyLabel);
+
+            mainFrame.setVisible(true);
+            applyChangesTo(container);
+        });
     }
 
     @Override
