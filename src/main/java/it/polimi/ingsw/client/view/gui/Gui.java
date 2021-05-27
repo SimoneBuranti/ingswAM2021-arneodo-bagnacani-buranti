@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class Gui extends ViewControllerObservable implements View, NotificatorVisitor {
+
     private ViewController viewController;
     private RestartFrame restartFrame;
     private JFrame mainFrame;
@@ -26,11 +27,6 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
     private JButton submitButton;
     private JButton yesButton;
     private JButton noButton ;
-
-    public Gui() {
-
-        startView();
-    }
 
 
 
@@ -102,7 +98,7 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
             yesButton.setSize(new Dimension(50,10));
 
 
-                noButton= new JButton("no");
+            noButton= new JButton("no");
             noButton.setSize(new Dimension(50,10));
 
 
