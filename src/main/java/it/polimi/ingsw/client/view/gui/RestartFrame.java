@@ -37,7 +37,7 @@ public class RestartFrame extends JFrame implements ActionListener {
         add(background);
         
         
-        this.submitButton = new JButton("Do you want restart the previous match?");
+       /* this.submitButton = new JButton("Do you want restart the previous match?");
         this.submitButton.setSize(new Dimension(50,30));
         this.yesButton = new JButton("yes");
         this.yesButton.setSize(new Dimension(30,15));

@@ -20,9 +20,14 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
     private ViewController viewController;
     private RestartFrame restartFrame;
     private JFrame mainFrame;
+    private PanelContainer container;
+
+    private JButton submitButton;
+    private JButton yesButton;
+    private JButton noButton ;
 
     public Gui() {
-        mainFrame=new JFrame();
+
         startView();
     }
 
@@ -31,27 +36,33 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
     @Override
     public void startView() {
         SwingUtilities.invokeLater(() -> {
+
+
+            mainFrame = new JFrame("Masters Of Renaissance");
+            mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             mainFrame.setLocation(475,208);
             mainFrame.setSize(820,420);
-            mainFrame.setLayout(new FlowLayout());
 
-            mainFrame.setTitle("Master of Renaissance");
-            mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            mainFrame.setResizable(false);
+            mainFrame.setResizable(true);
 
             ImageIcon icon = new ImageIcon("src/main/resources/resources/title.jpg");
-            Image image = icon.getImage();
-            icon.setImage(image.getScaledInstance(820, 462, 0));
-            JLabel background = new JLabel(icon);
-            background.setBounds(0, 0, 820, 462);
+            Image image=icon.getImage();
+            JPanel background = new PBackground(image);
+            mainFrame.repaint();
+            background.setLayout(null);
             mainFrame.add(background);
+
+            // Prepare the body container
+            container = new PanelContainer();
+            container.setBounds(0,0, 820, 420);
+            background.add(container);
+
             mainFrame.setVisible(true);
+
         });}
 
     @Override
-    public void update(String notification) throws IOException, InterruptedException {
-
-    }
+    public void update(String notification) throws IOException, InterruptedException { }
 
     @Override
     public void setViewController(ViewController viewController){
@@ -60,17 +71,55 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
     }
 
     @Override
-    public void askNumberOfPlayers() throws IOException, InterruptedException { }
+    public void askNumberOfPlayers() throws IOException, InterruptedException {
+
+    }
 
     @Override
     public void askNickname() throws IOException, InterruptedException {
+        SwingUtilities.invokeLater(() -> {
+            this.submitButton = new JButton("please Lord enter your NickName");
+            this.submitButton.setSize(new Dimension(70,30));
+           // this.textField = new JTextField();
+            this.yesButton = new JButton("yes");
+        this.yesButton.setSize(new Dimension(30,15));
+        this.noButton = new JButton("no");
+        this.noButton.setSize(new Dimension(30,15));
+         /*this.textField = new JTextField();
+         this.textField.setText("Username");
+        this.textField.setEditable(true);
+        this.textField.setPreferredSize(new Dimension(100,15));
+        this.textField.addActionListener(e -> textField.setEditable(false));*/
+            // this.submitButton.addActionListener(e -> this.);
 
-    }
+
+        });}
+
+
 
     @Override
     public void askRestartGame() throws IOException, InterruptedException {
+        SwingUtilities.invokeLater(() -> {
 
-    }
+            clear(container);
+
+            submitButton= new JButton("Do you want restart the previous match?");
+            submitButton.setSize(new Dimension(300,100));
+
+            yesButton= new JButton("yes");
+            yesButton.setSize(new Dimension(10,5));
+
+            noButton= new JButton("no");
+            noButton.setSize(new Dimension(10,5));
+
+            container.add(submitButton);
+            container.add(noButton);
+            container.add(yesButton);
+
+            mainFrame.setVisible(true);
+
+
+        });}
 
     @Override
     public void showChangeCurrent(String currentNick) {
@@ -266,4 +315,49 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
     public void visit(FaithPathNotification faithPathNotification) {
 
     }
+
+    public JButton getSubmitButton() {
+        return submitButton;
+    }
+
+    public JButton getYesButton() {
+        return yesButton;
+    }
+
+    public JButton getNoButton() {
+        return noButton;
+    }
+
+
+    /**
+     * Apply changes to a component
+     * @param component The component
+     */
+    private void applyChangesTo(Component component) {
+        component.revalidate();
+        component.repaint();
+    }
+
+
+    /**
+     * Flush the components inside a frame
+     * @param frame     The frame
+     */
+    private void clear(JFrame frame){
+        frame.getContentPane().removeAll();
+    }
+
+
+    /**
+     * Flush the components inside a panel
+     * @param panel     The panel
+     */
+    private void clear(JPanel panel){
+        panel.removeAll();
+    }
+
+
+
+
+
 }
