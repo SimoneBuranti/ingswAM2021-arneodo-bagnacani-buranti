@@ -5,6 +5,7 @@ import it.polimi.ingsw.client.view.ViewController;
 import it.polimi.ingsw.client.view.ViewControllerObservable;
 import it.polimi.ingsw.messages.Message;
 import it.polimi.ingsw.messages.NotEnoughSpaceErrorMessage;
+import it.polimi.ingsw.messages.RestartAnswerMessage;
 import it.polimi.ingsw.messages.observable.ShowAllOfPlayerMessage;
 import it.polimi.ingsw.server.model.Resource;
 import it.polimi.ingsw.server.model.leaderCards.LeaderCard;
@@ -78,21 +79,11 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
     @Override
     public void askNickname() throws IOException, InterruptedException {
         SwingUtilities.invokeLater(() -> {
-            this.submitButton = new JButton("please Lord enter your NickName");
-            this.submitButton.setSize(new Dimension(70,30));
-           // this.textField = new JTextField();
-            this.yesButton = new JButton("yes");
-        this.yesButton.setSize(new Dimension(30,15));
-        this.noButton = new JButton("no");
-        this.noButton.setSize(new Dimension(30,15));
-         /*this.textField = new JTextField();
-         this.textField.setText("Username");
-        this.textField.setEditable(true);
-        this.textField.setPreferredSize(new Dimension(100,15));
-        this.textField.addActionListener(e -> textField.setEditable(false));*/
-            // this.submitButton.addActionListener(e -> this.);
+
+            clear(container);
 
 
+            applyChangesTo(container);
         });}
 
 
@@ -103,14 +94,18 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
             clear(container);
 
+            container.setLayout(new FlowLayout());
             submitButton= new JButton("Do you want restart the previous match?");
-            submitButton.setSize(new Dimension(300,100));
+            submitButton.setSize(new Dimension(200,100));
 
             yesButton= new JButton("yes");
-            yesButton.setSize(new Dimension(10,5));
+            yesButton.setSize(new Dimension(50,10));
 
-            noButton= new JButton("no");
-            noButton.setSize(new Dimension(10,5));
+
+                noButton= new JButton("no");
+            noButton.setSize(new Dimension(50,10));
+
+
 
             container.add(submitButton);
             container.add(noButton);
@@ -118,8 +113,22 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
             mainFrame.setVisible(true);
 
+                this.yesButton.addActionListener(eYES -> {
+                    try {
+                        notifyObserver(new RestartAnswerMessage(true));
+                    } catch (IOException | InterruptedException ioException) {
+                        ioException.printStackTrace();}});
+               this.noButton.addActionListener(eNO -> {
+                    try {
+                        notifyObserver(new RestartAnswerMessage(false));
+                    } catch (IOException | InterruptedException ioException) {
+                        ioException.printStackTrace(); }});
+        });
 
-        });}
+    applyChangesTo(container);
+    }
+
+
 
     @Override
     public void showChangeCurrent(String currentNick) {
