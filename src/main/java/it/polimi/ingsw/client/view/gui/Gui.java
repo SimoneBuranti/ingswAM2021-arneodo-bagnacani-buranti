@@ -3,10 +3,7 @@ import it.polimi.ingsw.client.ligtModelNotification.*;
 import it.polimi.ingsw.client.view.View;
 import it.polimi.ingsw.client.view.ViewController;
 import it.polimi.ingsw.client.view.ViewControllerObservable;
-import it.polimi.ingsw.messages.Message;
-import it.polimi.ingsw.messages.NotEnoughSpaceErrorMessage;
-import it.polimi.ingsw.messages.NumberPlayerMessage;
-import it.polimi.ingsw.messages.RestartAnswerMessage;
+import it.polimi.ingsw.messages.*;
 import it.polimi.ingsw.messages.observable.ShowAllOfPlayerMessage;
 import it.polimi.ingsw.server.model.Resource;
 import it.polimi.ingsw.server.model.leaderCards.LeaderCard;
@@ -27,6 +24,11 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
     private JButton submitButton;
     private JButton yesButton;
     private JButton noButton ;
+    private JButton enterButton ;
+
+
+
+
 
     private JButton oneButton;
     private JButton twoButton ;
@@ -35,10 +37,8 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
     private JLabel lobbyLabel;
 
-    /*public Gui() {
+    private JLabel errorLabel;
 
-        startView();
-    }*/
 
 
 
@@ -54,12 +54,15 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
             mainFrame.setResizable(true);
 
+
+
             ImageIcon icon = new ImageIcon("src/main/resources/resources/title.jpg");
             Image image=icon.getImage();
             JPanel background = new PBackground(image);
             mainFrame.repaint();
             background.setLayout(null);
             mainFrame.add(background);
+            //mainFrame.add(errorText);
 
             // Prepare the body container
             container = new PanelContainer();
@@ -109,8 +112,6 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
             container.add(fourButton);
 
 
-            mainFrame.setVisible(true);
-
             this.oneButton.addActionListener(eONe -> {
                 sendNumberPlayersResponse(1);});
             this.twoButton.addActionListener(eNO -> {
@@ -120,48 +121,59 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
             this.fourButton.addActionListener(eNO -> {
                 sendNumberPlayersResponse(4);});
 
-        applyChangesTo(container);
-
-
-        });
-    }
+            applyChangesTo(container);
+        }); }
 
     public void sendNumberPlayersResponse(int n){
         try {
-            notifyObserver(new NumberPlayerMessage(n));
-        } catch (IOException | InterruptedException ioException) {
-            ioException.printStackTrace();
-        }
+            notifyObserver(new NumberPlayerMessage(n)); }
+        catch (IOException | InterruptedException ioException) { ioException.printStackTrace();}
         if(n > 1)
             showLabel();
-
     }
+
 
     public void showLabel(){
         SwingUtilities.invokeLater(() -> {
 
             clear(container);
             container.setLayout(new FlowLayout());
-
             lobbyLabel = new JLabel("Please wait for the missing players to start the game...");
-
-
             container.add(lobbyLabel);
-
-            mainFrame.setVisible(true);
             applyChangesTo(container);
         });
     }
+
     @Override
     public void askNickname() throws IOException, InterruptedException {
         SwingUtilities.invokeLater(() -> {
-
             clear(container);
 
 
+            container.setLayout(new FlowLayout());
+
+            TextField textField= new TextField();
+            textField.setText("");
+            textField.setEditable(true);
+            textField.setPreferredSize(new Dimension(100,20));
+
+            enterButton= new JButton("enter");
+            enterButton.setSize(new Dimension(50,20));
+
+            container.add(enterButton);
+            container.add(textField);
+
+            this.enterButton.addActionListener(eENTER->(new Thread(() -> {
+                String nickname = textField.toString();
+                try {
+                    container.remove(textField);
+                    container.remove(enterButton);
+                    notifyObserver(new UsernameMessage(nickname));
+                } catch (IOException | InterruptedException ioException) { ioException.printStackTrace();}
+            })).start());
+
             applyChangesTo(container);
-        });
-    }
+        });}
 
 
 
@@ -179,36 +191,31 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
             yesButton.setSize(new Dimension(50,10));
 
 
-            noButton= new JButton("no");
+                noButton= new JButton("no");
             noButton.setSize(new Dimension(50,10));
-
-
-
             container.add(submitButton);
             container.add(noButton);
             container.add(yesButton);
-
-            mainFrame.setVisible(true);
-
-                this.yesButton.addActionListener(eYES -> {
+            this.yesButton.addActionListener(eYES -> {
                     try {
-                        this.mainFrame.remove(yesButton);
-                        this.mainFrame.remove(noButton);
-                        this.mainFrame.remove(submitButton);
+                        container.remove(yesButton);
+                        container.remove(submitButton);
+                        container.remove(noButton);
                         notifyObserver(new RestartAnswerMessage(true));
                     } catch (IOException | InterruptedException ioException) {
                         ioException.printStackTrace();}});
                this.noButton.addActionListener(eNO -> {
                     try {
-                        this.mainFrame.remove(yesButton);
-                        this.mainFrame.remove(noButton);
-                        this.mainFrame.remove(submitButton);
+                        container.remove(yesButton);
+                        container.remove(submitButton);
+                        container.remove(noButton);
                         notifyObserver(new RestartAnswerMessage(false));
                     } catch (IOException | InterruptedException ioException) {
                         ioException.printStackTrace(); }});
+            applyChangesTo(container);
         });
 
-    applyChangesTo(container);
+
     }
 
 
@@ -225,8 +232,11 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
     @Override
     public void notifyError(Message msg) {
+        showLabel(msg);
+            if (msg.getMessageType().equals(MessageType.NICKNAMENOTFOUNDERROR) || msg.getMessageType().equals(MessageType.NICKNAMENOTFOUNDERROR) ) {
+                try { askNickname(); } catch (IOException | InterruptedException e) { e.printStackTrace(); } }
 
-    }
+       }
 
     @Override
     public void showPlayersOrder(ArrayList<String> nickName) {
@@ -237,6 +247,7 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
     public void showLastTurn(String nickName) {
 
     }
+
 
     @Override
     public void showLobby(int playersInLobby, int playerInGame) {
@@ -459,6 +470,20 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
     private void clear(JPanel panel){
         panel.removeAll();
     }
+
+
+    public void showLabel(Message message){
+        SwingUtilities.invokeLater(() -> {
+            clear(container);
+            container.setLayout(new FlowLayout());
+            errorLabel = new JLabel(message.toString());
+            container.add(errorLabel);
+            errorLabel.setLocation(475,108);
+            errorLabel.setSize(100,100);
+            applyChangesTo(container);
+        });
+    }
+
 
 
 
