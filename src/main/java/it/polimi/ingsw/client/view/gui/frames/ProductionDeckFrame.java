@@ -11,27 +11,12 @@ import java.util.ArrayList;
 
 public class ProductionDeckFrame extends JFrame{
     private final ViewController viewController;
-    private static final int deckWidth = 650;
-    private static final int deckHeight = 800;
-    private static final int marbleWidth = 140;
-    private static final int marbleHeight = 212;
+    private static final int deckWidth = 580;
+    private static final int deckHeight = 870;
 
     private JPanel decksPanel;
     private PanelContainer container;
     private JFrame deckFrame;
-
-    private JButton deck1Button;
-    private JButton deck2Button;
-    private JButton deck3Button;
-    private JButton deck4Button;
-    private JButton deck5Button;
-    private JButton deck6Button;
-    private JButton deck7Button;
-    private JButton deck8Button;
-    private JButton deck9Button;
-    private JButton deck10Button;
-    private JButton deck11Button;
-    private JButton deck12Button;
 
     public ProductionDeckFrame(ViewController viewController){
         this.viewController = viewController;
@@ -57,32 +42,30 @@ public class ProductionDeckFrame extends JFrame{
         });
     }
 
-    
-
     public void addDecks(ArrayList<ProductionCard> productionCards){
         SwingUtilities.invokeLater(() -> {
             clear(container);
             container.setLayout(null);
             decksPanel = new JPanel();
-            decksPanel.setLayout(new GridLayout(3, 4, 10,30));
+            decksPanel.setLayout(new GridLayout(3, 4, 10,0));
             decksPanel.setBounds(0, 0, deckWidth, deckHeight);
 
             for(int i = 0; i < 3 ; i++){
                 if(productionCards.get(5-i) != null){
-                    decksPanel.add(new CardLabel(productionCards.get(5-i).getKey()));
+                    decksPanel.add(new CardLabelWithButton(productionCards.get(5-i).getKey(), 1+(4*i)));
                 }else{
                     JLabel labelWhite = new JLabel();
                     labelWhite.setBackground(Color.WHITE);
                     decksPanel.add(labelWhite);
                 }
                 if(productionCards.get(2-i) != null){
-                    decksPanel.add(new CardLabel(productionCards.get(2-i).getKey()));
+                    decksPanel.add(new CardLabelWithButton(productionCards.get(2-i).getKey(), 2+(4*i)));
                 }
                 if(productionCards.get(8-i) != null){
-                    decksPanel.add(new CardLabel(productionCards.get(8-i).getKey()));
+                    decksPanel.add(new CardLabelWithButton(productionCards.get(8-i).getKey(),3+(4*i)));
                 }
                 if(productionCards.get(11-i) != null){
-                    decksPanel.add(new CardLabel(productionCards.get(11-i).getKey()));
+                    decksPanel.add(new CardLabelWithButton(productionCards.get(11-i).getKey(),4+(4*i)));
                 }
             }
             container.add(decksPanel);

@@ -153,7 +153,7 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
     @Override
     public void askNickname() throws IOException, InterruptedException {
         SwingUtilities.invokeLater(() -> {
-            clear(container);
+            //clear(container);
 
 
             container.setLayout(new FlowLayout());
@@ -170,12 +170,16 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
             container.add(textField);
 
             this.enterButton.addActionListener(eENTER->(new Thread(() -> {
-                String nickname = textField.toString();
-                try {
-                    container.remove(textField);
-                    container.remove(enterButton);
-                    notifyObserver(new UsernameMessage(nickname));
-                } catch (IOException | InterruptedException ioException) { ioException.printStackTrace();}
+                String nickname = textField.getText();
+                if(nickname.length() > 0){
+                    try {
+                        container.remove(textField);
+                        container.remove(enterButton);
+                        notifyObserver(new UsernameMessage(nickname));
+                    } catch (IOException | InterruptedException ioException) {
+                        ioException.printStackTrace();
+                    }
+                }
             })).start());
 
             applyChangesTo(container);
@@ -239,10 +243,15 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
     @Override
     public void notifyError(Message msg) {
         showLabel(msg);
-            if (msg.getMessageType().equals(MessageType.NICKNAMENOTFOUNDERROR) || msg.getMessageType().equals(MessageType.NICKNAMENOTFOUNDERROR) ) {
-                try { askNickname(); } catch (IOException | InterruptedException e) { e.printStackTrace(); } }
+        /*if (msg.getMessageType().equals(MessageType.NICKNAMENOTFOUNDERROR) || msg.getMessageType().equals(MessageType.NICKNAMENOTFOUNDERROR) ) {
+            try {
+                askNickname();
+            } catch (IOException | InterruptedException e) {
+                e.printStackTrace();
+            }
+        }*/
 
-       }
+    }
 
     @Override
     public void showPlayersOrder(ArrayList<String> nickName) {

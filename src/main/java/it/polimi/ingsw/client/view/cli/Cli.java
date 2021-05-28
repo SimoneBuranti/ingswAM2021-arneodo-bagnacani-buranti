@@ -215,6 +215,13 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
     @Override
     public void notifyError(Message msg) {
         System.out.println(msg.toString());
+        /*if(msg.getMessageType() == MessageType.ALREADYEXISTINGNICKNAMEERROR || msg.getMessageType() == MessageType.NICKNAMENOTFOUNDERROR){
+            try {
+                askNickname();
+            } catch (IOException | InterruptedException e) {
+                e.printStackTrace();
+            }
+        }*/
     }
 
     @Override
