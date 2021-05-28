@@ -1,14 +1,16 @@
 package it.polimi.ingsw.server.model;
 
-import it.polimi.ingsw.server.model.Reserve;
-import it.polimi.ingsw.server.model.Resource;
+import it.polimi.ingsw.server.controller.ClientController;
 import it.polimi.ingsw.server.model.exceptions.UnavailableResourceException;
 import it.polimi.ingsw.server.model.gameBoard.Storage;
 import it.polimi.ingsw.server.model.gameBoard.StorageExtraFirst;
 import it.polimi.ingsw.server.model.gameBoard.StorageExtraSecond;
+import it.polimi.ingsw.server.network.ClientHandler;
+import it.polimi.ingsw.server.network.Server;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -22,10 +24,33 @@ public class StorageExtraSecondTest {
      */
     @Test
     @DisplayName("Constructor Test")
-    public void constructorTest(){
-        Storage storage = new Storage();
-        new Reserve();
+    public void constructorTest() throws IOException, InterruptedException {
+        ArrayList<String> nickname = new ArrayList<>();
+        nickname.add("Ali");
+        nickname.add("Simo");
+        nickname.add("Ale");
+        ArrayList<ClientController> clientControllers = new ArrayList<>();
+        Server server= new Server();
+        ClientHandler clientHandler1= new ClientHandler(server);
+        ClientController clientController= new ClientController(server,clientHandler1) ;
 
+        ClientHandler clientHandler2= new ClientHandler(server);
+        ClientController clientController2= new ClientController(server,clientHandler2) ;
+
+        ClientHandler clientHandler3= new ClientHandler(server);
+        ClientController clientController3= new ClientController(server,clientHandler2) ;
+
+        clientControllers.add(clientController);
+        clientControllers.add(clientController2);
+        clientControllers.add(clientController3);
+
+        clientController3.setNickname("simo");
+        clientController.setNickname("ali");
+        clientController2.setNickname("ale");
+        GameMultiPlayer game = new GameMultiPlayer(3, nickname, true, clientControllers);
+
+
+        Storage storage=new Storage();
         storage.addResource(Resource.COIN);
         storage.addResource(Resource.COIN);
         storage.addResource(Resource.ROCK);

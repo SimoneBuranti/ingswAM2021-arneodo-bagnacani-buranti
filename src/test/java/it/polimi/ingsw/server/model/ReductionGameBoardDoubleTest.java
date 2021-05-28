@@ -1753,7 +1753,7 @@ class ReductionGameBoardDoubleTest {
         GameBoardInterface gameBoard = new GameBoard();
         gameBoard = new ReductionGameBoard(gameBoard,Resource.SHIELD);
         gameBoard = new ReductionGameBoardDouble(gameBoard,gameBoard.getResourceTypeFirst(),Resource.COIN);
-        new Reserve();
+
         ProductionCard card;
         Map<Resource,Integer> storageMap = new HashMap<>();
         Map<Resource,Integer> strongboxMap = new HashMap<>();
@@ -1952,7 +1952,7 @@ class ReductionGameBoardDoubleTest {
         GameBoardInterface gameBoard = new GameBoard();
         gameBoard = new ReductionGameBoard(gameBoard,Resource.SHIELD);
         gameBoard = new ReductionGameBoardDouble(gameBoard,gameBoard.getResourceTypeFirst(),Resource.COIN);
-        new Reserve();
+
         ProductionCard card;
         Map<Resource,Integer> storageMap = new HashMap<>();
         Map<Resource,Integer> strongboxMap = new HashMap<>();
@@ -2054,7 +2054,7 @@ class ReductionGameBoardDoubleTest {
         GameBoardInterface gameBoard = new GameBoard();
         gameBoard = new ReductionGameBoard(gameBoard,Resource.SHIELD);
         gameBoard = new ReductionGameBoardDouble(gameBoard,gameBoard.getResourceTypeFirst(),Resource.COIN);
-        new Reserve();
+
         ProductionCard card;
         Map<Resource,Integer> storageMap = new HashMap<>();
         Map<Resource,Integer> strongboxMap = new HashMap<>();
@@ -2122,11 +2122,11 @@ class ReductionGameBoardDoubleTest {
         }
 
 
-        try {
-            gameBoard.productionOn(0);
+      /*  try {
+        //    gameBoard.productionOn(0);
         } catch (ImpossibleProductionException | EmptyColumnException | CallForCouncilException | LastSpaceReachedException e) {
             e.printStackTrace();
-        }
+        }*/
 
         gameBoard.endOfProduction();
 

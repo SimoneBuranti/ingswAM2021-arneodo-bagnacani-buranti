@@ -98,9 +98,22 @@ public class Reserve extends Observable {
 
 
 
- public Reserve(Map map) throws IOException, InterruptedException {
-        reservePools=map;
+    public  int getAmountOfInMAp(Map map,Resource resource) {
+        int amount;
+        amount= (int) map.get(resource);
+        return amount;
+    }
 
+    public Reserve(Map map) throws IOException, InterruptedException {
+        int amount;
+        amount=getAmountOfInMAp(map,Resource.COIN);
+        reservePools.put(Resource.COIN,amount);
+        amount=getAmountOfInMAp(map,Resource.ROCK);
+        reservePools.put(Resource.ROCK,amount);
+        amount=getAmountOfInMAp(map,Resource.SERVANT);
+        reservePools.put(Resource.SERVANT,amount);
+        amount=getAmountOfInMAp(map,Resource.SHIELD);
+        reservePools.put(Resource.SHIELD,amount);
     }
 
     public Map<Resource , Integer> getReservePool(){

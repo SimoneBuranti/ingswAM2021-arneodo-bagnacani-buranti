@@ -930,7 +930,7 @@ class GameBoardTest {
     /**
      * This test checks the correct assessment of production card overall points (complete test)
      */
-    @Test
+   /* @Test
     @DisplayName("productionScoreTest() test - complete test")
     public void productionScoreTest() throws IOException, InterruptedException {
         GameBoard gameBoard = new GameBoard() ;
@@ -1045,7 +1045,7 @@ class GameBoardTest {
 
         assertEquals(score,gameBoard.productionScore());
 
-    }
+    }*/
 
     /**
      * This test checks the correct market related action behaviour.
