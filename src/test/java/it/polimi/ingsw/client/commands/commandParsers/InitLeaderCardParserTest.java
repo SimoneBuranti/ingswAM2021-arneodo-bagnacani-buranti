@@ -1,19 +1,17 @@
 package it.polimi.ingsw.client.commands.commandParsers;
 
-import it.polimi.ingsw.client.SocketClient;
 import it.polimi.ingsw.client.commands.Command;
 import it.polimi.ingsw.client.commands.InvalidCommandException;
 import it.polimi.ingsw.client.commands.KeepLeaderCardsCommand;
-import it.polimi.ingsw.client.commands.KeepResourcesCommand;
 import it.polimi.ingsw.client.view.ViewController;
 import it.polimi.ingsw.client.view.cli.Cli;
-import org.junit.jupiter.api.*;
-
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Scanner;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 class InitLeaderCardParserTest {
@@ -22,14 +20,17 @@ class InitLeaderCardParserTest {
     public ViewController viewController;
 
     InitLeaderCardParserTest() throws IOException {
+
         cli = new Cli();
-        viewController= new ViewController(new SocketClient("127.0.0.1",1234,cli),cli);
+        viewController= new ViewController(cli);
+
     }
 
 
     @Test
     @DisplayName("InitLeaderCard - two in a line")
     public void initCardLeaderCard1(){
+
         int[] chosen = new int[2];
         CommandParser commendParser = new InitLeaderCardParser();
 

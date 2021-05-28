@@ -1,17 +1,18 @@
 package it.polimi.ingsw.client.commands.commandParsers;
 
-import it.polimi.ingsw.client.SocketClient;
 import it.polimi.ingsw.client.commands.*;
 import it.polimi.ingsw.client.view.ViewController;
 import it.polimi.ingsw.client.view.cli.Cli;
 import it.polimi.ingsw.server.model.Resource;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class KeepResourcesParserTest {
 
@@ -20,12 +21,16 @@ class KeepResourcesParserTest {
     public ArrayList<Resource> pickedResources;
 
     KeepResourcesParserTest() throws IOException {
+
+
         cli = new Cli();
-        viewController= new ViewController(new SocketClient("127.0.0.1",1234,cli),cli);
+        viewController= new ViewController(cli);
         pickedResources = new ArrayList<>();
         pickedResources.add(Resource.ROCK);
         pickedResources.add(Resource.SHIELD);
         pickedResources.add(Resource.COIN);
+
+
     }
 
     @Test

@@ -1,26 +1,14 @@
 package it.polimi.ingsw.server.model;
 
 import it.polimi.ingsw.server.controller.ClientController;
-import it.polimi.ingsw.server.model.GameSolitaire;
-import it.polimi.ingsw.server.model.Resource;
-import it.polimi.ingsw.server.model.actionMarkers.ActionMarkerProductionViolet;
-import it.polimi.ingsw.server.model.colours.*;
 import it.polimi.ingsw.server.model.gameBoard.GameBoardInterface;
-import it.polimi.ingsw.server.model.gameBoard.ReductionGameBoard;
-import it.polimi.ingsw.server.model.leaderCards.*;
-import it.polimi.ingsw.server.model.productionCards.ProductionCard;
-import it.polimi.ingsw.server.model.requirements.*;
+import it.polimi.ingsw.server.network.ClientHandler;
+import it.polimi.ingsw.server.network.Server;
+import it.polimi.ingsw.server.virtualview.VirtualView;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class BuyProductionCardTest {
 
@@ -30,9 +18,12 @@ public class BuyProductionCardTest {
     @Test
     @DisplayName("Buy production card in solitaire game test")
     public void buyInSolitaireGame() throws IOException, InterruptedException {
-        ClientController clientController = null;
-        GameSolitaire game = new GameSolitaire("Ali",true,clientController);
+        Server server= new Server();
+        ClientHandler clientHandler= new ClientHandler(server);
+        ClientController clientController= new ClientController(server,clientHandler) ;
+        VirtualView virtualView = new VirtualView(clientController);
 
+        GameSolitaire game = new GameSolitaire("Ali",true,clientController);
         GameBoardInterface gameBoard = game.getGameBoardOfPlayer();
 
         for(int i = 0; i < 20; i++)

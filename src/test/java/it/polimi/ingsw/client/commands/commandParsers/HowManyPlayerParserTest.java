@@ -1,10 +1,8 @@
 package it.polimi.ingsw.client.commands.commandParsers;
 
-import it.polimi.ingsw.client.SocketClient;
 import it.polimi.ingsw.client.commands.Command;
 import it.polimi.ingsw.client.commands.HowManyPlayersCommand;
 import it.polimi.ingsw.client.commands.InvalidCommandException;
-import it.polimi.ingsw.client.commands.ResumeAnswerCommand;
 import it.polimi.ingsw.client.view.ViewController;
 import it.polimi.ingsw.client.view.cli.Cli;
 import org.junit.jupiter.api.DisplayName;
@@ -12,7 +10,8 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class HowManyPlayerParserTest {
 
@@ -20,8 +19,9 @@ class HowManyPlayerParserTest {
     public ViewController viewController;
 
     HowManyPlayerParserTest() throws IOException {
+
         cli = new Cli();
-        viewController= new ViewController(new SocketClient("127.0.0.1",1234,cli),cli);
+        viewController= new ViewController(cli);
     }
 
     @Test

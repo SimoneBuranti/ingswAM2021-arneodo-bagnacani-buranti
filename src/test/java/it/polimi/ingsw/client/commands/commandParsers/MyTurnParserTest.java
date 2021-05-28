@@ -1,15 +1,16 @@
 package it.polimi.ingsw.client.commands.commandParsers;
 
-import it.polimi.ingsw.client.SocketClient;
 import it.polimi.ingsw.client.commands.*;
 import it.polimi.ingsw.client.view.ViewController;
-import it.polimi.ingsw.client.view.cli.*;
-import org.junit.jupiter.api.*;
+import it.polimi.ingsw.client.view.cli.Cli;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.util.Scanner;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class MyTurnParserTest {
 
@@ -17,8 +18,11 @@ class MyTurnParserTest {
     public ViewController viewController;
 
     MyTurnParserTest() throws IOException {
+
+
         cli = new Cli();
-        viewController= new ViewController(new SocketClient("127.0.0.1",1234,cli),cli);
+        viewController= new ViewController(cli);
+
     }
 
     @Test

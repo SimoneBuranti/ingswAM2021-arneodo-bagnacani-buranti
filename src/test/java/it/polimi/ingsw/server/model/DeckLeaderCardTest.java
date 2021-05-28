@@ -3,6 +3,8 @@ package it.polimi.ingsw.server.model;
 import it.polimi.ingsw.server.controller.ClientController;
 import it.polimi.ingsw.server.model.players.PlayerFirst;
 import it.polimi.ingsw.server.model.players.PlayerSecond;
+import it.polimi.ingsw.server.network.ClientHandler;
+import it.polimi.ingsw.server.network.Server;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -25,6 +27,19 @@ class DeckLeaderCardTest {
         nickname.add("ale");
         nickname.add("ali");
         ArrayList<ClientController> clientControllers = new ArrayList<>();
+        Server server= new Server();
+        ClientHandler clientHandler1= new ClientHandler(server);
+        ClientController clientController= new ClientController(server,clientHandler1) ;
+
+
+        ClientHandler clientHandler2= new ClientHandler(server);
+        ClientController clientController2= new ClientController(server,clientHandler2) ;
+        clientController.setNickname("ali");
+        clientController2.setNickname("ale");
+
+        clientControllers.add(clientController);
+        clientControllers.add(clientController2);
+
         GameMultiPlayer game= new GameMultiPlayer(2,nickname,true, clientControllers);
         assertEquals(8,game.leaderDeckSize());
     }
@@ -43,6 +58,20 @@ class DeckLeaderCardTest {
         nickname.add("ale");
         nickname.add("ali");
         ArrayList<ClientController> clientControllers = new ArrayList<>();
+        Server server= new Server();
+        ClientHandler clientHandler1= new ClientHandler(server);
+        ClientController clientController= new ClientController(server,clientHandler1) ;
+
+        ClientHandler clientHandler2= new ClientHandler(server);
+        ClientController clientController2= new ClientController(server,clientHandler2) ;
+
+        clientControllers.add(clientController);
+        clientControllers.add(clientController2);
+
+        clientController.setNickname("ali");
+        clientController2.setNickname("ale");
+
+
         GameMultiPlayer game= new GameMultiPlayer(2,nickname,true, clientControllers);
         assertEquals(8,game.leaderDeckSize());
         assertNotEquals(game.getPlayerFromList(0).getCardFromPersonalLeaderCard(0),(game.getPlayerFromList(1).getCardFromPersonalLeaderCard(0)));
@@ -84,6 +113,18 @@ class DeckLeaderCardTest {
         nickname.add("ale");
         nickname.add("ali");
         ArrayList<ClientController> clientControllers = new ArrayList<>();
+        Server server= new Server();
+        ClientHandler clientHandler1= new ClientHandler(server);
+        ClientController clientController= new ClientController(server,clientHandler1) ;
+
+        ClientHandler clientHandler2= new ClientHandler(server);
+        ClientController clientController2= new ClientController(server,clientHandler2) ;
+
+        clientControllers.add(clientController);
+        clientControllers.add(clientController2);
+
+        clientController.setNickname("ali");
+        clientController2.setNickname("ale");
         GameMultiPlayer game= new GameMultiPlayer(2,nickname,true, clientControllers);
         assertTrue(game.getPlayerFromList(0) instanceof PlayerFirst);
         assertTrue(game.getPlayerFromList(1) instanceof PlayerSecond);

@@ -1,6 +1,5 @@
 package it.polimi.ingsw.server.model;
 
-import it.polimi.ingsw.server.model.Mix;
 import it.polimi.ingsw.server.model.marbles.*;
 import org.junit.jupiter.api.Test;
 
@@ -96,71 +95,6 @@ public class MixTest {
 
 
 
-    /**
-     * Try if the functionality of mixed works also with a list of Integer
-     */
-    @Test
-    public void TryWhitAnotherType()
-    {
-        ArrayList<Integer> List = new ArrayList<>(4);
-
-        List.add(1);
-        List.add(2);
-        List.add(3);
-        List.add(4);
-
-        assertEquals(1, (int) List.get(0));
-        assertEquals(2, (int) List.get(1));
-        assertEquals(3, (int) List.get(2));
-        assertEquals(4, (int) List.get(3));
-
-        Mix.MIXED(List);
-
-        assertTrue( List.get(0).equals(1) ||
-                List.get(1).equals(1) ||
-                List.get(2).equals(1) ||
-                List.get(3).equals(1));
-
-        assertTrue( List.get(0).equals(2) ||
-                List.get(1).equals(2) ||
-                List.get(2).equals(2) ||
-                List.get(3).equals(2));
-
-
-        assertTrue( List.get(0).equals(3) ||
-                List.get(1).equals(3) ||
-                List.get(2).equals(3) ||
-                List.get(3).equals(3));
-
-        assertTrue( List.get(0).equals(4) ||
-                List.get(1).equals(4) ||
-                List.get(2).equals(4) ||
-                List.get(3).equals(4));
-
-        List.add(5);
-        assertEquals(5, (int) List.get(4));
-
-
-        Mix.MIXED(List);
-        assertNotEquals(5, List.get(4));
-
-        Mix.MIXED(List);
-        List.add(6);
-        assertEquals(6, (int) List.get(5));
-        assertEquals(5, List.get(4));
-
-
-
-
-
-
-
-
-
-
-
-
-
-    }
+   
 
 }

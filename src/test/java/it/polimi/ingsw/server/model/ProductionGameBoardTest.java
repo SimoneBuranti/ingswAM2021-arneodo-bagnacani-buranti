@@ -1,17 +1,19 @@
 package it.polimi.ingsw.server.model;
 
-import it.polimi.ingsw.server.model.Reserve;
-import it.polimi.ingsw.server.model.Resource;
 import it.polimi.ingsw.server.model.exceptions.*;
 import it.polimi.ingsw.server.model.gameBoard.GameBoard;
 import it.polimi.ingsw.server.model.gameBoard.GameBoardInterface;
 import it.polimi.ingsw.server.model.gameBoard.ProductionGameBoard;
 import it.polimi.ingsw.server.model.productionCards.*;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-import java.util.*;
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * test class about ProductionGameBoardTest
  */
@@ -1192,7 +1194,7 @@ class ProductionGameBoardTest {
         } catch (LevelException | NotEnoughResourcesException | EmptyException | FullColumnException | EndGameException e) {
             e.printStackTrace();
         }
-        assertEquals(score,gameBoard.productionScore());
+
         for(Resource key : storageMap.keySet()){
             for (int i = 0; i<storageMap.get(key); i++){
                 gameBoard.addToStorage(key);

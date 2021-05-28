@@ -2,7 +2,6 @@ package it.polimi.ingsw.client.view.gui;
 
 import it.polimi.ingsw.server.model.Resource;
 
-import javax.swing.*;
 import java.awt.*;
 
 public abstract class Paths {
@@ -127,6 +126,53 @@ public abstract class Paths {
                 return Toolkit.getDefaultToolkit().createImage(srcPath + "quadrato rosso.png");
             default: return Toolkit.getDefaultToolkit().createImage(srcPath + "quadrato rosso.png");
         }
+    }
+
+    public static Image getLeaderImageFromKey(int key){
+
+        String srcPath = "src/main/resources/resources/front/";
+
+        switch(key) {
+            case 0:
+                return Toolkit.getDefaultToolkit().createImage(srcPath + "Masters of Renaissance_Cards_FRONT_3mmBleed_1-56-1.png");
+            case 1:
+                return Toolkit.getDefaultToolkit().createImage(srcPath + "Masters of Renaissance_Cards_FRONT_3mmBleed_1-53-1.png");
+            case 2:
+                return Toolkit.getDefaultToolkit().createImage(srcPath + "Masters of Renaissance_Cards_FRONT_3mmBleed_1-55-1.png");
+            case 3:
+                return Toolkit.getDefaultToolkit().createImage(srcPath + "Masters of Renaissance_Cards_FRONT_3mmBleed_1-54-1.png");
+
+
+            case 4:
+                return Toolkit.getDefaultToolkit().createImage(srcPath + "Masters of Renaissance_Cards_FRONT_3mmBleed_1-62-1.png");
+            case 5:
+                return Toolkit.getDefaultToolkit().createImage(srcPath + "Masters of Renaissance_Cards_FRONT_3mmBleed_1-64-1.png");
+            case 6:
+                return Toolkit.getDefaultToolkit().createImage(srcPath + "Masters of Renaissance_Cards_FRONT_3mmBleed_1-61-1.png");
+            case 7:
+                return Toolkit.getDefaultToolkit().createImage(srcPath + "Masters of Renaissance_Cards_FRONT_3mmBleed_1-63-1.png");
+
+
+                case 8:
+                return Toolkit.getDefaultToolkit().createImage(srcPath + "Masters of Renaissance_Cards_FRONT_3mmBleed_1-59-1.png");
+            case 9:
+                return Toolkit.getDefaultToolkit().createImage(srcPath + "Masters of Renaissance_Cards_FRONT_3mmBleed_1-60-1.png");
+            case 10:
+                return Toolkit.getDefaultToolkit().createImage(srcPath + "Masters of Renaissance_Cards_FRONT_3mmBleed_1-58-1.png");
+            case 11:
+                return Toolkit.getDefaultToolkit().createImage(srcPath + "Masters of Renaissance_Cards_FRONT_3mmBleed_1-57-1.png");
+
+
+           case 12:
+                return Toolkit.getDefaultToolkit().createImage(srcPath + "Masters of Renaissance_Cards_FRONT_3mmBleed_1-50-1.png");
+            case 13:
+                return Toolkit.getDefaultToolkit().createImage(srcPath + "Masters of Renaissance_Cards_FRONT_3mmBleed_1-49-1.png");
+            case 14:
+                return Toolkit.getDefaultToolkit().createImage(srcPath + "Masters of Renaissance_Cards_FRONT_3mmBleed_1-52-1.png");
+            case 15:
+                return Toolkit.getDefaultToolkit().createImage(srcPath + "Masters of Renaissance_Cards_FRONT_3mmBleed_1-51-1.png");
+                }
+        return null;
     }
 
 

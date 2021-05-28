@@ -38,6 +38,8 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
     private JLabel lobbyLabel;
 
     private JLabel errorLabel;
+    
+    private int readyToSend=0;
 
 
 
@@ -80,6 +82,10 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
     public void setViewController(ViewController viewController){
         this.viewController=viewController;
         setObserver(viewController);
+    }
+
+    public ViewController getViewController(){
+        return this.viewController;
     }
 
     @Override
@@ -268,6 +274,25 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
     @Override
     public void askLeaderCardToKeep(ArrayList<LeaderCard> leaderCards) throws IOException, InterruptedException {
+
+        SwingUtilities.invokeLater(() -> {
+            clear(container);
+
+            CardSwitcher cardSwitcher= new CardSwitcher(container,this);
+            cardSwitcher.setHeading("Choose two cards:");
+            cardSwitcher.showWhatToChoose(true);
+         //   cardSwitcher.showCardDetails();
+            if (getReadyToSend()==2)
+                (new Thread(() -> {
+                    try {
+                        notifyObserver(new KeepLeaderCardsMessage(CardListener.getSendableArrayInt().get(0),CardListener.getSendableArrayInt().get(1) ));
+                    } catch (IOException | InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                })).start();
+
+            applyChangesTo(container);
+        });
 
     }
 
@@ -481,12 +506,38 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
             errorLabel.setLocation(475,108);
             errorLabel.setSize(100,100);
             applyChangesTo(container);
+
         });
     }
 
 
+    public void setReadyToSend() {
+        this.readyToSend++;
+    }
+    
+    
+    public int getReadyToSend() {
+        return readyToSend;
 
+   /* public void printCards(List<LeaderCard> chosenCards, int numCards) {
+        if (numCards == chosenCards.size()) {
+           /* (new Thread(() -> {
+                showLoading();
+                serverHandler.sendGameCards(chosenCards);
+            })).start();
+        } else {
+            SwingUtilities.invokeLater(() -> {
+                clear(bodyContainer);
 
+                CardSwitcher cardSwitcher= new CardSwitcher(bodyContainer,this);
+                cardSwitcher.setHeading("Choose " + (numCards - chosenCards.size()) + " card" + (numCards - chosenCards.size() > 1 ? "s" : "") + " between these:");
+                cardSwitcher.showSwitcher(chosenCards,numCards);
+                cardSwitcher.showCardDetails();
 
+                applyChangesTo(bodyContainer);
+            });
+        }
+    }*/
 
-}
+    }public void showLoading () {
+    }}

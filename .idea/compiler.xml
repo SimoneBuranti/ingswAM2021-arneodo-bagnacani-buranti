@@ -6,6 +6,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="ingswAM2021-arneodo-bagnacani-buranti" />
         <module name="MaestriDelRinascimento_AM7" />
         <module name="AM7" />
       </profile>

@@ -10,13 +10,17 @@ import it.polimi.ingsw.messages.observable.*;
 import java.io.IOException;
 
 public class ViewController implements MessageVisitor, ViewObserver {
-    private final SocketClient socketClient;
+    private SocketClient socketClient;
     private LightGame game ;
     private String nickName = null;
     private View view;
 
+    public ViewController(View view) {
+        this.view=view;
+    }
+
     public LightGame getGame() {
-        return game;
+        return this.game;
     }
 
     public ViewController(SocketClient socketClient, View view){

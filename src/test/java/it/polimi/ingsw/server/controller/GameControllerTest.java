@@ -1,21 +1,8 @@
 package it.polimi.ingsw.server.controller;
 
-import com.google.gson.Gson;
-import it.polimi.ingsw.messages.*;
-import it.polimi.ingsw.server.model.GameMultiPlayer;
-import it.polimi.ingsw.server.model.GameSolitaire;
-import it.polimi.ingsw.server.network.*;
-import org.junit.jupiter.api.*;
-
-import java.io.*;
-import java.net.ServerSocket;
-import java.net.Socket;
-
-import static org.junit.jupiter.api.Assertions.*;
-
 public class GameControllerTest {
 
-    @Test
+   /* @Test
     @DisplayName("GameControllerEmpty -1- one connection only")
     public void gameControllerEmptyTest1() throws InterruptedException, FileNotFoundException {
         Server server = new Server();
@@ -330,5 +317,5 @@ public class GameControllerTest {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 }
