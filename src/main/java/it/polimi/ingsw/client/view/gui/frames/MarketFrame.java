@@ -26,13 +26,13 @@ public class MarketFrame extends JFrame{
     private JPanel extraPanel;
     private JFrame marketFrame;
 
-    private JButton buttonC0;
-    private JButton buttonC1;
-    private JButton buttonC2;
-    private JButton buttonC3;
-    private JButton buttonR0;
-    private JButton buttonR1;
-    private JButton buttonR2;
+    private PushColumnButton buttonC0;
+    private PushColumnButton buttonC1;
+    private PushColumnButton buttonC2;
+    private PushColumnButton buttonC3;
+    private PushRowButton buttonR0;
+    private PushRowButton buttonR1;
+    private PushRowButton buttonR2;
 
     public MarketFrame(ViewController viewController){
         this.viewController = viewController;
@@ -69,19 +69,19 @@ public class MarketFrame extends JFrame{
         SwingUtilities.invokeLater(() -> {
             container.setLayout(null);
 
-            buttonC0 = new JButton();
+            buttonC0 = new PushColumnButton();
             buttonC0.setBounds(115, 275, 30, 60);
-            buttonC1 = new JButton();
+            buttonC1 = new PushColumnButton();
             buttonC1.setBounds(157, 275, 30, 60);
-            buttonC2 = new JButton();
+            buttonC2 = new PushColumnButton();
             buttonC2.setBounds(205, 275, 30, 60);
-            buttonC3 = new JButton();
+            buttonC3 = new PushColumnButton();
             buttonC3.setBounds(247, 275, 30, 60);
-            buttonR0 = new JButton();
+            buttonR0 = new PushRowButton();
             buttonR0.setBounds(330, 113, 60, 30);
-            buttonR1 = new JButton();
+            buttonR1 = new PushRowButton();
             buttonR1.setBounds(330, 150, 60, 30);
-            buttonR2 = new JButton();
+            buttonR2 = new PushRowButton();
             buttonR2.setBounds(330, 190, 60, 30);
 
             container.add(buttonC0);
@@ -114,30 +114,29 @@ public class MarketFrame extends JFrame{
         });
     }
 
+    public void removeButton(){
+        SwingUtilities.invokeLater(() -> {
+            buttonC0.setEnabled(false);
+            buttonC1.setEnabled(false);
+            buttonC2.setEnabled(false);
+            buttonC3.setEnabled(false);
+            buttonR0.setEnabled(false);
+            buttonR1.setEnabled(false);
+            buttonR2.setEnabled(false);
+
+            applyChangesTo(container);
+            marketFrame.setVisible(true);
+        });
+    }
+
     public void sendPushColumn(int column){
         viewController.sendMessage(new PushColumnMessage(column));
-        container.remove(buttonC0);
-        container.remove(buttonC1);
-        container.remove(buttonC2);
-        container.remove(buttonC3);
-        container.remove(buttonR0);
-        container.remove(buttonR1);
-        container.remove(buttonR2);
-
-        applyChangesTo(container);
+        removeButton();
     }
 
     public void sendPushRow(int row){
         viewController.sendMessage(new PushRowMessage(row));
-        container.remove(buttonC0);
-        container.remove(buttonC1);
-        container.remove(buttonC2);
-        container.remove(buttonC3);
-        container.remove(buttonR0);
-        container.remove(buttonR1);
-        container.remove(buttonR2);
-
-        applyChangesTo(container);
+        removeButton();
     }
 
 
