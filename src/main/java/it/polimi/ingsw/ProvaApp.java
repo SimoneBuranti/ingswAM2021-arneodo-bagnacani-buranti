@@ -22,7 +22,8 @@ public class ProvaApp {
 
 
     public static void main(String[] args) {
-        Cli cli = new Cli();
+
+        /*Cli cli = new Cli();
         ViewController viewController= null;
         try {
             viewController = new ViewController(new SocketClient("127.0.0.1",1234,cli),cli);
@@ -45,7 +46,7 @@ public class ProvaApp {
             System.out.println(((KeepLeaderCardsCommand) command).getChosenLeaderCards()[1] ==2);
         } catch (InvalidCommandException e) {
             e.printStackTrace();
-        }
+        }*/
 
 
 

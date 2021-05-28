@@ -12,7 +12,7 @@ public class ViewControllerObservable {
      * Notifies all the current observers through the update method and passes to them a {@link Message}.
      *
      */
-    protected void notifyObserver(Message message) throws IOException, InterruptedException {
+    public void notifyObserver(Message message) throws IOException, InterruptedException {
         observer.update(message);
     }
 

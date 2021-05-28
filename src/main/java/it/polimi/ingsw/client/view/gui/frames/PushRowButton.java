@@ -8,20 +8,13 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class PushRowButton extends JButton implements ActionListener {
+public class PushRowButton extends JButton{
 
-    private int row;
-    private ViewController viewController;
 
     public PushRowButton(){
 
-        //this.setIcon(new ImageIcon((Paths.getImageFromPath("src/main/resources/resources/punchboard/frecciaSx.png")).getScaledInstance(,,0)));
-        //this.setBounds();
-        //this.setSize();
+        this.setIcon(new ImageIcon((Paths.getImageFromPath("src/main/resources/resources/punchboard/frecciaSx.png")).getScaledInstance(60,30,0)));
+        this.setSize(60,30);
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        viewController.sendMessage(new PushColumnMessage(this.row));
-    }
 }
