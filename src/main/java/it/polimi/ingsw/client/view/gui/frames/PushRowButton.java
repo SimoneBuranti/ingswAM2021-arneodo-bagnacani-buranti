@@ -1,6 +1,5 @@
 package it.polimi.ingsw.client.view.gui.frames;
 
-import com.sun.rowset.internal.Row;
 import it.polimi.ingsw.client.view.ViewController;
 import it.polimi.ingsw.client.view.gui.Paths;
 import it.polimi.ingsw.messages.PushColumnMessage;
