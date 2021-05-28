@@ -2,6 +2,7 @@ package it.polimi.ingsw.client.view.gui.frames;
 
 import it.polimi.ingsw.client.view.ViewController;
 import it.polimi.ingsw.messages.ProductionOnMessage;
+import it.polimi.ingsw.server.model.gameBoard.Strongbox;
 
 import javax.swing.*;
 import java.awt.*;
@@ -35,6 +36,7 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
     private JLabel[][] productionCards;
     private JButton[] productionButtons;
     private FaithPathPane faithPathPane;
+    private StrongBoxPanel strongboxPanel;
 
 
     public GameboardPanel(){
@@ -93,8 +95,8 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
             productionSpaces[i].setSize(psWidth,psHeight);
             productionSpaces[i].setBounds(psx[i],psy,psWidth,psHeight);
 
-            productionSpaces[i].setBackground(Color.WHITE);
-            productionSpaces[i].setOpaque(true);
+            //productionSpaces[i].setBackground(Color.WHITE);
+            productionSpaces[i].setOpaque(false);
             add(productionSpaces[i]);
 
         }
@@ -150,6 +152,8 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
     }
 
     private void initStrongBox() {
+        this.strongboxPanel = new StrongBoxPanel();
+        this.add(strongboxPanel);
     }
 
     private void initFaithPathPane() {

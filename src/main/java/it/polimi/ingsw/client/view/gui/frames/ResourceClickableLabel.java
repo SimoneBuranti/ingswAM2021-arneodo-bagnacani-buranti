@@ -7,46 +7,39 @@ import javax.swing.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class ResourceClickableLabel extends JLabel implements MouseListener {
+public class ResourceClickableLabel extends ResourceLabel implements MouseListener {
 
-    private Resource selected;
-
-    private static final int resourceDimension = 20;
+    private static final int resourceDimension = 27;
 
     public ResourceClickableLabel(int x,int y){
-
-        this.selected = Resource.COIN;
+        super(x,y,resourceDimension,Resource.COIN);
         this.setSize(resourceDimension,resourceDimension);
         this.setBounds(x,y,resourceDimension,resourceDimension);
-        this.setIcon(new ImageIcon((Paths.getImageFromResource(this.selected)).getScaledInstance(resourceDimension,resourceDimension,0)));
+        this.setIcon(new ImageIcon((Paths.getImageFromResource(this.resource)).getScaledInstance(resourceDimension,resourceDimension,0)));
         this.addMouseListener(this);
-    }
-
-    public Resource getSelected() {
-        return selected;
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        switch(this.selected) {
+        switch(this.resource) {
             case COIN: {
-                this.selected = Resource.ROCK;
+                this.resource = Resource.ROCK;
                 break;
             }
             case ROCK: {
-                this.selected = Resource.SHIELD;
+                this.resource = Resource.SHIELD;
                 break;
             }
             case SHIELD: {
-                this.selected = Resource.SERVANT;
+                this.resource = Resource.SERVANT;
                 break;
             }
             case SERVANT: {
-                this.selected = Resource.COIN;
+                this.resource = Resource.COIN;
                 break;
             }
         }
-        this.setIcon(new ImageIcon((Paths.getImageFromResource(this.selected)).getScaledInstance(resourceDimension, resourceDimension, 0)));
+        this.setIcon(new ImageIcon((Paths.getImageFromResource(this.resource)).getScaledInstance(resourceDimension, resourceDimension, 0)));
     }
 
     @Override
