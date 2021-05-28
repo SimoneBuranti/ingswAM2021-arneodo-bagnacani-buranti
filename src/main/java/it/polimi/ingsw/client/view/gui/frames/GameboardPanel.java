@@ -60,6 +60,7 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
 
         initStrongBox();
 
+        this.setBorder(BorderFactory.createBevelBorder(1,Color.BLACK,Color.DARK_GRAY));
 
         addProductionCard(1,0);
         addProductionCard(8,0);
@@ -207,12 +208,6 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
 
 
 
-
-
-
-
-
-
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -232,21 +227,21 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
 
     @Override
     public void mousePressed(MouseEvent e) {
-        System.out.println("You pressed");
+        //System.out.println("You pressed");
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        System.out.println("You released");
+        //System.out.println("You released");
     }
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        System.out.println("You entered");
+        //System.out.println("You entered");
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-        System.out.println("You exited");
+        //System.out.println("You exited");
     }
 }

@@ -5,6 +5,7 @@ import it.polimi.ingsw.client.view.gui.PBackground;
 import it.polimi.ingsw.client.view.gui.frames.GameboardPanel;
 import it.polimi.ingsw.client.view.gui.frames.LobbyFrame;
 import it.polimi.ingsw.client.view.gui.frames.NickFrame;
+import it.polimi.ingsw.client.view.gui.frames.ServerMessagePanel;
 import it.polimi.ingsw.server.model.Resource;
 
 import javax.swing.*;
@@ -17,13 +18,16 @@ public class SwingApp {
 
 
         JFrame frame = new JFrame();
-        frame.setSize(800,600);
+        frame.setSize(1115,608);
         GameboardPanel gameboard = new GameboardPanel();
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setLayout(null);
         frame.add(gameboard);
         frame.setVisible(true);
         frame.setLocation(350,100);
+        ServerMessagePanel serverMessagePanel = new ServerMessagePanel();
+        frame.add(serverMessagePanel);
+        serverMessagePanel.display("Ha un grande valore rappresentativo, essendo \n architettonicamente e artisticamente incentrato \nsul Risorgimento, il complesso processo di unità nazionale e liberazione dalla dominazione straniera portato a compimento sotto il regno di Vittorio Emanuele II di Savoia, cui il monumento è dedicato: per tale motivo il Vittoriano è considerato uno dei simboli patri italiani.");
 
         HashMap<Resource,Integer> newResources = new HashMap<>();
         newResources.put(Resource.COIN,3);
