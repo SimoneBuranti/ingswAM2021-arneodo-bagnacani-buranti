@@ -15,7 +15,6 @@ public class SwingApp {
 
     public static void main(String[] args) {
 
-        //HashMap<Resource,Integer> newRe
 
         JFrame frame = new JFrame();
         frame.setSize(800,600);
@@ -24,8 +23,23 @@ public class SwingApp {
         frame.setLayout(null);
         frame.add(gameboard);
         frame.setVisible(true);
-        //gameboard.updateStorage();
         frame.setLocation(350,100);
+
+        HashMap<Resource,Integer> newResources = new HashMap<>();
+        newResources.put(Resource.COIN,3);
+        newResources.put(Resource.ROCK,2);
+        newResources.put(Resource.SHIELD,1);
+        gameboard.updateStorage(newResources);
+
+
+        newResources = new HashMap<>();
+        newResources.put(Resource.SERVANT,1);
+        newResources.put(Resource.SHIELD,0);
+        newResources.put(Resource.COIN,1);
+        gameboard.updateStorage(newResources);
+
+
+
         frame.paintComponents(frame.getGraphics());
         frame.paintComponents(frame.getGraphics());
 
