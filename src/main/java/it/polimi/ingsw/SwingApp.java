@@ -1,20 +1,32 @@
 package it.polimi.ingsw;
 
+import it.polimi.ingsw.client.SocketClient;
+import it.polimi.ingsw.client.view.ViewController;
 import it.polimi.ingsw.client.view.gui.Gui;
 import it.polimi.ingsw.client.view.gui.PBackground;
-import it.polimi.ingsw.client.view.gui.frames.GameboardPanel;
-import it.polimi.ingsw.client.view.gui.frames.LobbyFrame;
-import it.polimi.ingsw.client.view.gui.frames.NickFrame;
+import it.polimi.ingsw.client.view.gui.frames.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 
 public class SwingApp {
 
     public static void main(String[] args) {
 
+        ProductionCardArray list = new ProductionCardArray();
+        ProductionDeckFrame deckFrame = null;
+        try {
+            deckFrame = new ProductionDeckFrame(new ViewController(new SocketClient("127.0.0.1", 1234, new Gui()), new Gui()));
+            deckFrame.addDecks(list.getList());
+            deckFrame.paintComponents(deckFrame.getGraphics());
+            deckFrame.paintComponents(deckFrame.getGraphics());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-        JFrame frame = new JFrame();
+
+        /*JFrame frame = new JFrame();
         frame.setSize(800,600);
         JPanel gameboard = new GameboardPanel();
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -23,7 +35,7 @@ public class SwingApp {
         frame.setVisible(true);
 
         frame.repaint();
-        frame.setLocation(350,100);
+        frame.setLocation(350,100);*/
 
     }
 
