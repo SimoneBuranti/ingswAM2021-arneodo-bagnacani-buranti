@@ -202,4 +202,10 @@ public abstract class Paths {
         }
         return Paths.getImageFromPath("src/main/resources/resources/punchboard/coin.png");
     }
+
+
+
+
+
+
 }

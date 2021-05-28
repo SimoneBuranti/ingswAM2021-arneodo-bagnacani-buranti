@@ -216,7 +216,6 @@ public class ViewController implements MessageVisitor, ViewObserver {
     @Override
     public void visit(ShowAllOfPlayerMessage msg) {
         view.showPlayerInfo(msg);
-
     }
 
     @Override

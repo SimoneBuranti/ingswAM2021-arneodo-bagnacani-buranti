@@ -319,6 +319,28 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
     @Override
     public void askInitResource() throws IOException, InterruptedException {
 
+        SwingUtilities.invokeLater(() -> {
+            clear(container);
+
+            if (this.getViewController().getGame().getPosition()!=1)
+            {
+                ResourceManager resourceManager = new ResourceManager(container,this);
+                resourceManager.setHeading("Choose two cards:");
+                resourceManager.showWhatToChoose(true);
+            }
+            else
+            {
+                container.setLayout(new FlowLayout());
+                errorLabel = new JLabel("sorry, you are the first player, do");
+                container.add(errorLabel);
+                errorLabel.setLocation(475,108);
+                errorLabel.setSize(100,100);
+            }
+
+            applyChangesTo(container);
+        });
+
+
     }
 
     @Override
@@ -328,6 +350,7 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
     @Override
     public void showMarketGrid(Marble[][] grid) {
+
 
     }
 
