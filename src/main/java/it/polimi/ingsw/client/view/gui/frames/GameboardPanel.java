@@ -31,6 +31,7 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
     private Image backgroundImage;
 
     private JLayeredPane[] productionSpaces;
+    private BaseProductionPanel baseProductionPanel;
     private JLabel[][] productionCards;
     private JButton[] productionButtons;
     private FaithPathPane faithPathPane;
@@ -44,6 +45,8 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
 
         initProductionSpaces();
 
+        initBaseProductionSpace();
+
         initButtons();
 
         initFaithPathPane();
@@ -51,7 +54,6 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
         initStorage();
 
         initStrongBox();
-
 
 
         addProductionCard(1,0);
@@ -156,7 +158,7 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
         faithPathPane.setSize(faithPathWidth,faithPathHeight);
         faithPathPane.setBounds(0,0,faithPathWidth,faithPathHeight);
 
-
+        //move button--------
         JButton moveButton = new JButton();
         moveButton.setSize(20,20);
         moveButton.addActionListener(e -> {
@@ -165,9 +167,24 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
         moveButton.setBounds(20,20,20,20);
         faithPathPane.add(moveButton);
 
-        add(faithPathPane);
+        //addPapal button--------
+        JButton papalButton = new JButton();
+        papalButton.setSize(20,20);
+        papalButton.addActionListener(e -> {
+            this.faithPathPane.addPapal();
+            this.repaint();
+        });
+        papalButton.setBounds(20,50,20,20);
+        faithPathPane.add(papalButton);
+
+        this.add(faithPathPane);
     }
 
+    public void initBaseProductionSpace(){
+        this.baseProductionPanel = new BaseProductionPanel();
+
+        this.add(baseProductionPanel);
+    }
 
 
 

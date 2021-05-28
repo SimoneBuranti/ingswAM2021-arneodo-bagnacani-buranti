@@ -1,5 +1,8 @@
 package it.polimi.ingsw.client.view.gui;
 
+import it.polimi.ingsw.server.model.Resource;
+
+import javax.swing.*;
 import java.awt.*;
 
 public abstract class Paths {
@@ -111,10 +114,46 @@ public abstract class Paths {
         return null;
     }
 
+    public static Image getPapalCardImageFromCurrCall(int currCall){
+
+        String srcPath = "src/main/resources/resources/punchboard/";
+
+        switch(currCall) {
+            case 0:
+                return Toolkit.getDefaultToolkit().createImage(srcPath + "quadrato giallo.png");
+            case 1:
+                return Toolkit.getDefaultToolkit().createImage(srcPath + "quadrato arancione.png");
+            case 2:
+                return Toolkit.getDefaultToolkit().createImage(srcPath + "quadrato rosso.png");
+            default: return Toolkit.getDefaultToolkit().createImage(srcPath + "quadrato rosso.png");
+        }
+    }
+
+
+
+
 
     public static Image getImageFromPath(String path){
-        return Toolkit.getDefaultToolkit().createImage(path+"Masters of Renaissance_Cards_FRONT_3mmBleed_1-48-1.png");
+        return Toolkit.getDefaultToolkit().createImage(path);
 
     }
 
+    public static Image getImageFromResource(Resource selected) {
+
+        switch(selected) {
+            case COIN: {
+                return Paths.getImageFromPath("src/main/resources/resources/punchboard/coin.png");
+            }
+            case ROCK: {
+                return Paths.getImageFromPath("src/main/resources/resources/punchboard/stone.png");
+            }
+            case SHIELD: {
+                return Paths.getImageFromPath("src/main/resources/resources/punchboard/shield.png");
+            }
+            case SERVANT: {
+                return Paths.getImageFromPath("src/main/resources/resources/punchboard/servant.png");
+            }
+        }
+        return Paths.getImageFromPath("src/main/resources/resources/punchboard/coin.png");
+    }
 }

@@ -15,7 +15,7 @@ public class SwingApp {
 
 
         JFrame frame = new JFrame();
-        frame.setSize(800,572);
+        frame.setSize(800,600);
         JPanel gameboard = new GameboardPanel();
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setLayout(null);
@@ -23,7 +23,7 @@ public class SwingApp {
         frame.setVisible(true);
 
         frame.repaint();
-
+        frame.setLocation(350,100);
 
     }
 
