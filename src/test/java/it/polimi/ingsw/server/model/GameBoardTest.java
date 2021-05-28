@@ -12,6 +12,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 /**
  * test class about GameBoard
  */
@@ -1013,8 +1015,9 @@ class GameBoardTest {
         try {
             score+=blueDeck.getPoints();
             gameBoard.buyProductionCard(blueDeck,2);
+            assertTrue(false);
         } catch (LevelException | NotEnoughResourcesException | EmptyException | FullColumnException | EndGameException e) {
-            e.printStackTrace();
+
         }
         assertEquals(score,gameBoard.productionScore());
 
@@ -1022,9 +1025,9 @@ class GameBoardTest {
             score+=blueDeckTwo.getPoints();
             gameBoard.buyProductionCard(blueDeckTwo,2);
         } catch (LevelException | NotEnoughResourcesException | EmptyException | FullColumnException | EndGameException e) {
-            e.printStackTrace();
+            //assertTrue(false);
         }
-        assertEquals(score,gameBoard.productionScore());
+        //assertEquals(score,gameBoard.productionScore());
         for(Resource key : storageMap.keySet()){
             for (int i = 0; i<storageMap.get(key); i++){
                 gameBoard.addToStorage(key);
@@ -1043,7 +1046,7 @@ class GameBoardTest {
             e.printStackTrace();
         }
 
-        assertEquals(score,gameBoard.productionScore());
+        //assertEquals(score,gameBoard.productionScore());
 
     }*/
 
@@ -1177,8 +1180,9 @@ class GameBoardTest {
 
         try {
             gameBoard.takeFromMarket(newResourcesList);
+            assertTrue(false);
         } catch (NotEnoughSpaceInStorageException e) {
-            e.printStackTrace();
+
         }
 
     }
@@ -1234,8 +1238,9 @@ class GameBoardTest {
 
         try {
             gameBoard.takeFromMarket(newResourcesList);
+            assertTrue(false);
         } catch (NotEnoughSpaceInStorageException e) {
-            e.printStackTrace();
+
         }
     }
 
@@ -1317,8 +1322,8 @@ class GameBoardTest {
 
         try {
             gameBoard.baseProductionOn(Resource.COIN,Resource.COIN,Resource.SHIELD);
+            assertTrue(false);
         } catch (ImpossibleProductionException e) {
-            e.printStackTrace();
         }
 
         gameBoard.endOfProduction();
@@ -1750,8 +1755,9 @@ class GameBoardTest {
 
         try {
             gameBoard.productionOn(0);
+            assertTrue(false);
         } catch (ImpossibleProductionException | EmptyColumnException | CallForCouncilException | LastSpaceReachedException e) {
-            e.printStackTrace();
+
         }
 
         gameBoard.endOfProduction();
@@ -1840,8 +1846,9 @@ class GameBoardTest {
 
         try {
             gameBoard.productionOn(0);
+            assertTrue(false);
         } catch (ImpossibleProductionException | EmptyColumnException | CallForCouncilException | LastSpaceReachedException e) {
-            e.printStackTrace();
+
         }
 
         gameBoard.endOfProduction();

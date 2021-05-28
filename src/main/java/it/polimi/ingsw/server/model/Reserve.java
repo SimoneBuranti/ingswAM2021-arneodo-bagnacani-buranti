@@ -24,7 +24,7 @@ public class Reserve extends Observable {
     /**
      * A static final map reservePools collects the current resource amount of the reserve
      */
-    private static Map<Resource , Integer> reservePools = new HashMap<>();
+    private static Map<Resource,Integer> reservePools = new HashMap<>();
 
     /**
      * The constructor initialise every resource type to the value of AMOUNT

@@ -5,25 +5,29 @@ import it.polimi.ingsw.client.view.gui.PBackground;
 import it.polimi.ingsw.client.view.gui.frames.GameboardPanel;
 import it.polimi.ingsw.client.view.gui.frames.LobbyFrame;
 import it.polimi.ingsw.client.view.gui.frames.NickFrame;
+import it.polimi.ingsw.server.model.Resource;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.HashMap;
 
 public class SwingApp {
 
     public static void main(String[] args) {
 
+        //HashMap<Resource,Integer> newRe
 
         JFrame frame = new JFrame();
         frame.setSize(800,600);
-        JPanel gameboard = new GameboardPanel();
+        GameboardPanel gameboard = new GameboardPanel();
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setLayout(null);
         frame.add(gameboard);
         frame.setVisible(true);
-
-        frame.repaint();
+        //gameboard.updateStorage();
         frame.setLocation(350,100);
+        frame.paintComponents(frame.getGraphics());
+        frame.paintComponents(frame.getGraphics());
 
     }
 

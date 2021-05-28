@@ -2,6 +2,7 @@ package it.polimi.ingsw.client.view.gui.frames;
 
 import it.polimi.ingsw.client.view.ViewController;
 import it.polimi.ingsw.messages.ProductionOnMessage;
+import it.polimi.ingsw.server.model.Resource;
 import it.polimi.ingsw.server.model.gameBoard.Strongbox;
 
 import javax.swing.*;
@@ -10,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.Map;
 
 public class GameboardPanel extends JPanel implements ActionListener, MouseListener {
 
@@ -36,6 +38,7 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
     private JLabel[][] productionCards;
     private JButton[] productionButtons;
     private FaithPathPane faithPathPane;
+    private StoragePanel storagePanel;
     private StrongBoxPanel strongboxPanel;
 
 
@@ -148,7 +151,9 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
 
 
     private void initStorage() {
+        this.storagePanel = new StoragePanel();
 
+        this.add(storagePanel);
     }
 
     private void initStrongBox() {
@@ -191,7 +196,11 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
     }
 
 
+    public void updateStorage(Map<Resource,Integer> newStorage){
 
+        this.storagePanel.updateStorage(newStorage);
+
+    }
 
 
 
@@ -223,21 +232,21 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
 
     @Override
     public void mousePressed(MouseEvent e) {
-
+        System.out.println("You pressed");
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-
+        System.out.println("You released");
     }
 
     @Override
     public void mouseEntered(MouseEvent e) {
-
+        System.out.println("You entered");
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-
+        System.out.println("You exited");
     }
 }
