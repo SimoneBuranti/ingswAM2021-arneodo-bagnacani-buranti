@@ -61,7 +61,7 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
             ImageIcon icon = new ImageIcon("src/main/resources/resources/title.jpg");
             Image image=icon.getImage();
             JPanel background = new PBackground(image);
-            mainFrame.repaint();
+          mainFrame.repaint();
             background.setLayout(null);
             mainFrame.add(background);
             //mainFrame.add(errorText);
@@ -278,18 +278,9 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
         SwingUtilities.invokeLater(() -> {
             clear(container);
 
-            CardSwitcher cardSwitcher= new CardSwitcher(container,this);
-            cardSwitcher.setHeading("Choose two cards:");
-            cardSwitcher.showWhatToChoose(true);
-         //   cardSwitcher.showCardDetails();
-            if (getReadyToSend()==2)
-                (new Thread(() -> {
-                    try {
-                        notifyObserver(new KeepLeaderCardsMessage(CardListener.getSendableArrayInt().get(0),CardListener.getSendableArrayInt().get(1) ));
-                    } catch (IOException | InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                })).start();
+            CardManager cardManager = new CardManager(container,this);
+            cardManager.setHeading("Choose two cards:");
+            cardManager.showWhatToChoose(true);
 
             applyChangesTo(container);
         });
@@ -529,7 +520,7 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
             SwingUtilities.invokeLater(() -> {
                 clear(bodyContainer);
 
-                CardSwitcher cardSwitcher= new CardSwitcher(bodyContainer,this);
+                CardManager cardSwitcher= new CardManager(bodyContainer,this);
                 cardSwitcher.setHeading("Choose " + (numCards - chosenCards.size()) + " card" + (numCards - chosenCards.size() > 1 ? "s" : "") + " between these:");
                 cardSwitcher.showSwitcher(chosenCards,numCards);
                 cardSwitcher.showCardDetails();

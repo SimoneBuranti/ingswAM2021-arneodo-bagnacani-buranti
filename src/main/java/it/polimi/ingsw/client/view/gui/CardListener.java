@@ -1,9 +1,11 @@
 package it.polimi.ingsw.client.view.gui;
 
+import it.polimi.ingsw.messages.KeepLeaderCardsMessage;
 import it.polimi.ingsw.server.model.leaderCards.LeaderCard;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +14,7 @@ import java.util.List;
  */
 public class CardListener implements MouseListener {
     private final LeaderCard card;
-    private final CardSwitcher cardSwitcher;
+    private final CardManager cardManager;
     private boolean multipleSelection;
     private boolean singleSelection;
     private int numCards;
@@ -26,14 +28,14 @@ public class CardListener implements MouseListener {
      *
      * @param card         The managed card
      * @param chosenCards  The chosen cards
-     * @param cardSwitcher The card switcher to be controlled
+     * @param cardManager The card switcher to be controlled
      * @param numCards     The number of cards to be selected
      */
-    public CardListener(LeaderCard card, CardSwitcher cardSwitcher, List<LeaderCard> chosenCards, int numCards,Gui gui) {
+    public CardListener(LeaderCard card, CardManager cardManager, List<LeaderCard> chosenCards, int numCards, Gui gui) {
         this.multipleSelection = true;
         this.singleSelection = false;
         this.card = card;
-        this.cardSwitcher=cardSwitcher;
+        this.cardManager = cardManager;
         this.chosenCards = chosenCards;
         this.numCards = numCards;
         this.gui=gui;
@@ -43,14 +45,14 @@ public class CardListener implements MouseListener {
     /**
      * Constructor: build a CardListener with single selection
      * @param card                  The managed card
-     * @param cardSwitcher          The card switcher to be controlled
+     * @param cardManager          The card switcher to be controlled
      * @param selectable            True to enable single selection, otherwise false
      */
-    public CardListener(LeaderCard card, CardSwitcher cardSwitcher, boolean selectable, Gui gui) {
+    public CardListener(LeaderCard card, CardManager cardManager, boolean selectable, Gui gui) {
         this.multipleSelection = false;
         this.singleSelection = selectable;
         this.card = card;
-        this.cardSwitcher=cardSwitcher;
+        this.cardManager = cardManager;
         this.gui=gui;
     }
 
@@ -60,17 +62,19 @@ public class CardListener implements MouseListener {
      * @param e The mouse event
      */
     public void mouseClicked(MouseEvent e) {
-                gui.showLoading();
                 addPlayerCardToArrayList(card);
                 gui.setReadyToSend();
+        if (gui.getReadyToSend()==2)
+            try {
+                gui.notifyObserver(new KeepLeaderCardsMessage(CardListener.getSendableArrayInt().get(0),CardListener.getSendableArrayInt().get(1) ));
+            } catch (IOException | InterruptedException e1) {
+                e1.printStackTrace();
             }
-
-
-    private void addPlayerCardToArrayList(LeaderCard card) {
-        sendableArray.add(card);
-        addPlayerCardToArrayListInt(card);
     }
 
+    private void addPlayerCardToArrayList(LeaderCard card) {
+        addPlayerCardToArrayListInt(card);
+    }
 
     private void addPlayerCardToArrayListInt(LeaderCard card) {
         for(int i=0; i<gui.getViewController().getGame().getGameBoardOfPlayer().getLeaderCards().size(); i++)

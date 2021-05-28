@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * A cards switcher with an action listener that enable multiple or single selection
  */
-public class CardSwitcher {
+public class CardManager {
     private Gui gui;
     private  PanelContainer container;
 
@@ -18,7 +18,7 @@ public class CardSwitcher {
     private boolean switcherVisibility;
 
 
-    public CardSwitcher(PanelContainer container, Gui gui){
+    public CardManager(PanelContainer container, Gui gui){
         this.container=container;
         this.gui=gui;
         switcherVisibility=false;
@@ -52,7 +52,8 @@ public class CardSwitcher {
      */
     public void setHeading(String heading){
         Label label = new Label(heading);
-       label.setBounds(0, 0, container.getWidth(), 40);
+        label.setBackground(Color.GRAY);
+        label.setBounds(0, 0, container.getWidth(), 40);
         container.add(label);
     }
 
@@ -88,7 +89,7 @@ public class CardSwitcher {
                                                             .getGameBoardOfPlayer()
                                                             .getLeaderCard(i)
                                                             .getKey())
-                                                            .getScaledInstance(82, 138, Image.SCALE_SMOOTH);
+                                                            .getScaledInstance(150, 300, Image.SCALE_SMOOTH);
 
             SensibleButton cardButton = new SensibleButton(scaledImage);
             cardContainer.add(cardButton);
