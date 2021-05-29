@@ -50,7 +50,7 @@ public class CardManager {
      */
     public void setHeading(String heading){
         Label label = new Label(heading);
-        label.setBackground(Color.GRAY);
+        label.setBackground(Color.WHITE);
         label.setBounds(0, 0, container.getWidth(), 40);
         container.add(label);
     }

@@ -232,16 +232,21 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
     @Override
     public void showChangeCurrent(String currentNick) {
+        /// messaggi pergamena
 
     }
 
     @Override
     public void yourTurn() {
+        /// messaggi pergamena
 
     }
 
     @Override
     public void notifyError(Message msg) {
+
+
+        // differenzio errori
         showLabel(msg);
         /*if (msg.getMessageType().equals(MessageType.NICKNAMENOTFOUNDERROR) || msg.getMessageType().equals(MessageType.NICKNAMENOTFOUNDERROR) ) {
             try {
@@ -255,11 +260,14 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
     @Override
     public void showPlayersOrder(ArrayList<String> nickName) {
+        // lascio a simo
+
 
     }
 
     @Override
     public void showLastTurn(String nickName) {
+        // pergamena
 
     }
 
@@ -294,26 +302,27 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
             applyChangesTo(container);
         });
 
+
+
     }
 
     @Override
     public void showCallForCouncil(String nickname, int papalCard) {
+        // fatto su gameboard
 
     }
 
     @Override
-    public void showStartGame() {
-
-    }
+    public void showStartGame() {}
 
     @Override
     public void showRestartMessage() {
-
+        // initial ask name
     }
 
     @Override
     public void showPlayerInfo(ShowAllOfPlayerMessage msg) {
-
+        // new frame
     }
 
     @Override
@@ -330,152 +339,170 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
             }
             else
             {
+
                 container.setLayout(new FlowLayout());
-                errorLabel = new JLabel("sorry, you are the first player, do");
+                errorLabel = new JLabel("sorry, you are the first player, take a nap");
+                errorLabel.setBackground(Color.WHITE);
+                errorLabel.setOpaque(true);
                 container.add(errorLabel);
                 errorLabel.setLocation(475,108);
                 errorLabel.setSize(100,100);
             }
 
             applyChangesTo(container);
-        });
-
-
-    }
+        });}
 
     @Override
-    public void showGameBoardProductionCards(ProductionCard[][] productionCards) {
-
-    }
+    public void showGameBoardProductionCards(ProductionCard[][] productionCards) {}
 
     @Override
-    public void showMarketGrid(Marble[][] grid) {
-
-
-    }
+    public void showMarketGrid(Marble[][] grid) {}
 
     @Override
-    public void showMarketExtra(Marble extra) {
-
-    }
+    public void showMarketExtra(Marble extra) { }
 
     @Override
     public void showFaithIndicator(int pos) {
+        // presente
 
     }
 
     @Override
     public void showDeckProductionCards(ArrayList<ProductionCard> productionCards) {
+        // new frame
 
     }
 
     @Override
     public void showGameBoardOfPlayer() {
+        // presente
 
     }
 
     @Override
     public void showProductionDecks() {
+        // presente
 
     }
 
     @Override
     public void showReserve() {
+        // new frame
 
     }
 
     @Override
     public void showMarket() {
+        // new frame market
 
     }
 
     @Override
     public void showWhiteMarbleResources(int n, ArrayList<Resource> whiteMarbleResourceTypes) {
+        // pop up
 
     }
 
     @Override
     public void showSpaceError(NotEnoughSpaceErrorMessage msg) {
+        // pop up
 
     }
 
     @Override
     public void checkThreadRestart() {
+        // nothing
 
     }
 
     @Override
     public void showActionMarker(String actionType) {
+        // fa simo
 
     }
 
     @Override
     public void youWin(int score) {
+        // pop up
 
     }
 
     @Override
     public void lorenzoWin() {
+        // pop up
 
     }
 
     @Override
     public void showWinner(String nickname) {
+        // pop up
 
     }
 
     @Override
     public void showOpponentAction(Message msg) {
+        // pergamena
 
     }
 
     @Override
     public void sayDisconnect() {
+        // pop up
 
     }
 
     @Override
     public void visit(DeckListNotification deckListNotification) {
+        // metodi relativi a classe
+
 
     }
 
     @Override
     public void visit(GameboardListNotification gameboardListNotification) {
+        // metodi relativi a classe
 
     }
 
     @Override
     public void visit(LeaderListCardNotification leaderListCardNotification) {
+        // metodi relativi a classe
 
     }
 
     @Override
     public void visit(StorageNotification storageNotification) {
+        // metodi relativi a classe
 
     }
 
     @Override
     public void visit(StrongboxNotification strongboxNotification) {
+        // metodi relativi a classe
 
     }
 
     @Override
     public void visit(ReserveNotification reserveNotification) {
+        // metodi relativi a classe
 
     }
 
     @Override
     public void visit(MarketNotification marketNotification) {
+        // metodi relativi a classe
 
     }
 
     @Override
     public void visit(ExtraMarketNotification extraMarketNotification) {
+        // metodi relativi a classe
 
     }
 
     @Override
     public void visit(FaithPathNotification faithPathNotification) {
+        // metodi relativi a classe
 
     }
 
