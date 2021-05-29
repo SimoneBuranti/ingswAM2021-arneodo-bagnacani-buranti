@@ -15,13 +15,13 @@ public class SwingApp {
 
 
         JFrame frame = new JFrame();
-        frame.setSize(1300,608);
+        frame.setSize(1200,668);
         GameboardPanel gameboard = new GameboardPanel();
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setLayout(null);
         frame.add(gameboard);
         frame.setVisible(true);
-        frame.setLocation(350,100);
+        frame.setLocation(250,160);
         ActionMarkerPanel actionMarkerPanel = new ActionMarkerPanel();
         frame.add(actionMarkerPanel);
         ServerMessagePanel serverMessagePanel = new ServerMessagePanel();

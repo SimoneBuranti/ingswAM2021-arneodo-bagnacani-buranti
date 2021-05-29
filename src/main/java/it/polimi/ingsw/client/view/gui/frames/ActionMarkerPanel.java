@@ -9,7 +9,7 @@ import java.awt.*;
 public class ActionMarkerPanel extends JPanel {
 
     private final static int markerDimension = 90;
-    private final static int panelWidth = 300;
+    private final static int panelWidth = 305;
     private final static int panelHeight = 150;
     private final static int panelX = 800;
     private final static int panelY = 250;
