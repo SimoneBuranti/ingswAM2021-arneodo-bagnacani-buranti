@@ -19,4 +19,8 @@ public class MagnificentWinMessage extends Message {
     public void accept(MessageVisitor v) throws IOException, InterruptedException {
         v.visit(this);
     }
+    @Override
+    public String toString(){
+        return "you lost";
+    }
 }

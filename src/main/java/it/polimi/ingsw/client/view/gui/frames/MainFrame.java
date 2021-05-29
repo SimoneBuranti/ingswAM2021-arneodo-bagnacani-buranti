@@ -30,14 +30,25 @@ public abstract class MainFrame  extends JFrame {
     protected ArrayList<JLabel> nicknames;
     protected ArrayList<JPanel> attached;
 
+    MarketFrame marketFrame;
+    ProductionDeckFrame productionDeckFrame;
 
 
-    public MainFrame(String title){
-        super(title);
-        //setGeneralFeatures();
-        //initNavigationBar();
+    public MainFrame(String string){
+        super(string);
+        setGeneralFeatures();
+        initNavigationBar();
 
-       // initGameMode();
+        initGameMode();
+    }
+
+
+    public MainFrame(){
+        super();
+        setGeneralFeatures();
+        initNavigationBar();
+
+       initGameMode();
     }
 
     public void initNavigationBar() {
@@ -89,11 +100,17 @@ public abstract class MainFrame  extends JFrame {
     }
 
 
-    private void initGameMode() {
+    private void initGameMode() {}
+
+    public void showPopUp(Message message){
+
+        JOptionPane.showMessageDialog(this,message.toString(),message.getMessageType().toString(),
+                JOptionPane.WARNING_MESSAGE);;
 
     }
-
-
+    public void showPopUp(String string){
+        JOptionPane.showMessageDialog(this,string,"Network Error",JOptionPane.WARNING_MESSAGE);
+    }
     public abstract void askLeaderCardToKeep(ArrayList<LeaderCard> leaderCards) throws IOException, InterruptedException;
 
     protected abstract void applyChangesTo(Component component);
@@ -105,4 +122,6 @@ public abstract class MainFrame  extends JFrame {
     public abstract void showLabel(Message message);
 
     public abstract void askInitResource() throws IOException, InterruptedException;
+
+
 }
