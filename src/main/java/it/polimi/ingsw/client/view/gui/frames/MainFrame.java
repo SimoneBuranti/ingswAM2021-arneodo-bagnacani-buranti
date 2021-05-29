@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class MainFrame  extends JFrame {
 
-
+    public final static int northHeight = 70;
     public final static int frameWidth = 1115;
     public final static int frameHeigth = 668;
     public final static int frameX = 250;
@@ -20,11 +20,14 @@ public class MainFrame  extends JFrame {
 
 
     protected GameboardPanel gameboardPanel;
+    protected ServerMessagePanel serverMessagePanel;
+    //protected LEADERCARDSPACE
 
     protected ReserveFrame reserveFrame;
     protected MarketFrame marketFrame;
+    protected ProductionDeckFrame productionDeckFrame;
 
-
+    protected JPanel mainPanel;
     protected JPanel navigationBar;
     protected JButton marketButton;
     protected JButton prodCardButton;
@@ -44,7 +47,7 @@ public class MainFrame  extends JFrame {
         this.attached = new ArrayList<>();
         this.setLocation(frameX,frameY);
         this.setSize(frameWidth,frameHeigth);
-
+        this.setResizable(false);
         this.setVisible(true);
     }
 
@@ -75,6 +78,9 @@ public class MainFrame  extends JFrame {
         this.marketButton = new JButton();
         marketButton.setText("Market");
         marketButton.setPreferredSize(new Dimension(buttonWidth,buttonHeight));
+        marketButton.addActionListener(e -> {
+            this.marketFrame.changeVisibility();
+        });
         //marketButton.setBorder(BorderFactory.createBevelBorder(0));
     }
 
@@ -83,6 +89,9 @@ public class MainFrame  extends JFrame {
         this.prodCardButton = new JButton();
         prodCardButton.setText("Decks");
         prodCardButton.setPreferredSize(new Dimension(buttonWidth,buttonHeight));
+        prodCardButton.addActionListener( e -> {
+            this.productionDeckFrame.changeVisibility();
+        });
         //prodCardButton.setBorder(BorderFactory.createBevelBorder(0));
 
     }
@@ -103,18 +112,32 @@ public class MainFrame  extends JFrame {
     public void setGeneralFeatures() {
 
         this.setLayout(new BorderLayout());
+        this.mainPanel = new JPanel();
+        this.add(mainPanel);
+        mainPanel.setLayout(null);
 
     }
 
 
     public void initGameMode() {
         for(JPanel p : attached){
-            this.remove(p);
+            mainPanel.remove(p);
         }
         setGeneralFeatures();
         initNavigationBar();
 
+        marketFrame = new MarketFrame();
+        productionDeckFrame = new ProductionDeckFrame();
         reserveFrame = new ReserveFrame();
+
+        gameboardPanel = new GameboardPanel();
+        gameboardPanel.setBounds(0,0,800,572);
+        mainPanel.add(gameboardPanel);
+        serverMessagePanel = new ServerMessagePanel();
+        serverMessagePanel.setBounds(800,0,300,250);
+        mainPanel.add(serverMessagePanel);
+        serverMessagePanel.display("Ha un grande valore rappresentativo, essendo \n architettonicamente e artisticamente incentrato \nsul Risorgimento, il complesso processo di unità nazionale e liberazione dalla dominazione straniera portato a compimento sotto il regno di Vittorio Emanuele II di Savoia, cui il monumento è dedicato: per tale motivo il Vittoriano è considerato uno dei simboli patri italiani.");
+
 
         this.setVisible(true);
     }

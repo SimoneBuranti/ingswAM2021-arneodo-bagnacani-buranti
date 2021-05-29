@@ -18,13 +18,14 @@ public class MarketFrame extends JFrame{
     private static final int marketHeight = 504;
     private static final int marbleWidth = 44;
     private static final int marbleHeight = 44;
+    private final static int marketX = 20;
+    private final static int marketY = 122;
 
-    private final ViewController viewController;
+    private ViewController viewController;
     private PanelContainer container;
 
     private JPanel gridPanel;
     private JPanel extraPanel;
-    private JFrame marketFrame;
 
     private PushColumnButton buttonC0;
     private PushColumnButton buttonC1;
@@ -34,25 +35,44 @@ public class MarketFrame extends JFrame{
     private PushRowButton buttonR1;
     private PushRowButton buttonR2;
 
+    private boolean visible;
+
     public MarketFrame(ViewController viewController){
+        super();
         this.viewController = viewController;
 
+        this.setLocation(marketX,marketY);
+        this.setAlwaysOnTop(true);
+        this.setDefaultCloseOperation(HIDE_ON_CLOSE);
+        visible = false;
+        this.setVisible(visible);
+        initMarket();
+
+    }
+
+    public MarketFrame(){// SOLO PER GRAFICA
+        super();
+        this.setLocation(marketX,marketY);
+        this.setAlwaysOnTop(true);
+        this.setDefaultCloseOperation(HIDE_ON_CLOSE);
+        visible = false;
+        this.setVisible(visible);
         initMarket();
 
     }
 
     public void initMarket(){
         SwingUtilities.invokeLater(() -> {
-            marketFrame = new JFrame("Market");
-            marketFrame.setSize(marketWidth, marketHeight);
-            marketFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-            marketFrame.setResizable(false);
+            //marketFrame = new JFrame("Market");
+            this.setSize(marketWidth, marketHeight);
+            //marketFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+            this.setResizable(false);
             ImageIcon icon = new ImageIcon("src/main/resources/resources/punchboard/plancia portabiglie.png");
             Image image = icon.getImage();
             JPanel background = new PBackground(image);
-            marketFrame.repaint();
+            this.repaint();
             background.setLayout(null);
-            marketFrame.add(background);
+            this.add(background);
 
             container = new PanelContainer();
             container.setBounds(0, 0, marketWidth, marketHeight);
@@ -60,9 +80,12 @@ public class MarketFrame extends JFrame{
 
             addButtons();
 
-            marketFrame.setVisible(true);
-
         });
+    }
+
+    public void changeVisibility(){
+        this.visible = !visible;
+        this.setVisible(visible);
     }
 
     public void addButtons(){
@@ -109,8 +132,6 @@ public class MarketFrame extends JFrame{
                 sendPushRow(2);});
 
             applyChangesTo(container);
-
-            marketFrame.setVisible(true);
         });
     }
 
@@ -125,7 +146,6 @@ public class MarketFrame extends JFrame{
             buttonR2.setEnabled(false);
 
             applyChangesTo(container);
-            marketFrame.setVisible(true);
         });
     }
 
@@ -156,7 +176,6 @@ public class MarketFrame extends JFrame{
             }
             container.add(gridPanel);
             applyChangesTo(container);
-            marketFrame.setVisible(true);
         });
     }
 
@@ -170,7 +189,6 @@ public class MarketFrame extends JFrame{
 
             extraPanel.add(getMarble(extra.getColour()));
             container.add(extraPanel);
-            marketFrame.setVisible(true);
             applyChangesTo(container);
         });
 

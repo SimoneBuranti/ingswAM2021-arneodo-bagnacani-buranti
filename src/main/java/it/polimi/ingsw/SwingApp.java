@@ -16,6 +16,8 @@ public class SwingApp {
 
         MainFrame mainFrame = new MainFrame("Master of Renaissance");
         mainFrame.initGameMode();
+        mainFrame.paintComponents(mainFrame.getGraphics());
+        mainFrame.paintComponents(mainFrame.getGraphics());
 
 
         /*JFrame frame = new JFrame();
