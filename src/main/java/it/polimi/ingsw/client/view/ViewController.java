@@ -364,7 +364,14 @@ public class ViewController implements MessageVisitor, ViewObserver {
 
     @Override
     public void visit(UpdateChosenLeaderMessage msg) {
-        game.getGameBoardOfPlayer().setLeaderPersonal(msg.getCardFirst(),msg.getCardSec()); }
+        try {
+            game.setLeaderPersonal(msg.getCardFirst(),msg.getCardSec());
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 
 
     @Override

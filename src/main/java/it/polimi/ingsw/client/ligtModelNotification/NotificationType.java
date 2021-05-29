@@ -10,4 +10,7 @@ public enum NotificationType {
     MARKETNOTIFY,
     EXTRAMARKETNOTIFY,
     FAITHNOTIFY,
+    INITLEADER,
+    ACTIVATELEADER,
+    DISCARDLEADER
 }

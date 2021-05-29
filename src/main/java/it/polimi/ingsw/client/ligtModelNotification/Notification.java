@@ -66,6 +66,16 @@ public abstract class Notification {
             case FAITHNOTIFY:
                 return gson.fromJson(jsonObj, FaithPathNotification.class);
 
+            case INITLEADER:
+                return gson.fromJson(jsonObj, InitLeaderNotification.class);
+
+            case ACTIVATELEADER:
+                return gson.fromJson(jsonObj, ActivateLeaderNotification.class);
+
+            case DISCARDLEADER:
+                return gson.fromJson(jsonObj, DiscardLeaderNotification.class);
+
+
                 default:
                 throw new IllegalArgumentException("Invalid topic " + notificationType);
         }

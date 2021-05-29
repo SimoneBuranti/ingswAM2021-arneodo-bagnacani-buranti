@@ -20,13 +20,32 @@ public class LeaderCardsPanel extends JPanel {
         setOpaque(false);
     }
 
-    public void addLeaderCards(ArrayList<LeaderCard> leaderCards){
-        firstCard = new LeaderCardLabel(leaderCards.get(0).getKey());
-        firstCard.setBounds(0,0, 150, 278);
-        this.add(firstCard);
-        secondCard = new LeaderCardLabel(leaderCards.get(1).getKey());
-        secondCard.setBounds(160,0, 150, 278);
-        this.add(secondCard);
+    public void addLeaderCards(ArrayList<LeaderCard> leaderCards, boolean activated){
+        if(!activated){
+            firstCard = new LeaderCardLabel(leaderCards.get(0).getKey());
+            firstCard.setBounds(0,0, 150, 278);
+            this.add(firstCard);
+            if(leaderCards.size() == 2) {
+                secondCard = new LeaderCardLabel(leaderCards.get(1).getKey());
+                secondCard.setBounds(160, 0, 150, 278);
+                this.add(secondCard);
+            }
+        }else {
+            if(firstCard != null){
+                firstCard = new LeaderCardActivatedLabel(leaderCards.get(0).getKey());
+                firstCard.setBounds(0,0, 150, 278);
+                this.add(firstCard);
+                if(leaderCards.size() == 2) {
+                    secondCard = new LeaderCardActivatedLabel(leaderCards.get(1).getKey());
+                    secondCard.setBounds(160, 0, 150, 278);
+                    this.add(secondCard);
+                }
+            }else{
+                secondCard = new LeaderCardActivatedLabel(leaderCards.get(0).getKey());
+                secondCard.setBounds(160, 0, 150, 278);
+                this.add(secondCard);
+            }
+        }
     }
 
     public void discardLeaderCard(int pos){

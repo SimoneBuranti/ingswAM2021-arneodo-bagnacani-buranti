@@ -211,6 +211,21 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
         showFaithIndicator(faithPathNotification.getI());
     }
 
+    @Override
+    public void visit(InitLeaderNotification initLeaderNotification) {
+        //gui method
+    }
+
+    @Override
+    public void visit(ActivateLeaderNotification activateLeaderNotification) {
+       //gui method
+    }
+
+    @Override
+    public void visit(DiscardLeaderNotification discardLeaderNotification) {
+        //gui method
+    }
+
 
     @Override
     public void notifyError(Message msg) {
