@@ -14,7 +14,9 @@ public class SwingApp {
     public static void main(String[] args) {
 
 
-        JFrame frame = new JFrame();
+        //MainFrame frame = new MainFrame();
+
+        /*JFrame frame = new JFrame();
         frame.setSize(1200,668);
         GameboardPanel gameboard = new GameboardPanel();
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -44,7 +46,7 @@ public class SwingApp {
 
 
         frame.paintComponents(frame.getGraphics());
-        frame.paintComponents(frame.getGraphics());
+        frame.paintComponents(frame.getGraphics());*/
 
     }
 

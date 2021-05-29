@@ -23,6 +23,10 @@ public class MainFrameMultiPlayer extends MainFrame {
         super(title);
         this.gui=gui;
 
+
+        initPlayerMenu();
+
+
     }
     @Override
     public void askLeaderCardToKeep(ArrayList<LeaderCard> leaderCards) throws IOException, InterruptedException {
@@ -110,7 +114,41 @@ public class MainFrameMultiPlayer extends MainFrame {
             }
 
             applyChangesTo(container);
-        });}
+        });
+    }
+
+
+
+    public void initPlayerMenu(){
+        this.playerMenu = new JMenu();
+        playerMenu.setText("Players");
+        playerMenu.setSize(buttonWidth,buttonHeight);
+        playerMenu.setBorder(BorderFactory.createBevelBorder(3));
+    }
+
+
+    public void initTurnPanel(){
+        this.turnPanel = new JPanel();
+        turnPanel.setLayout(new FlowLayout());
+        for(int i = 0;i<nicknames.size();i++){
+            turnPanel.add(nicknames.get(i));
+        }
+    }
+
+
+
+    public void setPlayers(ArrayList<String> players) {
+        this.players = new ArrayList<>();
+        this.nicknames = new ArrayList<>();
+        for(int i = 0;i<players.size(); i++){
+            this.players.add(new JMenuItem(players.get(i)));
+            this.playerMenu.add(this.players.get(i));
+            this.nicknames.add(new JLabel(players.get(i)));
+        }
+        initTurnPanel();
+    }
+
+
 
 
 }
