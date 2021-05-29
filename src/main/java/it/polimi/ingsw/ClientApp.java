@@ -2,6 +2,7 @@ package it.polimi.ingsw;
 
 import it.polimi.ingsw.client.SocketClient;
 import it.polimi.ingsw.client.view.View;
+import it.polimi.ingsw.client.view.cli.Cli;
 import it.polimi.ingsw.client.view.gui.Gui;
 
 import java.io.IOException;
@@ -13,6 +14,7 @@ public class ClientApp {
         String hostName = "127.0.0.1";
 
         int portNumber = 1234;
+
 
         boolean cliParam = false;
 
@@ -43,7 +45,7 @@ public class ClientApp {
                     socketClient.readMessage();
                 }
             }.start();
-        }
-   // }
+        //}
+    }
 }
 
