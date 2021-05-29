@@ -23,12 +23,12 @@ public class CardManager {
 
         // Prepares the external container
         cardContainer = new PanelContainer();
-        cardContainer.setBounds(0, 80, container.getWidth(), 138);
+        cardContainer.setBounds(10, 30, container.getWidth(), 300);
         cardContainer.setLayout(new GridLayout(1, 9, 10, 0));
 
         // Prepare the card details container
         cardDetailsContainer = new PanelContainer();
-        cardDetailsContainer.setBounds(0, 280, container.getWidth(), 150);
+        cardDetailsContainer.setBounds(10, 280, container.getWidth(), 150);
         cardDetailsContainer.setLayout(null);
 
         // Prepare the card name label

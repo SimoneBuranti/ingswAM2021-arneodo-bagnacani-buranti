@@ -3,6 +3,9 @@ import it.polimi.ingsw.client.ligtModelNotification.*;
 import it.polimi.ingsw.client.view.View;
 import it.polimi.ingsw.client.view.ViewController;
 import it.polimi.ingsw.client.view.ViewControllerObservable;
+import it.polimi.ingsw.client.view.gui.frames.MainFrame;
+import it.polimi.ingsw.client.view.gui.frames.MainFrameMultiPlayer;
+import it.polimi.ingsw.client.view.gui.frames.MainFrameSinglePlayer;
 import it.polimi.ingsw.messages.*;
 import it.polimi.ingsw.messages.observable.ShowAllOfPlayerMessage;
 import it.polimi.ingsw.server.model.Resource;
@@ -25,6 +28,8 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
     private JButton yesButton;
     private JButton noButton ;
     private JButton enterButton ;
+
+    private MainFrame mainFrameOfGame;
 
 
 
@@ -50,7 +55,7 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
 
             mainFrame = new JFrame("Masters Of Renaissance");
-            mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            mainFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             mainFrame.setLocation(475,208);
             mainFrame.setSize(820,420);
 
@@ -119,14 +124,23 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
 
             this.oneButton.addActionListener(eONe -> {
-                sendNumberPlayersResponse(1);});
+                sendNumberPlayersResponse(1);
+                mainFrame.dispose();
+                mainFrameOfGame=new MainFrameSinglePlayer(this,"your Personal Board");
+            });
             this.twoButton.addActionListener(eNO -> {
-                sendNumberPlayersResponse(2);});
+                sendNumberPlayersResponse(2);
+                mainFrame.dispose();
+            mainFrameOfGame=new MainFrameMultiPlayer(this,"your Personal Board");
+            });
             this.threeButton.addActionListener(eYES -> {
-                sendNumberPlayersResponse(3);});
+                sendNumberPlayersResponse(3);
+                mainFrame.dispose();
+                mainFrameOfGame=new MainFrameMultiPlayer(this,"your Personal Board");});
             this.fourButton.addActionListener(eNO -> {
-                sendNumberPlayersResponse(4);});
-
+                sendNumberPlayersResponse(4);
+                mainFrame.dispose();
+                mainFrameOfGame=new MainFrameMultiPlayer(this,"your Personal Board");});
             applyChangesTo(container);
         }); }
 
@@ -291,19 +305,7 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
     @Override
     public void askLeaderCardToKeep(ArrayList<LeaderCard> leaderCards) throws IOException, InterruptedException {
-
-        SwingUtilities.invokeLater(() -> {
-            clear(container);
-
-            CardManager cardManager = new CardManager(container,this);
-            cardManager.setHeading("Choose two cards:");
-            cardManager.showWhatToChoose(true);
-
-            applyChangesTo(container);
-        });
-
-
-
+    mainFrameOfGame.askLeaderCardToKeep(leaderCards);
     }
 
     @Override
@@ -327,30 +329,8 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
     @Override
     public void askInitResource() throws IOException, InterruptedException {
-
-        SwingUtilities.invokeLater(() -> {
-            clear(container);
-
-            if (this.getViewController().getGame().getPosition()!=1)
-            {
-                ResourceManager resourceManager = new ResourceManager(container,this);
-                resourceManager.setHeading("Choose two cards:");
-                resourceManager.showWhatToChoose(true);
-            }
-            else
-            {
-
-                container.setLayout(new FlowLayout());
-                errorLabel = new JLabel("sorry, you are the first player, take a nap");
-                errorLabel.setBackground(Color.WHITE);
-                errorLabel.setOpaque(true);
-                container.add(errorLabel);
-                errorLabel.setLocation(475,108);
-                errorLabel.setSize(100,100);
-            }
-
-            applyChangesTo(container);
-        });}
+        mainFrameOfGame.askInitResource();
+    }
 
     @Override
     public void showGameBoardProductionCards(ProductionCard[][] productionCards) {}
