@@ -55,6 +55,7 @@ public class CardListener implements MouseListener {
         if (gui.getReadyToSend()==2)
             try {
                 gui.notifyObserver(new KeepLeaderCardsMessage(CardListener.getSendableArrayInt().get(0),CardListener.getSendableArrayInt().get(1) ));
+                gui.askInitResource();
             } catch (IOException | InterruptedException e1) {
                 e1.printStackTrace();
             }
