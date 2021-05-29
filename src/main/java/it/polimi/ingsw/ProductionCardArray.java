@@ -1,11 +1,12 @@
 package it.polimi.ingsw;
 
 import it.polimi.ingsw.server.model.Resource;
-import it.polimi.ingsw.server.model.colours.Blue;
-import it.polimi.ingsw.server.model.colours.Green;
-import it.polimi.ingsw.server.model.colours.Violet;
-import it.polimi.ingsw.server.model.colours.Yellow;
+import it.polimi.ingsw.server.model.colours.*;
+import it.polimi.ingsw.server.model.leaderCards.LeaderCard;
+import it.polimi.ingsw.server.model.leaderCards.LeaderCardStorage;
 import it.polimi.ingsw.server.model.productionCards.ProductionCard;
+import it.polimi.ingsw.server.model.requirements.Requirements;
+import it.polimi.ingsw.server.model.requirements.ResourceRequirement;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,6 +15,21 @@ import java.util.Map;
 public class ProductionCardArray {
     ArrayList<ProductionCard> list;
     public ProductionCardArray(){
+
+        /*list = new ArrayList<>();
+        Colour blue = new Blue();
+        Colour green = new Green();
+        Colour yellow = new Yellow();
+        Colour violet = new Violet();
+
+
+        Requirements requirementsOne = new ResourceRequirement(Resource.COIN);
+        LeaderCard leaderCardOne = new LeaderCardStorage(requirementsOne, 3, Resource.ROCK, 0);
+        list.add(leaderCardOne);
+
+        Requirements requirementsTwo = new ResourceRequirement(Resource.ROCK);
+        LeaderCard leaderCardTwo = new LeaderCardStorage(requirementsTwo, 3, Resource.SERVANT, 1);
+        list.add(leaderCardTwo);*/
         list = new ArrayList<>();
         Blue blue= new Blue();
         Green green = new Green();
@@ -37,6 +53,7 @@ public class ProductionCardArray {
         blueOneOut.put(Resource.SHIELD, 0);
         ProductionCard cardOne =new ProductionCard(blueOne, blueOneIn, blueOneOut, 1, 1, blue ,1,1);
         list.add(cardOne);
+        //list.add(null);
 
         Map<Resource,Integer> blueFive =new HashMap<>();
         blueFive.put(Resource.COIN, 4);

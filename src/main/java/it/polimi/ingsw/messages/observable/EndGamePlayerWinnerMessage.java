@@ -3,7 +3,6 @@ package it.polimi.ingsw.messages.observable;
 import it.polimi.ingsw.messages.Message;
 import it.polimi.ingsw.messages.MessageType;
 import it.polimi.ingsw.messages.MessageVisitor;
-import it.polimi.ingsw.server.model.players.Player;
 
 import java.io.IOException;
 
@@ -29,5 +28,10 @@ public class EndGamePlayerWinnerMessage extends Message {
 
     public String getNickname() {
         return nickname;
+    }
+
+    @Override
+    public String toString(){
+        return "the winner is: "+getNickname();
     }
 }

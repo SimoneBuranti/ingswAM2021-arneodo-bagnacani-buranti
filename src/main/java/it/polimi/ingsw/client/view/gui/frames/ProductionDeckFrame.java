@@ -67,32 +67,40 @@ public class ProductionDeckFrame extends JFrame{
             container.setLayout(null);
             decksPanel = new JPanel();
             decksPanel.setLayout(new GridLayout(3, 4, 10,0));
-            decksPanel.setBounds(0, 0, deckWidth, deckHeight);
-
+            decksPanel.setBounds(3, 0, deckWidth-20, deckHeight-50);
+            decksPanel.setBackground( new Color(232,228,212) );
             for(int i = 0; i < 3 ; i++){
                 if(productionCards.get(5-i) != null){
-                    decksPanel.add(new CardLabelWithButton(productionCards.get(5-i).getKey(), 1+(4*i)));
+                    CardLabelWithButton card = new CardLabelWithButton(productionCards.get(5-i).getKey(), 1+(4*i));
+                    card.setSize(140, 248);
+                    decksPanel.add(card);
                 }else{
                     JLabel labelWhite = new JLabel();
                     labelWhite.setBackground(Color.WHITE);
                     decksPanel.add(labelWhite);
                 }
                 if(productionCards.get(2-i) != null){
-                    decksPanel.add(new CardLabelWithButton(productionCards.get(2-i).getKey(), 2+(4*i)));
+                    CardLabelWithButton card = new CardLabelWithButton(productionCards.get(2-i).getKey(), 2+(4*i));
+                    card.setSize(140, 248);
+                    decksPanel.add(card);
                 }else{
                     JLabel labelWhite = new JLabel();
                     labelWhite.setBackground(Color.WHITE);
                     decksPanel.add(labelWhite);
                 }
                 if(productionCards.get(8-i) != null){
-                    decksPanel.add(new CardLabelWithButton(productionCards.get(8-i).getKey(),3+(4*i)));
+                    CardLabelWithButton card = new CardLabelWithButton(productionCards.get(8-i).getKey(), 3+(4*i));
+                    card.setSize(140, 248);
+                    decksPanel.add(card);
                 }else{
                     JLabel labelWhite = new JLabel();
                     labelWhite.setBackground(Color.WHITE);
                     decksPanel.add(labelWhite);
                 }
                 if(productionCards.get(11-i) != null){
-                    decksPanel.add(new CardLabelWithButton(productionCards.get(11-i).getKey(),4+(4*i)));
+                    CardLabelWithButton card = new CardLabelWithButton(productionCards.get(11-i).getKey(), 4+(4*i));
+                    card.setSize(140, 248);
+                    decksPanel.add(card);
                 }else{
                     JLabel labelWhite = new JLabel();
                     labelWhite.setBackground(Color.WHITE);
@@ -101,7 +109,6 @@ public class ProductionDeckFrame extends JFrame{
             }
             container.add(decksPanel);
             applyChangesTo(container);
-            this.setVisible(true);
         });
     }
 

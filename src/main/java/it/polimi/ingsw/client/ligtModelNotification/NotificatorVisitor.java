@@ -19,4 +19,10 @@ public interface NotificatorVisitor {
     void visit(ExtraMarketNotification extraMarketNotification);
 
     void visit(FaithPathNotification faithPathNotification);
+
+    void visit(InitLeaderNotification initLeaderNotification);
+
+    void visit(ActivateLeaderNotification activateLeaderNotification);
+
+    void visit(DiscardLeaderNotification discardLeaderNotification);
 }

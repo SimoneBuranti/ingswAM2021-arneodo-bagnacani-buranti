@@ -7,7 +7,7 @@ import it.polimi.ingsw.client.view.gui.frames.MainFrame;
 import it.polimi.ingsw.client.view.gui.frames.MainFrameMultiPlayer;
 import it.polimi.ingsw.client.view.gui.frames.MainFrameSinglePlayer;
 import it.polimi.ingsw.messages.*;
-import it.polimi.ingsw.messages.observable.ShowAllOfPlayerMessage;
+import it.polimi.ingsw.messages.observable.*;
 import it.polimi.ingsw.server.model.Resource;
 import it.polimi.ingsw.server.model.leaderCards.LeaderCard;
 import it.polimi.ingsw.server.model.marbles.Marble;
@@ -30,6 +30,8 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
     private JButton enterButton ;
 
     private MainFrame mainFrameOfGame;
+
+    private Boolean isMultiOrNot;
 
 
 
@@ -125,22 +127,16 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
             this.oneButton.addActionListener(eONe -> {
                 sendNumberPlayersResponse(1);
-                mainFrame.dispose();
-                mainFrameOfGame=new MainFrameSinglePlayer(this,"your Personal Board");
             });
             this.twoButton.addActionListener(eNO -> {
                 sendNumberPlayersResponse(2);
-                mainFrame.dispose();
-            mainFrameOfGame=new MainFrameMultiPlayer(this,"your Personal Board");
             });
             this.threeButton.addActionListener(eYES -> {
                 sendNumberPlayersResponse(3);
-                mainFrame.dispose();
-                mainFrameOfGame=new MainFrameMultiPlayer(this,"your Personal Board");});
+            });
             this.fourButton.addActionListener(eNO -> {
                 sendNumberPlayersResponse(4);
-                mainFrame.dispose();
-                mainFrameOfGame=new MainFrameMultiPlayer(this,"your Personal Board");});
+                });
             applyChangesTo(container);
         }); }
 
@@ -315,7 +311,14 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
     }
 
     @Override
-    public void showStartGame() {}
+    public void showStartGame(GameTypeMessage msg) {
+        mainFrame.dispose();
+        if(msg.isMultiOrNot()==true)
+            mainFrameOfGame= new MainFrameMultiPlayer(this,"your board");
+        else
+            mainFrameOfGame= new MainFrameSinglePlayer(this, "your board");
+        isMultiOrNot=msg.isMultiOrNot();
+    }
 
     @Override
     public void showRestartMessage() {
@@ -385,7 +388,7 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
     @Override
     public void showSpaceError(NotEnoughSpaceErrorMessage msg) {
-        // pop up
+        //
 
     }
 
@@ -403,19 +406,19 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
     @Override
     public void youWin(int score) {
-        // pop up
+        mainFrameOfGame.showPopUp(new MyVictoryMessage(score));
 
     }
 
     @Override
     public void lorenzoWin() {
-        // pop up
+        mainFrameOfGame.showPopUp(new MagnificentWinMessage());
 
     }
 
     @Override
     public void showWinner(String nickname) {
-        // pop up
+        mainFrameOfGame.showPopUp(new EndGamePlayerWinnerMessage(nickname));
 
     }
 
@@ -427,7 +430,7 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
     @Override
     public void sayDisconnect() {
-        // pop up
+        mainFrameOfGame.showPopUp("server is crashed, you i've been disconnected");
 
     }
 
@@ -483,6 +486,21 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
     @Override
     public void visit(FaithPathNotification faithPathNotification) {
         // metodi relativi a classe
+
+    }
+
+    @Override
+    public void visit(InitLeaderNotification initLeaderNotification) {
+
+    }
+
+    @Override
+    public void visit(ActivateLeaderNotification activateLeaderNotification) {
+
+    }
+
+    @Override
+    public void visit(DiscardLeaderNotification discardLeaderNotification) {
 
     }
 
@@ -544,30 +562,27 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
     public void setReadyToSend() {
         this.readyToSend++;
     }
+    public void resetToSend() {
+        this.readyToSend=0;
+    }
     
     
     public int getReadyToSend() {
         return readyToSend;
 
-   /* public void printCards(List<LeaderCard> chosenCards, int numCards) {
-        if (numCards == chosenCards.size()) {
-           /* (new Thread(() -> {
-                showLoading();
-                serverHandler.sendGameCards(chosenCards);
-            })).start();
-        } else {
-            SwingUtilities.invokeLater(() -> {
-                clear(bodyContainer);
+  
 
-                CardManager cardSwitcher= new CardManager(bodyContainer,this);
-                cardSwitcher.setHeading("Choose " + (numCards - chosenCards.size()) + " card" + (numCards - chosenCards.size() > 1 ? "s" : "") + " between these:");
-                cardSwitcher.showSwitcher(chosenCards,numCards);
-                cardSwitcher.showCardDetails();
+    }
 
-                applyChangesTo(bodyContainer);
-            });
-        }
-    }*/
+    public void showLoading () { }
 
-    }public void showLoading () {
-    }}
+
+    public void powerToMainFrame() {
+        mainFrameOfGame.dispose();
+        if(isMultiOrNot)
+            mainFrameOfGame= new MainFrameMultiPlayer(this);
+        else
+            mainFrameOfGame= new MainFrameSinglePlayer(this);
+
+    }
+}

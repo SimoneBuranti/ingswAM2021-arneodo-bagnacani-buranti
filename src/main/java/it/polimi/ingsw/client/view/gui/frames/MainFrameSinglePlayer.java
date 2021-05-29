@@ -16,25 +16,27 @@ public class MainFrameSinglePlayer extends MainFrame{
 
     private int readyToSend=0;
 
+    public MainFrameSinglePlayer(Gui gui){
+        super();
+        this.gui=gui;
+      //  initPlayerMenu();
+    }
+
     public MainFrameSinglePlayer(Gui gui,String title){
         super(title);
         this.gui=gui;
         SwingUtilities.invokeLater(() -> {
-            this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             this.setLocation(475,208);
             this.setSize(820,420);
 
             this.setResizable(true);
-
-
-
             ImageIcon icon = new ImageIcon("src/main/resources/resources/title.jpg");
             Image image=icon.getImage();
             JPanel background = new PBackground(image);
             this.repaint();
             background.setLayout(null);
             this.add(background);
-            background.setOpaque(true);
             //mainFrame.add(errorText);
 
             // Prepare the body container
@@ -47,43 +49,6 @@ public class MainFrameSinglePlayer extends MainFrame{
         });
 
     }
-
-
-    public MainFrameSinglePlayer(){     // SOLO PER FARE LA GRAFICA
-        super("Master of Renaissance");
-        SwingUtilities.invokeLater(() -> {
-            this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            this.setLocation(475,208);
-            this.setSize(820,420);
-
-            this.setResizable(true);
-
-
-
-            ImageIcon icon = new ImageIcon("src/main/resources/resources/title.jpg");
-            Image image=icon.getImage();
-            JPanel background = new PBackground(image);
-            this.repaint();
-            background.setLayout(null);
-            this.add(background);
-            background.setOpaque(true);
-            //mainFrame.add(errorText);
-
-            // Prepare the body container
-            container = new PanelContainer();
-            container.setBounds(50,35, 700, 400);
-            background.add(container);
-            //---------------------------------------------------------------------------------------------
-
-
-
-            //---------------------------------------------------------------------------------------------
-            this.setVisible(true);
-
-        });
-
-    }
-
 
 
 
@@ -151,27 +116,15 @@ public class MainFrameSinglePlayer extends MainFrame{
 
         SwingUtilities.invokeLater(() -> {
             clear(container);
-
-            if (gui.getViewController().getGame().getPosition()!=1)
-            {
-                ResourceManager resourceManager = new ResourceManager(container,gui);
-                resourceManager.setHeading("Choose two resources:");
-                resourceManager.showWhatToChoose(true);
-            }
-            else
-            {
-
                 container.setLayout(new FlowLayout());
-                errorLabel = new JLabel("sorry, you are the first player, take a nap");
+                errorLabel = new JLabel("hey take a nap");
                 errorLabel.setBackground(Color.WHITE);
                 errorLabel.setOpaque(true);
                 container.add(errorLabel);
                 errorLabel.setLocation(475,108);
                 errorLabel.setSize(100,100);
-            }
 
             applyChangesTo(container);
         });}
-
 
 }

@@ -8,20 +8,20 @@ import it.polimi.ingsw.client.ligtModelNotification.*;
 import it.polimi.ingsw.client.view.View;
 import it.polimi.ingsw.client.view.ViewController;
 import it.polimi.ingsw.client.view.ViewControllerObservable;
-import it.polimi.ingsw.messages.*;
+import it.polimi.ingsw.messages.EndOfTurnMessage;
+import it.polimi.ingsw.messages.Message;
+import it.polimi.ingsw.messages.NotEnoughSpaceErrorMessage;
+import it.polimi.ingsw.messages.observable.GameTypeMessage;
 import it.polimi.ingsw.messages.observable.ShowAllOfPlayerMessage;
 import it.polimi.ingsw.server.model.Resource;
 import it.polimi.ingsw.server.model.leaderCards.LeaderCard;
 import it.polimi.ingsw.server.model.marbles.Marble;
 import it.polimi.ingsw.server.model.productionCards.ProductionCard;
 
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Scanner;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadPoolExecutor;
 
 public class Cli extends ViewControllerObservable implements View, NotificatorVisitor {
 
@@ -211,6 +211,21 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
         showFaithIndicator(faithPathNotification.getI());
     }
 
+    @Override
+    public void visit(InitLeaderNotification initLeaderNotification) {
+        //gui method
+    }
+
+    @Override
+    public void visit(ActivateLeaderNotification activateLeaderNotification) {
+       //gui method
+    }
+
+    @Override
+    public void visit(DiscardLeaderNotification discardLeaderNotification) {
+        //gui method
+    }
+
 
     @Override
     public void notifyError(Message msg) {
@@ -355,7 +370,7 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
     }
 
     @Override
-    public void showStartGame() {
+    public void showStartGame(GameTypeMessage msg) {
         System.out.println("The game has started!");
         this.commandParser = new StandardParser();
     }

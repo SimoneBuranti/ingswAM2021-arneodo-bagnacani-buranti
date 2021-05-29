@@ -2,6 +2,7 @@ package it.polimi.ingsw.client.view;
 
 import it.polimi.ingsw.messages.Message;
 import it.polimi.ingsw.messages.NotEnoughSpaceErrorMessage;
+import it.polimi.ingsw.messages.observable.GameTypeMessage;
 import it.polimi.ingsw.messages.observable.ShowAllOfPlayerMessage;
 import it.polimi.ingsw.server.model.Resource;
 import it.polimi.ingsw.server.model.leaderCards.LeaderCard;
@@ -10,7 +11,6 @@ import it.polimi.ingsw.server.model.productionCards.ProductionCard;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Map;
 
 public interface View  {
 
@@ -42,7 +42,7 @@ public interface View  {
 
     void showCallForCouncil(String nickname, int papalCard);
 
-    void showStartGame();
+    void showStartGame(GameTypeMessage msg);
 
     void showRestartMessage();
 

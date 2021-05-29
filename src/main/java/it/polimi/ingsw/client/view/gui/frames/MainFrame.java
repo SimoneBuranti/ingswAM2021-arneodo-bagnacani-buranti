@@ -18,7 +18,6 @@ public class MainFrame  extends JFrame {
     public final static int buttonWidth = 100;
     public final static int buttonHeight = 60;
 
-
     protected GameboardPanel gameboardPanel;
     protected ServerMessagePanel serverMessagePanel;
     //protected LEADERCARDSPACE
@@ -40,9 +39,29 @@ public class MainFrame  extends JFrame {
 
 
 
+    /*public MainFrame(String string){
+        super(string);
+        setGeneralFeatures();
+        initNavigationBar();
+
+        initGameMode();
+    }*/
+
+
+    public MainFrame(){
+        super();
+        setGeneralFeatures();
+        initNavigationBar();
+
+        initGameMode();
+    }
+
+
+
+
     public MainFrame(String title){
-        /*this.setLocation(frameX,frameY);
-        this.setSize(frameWidth,frameHeigth);*/
+        //this.setLocation(frameX,frameY);
+        //this.setSize(frameWidth,frameHeigth);
 
         this.attached = new ArrayList<>();
         this.setLocation(frameX,frameY);
@@ -142,16 +161,26 @@ public class MainFrame  extends JFrame {
         this.setVisible(true);
     }
 
+    public void showPopUp(Message message){
 
+        JOptionPane.showMessageDialog(this,message.toString(),message.getMessageType().toString(),
+                JOptionPane.WARNING_MESSAGE);;
+
+    }
+    public void showPopUp(String string){
+        JOptionPane.showMessageDialog(this,string,"Network Error",JOptionPane.WARNING_MESSAGE);
+    }
     public void askLeaderCardToKeep(ArrayList<LeaderCard> leaderCards) throws IOException, InterruptedException {}
 
-    protected void applyChangesTo(Component component){}
+    protected  void applyChangesTo(Component component) {}
 
-    protected void clear(JFrame frame){}
+    protected  void clear(JFrame frame){}
 
-    protected void clear(JPanel panel){}
+    protected  void clear(JPanel panel){}
 
-    public void showLabel(Message message){}
+    public  void showLabel(Message message){}
 
     public  void askInitResource() throws IOException, InterruptedException{}
+
+
 }

@@ -159,12 +159,14 @@ public class LightGameSolitaire extends LightGame{
     public void addLeaderCard(ArrayList<Integer> leaderCardKeys) throws IOException, InterruptedException {
         gameBoardOfPlayer.addLeaderCard(leaderCardKeys);
         notifyObserver(new LeaderListCardNotification(gameBoardOfPlayer.getLeaderCards(),false).serialize());
+        notifyObserver(new InitLeaderNotification(gameBoardOfPlayer.getLeaderCards(), false).serialize());
     }
 
     @Override
     public void addLeaderCardActivated(ArrayList<Integer> leaderCardKeys) throws IOException, InterruptedException {
         gameBoardOfPlayer.addLeaderCardActivated(leaderCardKeys);
         notifyObserver(new LeaderListCardNotification(gameBoardOfPlayer.getLeaderCardsActivated(),true).serialize());
+        notifyObserver(new InitLeaderNotification(gameBoardOfPlayer.getLeaderCardsActivated(),true).serialize());
     }
 
     @Override
@@ -182,15 +184,18 @@ public class LightGameSolitaire extends LightGame{
 
     @Override
     public void activateLeaderCard(int index) throws IOException, InterruptedException {
+        int key = gameBoardOfPlayer.getLeaderCard(index).getKey();
         gameBoardOfPlayer.activateLeaderCard(index);
         notifyObserver(new LeaderListCardNotification(gameBoardOfPlayer.getLeaderCards(),false).serialize());
         notifyObserver(new LeaderListCardNotification(gameBoardOfPlayer.getLeaderCardsActivated(),true).serialize());
+        notifyObserver(new ActivateLeaderNotification(index, key).serialize());
     }
 
     @Override
     public void discardLeaderCard(int index) throws IOException, InterruptedException {
         gameBoardOfPlayer.discardLeaderCard(index);
         notifyObserver(new LeaderListCardNotification(gameBoardOfPlayer.getLeaderCards(),false).serialize());
+        notifyObserver(new DiscardLeaderNotification(index).serialize());
     }
 
     @Override

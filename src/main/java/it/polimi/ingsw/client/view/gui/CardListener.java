@@ -50,8 +50,7 @@ public class CardListener implements MouseListener {
      * @param e The mouse event
      */
     public void mouseClicked(MouseEvent e) {
-                addPlayerCardToArrayList(card);
-
+        addPlayerCardToArrayList(card);
         if (gui.getReadyToSend()==2)
             try {
                 gui.notifyObserver(new KeepLeaderCardsMessage(CardListener.getSendableArrayInt().get(0),CardListener.getSendableArrayInt().get(1) ));
@@ -62,21 +61,28 @@ public class CardListener implements MouseListener {
     }
 
     private void addPlayerCardToArrayList(LeaderCard card) {
-        sendableArray.add(card);
-
         addPlayerCardToArrayListInt(card);
     }
 
     private void addPlayerCardToArrayListInt(LeaderCard card) {
-        for(int i=0; i<gui.getViewController().getGame().getGameBoardOfPlayer().getLeaderCards().size(); i++)
-            if (gui.getViewController().getGame().getGameBoardOfPlayer().getLeaderCards().get(i).equals(card))
-                if (sendableArray.size()==1)
-                    {if (!sendableArray.get(0).equals(card))
-                        {sendableArrayInt.add(i);
-                         gui.setReadyToSend();}}
+        for(int i=0; i<gui.getViewController().getGame().getGameBoardOfPlayer().getLeaderCards().size(); i++){
+            if (gui.getViewController().getGame().getGameBoardOfPlayer().getLeaderCards().get(i).equals(card)){
+                if (sendableArrayInt.size()==1)
+                    {
+                        if (!(sendableArrayInt.get(0) ==i))
+                        {
+                            sendableArrayInt.add(i);
+                            gui.setReadyToSend();
+                        }
+                    }
+
                 else
-                    {sendableArrayInt.add(i);
-                     gui.setReadyToSend();}
+                    {
+                            sendableArrayInt.add(i);
+                            gui.setReadyToSend();
+                    }
+            }
+        }
     }
 
 
@@ -108,4 +114,5 @@ public class CardListener implements MouseListener {
     public static ArrayList<Integer> getSendableArrayInt(){
         return sendableArrayInt;
     }
+
 }

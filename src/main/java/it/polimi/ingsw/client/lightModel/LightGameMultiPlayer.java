@@ -24,6 +24,7 @@ public class LightGameMultiPlayer extends LightGame{
         ArrayList<ProductionCard> list = new ArrayList<>();
         list=deckNotification();
         notifyObserver(new DeckListNotification(list).serialize());
+
     }
 
     @Override
@@ -48,13 +49,18 @@ public class LightGameMultiPlayer extends LightGame{
     public void addLeaderCard(ArrayList<Integer> leaderCardKeys) throws IOException, InterruptedException {
         gameBoardOfPlayer.addLeaderCard(leaderCardKeys);
         notifyObserver(new LeaderListCardNotification(gameBoardOfPlayer.getLeaderCards(),false).serialize());
-
+        if(leaderCardKeys.size() < 3 && leaderCardKeys.size() > 0) {
+            notifyObserver(new InitLeaderNotification(gameBoardOfPlayer.getLeaderCards(), false).serialize());
+        }
     }
 
     @Override
     public void addLeaderCardActivated(ArrayList<Integer> leaderCardKeys) throws IOException, InterruptedException {
        gameBoardOfPlayer.addLeaderCardActivated(leaderCardKeys);
         notifyObserver(new LeaderListCardNotification(gameBoardOfPlayer.getLeaderCardsActivated(),true).serialize());
+        if(leaderCardKeys.size() > 0) {
+            notifyObserver(new InitLeaderNotification(gameBoardOfPlayer.getLeaderCardsActivated(), true).serialize());
+        }
     }
 
 
@@ -65,9 +71,11 @@ public class LightGameMultiPlayer extends LightGame{
 
     @Override
     public void activateLeaderCard(int index) throws IOException, InterruptedException {
-       gameBoardOfPlayer.activateLeaderCard(index);
+        int key = gameBoardOfPlayer.getLeaderCard(index).getKey();
+        gameBoardOfPlayer.activateLeaderCard(index);
         notifyObserver(new LeaderListCardNotification(gameBoardOfPlayer.getLeaderCards(),false).serialize());
         notifyObserver(new LeaderListCardNotification(gameBoardOfPlayer.getLeaderCardsActivated(),true).serialize());
+        notifyObserver(new ActivateLeaderNotification(index, key).serialize());
     }
 
 
@@ -75,6 +83,7 @@ public class LightGameMultiPlayer extends LightGame{
     public void discardLeaderCard(int index) throws IOException, InterruptedException {
        gameBoardOfPlayer.discardLeaderCard(index);
         notifyObserver(new LeaderListCardNotification(gameBoardOfPlayer.getLeaderCards(),false).serialize());
+        notifyObserver(new DiscardLeaderNotification(index).serialize());
 
     }
 
