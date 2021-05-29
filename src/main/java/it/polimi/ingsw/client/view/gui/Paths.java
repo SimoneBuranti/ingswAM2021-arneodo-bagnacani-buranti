@@ -204,8 +204,27 @@ public abstract class Paths {
     }
 
 
-
-
-
-
+    public static Image getImageFromActionMarker(String actionMarker) {
+        switch(actionMarker) {
+            case "ActionMarkerProductionYellow" : {
+                return Paths.getImageFromPath("src/main/resources/resources/punchboard/cerchio4.png");
+            }
+            case "ActionMarkerProductionGreen" : {
+                return Paths.getImageFromPath("src/main/resources/resources/punchboard/cerchio2.png");
+            }
+            case "ActionMarkerProductionBlue" : {
+                return Paths.getImageFromPath("src/main/resources/resources/punchboard/cerchio1.png");
+            }
+            case "ActionMarkerProductionViolet" : {
+                return Paths.getImageFromPath("src/main/resources/resources/punchboard/cerchio3.png");
+            }
+            case "ActionMarkerForCrossOnce" : {
+                return Paths.getImageFromPath("src/main/resources/resources/punchboard/cerchio7.png");
+            }
+            case "ActionMarkerForCrossDouble" : {
+                return Paths.getImageFromPath("src/main/resources/resources/punchboard/cerchio6.png");
+            }
+        }
+        return Paths.getImageFromPath("src/main/resources/resources/punchboard/cerchio4.png");
+    }
 }
