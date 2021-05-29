@@ -14,7 +14,9 @@ public class SwingApp {
     public static void main(String[] args) {
 
 
-        //MainFrame frame = new MainFrame();
+        MainFrame mainFrame = new MainFrame("Master of Renaissance");
+        mainFrame.initGameMode();
+
 
         /*JFrame frame = new JFrame();
         frame.setSize(1200,668);

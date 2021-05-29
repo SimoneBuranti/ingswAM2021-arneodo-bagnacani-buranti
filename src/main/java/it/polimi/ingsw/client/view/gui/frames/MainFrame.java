@@ -8,7 +8,7 @@ import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public abstract class MainFrame  extends JFrame {
+public class MainFrame  extends JFrame {
 
 
     public final static int frameWidth = 1115;
@@ -20,6 +20,11 @@ public abstract class MainFrame  extends JFrame {
 
 
     protected GameboardPanel gameboardPanel;
+
+    protected ReserveFrame reserveFrame;
+    protected MarketFrame marketFrame;
+
+
     protected JPanel navigationBar;
     protected JButton marketButton;
     protected JButton prodCardButton;
@@ -33,75 +38,97 @@ public abstract class MainFrame  extends JFrame {
 
 
     public MainFrame(String title){
-        setGeneralFeatures();
-        initNavigationBar();
+        /*this.setLocation(frameX,frameY);
+        this.setSize(frameWidth,frameHeigth);*/
 
-        initGameMode();
+        this.attached = new ArrayList<>();
+        this.setLocation(frameX,frameY);
+        this.setSize(frameWidth,frameHeigth);
+
+        this.setVisible(true);
     }
 
     public void initNavigationBar() {
-        this.navigationBar = new JPanel();
+        navigationBar = new JPanel();
         navigationBar.setBackground(new Color(199, 0, 0));
-        this.setLayout(new FlowLayout());
+        navigationBar.setLayout(new FlowLayout());
+        navigationBar.setPreferredSize(new Dimension(buttonHeight+10,buttonHeight+10));
+        navigationBar.setBorder(BorderFactory.createBevelBorder(0));
 
         initMarketButton();
         initProdCardButton();
         initReserveButton();
 
+        this.navigationBar.add(marketButton);
+        this.navigationBar.add(prodCardButton);
+        this.navigationBar.add(reserveButton);
+        this.add(navigationBar,BorderLayout.NORTH);
+
+        //---------------
+        /*JPanel random = new JPanel();
+        random.setBackground(Color.RED);
+        random.setPreferredSize(new Dimension(buttonHeight,buttonHeight));
+        random.setBorder(BorderFactory.createBevelBorder(0));*/
     }
 
     public void initMarketButton(){
         this.marketButton = new JButton();
         marketButton.setText("Market");
-        marketButton.setSize(buttonWidth,buttonHeight);
-        marketButton.setBorder(BorderFactory.createBevelBorder(3));
-
+        marketButton.setPreferredSize(new Dimension(buttonWidth,buttonHeight));
+        //marketButton.setBorder(BorderFactory.createBevelBorder(0));
     }
 
 
     public void initProdCardButton(){
-        this.marketButton = new JButton();
-        marketButton.setText("Production cards");
-        marketButton.setSize(buttonWidth,buttonHeight);
-        marketButton.setBorder(BorderFactory.createBevelBorder(3));
+        this.prodCardButton = new JButton();
+        prodCardButton.setText("Decks");
+        prodCardButton.setPreferredSize(new Dimension(buttonWidth,buttonHeight));
+        //prodCardButton.setBorder(BorderFactory.createBevelBorder(0));
 
     }
 
     public void initReserveButton(){
-        this.marketButton = new JButton();
-        marketButton.setText("Reserve");
-        marketButton.setSize(buttonWidth,buttonHeight);
-        marketButton.setBorder(BorderFactory.createBevelBorder(3));
+        this.reserveButton = new JButton();
+        reserveButton.setText("Reserve");
+        reserveButton.setPreferredSize(new Dimension(buttonWidth,buttonHeight));
+        reserveButton.addActionListener(e -> {
+            reserveFrame.changeVisibility();
+        });
+        //reserveButton.setBorder(BorderFactory.createBevelBorder(0));
 
     }
 
 
 
     public void setGeneralFeatures() {
-        this.attached = new ArrayList<>();
-
-        this.setBackground(new Color(6, 8, 118));
-        this.setLocation(frameX,frameY);
-        this.setSize(frameWidth,frameHeigth);
 
         this.setLayout(new BorderLayout());
-    }
-
-
-    private void initGameMode() {
 
     }
 
 
-    public abstract void askLeaderCardToKeep(ArrayList<LeaderCard> leaderCards) throws IOException, InterruptedException;
+    public void initGameMode() {
+        for(JPanel p : attached){
+            this.remove(p);
+        }
+        setGeneralFeatures();
+        initNavigationBar();
 
-    protected abstract void applyChangesTo(Component component);
+        reserveFrame = new ReserveFrame();
 
-    protected abstract void clear(JFrame frame);
+        this.setVisible(true);
+    }
 
-    protected abstract void clear(JPanel panel);
 
-    public abstract void showLabel(Message message);
+    public void askLeaderCardToKeep(ArrayList<LeaderCard> leaderCards) throws IOException, InterruptedException {}
 
-    public abstract void askInitResource() throws IOException, InterruptedException;
+    protected void applyChangesTo(Component component){}
+
+    protected void clear(JFrame frame){}
+
+    protected void clear(JPanel panel){}
+
+    public void showLabel(Message message){}
+
+    public  void askInitResource() throws IOException, InterruptedException{}
 }

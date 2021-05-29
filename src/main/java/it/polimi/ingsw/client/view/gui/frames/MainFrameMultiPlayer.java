@@ -28,6 +28,15 @@ public class MainFrameMultiPlayer extends MainFrame {
 
 
     }
+
+    public MainFrameMultiPlayer(){    // SOLO PER FARE LA GRAFICA
+        super("Master of Renaissance");
+
+        initPlayerMenu();
+
+
+    }
+
     @Override
     public void askLeaderCardToKeep(ArrayList<LeaderCard> leaderCards) throws IOException, InterruptedException {
 

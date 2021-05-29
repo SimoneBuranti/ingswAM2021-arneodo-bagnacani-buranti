@@ -49,6 +49,44 @@ public class MainFrameSinglePlayer extends MainFrame{
     }
 
 
+    public MainFrameSinglePlayer(){     // SOLO PER FARE LA GRAFICA
+        super("Master of Renaissance");
+        SwingUtilities.invokeLater(() -> {
+            this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            this.setLocation(475,208);
+            this.setSize(820,420);
+
+            this.setResizable(true);
+
+
+
+            ImageIcon icon = new ImageIcon("src/main/resources/resources/title.jpg");
+            Image image=icon.getImage();
+            JPanel background = new PBackground(image);
+            this.repaint();
+            background.setLayout(null);
+            this.add(background);
+            background.setOpaque(true);
+            //mainFrame.add(errorText);
+
+            // Prepare the body container
+            container = new PanelContainer();
+            container.setBounds(50,35, 700, 400);
+            background.add(container);
+            //---------------------------------------------------------------------------------------------
+
+
+
+            //---------------------------------------------------------------------------------------------
+            this.setVisible(true);
+
+        });
+
+    }
+
+
+
+
     @Override
     public void askLeaderCardToKeep(ArrayList<LeaderCard> leaderCards) throws IOException, InterruptedException {
 
@@ -133,4 +171,7 @@ public class MainFrameSinglePlayer extends MainFrame{
             }
 
             applyChangesTo(container);
-        });}}
+        });}
+
+
+}
