@@ -1,8 +1,10 @@
 package it.polimi.ingsw.client.view.gui.frames;
 
-public class MainFrame {
+import javax.swing.*;
 
+public class MainFrame extends JFrame {
 
+    //private int
 
     private GameboardPanel gameboardPanel;
 
