@@ -76,6 +76,7 @@ public class CardManager {
                                                                 .getGameBoardOfPlayer()
                                                                 .getLeaderCard(i), this, selectable,gui));
         }
+
     }
 
 

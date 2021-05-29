@@ -7,6 +7,7 @@ import it.polimi.ingsw.client.view.gui.frames.MainFrame;
 import it.polimi.ingsw.client.view.gui.frames.MainFrameMultiPlayer;
 import it.polimi.ingsw.client.view.gui.frames.MainFrameSinglePlayer;
 import it.polimi.ingsw.messages.*;
+import it.polimi.ingsw.messages.observable.GameTypeMessage;
 import it.polimi.ingsw.messages.observable.ShowAllOfPlayerMessage;
 import it.polimi.ingsw.server.model.Resource;
 import it.polimi.ingsw.server.model.leaderCards.LeaderCard;
@@ -125,22 +126,16 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
             this.oneButton.addActionListener(eONe -> {
                 sendNumberPlayersResponse(1);
-                mainFrame.dispose();
-                mainFrameOfGame=new MainFrameSinglePlayer(this,"your Personal Board");
             });
             this.twoButton.addActionListener(eNO -> {
                 sendNumberPlayersResponse(2);
-                mainFrame.dispose();
-            mainFrameOfGame=new MainFrameMultiPlayer(this,"your Personal Board");
             });
             this.threeButton.addActionListener(eYES -> {
                 sendNumberPlayersResponse(3);
-                mainFrame.dispose();
-                mainFrameOfGame=new MainFrameMultiPlayer(this,"your Personal Board");});
+            });
             this.fourButton.addActionListener(eNO -> {
                 sendNumberPlayersResponse(4);
-                mainFrame.dispose();
-                mainFrameOfGame=new MainFrameMultiPlayer(this,"your Personal Board");});
+                });
             applyChangesTo(container);
         }); }
 
@@ -315,7 +310,13 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
     }
 
     @Override
-    public void showStartGame() {}
+    public void showStartGame(GameTypeMessage msg) {
+        mainFrame.dispose();
+        if(msg.isMultiOrNot()==true)
+            mainFrameOfGame= new MainFrameMultiPlayer(this,"your board");
+        else
+            mainFrameOfGame= new MainFrameSinglePlayer(this, "your board");
+    }
 
     @Override
     public void showRestartMessage() {
@@ -543,6 +544,9 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
     public void setReadyToSend() {
         this.readyToSend++;
+    }
+    public void resetToSend() {
+        this.readyToSend=0;
     }
     
     

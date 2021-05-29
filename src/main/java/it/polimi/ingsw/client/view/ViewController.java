@@ -650,7 +650,7 @@ public class ViewController implements MessageVisitor, ViewObserver {
     @Override
     public void visit(GameTypeMessage msg) throws IOException, InterruptedException {
         setGame(msg.isMultiOrNot());
-        view.showStartGame();
+        view.showStartGame(msg);
     }
 
 

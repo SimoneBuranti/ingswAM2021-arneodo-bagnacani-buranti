@@ -33,10 +33,11 @@ public abstract class MainFrame  extends JFrame {
 
 
     public MainFrame(String title){
-        setGeneralFeatures();
-        initNavigationBar();
+        super(title);
+        //setGeneralFeatures();
+        //initNavigationBar();
 
-        initGameMode();
+       // initGameMode();
     }
 
     public void initNavigationBar() {

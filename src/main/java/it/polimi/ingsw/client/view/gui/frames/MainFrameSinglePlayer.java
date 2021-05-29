@@ -34,7 +34,6 @@ public class MainFrameSinglePlayer extends MainFrame{
             this.repaint();
             background.setLayout(null);
             this.add(background);
-            background.setOpaque(true);
             //mainFrame.add(errorText);
 
             // Prepare the body container
