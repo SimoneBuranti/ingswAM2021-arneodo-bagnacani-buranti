@@ -60,12 +60,24 @@ public class ProductionDeckFrame extends JFrame{
                 }
                 if(productionCards.get(2-i) != null){
                     decksPanel.add(new CardLabelWithButton(productionCards.get(2-i).getKey(), 2+(4*i)));
+                }else{
+                    JLabel labelWhite = new JLabel();
+                    labelWhite.setBackground(Color.WHITE);
+                    decksPanel.add(labelWhite);
                 }
                 if(productionCards.get(8-i) != null){
                     decksPanel.add(new CardLabelWithButton(productionCards.get(8-i).getKey(),3+(4*i)));
+                }else{
+                    JLabel labelWhite = new JLabel();
+                    labelWhite.setBackground(Color.WHITE);
+                    decksPanel.add(labelWhite);
                 }
                 if(productionCards.get(11-i) != null){
                     decksPanel.add(new CardLabelWithButton(productionCards.get(11-i).getKey(),4+(4*i)));
+                }else{
+                    JLabel labelWhite = new JLabel();
+                    labelWhite.setBackground(Color.WHITE);
+                    decksPanel.add(labelWhite);
                 }
             }
             container.add(decksPanel);
