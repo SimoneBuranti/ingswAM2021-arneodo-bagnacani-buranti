@@ -2,17 +2,29 @@ package it.polimi.ingsw.client.view.gui.frames;
 
 import it.polimi.ingsw.client.view.gui.*;
 import it.polimi.ingsw.messages.Message;
+import it.polimi.ingsw.server.model.Resource;
 import it.polimi.ingsw.server.model.leaderCards.LeaderCard;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Map;
 
 public class MainFrameMultiPlayer extends MainFrame {
+
+    private Gui gui;
     private PanelContainer container;
     private JLabel errorLabel;
-    private Gui gui;
+    private GameboardPanel gameboardPanel;
+
+    private Font currentPlayerFont = new Font("Helvetica", Font.BOLD, 22);
+    private JPanel menuPanel;
+    private JMenuBar menuBar;
+    private JMenu playerMenu;
+    private JPanel turnPanel;
+    private ArrayList<JMenuItem> players;
+    private ArrayList<JLabel> nicknames;
 
 
     public MainFrameMultiPlayer(Gui gui,String title){
@@ -44,9 +56,85 @@ public class MainFrameMultiPlayer extends MainFrame {
     public MainFrameMultiPlayer(Gui gui){
         super(gui);
         this.gui=gui;
-        initPlayerMenu();
     }
 
+
+
+    public void initPlayerMenu() {
+        Font f = new Font("Helvetica", Font.BOLD, 16);
+
+        menuPanel = new JPanel();
+        menuPanel.setPreferredSize(new Dimension(buttonWidth, buttonHeight));
+        menuPanel.setLayout(null);
+
+        menuBar = new JMenuBar();
+        menuBar.setPreferredSize(new Dimension(buttonWidth, buttonHeight));
+        menuBar.setBounds(0, 0, buttonWidth, buttonHeight);
+        menuBar.setLayout(null);
+
+        playerMenu = new JMenu();
+        playerMenu.setText("Players");
+        playerMenu.setFont(f);
+        playerMenu.setBounds(0, 0, buttonWidth, buttonHeight);
+        playerMenu.setBackground(new Color(0xeaf1f7));
+        playerMenu.setHorizontalTextPosition(SwingConstants.CENTER);
+        playerMenu.setOpaque(true);
+        playerMenu.setBorder(BorderFactory.createBevelBorder(0));
+
+        menuBar.add(playerMenu);
+        menuPanel.add(menuBar);
+    }
+
+    public void initTurnPanel() {
+        this.turnPanel = new JPanel();
+        int turnPanelWidth = 0;
+        Font f = new Font("Helvetica", Font.BOLD, 18);
+        turnPanel.setBackground(new Color(0xeaf1f7));
+        turnPanel.setLayout(new GridLayout(1, nicknames.size(), 0, 0));
+        for (int i = 0; i < nicknames.size(); i++) {
+            turnPanelWidth = turnPanelWidth + nicknames.get(i).getText().length();
+            nicknames.get(i).setFont(f);
+            nicknames.get(i).setSize(new Dimension(nicknames.get(i).getText().length() * letterOffset, buttonHeight));
+            turnPanel.add(nicknames.get(i));
+        }
+        turnPanelWidth *= letterOffset;
+        turnPanel.setPreferredSize(new Dimension(turnPanelWidth, buttonHeight));
+
+        blankLabels = new JLabel[2];
+        for (int i = 0; i < blankLabels.length; i++) {
+            blankLabels[i] = new JLabel();
+            blankLabels[i].setPreferredSize(new Dimension(80, buttonHeight));
+            navigationBar.add(blankLabels[i]);
+        }
+
+        this.navigationBar.add(turnPanel);
+    }
+
+
+    public void initNavigationBar() {
+        navigationBar = new JPanel();
+        navigationBar.setBackground(new Color(199, 0, 0));
+        navigationBar.setLayout(new FlowLayout());
+        navigationBar.setPreferredSize(new Dimension(buttonHeight + 10, buttonHeight + 10));
+        navigationBar.setBorder(BorderFactory.createBevelBorder(0));
+
+        initMarketButton();
+        initProdCardButton();
+        initReserveButton();
+        initPlayerMenu();
+
+        this.navigationBar.add(marketButton);
+        this.navigationBar.add(prodCardButton);
+        this.navigationBar.add(reserveButton);
+        this.navigationBar.add(menuPanel);
+        this.add(navigationBar, BorderLayout.NORTH);
+
+        //---------------
+        /*JPanel random = new JPanel();
+        random.setBackground(Color.RED);
+        random.setPreferredSize(new Dimension(buttonHeight,buttonHeight));
+        random.setBorder(BorderFactory.createBevelBorder(0));*/
+    }
 
 
     @Override
@@ -138,37 +226,34 @@ public class MainFrameMultiPlayer extends MainFrame {
         });
     }
 
+    public void setCurrentPlayer(String nick) {
 
+        for (int i = 0; i < nicknames.size(); i++)
+            if (nicknames.get(i).getText().equals(nick)) {
+                nicknames.get(i).setForeground(new Color(199, 0, 0));
+                nicknames.get(i).setFont(currentPlayerFont);
+            }
 
-    public void initPlayerMenu(){
-        this.playerMenu = new JMenu();
-        playerMenu.setText("Players");
-        playerMenu.setSize(buttonWidth,buttonHeight);
-        playerMenu.setBorder(BorderFactory.createBevelBorder(3));
     }
-
-
-    public void initTurnPanel(){
-        this.turnPanel = new JPanel();
-        turnPanel.setLayout(new FlowLayout());
-        for(int i = 0;i<nicknames.size();i++){
-            turnPanel.add(nicknames.get(i));
-        }
-    }
-
-
-
     public void setPlayers(ArrayList<String> players) {
         this.players = new ArrayList<>();
         this.nicknames = new ArrayList<>();
-        for(int i = 0;i<players.size(); i++){
+        for (int i = 0; i < players.size(); i++) {
+
             this.players.add(new JMenuItem(players.get(i)));
             this.playerMenu.add(this.players.get(i));
             this.nicknames.add(new JLabel(players.get(i)));
+            this.nicknames.get(i).setHorizontalAlignment(SwingConstants.CENTER);
+            this.nicknames.get(i).setVerticalAlignment(SwingConstants.CENTER);
         }
         initTurnPanel();
     }
 
+    public void updateStorage(Map<Resource, Integer> newStorage) {
+
+        this.gameboardPanel.updateStorage(newStorage);
+
+    }
 
 
 }

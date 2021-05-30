@@ -1,7 +1,10 @@
 package it.polimi.ingsw.client.view.gui.frames;
 
 import it.polimi.ingsw.client.view.gui.Gui;
+import it.polimi.ingsw.messages.KeepResourcesMessage;
 import it.polimi.ingsw.messages.Message;
+import it.polimi.ingsw.messages.NotEnoughSpaceErrorMessage;
+import it.polimi.ingsw.messages.WhiteMarbleChoosenResourcesMessage;
 import it.polimi.ingsw.server.model.Resource;
 import it.polimi.ingsw.server.model.leaderCards.LeaderCard;
 
@@ -10,8 +13,9 @@ import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
-public class MainFrame  extends JFrame {
+public abstract class MainFrame  extends JFrame {
 
     public final static int northHeight = 70;
     public final static int frameWidth = 1195;
@@ -23,97 +27,79 @@ public class MainFrame  extends JFrame {
     public final static int leaderWidth = 370;
     public final static int leaderHeight = 290;
     public final static int letterOffset = 10;
-    private final static int actionPanelWidth = 305;
-    private final static int actionPanelHeight = 150;
 
-    protected GameboardPanel gameboardPanel;
+    protected Gui gui;
+
     protected ServerMessagePanel serverMessagePanel;
     protected LeaderCardsPanel leaderCardsPanel;
-    protected ActionMarkerPanel actionMarkerPanel;
-    //protected LEADERCARDSPACE
+
 
     protected ReserveFrame reserveFrame;
     protected MarketFrame marketFrame;
     protected ProductionDeckFrame productionDeckFrame;
 
-    protected JPanel menuPanel;
-    protected JMenuBar menuBar;
     protected JPanel mainPanel;
     protected JPanel navigationBar;
     protected JButton marketButton;
     protected JButton prodCardButton;
     protected JButton reserveButton;
-    protected JMenu playerMenu;
-    protected JPanel turnPanel;
-    protected ArrayList<JMenuItem> players;
-    protected ArrayList<JLabel> nicknames;
+
     protected ArrayList<JPanel> attached;
     protected JLabel[] blankLabels;
-    private Font currentPlayerFont =new Font("Helvetica", Font.BOLD, 22);;
 
 
-    public MainFrame(String title){
-        /*this.setLocation(frameX,frameY);
-        this.setSize(frameWidth,frameHeigth);*/
+
+
+    public MainFrame(String string,Gui gui){
+        super(string);
+        this.gui=gui;
 
         this.attached = new ArrayList<>();
-        this.setLocation(frameX,frameY);
-        this.setSize(frameWidth,frameHeigth);
+        this.setLocation(frameX, frameY);
+        this.setSize(frameWidth, frameHeigth);
+        this.setResizable(false);
+        this.setVisible(true);
+    }
+
+
+    public MainFrame(Gui gui){
+        super();
+        this.gui=gui;
+
+        this.attached = new ArrayList<>();
+        this.setLocation(frameX, frameY);
+        this.setSize(frameWidth, frameHeigth);
+        this.setResizable(false);
+        this.setVisible(true);
+
+
+        initGameMode();
+    }
+
+
+
+    /*public MainFrame(String title) {
+        //this.setLocation(frameX,frameY);
+        //this.setSize(frameWidth,frameHeigth);
+
+        this.attached = new ArrayList<>();
+        this.setLocation(frameX, frameY);
+        this.setSize(frameWidth, frameHeigth);
         this.setResizable(true);
         this.setVisible(true);
-    }
-    public MainFrame(Gui gui){
-        /*this.setLocation(frameX,frameY);
-        this.setSize(frameWidth,frameHeigth);*/
+    }*/
 
-        this.attached = new ArrayList<>();
-        this.setLocation(frameX,frameY);
-        this.setSize(frameWidth,frameHeigth);
-        this.setResizable(false);
-        this.setVisible(true);
-    }
-    public MainFrame(String title, Gui gui){
-        /*this.setLocation(frameX,frameY);
-        this.setSize(frameWidth,frameHeigth);*/
 
-        this.attached = new ArrayList<>();
-        this.setLocation(frameX,frameY);
-        this.setSize(frameWidth,frameHeigth);
-        this.setResizable(false);
-        this.setVisible(true);
-    }
 
-    public void initNavigationBar() {
-        navigationBar = new JPanel();
-        navigationBar.setBackground(new Color(199, 0, 0));
-        navigationBar.setLayout(new FlowLayout());
-        navigationBar.setPreferredSize(new Dimension(buttonHeight+10,buttonHeight+10));
-        navigationBar.setBorder(BorderFactory.createBevelBorder(0));
 
-        initMarketButton();
-        initProdCardButton();
-        initReserveButton();
-        initPlayerMenu();
 
-        this.navigationBar.add(marketButton);
-        this.navigationBar.add(prodCardButton);
-        this.navigationBar.add(reserveButton);
-        this.navigationBar.add(menuPanel);
-        this.add(navigationBar,BorderLayout.NORTH);
 
-        //---------------
-        /*JPanel random = new JPanel();
-        random.setBackground(Color.RED);
-        random.setPreferredSize(new Dimension(buttonHeight,buttonHeight));
-        random.setBorder(BorderFactory.createBevelBorder(0));*/
-    }
-
-    public void initMarketButton(){
+    public void initMarketButton() {
         this.marketButton = new JButton();
         marketButton.setText("Market");
         Font f = new Font("Helvetica", Font.BOLD, 16);
         marketButton.setFont(f);
-        marketButton.setPreferredSize(new Dimension(buttonWidth,buttonHeight));
+        marketButton.setPreferredSize(new Dimension(buttonWidth, buttonHeight));
         marketButton.setBackground(new Color(0xeaf1f7));
         marketButton.addActionListener(e -> {
             this.marketFrame.changeVisibility();
@@ -122,26 +108,26 @@ public class MainFrame  extends JFrame {
     }
 
 
-    public void initProdCardButton(){
+    public void initProdCardButton() {
         this.prodCardButton = new JButton();
         prodCardButton.setText("Decks");
         Font f = new Font("Helvetica", Font.BOLD, 16);
         prodCardButton.setFont(f);
-        prodCardButton.setPreferredSize(new Dimension(buttonWidth,buttonHeight));
+        prodCardButton.setPreferredSize(new Dimension(buttonWidth, buttonHeight));
         prodCardButton.setBackground(new Color(0xeaf1f7));
-        prodCardButton.addActionListener( e -> {
+        prodCardButton.addActionListener(e -> {
             this.productionDeckFrame.changeVisibility();
         });
         //prodCardButton.setBorder(BorderFactory.createBevelBorder(0));
 
     }
 
-    public void initReserveButton(){
+    public void initReserveButton() {
         this.reserveButton = new JButton();
         reserveButton.setText("Reserve");
         Font f = new Font("Helvetica", Font.BOLD, 16);
         reserveButton.setFont(f);
-        reserveButton.setPreferredSize(new Dimension(buttonWidth,buttonHeight));
+        reserveButton.setPreferredSize(new Dimension(buttonWidth, buttonHeight));
         reserveButton.setBackground(new Color(0xeaf1f7));
         reserveButton.addActionListener(e -> {
             reserveFrame.changeVisibility();
@@ -150,55 +136,7 @@ public class MainFrame  extends JFrame {
 
     }
 
-    public void initPlayerMenu(){
-        Font f = new Font("Helvetica", Font.BOLD, 16);
 
-        menuPanel = new JPanel();
-        menuPanel.setPreferredSize(new Dimension(buttonWidth,buttonHeight));
-        menuPanel.setLayout(null);
-
-        menuBar = new JMenuBar();
-        menuBar.setPreferredSize(new Dimension(buttonWidth,buttonHeight));
-        menuBar.setBounds(0,0,buttonWidth,buttonHeight);
-        menuBar.setLayout(null);
-
-        playerMenu = new JMenu();
-        playerMenu.setText("Players");
-        playerMenu.setFont(f);
-        playerMenu.setBounds(0,0,buttonWidth,buttonHeight);
-        playerMenu.setBackground(new Color(0xeaf1f7));
-        playerMenu.setHorizontalTextPosition(SwingConstants.CENTER);
-        playerMenu.setOpaque(true);
-        playerMenu.setBorder(BorderFactory.createBevelBorder(0));
-
-        menuBar.add(playerMenu);
-        menuPanel.add(menuBar);
-    }
-
-    public void initTurnPanel(){
-        this.turnPanel = new JPanel();
-        int turnPanelWidth = 0;
-        Font f = new Font("Helvetica", Font.BOLD, 18);
-        turnPanel.setBackground(new Color(0xeaf1f7));
-        turnPanel.setLayout(new GridLayout(1,nicknames.size(),0,0));
-        for(int i = 0;i<nicknames.size();i++){
-            turnPanelWidth = turnPanelWidth + nicknames.get(i).getText().length();
-            nicknames.get(i).setFont(f);
-            nicknames.get(i).setSize(new Dimension(nicknames.get(i).getText().length()*letterOffset,buttonHeight));
-            turnPanel.add(nicknames.get(i));
-        }
-        turnPanelWidth *= letterOffset;
-        turnPanel.setPreferredSize(new Dimension(turnPanelWidth,buttonHeight));
-
-        blankLabels = new JLabel[2];
-        for(int i = 0;i<blankLabels.length;i++){
-            blankLabels[i] = new JLabel();
-            blankLabels[i].setPreferredSize(new Dimension(80,buttonHeight));
-            navigationBar.add(blankLabels[i]);
-        }
-
-        this.navigationBar.add(turnPanel);
-    }
 
 
     public void setGeneralFeatures() {
@@ -210,23 +148,14 @@ public class MainFrame  extends JFrame {
 
     }
 
-    public void setPlayers(ArrayList<String> players) {
-        this.players = new ArrayList<>();
-        this.nicknames = new ArrayList<>();
-        for(int i = 0;i<players.size(); i++){
-
-            this.players.add(new JMenuItem(players.get(i)));
-            this.playerMenu.add(this.players.get(i));
-            this.nicknames.add(new JLabel(players.get(i)));
-            this.nicknames.get(i).setHorizontalAlignment(SwingConstants.CENTER);
-            this.nicknames.get(i).setVerticalAlignment(SwingConstants.CENTER);
-        }
-        initTurnPanel();
-    }
 
 
-    public void initGameMode() {
-        for(JPanel p : attached){
+
+
+    public void initGameMode() {}
+
+    /*public void initGameMode() {
+        for (JPanel p : attached) {
             mainPanel.remove(p);
         }
         setGeneralFeatures();
@@ -237,10 +166,10 @@ public class MainFrame  extends JFrame {
         reserveFrame = new ReserveFrame();
 
         gameboardPanel = new LorenzoGameboardPanel();
-        gameboardPanel.setBounds(0,0,800,572);
+        gameboardPanel.setBounds(0, 0, 800, 572);
         mainPanel.add(gameboardPanel);
         serverMessagePanel = new ServerMessagePanel();
-        serverMessagePanel.setBounds(800,0,380,275);
+        serverMessagePanel.setBounds(800, 0, 380, 275);
         mainPanel.add(serverMessagePanel);
         leaderCardsPanel = new LeaderCardsPanel();
         leaderCardsPanel.setBounds(805, 280, leaderWidth, leaderHeight);
@@ -253,49 +182,249 @@ public class MainFrame  extends JFrame {
 
 
         this.setVisible(true);
+    }*/
+
+
+
+
+
+    public void addToExtraStorage(int position, Resource resourceType, int quantity) {
+        leaderCardsPanel.addToStorageExtra(position, resourceType, quantity);
     }
 
-    public void setCurrentPlayer(String nick){
+    public abstract void updateStorage(Map<Resource, Integer> newStorage);
 
-        for(int i = 0; i<nicknames.size();i++)
-            if(nicknames.get(i).getText().equals(nick)){
-                nicknames.get(i).setForeground(new Color(199, 0, 0));
-                nicknames.get(i).setFont(currentPlayerFont);
+
+    public void showPopUp(Message message){
+
+        JOptionPane.showMessageDialog(this,message.toString(),message.getMessageType().toString(),
+                JOptionPane.WARNING_MESSAGE);;
+
+    }
+    public void showPopUp(String string){
+        JOptionPane.showMessageDialog(this,string,"Network Error",JOptionPane.WARNING_MESSAGE);
+    }
+
+
+
+    public void marblePossibilityPopUp(int n, ArrayList<Resource> whiteMarbleResourceTypes){
+
+
+        SwingUtilities.invokeLater(() -> {
+            int howManyC=0;
+            int howManyR=0;
+            int howManyS=0;
+            int howManyV=0;
+            int howManyChoosen=0;
+
+            ArrayList<Resource> arrayList=new ArrayList<>(whiteMarbleResourceTypes.size());
+            for (Resource resource: whiteMarbleResourceTypes)
+            {
+                if (resource.equals(Resource.COIN))
+                    howManyR++;
+                else if (resource.equals(Resource.ROCK))
+                    howManyC++;
+                else if (resource.equals(Resource.SERVANT))
+                    howManyV++;
+                else if (resource.equals(Resource.SHIELD))
+                    howManyS++;
+            }
+            JButton coinButton;
+            JButton servantButton;
+            JButton shieldButton;
+            JButton rockButton;
+            JButton enterButton;
+
+            JDialog dialog =new JDialog();
+
+            dialog.setLayout(new FlowLayout());
+
+            if (howManyC>0){
+                coinButton= new JButton("COIN");
+                coinButton.setSize(new Dimension(50,50));
+                dialog.add(coinButton);
+                coinButton.addActionListener(eNO -> {
+                    if (howManyChoosen<= n){
+                        arrayList.add(Resource.COIN);}
+
+                });}
+
+            if (howManyV>0){
+                servantButton= new JButton("SERVANT");
+                servantButton.setSize(new Dimension(50,50));
+                dialog.add(servantButton);
+
+                servantButton.addActionListener(eYES -> {
+                    if (howManyChoosen>=n){
+                        arrayList.add(Resource.COIN);
+                    }
+                });}
+
+            if(howManyS>0){
+                shieldButton= new JButton("SHIELD");
+                shieldButton.setSize(new Dimension(50,50));
+                dialog.add(shieldButton);
+
+                shieldButton.addActionListener(eNO -> {
+                    if (howManyChoosen>=n){
+                        arrayList.add(Resource.COIN);
+                    }
+                });
             }
 
+            if(howManyR>0){
+                rockButton= new JButton("ROCK");
+                rockButton.setSize(new Dimension(50,50));
+                dialog.add(rockButton);
+                rockButton.addActionListener(eONe -> {
+                    if (howManyChoosen>=n){
+                        arrayList.add(Resource.COIN);
+                    }
+                });}
+
+            enterButton= new JButton("4");
+            enterButton.setSize(new Dimension(60,60));
+
+
+            dialog.add(enterButton);
+
+
+
+            enterButton.addActionListener(eNO -> {
+                try {
+                    gui.notifyObserver(new WhiteMarbleChoosenResourcesMessage(arrayList));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            });
+
+        });
+
+
+
     }
 
-    public void showLorenzoActionPopUp(String actionMarker){
-        JDialog dialog = new JDialog();
-        dialog.setLocation(600,430);
-        dialog.setLayout(null);
-        actionMarkerPanel.updatePickedMarkerImage(actionMarker);
-        dialog.add(actionMarkerPanel);
-        dialog.setSize(actionPanelWidth+10,actionPanelHeight+35);
-        actionMarkerPanel.setVisible(true);
-        dialog.setVisible(true);
+    public void  fullStoragePopUp(NotEnoughSpaceErrorMessage message){
+
+        SwingUtilities.invokeLater(() -> {
+            int howManyC=0;
+            int howManyR=0;
+            int howManyS=0;
+            int howManyV=0;
+            AtomicInteger howManyCP= new AtomicInteger();
+            AtomicInteger howManyRP= new AtomicInteger();
+            AtomicInteger howManySP= new AtomicInteger();
+            AtomicInteger howManyVP= new AtomicInteger();
+            ArrayList<Resource> arrayList=new ArrayList<>(message.getReources().size());
+            for (Resource resource: message.getReources())
+            {
+                if (resource.equals(Resource.COIN))
+                    howManyR++;
+                else if (resource.equals(Resource.ROCK))
+                    howManyC++;
+                else if (resource.equals(Resource.SERVANT))
+                    howManyV++;
+                else if (resource.equals(Resource.SHIELD))
+                    howManyS++;
+            }
+            JButton coinButton;
+            JButton servantButton;
+            JButton shieldButton;
+            JButton rockButton;
+            JButton enterButton;
+
+            JDialog dialog =new JDialog();
+
+            dialog.setLayout(new FlowLayout());
+
+            coinButton= new JButton("COIN");
+            coinButton.setSize(new Dimension(50,50));
+
+            servantButton= new JButton("SERVANT");
+            servantButton.setSize(new Dimension(50,50));
+
+            shieldButton= new JButton("SHIELD");
+            shieldButton.setSize(new Dimension(50,50));
+
+            rockButton= new JButton("ROCK");
+            rockButton.setSize(new Dimension(50,50));
+
+            enterButton= new JButton("4");
+            enterButton.setSize(new Dimension(60,60));
+
+            dialog.add(coinButton);
+            dialog.add(rockButton);
+            dialog.add(servantButton);
+            dialog.add(shieldButton);
+            dialog.add(enterButton);
+
+
+            int finalHowManyR = howManyR;
+            rockButton.addActionListener(eONe -> {
+                if (howManyRP.get() != finalHowManyR){
+                    arrayList.add(Resource.COIN);
+                    howManyRP.getAndIncrement();
+                }
+            });
+            int finalHowManyC = howManyC;
+            coinButton.addActionListener(eNO -> {
+                if (howManyCP.get() != finalHowManyC){
+                    arrayList.add(Resource.COIN);
+                    howManyCP.getAndIncrement();}
+            });
+            int finalHowManyV = howManyV;
+            servantButton.addActionListener(eYES -> {
+                if (howManyVP.get() != finalHowManyV){
+                    arrayList.add(Resource.COIN);
+                    howManyVP.getAndIncrement();}
+            });
+            int finalHowManyS = howManyS;
+            shieldButton.addActionListener(eNO -> {
+                if (howManySP.get() != finalHowManyS){
+                    arrayList.add(Resource.COIN);
+                    howManySP.getAndIncrement();}
+            });
+            enterButton.addActionListener(eNO -> {
+                try {
+                    gui.notifyObserver(new KeepResourcesMessage(arrayList));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            });
+
+        }); }
+
+    public MarketFrame getMarketFrame() {
+        return marketFrame;
     }
 
-    public void addToExtraStorage(int position, Resource resourceType,int quantity){
-        leaderCardsPanel.addToStorageExtra( position, resourceType, quantity);
+    public ReserveFrame getReserveFrame(){
+        return reserveFrame;
     }
 
-    public void updateStorage(Map<Resource,Integer> newStorage){
-
-        this.gameboardPanel.updateStorage(newStorage);
-
+    public ProductionDeckFrame getProductionDeckFrame(){
+        return productionDeckFrame;
     }
 
 
-    public void askLeaderCardToKeep(ArrayList<LeaderCard> leaderCards) throws IOException, InterruptedException {}
+    public abstract void askLeaderCardToKeep(ArrayList<LeaderCard> leaderCards) throws IOException, InterruptedException;
 
-    protected void applyChangesTo(Component component){}
+    protected abstract void applyChangesTo(Component component);
 
-    protected void clear(JFrame frame){}
+    protected abstract void clear(JFrame frame);
 
-    protected void clear(JPanel panel){}
+    protected abstract void clear(JPanel panel);
 
-    public void showLabel(Message message){}
+    public abstract void showLabel(Message message);
 
-    public  void askInitResource() throws IOException, InterruptedException{}
+    public abstract void askInitResource() throws IOException, InterruptedException;
+
 }
+
+
+
+

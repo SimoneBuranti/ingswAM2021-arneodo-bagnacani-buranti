@@ -18,7 +18,7 @@ public class SwingApp {
             e.printStackTrace();
         }*/
 
-        ArrayList<String> nicknames = new ArrayList<>();
+        /*ArrayList<String> nicknames = new ArrayList<>();
         nicknames.add("simone");
         nicknames.add("alice");
         nicknames.add("aeeeeeeeeeeeeeeee");
@@ -30,7 +30,7 @@ public class SwingApp {
         mainFrame.setCurrentPlayer("simone");
         mainFrame.showLorenzoActionPopUp("ActionMarkerForCrossDouble");
         mainFrame.paintComponents(mainFrame.getGraphics());
-        mainFrame.paintComponents(mainFrame.getGraphics());
+        mainFrame.paintComponents(mainFrame.getGraphics());*/
 
 
         /*JFrame frame = new JFrame();

@@ -2,18 +2,27 @@ package it.polimi.ingsw.client.view.gui.frames;
 
 import it.polimi.ingsw.client.view.gui.*;
 import it.polimi.ingsw.messages.Message;
+import it.polimi.ingsw.server.model.Resource;
 import it.polimi.ingsw.server.model.leaderCards.LeaderCard;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Map;
 
 public class MainFrameSinglePlayer extends MainFrame{
+
+
+    private final static int actionPanelWidth = 305;
+    private final static int actionPanelHeight = 150;
+
     private PanelContainer container;
+    protected ActionMarkerPanel actionMarkerPanel;
     private JLabel errorLabel;
     private Gui gui;
 
+    private LorenzoGameboardPanel lorenzoGameboardPanel;
     private int readyToSend=0;
 
     public MainFrameSinglePlayer(Gui gui){
@@ -21,6 +30,68 @@ public class MainFrameSinglePlayer extends MainFrame{
         this.gui=gui;
       //  initPlayerMenu();
     }
+
+
+    public void initNavigationBar() {
+        navigationBar = new JPanel();
+        navigationBar.setBackground(new Color(199, 0, 0));
+        navigationBar.setLayout(new FlowLayout());
+        navigationBar.setPreferredSize(new Dimension(buttonHeight + 10, buttonHeight + 10));
+        navigationBar.setBorder(BorderFactory.createBevelBorder(0));
+
+        initMarketButton();
+        initProdCardButton();
+        initReserveButton();
+
+        this.navigationBar.add(marketButton);
+        this.navigationBar.add(prodCardButton);
+        this.navigationBar.add(reserveButton);
+        this.add(navigationBar, BorderLayout.NORTH);
+
+        //---------------
+        /*JPanel random = new JPanel();
+        random.setBackground(Color.RED);
+        random.setPreferredSize(new Dimension(buttonHeight,buttonHeight));
+        random.setBorder(BorderFactory.createBevelBorder(0));*/
+    }
+
+    public void updateStorage(Map<Resource, Integer> newStorage) {
+
+        this.lorenzoGameboardPanel.updateStorage(newStorage);
+
+    }
+
+    public void initGameMode() {
+        for (JPanel p : attached) {
+            mainPanel.remove(p);
+        }
+        setGeneralFeatures();
+        initNavigationBar();
+
+        marketFrame = new MarketFrame();
+        productionDeckFrame = new ProductionDeckFrame();
+        reserveFrame = new ReserveFrame();
+
+        lorenzoGameboardPanel = new LorenzoGameboardPanel();
+        lorenzoGameboardPanel.setBounds(0, 0, 800, 572);
+        mainPanel.add(lorenzoGameboardPanel);
+        serverMessagePanel = new ServerMessagePanel();
+        serverMessagePanel.setBounds(800, 0, 380, 275);
+        mainPanel.add(serverMessagePanel);
+        leaderCardsPanel = new LeaderCardsPanel();
+        leaderCardsPanel.setBounds(805, 280, leaderWidth, leaderHeight);
+        leaderCardsPanel.setBackground(Color.BLUE);
+        leaderCardsPanel.setOpaque(true);
+        mainPanel.add(leaderCardsPanel);
+
+        actionMarkerPanel = new ActionMarkerPanel();
+        serverMessagePanel.display("Ha un grande valore rappresentativo, essendo \n architettonicamente e artisticamente incentrato \nsul Risorgimento, il complesso processo di unità nazionale e liberazione dalla dominazione straniera portato a compimento sotto il regno di Vittorio Emanuele II di Savoia, cui il monumento è dedicato: per tale motivo il Vittoriano è considerato uno dei simboli patri italiani.");
+
+
+        this.setVisible(true);
+    }
+
+
 
     public MainFrameSinglePlayer(Gui gui,String title){
         super(title,gui);
@@ -50,6 +121,17 @@ public class MainFrameSinglePlayer extends MainFrame{
 
     }
 
+
+    public void showLorenzoActionPopUp(String actionMarker) {
+        JDialog dialog = new JDialog();
+        dialog.setLocation(600, 430);
+        dialog.setLayout(null);
+        actionMarkerPanel.updatePickedMarkerImage(actionMarker);
+        dialog.add(actionMarkerPanel);
+        dialog.setSize(actionPanelWidth + 10, actionPanelHeight + 35);
+        actionMarkerPanel.setVisible(true);
+        dialog.setVisible(true);
+    }
 
 
     @Override
