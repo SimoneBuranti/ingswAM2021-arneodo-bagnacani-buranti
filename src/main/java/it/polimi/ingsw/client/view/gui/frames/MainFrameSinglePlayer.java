@@ -1,6 +1,7 @@
 package it.polimi.ingsw.client.view.gui.frames;
 
 import it.polimi.ingsw.client.view.gui.*;
+import it.polimi.ingsw.messages.EndOfTurnMessage;
 import it.polimi.ingsw.messages.Message;
 import it.polimi.ingsw.server.model.Resource;
 import it.polimi.ingsw.server.model.leaderCards.LeaderCard;
@@ -196,17 +197,7 @@ public class MainFrameSinglePlayer extends MainFrame{
     @Override
     public void askInitResource() throws IOException, InterruptedException {
 
-        SwingUtilities.invokeLater(() -> {
-            clear(container);
-                container.setLayout(new FlowLayout());
-                errorLabel = new JLabel("hey take a nap");
-                errorLabel.setBackground(Color.WHITE);
-                errorLabel.setOpaque(true);
-                container.add(errorLabel);
-                errorLabel.setLocation(475,108);
-                errorLabel.setSize(100,100);
-
-            applyChangesTo(container);
-        });}
+        gui.notifyObserver(new EndOfTurnMessage());
+    }
 
 }

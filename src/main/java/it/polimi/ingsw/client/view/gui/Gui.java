@@ -319,6 +319,7 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
             mainFrameOfGame= new MainFrameMultiPlayer(this,"your board");
         else
             mainFrameOfGame= new MainFrameSinglePlayer(this, "your board");
+
         isMultiOrNot=msg.isMultiOrNot();
     }
 
@@ -599,11 +600,8 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
 
     public void powerToMainFrame() {
-        mainFrameOfGame.dispose();
-        if(isMultiOrNot)
-            mainFrameOfGame= new MainFrameMultiPlayer(this);
-        else
-            mainFrameOfGame= new MainFrameSinglePlayer(this);
+        mainFrameOfGame.removeAll();
+        mainFrameOfGame.initGameMode();
 
     }
 }

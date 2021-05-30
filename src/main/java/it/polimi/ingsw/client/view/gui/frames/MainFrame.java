@@ -59,6 +59,7 @@ public abstract class MainFrame  extends JFrame {
         this.setSize(frameWidth, frameHeigth);
         this.setResizable(false);
         this.setVisible(true);
+
     }
 
 
@@ -66,11 +67,12 @@ public abstract class MainFrame  extends JFrame {
         super();
         this.gui=gui;
 
+        this.setTitle("Master of Renaissance");
         this.attached = new ArrayList<>();
         this.setLocation(frameX, frameY);
         this.setSize(frameWidth, frameHeigth);
         this.setResizable(false);
-        this.setVisible(true);
+        this.setVisible(false);
 
 
         initGameMode();

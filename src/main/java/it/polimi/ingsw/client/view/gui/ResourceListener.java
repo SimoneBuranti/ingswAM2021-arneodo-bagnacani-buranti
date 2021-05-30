@@ -1,5 +1,6 @@
 package it.polimi.ingsw.client.view.gui;
 
+import it.polimi.ingsw.messages.EndOfTurnMessage;
 import it.polimi.ingsw.messages.KeepResourcesMessage;
 import it.polimi.ingsw.server.model.Resource;
 
@@ -29,6 +30,8 @@ public class ResourceListener implements MouseListener {
             if (gui.getReadyToSend()==2){
                 try {
                     gui.notifyObserver(new KeepResourcesMessage(sendableArray));
+                    gui.notifyObserver(new EndOfTurnMessage());
+                    gui.powerToMainFrame();
                 } catch (IOException | InterruptedException e1) {
                     e1.printStackTrace();
                 }}}
@@ -37,11 +40,20 @@ public class ResourceListener implements MouseListener {
             if (gui.getReadyToSend()==1){
                 try {
                     gui.notifyObserver(new KeepResourcesMessage(sendableArray));
+                    gui.notifyObserver(new EndOfTurnMessage());
+                    gui.powerToMainFrame();
                 } catch (IOException | InterruptedException e1) {
                     e1.printStackTrace();
                 }}}
-        else
-           gui.powerToMainFrame();
+        else{
+            gui.powerToMainFrame();
+            try {
+                gui.notifyObserver(new EndOfTurnMessage());
+            } catch (IOException | InterruptedException ioException) {
+                ioException.printStackTrace();
+            }
+        }
+
     }
 
     private void addToArrayList(Resource resource) {
