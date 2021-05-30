@@ -17,13 +17,13 @@ public class MainFrameSinglePlayer extends MainFrame{
     private int readyToSend=0;
 
     public MainFrameSinglePlayer(Gui gui){
-        super();
+        super(gui);
         this.gui=gui;
       //  initPlayerMenu();
     }
 
     public MainFrameSinglePlayer(Gui gui,String title){
-        super(title);
+        super(title,gui);
         this.gui=gui;
         SwingUtilities.invokeLater(() -> {
             this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

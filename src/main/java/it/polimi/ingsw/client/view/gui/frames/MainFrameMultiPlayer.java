@@ -16,7 +16,7 @@ public class MainFrameMultiPlayer extends MainFrame {
 
 
     public MainFrameMultiPlayer(Gui gui,String title){
-        super(title);
+        super(title,gui);
         this.gui=gui;
         SwingUtilities.invokeLater(() -> {
             this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -42,7 +42,7 @@ public class MainFrameMultiPlayer extends MainFrame {
         });}
 
     public MainFrameMultiPlayer(Gui gui){
-        super();
+        super(gui);
         this.gui=gui;
         initPlayerMenu();
     }
