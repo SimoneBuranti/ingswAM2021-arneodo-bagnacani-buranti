@@ -10,6 +10,7 @@ import it.polimi.ingsw.messages.*;
 import it.polimi.ingsw.messages.observable.*;
 import it.polimi.ingsw.server.model.Resource;
 import it.polimi.ingsw.server.model.leaderCards.LeaderCard;
+import it.polimi.ingsw.server.model.leaderCards.LeaderCardStorage;
 import it.polimi.ingsw.server.model.marbles.Marble;
 import it.polimi.ingsw.server.model.productionCards.ProductionCard;
 
@@ -17,6 +18,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Gui extends ViewControllerObservable implements View, NotificatorVisitor {
     private ViewController viewController;
@@ -355,30 +357,30 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
     @Override
     public void showProductionDecks() {
-        mainFrameOfGame.showProductionDeckFrame();
+        //mainFrameOfGame.showProductionDeckFrame();
 
     }
 
     @Override
     public void showReserve() {
-        mainFrameOfGame.showReserve();
+        //mainFrameOfGame.showReserve();
 
     }
 
     @Override
     public void showMarket() {
-        mainFrameOfGame.showMarket();
+        //mainFrameOfGame.showMarket();
 
     }
 
     @Override
     public void showWhiteMarbleResources(int n, ArrayList<Resource> whiteMarbleResourceTypes) {
-        mainFrameOfGame.marblePossibilityPopUp(n,whiteMarbleResourceTypes);
+        //mainFrameOfGame.marblePossibilityPopUp(n,whiteMarbleResourceTypes);
     }
 
     @Override
     public void showSpaceError(NotEnoughSpaceErrorMessage msg) {
-        mainFrameOfGame.fullStoragePopUp(msg);
+        //mainFrameOfGame.fullStoragePopUp(msg);
     }
 
     @Override
@@ -389,25 +391,27 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
     @Override
     public void showActionMarker(String actionType) {
-        // fa simo
+        SwingUtilities.invokeLater(()-> {
+            //mainFrame.
+        });
 
     }
 
     @Override
     public void youWin(int score) {
-        mainFrameOfGame.showPopUp(new MyVictoryMessage(score));
+        //mainFrameOfGame.showPopUp(new MyVictoryMessage(score));
 
     }
 
     @Override
     public void lorenzoWin() {
-        mainFrameOfGame.showPopUp(new MagnificentWinMessage());
+        //mainFrameOfGame.showPopUp(new MagnificentWinMessage());
 
     }
 
     @Override
     public void showWinner(String nickname) {
-        mainFrameOfGame.showPopUp(new EndGamePlayerWinnerMessage(nickname));
+        //mainFrameOfGame.showPopUp(new EndGamePlayerWinnerMessage(nickname));
 
     }
 
@@ -419,13 +423,13 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
     @Override
     public void sayDisconnect() {
-        mainFrameOfGame.showPopUp("server is crashed, you i've been disconnected");
+        //mainFrameOfGame.showPopUp("server is crashed, you i've been disconnected");
 
     }
 
     @Override
     public void visit(DeckListNotification deckListNotification) {
-       mainFrameOfGame.getProductionDeckFrame().addDecks(deckListNotification.getListOfFirstCard());
+       //mainFrameOfGame.getProductionDeckFrame().addDecks(deckListNotification.getListOfFirstCard());
     }
 
     @Override
@@ -442,7 +446,37 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
     @Override
     public void visit(StorageNotification storageNotification) {
-        // metodi relativi a classe
+        SwingUtilities.invokeLater(() -> {
+            HashMap<Resource,Integer> resources;
+            ArrayList<LeaderCard> activated = viewController.getGame().getLeaderCardActivated();
+            ArrayList<Resource> extraTypes = new ArrayList<>();
+            ArrayList<Integer> cardPositions = new ArrayList<>();
+            resources = (HashMap<Resource, Integer>) storageNotification.getMap();
+
+            for(int i = 0; i<activated.size();i++){
+                if (activated.get(i) instanceof LeaderCardStorage){
+                    extraTypes.add(activated.get(i).getResourceEffect());
+                    cardPositions.add(i);
+                }
+            }
+
+            for(Resource r : resources.keySet()){
+                for (int i = 0; i<extraTypes.size();i++){
+                    if(extraTypes.get(i) == r){
+                        if (resources.get(r)>2){
+                            //mainFrame.addToExtraStorage(cardPositions.get(i),r,2);
+                            resources.put(r,resources.remove(r)-2);
+                        } else {
+                            //mainFrame.addToExtraStorage(cardPositions.get(i),r,resources.get(r));
+                            resources.put(r,0);
+                        }
+                    }
+                }
+            }
+
+            //mainFrame.updateStorage(resources);
+
+        });
 
     }
 
@@ -454,19 +488,19 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
     @Override
     public void visit(ReserveNotification reserveNotification) {
-        mainFrameOfGame.getReserveFrame().updateReserve(reserveNotification.getMap());
+        //mainFrameOfGame.getReserveFrame().updateReserve(reserveNotification.getMap());
 
     }
 
     @Override
     public void visit(MarketNotification marketNotification) {
-        mainFrameOfGame.getMarketFrame().setMarbleGrid(marketNotification.getList());
+        //mainFrameOfGame.getMarketFrame().setMarbleGrid(marketNotification.getList());
 
     }
 
     @Override
     public void visit(ExtraMarketNotification extraMarketNotification) {
-        mainFrameOfGame.getMarketFrame().setMarbleExtra(extraMarketNotification.getMarble());
+        //mainFrameOfGame.getMarketFrame().setMarbleExtra(extraMarketNotification.getMarble());
 
     }
 

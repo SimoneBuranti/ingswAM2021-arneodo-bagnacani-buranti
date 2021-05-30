@@ -1,5 +1,6 @@
 package it.polimi.ingsw.client.view.gui.frames;
 
+import it.polimi.ingsw.server.model.Resource;
 import it.polimi.ingsw.server.model.leaderCards.LeaderCard;
 
 import javax.swing.*;
@@ -16,8 +17,8 @@ public class LeaderCardsPanel extends JPanel {
     public LeaderCardsPanel(){
         super();
         this.setLayout(null);
-        this.setBounds(810, 280, leaderWidth, leaderHeight);
-        setOpaque(false);
+        this.setBounds(805, 280, leaderWidth, leaderHeight);
+        setOpaque(true);
     }
 
     public void addLeaderCards(ArrayList<LeaderCard> leaderCards, boolean activated){
@@ -84,5 +85,8 @@ public class LeaderCardsPanel extends JPanel {
         super.paintComponent(g);
         //g.drawImage(backgroundImage, 0, 0, null);
 
+    }
+
+    public void addToExtraStorage(int position, Resource resourceType, int quantity) {
     }
 }

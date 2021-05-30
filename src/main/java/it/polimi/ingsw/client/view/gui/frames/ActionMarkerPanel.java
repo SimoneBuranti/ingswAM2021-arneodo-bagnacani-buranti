@@ -11,8 +11,8 @@ public class ActionMarkerPanel extends JPanel {
     private final static int markerDimension = 90;
     private final static int panelWidth = 305;
     private final static int panelHeight = 150;
-    private final static int panelX = 800;
-    private final static int panelY = 250;
+    private final static int panelX = 0;
+    private final static int panelY = 0;
     private final static int markerDeckLabelX = 170;
     private final static int markerDeckLabelY = 45;
     private final static int pickedMarkerLabelX = 45;
@@ -38,9 +38,10 @@ public class ActionMarkerPanel extends JPanel {
 
         updatePickedMarkerImage("ActionMarkerProductionYellow");
 
-        removeActionMarketDeck();
+        //removeActionMarketDeck();
 
         this.setLayout(null);
+        this.setBackground(new Color(232,228,212));
         this.setBounds(panelX,panelY,panelWidth,panelHeight);
         this.setBorder(BorderFactory.createBevelBorder(0));
     }

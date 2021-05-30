@@ -8,8 +8,8 @@ import java.awt.*;
 public class ServerMessagePanel extends JPanel {
 
     private final static int n = 8;
-    private final static int messageWidth = 300;
-    private final static int messageHeight = 250;
+    private final static int messageWidth = 380;
+    private final static int messageHeight = 275;
 
 
     private Image backgroundImage;
@@ -19,8 +19,8 @@ public class ServerMessagePanel extends JPanel {
     public ServerMessagePanel(){
         super();
         this.lineBox = new JPanel();
-        this.lineBox.setBounds(37,27,280,200);
-        this.lineBox.setSize(220,200);
+        this.lineBox.setBounds(45,35,280,200);
+        this.lineBox.setSize(280,200);
         this.lineBox.setLayout(new GridLayout(n, 1, 0,0));
         this.add(lineBox);
         this.lineBox.setBackground(new Color(232,228,212));
@@ -33,7 +33,7 @@ public class ServerMessagePanel extends JPanel {
 
         for(int i = 0;i<n;i++){
             this.textLabels[i] = new JLabel();
-            this.textLabels[i].setSize(220,25);
+            this.textLabels[i].setSize(280,25);
             this.textLabels[i].setBackground(new Color(232,228,212));
             this.lineBox.add(this.textLabels[i]);
             this.textLabels[i].setOpaque(true);

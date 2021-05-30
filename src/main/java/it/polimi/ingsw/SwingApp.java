@@ -1,5 +1,9 @@
 package it.polimi.ingsw;
 
+import it.polimi.ingsw.client.view.gui.frames.MainFrame;
+
+import java.util.ArrayList;
+
 public class SwingApp {
 
     public static void main(String[] args) {
@@ -12,10 +16,19 @@ public class SwingApp {
             productionDeckFrame.addDecks(productionCardArray.getList());
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
+
+        ArrayList<String> nicknames = new ArrayList<>();
+        nicknames.add("simone");
+        nicknames.add("alice");
+        nicknames.add("aeeeeeeeeeeeeeeee");
+        nicknames.add("AAAAAAAAAAA");
 
         MainFrame mainFrame = new MainFrame("Master of Renaissance");
         mainFrame.initGameMode();
+        mainFrame.setPlayers(nicknames);
+        mainFrame.setCurrentPlayer("simo");
+        mainFrame.showLorenzoActionPopUp("ActionMarkerForCrossDouble");
         mainFrame.paintComponents(mainFrame.getGraphics());
         mainFrame.paintComponents(mainFrame.getGraphics());
 
