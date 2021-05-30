@@ -456,7 +456,7 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
             for(int i = 0; i<activated.size();i++){
                 if (activated.get(i) instanceof LeaderCardStorage){
                     extraTypes.add(activated.get(i).getResourceEffect());
-                    cardPositions.add(i);
+                    cardPositions.add(viewController.getGame().getIndexActivated(i));
                 }
             }
 
@@ -464,17 +464,17 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
                 for (int i = 0; i<extraTypes.size();i++){
                     if(extraTypes.get(i) == r){
                         if (resources.get(r)>2){
-                            //mainFrame.addToExtraStorage(cardPositions.get(i),r,2);
+                            mainFrameOfGame.addToExtraStorage(cardPositions.get(i),r,2);
                             resources.put(r,resources.remove(r)-2);
                         } else {
-                            //mainFrame.addToExtraStorage(cardPositions.get(i),r,resources.get(r));
+                            mainFrameOfGame.addToExtraStorage(cardPositions.get(i),r,resources.get(r));
                             resources.put(r,0);
                         }
                     }
                 }
             }
 
-            //mainFrame.updateStorage(resources);
+            mainFrameOfGame.updateStorage(resources);
 
         });
 

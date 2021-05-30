@@ -15,13 +15,13 @@ public class MainFrame  extends JFrame {
 
     public final static int northHeight = 70;
     public final static int frameWidth = 1195;
-    public final static int frameHeigth = 668;
+    public final static int frameHeigth = 673;
     public final static int frameX = 230;
     public final static int frameY = 160;
     public final static int buttonWidth = 100;
     public final static int buttonHeight = 60;
     public final static int leaderWidth = 370;
-    public final static int leaderHeight = 278;
+    public final static int leaderHeight = 290;
     public final static int letterOffset = 10;
     private final static int actionPanelWidth = 305;
     private final static int actionPanelHeight = 150;
@@ -36,6 +36,8 @@ public class MainFrame  extends JFrame {
     protected MarketFrame marketFrame;
     protected ProductionDeckFrame productionDeckFrame;
 
+    protected JPanel menuPanel;
+    protected JMenuBar menuBar;
     protected JPanel mainPanel;
     protected JPanel navigationBar;
     protected JButton marketButton;
@@ -96,7 +98,7 @@ public class MainFrame  extends JFrame {
         this.navigationBar.add(marketButton);
         this.navigationBar.add(prodCardButton);
         this.navigationBar.add(reserveButton);
-        this.navigationBar.add(playerMenu);
+        this.navigationBar.add(menuPanel);
         this.add(navigationBar,BorderLayout.NORTH);
 
         //---------------
@@ -149,21 +151,28 @@ public class MainFrame  extends JFrame {
     }
 
     public void initPlayerMenu(){
-        this.playerMenu = new JMenu();
-        playerMenu.setText("Players");
         Font f = new Font("Helvetica", Font.BOLD, 16);
+
+        menuPanel = new JPanel();
+        menuPanel.setPreferredSize(new Dimension(buttonWidth,buttonHeight));
+        menuPanel.setLayout(null);
+
+        menuBar = new JMenuBar();
+        menuBar.setPreferredSize(new Dimension(buttonWidth,buttonHeight));
+        menuBar.setBounds(0,0,buttonWidth,buttonHeight);
+        menuBar.setLayout(null);
+
+        playerMenu = new JMenu();
+        playerMenu.setText("Players");
         playerMenu.setFont(f);
-        playerMenu.setPreferredSize(new Dimension(buttonWidth,buttonHeight));
+        playerMenu.setBounds(0,0,buttonWidth,buttonHeight);
         playerMenu.setBackground(new Color(0xeaf1f7));
         playerMenu.setHorizontalTextPosition(SwingConstants.CENTER);
         playerMenu.setOpaque(true);
         playerMenu.setBorder(BorderFactory.createBevelBorder(0));
-        JMenuItem lorenzo = new JMenuItem("Lorenzo");
-        lorenzo.addActionListener(e ->{
-            System.out.println("Aprirei lorenzo");
-        });
-        playerMenu.add(lorenzo);
 
+        menuBar.add(playerMenu);
+        menuPanel.add(menuBar);
     }
 
     public void initTurnPanel(){
@@ -205,6 +214,7 @@ public class MainFrame  extends JFrame {
         this.players = new ArrayList<>();
         this.nicknames = new ArrayList<>();
         for(int i = 0;i<players.size(); i++){
+
             this.players.add(new JMenuItem(players.get(i)));
             this.playerMenu.add(this.players.get(i));
             this.nicknames.add(new JLabel(players.get(i)));
@@ -226,7 +236,7 @@ public class MainFrame  extends JFrame {
         productionDeckFrame = new ProductionDeckFrame();
         reserveFrame = new ReserveFrame();
 
-        gameboardPanel = new GameboardPanel();
+        gameboardPanel = new LorenzoGameboardPanel();
         gameboardPanel.setBounds(0,0,800,572);
         mainPanel.add(gameboardPanel);
         serverMessagePanel = new ServerMessagePanel();
@@ -235,6 +245,7 @@ public class MainFrame  extends JFrame {
         leaderCardsPanel = new LeaderCardsPanel();
         leaderCardsPanel.setBounds(805, 280, leaderWidth, leaderHeight);
         leaderCardsPanel.setBackground(Color.BLUE);
+        leaderCardsPanel.setOpaque(true);
         mainPanel.add(leaderCardsPanel);
 
         actionMarkerPanel = new ActionMarkerPanel();
@@ -266,7 +277,7 @@ public class MainFrame  extends JFrame {
     }
 
     public void addToExtraStorage(int position, Resource resourceType,int quantity){
-        leaderCardsPanel.addToExtraStorage( position, resourceType, quantity);
+        leaderCardsPanel.addToStorageExtra( position, resourceType, quantity);
     }
 
     public void updateStorage(Map<Resource,Integer> newStorage){

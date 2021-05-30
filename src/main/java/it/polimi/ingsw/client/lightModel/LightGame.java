@@ -394,6 +394,10 @@ public class LightGame extends ViewObservable {
         return gameBoardOfPlayer.getLeaderCardActivated();
     }
 
+    public int getIndexActivated(int i){
+        return gameBoardOfPlayer.getIndexActivated(i);
+    }
+
     public boolean isInitResource() {
         return initResource;
     }

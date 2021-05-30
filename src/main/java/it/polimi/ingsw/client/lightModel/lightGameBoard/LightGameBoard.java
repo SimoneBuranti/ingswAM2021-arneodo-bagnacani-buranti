@@ -21,6 +21,8 @@ public class LightGameBoard {
     private final LightProductionCards productionCardsByKey;
     private final LightLeaderCards leaderCardsByKey;
 
+    private ArrayList<Integer> indexLeaderActivated;
+
     public LightGameBoard(String nickname){
         this.nickname = nickname;
         storage = new LightStorage();
@@ -31,6 +33,7 @@ public class LightGameBoard {
         leaderCardsActivated = new ArrayList<>();
         productionCardsByKey = new LightProductionCards();
         leaderCardsByKey = new LightLeaderCards();
+        indexLeaderActivated = new ArrayList<>();
     }
 
     public String getNickname(){
@@ -117,9 +120,14 @@ public class LightGameBoard {
 
 
     public void activateLeaderCard(int index){
+        indexLeaderActivated.add(index);
         leaderCardsActivated.add(leaderCards.remove(index));
     }
 
+
+    public int getIndexActivated(int i){
+        return indexLeaderActivated.get(i);
+    }
 
     public void discardLeaderCard(int index){
         leaderCards.remove(index);

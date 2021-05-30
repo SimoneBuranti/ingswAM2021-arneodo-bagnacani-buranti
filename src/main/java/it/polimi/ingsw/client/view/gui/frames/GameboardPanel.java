@@ -15,31 +15,31 @@ import java.util.Map;
 
 public class GameboardPanel extends JPanel implements ActionListener, MouseListener {
 
-    private static final int gameboardWidth = 800;
-    private static final int gameboardHeight = 572;
-    private static final int faithPathWidth = 800;
-    private static final int faithPathHeight = 172;
-    private static final int cardWidth = 140;
-    private static final int cardHeight = 212;
-    private static final int cardOffset = 38;
-    private static final int psWidth = 144;
-    private static final int psHeight = 300;
-    private static final int[] psx = {306,460,618};
-    private final static int psy =226;
+    protected static final int gameboardWidth = 800;
+    protected static final int gameboardHeight = 572;
+    protected static final int faithPathWidth = 800;
+    protected static final int faithPathHeight = 172;
+    protected static final int cardWidth = 140;
+    protected static final int cardHeight = 212;
+    protected static final int cardOffset = 38;
+    protected static final int psWidth = 144;
+    protected static final int psHeight = 300;
+    protected static final int[] psx = {306,460,618};
+    protected final static int psy =226;
 
 
-    private ViewController viewController;
+    protected ViewController viewController;
 
 
-    private Image backgroundImage;
+    protected Image backgroundImage;
 
-    private JLayeredPane[] productionSpaces;
-    private BaseProductionPanel baseProductionPanel;
-    private JLabel[][] productionCards;
-    private JButton[] productionButtons;
-    private FaithPathPane faithPathPane;
-    private StoragePanel storagePanel;
-    private StrongBoxPanel strongboxPanel;
+    protected JLayeredPane[] productionSpaces;
+    protected BaseProductionPanel baseProductionPanel;
+    protected JLabel[][] productionCards;
+    protected JButton[] productionButtons;
+    protected FaithPathPane faithPathPane;
+    protected StoragePanel storagePanel;
+    protected StrongBoxPanel strongboxPanel;
 
 
     public GameboardPanel(){
@@ -168,7 +168,7 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
         faithPathPane.setSize(faithPathWidth,faithPathHeight);
         faithPathPane.setBounds(0,0,faithPathWidth,faithPathHeight);
 
-        //move button--------
+        //move button Player--------
         JButton moveButton = new JButton();
         moveButton.setSize(20,20);
         moveButton.addActionListener(e -> {
@@ -203,7 +203,13 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
 
     }
 
+    public void updateLorenzoIndicator(int indicator){
 
+    }
+
+    public void lorenzoMove(){
+
+    }
 
 
 

@@ -27,7 +27,7 @@ public class SwingApp {
         MainFrame mainFrame = new MainFrame("Master of Renaissance");
         mainFrame.initGameMode();
         mainFrame.setPlayers(nicknames);
-        mainFrame.setCurrentPlayer("simo");
+        mainFrame.setCurrentPlayer("simone");
         mainFrame.showLorenzoActionPopUp("ActionMarkerForCrossDouble");
         mainFrame.paintComponents(mainFrame.getGraphics());
         mainFrame.paintComponents(mainFrame.getGraphics());
