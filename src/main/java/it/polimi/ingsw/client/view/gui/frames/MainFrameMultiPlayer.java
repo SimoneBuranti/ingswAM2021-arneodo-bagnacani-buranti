@@ -1,5 +1,6 @@
 package it.polimi.ingsw.client.view.gui.frames;
 
+import it.polimi.ingsw.client.ligtModelNotification.GameboardListNotification;
 import it.polimi.ingsw.client.view.gui.*;
 import it.polimi.ingsw.messages.Message;
 import it.polimi.ingsw.server.model.Resource;
@@ -56,6 +57,7 @@ public class MainFrameMultiPlayer extends MainFrame {
     public MainFrameMultiPlayer(Gui gui){
         super(gui);
         this.gui=gui;
+
     }
 
 
@@ -226,6 +228,11 @@ public class MainFrameMultiPlayer extends MainFrame {
         });
     }
 
+    @Override
+    public void showLorenzoActionPopUp(String string) {
+
+    }
+
     public void setCurrentPlayer(String nick) {
 
         for (int i = 0; i < nicknames.size(); i++)
@@ -254,6 +261,35 @@ public class MainFrameMultiPlayer extends MainFrame {
         this.gameboardPanel.updateStorage(newStorage);
 
     }
+
+    public void getStrongBox(Map<Resource,Integer> map){
+        this.gameboardPanel.strongboxPanel.updateStrongBox(map);
+
+    }
+
+    public void updateFaith(int i){
+        this.gameboardPanel.faithPathPane.updateIndicator(i);
+
+    }
+
+    public void initLeader(ArrayList<LeaderCard> arrayList, boolean bool){
+        this.leaderCardsPanel.addLeaderCards(arrayList,bool);
+    }
+    public void activateLeader(int arrayList, int bool){
+        this.leaderCardsPanel.activatedLeaderCard(arrayList,bool);
+    }
+    public void discardLeader(int bool){
+        this.leaderCardsPanel.discardLeaderCard(bool);
+    }
+
+    public void updateProductionCard(GameboardListNotification gameboardListNotification){
+        this.gameboardPanel.updateProductionSpaces(gameboardListNotification);
+    }
+
+    public void callForCouncil(int i){
+        this.gameboardPanel.givePapalcard(i);
+    }
+
 
 
 }

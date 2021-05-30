@@ -32,6 +32,7 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
     private JButton enterButton ;
 
     private MainFrame mainFrameOfGame;
+    private MainFrame mainFrameOfPreGame;
 
     private Boolean isMultiOrNot;
 
@@ -244,42 +245,30 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
     @Override
     public void showChangeCurrent(String currentNick) {
-        /// messaggi pergamena
-
+        mainFrameOfGame.setCurrentPlayer(currentNick);
     }
 
     @Override
     public void yourTurn() {
-        /// messaggi pergamena
+        mainFrameOfGame.setCurrentPlayer(viewController.getNickName());
+
 
     }
 
     @Override
     public void notifyError(Message msg) {
+        showLabel(msg); }
 
-
-        // differenzio errori
-        showLabel(msg);
-        /*if (msg.getMessageType().equals(MessageType.NICKNAMENOTFOUNDERROR) || msg.getMessageType().equals(MessageType.NICKNAMENOTFOUNDERROR) ) {
-            try {
-                askNickname();
-            } catch (IOException | InterruptedException e) {
-                e.printStackTrace();
-            }
-        }*/
-
-    }
 
     @Override
     public void showPlayersOrder(ArrayList<String> nickName) {
-        // lascio a simo
-
+        mainFrameOfGame.setPlayers(nickName);
 
     }
 
     @Override
     public void showLastTurn(String nickName) {
-        // pergamena
+        mainFrameOfGame.displayString("last turn ");
 
     }
 
@@ -303,12 +292,14 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
     @Override
     public void askLeaderCardToKeep(ArrayList<LeaderCard> leaderCards) throws IOException, InterruptedException {
-    mainFrameOfGame.askLeaderCardToKeep(leaderCards);
+    mainFrameOfPreGame.askLeaderCardToKeep(leaderCards);
     }
 
     @Override
     public void showCallForCouncil(String nickname, int papalCard) {
-        // fatto su gameboard
+        if (papalCard==1)
+            mainFrameOfGame.callForCouncil(viewController.getGame().getGameBoardOfPlayer().getCurrCall());
+
 
     }
 
@@ -316,26 +307,27 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
     public void showStartGame(GameTypeMessage msg) {
         mainFrame.dispose();
         if(msg.isMultiOrNot()==true)
-            mainFrameOfGame= new MainFrameMultiPlayer(this,"your board");
+        {
+            if(!viewController.getGame().isInitResource() || !viewController.getGame().isInitLeader())
+            { mainFrameOfPreGame = new MainFrameMultiPlayer(this,"your board");}
+            mainFrameOfGame= new MainFrameMultiPlayer(this);}
         else
-            mainFrameOfGame= new MainFrameSinglePlayer(this, "your board");
+        { if(!viewController.getGame().isInitResource() || !viewController.getGame().isInitLeader())
+        {mainFrameOfPreGame = new MainFrameSinglePlayer(this,"your board");}
+            mainFrameOfGame= new MainFrameSinglePlayer(this);}
 
         isMultiOrNot=msg.isMultiOrNot();
     }
 
     @Override
-    public void showRestartMessage() {
-        // initial ask name
-    }
+    public void showRestartMessage() {}
 
     @Override
-    public void showPlayerInfo(ShowAllOfPlayerMessage msg) {
-        // new frame
-    }
+    public void showPlayerInfo(ShowAllOfPlayerMessage msg) { }
 
     @Override
     public void askInitResource() throws IOException, InterruptedException {
-        mainFrameOfGame.askInitResource();
+        mainFrameOfPreGame.askInitResource();
     }
 
     @Override
@@ -357,92 +349,79 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
     public void showGameBoardOfPlayer() {}
 
     @Override
-    public void showProductionDecks() {
-        //mainFrameOfGame.showProductionDeckFrame();
-
-    }
+    public void showProductionDecks() {}
 
     @Override
-    public void showReserve() {
-        //mainFrameOfGame.showReserve();
-
-    }
+    public void showReserve() {}
 
     @Override
-    public void showMarket() {
-        //mainFrameOfGame.showMarket();
-
-    }
+    public void showMarket() {}
 
     @Override
     public void showWhiteMarbleResources(int n, ArrayList<Resource> whiteMarbleResourceTypes) {
-        //mainFrameOfGame.marblePossibilityPopUp(n,whiteMarbleResourceTypes);
+        mainFrameOfGame.marblePossibilityPopUp(n,whiteMarbleResourceTypes);
     }
 
     @Override
     public void showSpaceError(NotEnoughSpaceErrorMessage msg) {
-        //mainFrameOfGame.fullStoragePopUp(msg);
+        mainFrameOfGame.fullStoragePopUp(msg);
     }
 
     @Override
-    public void checkThreadRestart() {
-        // nothing
-
-    }
+    public void checkThreadRestart() { }
 
     @Override
     public void showActionMarker(String actionType) {
         SwingUtilities.invokeLater(()-> {
-            //mainFrame.
+            mainFrameOfGame.showLorenzoActionPopUp(actionType);
         });
 
     }
 
     @Override
     public void youWin(int score) {
-        //mainFrameOfGame.showPopUp(new MyVictoryMessage(score));
+        mainFrameOfGame.showPopUp(new MyVictoryMessage(score));
 
     }
 
     @Override
     public void lorenzoWin() {
-        //mainFrameOfGame.showPopUp(new MagnificentWinMessage());
+        mainFrameOfGame.showPopUp(new MagnificentWinMessage());
 
     }
 
     @Override
     public void showWinner(String nickname) {
-        //mainFrameOfGame.showPopUp(new EndGamePlayerWinnerMessage(nickname));
+        mainFrameOfGame.showPopUp(new EndGamePlayerWinnerMessage(nickname));
 
     }
 
     @Override
     public void showOpponentAction(Message msg) {
-        // pergamena
+        mainFrameOfGame.displayString(msg.toString());
 
     }
 
     @Override
     public void sayDisconnect() {
-        //mainFrameOfGame.showPopUp("server is crashed, you i've been disconnected");
+
+        mainFrameOfGame.showPopUp("server is crashed, you i've been disconnected");
 
     }
 
     @Override
     public void visit(DeckListNotification deckListNotification) {
-       //mainFrameOfGame.getProductionDeckFrame().addDecks(deckListNotification.getListOfFirstCard());
+       mainFrameOfGame.getProductionDeckFrame().addDecks(deckListNotification.getListOfFirstCard());
     }
 
     @Override
     public void visit(GameboardListNotification gameboardListNotification) {
-        // metodi relativi a classe
+        mainFrameOfGame.updateProductionCard(gameboardListNotification);
 
     }
 
     @Override
-    public void visit(LeaderListCardNotification leaderListCardNotification) {
-        // metodi relativi a classe
-
+    public void visit(LeaderListCardNotification leaderListCardNotification){
     }
 
     @Override
@@ -481,61 +460,65 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
     }
 
+    /**
+     * @param strongboxNotification
+     */
     @Override
     public void visit(StrongboxNotification strongboxNotification) {
-        //
+       mainFrameOfGame.getStrongBox(strongboxNotification.getMap());
 
     }
 
+    /**
+     * @param reserveNotification
+     */
     @Override
     public void visit(ReserveNotification reserveNotification) {
-        //mainFrameOfGame.getReserveFrame().updateReserve(reserveNotification.getMap());
+        mainFrameOfGame.getReserveFrame().updateReserve(reserveNotification.getMap());
 
     }
 
+    /**
+     * @param marketNotification
+     */
     @Override
     public void visit(MarketNotification marketNotification) {
-        //mainFrameOfGame.getMarketFrame().setMarbleGrid(marketNotification.getList());
+        mainFrameOfGame.getMarketFrame().setMarbleGrid(marketNotification.getList());
 
     }
 
     @Override
     public void visit(ExtraMarketNotification extraMarketNotification) {
-        //mainFrameOfGame.getMarketFrame().setMarbleExtra(extraMarketNotification.getMarble());
+        mainFrameOfGame.getMarketFrame().setMarbleExtra(extraMarketNotification.getMarble());
 
     }
 
     @Override
     public void visit(FaithPathNotification faithPathNotification) {
-        // metodi relativi a classe
+        mainFrameOfGame.updateFaith(faithPathNotification.getI());
 
     }
 
     @Override
     public void visit(InitLeaderNotification initLeaderNotification) {
+        mainFrameOfGame.initLeader(initLeaderNotification.getListOfFirstCard(),initLeaderNotification.isActivated());
 
     }
 
     @Override
     public void visit(ActivateLeaderNotification activateLeaderNotification) {
+        mainFrameOfGame.activateLeader(activateLeaderNotification.getIndex(),activateLeaderNotification.getKey());
+
+
 
     }
 
     @Override
     public void visit(DiscardLeaderNotification discardLeaderNotification) {
+        mainFrameOfGame.discardLeader(discardLeaderNotification.getIndex());
 
-    }
 
-    public JButton getSubmitButton() {
-        return submitButton;
-    }
 
-    public JButton getYesButton() {
-        return yesButton;
-    }
-
-    public JButton getNoButton() {
-        return noButton;
     }
 
 
@@ -548,14 +531,6 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
         component.repaint();
     }
 
-
-    /**
-     * Flush the components inside a frame
-     * @param frame     The frame
-     */
-    private void clear(JFrame frame){
-        frame.getContentPane().removeAll();
-    }
 
 
     /**
@@ -584,9 +559,7 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
     public void setReadyToSend() {
         this.readyToSend++;
     }
-    public void resetToSend() {
-        this.readyToSend=0;
-    }
+
     
     
     public int getReadyToSend() {
@@ -599,9 +572,20 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
     public void showLoading () { }
 
 
-    public void powerToMainFrame() {
-        mainFrameOfGame.removeAll();
-        mainFrameOfGame.initGameMode();
+    public void powerToMainFrame()
+    {
+        mainFrameOfPreGame.dispose();
+        mainFrameOfGame.setVisible(true);
+        mainFrameOfGame.paintComponents(mainFrameOfGame.getGraphics());
+        mainFrameOfGame.paintComponents(mainFrameOfGame.getGraphics());
+        mainFrameOfGame.paintComponents(mainFrameOfGame.getGraphics());
+        mainFrameOfGame.paintComponents(mainFrameOfGame.getGraphics());
+        mainFrameOfGame.paintComponents(mainFrameOfGame.getGraphics());
+        mainFrameOfGame.paintComponents(mainFrameOfGame.getGraphics());
+        mainFrameOfGame.paintComponents(mainFrameOfGame.getGraphics());
+        mainFrameOfGame.paintComponents(mainFrameOfGame.getGraphics());
+        mainFrameOfGame.paintComponents(mainFrameOfGame.getGraphics());
+
 
     }
 }

@@ -1,5 +1,6 @@
 package it.polimi.ingsw.client.view.gui.frames;
 
+import it.polimi.ingsw.client.ligtModelNotification.GameboardListNotification;
 import it.polimi.ingsw.client.view.gui.*;
 import it.polimi.ingsw.messages.EndOfTurnMessage;
 import it.polimi.ingsw.messages.Message;
@@ -89,7 +90,7 @@ public class MainFrameSinglePlayer extends MainFrame{
         serverMessagePanel.display("Ha un grande valore rappresentativo, essendo \n architettonicamente e artisticamente incentrato \nsul Risorgimento, il complesso processo di unità nazionale e liberazione dalla dominazione straniera portato a compimento sotto il regno di Vittorio Emanuele II di Savoia, cui il monumento è dedicato: per tale motivo il Vittoriano è considerato uno dei simboli patri italiani.");
 
 
-        this.setVisible(true);
+        this.setVisible(false);
     }
 
 
@@ -196,8 +197,37 @@ public class MainFrameSinglePlayer extends MainFrame{
 
     @Override
     public void askInitResource() throws IOException, InterruptedException {
-
         gui.notifyObserver(new EndOfTurnMessage());
+        gui.powerToMainFrame();
+    }
+
+    public void getStrongBox(Map<Resource,Integer> map){
+        this.lorenzoGameboardPanel.strongboxPanel.updateStrongBox(map);
+
+    }
+
+    public void updateFaith(int i){
+        this.lorenzoGameboardPanel.faithPathPane.updateIndicator(i);
+
+
+    }
+
+    public void initLeader(ArrayList<LeaderCard> arrayList, boolean bool){
+        this.leaderCardsPanel.addLeaderCards(arrayList,bool);
+    }
+    public void activateLeader(int arrayList, int bool){
+        this.leaderCardsPanel.activatedLeaderCard(arrayList,bool);
+    }
+    public void discardLeader(int bool){
+        this.leaderCardsPanel.discardLeaderCard(bool);
+    }
+
+    public void updateProductionCard(GameboardListNotification gameboardListNotification){
+        this.lorenzoGameboardPanel.updateProductionSpaces(gameboardListNotification);
+    }
+
+    public void callForCouncil(int i){
+        this.lorenzoGameboardPanel.givePapalcard(i);
     }
 
 }

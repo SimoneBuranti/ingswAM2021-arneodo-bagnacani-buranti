@@ -1,5 +1,6 @@
 package it.polimi.ingsw.client.view.gui.frames;
 
+import it.polimi.ingsw.client.ligtModelNotification.GameboardListNotification;
 import it.polimi.ingsw.client.view.gui.Gui;
 import it.polimi.ingsw.messages.KeepResourcesMessage;
 import it.polimi.ingsw.messages.Message;
@@ -54,11 +55,10 @@ public abstract class MainFrame  extends JFrame {
         super(string);
         this.gui=gui;
 
-        this.attached = new ArrayList<>();
+     /*   this.attached = new ArrayList<>();
         this.setLocation(frameX, frameY);
         this.setSize(frameWidth, frameHeigth);
-        this.setResizable(false);
-        this.setVisible(true);
+        this.setResizable(false);*/
 
     }
 
@@ -73,7 +73,6 @@ public abstract class MainFrame  extends JFrame {
         this.setSize(frameWidth, frameHeigth);
         this.setResizable(false);
         this.setVisible(false);
-
 
         initGameMode();
     }
@@ -149,8 +148,12 @@ public abstract class MainFrame  extends JFrame {
         mainPanel.setLayout(null);
 
     }
+    public abstract void getStrongBox(Map<Resource, Integer> map);
 
-
+    public abstract void updateFaith(int i);
+    public abstract void initLeader(ArrayList<LeaderCard> arrayList, boolean bool);
+    public abstract void activateLeader(int arrayList, int bool);
+    public abstract void discardLeader(int bool);
 
 
 
@@ -307,6 +310,7 @@ public abstract class MainFrame  extends JFrame {
 
 
     }
+    public abstract void updateProductionCard(GameboardListNotification gameboardListNotification);
 
     public void  fullStoragePopUp(NotEnoughSpaceErrorMessage message){
 
@@ -412,6 +416,14 @@ public abstract class MainFrame  extends JFrame {
         return productionDeckFrame;
     }
 
+    public void setPlayers(ArrayList<String> arrayList){}
+
+    public abstract void callForCouncil(int i);
+
+
+
+    public  void setCurrentPlayer(String currentNick){}
+
 
     public abstract void askLeaderCardToKeep(ArrayList<LeaderCard> leaderCards) throws IOException, InterruptedException;
 
@@ -425,6 +437,11 @@ public abstract class MainFrame  extends JFrame {
 
     public abstract void askInitResource() throws IOException, InterruptedException;
 
+    public void displayString(String string){
+        serverMessagePanel.display(string);
+    }
+
+    public abstract void showLorenzoActionPopUp(String string);
 }
 
 

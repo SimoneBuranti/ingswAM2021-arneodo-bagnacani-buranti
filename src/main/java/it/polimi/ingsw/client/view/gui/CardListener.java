@@ -91,7 +91,6 @@ public class CardListener implements MouseListener {
      * @param e The mouse event
      */
     public void mousePressed(MouseEvent e) {
-        mouseClicked(e);
     }
 
     /**

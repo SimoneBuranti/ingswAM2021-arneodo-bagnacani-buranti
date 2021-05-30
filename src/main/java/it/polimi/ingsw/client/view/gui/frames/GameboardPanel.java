@@ -1,5 +1,6 @@
 package it.polimi.ingsw.client.view.gui.frames;
 
+import it.polimi.ingsw.client.ligtModelNotification.GameboardListNotification;
 import it.polimi.ingsw.client.view.ViewController;
 import it.polimi.ingsw.messages.ProductionOnMessage;
 import it.polimi.ingsw.server.model.Resource;
@@ -249,5 +250,19 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
     @Override
     public void mouseExited(MouseEvent e) {
         //System.out.println("You exited");
+    }
+    public void updateProductionSpaces(GameboardListNotification gameboardListNotification){
+        initProductionSpaces();
+        for(int i=0; i<3; i++)
+            for(int j=0; j<3; j++){
+                if (gameboardListNotification.getListOfFirstCard()[i][j]!=null)
+                    addProductionCard(gameboardListNotification.getListOfFirstCard()[i][j].getKey(),j);
+
+            }
+
+    }
+    public void givePapalcard(int i) {
+        faithPathPane.givePapalCard(i);
+
     }
 }

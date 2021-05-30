@@ -332,4 +332,6 @@ public class LightGameBoard {
         arrayList.add(LightLeaderCards.leaderCardByKey(leaderCards.get(cardSec).getKey()));
         leaderCards=arrayList;
     }
+
+
 }

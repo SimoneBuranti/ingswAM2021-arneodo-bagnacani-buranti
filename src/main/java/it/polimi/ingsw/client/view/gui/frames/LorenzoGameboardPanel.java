@@ -58,5 +58,4 @@ public class LorenzoGameboardPanel extends GameboardPanel{
         blackCrossLabel.setBounds(trackX[indicator],trackY[indicator],crossDimension,crossDimension);
     }
 
-
 }
