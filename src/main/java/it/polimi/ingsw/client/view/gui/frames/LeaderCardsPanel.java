@@ -1,6 +1,9 @@
 package it.polimi.ingsw.client.view.gui.frames;
 
+import it.polimi.ingsw.client.lightModel.lightGameBoard.LightLeaderCards;
+import it.polimi.ingsw.server.model.Resource;
 import it.polimi.ingsw.server.model.leaderCards.LeaderCard;
+import it.polimi.ingsw.server.model.leaderCards.LeaderCardStorage;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,13 +11,17 @@ import java.util.ArrayList;
 
 public class LeaderCardsPanel extends JPanel {
     private final static int leaderWidth = 370;
-    private final static int leaderHeight = 278;
+    private final static int leaderHeight = 290; //278
 
     private JLabel firstCard;
     private JLabel secondCard;
+    private ArrayList<ResourceLabel> firstResources;
+    private ArrayList<ResourceLabel> secondResources;
 
     public LeaderCardsPanel(){
         super();
+        firstResources = new ArrayList<>();
+        secondResources = new ArrayList<>();
         this.setLayout(null);
         this.setBounds(810, 280, leaderWidth, leaderHeight);
         setOpaque(false);
@@ -68,15 +75,71 @@ public class LeaderCardsPanel extends JPanel {
         if(pos == 0){
             this.remove(firstCard);
             firstCard = new LeaderCardActivatedLabel(key);
-            firstCard.setBounds(0,0, 150, 278);
+            firstCard.setBounds(0,0, 150, 232);
             this.add(firstCard);
+            new LightLeaderCards();
+            if(LightLeaderCards.leaderCardByKey(key) instanceof LeaderCardStorage){
+                JLabel textLabel = new JLabel("Extra storage:");
+                textLabel.setBounds(40, 234, 150, 15);
+                this.add(textLabel);
+            }
         }else{
             this.remove(secondCard);
             secondCard = new LeaderCardActivatedLabel(key);
-            secondCard.setBounds(160,0, 150, 278);
+            secondCard.setBounds(160,0, 150, 232);
             this.add(secondCard);
+            new LightLeaderCards();
+            if(LightLeaderCards.leaderCardByKey(key) instanceof LeaderCardStorage){
+                JLabel textLabel = new JLabel("Extra storage:");
+                textLabel.setBounds(200, 234, 150, 15);
+                this.add(textLabel);
+            }
         }
 
+    }
+
+    public void addToStorageExtra(int position, Resource resource, int quantity){
+        if(position == 0){
+            for(ResourceLabel resourceLabel : firstResources){
+                this.remove(resourceLabel);
+            }
+            if(quantity == 1){
+                ResourceLabel firstLabel = new ResourceLabel(30, 250, 40, resource);
+                firstResources.add(firstLabel);
+                firstLabel.setBounds(30, 250, 40, 40);
+                this.add(firstLabel);
+            }else if(quantity == 2){
+                ResourceLabel firstLabel = new ResourceLabel(30, 250, 40, resource);
+                firstResources.add(firstLabel);
+                firstLabel.setBounds(30, 250, 40, 40);
+                this.add(firstLabel);
+
+                ResourceLabel secondLabel = new ResourceLabel(85, 250, 40, resource);
+                firstResources.add(secondLabel);
+                secondLabel.setBounds(85, 250, 40, 40);
+                this.add(secondLabel);
+            }
+        }else{
+            for(ResourceLabel resourceLabel : secondResources){
+                this.remove(resourceLabel);
+            }
+            if(quantity == 1){
+                ResourceLabel firstLabel = new ResourceLabel(190, 250, 40, resource);
+                secondResources.add(firstLabel);
+                firstLabel.setBounds(190, 250, 40, 40);
+                this.add(firstLabel);
+            }else if(quantity == 2){
+                ResourceLabel firstLabel = new ResourceLabel(190, 250, 40, resource);
+                secondResources.add(firstLabel);
+                firstLabel.setBounds(190, 250, 40, 40);
+                this.add(firstLabel);
+
+                ResourceLabel secondLabel = new ResourceLabel(245, 250, 40, resource);
+                secondResources.add(secondLabel);
+                secondLabel.setBounds(245, 250, 40, 40);
+                this.add(secondLabel);
+            }
+        }
     }
 
     @Override

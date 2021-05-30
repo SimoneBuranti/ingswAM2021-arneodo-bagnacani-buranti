@@ -134,13 +134,13 @@ public abstract class Paths {
 
         switch(key) {
             case 0:
-                return Toolkit.getDefaultToolkit().createImage(srcPath + "Masters of Renaissance_Cards_FRONT_3mmBleed_1-56-1.png");
-            case 1:
                 return Toolkit.getDefaultToolkit().createImage(srcPath + "Masters of Renaissance_Cards_FRONT_3mmBleed_1-53-1.png");
-            case 2:
-                return Toolkit.getDefaultToolkit().createImage(srcPath + "Masters of Renaissance_Cards_FRONT_3mmBleed_1-55-1.png");
-            case 3:
+            case 1:
                 return Toolkit.getDefaultToolkit().createImage(srcPath + "Masters of Renaissance_Cards_FRONT_3mmBleed_1-54-1.png");
+            case 2:
+                return Toolkit.getDefaultToolkit().createImage(srcPath + "Masters of Renaissance_Cards_FRONT_3mmBleed_1-56-1.png");
+            case 3:
+                return Toolkit.getDefaultToolkit().createImage(srcPath + "Masters of Renaissance_Cards_FRONT_3mmBleed_1-55-1.png");
 
 
             case 4:

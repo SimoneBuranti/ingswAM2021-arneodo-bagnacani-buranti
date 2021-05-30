@@ -8,7 +8,7 @@ import java.awt.*;
 public class LeaderCardActivatedLabel extends JLabel {
     private static final int cardWidth = 150;
     private static final int cardHeight = 222;
-    private static final int panelHeight = 278;
+    private static final int panelHeight = 232;
 
     private Image cardImage;
     private JLabel cardLabel;
