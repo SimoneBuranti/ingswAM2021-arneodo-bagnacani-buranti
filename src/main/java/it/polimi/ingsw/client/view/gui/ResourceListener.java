@@ -33,13 +33,15 @@ public class ResourceListener implements MouseListener {
                     e1.printStackTrace();
                 }}}
 
-        if (gui.getViewController().getGame().getPosition()==2){
+        else if (gui.getViewController().getGame().getPosition()==2){
             if (gui.getReadyToSend()==1){
                 try {
                     gui.notifyObserver(new KeepResourcesMessage(sendableArray));
                 } catch (IOException | InterruptedException e1) {
                     e1.printStackTrace();
                 }}}
+        else
+           gui.powerToMainFrame();
     }
 
     private void addToArrayList(Resource resource) {

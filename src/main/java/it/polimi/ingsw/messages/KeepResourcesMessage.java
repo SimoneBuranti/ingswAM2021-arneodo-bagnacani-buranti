@@ -4,7 +4,6 @@ import it.polimi.ingsw.server.model.Resource;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class KeepResourcesMessage extends Message{
     private final MessageType messageType = MessageType.KEEPRESOURCES;
@@ -12,7 +11,6 @@ public class KeepResourcesMessage extends Message{
     private ArrayList<Resource> choosenResources;
 
     public KeepResourcesMessage(ArrayList<Resource> choosenResources) {
-        System.out.println("Sono dentro al messaggio : "+ choosenResources);
         this.choosenResources = choosenResources;
     }
 

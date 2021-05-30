@@ -1,9 +1,6 @@
 package it.polimi.ingsw.client.view.gui.frames;
 
-import it.polimi.ingsw.client.view.gui.CardManager;
-import it.polimi.ingsw.client.view.gui.Gui;
-import it.polimi.ingsw.client.view.gui.PanelContainer;
-import it.polimi.ingsw.client.view.gui.ResourceManager;
+import it.polimi.ingsw.client.view.gui.*;
 import it.polimi.ingsw.messages.Message;
 import it.polimi.ingsw.server.model.leaderCards.LeaderCard;
 
@@ -17,17 +14,41 @@ public class MainFrameMultiPlayer extends MainFrame {
     private JLabel errorLabel;
     private Gui gui;
 
-    private int readyToSend=0;
 
     public MainFrameMultiPlayer(Gui gui,String title){
-        super(title);
+        super(title,gui);
         this.gui=gui;
+        SwingUtilities.invokeLater(() -> {
+            this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            this.setLocation(475,208);
+            this.setSize(820,420);
 
+            this.setResizable(true);
+            ImageIcon icon = new ImageIcon("src/main/resources/resources/title.jpg");
+            Image image=icon.getImage();
+            JPanel background = new PBackground(image);
+            this.repaint();
+            background.setLayout(null);
+            this.add(background);
+            //mainFrame.add(errorText);
 
+            // Prepare the body container
+            container = new PanelContainer();
+            container.setBounds(50,35, 700, 400);
+            background.add(container);
+
+            this.setVisible(true);
+
+        });}
+
+    public MainFrameMultiPlayer(Gui gui){
+        super(gui);
+        this.gui=gui;
         initPlayerMenu();
-
-
     }
+
+
+
     @Override
     public void askLeaderCardToKeep(ArrayList<LeaderCard> leaderCards) throws IOException, InterruptedException {
 
@@ -147,7 +168,6 @@ public class MainFrameMultiPlayer extends MainFrame {
         }
         initTurnPanel();
     }
-
 
 
 

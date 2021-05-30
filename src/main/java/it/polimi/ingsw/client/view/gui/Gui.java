@@ -7,8 +7,7 @@ import it.polimi.ingsw.client.view.gui.frames.MainFrame;
 import it.polimi.ingsw.client.view.gui.frames.MainFrameMultiPlayer;
 import it.polimi.ingsw.client.view.gui.frames.MainFrameSinglePlayer;
 import it.polimi.ingsw.messages.*;
-import it.polimi.ingsw.messages.observable.GameTypeMessage;
-import it.polimi.ingsw.messages.observable.ShowAllOfPlayerMessage;
+import it.polimi.ingsw.messages.observable.*;
 import it.polimi.ingsw.server.model.Resource;
 import it.polimi.ingsw.server.model.leaderCards.LeaderCard;
 import it.polimi.ingsw.server.model.marbles.Marble;
@@ -31,6 +30,8 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
     private JButton enterButton ;
 
     private MainFrame mainFrameOfGame;
+
+    private Boolean isMultiOrNot;
 
 
 
@@ -316,6 +317,7 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
             mainFrameOfGame= new MainFrameMultiPlayer(this,"your board");
         else
             mainFrameOfGame= new MainFrameSinglePlayer(this, "your board");
+        isMultiOrNot=msg.isMultiOrNot();
     }
 
     @Override
@@ -343,51 +345,40 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
     public void showMarketExtra(Marble extra) { }
 
     @Override
-    public void showFaithIndicator(int pos) {
-        // presente
-
-    }
+    public void showFaithIndicator(int pos) {}
 
     @Override
-    public void showDeckProductionCards(ArrayList<ProductionCard> productionCards) {
-        // new frame
-
-    }
+    public void showDeckProductionCards(ArrayList<ProductionCard> productionCards) {}
 
     @Override
-    public void showGameBoardOfPlayer() {
-        // presente
-
-    }
+    public void showGameBoardOfPlayer() {}
 
     @Override
     public void showProductionDecks() {
-        // presente
+        mainFrameOfGame.showProductionDeckFrame();
 
     }
 
     @Override
     public void showReserve() {
-        // new frame
+        mainFrameOfGame.showReserve();
 
     }
 
     @Override
     public void showMarket() {
-        // new frame market
+        mainFrameOfGame.showMarket();
 
     }
 
     @Override
     public void showWhiteMarbleResources(int n, ArrayList<Resource> whiteMarbleResourceTypes) {
-        // pop up
-
+        mainFrameOfGame.marblePossibilityPopUp(n,whiteMarbleResourceTypes);
     }
 
     @Override
     public void showSpaceError(NotEnoughSpaceErrorMessage msg) {
-        // pop up
-
+        mainFrameOfGame.fullStoragePopUp(msg);
     }
 
     @Override
@@ -404,19 +395,19 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
     @Override
     public void youWin(int score) {
-        // pop up
+        mainFrameOfGame.showPopUp(new MyVictoryMessage(score));
 
     }
 
     @Override
     public void lorenzoWin() {
-        // pop up
+        mainFrameOfGame.showPopUp(new MagnificentWinMessage());
 
     }
 
     @Override
     public void showWinner(String nickname) {
-        // pop up
+        mainFrameOfGame.showPopUp(new EndGamePlayerWinnerMessage(nickname));
 
     }
 
@@ -428,15 +419,13 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
     @Override
     public void sayDisconnect() {
-        // pop up
+        mainFrameOfGame.showPopUp("server is crashed, you i've been disconnected");
 
     }
 
     @Override
     public void visit(DeckListNotification deckListNotification) {
-        // metodi relativi a classe
-
-
+       mainFrameOfGame.getProductionDeckFrame().addDecks(deckListNotification.getListOfFirstCard());
     }
 
     @Override
@@ -459,31 +448,46 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
     @Override
     public void visit(StrongboxNotification strongboxNotification) {
-        // metodi relativi a classe
+        //
 
     }
 
     @Override
     public void visit(ReserveNotification reserveNotification) {
-        // metodi relativi a classe
+        mainFrameOfGame.getReserveFrame().updateReserve(reserveNotification.getMap());
 
     }
 
     @Override
     public void visit(MarketNotification marketNotification) {
-        // metodi relativi a classe
+        mainFrameOfGame.getMarketFrame().setMarbleGrid(marketNotification.getList());
 
     }
 
     @Override
     public void visit(ExtraMarketNotification extraMarketNotification) {
-        // metodi relativi a classe
+        mainFrameOfGame.getMarketFrame().setMarbleExtra(extraMarketNotification.getMarble());
 
     }
 
     @Override
     public void visit(FaithPathNotification faithPathNotification) {
         // metodi relativi a classe
+
+    }
+
+    @Override
+    public void visit(InitLeaderNotification initLeaderNotification) {
+
+    }
+
+    @Override
+    public void visit(ActivateLeaderNotification activateLeaderNotification) {
+
+    }
+
+    @Override
+    public void visit(DiscardLeaderNotification discardLeaderNotification) {
 
     }
 
@@ -553,25 +557,19 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
     public int getReadyToSend() {
         return readyToSend;
 
-   /* public void printCards(List<LeaderCard> chosenCards, int numCards) {
-        if (numCards == chosenCards.size()) {
-           /* (new Thread(() -> {
-                showLoading();
-                serverHandler.sendGameCards(chosenCards);
-            })).start();
-        } else {
-            SwingUtilities.invokeLater(() -> {
-                clear(bodyContainer);
+  
 
-                CardManager cardSwitcher= new CardManager(bodyContainer,this);
-                cardSwitcher.setHeading("Choose " + (numCards - chosenCards.size()) + " card" + (numCards - chosenCards.size() > 1 ? "s" : "") + " between these:");
-                cardSwitcher.showSwitcher(chosenCards,numCards);
-                cardSwitcher.showCardDetails();
+    }
 
-                applyChangesTo(bodyContainer);
-            });
-        }
-    }*/
+    public void showLoading () { }
 
-    }public void showLoading () {
-    }}
+
+    public void powerToMainFrame() {
+        mainFrameOfGame.dispose();
+        if(isMultiOrNot)
+            mainFrameOfGame= new MainFrameMultiPlayer(this);
+        else
+            mainFrameOfGame= new MainFrameSinglePlayer(this);
+
+    }
+}

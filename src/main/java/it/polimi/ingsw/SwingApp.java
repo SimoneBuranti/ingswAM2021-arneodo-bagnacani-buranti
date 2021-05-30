@@ -1,16 +1,5 @@
 package it.polimi.ingsw;
 
-import it.polimi.ingsw.client.SocketClient;
-import it.polimi.ingsw.client.view.ViewController;
-import it.polimi.ingsw.client.view.gui.Gui;
-import it.polimi.ingsw.client.view.gui.frames.*;
-import it.polimi.ingsw.server.model.Resource;
-
-import javax.swing.*;
-import java.awt.*;
-import java.io.IOException;
-import java.util.HashMap;
-
 public class SwingApp {
 
     public static void main(String[] args) {
@@ -23,11 +12,15 @@ public class SwingApp {
             productionDeckFrame.addDecks(productionCardArray.getList());
         } catch (IOException e) {
             e.printStackTrace();
-        }*/
+        }
 
-        //MainFrame frame = new MainFrame();
+        MainFrame mainFrame = new MainFrame("Master of Renaissance");
+        mainFrame.initGameMode();
+        mainFrame.paintComponents(mainFrame.getGraphics());
+        mainFrame.paintComponents(mainFrame.getGraphics());
 
-        JFrame frame = new JFrame();
+
+        /*JFrame frame = new JFrame();
         frame.setSize(1200,668);
         GameboardPanel gameboard = new GameboardPanel();
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -64,7 +57,7 @@ public class SwingApp {
 
 
         frame.paintComponents(frame.getGraphics());
-        frame.paintComponents(frame.getGraphics());
+        frame.paintComponents(frame.getGraphics());*/
 
     }
 

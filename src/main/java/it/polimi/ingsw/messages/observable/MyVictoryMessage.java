@@ -28,4 +28,9 @@ public class MyVictoryMessage extends Message {
     public int getScore() {
         return score;
     }
+
+    @Override
+    public String toString(){
+        return "your score : "+getScore();
+    }
 }
