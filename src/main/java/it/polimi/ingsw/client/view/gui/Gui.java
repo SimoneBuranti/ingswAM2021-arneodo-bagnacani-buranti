@@ -86,8 +86,10 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
         });}
 
     @Override
-    public void update(String notification) throws IOException, InterruptedException { }
-
+    public void update(String notification) throws IOException, InterruptedException {
+        Notification parsedMsg = Notification.deserialize(notification);
+        parsedMsg.accept(this);
+    }
     @Override
     public void setViewController(ViewController viewController){
         this.viewController=viewController;
@@ -508,8 +510,6 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
     @Override
     public void visit(ActivateLeaderNotification activateLeaderNotification) {
         mainFrameOfGame.activateLeader(activateLeaderNotification.getIndex(),activateLeaderNotification.getKey());
-
-
 
     }
 

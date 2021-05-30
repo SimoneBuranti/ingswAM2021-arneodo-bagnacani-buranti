@@ -23,9 +23,8 @@ public class CardLabelWithButton extends JPanel {
         cardLabel.setIcon(new ImageIcon(cardImage));
         button = new JButton("Deck "+ deck);
         button.setBounds(30,220, 100, 28);
-        //button.setBackground(new Color(255, 235, 205));
-        //button.setBackground(new Color(245, 204, 176));
         button.setBackground(new Color(188, 143, 143));
+        //button.setBackground(new Color(153, 139, 109));
         this.add(cardLabel);
         this.add(button);
         this.setSize(cardWidth,panelHeight);

@@ -82,8 +82,8 @@ public class MainFrameSinglePlayer extends MainFrame{
         mainPanel.add(serverMessagePanel);
         leaderCardsPanel = new LeaderCardsPanel();
         leaderCardsPanel.setBounds(805, 280, leaderWidth, leaderHeight);
-        leaderCardsPanel.setBackground(Color.BLUE);
-        leaderCardsPanel.setOpaque(true);
+        //leaderCardsPanel.setBackground(Color.BLUE);
+        //leaderCardsPanel.setOpaque(true);
         mainPanel.add(leaderCardsPanel);
 
         actionMarkerPanel = new ActionMarkerPanel();
