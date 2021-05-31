@@ -32,7 +32,6 @@ public class GameControllerSinglePlayer extends GameController {
                 tempLobbyController.get(i).getClientHandler().sendMessage(new CompleteRunningMatchErrorMessage());
                 try {
                     tempLobbyController.get(i).getClientHandler().disconnect();
-                    System.out.println("sono qui");
                 } catch (IOException e) {
                     //messaggio di errore
                 }
@@ -53,22 +52,26 @@ public class GameControllerSinglePlayer extends GameController {
         if(game.disconnectPlayer(clientController.getNickname())) {
             flag = true;
             server.addClientControllersDisconnected(clientController);
-            System.out.println("Ho disconnesso client - general call");
+            System.out.println("Ho disconnesso client ");
         }
         try {
             clientController.getClientHandler().disconnect();
         } catch (IOException | InterruptedException e) {
             //messaggio di errore
         }
-        if(flag) {
-            server.setGameController(new GameControllerDisconnection(this.server,this.game));
-        }}
+
+        if(flag)
+        {
+            server.resetInfoPartial();
+        }
+
+        }
         else
         { game.disconnectPlayer(clientController.getNickname());
             server.addClientControllersDisconnected(clientController);
             try {
                 clientController.getClientHandler().disconnect();
-                System.out.println("Ho disconnesso client - general call");
+                System.out.println("Ho disconnesso client");
             } catch (IOException | InterruptedException e) {
                 //messaggio di errore
             }
@@ -86,7 +89,7 @@ public class GameControllerSinglePlayer extends GameController {
         clientController.getClientHandler().sendMessage(new CompleteRunningMatchErrorMessage());
         try {
             clientController.getClientHandler().disconnect();
-            System.out.println("Ho disconnesso client - general call");
+            System.out.println("Ho disconnesso client");
         } catch (IOException e) {
             //messaggio di errore
         }

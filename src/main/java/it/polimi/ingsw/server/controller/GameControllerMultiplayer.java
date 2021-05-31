@@ -29,15 +29,16 @@ public class GameControllerMultiplayer extends GameController {
      } catch (IOException | InterruptedException e) {
      //messaggio di errore
     }
-     if(flag) {
+     if(flag && !(server.getClientControllersDisconnected().size() ==server.getClientController().size())) {
       server.setGameController(new GameControllerDisconnection(this.server,this.game));
-     }}
+     }
+        }
         else
         {game.disconnectPlayer(clientController.getNickname());
             server.addClientControllersDisconnected(clientController);
             try {
                 clientController.getClientHandler().disconnect();
-                System.out.println("Ho disconnesso client - general call");
+                System.out.println("Ho disconnesso client");
             } catch (IOException | InterruptedException e) {
                 //messaggio di errore
             }

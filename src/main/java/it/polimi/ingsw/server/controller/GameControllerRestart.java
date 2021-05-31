@@ -40,7 +40,7 @@ public class GameControllerRestart extends GameController {
                 c.getClientHandler().sendMessage(new NPlayersMessage(server.getGameController().getLobbySize(), server.getLobbySize()));
         }
         clientController.getClientHandler().disconnect();
-        System.out.println("Ho disconnesso client - general call");
+        System.out.println("Ho disconnesso client");
     }
 
     @Override
@@ -95,7 +95,6 @@ public class GameControllerRestart extends GameController {
 
             if (reconnected.size() == server.getLobbySize()){
                 if (numberOfPlayers==1){
-                    System.out.println("try to restart all*******");
                     server.restoreGameSingleBackup();
                     server.setGameController(new GameControllerSinglePlayer(server,server.getGame()));
 

@@ -254,4 +254,21 @@ public class Server {
         this.gameController = new GameControllerEmpty(this);
         gameController.setServer(this);
     }
+
+    public void resetInfoPartial() {
+        this.game=null;
+        clientControllers = new ArrayList<>();
+        tempClientController = new ArrayList<>();
+        clientControllersDisconnected = new ArrayList<>();
+
+     //   lobby = new ArrayList<>();
+        this.gameController = new GameControllerRestart(this);
+        gameController.setServer(this);
+        sendRestartQuestion = true;
+        restartQuestion = 0;
+        setRestartAnswerReceived(false);
+        restartQuestionSent = false;
+        gameController.setNumberOfPlayers(lobby.size());
+
+    }
 }

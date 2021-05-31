@@ -43,17 +43,17 @@ public class GameControllerEmpty extends GameController {
 
         return false;
     }
+
     @Override
     public void handleMessage(ExitMessage msg, ClientController clientController) throws IOException, InterruptedException {
         if(isFirstClient(clientController)){
             server.removePlayerToLobby(clientController.getNickname());
             server.removeClientController(clientController);
             disconnectFirstClient();
-        }else{
-            disconnectClientTempLobby(clientController);
         }
+        else{ disconnectClientTempLobby(clientController); }
         clientController.getClientHandler().disconnect();
-        System.out.println("Ho disconnesso client - general call");
+        System.out.println("Ho disconnesso client");
     }
 
     @Override

@@ -823,5 +823,12 @@ public class Game extends Observable {
         this.isOver=bool;
     }
 
+    /**
+     * ask method on player info
+     * @param n
+     * @param nickname
+     * @throws IOException
+     * @throws InterruptedException
+     */
     public void askInfoOnPlayer(int n, String nickname) throws IOException, InterruptedException {}
 }

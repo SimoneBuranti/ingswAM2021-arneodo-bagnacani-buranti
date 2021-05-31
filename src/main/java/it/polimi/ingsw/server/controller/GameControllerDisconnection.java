@@ -23,9 +23,13 @@ public class GameControllerDisconnection extends GameController {
         server.addClientControllersDisconnected(clientController);
         try {
             clientController.getClientHandler().disconnect();
-            System.out.println("Ho disconnesso client - general call");
+            System.out.println("Ho disconnesso client ");
         } catch (IOException | InterruptedException e) {
             //messaggio di errore
+        }
+        if((server.getClientControllersDisconnected().size() ==server.getClientController().size()))
+        {
+            server.resetInfoPartial();
         }
     }
 

@@ -39,7 +39,7 @@ public class SocketClient {
             if (!isCheckServer()){
                 ack++;
                 //System.out.println("ack error: " + ack);
-                if(ack==8){
+                if(ack==4){
                     try {
                         viewController.sayDisconnect();
                         disconnect();
