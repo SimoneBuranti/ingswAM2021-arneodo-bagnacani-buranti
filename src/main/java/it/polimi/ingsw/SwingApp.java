@@ -1,10 +1,7 @@
 package it.polimi.ingsw;
 
 import it.polimi.ingsw.client.view.gui.Gui;
-import it.polimi.ingsw.client.view.gui.frames.GameboardPanel;
-import it.polimi.ingsw.client.view.gui.frames.LeaderCardsPanel;
-import it.polimi.ingsw.client.view.gui.frames.MainFrame;
-import it.polimi.ingsw.client.view.gui.frames.ServerMessagePanel;
+import it.polimi.ingsw.client.view.gui.frames.*;
 import it.polimi.ingsw.server.model.Resource;
 
 import javax.swing.*;
@@ -16,6 +13,7 @@ public class SwingApp {
 
     public static void main(String[] args) {
 
+        JFrame market = new MarketFrame(new Gui());
         /*ProductionCardArray productionCardArray = new ProductionCardArray();
         ProductionDeckFrame productionDeckFrame;
 
@@ -32,7 +30,7 @@ public class SwingApp {
         nicknames.add("aeeeeeeeeeeeeeeee");
         nicknames.add("AAAAAAAAAAA");*/
 
-        /*MainFrame mainFrame = new MainFrame("Master of Renaissance");
+        /*MainFrame mainFrame = new MainFrameSinglePlayer(new Gui());
         mainFrame.initGameMode();
         mainFrame.setCurrentPlayer("simone");
         mainFrame.showLorenzoActionPopUp("ActionMarkerForCrossDouble");
@@ -53,17 +51,17 @@ public class SwingApp {
         LeaderCardsPanel leaderCardsPanel = new LeaderCardsPanel(new Gui());
         frame.add(leaderCardsPanel);
         leaderCardsPanel.addLeaderCards(leaderCards.getList(), false);
-        //leaderCardsPanel.discardLeaderCard(1);
+        leaderCardsPanel.discardLeaderCard(0);
 
-        leaderCardsPanel.activatedLeaderCard(0, 4);
-        leaderCardsPanel.activatedLeaderCard(1, 4);*/
+        //leaderCardsPanel.activatedLeaderCard(0, 4);
+        //leaderCardsPanel.activatedLeaderCard(1, 4);
         //leaderCardsPanel.activatedLeaderCard(1, 1);
         //leaderCardsPanel.addToStorageExtra(0, Resource.ROCK, 2);
         //leaderCardsPanel.addToStorageExtra(1,Resource.SERVANT, 2);
 
         //ActionMarkerPanel actionMarkerPanel = new ActionMarkerPanel();
         //frame.add(actionMarkerPanel);
-        /*ServerMessagePanel serverMessagePanel = new ServerMessagePanel();
+        ServerMessagePanel serverMessagePanel = new ServerMessagePanel();
         frame.add(serverMessagePanel);
         serverMessagePanel.display("Ha un grande valore rappresentativo, essendo \n architettonicamente e artisticamente incentrato \nsul Risorgimento, il complesso processo di unità nazionale e liberazione dalla dominazione straniera portato a compimento sotto il regno di Vittorio Emanuele II di Savoia, cui il monumento è dedicato: per tale motivo il Vittoriano è considerato uno dei simboli patri italiani.");
 

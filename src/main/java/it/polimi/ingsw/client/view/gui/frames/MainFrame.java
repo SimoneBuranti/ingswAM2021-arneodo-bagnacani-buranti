@@ -153,7 +153,7 @@ public abstract class MainFrame  extends JFrame {
 
     public abstract void updateFaith(int i);
     public abstract void initLeader(ArrayList<LeaderCard> arrayList, boolean bool);
-    public abstract void activateLeader(int arrayList, int bool);
+    public abstract void activateLeader(int key, int index);
     public abstract void discardLeader(int bool);
 
 
@@ -478,6 +478,8 @@ public abstract class MainFrame  extends JFrame {
     }
 
     public abstract void showLorenzoActionPopUp(String string);
+
+    public abstract void updateLorenzoIndicator(int i);
 
     public void showAllOfPlayer(ShowAllOfPlayerMessage msg){
     }

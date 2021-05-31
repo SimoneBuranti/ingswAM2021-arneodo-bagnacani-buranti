@@ -16,7 +16,7 @@ public class FaithPathPane extends JPanel {
     private static final int[] papalY = {84,41,84};
 
 
-    private String crossPath = "src/main/resources/resources/punchboard/croce rossa.jpeg";
+    private String crossPath = "src/main/resources/resources/punchboard/croci-03.png";
     private ImageIcon crossIcon;
     private JLabel crossLabel;
     private JLabel papalCards[];

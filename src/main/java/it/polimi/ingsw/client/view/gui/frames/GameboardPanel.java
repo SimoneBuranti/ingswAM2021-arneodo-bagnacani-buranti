@@ -238,7 +238,6 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
 
 
     public void updateStorage(Map<Resource,Integer> newStorage){
-
         this.storagePanel.updateStorage(newStorage);
 
     }

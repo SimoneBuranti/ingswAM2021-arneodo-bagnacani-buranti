@@ -75,7 +75,7 @@ public class LightGameMultiPlayer extends LightGame{
         gameBoardOfPlayer.activateLeaderCard(index);
         notifyObserver(new LeaderListCardNotification(gameBoardOfPlayer.getLeaderCards(),false).serialize());
         notifyObserver(new LeaderListCardNotification(gameBoardOfPlayer.getLeaderCardsActivated(),true).serialize());
-        notifyObserver(new ActivateLeaderNotification(index, key).serialize());
+        notifyObserver(new ActivateLeaderNotification(key, gameBoardOfPlayer.getLeaderCardsActivated().size()-1).serialize());
     }
 
 

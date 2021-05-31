@@ -136,30 +136,24 @@ public class MarketFrame extends JFrame{
     }
 
     public void removeButton(){
-        SwingUtilities.invokeLater(() -> {
-            buttonC0.setEnabled(false);
-            buttonC1.setEnabled(false);
-            buttonC2.setEnabled(false);
-            buttonC3.setEnabled(false);
-            buttonR0.setEnabled(false);
-            buttonR1.setEnabled(false);
-            buttonR2.setEnabled(false);
+        buttonC0.setEnabled(false);
+        buttonC1.setEnabled(false);
+        buttonC2.setEnabled(false);
+        buttonC3.setEnabled(false);
+        buttonR0.setEnabled(false);
+        buttonR1.setEnabled(false);
+        buttonR2.setEnabled(false);
 
-            applyChangesTo(container);
-        });
     }
     public void enableButton(){
-        SwingUtilities.invokeLater(() -> {
-            buttonC0.setEnabled(true);
-            buttonC1.setEnabled(true);
-            buttonC2.setEnabled(true);
-            buttonC3.setEnabled(true);
-            buttonR0.setEnabled(true);
-            buttonR1.setEnabled(true);
-            buttonR2.setEnabled(true);
+        buttonC0.setEnabled(true);
+        buttonC1.setEnabled(true);
+        buttonC2.setEnabled(true);
+        buttonC3.setEnabled(true);
+        buttonR0.setEnabled(true);
+        buttonR1.setEnabled(true);
+        buttonR2.setEnabled(true);
 
-            applyChangesTo(container);
-        });
     }
 
     public void sendPushColumn(int column){
