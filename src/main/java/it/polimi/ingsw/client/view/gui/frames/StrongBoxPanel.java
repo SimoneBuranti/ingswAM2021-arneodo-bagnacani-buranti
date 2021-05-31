@@ -24,13 +24,13 @@ public class StrongBoxPanel extends JPanel {
 
         this.setLayout(new GridLayout(2,2,2,2));
 
-        ResourceLabel coinLabel = new ResourceLabel(0,0,resourceDimension, Resource.COIN);
+        coinLabel = new ResourceLabel(0,0,resourceDimension, Resource.COIN);
         coinLabel.setValue(0);
-        ResourceLabel rockLabel = new ResourceLabel(0,0,resourceDimension, Resource.ROCK);
+        rockLabel = new ResourceLabel(0,0,resourceDimension, Resource.ROCK);
         rockLabel.setValue(0);
-        ResourceLabel shieldLabel = new ResourceLabel(0,0,resourceDimension, Resource.SHIELD);
+        shieldLabel = new ResourceLabel(0,0,resourceDimension, Resource.SHIELD);
         shieldLabel.setValue(0);
-        ResourceLabel servantLabel = new ResourceLabel(0,0,resourceDimension, Resource.SERVANT);
+        servantLabel = new ResourceLabel(0,0,resourceDimension, Resource.SERVANT);
         servantLabel.setValue(0);
 
         this.add(coinLabel);
