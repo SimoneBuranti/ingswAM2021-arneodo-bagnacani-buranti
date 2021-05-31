@@ -40,7 +40,7 @@ public class SwingApp {
         mainFrame.paintComponents(mainFrame.getGraphics());*/
 
 
-        Frame frame = new JFrame();
+        /*Frame frame = new JFrame();
         frame.setSize(1200,668);
         GameboardPanel gameboard = new GameboardPanel(new Gui());
         //frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -56,14 +56,14 @@ public class SwingApp {
         //leaderCardsPanel.discardLeaderCard(1);
 
         leaderCardsPanel.activatedLeaderCard(0, 4);
-        leaderCardsPanel.activatedLeaderCard(1, 4);
+        leaderCardsPanel.activatedLeaderCard(1, 4);*/
         //leaderCardsPanel.activatedLeaderCard(1, 1);
         //leaderCardsPanel.addToStorageExtra(0, Resource.ROCK, 2);
         //leaderCardsPanel.addToStorageExtra(1,Resource.SERVANT, 2);
 
         //ActionMarkerPanel actionMarkerPanel = new ActionMarkerPanel();
         //frame.add(actionMarkerPanel);
-        ServerMessagePanel serverMessagePanel = new ServerMessagePanel();
+        /*ServerMessagePanel serverMessagePanel = new ServerMessagePanel();
         frame.add(serverMessagePanel);
         serverMessagePanel.display("Ha un grande valore rappresentativo, essendo \n architettonicamente e artisticamente incentrato \nsul Risorgimento, il complesso processo di unità nazionale e liberazione dalla dominazione straniera portato a compimento sotto il regno di Vittorio Emanuele II di Savoia, cui il monumento è dedicato: per tale motivo il Vittoriano è considerato uno dei simboli patri italiani.");
 
@@ -83,7 +83,7 @@ public class SwingApp {
 
 
         frame.paintComponents(frame.getGraphics());
-        frame.paintComponents(frame.getGraphics());
+        frame.paintComponents(frame.getGraphics());*/
 
     }
 

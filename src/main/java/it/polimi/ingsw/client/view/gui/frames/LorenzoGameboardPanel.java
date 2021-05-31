@@ -1,5 +1,6 @@
 package it.polimi.ingsw.client.view.gui.frames;
 
+import it.polimi.ingsw.client.view.gui.Gui;
 import it.polimi.ingsw.client.view.gui.Paths;
 
 import javax.swing.*;
@@ -16,8 +17,8 @@ public class LorenzoGameboardPanel extends GameboardPanel{
 
     private int indicator;
 
-    public LorenzoGameboardPanel(){
-        super();
+    public LorenzoGameboardPanel(Gui gui){
+        super(gui);
 
         initBlackCrossLabel();
 

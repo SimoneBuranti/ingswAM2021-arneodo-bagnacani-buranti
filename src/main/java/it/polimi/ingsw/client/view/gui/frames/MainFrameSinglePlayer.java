@@ -75,7 +75,7 @@ public class MainFrameSinglePlayer extends MainFrame{
         productionDeckFrame = new ProductionDeckFrame(gui);
         reserveFrame = new ReserveFrame();
 
-        lorenzoGameboardPanel = new LorenzoGameboardPanel();
+        lorenzoGameboardPanel = new LorenzoGameboardPanel(gui);
         lorenzoGameboardPanel.setBounds(0, 0, 800, 572);
         mainPanel.add(lorenzoGameboardPanel);
         serverMessagePanel = new ServerMessagePanel();

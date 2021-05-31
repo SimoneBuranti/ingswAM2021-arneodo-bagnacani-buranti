@@ -157,6 +157,35 @@ public class MainFrameMultiPlayer extends MainFrame {
     }
 
 
+    public void initGameMode() {
+        for (JPanel p : attached) {
+            mainPanel.remove(p);
+        }
+        setGeneralFeatures();
+        initNavigationBar();
+
+        marketFrame = new MarketFrame(gui);
+        productionDeckFrame = new ProductionDeckFrame(gui);
+        reserveFrame = new ReserveFrame();
+
+        gameboardPanel = new GameboardPanel(gui);
+        gameboardPanel.setBounds(0, 0, 800, 572);
+        mainPanel.add(gameboardPanel);
+        serverMessagePanel = new ServerMessagePanel();
+        serverMessagePanel.setBounds(800, 0, 380, 275);
+        mainPanel.add(serverMessagePanel);
+        leaderCardsPanel = new LeaderCardsPanel(gui);
+        leaderCardsPanel.setBounds(805, 280, leaderWidth, leaderHeight);
+        //leaderCardsPanel.setBackground(Color.BLUE);
+        //leaderCardsPanel.setOpaque(true);
+        mainPanel.add(leaderCardsPanel);
+
+
+        this.setVisible(false);
+    }
+
+
+
     /**
      * Apply changes to a component
      * @param component The component

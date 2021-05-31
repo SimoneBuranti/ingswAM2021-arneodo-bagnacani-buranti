@@ -262,7 +262,7 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
     @Override
     public void yourTurn() {
         mainFrameOfGame.setCurrentPlayer(viewController.getNickName());
-        enableAllAction();
+        //enableAllAction();
 
     }
 
@@ -351,10 +351,6 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
     @Override
     public void showRestartMessage() {}
 
-    @Override
-    public void showPlayerInfo(ShowAllOfPlayerMessage msg) {
-        mainFrameOfGame.showAllOfPlayer(msg);
-    }
 
     @Override
     public void askInitResource() throws IOException, InterruptedException {
@@ -442,7 +438,8 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
     @Override
     public void visit(DeckListNotification deckListNotification) {
-       mainFrameOfGame.getProductionDeckFrame().addDecks(deckListNotification.getListOfFirstCard());
+        System.out.println("decklist notific");
+        mainFrameOfGame.getProductionDeckFrame().addDecks(deckListNotification.getListOfFirstCard());
     }
 
     @Override
@@ -649,7 +646,7 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
     }
 
 
-    public void showAllOfPlayer(ShowAllOfPlayerMessage msg){
+    public void showPlayerInfo(ShowAllOfPlayerMessage msg){
         this.playerInformatioFrames= new PlayerInformatioFrames(msg);
     }
 

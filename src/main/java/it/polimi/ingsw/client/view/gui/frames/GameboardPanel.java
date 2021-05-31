@@ -75,8 +75,6 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
 
     public GameboardPanel(){
 
-        this.gui = gui;
-
         initGameboardPanel();
 
         initProductionSpaces();
