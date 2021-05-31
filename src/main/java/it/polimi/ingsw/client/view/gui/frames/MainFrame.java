@@ -6,6 +6,7 @@ import it.polimi.ingsw.messages.KeepResourcesMessage;
 import it.polimi.ingsw.messages.Message;
 import it.polimi.ingsw.messages.NotEnoughSpaceErrorMessage;
 import it.polimi.ingsw.messages.WhiteMarbleChoosenResourcesMessage;
+import it.polimi.ingsw.messages.observable.ShowAllOfPlayerMessage;
 import it.polimi.ingsw.server.model.Resource;
 import it.polimi.ingsw.server.model.leaderCards.LeaderCard;
 
@@ -461,6 +462,9 @@ public abstract class MainFrame  extends JFrame {
     }
 
     public abstract void showLorenzoActionPopUp(String string);
+
+    public void showAllOfPlayer(ShowAllOfPlayerMessage msg){
+    }
 }
 
 
