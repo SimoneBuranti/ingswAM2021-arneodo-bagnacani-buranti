@@ -148,6 +148,19 @@ public class MarketFrame extends JFrame{
             applyChangesTo(container);
         });
     }
+    public void enableButton(){
+        SwingUtilities.invokeLater(() -> {
+            buttonC0.setEnabled(true);
+            buttonC1.setEnabled(true);
+            buttonC2.setEnabled(true);
+            buttonC3.setEnabled(true);
+            buttonR0.setEnabled(true);
+            buttonR1.setEnabled(true);
+            buttonR2.setEnabled(true);
+
+            applyChangesTo(container);
+        });
+    }
 
     public void sendPushColumn(int column){
         viewController.sendMessage(new PushColumnMessage(column));

@@ -71,7 +71,7 @@ public class MainFrameSinglePlayer extends MainFrame{
         initNavigationBar();
 
         marketFrame = new MarketFrame();
-        productionDeckFrame = new ProductionDeckFrame();
+        productionDeckFrame = new ProductionDeckFrame(gui);
         reserveFrame = new ReserveFrame();
 
         lorenzoGameboardPanel = new LorenzoGameboardPanel();
@@ -224,6 +224,11 @@ public class MainFrameSinglePlayer extends MainFrame{
 
     public void updateProductionCard(GameboardListNotification gameboardListNotification){
         this.lorenzoGameboardPanel.updateProductionSpaces(gameboardListNotification);
+    }
+
+    @Override
+    public void putCardMode(int deckKey) {
+        lorenzoGameboardPanel.putCardMode(deckKey);
     }
 
     public void callForCouncil(int i){

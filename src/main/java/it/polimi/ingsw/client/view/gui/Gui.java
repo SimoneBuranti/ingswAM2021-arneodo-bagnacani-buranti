@@ -588,4 +588,24 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
 
     }
+
+    public void disableAllExceptProductions() {
+        mainFrameOfGame.disableMarketButtons();
+        mainFrameOfGame.disableDeckButtons();
+        mainFrameOfGame.disableLeaderButtons();
+    }
+
+    public void putProdCardMode(int deckKey) {
+        mainFrameOfGame.disableMarketButtons();
+        mainFrameOfGame.disableLeaderButtons();
+        mainFrameOfGame.putCardMode(deckKey);
+
+    }
+
+    public void actionDoneMode() {
+        mainFrameOfGame.disableMarketButtons();
+        mainFrameOfGame.disableDeckButtons();
+        mainFrameOfGame.disableProductionButtons();
+        //mainFrameOfGame.enableLeaderButtons();
+    }
 }

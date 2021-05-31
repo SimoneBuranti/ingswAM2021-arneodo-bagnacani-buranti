@@ -1,5 +1,7 @@
 package it.polimi.ingsw.client.view.gui;
 
+import it.polimi.ingsw.client.view.gui.listeners.CardListener;
+
 import java.awt.*;
 
 /**

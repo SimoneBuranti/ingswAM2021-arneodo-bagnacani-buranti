@@ -39,9 +39,10 @@ public class BaseProductionPanel extends JPanel {
         productionButton = new JButton();
         productionButton.setSize(108,20);
         productionButton.setBounds(0,310,108,20);
+        productionButton.setText("Activate");
         productionButton.addActionListener( e -> {
-            //this.viewController.sendMessage(new BaseProductionOnMessage(this.input1.getSelected(),this.input2.getSelected(),this.output.getSelected()));
-            System.out.println(new BaseProductionOnMessage(this.input1.getResource(),this.input2.getResource(),this.output.getResource()));
+            this.viewController.sendMessage(new BaseProductionOnMessage(this.input1.getResource(),this.input2.getResource(),this.output.getResource()));
+            //System.out.println(new BaseProductionOnMessage(this.input1.getResource(),this.input2.getResource(),this.output.getResource()));
             this.productionButton.setEnabled(false);
         });
 
@@ -76,6 +77,10 @@ public class BaseProductionPanel extends JPanel {
         output.setBounds(oX,oY,resourceDimension,resourceDimension);
         //output.setOpaque(true);
         this.add(output);
+    }
+
+    public void enableButton(){
+        this.productionButton.setEnabled(true);
     }
 
 }

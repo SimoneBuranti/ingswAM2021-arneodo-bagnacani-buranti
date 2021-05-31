@@ -1,5 +1,7 @@
-package it.polimi.ingsw.client.view.gui;
+package it.polimi.ingsw.client.view.gui.listeners;
 
+import it.polimi.ingsw.client.view.gui.CardManager;
+import it.polimi.ingsw.client.view.gui.Gui;
 import it.polimi.ingsw.messages.KeepLeaderCardsMessage;
 import it.polimi.ingsw.server.model.leaderCards.LeaderCard;
 

@@ -1,5 +1,7 @@
-package it.polimi.ingsw.client.view.gui;
+package it.polimi.ingsw.client.view.gui.listeners;
 
+import it.polimi.ingsw.client.view.gui.Gui;
+import it.polimi.ingsw.client.view.gui.ResourceManager;
 import it.polimi.ingsw.messages.EndOfTurnMessage;
 import it.polimi.ingsw.messages.KeepResourcesMessage;
 import it.polimi.ingsw.server.model.Resource;
@@ -16,7 +18,7 @@ public class ResourceListener implements MouseListener {
 
 
 
-    public ResourceListener(Resource resource , ResourceManager resourceManager,Gui gui) {
+    public ResourceListener(Resource resource , ResourceManager resourceManager, Gui gui) {
 
         this.resource=resource;
         this.gui=gui;

@@ -404,6 +404,25 @@ public abstract class MainFrame  extends JFrame {
 
         }); }
 
+
+    public void disableMarketButtons(){
+        marketFrame.removeButton();
+    }
+
+    public void disableDeckButtons(){
+        productionDeckFrame.disableButtons();
+    }
+
+    public abstract void putCardMode(int deckKey);
+
+    public void disableLeaderButtons(){
+
+    }
+
+    public void disableProductionButtons(){
+
+    }
+
     public MarketFrame getMarketFrame() {
         return marketFrame;
     }

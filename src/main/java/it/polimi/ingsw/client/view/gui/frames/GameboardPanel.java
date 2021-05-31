@@ -2,6 +2,9 @@ package it.polimi.ingsw.client.view.gui.frames;
 
 import it.polimi.ingsw.client.ligtModelNotification.GameboardListNotification;
 import it.polimi.ingsw.client.view.ViewController;
+import it.polimi.ingsw.client.view.gui.Gui;
+import it.polimi.ingsw.client.view.gui.listeners.ActivateProductionListener;
+import it.polimi.ingsw.client.view.gui.listeners.PutCardButtonListener;
 import it.polimi.ingsw.messages.ProductionOnMessage;
 import it.polimi.ingsw.server.model.Resource;
 import it.polimi.ingsw.server.model.gameBoard.Strongbox;
@@ -29,6 +32,8 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
     protected final static int psy =226;
 
 
+    protected Gui gui;
+
     protected ViewController viewController;
 
 
@@ -43,9 +48,9 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
     protected StrongBoxPanel strongboxPanel;
 
 
-    public GameboardPanel(){
+    public GameboardPanel(Gui gui){
 
-        this.viewController = viewController;
+        this.gui = gui;
 
         initGameboardPanel();
 
@@ -63,14 +68,7 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
 
         this.setBorder(BorderFactory.createBevelBorder(1,Color.BLACK,Color.DARK_GRAY));
 
-        addProductionCard(1,0);
-        addProductionCard(8,0);
-        addProductionCard(12,0);
 
-        addProductionCard(13,1);
-        addProductionCard(20,1);
-
-        addProductionCard(26,2);
     }
 
 
@@ -120,10 +118,8 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
             productionButtons[i].setSize(108,20);
             productionButtons[i].setEnabled(false);
             int finalI = i;
-            productionButtons[i].addActionListener(e -> {
-                productionButtons[finalI].setEnabled(false);
-                viewController.sendMessage(new ProductionOnMessage(finalI));
-            });
+            productionButtons[i].setText("Activate");
+            productionButtons[i].addActionListener(new ActivateProductionListener(gui,productionButtons[i],i));
 
             this.add(productionButtons[i]);
         }
@@ -170,7 +166,7 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
         faithPathPane.setBounds(0,0,faithPathWidth,faithPathHeight);
 
         //move button Player--------
-        JButton moveButton = new JButton();
+        /*JButton moveButton = new JButton();
         moveButton.setSize(20,20);
         moveButton.addActionListener(e -> {
             faithPathPane.move();
@@ -186,7 +182,7 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
             this.repaint();
         });
         papalButton.setBounds(20,50,20,20);
-        faithPathPane.add(papalButton);
+        faithPathPane.add(papalButton);*/
 
         this.add(faithPathPane);
     }
@@ -264,5 +260,17 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
     public void givePapalcard(int i) {
         faithPathPane.givePapalCard(i);
 
+    }
+
+    public void enableProductionButtons(){
+
+    }
+
+    public void putCardMode(int deckKey){
+        for(int i = 0; i<3 ; i++){
+            productionButtons[i].setText("Put here");
+            productionButtons[i].setEnabled(true);
+            productionButtons[i].addActionListener(new PutCardButtonListener(gui,deckKey,i));
+        }
     }
 }

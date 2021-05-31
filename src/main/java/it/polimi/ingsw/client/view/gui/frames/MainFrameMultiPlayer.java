@@ -286,6 +286,11 @@ public class MainFrameMultiPlayer extends MainFrame {
         this.gameboardPanel.updateProductionSpaces(gameboardListNotification);
     }
 
+    @Override
+    public void putCardMode(int deckKey) {
+        gameboardPanel.putCardMode(deckKey);
+    }
+
     public void callForCouncil(int i){
         this.gameboardPanel.givePapalcard(i);
     }

@@ -1,7 +1,9 @@
 package it.polimi.ingsw;
 
+import it.polimi.ingsw.client.view.gui.frames.GameboardPanel;
 import it.polimi.ingsw.client.view.gui.frames.MainFrame;
 
+import javax.swing.*;
 import java.util.ArrayList;
 
 public class SwingApp {
@@ -22,18 +24,17 @@ public class SwingApp {
         nicknames.add("simone");
         nicknames.add("alice");
         nicknames.add("aeeeeeeeeeeeeeeee");
-        nicknames.add("AAAAAAAAAAA");
+        nicknames.add("AAAAAAAAAAA");*/
 
-        MainFrame mainFrame = new MainFrame("Master of Renaissance");
+        /*MainFrame mainFrame = new MainFrame("Master of Renaissance");
         mainFrame.initGameMode();
-        mainFrame.setPlayers(nicknames);
         mainFrame.setCurrentPlayer("simone");
         mainFrame.showLorenzoActionPopUp("ActionMarkerForCrossDouble");
         mainFrame.paintComponents(mainFrame.getGraphics());
         mainFrame.paintComponents(mainFrame.getGraphics());*/
 
 
-        /*JFrame frame = new JFrame();
+        JFrame frame = new JFrame();
         frame.setSize(1200,668);
         GameboardPanel gameboard = new GameboardPanel();
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -41,6 +42,7 @@ public class SwingApp {
         frame.add(gameboard);
         frame.setVisible(true);
         frame.setLocation(250,160);
+        /*
         ProductionCardArray leaderCards = new ProductionCardArray();
         LeaderCardsPanel leaderCardsPanel = new LeaderCardsPanel();
         frame.add(leaderCardsPanel);
