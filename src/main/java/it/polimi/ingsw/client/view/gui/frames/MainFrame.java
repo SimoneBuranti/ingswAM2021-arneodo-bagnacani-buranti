@@ -410,19 +410,33 @@ public abstract class MainFrame  extends JFrame {
         marketFrame.removeButton();
     }
 
+    public void enableMarketButtons(){
+        marketFrame.enableButton();
+    }
+
     public void disableDeckButtons(){
         productionDeckFrame.disableButtons();
+    }
+
+    public void enableDeckButtons(){
+        productionDeckFrame.enableButtons();
     }
 
     public abstract void putCardMode(int deckKey);
 
     public void disableLeaderButtons(){
-
+        leaderCardsPanel.disableButtons();
     }
 
-    public void disableProductionButtons(){
-
+    public void enableLeaderButtons() {
+        leaderCardsPanel.enableButtons();
     }
+
+    public abstract void disableProductionButtons();
+
+    public abstract void enableProductionButtons();
+
+
 
     public MarketFrame getMarketFrame() {
         return marketFrame;
@@ -465,6 +479,12 @@ public abstract class MainFrame  extends JFrame {
 
     public void showAllOfPlayer(ShowAllOfPlayerMessage msg){
     }
+
+    public abstract void enableEndTurnButton();
+
+    public abstract void disableEndTurnButton();
+
+    public abstract void activateEndOfProductionButton();
 }
 
 
