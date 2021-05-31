@@ -88,7 +88,6 @@ public class MainFrameSinglePlayer extends MainFrame{
         mainPanel.add(leaderCardsPanel);
 
         actionMarkerPanel = new ActionMarkerPanel();
-        serverMessagePanel.display("Ha un grande valore rappresentativo, essendo \n architettonicamente e artisticamente incentrato \nsul Risorgimento, il complesso processo di unità nazionale e liberazione dalla dominazione straniera portato a compimento sotto il regno di Vittorio Emanuele II di Savoia, cui il monumento è dedicato: per tale motivo il Vittoriano è considerato uno dei simboli patri italiani.");
 
 
         this.setVisible(false);
@@ -154,6 +153,11 @@ public class MainFrameSinglePlayer extends MainFrame{
     @Override
     public void enableBaseProductionButton() {
         lorenzoGameboardPanel.enableBaseProductionButton();
+    }
+
+    @Override
+    public void disableEndOfProductionButton() {
+        lorenzoGameboardPanel.disableEndOfProductionButton();
     }
 
     @Override

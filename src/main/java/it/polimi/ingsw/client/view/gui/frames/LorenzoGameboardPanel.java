@@ -23,13 +23,13 @@ public class LorenzoGameboardPanel extends GameboardPanel{
         initBlackCrossLabel();
 
         //move button Lorenzo--------
-        JButton lorenzoButton = new JButton();
+        /*JButton lorenzoButton = new JButton();
         lorenzoButton.setSize(20,20);
         lorenzoButton.addActionListener(e -> {
             this.lorenzoMove();
         });
         lorenzoButton.setBounds(20,0,20,20);
-        faithPathPane.add(lorenzoButton);
+        faithPathPane.add(lorenzoButton);*/
 
     }
 

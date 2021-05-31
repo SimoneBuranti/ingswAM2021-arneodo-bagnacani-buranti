@@ -278,12 +278,14 @@ public class  GameBoard extends GameBoardInterface{
 
         if(deck.size() == 0)
             throw new EmptyException();
-        if(deck.getLevel()!=firstRowFree(chosenColumn)+1)
-            throw new LevelException();
+
 
         for(Resource resource : requiredResources)
             if (!availableResources.remove(resource))
                 throw new NotEnoughResourcesException();
+
+        if(deck.getLevel()!=firstRowFree(chosenColumn)+1)
+            throw new LevelException();
 
         payResources(requiredResources);
 

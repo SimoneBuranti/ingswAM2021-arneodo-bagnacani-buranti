@@ -134,6 +134,7 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
     public void initButtons() {
         this.endTurnButton = new JButton();
         endTurnButton.setText("End turn");
+        endTurnButton.setEnabled(false);
         endTurnButton.setBounds(5,5,90,80);
         endTurnButton.addActionListener(e -> {
             endTurnButton.setEnabled(false);
@@ -144,6 +145,7 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
 
         this.endOfproductionButton = new JButton();
         endOfproductionButton.setText("End Production");
+        endOfproductionButton.setEnabled(false);
         endOfproductionButton.setBounds(618,160,143,20);
         endOfproductionButton.setBackground(new Color(199,0,0));
         endOfproductionButton.addActionListener(e -> {
@@ -162,6 +164,7 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
             productionButtons[i].setEnabled(false);
             int finalI = i;
             productionButtons[i].setText("Activate");
+            productionButtons[i].removeAll();
             productionButtons[i].addActionListener(new ActivateProductionListener(gui,productionButtons[i],i));
 
             this.add(productionButtons[i]);
@@ -316,6 +319,7 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
         for(int i = 0; i < 3; i++){
             productionButtons[i].setText("Activate");
             productionButtons[i].setEnabled(true);
+            productionButtons[i].removeAll();
             productionButtons[i].addActionListener(new ActivateProductionListener(gui,productionButtons[i], i));
         }
         baseProductionPanel.enableButton();
@@ -342,6 +346,7 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
         for(int i = 0; i<3 ; i++){
             productionButtons[i].setText("Put here");
             productionButtons[i].setEnabled(true);
+            productionButtons[i].removeAll();
             productionButtons[i].addActionListener(new PutCardButtonListener(gui,chosenDeckNumber,i));
         }
     }

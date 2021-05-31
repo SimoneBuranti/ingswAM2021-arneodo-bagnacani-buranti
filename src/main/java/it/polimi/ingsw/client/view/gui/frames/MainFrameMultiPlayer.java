@@ -284,6 +284,11 @@ public class MainFrameMultiPlayer extends MainFrame {
         gameboardPanel.enableBaseProductionButton();
     }
 
+    @Override
+    public void disableEndOfProductionButton() {
+        gameboardPanel.disableEndOfProductionButton();
+    }
+
     public void setCurrentPlayer(String nick) {
 
         for (int i = 0; i < nicknames.size(); i++)

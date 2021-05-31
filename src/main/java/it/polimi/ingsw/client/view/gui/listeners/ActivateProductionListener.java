@@ -19,6 +19,8 @@ public class ActivateProductionListener implements ActionListener {
         this.gui = gui;
         this.button = button;
         this.column = column;
+
+        button.setText("Activate");
     }
 
 

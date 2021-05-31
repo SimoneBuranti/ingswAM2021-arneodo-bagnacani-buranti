@@ -434,6 +434,8 @@ public abstract class MainFrame  extends JFrame {
         leaderCardsPanel.enableButtons();
     }
 
+
+
     public abstract void disableProductionButtons();
 
     public abstract void enableProductionButtons();
@@ -489,6 +491,8 @@ public abstract class MainFrame  extends JFrame {
     public abstract void activateEndOfProductionButton();
 
     public abstract void enableBaseProductionButton();
+
+    public abstract void disableEndOfProductionButton();
 }
 
 

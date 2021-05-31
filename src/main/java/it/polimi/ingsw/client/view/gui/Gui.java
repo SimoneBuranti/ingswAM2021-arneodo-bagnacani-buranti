@@ -261,14 +261,25 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
     @Override
     public void yourTurn() {
-        mainFrameOfGame.setCurrentPlayer(viewController.getNickName());
-        //enableAllAction();
+        SwingUtilities.invokeLater(() -> {
+
+            mainFrameOfGame.setCurrentPlayer(viewController.getNickName());
+            if (viewController.getGame().isInitLeader()){
+                enableAllAction();
+            }
+
+        });
 
     }
 
     @Override
     public void notifyError(Message msg) {
-        showLabel(msg);
+        if (msg instanceof NoNicknameMessage || msg instanceof AlreadyExistingNickNameErrorMessage ||
+                msg instanceof BootingLobbyErrorMessage || msg instanceof CompleteRunningMatchErrorMessage){
+            showLabel(msg);
+        } else {
+            mainFrameOfGame.displayString(msg.toString());
+        }
 
         if (msg instanceof NotAvailableResourcesErrorMessage){
             enableAllAction();
@@ -643,6 +654,9 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
         mainFrameOfGame.enableDeckButtons();
         mainFrameOfGame.enableProductionButtons();
         mainFrameOfGame.enableLeaderButtons();
+
+        mainFrameOfGame.disableEndTurnButton();
+        mainFrameOfGame.disableEndOfProductionButton();
     }
 
 

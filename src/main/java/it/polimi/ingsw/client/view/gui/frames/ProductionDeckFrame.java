@@ -69,6 +69,7 @@ public class ProductionDeckFrame extends JFrame{
 
     public void addDecks(ArrayList<ProductionCard> productionCards){
         SwingUtilities.invokeLater(() -> {
+
             clear(container);
             container.setLayout(null);
             cardLabelWithButtons = new ArrayList<>();
@@ -120,6 +121,7 @@ public class ProductionDeckFrame extends JFrame{
             }
             container.add(decksPanel);
             applyChangesTo(container);
+            System.out.println("Ho fatto tutto");
         });
     }
 
