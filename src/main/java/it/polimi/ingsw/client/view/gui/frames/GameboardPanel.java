@@ -5,6 +5,8 @@ import it.polimi.ingsw.client.view.ViewController;
 import it.polimi.ingsw.client.view.gui.Gui;
 import it.polimi.ingsw.client.view.gui.listeners.ActivateProductionListener;
 import it.polimi.ingsw.client.view.gui.listeners.PutCardButtonListener;
+import it.polimi.ingsw.messages.EndOfProductionMessage;
+import it.polimi.ingsw.messages.EndOfTurnMessage;
 import it.polimi.ingsw.messages.ProductionOnMessage;
 import it.polimi.ingsw.server.model.Resource;
 import it.polimi.ingsw.server.model.gameBoard.Strongbox;
@@ -34,8 +36,6 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
 
     protected Gui gui;
 
-    protected ViewController viewController;
-
 
     protected Image backgroundImage;
 
@@ -43,10 +43,11 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
     protected BaseProductionPanel baseProductionPanel;
     protected JLabel[][] productionCards;
     protected JButton[] productionButtons;
+    protected JButton endOfproductionButton;
     protected FaithPathPane faithPathPane;
     protected StoragePanel storagePanel;
     protected StrongBoxPanel strongboxPanel;
-
+    protected JButton endTurnButton;
 
     public GameboardPanel(Gui gui){
 
@@ -71,11 +72,31 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
 
     }
 
+    public GameboardPanel(){
+
+        this.gui = gui;
+
+        initGameboardPanel();
+
+        initProductionSpaces();
+
+        initBaseProductionSpace();
+
+        initButtons();
+
+        initFaithPathPane();
+
+        initStorage();
+
+        initStrongBox();
+
+        this.setBorder(BorderFactory.createBevelBorder(1,Color.BLACK,Color.DARK_GRAY));
 
 
-    public void setViewController(ViewController viewController) {
-        this.viewController = viewController;
     }
+
+
+
 
     public void initGameboardPanel(){
         Image image = Toolkit.getDefaultToolkit().createImage("src/main/resources/resources/board/Masters of Renaissance_PlayerBoard (11_2020)-1.png");
@@ -107,9 +128,29 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
     }
 
 
-    public void initButtons() {
-        this.productionButtons = new JButton[3];
 
+
+    public void initButtons() {
+        this.endTurnButton = new JButton();
+        endTurnButton.setText("End turn");
+        endTurnButton.setBounds(5,5,90,80);
+        endTurnButton.addActionListener(e -> {
+            endTurnButton.setEnabled(false);
+            gui.getViewController().sendMessage(new EndOfTurnMessage());
+        });
+        endTurnButton.setBackground(new Color(199,0,0));
+        this.add(endTurnButton);
+
+        this.endOfproductionButton = new JButton();
+        endOfproductionButton.setText("End Production");
+        endOfproductionButton.setBounds(618,160,143,20);
+        endOfproductionButton.setBackground(new Color(199,0,0));
+        endOfproductionButton.addActionListener(e -> {
+            endOfproductionButton.setEnabled(false);
+            gui.getViewController().sendMessage(new EndOfProductionMessage());
+        });
+        this.productionButtons = new JButton[3];
+        this.add(endOfproductionButton);
         for (int i = 0; i<3 ; i++){
 
             productionButtons[i] = new JButton();
@@ -264,6 +305,22 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
 
     public void enableProductionButtons(){
 
+    }
+
+    public void enableEndTurnButton(){
+        this.endTurnButton.setEnabled(true);
+    }
+
+    public void enableEndOfProductionButton(){
+        this.endOfproductionButton.setEnabled(true);
+    }
+
+    public void disablebleEndTurnButton(){
+        this.endTurnButton.setEnabled(true);
+    }
+
+    public void disableEndOfProductionButton(){
+        this.endOfproductionButton.setEnabled(true);
     }
 
     public void putCardMode(int deckKey){

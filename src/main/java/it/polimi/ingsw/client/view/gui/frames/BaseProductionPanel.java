@@ -37,9 +37,10 @@ public class BaseProductionPanel extends JPanel {
         initOutput();
 
         productionButton = new JButton();
-        productionButton.setSize(108,20);
-        productionButton.setBounds(0,310,108,20);
+        productionButton.setSize(90,20);
+        productionButton.setBounds(0,310,90,20);
         productionButton.setText("Activate");
+        productionButton.setHorizontalTextPosition(SwingConstants.CENTER);
         productionButton.addActionListener( e -> {
             this.viewController.sendMessage(new BaseProductionOnMessage(this.input1.getResource(),this.input2.getResource(),this.output.getResource()));
             //System.out.println(new BaseProductionOnMessage(this.input1.getResource(),this.input2.getResource(),this.output.getResource()));
