@@ -1,6 +1,7 @@
 package it.polimi.ingsw.client.view.gui.frames;
 
 import it.polimi.ingsw.client.lightModel.lightGameBoard.LightLeaderCards;
+import it.polimi.ingsw.client.view.gui.Gui;
 import it.polimi.ingsw.server.model.Resource;
 import it.polimi.ingsw.server.model.leaderCards.LeaderCard;
 import it.polimi.ingsw.server.model.leaderCards.LeaderCardStorage;
@@ -13,13 +14,16 @@ public class LeaderCardsPanel extends JPanel {
     private final static int leaderWidth = 370;
     private final static int leaderHeight = 290; //278
 
-    private JLabel firstCard;
-    private JLabel secondCard;
+    private EmptyLeaderCardLabel firstCard;
+    private EmptyLeaderCardLabel secondCard;
     private ArrayList<ResourceLabel> firstResources;
     private ArrayList<ResourceLabel> secondResources;
 
-    public LeaderCardsPanel(){
+    private Gui gui;
+
+    public LeaderCardsPanel( Gui gui){
         super();
+        this.gui = gui;
         firstResources = new ArrayList<>();
         secondResources = new ArrayList<>();
         this.setLayout(null);
@@ -29,11 +33,11 @@ public class LeaderCardsPanel extends JPanel {
 
     public void addLeaderCards(ArrayList<LeaderCard> leaderCards, boolean activated){
         if(!activated){
-            firstCard = new LeaderCardLabel(leaderCards.get(0).getKey());
+            firstCard = new LeaderCardLabel(leaderCards.get(0).getKey(), gui, 0);
             firstCard.setBounds(0,0, 150, 278);
             this.add(firstCard);
             if(leaderCards.size() == 2) {
-                secondCard = new LeaderCardLabel(leaderCards.get(1).getKey());
+                secondCard = new LeaderCardLabel(leaderCards.get(1).getKey(), gui, 1);
                 secondCard.setBounds(160, 0, 150, 278);
                 this.add(secondCard);
             }
@@ -58,13 +62,13 @@ public class LeaderCardsPanel extends JPanel {
     public void discardLeaderCard(int pos){
         if(pos == 0){
             this.remove(firstCard);
-            firstCard = new JLabel();
+            firstCard = new EmptyLeaderCardLabel();
             firstCard.setBounds(0,0, 150, 278);
             firstCard.setBackground(Color.WHITE);
             this.add(firstCard);
         }else{
             this.remove(secondCard);
-            secondCard = new JLabel();
+            secondCard = new EmptyLeaderCardLabel();
             secondCard.setBounds(160,0, 150, 278);
             secondCard.setBackground(Color.WHITE);
             this.add(secondCard);
@@ -140,6 +144,16 @@ public class LeaderCardsPanel extends JPanel {
                 this.add(secondLabel);
             }
         }
+    }
+
+    public void enableButtons(){
+        firstCard.enableButtons();
+        secondCard.enableButtons();
+    }
+
+    public void disableButtons(){
+        firstCard.disableButtons();
+        secondCard.disableButtons();
     }
 
     @Override

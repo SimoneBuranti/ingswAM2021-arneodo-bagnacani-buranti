@@ -84,4 +84,8 @@ public class BaseProductionPanel extends JPanel {
         this.productionButton.setEnabled(true);
     }
 
+    public void disableButton(){
+        this.productionButton.setEnabled(false);
+    }
+
 }

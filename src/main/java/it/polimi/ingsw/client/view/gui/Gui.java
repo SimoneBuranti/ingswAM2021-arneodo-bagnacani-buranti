@@ -253,7 +253,7 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
     @Override
     public void yourTurn() {
         mainFrameOfGame.setCurrentPlayer(viewController.getNickName());
-
+        enableAllAction();
 
     }
 
@@ -593,19 +593,30 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
         mainFrameOfGame.disableMarketButtons();
         mainFrameOfGame.disableDeckButtons();
         mainFrameOfGame.disableLeaderButtons();
+        mainFrameOfGame.activateEndOfProductionButton();
     }
 
     public void putProdCardMode(int deckKey) {
         mainFrameOfGame.disableMarketButtons();
         mainFrameOfGame.disableLeaderButtons();
+        mainFrameOfGame.disableDeckButtons();
         mainFrameOfGame.putCardMode(deckKey);
-
     }
 
     public void actionDoneMode() {
         mainFrameOfGame.disableMarketButtons();
         mainFrameOfGame.disableDeckButtons();
         mainFrameOfGame.disableProductionButtons();
-        //mainFrameOfGame.enableLeaderButtons();
+        mainFrameOfGame.enableLeaderButtons();
+        mainFrameOfGame.enableEndTurnButton();
     }
+
+    public void enableAllAction() {
+        mainFrameOfGame.enableMarketButtons();
+        mainFrameOfGame.enableDeckButtons();
+        mainFrameOfGame.enableProductionButtons();
+        mainFrameOfGame.enableLeaderButtons();
+    }
+
+
 }

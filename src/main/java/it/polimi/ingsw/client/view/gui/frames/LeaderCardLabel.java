@@ -1,11 +1,14 @@
 package it.polimi.ingsw.client.view.gui.frames;
 
+import it.polimi.ingsw.client.view.gui.Gui;
 import it.polimi.ingsw.client.view.gui.Paths;
+import it.polimi.ingsw.client.view.gui.listeners.ActivateLeaderListener;
+import it.polimi.ingsw.client.view.gui.listeners.DiscardLeaderListener;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class LeaderCardLabel extends JLabel {
+public class LeaderCardLabel extends EmptyLeaderCardLabel {
     private static final int cardWidth = 150;
     private static final int cardHeight = 222;
     private static final int panelHeight = 278;
@@ -16,10 +19,14 @@ public class LeaderCardLabel extends JLabel {
     private JButton buttonActivate;
     private JButton buttonDiscard;
 
+    private Gui gui;
+    private int index;
 
-    public LeaderCardLabel(int key){
 
+    public LeaderCardLabel(int key, Gui gui, int index){
 
+        this.gui = gui;
+        this.index = index;
         textLabel = new JLabel("Card to activate/discard");
         textLabel.setBounds(0, 0, 150, 10);
 
@@ -31,9 +38,11 @@ public class LeaderCardLabel extends JLabel {
         buttonActivate = new JButton("A");
         buttonActivate.setBounds(15,243, 50, 28); //230
         buttonActivate.setBackground(new Color(232,228,212));
+        buttonActivate.addActionListener(new ActivateLeaderListener(gui, index, this));
         buttonDiscard = new JButton("D");
         buttonDiscard.setBounds(85,243, 50, 28);
         buttonDiscard.setBackground(new Color(232,228,212));
+        buttonDiscard.addActionListener(new DiscardLeaderListener(gui, index, this));
         this.add(textLabel);
         this.add(cardLabel);
         this.add(buttonActivate);
@@ -49,4 +58,15 @@ public class LeaderCardLabel extends JLabel {
 
     }
 
+    @Override
+    public void enableButtons() {
+        buttonActivate.setEnabled(true);
+        buttonDiscard.setEnabled(true);
+    }
+
+    @Override
+    public void disableButtons() {
+        buttonActivate.setEnabled(false);
+        buttonDiscard.setEnabled(false);
+    }
 }

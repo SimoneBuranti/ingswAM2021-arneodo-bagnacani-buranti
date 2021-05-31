@@ -5,7 +5,7 @@ import it.polimi.ingsw.client.view.gui.Paths;
 import javax.swing.*;
 import java.awt.*;
 
-public class LeaderCardActivatedLabel extends JLabel {
+public class LeaderCardActivatedLabel extends EmptyLeaderCardLabel {
     private static final int cardWidth = 150;
     private static final int cardHeight = 222;
     private static final int panelHeight = 232;
@@ -32,4 +32,13 @@ public class LeaderCardActivatedLabel extends JLabel {
         this.setBounds(0, 0,cardWidth, panelHeight);
     }
 
+    @Override
+    public void enableButtons() {
+
+    }
+
+    @Override
+    public void disableButtons() {
+
+    }
 }

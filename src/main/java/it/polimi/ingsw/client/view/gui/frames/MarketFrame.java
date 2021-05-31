@@ -21,7 +21,7 @@ public class MarketFrame extends JFrame{
     private final static int marketX = 20;
     private final static int marketY = 122;
 
-    private ViewController viewController;
+    private Gui gui;
     private PanelContainer container;
 
     private JPanel gridPanel;
@@ -37,9 +37,9 @@ public class MarketFrame extends JFrame{
 
     private boolean visible;
 
-    public MarketFrame(ViewController viewController){
+    public MarketFrame(Gui gui){
         super();
-        this.viewController = viewController;
+        this.gui = gui;
 
         this.setLocation(marketX,marketY);
         this.setAlwaysOnTop(true);
@@ -50,7 +50,7 @@ public class MarketFrame extends JFrame{
 
     }
 
-    public MarketFrame(){// SOLO PER GRAFICA
+    /*public MarketFrame(){// SOLO PER GRAFICA
         super();
         this.setLocation(marketX,marketY);
         this.setAlwaysOnTop(true);
@@ -59,7 +59,7 @@ public class MarketFrame extends JFrame{
         this.setVisible(visible);
         initMarket();
 
-    }
+    }*/
 
     public void initMarket(){
         SwingUtilities.invokeLater(() -> {
@@ -163,13 +163,25 @@ public class MarketFrame extends JFrame{
     }
 
     public void sendPushColumn(int column){
-        viewController.sendMessage(new PushColumnMessage(column));
-        removeButton();
+        try {
+            gui.notifyObserver(new PushColumnMessage(column));
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        gui.actionDoneMode();
     }
 
     public void sendPushRow(int row){
-        viewController.sendMessage(new PushRowMessage(row));
-        removeButton();
+        try {
+            gui.notifyObserver(new PushRowMessage(row));
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        gui.actionDoneMode();
     }
 
 

@@ -13,10 +13,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ProductionCardArray {
-    ArrayList<ProductionCard> list;
+    ArrayList<LeaderCard> list;
     public ProductionCardArray(){
 
-        /*list = new ArrayList<>();
+        list = new ArrayList<>();
         Colour blue = new Blue();
         Colour green = new Green();
         Colour yellow = new Yellow();
@@ -29,8 +29,8 @@ public class ProductionCardArray {
 
         Requirements requirementsTwo = new ResourceRequirement(Resource.ROCK);
         LeaderCard leaderCardTwo = new LeaderCardStorage(requirementsTwo, 3, Resource.SERVANT, 1);
-        list.add(leaderCardTwo);*/
-        list = new ArrayList<>();
+        list.add(leaderCardTwo);
+        /*list = new ArrayList<>();
         Blue blue= new Blue();
         Green green = new Green();
         Yellow yellow = new Yellow();
@@ -251,11 +251,11 @@ public class ProductionCardArray {
         violetNineOut.put(Resource.SERVANT, 0);
         violetNineOut.put(Resource.SHIELD, 0);
         ProductionCard cardThirtyThree =new ProductionCard(violetNine,violetNineIn,violetNineOut, 9, 3, violet,2,33);
-        list.add(cardThirtyThree);
+        list.add(cardThirtyThree);*/
 
     }
 
-    public ArrayList<ProductionCard> getList(){
+    public ArrayList<LeaderCard> getList(){
         return list;
     }
 }

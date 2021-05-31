@@ -70,7 +70,7 @@ public class MainFrameSinglePlayer extends MainFrame{
         setGeneralFeatures();
         initNavigationBar();
 
-        marketFrame = new MarketFrame();
+        marketFrame = new MarketFrame(gui);
         productionDeckFrame = new ProductionDeckFrame(gui);
         reserveFrame = new ReserveFrame();
 
@@ -80,7 +80,7 @@ public class MainFrameSinglePlayer extends MainFrame{
         serverMessagePanel = new ServerMessagePanel();
         serverMessagePanel.setBounds(800, 0, 380, 275);
         mainPanel.add(serverMessagePanel);
-        leaderCardsPanel = new LeaderCardsPanel();
+        leaderCardsPanel = new LeaderCardsPanel(gui);
         leaderCardsPanel.setBounds(805, 280, leaderWidth, leaderHeight);
         //leaderCardsPanel.setBackground(Color.BLUE);
         //leaderCardsPanel.setOpaque(true);
@@ -133,6 +133,33 @@ public class MainFrameSinglePlayer extends MainFrame{
         dialog.setSize(actionPanelWidth + 10, actionPanelHeight + 35);
         actionMarkerPanel.setVisible(true);
         dialog.setVisible(true);
+    }
+
+    @Override
+    public void enableEndTurnButton() {
+        lorenzoGameboardPanel.enableEndTurnButton();
+    }
+
+    @Override
+    public void disableEndTurnButton() {
+        lorenzoGameboardPanel.disableEndTurnButton();
+    }
+
+    @Override
+    public void activateEndOfProductionButton() {
+        lorenzoGameboardPanel.enableEndOfProductionButton();
+    }
+
+    @Override
+    public void disableProductionButtons() {
+        lorenzoGameboardPanel.disableProductionButtons();
+        //disbale production button leader
+    }
+
+    @Override
+    public void enableProductionButtons() {
+        lorenzoGameboardPanel.enableProductionButtons();
+        //enable production button leader
     }
 
 

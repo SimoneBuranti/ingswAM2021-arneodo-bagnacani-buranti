@@ -233,6 +233,21 @@ public class MainFrameMultiPlayer extends MainFrame {
 
     }
 
+    @Override
+    public void enableEndTurnButton() {
+        gameboardPanel.enableEndTurnButton();
+    }
+
+    @Override
+    public void disableEndTurnButton() {
+        gameboardPanel.disableEndTurnButton();
+    }
+
+    @Override
+    public void activateEndOfProductionButton() {
+        gameboardPanel.enableEndOfProductionButton();
+    }
+
     public void setCurrentPlayer(String nick) {
 
         for (int i = 0; i < nicknames.size(); i++)
@@ -289,6 +304,18 @@ public class MainFrameMultiPlayer extends MainFrame {
     @Override
     public void putCardMode(int deckKey) {
         gameboardPanel.putCardMode(deckKey);
+    }
+
+    @Override
+    public void disableProductionButtons() {
+        gameboardPanel.disableProductionButtons();
+        //disbale production button leader
+    }
+
+    @Override
+    public void enableProductionButtons() {
+        gameboardPanel.enableProductionButtons();
+        //enable production button leader
     }
 
     public void callForCouncil(int i){

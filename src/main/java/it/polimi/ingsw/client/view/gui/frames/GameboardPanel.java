@@ -148,6 +148,7 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
         endOfproductionButton.addActionListener(e -> {
             endOfproductionButton.setEnabled(false);
             gui.getViewController().sendMessage(new EndOfProductionMessage());
+            gui.actionDoneMode();
         });
         this.productionButtons = new JButton[3];
         this.add(endOfproductionButton);
@@ -300,12 +301,25 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
     }
     public void givePapalcard(int i) {
         faithPathPane.givePapalCard(i);
+    }
 
+    public void disableProductionButtons(){
+        for(int i = 0; i < 3; i++){
+            productionButtons[i].setEnabled(false);
+        }
+
+        baseProductionPanel.disableButton();
     }
 
     public void enableProductionButtons(){
-
+        for(int i = 0; i < 3; i++){
+            productionButtons[i].setText("Activate");
+            productionButtons[i].setEnabled(true);
+            productionButtons[i].addActionListener(new ActivateProductionListener(gui,productionButtons[i], i));
+        }
+        baseProductionPanel.enableButton();
     }
+
 
     public void enableEndTurnButton(){
         this.endTurnButton.setEnabled(true);
@@ -315,7 +329,7 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
         this.endOfproductionButton.setEnabled(true);
     }
 
-    public void disablebleEndTurnButton(){
+    public void disableEndTurnButton(){
         this.endTurnButton.setEnabled(true);
     }
 

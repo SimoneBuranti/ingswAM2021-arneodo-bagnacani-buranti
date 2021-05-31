@@ -1,5 +1,6 @@
 package it.polimi.ingsw;
 
+import it.polimi.ingsw.client.view.gui.Gui;
 import it.polimi.ingsw.client.view.gui.frames.GameboardPanel;
 import it.polimi.ingsw.client.view.gui.frames.MainFrame;
 
@@ -36,7 +37,7 @@ public class SwingApp {
 
         JFrame frame = new JFrame();
         frame.setSize(1200,668);
-        GameboardPanel gameboard = new GameboardPanel();
+        GameboardPanel gameboard = new GameboardPanel(new Gui());
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setLayout(null);
         frame.add(gameboard);
@@ -46,9 +47,13 @@ public class SwingApp {
         ProductionCardArray leaderCards = new ProductionCardArray();
         LeaderCardsPanel leaderCardsPanel = new LeaderCardsPanel();
         frame.add(leaderCardsPanel);
-        leaderCardsPanel.addLeaderCards(leaderCards.getList());
-        leaderCardsPanel.discardLeaderCard(1);
+        leaderCardsPanel.addLeaderCards(leaderCards.getList(), false);
+        //leaderCardsPanel.discardLeaderCard(1);
+
         leaderCardsPanel.activatedLeaderCard(0, 0);
+        leaderCardsPanel.activatedLeaderCard(1, 1);
+        leaderCardsPanel.addToStorageExtra(0,Resource.ROCK, 2);
+        leaderCardsPanel.addToStorageExtra(1,Resource.SERVANT, 2);
 
         //ActionMarkerPanel actionMarkerPanel = new ActionMarkerPanel();
         //frame.add(actionMarkerPanel);
