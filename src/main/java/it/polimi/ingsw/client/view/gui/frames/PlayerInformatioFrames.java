@@ -2,6 +2,7 @@ package it.polimi.ingsw.client.view.gui.frames;
 
 import it.polimi.ingsw.client.ligtModelNotification.GameboardListNotification;
 import it.polimi.ingsw.client.view.ViewController;
+import it.polimi.ingsw.client.view.gui.Gui;
 import it.polimi.ingsw.messages.ProductionOnMessage;
 import it.polimi.ingsw.messages.observable.ShowAllOfPlayerMessage;
 import it.polimi.ingsw.server.model.Resource;
@@ -27,7 +28,7 @@ public class PlayerInformatioFrames extends JPanel {
     protected final static int psy =226;
 
 
-    protected ViewController viewController;
+    protected Gui gui;
 
 
     protected JLayeredPane[] productionSpaces;
@@ -44,9 +45,9 @@ public class PlayerInformatioFrames extends JPanel {
     protected Image backgroundImage;
 
 
-    public PlayerInformatioFrames(ViewController viewController, ShowAllOfPlayerMessage msg){
+    public PlayerInformatioFrames(Gui gui, ShowAllOfPlayerMessage msg){
 
-        this.viewController = viewController;
+        this.gui = gui;
 
         initGameboardPanel();
 
@@ -60,7 +61,7 @@ public class PlayerInformatioFrames extends JPanel {
 
         initStrongBox();
 
-        this.leaderCardsPanel=new LeaderCardsPanel();
+        this.leaderCardsPanel=new LeaderCardsPanel(gui);
 
         this.setBorder(BorderFactory.createBevelBorder(1,Color.BLACK,Color.DARK_GRAY));
 
@@ -78,10 +79,6 @@ public class PlayerInformatioFrames extends JPanel {
 
     }
 
-
-    public void setViewController(ViewController viewController) {
-        this.viewController = viewController;
-    }
 
     public void initGameboardPanel(){
         Image image = Toolkit.getDefaultToolkit().createImage("src/main/resources/resources/board/Masters of Renaissance_PlayerBoard (11_2020)-1.png");

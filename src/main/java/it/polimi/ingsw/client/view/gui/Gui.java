@@ -50,7 +50,7 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
     
     private int readyToSend=0;
 
-
+    private boolean chosenResumeGame;
 
 
     @Override
@@ -172,6 +172,14 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
             container.setLayout(new FlowLayout());
 
+            if (chosenResumeGame){
+                JLabel adviceLabel = new JLabel("Insert your previous nickname to resume the match");
+                adviceLabel.setOpaque(true);
+                adviceLabel.setBackground(Color.WHITE);
+                adviceLabel.setBorder(BorderFactory.createBevelBorder(0));
+                container.add(adviceLabel);
+            }
+
             TextField textField= new TextField();
             textField.setText("");
             textField.setEditable(true);
@@ -215,7 +223,7 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
             yesButton.setSize(new Dimension(50,10));
 
 
-                noButton= new JButton("no");
+            noButton= new JButton("no");
             noButton.setSize(new Dimension(50,10));
             container.add(submitButton);
             container.add(noButton);
@@ -225,6 +233,7 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
                         container.remove(yesButton);
                         container.remove(submitButton);
                         container.remove(noButton);
+                        chosenResumeGame = true;
                         notifyObserver(new RestartAnswerMessage(true));
                     } catch (IOException | InterruptedException ioException) {
                         ioException.printStackTrace();}});
@@ -233,6 +242,7 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
                         container.remove(yesButton);
                         container.remove(submitButton);
                         container.remove(noButton);
+                        chosenResumeGame = false;
                         notifyObserver(new RestartAnswerMessage(false));
                     } catch (IOException | InterruptedException ioException) {
                         ioException.printStackTrace(); }});
@@ -622,7 +632,7 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
 
     public void showAllOfPlayer(ShowAllOfPlayerMessage msg){
-        this.playerInformatioFrames= new PlayerInformatioFrames(viewController,msg);
+        this.playerInformatioFrames= new PlayerInformatioFrames(this,msg);
     }
 
 }

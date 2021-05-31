@@ -346,6 +346,6 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
     }
 
     public void showAllOfPlayer(ShowAllOfPlayerMessage msg) {
-        new PlayerInformatioFrames(gui.getViewController(),msg);
+        new PlayerInformatioFrames(gui,msg);
     }
 }

@@ -21,7 +21,7 @@ public class LeaderCardsPanel extends JPanel {
 
     private Gui gui;
 
-    public LeaderCardsPanel( Gui gui){
+    public LeaderCardsPanel(Gui gui){
         super();
         this.gui = gui;
         firstResources = new ArrayList<>();
@@ -30,6 +30,8 @@ public class LeaderCardsPanel extends JPanel {
         this.setBounds(810, 280, leaderWidth, leaderHeight);
         setOpaque(false);
     }
+
+
 
     public void addLeaderCards(ArrayList<LeaderCard> leaderCards, boolean activated){
         if(!activated){
@@ -165,11 +167,11 @@ public class LeaderCardsPanel extends JPanel {
 
     public void addLeaderCardsAsInt(ArrayList<Integer> leaderCards, boolean activated){
         if(!activated){
-            firstCard = new LeaderCardLabel(leaderCards.get(0));
+            firstCard = new LeaderCardLabel(leaderCards.get(0),gui,0);
             firstCard.setBounds(0,0, 150, 278);
             this.add(firstCard);
             if(leaderCards.size() == 2) {
-                secondCard = new LeaderCardLabel(leaderCards.get(1));
+                secondCard = new LeaderCardLabel(leaderCards.get(1),gui,1);
                 secondCard.setBounds(160, 0, 150, 278);
                 this.add(secondCard);
             }
