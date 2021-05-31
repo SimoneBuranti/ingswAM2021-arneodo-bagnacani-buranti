@@ -55,9 +55,9 @@ public class ExtraProductionCommand extends Command {
                     throw new AlreadyActivatedProductionException();
 
                 if ((input.charAt(0) - '0') == 1) {
-                    return new ExtraProductionOnMessage(askForOutputResource());
+                    return new ExtraProductionOnMessage(askForOutputResource(),viewController.getGame().getLeaderCardActivated().get(0).getResourceEffect());
                 }
-                return new DoubleProductionOnMessage(askForOutputResource());
+                return new DoubleProductionOnMessage(askForOutputResource(),viewController.getGame().getLeaderCardActivated().get(1).getResourceEffect());
             }
         }else
             throw new SpentTokenException();

@@ -19,6 +19,11 @@ public class DoubleProductionOnMessage extends Message {
         this.outputResource = o;
     }
 
+    public DoubleProductionOnMessage(Resource o, Resource leader) {
+        this.outputResource = o;
+        this.resourceLeader = leader;
+    }
+
 
     public Resource getOutputResource() {
         return outputResource;

@@ -2,10 +2,12 @@ package it.polimi.ingsw.client.view.gui.frames;
 
 import it.polimi.ingsw.client.commands.BaseProductionCommand;
 import it.polimi.ingsw.client.view.ViewController;
+import it.polimi.ingsw.client.view.gui.Gui;
 import it.polimi.ingsw.messages.BaseProductionOnMessage;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 
 public class BaseProductionPanel extends JPanel {
 
@@ -18,6 +20,7 @@ public class BaseProductionPanel extends JPanel {
     private static final int oX = 56;
     private static final int oY = 195;
 
+    private Gui gui;
 
     private ViewController viewController;
     private ResourceClickableLabel input1;
@@ -26,7 +29,9 @@ public class BaseProductionPanel extends JPanel {
 
     private JButton productionButton;
 
-    public BaseProductionPanel(){
+    public BaseProductionPanel(Gui gui){
+
+        this.gui = gui;
 
         this.setLayout(null);
 
@@ -42,9 +47,16 @@ public class BaseProductionPanel extends JPanel {
         productionButton.setText("Activate");
         productionButton.setHorizontalTextPosition(SwingConstants.CENTER);
         productionButton.addActionListener( e -> {
-            this.viewController.sendMessage(new BaseProductionOnMessage(this.input1.getResource(),this.input2.getResource(),this.output.getResource()));
+            try {
+                this.gui.notifyObserver(new BaseProductionOnMessage(this.input1.getResource(),this.input2.getResource(),this.output.getResource()));
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            } catch (InterruptedException interruptedException) {
+                interruptedException.printStackTrace();
+            }
             //System.out.println(new BaseProductionOnMessage(this.input1.getResource(),this.input2.getResource(),this.output.getResource()));
             this.productionButton.setEnabled(false);
+            this.gui.disableAllExceptProductions();
         });
 
         this.setSize(psWidth,psHeight);

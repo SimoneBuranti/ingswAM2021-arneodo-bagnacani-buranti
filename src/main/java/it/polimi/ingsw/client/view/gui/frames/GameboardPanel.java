@@ -230,7 +230,7 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
     }
 
     public void initBaseProductionSpace(){
-        this.baseProductionPanel = new BaseProductionPanel();
+        this.baseProductionPanel = new BaseProductionPanel(gui);
 
         this.add(baseProductionPanel);
     }
@@ -346,6 +346,6 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
     }
 
     public void showAllOfPlayer(ShowAllOfPlayerMessage msg) {
-        new PlayerInformatioFrames(gui,msg);
+        new PlayerInformatioFrames(msg);
     }
 }

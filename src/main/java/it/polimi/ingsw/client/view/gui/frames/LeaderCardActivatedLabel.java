@@ -10,6 +10,7 @@ public class LeaderCardActivatedLabel extends EmptyLeaderCardLabel {
     private static final int cardHeight = 222;
     private static final int panelHeight = 232;
 
+    private int key;
     private Image cardImage;
     private JLabel cardLabel;
     private JLabel textLabel;
@@ -17,7 +18,7 @@ public class LeaderCardActivatedLabel extends EmptyLeaderCardLabel {
 
     public LeaderCardActivatedLabel(int key){
 
-
+        this.key = key;
         textLabel = new JLabel("Activated card");
         textLabel.setBounds(0, 0, 150, 10);
 
@@ -30,6 +31,10 @@ public class LeaderCardActivatedLabel extends EmptyLeaderCardLabel {
         this.add(cardLabel);
         this.setSize(cardWidth,panelHeight);
         this.setBounds(0, 0,cardWidth, panelHeight);
+    }
+
+    public int keyOfLeaderCard(){
+        return key;
     }
 
     @Override

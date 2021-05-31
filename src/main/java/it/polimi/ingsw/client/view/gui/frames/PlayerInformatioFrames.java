@@ -28,8 +28,6 @@ public class PlayerInformatioFrames extends JPanel {
     protected final static int psy =226;
 
 
-    protected Gui gui;
-
 
     protected JLayeredPane[] productionSpaces;
     protected BaseProductionPanel baseProductionPanel;
@@ -45,15 +43,13 @@ public class PlayerInformatioFrames extends JPanel {
     protected Image backgroundImage;
 
 
-    public PlayerInformatioFrames(Gui gui, ShowAllOfPlayerMessage msg){
+    public PlayerInformatioFrames(ShowAllOfPlayerMessage msg){
 
-        this.gui = gui;
 
         initGameboardPanel();
 
         initProductionSpaces();
 
-        initBaseProductionSpace();
 
         initFaithPathPane();
 
@@ -61,7 +57,7 @@ public class PlayerInformatioFrames extends JPanel {
 
         initStrongBox();
 
-        this.leaderCardsPanel=new LeaderCardsPanel(gui);
+        this.leaderCardsPanel=new LeaderCardsPanel();
 
         this.setBorder(BorderFactory.createBevelBorder(1,Color.BLACK,Color.DARK_GRAY));
 
@@ -152,10 +148,6 @@ public class PlayerInformatioFrames extends JPanel {
         this.add(faithPathPane);
     }
 
-    public void initBaseProductionSpace(){
-        this.baseProductionPanel = new BaseProductionPanel();
-        this.add(baseProductionPanel);
-    }
 
 
     public void updateStorage(Map<Resource,Integer> newStorage){

@@ -19,6 +19,11 @@ public class ExtraProductionOnMessage extends Message {
         this.outputResource = o;
     }
 
+    public ExtraProductionOnMessage(Resource o, Resource leader) {
+        this.outputResource = o;
+        this.resourceLeader = leader;
+    }
+
     public Resource getOutputResource() {
         return outputResource;
     }

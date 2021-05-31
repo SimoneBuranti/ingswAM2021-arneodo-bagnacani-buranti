@@ -2,10 +2,15 @@ package it.polimi.ingsw;
 
 import it.polimi.ingsw.client.view.gui.Gui;
 import it.polimi.ingsw.client.view.gui.frames.GameboardPanel;
+import it.polimi.ingsw.client.view.gui.frames.LeaderCardsPanel;
 import it.polimi.ingsw.client.view.gui.frames.MainFrame;
+import it.polimi.ingsw.client.view.gui.frames.ServerMessagePanel;
+import it.polimi.ingsw.server.model.Resource;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class SwingApp {
 
@@ -35,25 +40,26 @@ public class SwingApp {
         mainFrame.paintComponents(mainFrame.getGraphics());*/
 
 
-        JFrame frame = new JFrame();
+        Frame frame = new JFrame();
         frame.setSize(1200,668);
         GameboardPanel gameboard = new GameboardPanel(new Gui());
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        //frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setLayout(null);
         frame.add(gameboard);
         frame.setVisible(true);
         frame.setLocation(250,160);
-        /*
+
         ProductionCardArray leaderCards = new ProductionCardArray();
-        LeaderCardsPanel leaderCardsPanel = new LeaderCardsPanel();
+        LeaderCardsPanel leaderCardsPanel = new LeaderCardsPanel(new Gui());
         frame.add(leaderCardsPanel);
         leaderCardsPanel.addLeaderCards(leaderCards.getList(), false);
         //leaderCardsPanel.discardLeaderCard(1);
 
-        leaderCardsPanel.activatedLeaderCard(0, 0);
-        leaderCardsPanel.activatedLeaderCard(1, 1);
-        leaderCardsPanel.addToStorageExtra(0,Resource.ROCK, 2);
-        leaderCardsPanel.addToStorageExtra(1,Resource.SERVANT, 2);
+        leaderCardsPanel.activatedLeaderCard(0, 4);
+        leaderCardsPanel.activatedLeaderCard(1, 4);
+        //leaderCardsPanel.activatedLeaderCard(1, 1);
+        //leaderCardsPanel.addToStorageExtra(0, Resource.ROCK, 2);
+        //leaderCardsPanel.addToStorageExtra(1,Resource.SERVANT, 2);
 
         //ActionMarkerPanel actionMarkerPanel = new ActionMarkerPanel();
         //frame.add(actionMarkerPanel);
@@ -77,7 +83,7 @@ public class SwingApp {
 
 
         frame.paintComponents(frame.getGraphics());
-        frame.paintComponents(frame.getGraphics());*/
+        frame.paintComponents(frame.getGraphics());
 
     }
 

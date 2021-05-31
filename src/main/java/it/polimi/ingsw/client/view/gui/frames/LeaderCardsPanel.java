@@ -2,12 +2,17 @@ package it.polimi.ingsw.client.view.gui.frames;
 
 import it.polimi.ingsw.client.lightModel.lightGameBoard.LightLeaderCards;
 import it.polimi.ingsw.client.view.gui.Gui;
+import it.polimi.ingsw.messages.BaseProductionOnMessage;
+import it.polimi.ingsw.messages.DoubleProductionOnMessage;
+import it.polimi.ingsw.messages.ExtraProductionOnMessage;
 import it.polimi.ingsw.server.model.Resource;
 import it.polimi.ingsw.server.model.leaderCards.LeaderCard;
+import it.polimi.ingsw.server.model.leaderCards.LeaderCardProduction;
 import it.polimi.ingsw.server.model.leaderCards.LeaderCardStorage;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class LeaderCardsPanel extends JPanel {
@@ -18,12 +23,25 @@ public class LeaderCardsPanel extends JPanel {
     private EmptyLeaderCardLabel secondCard;
     private ArrayList<ResourceLabel> firstResources;
     private ArrayList<ResourceLabel> secondResources;
+    private ResourceClickableLabel firstResourceProduction;
+    private JButton firstActivateButton;
+    private ResourceClickableLabel secondResourceProduction;
+    private JButton secondActivateButton;
 
     private Gui gui;
 
     public LeaderCardsPanel(Gui gui){
         super();
         this.gui = gui;
+        firstResources = new ArrayList<>();
+        secondResources = new ArrayList<>();
+        this.setLayout(null);
+        this.setBounds(810, 280, leaderWidth, leaderHeight);
+        setOpaque(false);
+    }
+
+    public LeaderCardsPanel(){
+        super();
         firstResources = new ArrayList<>();
         secondResources = new ArrayList<>();
         this.setLayout(null);
@@ -88,6 +106,29 @@ public class LeaderCardsPanel extends JPanel {
                 JLabel textLabel = new JLabel("Extra storage:");
                 textLabel.setBounds(40, 234, 150, 15);
                 this.add(textLabel);
+            }else if(LightLeaderCards.leaderCardByKey(key) instanceof LeaderCardProduction){
+                JLabel textLabel = new JLabel("Choose:");
+                textLabel.setBounds(10, 242, 50, 15);
+                this.add(textLabel);
+                firstResourceProduction = new ResourceClickableLabel(75, 236);
+                this.add(firstResourceProduction);
+                firstActivateButton = new JButton();
+                firstActivateButton.setText("Activate");
+                firstActivateButton.setBounds(26, 268, 108, 20);
+                this.add(firstActivateButton);
+
+                firstActivateButton.addActionListener( e -> {
+                    try {
+                        this.gui.notifyObserver(new ExtraProductionOnMessage(firstResourceProduction.getResource(), leaderCardResource(0)));
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    } catch (InterruptedException interruptedException) {
+                        interruptedException.printStackTrace();
+                    }
+                    //System.out.println(new BaseProductionOnMessage(this.input1.getResource(),this.input2.getResource(),this.output.getResource()));
+                    this.firstActivateButton.setEnabled(false);
+                    this.gui.disableAllExceptProductions();
+                });
             }
         }else{
             this.remove(secondCard);
@@ -99,9 +140,45 @@ public class LeaderCardsPanel extends JPanel {
                 JLabel textLabel = new JLabel("Extra storage:");
                 textLabel.setBounds(200, 234, 150, 15);
                 this.add(textLabel);
+            }else if(LightLeaderCards.leaderCardByKey(key) instanceof LeaderCardProduction){
+                JLabel textLabel = new JLabel("Choose:");
+                textLabel.setBounds(170, 242, 50, 15);
+                this.add(textLabel);
+                secondResourceProduction = new ResourceClickableLabel(235, 236);
+                this.add(secondResourceProduction);
+                secondActivateButton = new JButton();
+                secondActivateButton.setText("Activate");
+                secondActivateButton.setBounds(186, 268, 108, 20);
+                this.add(secondActivateButton);
+
+                secondActivateButton.addActionListener( e -> {
+                    try {
+                        this.gui.notifyObserver(new DoubleProductionOnMessage(secondResourceProduction.getResource(), leaderCardResource(1)));
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    } catch (InterruptedException interruptedException) {
+                        interruptedException.printStackTrace();
+                    }
+                    //System.out.println(new BaseProductionOnMessage(this.input1.getResource(),this.input2.getResource(),this.output.getResource()));
+                    this.secondActivateButton.setEnabled(false);
+                    this.gui.disableAllExceptProductions();
+                });
             }
         }
 
+    }
+
+    public Resource leaderCardResource(int index){
+        int key;
+        LeaderCard temp;
+        new LightLeaderCards();
+        if(index == 0){
+            key = firstCard.keyOfLeaderCard();
+        }else{
+            key = secondCard.keyOfLeaderCard();
+        }
+        temp = LightLeaderCards.leaderCardByKey(key);
+        return temp.getResourceEffect();
     }
 
     public void addToStorageExtra(int position, Resource resource, int quantity){
@@ -147,6 +224,21 @@ public class LeaderCardsPanel extends JPanel {
             }
         }
     }
+
+    public void enableProductionButtons(){
+        if(firstActivateButton != null)
+            firstActivateButton.setEnabled(true);
+        if(secondActivateButton != null)
+            secondActivateButton.setEnabled(true);
+    }
+
+    public void disableProductionButtons(){
+        if(firstActivateButton != null)
+            firstActivateButton.setEnabled(false);
+        if(secondActivateButton != null)
+            secondActivateButton.setEnabled(false);
+    }
+
 
     public void enableButtons(){
         firstCard.enableButtons();

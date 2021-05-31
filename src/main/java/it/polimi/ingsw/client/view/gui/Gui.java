@@ -632,7 +632,7 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
 
     public void showAllOfPlayer(ShowAllOfPlayerMessage msg){
-        this.playerInformatioFrames= new PlayerInformatioFrames(this,msg);
+        this.playerInformatioFrames= new PlayerInformatioFrames(msg);
     }
 
 }

@@ -3,10 +3,12 @@ package it.polimi.ingsw;
 import it.polimi.ingsw.server.model.Resource;
 import it.polimi.ingsw.server.model.colours.*;
 import it.polimi.ingsw.server.model.leaderCards.LeaderCard;
+import it.polimi.ingsw.server.model.leaderCards.LeaderCardProduction;
 import it.polimi.ingsw.server.model.leaderCards.LeaderCardStorage;
 import it.polimi.ingsw.server.model.productionCards.ProductionCard;
 import it.polimi.ingsw.server.model.requirements.Requirements;
 import it.polimi.ingsw.server.model.requirements.ResourceRequirement;
+import it.polimi.ingsw.server.model.requirements.SecondLevelRequirement;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,8 +25,8 @@ public class ProductionCardArray {
         Colour violet = new Violet();
 
 
-        Requirements requirementsOne = new ResourceRequirement(Resource.COIN);
-        LeaderCard leaderCardOne = new LeaderCardStorage(requirementsOne, 3, Resource.ROCK, 0);
+        Requirements requirementsFive = new SecondLevelRequirement(blue);
+        LeaderCard leaderCardOne = new LeaderCardProduction(requirementsFive, 4, Resource.SERVANT, 4);
         list.add(leaderCardOne);
 
         Requirements requirementsTwo = new ResourceRequirement(Resource.ROCK);

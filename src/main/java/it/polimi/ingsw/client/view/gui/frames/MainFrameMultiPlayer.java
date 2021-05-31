@@ -310,13 +310,13 @@ public class MainFrameMultiPlayer extends MainFrame {
     @Override
     public void disableProductionButtons() {
         gameboardPanel.disableProductionButtons();
-        //disbale production button leader
+        leaderCardsPanel.disableProductionButtons();
     }
 
     @Override
     public void enableProductionButtons() {
         gameboardPanel.enableProductionButtons();
-        //enable production button leader
+        leaderCardsPanel.enableProductionButtons();
     }
 
     public void callForCouncil(int i){

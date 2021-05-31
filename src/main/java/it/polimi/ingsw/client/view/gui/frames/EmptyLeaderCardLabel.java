@@ -7,4 +7,8 @@ public class EmptyLeaderCardLabel extends JLabel {
     public void enableButtons(){}
 
     public void disableButtons(){}
+
+    public int keyOfLeaderCard(){
+        return 0;
+    }
 }

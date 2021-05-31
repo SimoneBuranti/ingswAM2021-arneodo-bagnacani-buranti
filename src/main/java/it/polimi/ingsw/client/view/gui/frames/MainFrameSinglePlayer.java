@@ -153,13 +153,13 @@ public class MainFrameSinglePlayer extends MainFrame{
     @Override
     public void disableProductionButtons() {
         lorenzoGameboardPanel.disableProductionButtons();
-        //disbale production button leader
+        leaderCardsPanel.disableProductionButtons();
     }
 
     @Override
     public void enableProductionButtons() {
         lorenzoGameboardPanel.enableProductionButtons();
-        //enable production button leader
+        leaderCardsPanel.enableProductionButtons();
     }
 
 

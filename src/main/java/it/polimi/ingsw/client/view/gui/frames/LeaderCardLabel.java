@@ -21,10 +21,11 @@ public class LeaderCardLabel extends EmptyLeaderCardLabel {
 
     private Gui gui;
     private int index;
+    private int key;
 
 
     public LeaderCardLabel(int key, Gui gui, int index){
-
+        this.key = key;
         this.gui = gui;
         this.index = index;
         textLabel = new JLabel("Card to activate/discard");
@@ -49,6 +50,10 @@ public class LeaderCardLabel extends EmptyLeaderCardLabel {
         this.add(buttonDiscard);
         this.setSize(cardWidth,panelHeight);
         this.setBounds(0, 0,cardWidth, panelHeight);
+    }
+
+    public int keyOfLeaderCard(){
+        return key;
     }
 
     @Override
