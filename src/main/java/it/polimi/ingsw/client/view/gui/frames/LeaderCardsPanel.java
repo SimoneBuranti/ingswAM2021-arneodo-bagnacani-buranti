@@ -162,4 +162,73 @@ public class LeaderCardsPanel extends JPanel {
         //g.drawImage(backgroundImage, 0, 0, null);
 
     }
+
+    public void addLeaderCardsAsInt(ArrayList<Integer> leaderCards, boolean activated){
+        if(!activated){
+            firstCard = new LeaderCardLabel(leaderCards.get(0));
+            firstCard.setBounds(0,0, 150, 278);
+            this.add(firstCard);
+            if(leaderCards.size() == 2) {
+                secondCard = new LeaderCardLabel(leaderCards.get(1));
+                secondCard.setBounds(160, 0, 150, 278);
+                this.add(secondCard);
+            }
+        }else {
+            if(firstCard != null){
+                firstCard = new LeaderCardActivatedLabel(leaderCards.get(0));
+                firstCard.setBounds(0,0, 150, 278);
+                this.add(firstCard);
+                if(leaderCards.size() == 2) {
+                    secondCard = new LeaderCardActivatedLabel(leaderCards.get(1));
+                    secondCard.setBounds(160, 0, 150, 278);
+                    this.add(secondCard);
+                }
+            }else{
+                secondCard = new LeaderCardActivatedLabel(leaderCards.get(0));
+                secondCard.setBounds(160, 0, 150, 278);
+                this.add(secondCard);
+            }
+        }
+}
+    public void addToStorageExtraPlayerOpponent(Resource resource1, Resource resource2, int howmany1, int howmany2){
+
+            if(howmany1 == 1){
+                ResourceLabel firstLabel = new ResourceLabel(30, 250, 40, resource1);
+                firstResources.add(firstLabel);
+                firstLabel.setBounds(30, 250, 40, 40);
+                this.add(firstLabel);
+            }else if(howmany1 == 2){
+                ResourceLabel firstLabel = new ResourceLabel(30, 250, 40, resource1);
+                firstResources.add(firstLabel);
+                firstLabel.setBounds(30, 250, 40, 40);
+                this.add(firstLabel);
+
+                ResourceLabel secondLabel = new ResourceLabel(85, 250, 40, resource1);
+                firstResources.add(secondLabel);
+                secondLabel.setBounds(85, 250, 40, 40);
+                this.add(secondLabel);
+            }
+
+            if(howmany2 == 1){
+                ResourceLabel firstLabel = new ResourceLabel(190, 250, 40, resource2);
+                secondResources.add(firstLabel);
+                firstLabel.setBounds(190, 250, 40, 40);
+                this.add(firstLabel);
+            }else if(howmany2 == 2){
+                ResourceLabel firstLabel = new ResourceLabel(190, 250, 40, resource2);
+                secondResources.add(firstLabel);
+                firstLabel.setBounds(190, 250, 40, 40);
+                this.add(firstLabel);
+
+                ResourceLabel secondLabel = new ResourceLabel(245, 250, 40, resource2);
+                secondResources.add(secondLabel);
+                secondLabel.setBounds(245, 250, 40, 40);
+                this.add(secondLabel);
+            }
+
+    }
+
+
+
+
 }

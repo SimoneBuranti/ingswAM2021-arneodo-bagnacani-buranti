@@ -10,6 +10,7 @@ import it.polimi.ingsw.server.model.exceptions.EndGameException;
 import it.polimi.ingsw.server.model.exceptions.LastSpaceReachedException;
 import it.polimi.ingsw.server.model.leaderCards.DeckLeaderCard;
 import it.polimi.ingsw.server.model.leaderCards.LeaderCardProduction;
+import it.polimi.ingsw.server.model.leaderCards.LeaderCardStorage;
 import it.polimi.ingsw.server.model.players.*;
 
 import java.io.FileNotFoundException;
@@ -678,20 +679,39 @@ public class GameMultiPlayer extends Game {
             for (int i=0; i<playerList.get(n-1).getGameBoardOfPlayer().getLeaderCardsActivated().size();i++)
                 needForLeader2.add(playerList.get(n-1).getGameBoardOfPlayer().getLeaderCardsActivated().get(i).getKey());
 
+            Resource resource1=null;
+            Resource resource2=null;
+            int howMany1=0;
+            int howMany2=0;
 
-            notifyOnlyOneSpecificObserver(new ShowAllOfPlayerMessage(list,
+            if(playerList.get(n-1).getGameBoardOfPlayer().getLeaderCardsActivated().size() != 0){
+                if (playerList.get(n-1).getGameBoardOfPlayer().getLeaderCardsActivated().get(0)!=null){
+                    if(playerList.get(n-1).getGameBoardOfPlayer().getLeaderCardsActivated().get(0) instanceof LeaderCardStorage)
+                    {
+                        resource1=playerList.get(n-1).getGameBoardOfPlayer().getLeaderCardsActivated().get(0).getResourceEffect();
+                        howMany1=2-playerList.get(n-1).getGameBoardOfPlayer().getStorageOfGameBoard().getNumExtraFirstAvailable();
+                    }
+                }
+                if(playerList.get(n-1).getGameBoardOfPlayer().getLeaderCardsActivated()!=null && playerList.get(n-1).getGameBoardOfPlayer().getLeaderCardsActivated().get(1)!=null){
+                    if(playerList.get(n-1).getGameBoardOfPlayer().getLeaderCardsActivated().get(1) instanceof LeaderCardStorage)
+                    {
+                        resource2=playerList.get(n-1).getGameBoardOfPlayer().getLeaderCardsActivated().get(0).getResourceEffect();
+                        howMany2=2-playerList.get(n-1).getGameBoardOfPlayer().getStorageOfGameBoard().getNumExtraFirstAvailable();
+                    }
+                }
+            }
+
+    notifyOnlyOneSpecificObserver(new ShowAllOfPlayerMessage(list,
                     needForLeader2,
                     playerList.get(n-1).getGameBoardOfPlayer().getStorageOfGameBoard().getStorageResource(),
                     playerList.get(n-1).getGameBoardOfPlayer().getStrongboxOfGameBoard().getStrongBoxResource(),
                     playerList.get(n-1).getGameBoardOfPlayer().getIndicator(),
                     playerList.get(n-1).isConnected(),
-                    playerList.get(n-1).getNickName()),nickname);
-
-
+                    playerList.get(n-1).getNickName(),
+                    resource1,resource2,howMany1,howMany2),nickname);
         }
         else
-            notifyOnlyOneSpecificObserver(new NoPlayersErrorMessage(),nickname);
-    }
+            notifyOnlyOneSpecificObserver(new NoPlayersErrorMessage(),nickname);}
 
     public void configWhitPlayerInfo(Player p, int pos) throws IOException, InterruptedException {
         notifyOnlyOneSpecificObserver(new PositionMessage(pos), p.getNickName());

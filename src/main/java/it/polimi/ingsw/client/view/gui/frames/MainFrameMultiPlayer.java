@@ -3,6 +3,7 @@ package it.polimi.ingsw.client.view.gui.frames;
 import it.polimi.ingsw.client.ligtModelNotification.GameboardListNotification;
 import it.polimi.ingsw.client.view.gui.*;
 import it.polimi.ingsw.messages.Message;
+import it.polimi.ingsw.messages.observable.ShowAllOfPlayerMessage;
 import it.polimi.ingsw.server.model.Resource;
 import it.polimi.ingsw.server.model.leaderCards.LeaderCard;
 
@@ -320,6 +321,11 @@ public class MainFrameMultiPlayer extends MainFrame {
 
     public void callForCouncil(int i){
         this.gameboardPanel.givePapalcard(i);
+    }
+
+    public void showAllOfPlayer(ShowAllOfPlayerMessage msg){
+        gameboardPanel.showAllOfPlayer(msg);
+
     }
 
 

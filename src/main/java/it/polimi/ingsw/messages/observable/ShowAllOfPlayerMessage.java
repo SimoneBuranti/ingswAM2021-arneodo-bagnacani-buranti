@@ -22,7 +22,16 @@ public class ShowAllOfPlayerMessage extends Message {
     boolean connected;
     String nickname;
 
-   public ShowAllOfPlayerMessage (int[][] productioncard,ArrayList<Integer> listLeaderActivated,Map<Resource,Integer> storage,Map<Resource,Integer> strongBox,int faithIndicator, boolean connected,String nickname)
+    Resource resource1=null;
+    Resource resource2=null;
+    int howMany1=0;
+    int howMany2=0;
+
+   public ShowAllOfPlayerMessage (int[][] productioncard,ArrayList<Integer> listLeaderActivated,Map<Resource,Integer> storage,Map<Resource,Integer> strongBox,int faithIndicator, boolean connected,String nickname
+     ,Resource resource1,
+             Resource resource2,
+             int howMany1,
+             int howMany2)
    {
 
        this.faithIndicator=faithIndicator;
@@ -35,6 +44,11 @@ public class ShowAllOfPlayerMessage extends Message {
        this.strongBox=strongBox;
        this.connected=connected;
        this.nickname=nickname;
+
+      this.resource1=resource1;
+       this.resource2=resource2;
+      this.howMany1=howMany1;
+       this.howMany2=howMany2;
    }
 
 
@@ -76,5 +90,21 @@ public class ShowAllOfPlayerMessage extends Message {
 
     public String getNickname() {
         return nickname;
+    }
+
+    public int getHowMany1() {
+        return howMany1;
+    }
+
+    public Resource getResource1() {
+        return resource1;
+    }
+
+    public int getHowMany2() {
+        return howMany2;
+    }
+
+    public Resource getResource2() {
+        return resource2;
     }
 }

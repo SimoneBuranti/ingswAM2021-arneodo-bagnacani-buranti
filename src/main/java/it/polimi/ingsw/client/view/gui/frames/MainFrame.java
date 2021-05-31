@@ -6,6 +6,7 @@ import it.polimi.ingsw.messages.KeepResourcesMessage;
 import it.polimi.ingsw.messages.Message;
 import it.polimi.ingsw.messages.NotEnoughSpaceErrorMessage;
 import it.polimi.ingsw.messages.WhiteMarbleChoosenResourcesMessage;
+import it.polimi.ingsw.messages.observable.ShowAllOfPlayerMessage;
 import it.polimi.ingsw.server.model.Resource;
 import it.polimi.ingsw.server.model.leaderCards.LeaderCard;
 
@@ -409,32 +410,19 @@ public abstract class MainFrame  extends JFrame {
         marketFrame.removeButton();
     }
 
-    public void enableMarketButtons(){
-        marketFrame.enableButton();
-    }
-
     public void disableDeckButtons(){
         productionDeckFrame.disableButtons();
-    }
-
-    public void enableDeckButtons(){
-        productionDeckFrame.enableButtons();
     }
 
     public abstract void putCardMode(int deckKey);
 
     public void disableLeaderButtons(){
-        leaderCardsPanel.disableButtons();
+
     }
 
-    public void enableLeaderButtons() {
-        leaderCardsPanel.enableButtons();
+    public void disableProductionButtons(){
+
     }
-
-    public abstract void disableProductionButtons();
-
-    public abstract void enableProductionButtons();
-
 
     public MarketFrame getMarketFrame() {
         return marketFrame;
@@ -475,11 +463,8 @@ public abstract class MainFrame  extends JFrame {
 
     public abstract void showLorenzoActionPopUp(String string);
 
-    public abstract void enableEndTurnButton();
-
-    public abstract void disableEndTurnButton();
-
-    public abstract void activateEndOfProductionButton();
+    public void showAllOfPlayer(ShowAllOfPlayerMessage msg){
+    }
 }
 
 

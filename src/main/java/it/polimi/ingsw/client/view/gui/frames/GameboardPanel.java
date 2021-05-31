@@ -8,6 +8,7 @@ import it.polimi.ingsw.client.view.gui.listeners.PutCardButtonListener;
 import it.polimi.ingsw.messages.EndOfProductionMessage;
 import it.polimi.ingsw.messages.EndOfTurnMessage;
 import it.polimi.ingsw.messages.ProductionOnMessage;
+import it.polimi.ingsw.messages.observable.ShowAllOfPlayerMessage;
 import it.polimi.ingsw.server.model.Resource;
 import it.polimi.ingsw.server.model.gameBoard.Strongbox;
 
@@ -91,7 +92,6 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
         initStrongBox();
 
         this.setBorder(BorderFactory.createBevelBorder(1,Color.BLACK,Color.DARK_GRAY));
-
 
     }
 
@@ -343,5 +343,9 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
             productionButtons[i].setEnabled(true);
             productionButtons[i].addActionListener(new PutCardButtonListener(gui,deckKey,i));
         }
+    }
+
+    public void showAllOfPlayer(ShowAllOfPlayerMessage msg) {
+        new PlayerInformatioFrames(gui.getViewController(),msg);
     }
 }
