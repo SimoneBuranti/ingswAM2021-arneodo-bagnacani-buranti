@@ -224,6 +224,11 @@ public class ViewController implements MessageVisitor, ViewObserver {
     }
 
     @Override
+    public void visit(BaseProductionErrorMessage msg) {
+        view.notifyError(msg);
+    }
+
+    @Override
     public void visit(RestartAnswerMessage msg) {
 
     }
@@ -384,6 +389,7 @@ public class ViewController implements MessageVisitor, ViewObserver {
         game.setDeckProductionCard(msg.getNumberDeck(), msg.getDeck());
         if(game.isEachDeckConfig())
             game.configInit();
+
     }
 
     @Override

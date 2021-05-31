@@ -34,12 +34,12 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
     protected static final int[] psx = {306,460,618};
     protected final static int psy =226;
 
-
     protected Gui gui;
 
 
     protected Image backgroundImage;
 
+    protected int chosenDeckNumber;
     protected JLayeredPane[] productionSpaces;
     protected BaseProductionPanel baseProductionPanel;
     protected JLabel[][] productionCards;
@@ -95,6 +95,9 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
 
     }
 
+    public void setChosenDeckNumber(int n){
+        this.chosenDeckNumber = n;
+    }
 
 
 
@@ -337,15 +340,19 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
         this.endOfproductionButton.setEnabled(true);
     }
 
-    public void putCardMode(int deckKey){
+    public void putCardMode(){
         for(int i = 0; i<3 ; i++){
             productionButtons[i].setText("Put here");
             productionButtons[i].setEnabled(true);
-            productionButtons[i].addActionListener(new PutCardButtonListener(gui,deckKey,i));
+            productionButtons[i].addActionListener(new PutCardButtonListener(gui,chosenDeckNumber,i));
         }
     }
 
     public void showAllOfPlayer(ShowAllOfPlayerMessage msg) {
         new PlayerInformatioFrames(msg);
+    }
+
+    public void enableBaseProductionButton() {
+        baseProductionPanel.enableButton();
     }
 }

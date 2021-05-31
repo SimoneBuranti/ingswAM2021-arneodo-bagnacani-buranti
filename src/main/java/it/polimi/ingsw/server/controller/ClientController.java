@@ -171,6 +171,11 @@ public class ClientController implements MessageVisitor {
 
     }
 
+    @Override
+    public void visit(BaseProductionErrorMessage baseProductionErrorMessage) {
+
+    }
+
     //***********************************************************************************************************
 
 
@@ -216,7 +221,7 @@ public class ClientController implements MessageVisitor {
             try {
                 game.baseProductionOn(msg.getFirstInputResource(),msg.getSecondInputResource(),msg.getOutputResource());
             } catch (ImpossibleProductionException e) {
-                clientHandler.sendMessage(new NotAvailableResourcesErrorMessage());
+                clientHandler.sendMessage(new BaseProductionErrorMessage());
             }
         } else {
             clientHandler.sendMessage(new NotYourTurnErrorMessage());

@@ -18,6 +18,7 @@ public class BuyCardListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        gui.putProdCardMode(key);
+        gui.setChosenDeckNumber(key);
+        gui.putProdCardMode();
     }
 }

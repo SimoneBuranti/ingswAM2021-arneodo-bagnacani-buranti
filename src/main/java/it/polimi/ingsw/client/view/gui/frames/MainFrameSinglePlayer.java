@@ -30,7 +30,8 @@ public class MainFrameSinglePlayer extends MainFrame{
     public MainFrameSinglePlayer(Gui gui){
         super(gui);
         this.gui=gui;
-      //  initPlayerMenu();
+
+        initGameMode();
     }
 
 
@@ -151,6 +152,11 @@ public class MainFrameSinglePlayer extends MainFrame{
     }
 
     @Override
+    public void enableBaseProductionButton() {
+        lorenzoGameboardPanel.enableBaseProductionButton();
+    }
+
+    @Override
     public void disableProductionButtons() {
         lorenzoGameboardPanel.disableProductionButtons();
         leaderCardsPanel.disableProductionButtons();
@@ -254,8 +260,13 @@ public class MainFrameSinglePlayer extends MainFrame{
     }
 
     @Override
-    public void putCardMode(int deckKey) {
-        lorenzoGameboardPanel.putCardMode(deckKey);
+    public void setChosenDeckNumber(int n) {
+        lorenzoGameboardPanel.setChosenDeckNumber(n);
+    }
+
+    @Override
+    public void putCardMode() {
+        lorenzoGameboardPanel.putCardMode();
     }
 
     public void callForCouncil(int i){

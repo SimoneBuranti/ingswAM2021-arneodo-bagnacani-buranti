@@ -196,7 +196,8 @@ public abstract class Message{
             case LORENZOCONFIG:
                 return gson.fromJson(jsonObj, LorenzoTheMagnificentConfigMessage.class);
 
-
+            case BASEPRODUCTIONERROR :
+                return gson.fromJson(jsonObj, BaseProductionErrorMessage.class);
 
             case MAGNIFICENTWIN:
                 return gson.fromJson(jsonObj, MagnificentWinMessage.class);

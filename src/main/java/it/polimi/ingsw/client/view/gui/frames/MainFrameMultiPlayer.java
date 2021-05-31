@@ -59,6 +59,7 @@ public class MainFrameMultiPlayer extends MainFrame {
         super(gui);
         this.gui=gui;
 
+        initGameMode();
     }
 
 
@@ -249,6 +250,11 @@ public class MainFrameMultiPlayer extends MainFrame {
         gameboardPanel.enableEndOfProductionButton();
     }
 
+    @Override
+    public void enableBaseProductionButton() {
+        gameboardPanel.enableBaseProductionButton();
+    }
+
     public void setCurrentPlayer(String nick) {
 
         for (int i = 0; i < nicknames.size(); i++)
@@ -303,8 +309,13 @@ public class MainFrameMultiPlayer extends MainFrame {
     }
 
     @Override
-    public void putCardMode(int deckKey) {
-        gameboardPanel.putCardMode(deckKey);
+    public void putCardMode() {
+        gameboardPanel.putCardMode();
+    }
+
+    @Override
+    public void setChosenDeckNumber(int n) {
+        gameboardPanel.setChosenDeckNumber(n);
     }
 
     @Override

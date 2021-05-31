@@ -422,7 +422,9 @@ public abstract class MainFrame  extends JFrame {
         productionDeckFrame.enableButtons();
     }
 
-    public abstract void putCardMode(int deckKey);
+    public abstract void putCardMode();
+
+    public abstract void setChosenDeckNumber(int n);
 
     public void disableLeaderButtons(){
         leaderCardsPanel.disableButtons();
@@ -485,6 +487,8 @@ public abstract class MainFrame  extends JFrame {
     public abstract void disableEndTurnButton();
 
     public abstract void activateEndOfProductionButton();
+
+    public abstract void enableBaseProductionButton();
 }
 
 

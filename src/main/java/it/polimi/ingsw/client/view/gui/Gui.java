@@ -268,9 +268,25 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
     @Override
     public void notifyError(Message msg) {
-        showLabel(msg); }
+        showLabel(msg);
 
+        if (msg instanceof NotAvailableResourcesErrorMessage){
+            enableAllAction();
+        }
 
+        if (msg instanceof WrongColumnErrorMessage) {
+            mainFrameOfGame.putCardMode();
+        }
+
+        if (msg instanceof RequirementsErrorMessage){
+            mainFrameOfGame.enableLeaderButtons();
+        }
+
+        if (msg instanceof BaseProductionErrorMessage){
+            mainFrameOfGame.enableBaseProductionButton();
+        }
+
+    }
     @Override
     public void showPlayersOrder(ArrayList<String> nickName) {
         mainFrameOfGame.setPlayers(nickName);
@@ -322,11 +338,13 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
             if(!viewController.getGame().isInitResource() || !viewController.getGame().isInitLeader())
             { mainFrameOfPreGame = new MainFrameMultiPlayer(this,"your board");}
             mainFrameOfGame= new MainFrameMultiPlayer(this);}
-        else
-        { if(!viewController.getGame().isInitResource() || !viewController.getGame().isInitLeader())
-        {mainFrameOfPreGame = new MainFrameSinglePlayer(this,"your board");}
-            mainFrameOfGame= new MainFrameSinglePlayer(this);}
+        else {
 
+            if(!viewController.getGame().isInitResource() || !viewController.getGame().isInitLeader()) {
+                mainFrameOfPreGame = new MainFrameSinglePlayer(this,"your board");
+            }
+            mainFrameOfGame= new MainFrameSinglePlayer(this);
+        }
         isMultiOrNot=msg.isMultiOrNot();
     }
 
@@ -608,11 +626,11 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
         mainFrameOfGame.activateEndOfProductionButton();
     }
 
-    public void putProdCardMode(int deckKey) {
+    public void putProdCardMode() {
         mainFrameOfGame.disableMarketButtons();
         mainFrameOfGame.disableLeaderButtons();
         mainFrameOfGame.disableDeckButtons();
-        mainFrameOfGame.putCardMode(deckKey);
+        mainFrameOfGame.putCardMode();
     }
 
     public void actionDoneMode() {
@@ -635,4 +653,7 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
         this.playerInformatioFrames= new PlayerInformatioFrames(msg);
     }
 
+    public void setChosenDeckNumber(int key) {
+        mainFrameOfGame.setChosenDeckNumber(key);
+    }
 }

@@ -129,4 +129,6 @@ public interface MessageVisitor {
     void visit(ShowAllOfPlayerMessage showAllOfPlayerMessage);
 
     void visit(PositionMessage positionMessage);
+
+    void visit(BaseProductionErrorMessage baseProductionErrorMessage);
 }
