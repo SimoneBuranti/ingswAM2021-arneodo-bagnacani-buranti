@@ -8,12 +8,12 @@ import java.util.ArrayList;
 public class ActivateLeaderNotification extends Notification{
     private final NotificationType notificationType = NotificationType.ACTIVATELEADER;
 
-    private int index;
     private int key;
+    private int newIndex;
 
-    public ActivateLeaderNotification(int index, int key){
-        this.index = index;
+    public ActivateLeaderNotification(int key, int newIndex){
         this.key = key;
+        this.newIndex = newIndex;
     }
     @Override
     public void accept(NotificatorVisitor v) throws IOException, InterruptedException {
@@ -24,11 +24,11 @@ public class ActivateLeaderNotification extends Notification{
         return notificationType;
     }
 
-    public int getIndex() {
-        return index;
-    }
-
     public int getKey() {
         return key;
+    }
+
+    public int getNewIndex() {
+        return newIndex;
     }
 }

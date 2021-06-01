@@ -25,7 +25,7 @@ public class ProductionDeckFrame extends JFrame{
 
     private boolean visible;
 
-    public ProductionDeckFrame(Gui gui){
+    public  ProductionDeckFrame(Gui gui){
         this.gui = gui;
 
         initDecks();

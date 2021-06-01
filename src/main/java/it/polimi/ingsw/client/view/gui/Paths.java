@@ -153,7 +153,7 @@ public abstract class Paths {
                 return Toolkit.getDefaultToolkit().createImage(srcPath + "Masters of Renaissance_Cards_FRONT_3mmBleed_1-63-1.png");
 
 
-                case 8:
+            case 8:
                 return Toolkit.getDefaultToolkit().createImage(srcPath + "Masters of Renaissance_Cards_FRONT_3mmBleed_1-59-1.png");
             case 9:
                 return Toolkit.getDefaultToolkit().createImage(srcPath + "Masters of Renaissance_Cards_FRONT_3mmBleed_1-60-1.png");
@@ -163,7 +163,7 @@ public abstract class Paths {
                 return Toolkit.getDefaultToolkit().createImage(srcPath + "Masters of Renaissance_Cards_FRONT_3mmBleed_1-57-1.png");
 
 
-           case 12:
+            case 12:
                 return Toolkit.getDefaultToolkit().createImage(srcPath + "Masters of Renaissance_Cards_FRONT_3mmBleed_1-50-1.png");
             case 13:
                 return Toolkit.getDefaultToolkit().createImage(srcPath + "Masters of Renaissance_Cards_FRONT_3mmBleed_1-49-1.png");

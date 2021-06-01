@@ -11,4 +11,8 @@ public class EmptyLeaderCardLabel extends JLabel {
     public int keyOfLeaderCard(){
         return 0;
     }
+
+    public int getIndex(){
+        return 0;
+    }
 }

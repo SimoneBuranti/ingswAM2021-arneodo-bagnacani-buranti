@@ -59,7 +59,6 @@ public class MainFrameSinglePlayer extends MainFrame{
     }
 
     public void updateStorage(Map<Resource, Integer> newStorage) {
-
         this.lorenzoGameboardPanel.updateStorage(newStorage);
 
     }
@@ -133,6 +132,11 @@ public class MainFrameSinglePlayer extends MainFrame{
         dialog.setSize(actionPanelWidth + 10, actionPanelHeight + 35);
         actionMarkerPanel.setVisible(true);
         dialog.setVisible(true);
+    }
+
+    @Override
+    public void updateLorenzoIndicator(int i) {
+        lorenzoGameboardPanel.updateLorenzoIndicator(i);
     }
 
     @Override
@@ -252,8 +256,8 @@ public class MainFrameSinglePlayer extends MainFrame{
     public void initLeader(ArrayList<LeaderCard> arrayList, boolean bool){
         this.leaderCardsPanel.addLeaderCards(arrayList,bool);
     }
-    public void activateLeader(int arrayList, int bool){
-        this.leaderCardsPanel.activatedLeaderCard(arrayList,bool);
+    public void activateLeader(int key, int index){
+        this.leaderCardsPanel.activatedLeaderCard(key, index);
     }
     public void discardLeader(int bool){
         this.leaderCardsPanel.discardLeaderCard(bool);

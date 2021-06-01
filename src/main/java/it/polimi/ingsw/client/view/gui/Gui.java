@@ -256,17 +256,19 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
     @Override
     public void showChangeCurrent(String currentNick) {
-        mainFrameOfGame.setCurrentPlayer(currentNick);
+        SwingUtilities.invokeLater(() -> {
+            mainFrameOfGame.setCurrentPlayer(currentNick);
+            applyChangesTo(mainFrameOfGame);
+
+        });
     }
 
     @Override
     public void yourTurn() {
         SwingUtilities.invokeLater(() -> {
-
             mainFrameOfGame.setCurrentPlayer(viewController.getNickName());
-            if (viewController.getGame().isInitLeader()){
-                enableAllAction();
-            }
+            enableAllAction();
+            applyChangesTo(mainFrameOfGame);
 
         });
 
@@ -274,39 +276,46 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
     @Override
     public void notifyError(Message msg) {
-        if (msg instanceof NoNicknameMessage || msg instanceof AlreadyExistingNickNameErrorMessage ||
-                msg instanceof BootingLobbyErrorMessage || msg instanceof CompleteRunningMatchErrorMessage){
+        SwingUtilities.invokeLater(() -> {
             showLabel(msg);
-        } else {
-            mainFrameOfGame.displayString(msg.toString());
-        }
 
-        if (msg instanceof NotAvailableResourcesErrorMessage){
-            enableAllAction();
-        }
+            if (msg instanceof NotAvailableResourcesErrorMessage){
+                enableAllAction();
+            }
 
-        if (msg instanceof WrongColumnErrorMessage) {
-            mainFrameOfGame.putCardMode();
-        }
+            if (msg instanceof WrongColumnErrorMessage) {
+                mainFrameOfGame.putCardMode();
+            }
 
-        if (msg instanceof RequirementsErrorMessage){
-            mainFrameOfGame.enableLeaderButtons();
-        }
+            if (msg instanceof RequirementsErrorMessage){
+                mainFrameOfGame.enableLeaderButtons();
+            }
 
-        if (msg instanceof BaseProductionErrorMessage){
-            mainFrameOfGame.enableBaseProductionButton();
-        }
+            if (msg instanceof BaseProductionErrorMessage){
+                mainFrameOfGame.enableBaseProductionButton();
+            }
+            applyChangesTo(mainFrameOfGame);
+
+        });
 
     }
     @Override
     public void showPlayersOrder(ArrayList<String> nickName) {
-        mainFrameOfGame.setPlayers(nickName);
+        SwingUtilities.invokeLater(() -> {
+            mainFrameOfGame.setPlayers(nickName);
+            applyChangesTo(mainFrameOfGame);
+
+        });
 
     }
 
     @Override
     public void showLastTurn(String nickName) {
-        mainFrameOfGame.displayString("last turn ");
+        SwingUtilities.invokeLater(() -> {
+            mainFrameOfGame.displayString("last turn ");
+            applyChangesTo(mainFrameOfGame);
+
+        });
 
     }
 
@@ -335,8 +344,12 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
     @Override
     public void showCallForCouncil(String nickname, int papalCard) {
-        if (papalCard==1)
-            mainFrameOfGame.callForCouncil(viewController.getGame().getGameBoardOfPlayer().getCurrCall());
+        SwingUtilities.invokeLater(() -> {
+            if (papalCard==1)
+                mainFrameOfGame.callForCouncil(viewController.getGame().getGameBoardOfPlayer().getCurrCall());
+            applyChangesTo(mainFrameOfGame);
+
+        });
 
 
     }
@@ -397,12 +410,20 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
     @Override
     public void showWhiteMarbleResources(int n, ArrayList<Resource> whiteMarbleResourceTypes) {
-        mainFrameOfGame.marblePossibilityPopUp(n,whiteMarbleResourceTypes);
+        SwingUtilities.invokeLater(() -> {
+            mainFrameOfGame.marblePossibilityPopUp(n,whiteMarbleResourceTypes);
+            applyChangesTo(mainFrameOfGame);
+
+        });
     }
 
     @Override
     public void showSpaceError(NotEnoughSpaceErrorMessage msg) {
-        mainFrameOfGame.fullStoragePopUp(msg);
+        SwingUtilities.invokeLater(() -> {
+            mainFrameOfGame.fullStoragePopUp(msg);
+            applyChangesTo(mainFrameOfGame);
+
+        });
     }
 
     @Override
@@ -412,50 +433,78 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
     public void showActionMarker(String actionType) {
         SwingUtilities.invokeLater(()-> {
             mainFrameOfGame.showLorenzoActionPopUp(actionType);
+            applyChangesTo(mainFrameOfGame);
         });
 
     }
 
     @Override
     public void youWin(int score) {
-        mainFrameOfGame.showPopUp(new MyVictoryMessage(score));
+        SwingUtilities.invokeLater(() -> {
+            mainFrameOfGame.showPopUp(new MyVictoryMessage(score));
+            applyChangesTo(mainFrameOfGame);
+
+        });
 
     }
 
     @Override
     public void lorenzoWin() {
-        mainFrameOfGame.showPopUp(new MagnificentWinMessage());
+        SwingUtilities.invokeLater(() -> {
+            mainFrameOfGame.showPopUp(new MagnificentWinMessage());
+            applyChangesTo(mainFrameOfGame);
+
+        });
 
     }
 
     @Override
     public void showWinner(String nickname) {
-        mainFrameOfGame.showPopUp(new EndGamePlayerWinnerMessage(nickname));
+        SwingUtilities.invokeLater(() -> {
+            mainFrameOfGame.showPopUp(new EndGamePlayerWinnerMessage(nickname));
+            applyChangesTo(mainFrameOfGame);
+
+        });
 
     }
 
     @Override
     public void showOpponentAction(Message msg) {
-        mainFrameOfGame.displayString(msg.toString());
+        SwingUtilities.invokeLater(() -> {
+            mainFrameOfGame.displayString(msg.toString());
+            applyChangesTo(mainFrameOfGame);
+
+        });
 
     }
 
     @Override
     public void sayDisconnect() {
 
-        mainFrameOfGame.showPopUp("server is crashed, you i've been disconnected");
+        SwingUtilities.invokeLater(() -> {
+            mainFrameOfGame.showPopUp("server is crashed, you i've been disconnected");
+            applyChangesTo(mainFrameOfGame);
 
+        });
     }
 
     @Override
     public void visit(DeckListNotification deckListNotification) {
-        System.out.println("decklist notific");
-        mainFrameOfGame.getProductionDeckFrame().addDecks(deckListNotification.getListOfFirstCard());
+        //System.out.println("decklist notific");
+        SwingUtilities.invokeLater(() -> {
+            mainFrameOfGame.getProductionDeckFrame().addDecks(deckListNotification.getListOfFirstCard());
+            applyChangesTo(mainFrameOfGame);
+
+        });
     }
 
     @Override
     public void visit(GameboardListNotification gameboardListNotification) {
-        mainFrameOfGame.updateProductionCard(gameboardListNotification);
+        SwingUtilities.invokeLater(() -> {
+            mainFrameOfGame.updateProductionCard(gameboardListNotification);
+            applyChangesTo(mainFrameOfGame);
+
+        });
 
     }
 
@@ -494,6 +543,7 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
             }
 
             mainFrameOfGame.updateStorage(resources);
+            applyChangesTo(mainFrameOfGame);
 
         });
 
@@ -504,7 +554,11 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
      */
     @Override
     public void visit(StrongboxNotification strongboxNotification) {
-       mainFrameOfGame.getStrongBox(strongboxNotification.getMap());
+        SwingUtilities.invokeLater(() -> {
+            mainFrameOfGame.getStrongBox(strongboxNotification.getMap());
+            applyChangesTo(mainFrameOfGame);
+
+        });
 
     }
 
@@ -513,7 +567,11 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
      */
     @Override
     public void visit(ReserveNotification reserveNotification) {
-        mainFrameOfGame.getReserveFrame().updateReserve(reserveNotification.getMap());
+        SwingUtilities.invokeLater(() -> {
+            mainFrameOfGame.getReserveFrame().updateReserve(reserveNotification.getMap());
+            applyChangesTo(mainFrameOfGame);
+
+        });
 
     }
 
@@ -522,38 +580,61 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
      */
     @Override
     public void visit(MarketNotification marketNotification) {
-        mainFrameOfGame.getMarketFrame().setMarbleGrid(marketNotification.getList());
+        SwingUtilities.invokeLater(() -> {
+            mainFrameOfGame.getMarketFrame().setMarbleGrid(marketNotification.getList());
+            applyChangesTo(mainFrameOfGame);
+
+        });
 
     }
 
     @Override
     public void visit(ExtraMarketNotification extraMarketNotification) {
-        mainFrameOfGame.getMarketFrame().setMarbleExtra(extraMarketNotification.getMarble());
+        SwingUtilities.invokeLater(() -> {
+            mainFrameOfGame.getMarketFrame().setMarbleExtra(extraMarketNotification.getMarble());
+            applyChangesTo(mainFrameOfGame);
+
+        });
 
     }
 
     @Override
     public void visit(FaithPathNotification faithPathNotification) {
-        mainFrameOfGame.updateFaith(faithPathNotification.getI());
+        SwingUtilities.invokeLater(() -> {
+        if(!faithPathNotification.isLorenzo())
+            mainFrameOfGame.updateFaith(faithPathNotification.getI());
+        else
+            mainFrameOfGame.updateLorenzoIndicator(faithPathNotification.getI());
+            applyChangesTo(mainFrameOfGame);
 
+        });
     }
 
     @Override
     public void visit(InitLeaderNotification initLeaderNotification) {
-        mainFrameOfGame.initLeader(initLeaderNotification.getListOfFirstCard(),initLeaderNotification.isActivated());
+        SwingUtilities.invokeLater(() -> {
+            mainFrameOfGame.initLeader(initLeaderNotification.getListOfFirstCard(), initLeaderNotification.isActivated());
+            applyChangesTo(mainFrameOfGame);
 
+        });
     }
 
     @Override
     public void visit(ActivateLeaderNotification activateLeaderNotification) {
-        mainFrameOfGame.activateLeader(activateLeaderNotification.getIndex(),activateLeaderNotification.getKey());
+        SwingUtilities.invokeLater(() -> {
+            mainFrameOfGame.activateLeader(activateLeaderNotification.getKey(), activateLeaderNotification.getNewIndex());
+            applyChangesTo(mainFrameOfGame);
 
+        });
     }
 
     @Override
     public void visit(DiscardLeaderNotification discardLeaderNotification) {
-        mainFrameOfGame.discardLeader(discardLeaderNotification.getIndex());
+        SwingUtilities.invokeLater(() -> {
+            mainFrameOfGame.discardLeader(discardLeaderNotification.getIndex());
+            applyChangesTo(mainFrameOfGame);
 
+        });
 
 
     }
@@ -628,35 +709,49 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
 
     public void disableAllExceptProductions() {
-        mainFrameOfGame.disableMarketButtons();
-        mainFrameOfGame.disableDeckButtons();
-        mainFrameOfGame.disableLeaderButtons();
-        mainFrameOfGame.activateEndOfProductionButton();
+        SwingUtilities.invokeLater(() -> {
+            mainFrameOfGame.disableMarketButtons();
+            mainFrameOfGame.disableDeckButtons();
+            mainFrameOfGame.disableLeaderButtons();
+            mainFrameOfGame.activateEndOfProductionButton();
+            applyChangesTo(mainFrameOfGame);
+
+        });
     }
 
     public void putProdCardMode() {
-        mainFrameOfGame.disableMarketButtons();
-        mainFrameOfGame.disableLeaderButtons();
-        mainFrameOfGame.disableDeckButtons();
-        mainFrameOfGame.putCardMode();
+        SwingUtilities.invokeLater(() -> {
+            mainFrameOfGame.disableMarketButtons();
+            mainFrameOfGame.disableLeaderButtons();
+            mainFrameOfGame.disableDeckButtons();
+            mainFrameOfGame.putCardMode();
+            applyChangesTo(mainFrameOfGame);
+
+        });
     }
 
     public void actionDoneMode() {
-        mainFrameOfGame.disableMarketButtons();
-        mainFrameOfGame.disableDeckButtons();
-        mainFrameOfGame.disableProductionButtons();
-        mainFrameOfGame.enableLeaderButtons();
-        mainFrameOfGame.enableEndTurnButton();
+        SwingUtilities.invokeLater(() -> {
+            mainFrameOfGame.disableMarketButtons();
+            mainFrameOfGame.disableDeckButtons();
+            mainFrameOfGame.disableProductionButtons();
+            mainFrameOfGame.enableLeaderButtons();
+            mainFrameOfGame.enableEndTurnButton();
+            applyChangesTo(mainFrameOfGame);
+
+        });
     }
 
     public void enableAllAction() {
-        mainFrameOfGame.enableMarketButtons();
-        mainFrameOfGame.enableDeckButtons();
-        mainFrameOfGame.enableProductionButtons();
-        mainFrameOfGame.enableLeaderButtons();
+        SwingUtilities.invokeLater(() -> {
+            mainFrameOfGame.enableMarketButtons();
+            mainFrameOfGame.enableDeckButtons();
+            mainFrameOfGame.enableProductionButtons();
+            mainFrameOfGame.enableLeaderButtons();
+            applyChangesTo(mainFrameOfGame);
 
-        mainFrameOfGame.disableEndTurnButton();
-        mainFrameOfGame.disableEndOfProductionButton();
+        });
+
     }
 
 

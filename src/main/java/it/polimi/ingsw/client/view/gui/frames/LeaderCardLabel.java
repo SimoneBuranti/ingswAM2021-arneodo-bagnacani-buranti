@@ -56,6 +56,10 @@ public class LeaderCardLabel extends EmptyLeaderCardLabel {
         return key;
     }
 
+    public int getIndex(){
+        return index;
+    }
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);

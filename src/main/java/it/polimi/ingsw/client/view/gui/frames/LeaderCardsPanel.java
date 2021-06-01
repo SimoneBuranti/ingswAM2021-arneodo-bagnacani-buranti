@@ -50,31 +50,45 @@ public class LeaderCardsPanel extends JPanel {
     }
 
 
-
     public void addLeaderCards(ArrayList<LeaderCard> leaderCards, boolean activated){
-        if(!activated){
-            firstCard = new LeaderCardLabel(leaderCards.get(0).getKey(), gui, 0);
-            firstCard.setBounds(0,0, 150, 278);
-            this.add(firstCard);
-            if(leaderCards.size() == 2) {
-                secondCard = new LeaderCardLabel(leaderCards.get(1).getKey(), gui, 1);
-                secondCard.setBounds(160, 0, 150, 278);
-                this.add(secondCard);
-            }
-        }else {
-            if(firstCard != null){
-                firstCard = new LeaderCardActivatedLabel(leaderCards.get(0).getKey());
-                firstCard.setBounds(0,0, 150, 278);
+        if(leaderCards.size() < 3) {
+            if (!activated) {
+                firstCard = new LeaderCardLabel(leaderCards.get(0).getKey(), gui, 0);
+                firstCard.setBounds(0, 0, 150, 278);
                 this.add(firstCard);
-                if(leaderCards.size() == 2) {
-                    secondCard = new LeaderCardActivatedLabel(leaderCards.get(1).getKey());
+                if (leaderCards.size() == 2) {
+                    secondCard = new LeaderCardLabel(leaderCards.get(1).getKey(), gui, 1);
                     secondCard.setBounds(160, 0, 150, 278);
                     this.add(secondCard);
                 }
-            }else{
-                secondCard = new LeaderCardActivatedLabel(leaderCards.get(0).getKey());
-                secondCard.setBounds(160, 0, 150, 278);
-                this.add(secondCard);
+            } else {
+                new LightLeaderCards();
+                if (firstCard != null) {
+                    firstCard = new LeaderCardActivatedLabel(leaderCards.get(0).getKey(), 0);
+                    firstCard.setBounds(0, 0, 150, 278);
+                    if(LightLeaderCards.leaderCardByKey(firstCard.keyOfLeaderCard()) instanceof LeaderCardStorage){
+                        leaderCardStorageFirst();
+                    }else if(LightLeaderCards.leaderCardByKey(firstCard.keyOfLeaderCard()) instanceof LeaderCardProduction)
+                        leaderCardProductionFirst();
+                    this.add(firstCard);
+                    if (leaderCards.size() == 2) {
+                        secondCard = new LeaderCardActivatedLabel(leaderCards.get(1).getKey(), 1);
+                        secondCard.setBounds(160, 0, 150, 278);
+                        if(LightLeaderCards.leaderCardByKey(secondCard.keyOfLeaderCard()) instanceof LeaderCardStorage){
+                            leaderCardStorageSecond();
+                        }else if(LightLeaderCards.leaderCardByKey(secondCard.keyOfLeaderCard()) instanceof LeaderCardProduction)
+                            leaderCardProductionSecond();
+                        this.add(secondCard);
+                    }
+                } else {
+                    secondCard = new LeaderCardActivatedLabel(leaderCards.get(0).getKey(), 0);
+                    secondCard.setBounds(160, 0, 150, 278);
+                    if(LightLeaderCards.leaderCardByKey(secondCard.keyOfLeaderCard()) instanceof LeaderCardStorage){
+                        leaderCardStorageSecond();
+                    }else if(LightLeaderCards.leaderCardByKey(secondCard.keyOfLeaderCard()) instanceof LeaderCardProduction)
+                        leaderCardProductionSecond();
+                    this.add(secondCard);
+                }
             }
         }
     }
@@ -82,87 +96,128 @@ public class LeaderCardsPanel extends JPanel {
     public void discardLeaderCard(int pos){
         if(pos == 0){
             this.remove(firstCard);
-            firstCard = new EmptyLeaderCardLabel();
-            firstCard.setBounds(0,0, 150, 278);
-            firstCard.setBackground(Color.WHITE);
-            this.add(firstCard);
+            if(secondCard != null) {
+                if (secondCard instanceof LeaderCardLabel) {
+                    firstCard = new LeaderCardLabel(secondCard.keyOfLeaderCard(), gui, 0);
+                    firstCard.setBounds(0, 0, 150, 278);
+                    this.add(firstCard);
+                } else {
+                    firstCard = new LeaderCardActivatedLabel(secondCard.keyOfLeaderCard(), 0);
+                    new LightLeaderCards();
+                    if (LightLeaderCards.leaderCardByKey(firstCard.keyOfLeaderCard()) instanceof LeaderCardStorage) {
+                        leaderCardStorageFirst();
+                    } else if (LightLeaderCards.leaderCardByKey(firstCard.keyOfLeaderCard()) instanceof LeaderCardProduction)
+                        leaderCardProductionFirst();
+                    firstCard.setBounds(0, 0, 150, 278);
+                    this.add(firstCard);
+                }
+                this.remove(secondCard);
+                secondCard = null;
+            }
+            /*secondCard = new EmptyLeaderCardLabel();
+            secondCard.setBounds(0,0, 150, 278);
+            secondCard.setBackground(Color.WHITE);
+            this.add(secondCard);*/
         }else{
             this.remove(secondCard);
-            secondCard = new EmptyLeaderCardLabel();
+            secondCard = null;
+            /*secondCard = new EmptyLeaderCardLabel();
             secondCard.setBounds(160,0, 150, 278);
             secondCard.setBackground(Color.WHITE);
-            this.add(secondCard);
+            this.add(secondCard);*/
         }
     }
 
-    public void activatedLeaderCard(int pos, int key){
-        if(pos == 0){
+    public void leaderCardStorageFirst(){
+        JLabel textLabel = new JLabel("Extra storage:");
+        textLabel.setBounds(40, 234, 150, 15);
+        this.add(textLabel);
+    }
+
+    public void leaderCardStorageSecond(){
+        JLabel textLabel = new JLabel("Extra storage:");
+        textLabel.setBounds(200, 234, 150, 15);
+        this.add(textLabel);
+    }
+
+    public void leaderCardProductionFirst(){
+        JLabel textLabel = new JLabel("Choose:");
+        textLabel.setBounds(10, 242, 50, 15);
+        this.add(textLabel);
+        firstResourceProduction = new ResourceClickableLabel(75, 236);
+        this.add(firstResourceProduction);
+        firstActivateButton = new JButton();
+        firstActivateButton.setText("Activate");
+        firstActivateButton.setBounds(26, 268, 108, 20);
+        this.add(firstActivateButton);
+
+        firstActivateButton.addActionListener( e -> {
+            try {
+                if(firstCard.getIndex() == 0)
+                    this.gui.notifyObserver(new ExtraProductionOnMessage(firstResourceProduction.getResource(), leaderCardResource(0)));
+                else
+                    this.gui.notifyObserver(new DoubleProductionOnMessage(firstResourceProduction.getResource(), leaderCardResource(0)));
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            } catch (InterruptedException interruptedException) {
+                interruptedException.printStackTrace();
+            }
+            //System.out.println(new BaseProductionOnMessage(this.input1.getResource(),this.input2.getResource(),this.output.getResource()));
+            this.firstActivateButton.setEnabled(false);
+            this.gui.disableAllExceptProductions();
+        });
+    }
+
+    public void leaderCardProductionSecond(){
+        JLabel textLabel = new JLabel("Choose:");
+        textLabel.setBounds(170, 242, 50, 15);
+        this.add(textLabel);
+        secondResourceProduction = new ResourceClickableLabel(235, 236);
+        this.add(secondResourceProduction);
+        secondActivateButton = new JButton();
+        secondActivateButton.setText("Activate");
+        secondActivateButton.setBounds(186, 268, 108, 20);
+        this.add(secondActivateButton);
+
+        secondActivateButton.addActionListener( e -> {
+            try {
+                if(firstCard.getIndex() == 0)
+                    this.gui.notifyObserver(new ExtraProductionOnMessage(secondResourceProduction.getResource(), leaderCardResource(1)));
+                else
+                    this.gui.notifyObserver(new DoubleProductionOnMessage(secondResourceProduction.getResource(), leaderCardResource(1)));
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            } catch (InterruptedException interruptedException) {
+                interruptedException.printStackTrace();
+            }
+            //System.out.println(new BaseProductionOnMessage(this.input1.getResource(),this.input2.getResource(),this.output.getResource()));
+            this.secondActivateButton.setEnabled(false);
+            this.gui.disableAllExceptProductions();
+        });
+    }
+
+    public void activatedLeaderCard(int key, int index){
+        if(key == firstCard.keyOfLeaderCard()){
             this.remove(firstCard);
-            firstCard = new LeaderCardActivatedLabel(key);
+            firstCard = new LeaderCardActivatedLabel(key, index);
             firstCard.setBounds(0,0, 150, 232);
             this.add(firstCard);
             new LightLeaderCards();
             if(LightLeaderCards.leaderCardByKey(key) instanceof LeaderCardStorage){
-                JLabel textLabel = new JLabel("Extra storage:");
-                textLabel.setBounds(40, 234, 150, 15);
-                this.add(textLabel);
+                leaderCardStorageFirst();
             }else if(LightLeaderCards.leaderCardByKey(key) instanceof LeaderCardProduction){
-                JLabel textLabel = new JLabel("Choose:");
-                textLabel.setBounds(10, 242, 50, 15);
-                this.add(textLabel);
-                firstResourceProduction = new ResourceClickableLabel(75, 236);
-                this.add(firstResourceProduction);
-                firstActivateButton = new JButton();
-                firstActivateButton.setText("Activate");
-                firstActivateButton.setBounds(26, 268, 108, 20);
-                this.add(firstActivateButton);
-
-                firstActivateButton.addActionListener( e -> {
-                    try {
-                        this.gui.notifyObserver(new ExtraProductionOnMessage(firstResourceProduction.getResource(), leaderCardResource(0)));
-                    } catch (IOException ioException) {
-                        ioException.printStackTrace();
-                    } catch (InterruptedException interruptedException) {
-                        interruptedException.printStackTrace();
-                    }
-                    //System.out.println(new BaseProductionOnMessage(this.input1.getResource(),this.input2.getResource(),this.output.getResource()));
-                    this.firstActivateButton.setEnabled(false);
-                    this.gui.disableAllExceptProductions();
-                });
+                leaderCardProductionSecond();
             }
         }else{
             this.remove(secondCard);
-            secondCard = new LeaderCardActivatedLabel(key);
+            secondCard = new LeaderCardActivatedLabel(key, index);
             secondCard.setBounds(160,0, 150, 232);
             this.add(secondCard);
             new LightLeaderCards();
             if(LightLeaderCards.leaderCardByKey(key) instanceof LeaderCardStorage){
-                JLabel textLabel = new JLabel("Extra storage:");
-                textLabel.setBounds(200, 234, 150, 15);
-                this.add(textLabel);
+                leaderCardStorageSecond();
             }else if(LightLeaderCards.leaderCardByKey(key) instanceof LeaderCardProduction){
-                JLabel textLabel = new JLabel("Choose:");
-                textLabel.setBounds(170, 242, 50, 15);
-                this.add(textLabel);
-                secondResourceProduction = new ResourceClickableLabel(235, 236);
-                this.add(secondResourceProduction);
-                secondActivateButton = new JButton();
-                secondActivateButton.setText("Activate");
-                secondActivateButton.setBounds(186, 268, 108, 20);
-                this.add(secondActivateButton);
-
-                secondActivateButton.addActionListener( e -> {
-                    try {
-                        this.gui.notifyObserver(new DoubleProductionOnMessage(secondResourceProduction.getResource(), leaderCardResource(1)));
-                    } catch (IOException ioException) {
-                        ioException.printStackTrace();
-                    } catch (InterruptedException interruptedException) {
-                        interruptedException.printStackTrace();
-                    }
-                    //System.out.println(new BaseProductionOnMessage(this.input1.getResource(),this.input2.getResource(),this.output.getResource()));
-                    this.secondActivateButton.setEnabled(false);
-                    this.gui.disableAllExceptProductions();
-                });
+                leaderCardProductionSecond();
             }
         }
 
@@ -241,13 +296,17 @@ public class LeaderCardsPanel extends JPanel {
 
 
     public void enableButtons(){
-        firstCard.enableButtons();
-        secondCard.enableButtons();
+        if(firstCard != null)
+            firstCard.enableButtons();
+        if(firstCard != null)
+            secondCard.enableButtons();
     }
 
     public void disableButtons(){
-        firstCard.disableButtons();
-        secondCard.disableButtons();
+        if(firstCard != null)
+            firstCard.disableButtons();
+        if(firstCard != null)
+            secondCard.disableButtons();
     }
 
     @Override
@@ -269,16 +328,16 @@ public class LeaderCardsPanel extends JPanel {
             }
         }else {
             if(firstCard != null){
-                firstCard = new LeaderCardActivatedLabel(leaderCards.get(0));
+                firstCard = new LeaderCardActivatedLabel(leaderCards.get(0), 0);
                 firstCard.setBounds(0,0, 150, 278);
                 this.add(firstCard);
                 if(leaderCards.size() == 2) {
-                    secondCard = new LeaderCardActivatedLabel(leaderCards.get(1));
+                    secondCard = new LeaderCardActivatedLabel(leaderCards.get(1), 1);
                     secondCard.setBounds(160, 0, 150, 278);
                     this.add(secondCard);
                 }
             }else{
-                secondCard = new LeaderCardActivatedLabel(leaderCards.get(0));
+                secondCard = new LeaderCardActivatedLabel(leaderCards.get(0),0);
                 secondCard.setBounds(160, 0, 150, 278);
                 this.add(secondCard);
             }

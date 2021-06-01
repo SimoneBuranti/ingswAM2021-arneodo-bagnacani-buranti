@@ -64,11 +64,11 @@ public class LightGameSolitaire extends LightGame{
     @Override
     public void moveBlackCrossOnce(){
         lorenzoTheMagnificent.moveBlackCross();
-        /*try {
+        try {
             notifyObserver((new FaithPathNotification(lorenzoTheMagnificent.getFaithIndicator(),true).serialize()));
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
-        }*/
+        }
     }
 
     /**
@@ -77,11 +77,11 @@ public class LightGameSolitaire extends LightGame{
      */
     public void moveBlackCrossDouble(){
         lorenzoTheMagnificent.moveBlackCrossDouble();
-       /* try {
+        try {
             notifyObserver((new FaithPathNotification(lorenzoTheMagnificent.getFaithIndicator(),true).serialize()));
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
-        }*/
+        }
     }
 
     /**
@@ -188,7 +188,7 @@ public class LightGameSolitaire extends LightGame{
         gameBoardOfPlayer.activateLeaderCard(index);
         notifyObserver(new LeaderListCardNotification(gameBoardOfPlayer.getLeaderCards(),false).serialize());
         notifyObserver(new LeaderListCardNotification(gameBoardOfPlayer.getLeaderCardsActivated(),true).serialize());
-        notifyObserver(new ActivateLeaderNotification(index, key).serialize());
+        notifyObserver(new ActivateLeaderNotification(key, gameBoardOfPlayer.getLeaderCardActivated().size()-1).serialize());
     }
 
     @Override

@@ -78,6 +78,8 @@ public class MarketFrame extends JFrame{
             container.setBounds(0, 0, marketWidth, marketHeight);
             background.add(container);
 
+
+
             addButtons();
 
         });
@@ -136,30 +138,24 @@ public class MarketFrame extends JFrame{
     }
 
     public void removeButton(){
-        SwingUtilities.invokeLater(() -> {
-            buttonC0.setEnabled(false);
-            buttonC1.setEnabled(false);
-            buttonC2.setEnabled(false);
-            buttonC3.setEnabled(false);
-            buttonR0.setEnabled(false);
-            buttonR1.setEnabled(false);
-            buttonR2.setEnabled(false);
+        buttonC0.setEnabled(false);
+        buttonC1.setEnabled(false);
+        buttonC2.setEnabled(false);
+        buttonC3.setEnabled(false);
+        buttonR0.setEnabled(false);
+        buttonR1.setEnabled(false);
+        buttonR2.setEnabled(false);
 
-            applyChangesTo(container);
-        });
     }
     public void enableButton(){
-        SwingUtilities.invokeLater(() -> {
-            buttonC0.setEnabled(true);
-            buttonC1.setEnabled(true);
-            buttonC2.setEnabled(true);
-            buttonC3.setEnabled(true);
-            buttonR0.setEnabled(true);
-            buttonR1.setEnabled(true);
-            buttonR2.setEnabled(true);
+        buttonC0.setEnabled(true);
+        buttonC1.setEnabled(true);
+        buttonC2.setEnabled(true);
+        buttonC3.setEnabled(true);
+        buttonR0.setEnabled(true);
+        buttonR1.setEnabled(true);
+        buttonR2.setEnabled(true);
 
-            applyChangesTo(container);
-        });
     }
 
     public void sendPushColumn(int column){
@@ -186,8 +182,9 @@ public class MarketFrame extends JFrame{
 
 
     public void setMarbleGrid(Marble[][] grid){
-        SwingUtilities.invokeLater(() -> {
-            clear(container);
+        //SwingUtilities.invokeLater(() -> {
+            if(gridPanel != null)
+                clear(container);
             container.setLayout(null);
             gridPanel = new JPanel();
             gridPanel.setOpaque(false);
@@ -201,11 +198,11 @@ public class MarketFrame extends JFrame{
             }
             container.add(gridPanel);
             applyChangesTo(container);
-        });
+        //});
     }
 
     public void setMarbleExtra(Marble extra){
-        SwingUtilities.invokeLater(() -> {
+        //SwingUtilities.invokeLater(() -> {
             container.setLayout(null);
             extraPanel = new JPanel();
             extraPanel.setOpaque(false);
@@ -215,7 +212,7 @@ public class MarketFrame extends JFrame{
             extraPanel.add(getMarble(extra.getColour()));
             container.add(extraPanel);
             applyChangesTo(container);
-        });
+        //});
 
     }
 
@@ -270,7 +267,8 @@ public class MarketFrame extends JFrame{
     }
 
     private void clear(JPanel panel){
-        panel.removeAll();
+        panel.remove(gridPanel);
+        panel.remove(extraPanel);
     }
 
     private void applyChangesTo(Component component) {
