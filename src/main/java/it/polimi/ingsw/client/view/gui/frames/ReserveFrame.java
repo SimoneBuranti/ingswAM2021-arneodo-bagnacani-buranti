@@ -40,8 +40,6 @@ public class ReserveFrame extends JFrame {
 
         visible = false;
         this.setVisible(visible);
-        this.repaint();
-        this.repaint();
     }
 
     public void changeVisibility(){
@@ -52,4 +50,5 @@ public class ReserveFrame extends JFrame {
     public void updateReserve(Map<Resource,Integer> reserve){
         reservePanel.updateReserve(reserve);
     }
+
 }

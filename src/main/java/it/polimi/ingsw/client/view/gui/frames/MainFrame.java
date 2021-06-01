@@ -133,6 +133,7 @@ public abstract class MainFrame  extends JFrame {
         reserveButton.setBackground(new Color(0xeaf1f7));
         reserveButton.addActionListener(e -> {
             reserveFrame.changeVisibility();
+            reserveFrame.paintComponents(reserveFrame.getGraphics());
         });
         //reserveButton.setBorder(BorderFactory.createBevelBorder(0));
 

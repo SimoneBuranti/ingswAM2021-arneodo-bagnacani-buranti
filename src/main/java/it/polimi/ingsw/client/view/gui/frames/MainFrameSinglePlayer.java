@@ -30,7 +30,7 @@ public class MainFrameSinglePlayer extends MainFrame{
     public MainFrameSinglePlayer(Gui gui){
         super(gui);
         this.gui=gui;
-
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         initGameMode();
     }
 

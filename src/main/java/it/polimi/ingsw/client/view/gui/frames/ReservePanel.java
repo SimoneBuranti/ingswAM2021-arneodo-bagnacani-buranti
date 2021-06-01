@@ -50,7 +50,6 @@ public class ReservePanel extends JPanel {
 
         this.setOpaque(false);
         this.setBounds(reserveX,reserveY,reserveWidth,reserveHeight);
-        this.repaint();
     }
 
     public void updateReserve(Map<Resource,Integer> reserve){
