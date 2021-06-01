@@ -11,6 +11,7 @@ import it.polimi.ingsw.messages.ProductionOnMessage;
 import it.polimi.ingsw.messages.observable.ShowAllOfPlayerMessage;
 import it.polimi.ingsw.server.model.Resource;
 import it.polimi.ingsw.server.model.gameBoard.Strongbox;
+import it.polimi.ingsw.server.model.productionCards.ProductionCard;
 
 import javax.swing.*;
 import java.awt.*;
@@ -43,7 +44,7 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
     protected JLayeredPane[] productionSpaces;
     protected BaseProductionPanel baseProductionPanel;
     protected JLabel[][] productionCards;
-    protected JButton[] productionButtons;
+    protected ProductionButton[] productionButtons;
     protected JButton endOfproductionButton;
     protected FaithPathPane faithPathPane;
     protected StoragePanel storagePanel;
@@ -149,22 +150,21 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
         endOfproductionButton.setBounds(618,160,143,20);
         endOfproductionButton.setBackground(new Color(199,0,0));
         endOfproductionButton.addActionListener(e -> {
-            endOfproductionButton.setEnabled(false);
-            gui.getViewController().sendMessage(new EndOfProductionMessage());
-            gui.actionDoneMode();
+                    endOfproductionButton.setEnabled(false);
+                    gui.getViewController().sendMessage(new EndOfProductionMessage());
+                    gui.actionDoneMode();
         });
-        this.productionButtons = new JButton[3];
+        this.productionButtons = new ProductionButton[3];
         this.add(endOfproductionButton);
         for (int i = 0; i<3 ; i++){
-
-            productionButtons[i] = new JButton();
+            productionButtons[i] = new ProductionButton();
             productionButtons[i].setOpaque(true);
             productionButtons[i].setBounds(326+i*157,535,100,30);
             productionButtons[i].setSize(108,20);
             productionButtons[i].setEnabled(false);
             int finalI = i;
             productionButtons[i].setText("Activate");
-            productionButtons[i].removeAll();
+            //productionButtons[i].getA();
             productionButtons[i].addActionListener(new ActivateProductionListener(gui,productionButtons[i],i));
 
             this.add(productionButtons[i]);
@@ -179,8 +179,10 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
         for(int i = 0 ; i<3; i++){
             if (productionCards[i][column] == null){
 
-                if (i == 0)
+                if (i == 0){
                     productionButtons[column].setEnabled(true);
+                }
+
 
                 productionCards[i][column] = cardLabel;
 
@@ -191,6 +193,8 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
                 i = 3;
             }
         }
+
+        this.repaint();
     }
 
 
@@ -308,6 +312,8 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
 
     public void disableProductionButtons(){
         for(int i = 0; i < 3; i++){
+            Gui.removeAllListeners(productionButtons[i]);
+            productionButtons[i].addActionListener(new ActivateProductionListener(gui,productionButtons[i],i));
             productionButtons[i].setEnabled(false);
         }
 
@@ -317,10 +323,16 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
     public void enableProductionButtons(){
         for(int i = 0; i < 3; i++){
             productionButtons[i].setText("Activate");
-            productionButtons[i].setEnabled(true);
-            productionButtons[i].removeAll();
+            if (gui.getViewController().getGame().getGameBoardOfPlayer().getProductionCard(i) != null){
+                productionButtons[i].setEnabled(true);
+            } else {
+                productionButtons[i].setEnabled(false);
+            }
+            productionButtons[i].setToken(true);
+            Gui.removeAllListeners(productionButtons[i]);
             productionButtons[i].addActionListener(new ActivateProductionListener(gui,productionButtons[i], i));
         }
+
         baseProductionPanel.enableButton();
     }
 
@@ -334,18 +346,24 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
     }
 
     public void disableEndTurnButton(){
-        this.endTurnButton.setEnabled(true);
+
+        this.endTurnButton.setEnabled(false);
     }
 
     public void disableEndOfProductionButton(){
-        this.endOfproductionButton.setEnabled(true);
+        this.endOfproductionButton.setEnabled(false);
     }
 
     public void putCardMode(){
         for(int i = 0; i<3 ; i++){
             productionButtons[i].setText("Put here");
-            productionButtons[i].setEnabled(true);
-            productionButtons[i].removeAll();
+            ProductionCard card = gui.getViewController().getGame().getGameBoardOfPlayer().getProductionCard(i);
+            if (card != null && card.getLevel() == 3){
+                setEnabled(false);
+            } else {
+                productionButtons[i].setEnabled(true);
+            }
+            Gui.removeAllListeners(productionButtons[i]);
             productionButtons[i].addActionListener(new PutCardButtonListener(gui,chosenDeckNumber,i));
         }
     }
@@ -356,5 +374,20 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
 
     public void enableBaseProductionButton() {
         baseProductionPanel.enableButton();
+    }
+
+    public int howManyActivated() {
+        int cont = 0;
+        if(!baseProductionPanel.getProductionButton().isToken())
+            cont++;
+        for(int i = 0 ; i<3;i++){
+            if (!productionButtons[i].isToken())
+                cont++;
+        }
+        return cont;
+    }
+
+    public void updateStrongBox(Map<Resource, Integer> map) {
+        this.strongboxPanel.updateStrongBox(map);
     }
 }

@@ -22,12 +22,11 @@ public class BaseProductionPanel extends JPanel {
 
     private Gui gui;
 
-    private ViewController viewController;
     private ResourceClickableLabel input1;
     private ResourceClickableLabel input2;
     private ResourceClickableLabel output;
 
-    private JButton productionButton;
+    private ProductionButton productionButton;
 
     public BaseProductionPanel(Gui gui){
 
@@ -41,22 +40,22 @@ public class BaseProductionPanel extends JPanel {
 
         initOutput();
 
-        productionButton = new JButton();
+        productionButton = new ProductionButton();
         productionButton.setSize(90,20);
         productionButton.setBounds(0,310,90,20);
         productionButton.setText("Activate");
+        productionButton.setToken(true);
         productionButton.setHorizontalTextPosition(SwingConstants.CENTER);
         productionButton.addActionListener( e -> {
-            try {
-                this.gui.notifyObserver(new BaseProductionOnMessage(this.input1.getResource(),this.input2.getResource(),this.output.getResource()));
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            } catch (InterruptedException interruptedException) {
-                interruptedException.printStackTrace();
-            }
+                    try {
+                        productionButton.setToken(false);
+                        this.productionButton.setEnabled(false);
+                        this.gui.disableAllExceptProductions();
+                        this.gui.notifyObserver(new BaseProductionOnMessage(this.input1.getResource(),this.input2.getResource(),this.output.getResource()));
+                    } catch (IOException | InterruptedException ioException) {
+                        ioException.printStackTrace();
+                    }
             //System.out.println(new BaseProductionOnMessage(this.input1.getResource(),this.input2.getResource(),this.output.getResource()));
-            this.productionButton.setEnabled(false);
-            this.gui.disableAllExceptProductions();
         });
 
         this.setSize(psWidth,psHeight);
@@ -67,9 +66,6 @@ public class BaseProductionPanel extends JPanel {
         this.add(productionButton);
     }
 
-    public void setViewController(ViewController viewController) {
-        this.viewController = viewController;
-    }
 
     public void initInput1(){
         input1 = new ResourceClickableLabel(iX,i1Y);
@@ -93,11 +89,17 @@ public class BaseProductionPanel extends JPanel {
     }
 
     public void enableButton(){
+        this.productionButton.setToken(true);
         this.productionButton.setEnabled(true);
     }
 
     public void disableButton(){
+        this.productionButton.setToken(false);
         this.productionButton.setEnabled(false);
+    }
+
+    public ProductionButton getProductionButton(){
+        return productionButton;
     }
 
 }

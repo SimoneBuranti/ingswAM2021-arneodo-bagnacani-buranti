@@ -164,6 +164,7 @@ public class MainFrameSinglePlayer extends MainFrame{
         lorenzoGameboardPanel.disableEndOfProductionButton();
     }
 
+
     @Override
     public void disableProductionButtons() {
         lorenzoGameboardPanel.disableProductionButtons();
@@ -172,6 +173,8 @@ public class MainFrameSinglePlayer extends MainFrame{
 
     @Override
     public void enableProductionButtons() {
+        lorenzoGameboardPanel.disableEndTurnButton();
+        lorenzoGameboardPanel.disableEndOfProductionButton();
         lorenzoGameboardPanel.enableProductionButtons();
         leaderCardsPanel.enableProductionButtons();
     }
@@ -243,7 +246,7 @@ public class MainFrameSinglePlayer extends MainFrame{
     }
 
     public void getStrongBox(Map<Resource,Integer> map){
-        this.lorenzoGameboardPanel.strongboxPanel.updateStrongBox(map);
+        this.lorenzoGameboardPanel.updateStrongBox(map);
 
     }
 
@@ -279,6 +282,11 @@ public class MainFrameSinglePlayer extends MainFrame{
 
     public void callForCouncil(int i){
         this.lorenzoGameboardPanel.givePapalcard(i);
+    }
+
+    @Override
+    public int howManyActivated(){
+        return (lorenzoGameboardPanel.howManyActivated() + leaderCardsPanel.howManyActivated());
     }
 
 }

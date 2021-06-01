@@ -96,6 +96,9 @@ public class LightGameBoard {
     public ProductionCard getProductionCard(int chosenColumn){
         int row = lastRowOccupied(chosenColumn);
 
+        if ( row == -1)
+            return null;
+
         return productionCards[row][chosenColumn];
     }
 

@@ -3,10 +3,7 @@ import it.polimi.ingsw.client.ligtModelNotification.*;
 import it.polimi.ingsw.client.view.View;
 import it.polimi.ingsw.client.view.ViewController;
 import it.polimi.ingsw.client.view.ViewControllerObservable;
-import it.polimi.ingsw.client.view.gui.frames.MainFrame;
-import it.polimi.ingsw.client.view.gui.frames.MainFrameMultiPlayer;
-import it.polimi.ingsw.client.view.gui.frames.MainFrameSinglePlayer;
-import it.polimi.ingsw.client.view.gui.frames.PlayerInformatioFrames;
+import it.polimi.ingsw.client.view.gui.frames.*;
 import it.polimi.ingsw.messages.*;
 import it.polimi.ingsw.messages.observable.*;
 import it.polimi.ingsw.server.model.Resource;
@@ -17,6 +14,7 @@ import it.polimi.ingsw.server.model.productionCards.ProductionCard;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -277,7 +275,12 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
     @Override
     public void notifyError(Message msg) {
         SwingUtilities.invokeLater(() -> {
-            showLabel(msg);
+
+            if (msg instanceof NoNicknameMessage || msg instanceof BootingLobbyErrorMessage
+                    || msg instanceof AlreadyExistingNickNameErrorMessage || msg instanceof CompleteRunningMatchErrorMessage)
+                showLabel(msg);
+            else
+                mainFrameOfGame.displayString(msg.toString());
 
             if (msg instanceof NotAvailableResourcesErrorMessage){
                 enableAllAction();
@@ -293,6 +296,8 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
             if (msg instanceof BaseProductionErrorMessage){
                 mainFrameOfGame.enableBaseProductionButton();
+                if (howManyActivated()<2)
+                    enableAllAction();
             }
             applyChangesTo(mainFrameOfGame);
 
@@ -697,13 +702,6 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
         mainFrameOfGame.paintComponents(mainFrameOfGame.getGraphics());
         mainFrameOfGame.paintComponents(mainFrameOfGame.getGraphics());
         mainFrameOfGame.paintComponents(mainFrameOfGame.getGraphics());
-        mainFrameOfGame.paintComponents(mainFrameOfGame.getGraphics());
-        mainFrameOfGame.paintComponents(mainFrameOfGame.getGraphics());
-        mainFrameOfGame.paintComponents(mainFrameOfGame.getGraphics());
-        mainFrameOfGame.paintComponents(mainFrameOfGame.getGraphics());
-        mainFrameOfGame.paintComponents(mainFrameOfGame.getGraphics());
-        mainFrameOfGame.paintComponents(mainFrameOfGame.getGraphics());
-
 
     }
 
@@ -762,4 +760,19 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
     public void setChosenDeckNumber(int key) {
         mainFrameOfGame.setChosenDeckNumber(key);
     }
+
+    public static void removeAllListeners(JButton button) {
+        ActionListener[] listenerList;
+        listenerList = button.getActionListeners();
+
+        for(int i = 0;i< listenerList.length; i++){
+            button.removeActionListener(listenerList[i]);
+        }
+    }
+
+    public int howManyActivated() {
+        return mainFrameOfGame.howManyActivated();
+    }
+
+
 }

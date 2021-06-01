@@ -24,9 +24,9 @@ public class LeaderCardsPanel extends JPanel {
     private ArrayList<ResourceLabel> firstResources;
     private ArrayList<ResourceLabel> secondResources;
     private ResourceClickableLabel firstResourceProduction;
-    private JButton firstActivateButton;
+    private ProductionButton firstActivateButton;
     private ResourceClickableLabel secondResourceProduction;
-    private JButton secondActivateButton;
+    private ProductionButton secondActivateButton;
 
     private Gui gui;
 
@@ -146,7 +146,7 @@ public class LeaderCardsPanel extends JPanel {
         this.add(textLabel);
         firstResourceProduction = new ResourceClickableLabel(75, 236);
         this.add(firstResourceProduction);
-        firstActivateButton = new JButton();
+        firstActivateButton = new ProductionButton();
         firstActivateButton.setText("Activate");
         firstActivateButton.setBounds(26, 268, 108, 20);
         this.add(firstActivateButton);
@@ -164,6 +164,7 @@ public class LeaderCardsPanel extends JPanel {
             }
             //System.out.println(new BaseProductionOnMessage(this.input1.getResource(),this.input2.getResource(),this.output.getResource()));
             this.firstActivateButton.setEnabled(false);
+            this.firstActivateButton.setToken(false);
             this.gui.disableAllExceptProductions();
         });
     }
@@ -174,7 +175,7 @@ public class LeaderCardsPanel extends JPanel {
         this.add(textLabel);
         secondResourceProduction = new ResourceClickableLabel(235, 236);
         this.add(secondResourceProduction);
-        secondActivateButton = new JButton();
+        secondActivateButton = new ProductionButton();
         secondActivateButton.setText("Activate");
         secondActivateButton.setBounds(186, 268, 108, 20);
         this.add(secondActivateButton);
@@ -192,6 +193,7 @@ public class LeaderCardsPanel extends JPanel {
             }
             //System.out.println(new BaseProductionOnMessage(this.input1.getResource(),this.input2.getResource(),this.output.getResource()));
             this.secondActivateButton.setEnabled(false);
+            this.secondActivateButton.setToken(false);
             this.gui.disableAllExceptProductions();
         });
     }
@@ -281,10 +283,15 @@ public class LeaderCardsPanel extends JPanel {
     }
 
     public void enableProductionButtons(){
-        if(firstActivateButton != null)
+        if(firstActivateButton != null){
+            firstActivateButton.setToken(true);
             firstActivateButton.setEnabled(true);
-        if(secondActivateButton != null)
+        }
+        if(secondActivateButton != null){
+            firstActivateButton.setToken(true);
             secondActivateButton.setEnabled(true);
+        }
+
     }
 
     public void disableProductionButtons(){
@@ -298,14 +305,14 @@ public class LeaderCardsPanel extends JPanel {
     public void enableButtons(){
         if(firstCard != null)
             firstCard.enableButtons();
-        if(firstCard != null)
+        if(secondCard != null)
             secondCard.enableButtons();
     }
 
     public void disableButtons(){
         if(firstCard != null)
             firstCard.disableButtons();
-        if(firstCard != null)
+        if(secondCard != null)
             secondCard.disableButtons();
     }
 
@@ -382,6 +389,14 @@ public class LeaderCardsPanel extends JPanel {
     }
 
 
+    public int howManyActivated() {
+        int cont = 0;
 
+        if (firstActivateButton != null && !firstActivateButton.isToken())
+            cont++;
+        if (secondActivateButton != null && !secondActivateButton.isToken())
+            cont++;
 
+        return cont;
+    }
 }

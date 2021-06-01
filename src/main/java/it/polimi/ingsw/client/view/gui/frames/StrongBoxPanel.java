@@ -44,8 +44,9 @@ public class StrongBoxPanel extends JPanel {
 
     public void updateStrongBox(Map<Resource,Integer> strongBox){
         coinLabel.setValue(strongBox.get(Resource.COIN));
-        rockLabel.setValue(strongBox.get(Resource.COIN));
-        shieldLabel.setValue(strongBox.get(Resource.COIN));
-        servantLabel.setValue(strongBox.get(Resource.COIN));
+        rockLabel.setValue(strongBox.get(Resource.ROCK));
+        shieldLabel.setValue(strongBox.get(Resource.SHIELD));
+        servantLabel.setValue(strongBox.get(Resource.SERVANT));
+        this.repaint();
     }
 }

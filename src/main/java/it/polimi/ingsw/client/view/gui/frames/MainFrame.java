@@ -495,6 +495,8 @@ public abstract class MainFrame  extends JFrame {
     public abstract void enableBaseProductionButton();
 
     public abstract void disableEndOfProductionButton();
+
+    public abstract int howManyActivated();
 }
 
 

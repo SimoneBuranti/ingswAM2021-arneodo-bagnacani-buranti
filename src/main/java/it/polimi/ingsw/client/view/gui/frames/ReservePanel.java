@@ -25,7 +25,7 @@ public class ReservePanel extends JPanel {
     public ReservePanel() {
         super();
 
-        this.setLayout(new FlowLayout(SwingConstants.CENTER,40,15));
+        this.setLayout(new FlowLayout(SwingConstants.CENTER,30,15));
         reserveImage = (Paths.getImageFromPath("src/main/resources/resources/punchboard/reserve.png"))
                 .getScaledInstance(reserveWidth,reserveHeight,0);
 
@@ -50,6 +50,7 @@ public class ReservePanel extends JPanel {
 
         this.setOpaque(false);
         this.setBounds(reserveX,reserveY,reserveWidth,reserveHeight);
+        this.repaint();
     }
 
     public void updateReserve(Map<Resource,Integer> reserve){

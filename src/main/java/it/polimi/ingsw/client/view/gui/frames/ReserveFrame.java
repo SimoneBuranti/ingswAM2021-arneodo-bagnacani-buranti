@@ -40,8 +40,8 @@ public class ReserveFrame extends JFrame {
 
         visible = false;
         this.setVisible(visible);
-        paintComponents(this.getGraphics());
-        paintComponents(this.getGraphics());
+        this.repaint();
+        this.repaint();
     }
 
     public void changeVisibility(){

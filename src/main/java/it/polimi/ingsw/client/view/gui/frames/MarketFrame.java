@@ -187,7 +187,8 @@ public class MarketFrame extends JFrame{
                 clear(container);
             container.setLayout(null);
             gridPanel = new JPanel();
-            gridPanel.setOpaque(false);
+            gridPanel.setOpaque(true);
+            gridPanel.setBackground(new Color(28, 28, 28));
             gridPanel.setLayout(new GridLayout(3, 4));
             gridPanel.setBounds(100, 95, 192, 144);
 
@@ -198,6 +199,7 @@ public class MarketFrame extends JFrame{
             }
             container.add(gridPanel);
             applyChangesTo(container);
+            //this.repaint();
         //});
     }
 
@@ -269,6 +271,11 @@ public class MarketFrame extends JFrame{
     private void clear(JPanel panel){
         panel.remove(gridPanel);
         panel.remove(extraPanel);
+    }
+
+    @Override
+    public void paintComponents(Graphics g){
+        super.paintComponents(g);
     }
 
     private void applyChangesTo(Component component) {

@@ -168,7 +168,7 @@ public class ClientHandler implements Runnable {
     }
 
     public synchronized void sendMessage (Message msg) throws InterruptedException, IOException {
-        System.out.println(clientController.getNickname() + " " + msg.getMessageType()+"invio da server");
+        System.out.println(clientController.getNickname() + " " + msg.getMessageType()+" invio da server  ("+msg+")");
         writeStream.println(msg.serialize());
         writeStream.flush();
 

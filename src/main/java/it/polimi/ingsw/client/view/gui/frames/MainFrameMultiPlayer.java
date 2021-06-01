@@ -294,6 +294,12 @@ public class MainFrameMultiPlayer extends MainFrame {
         gameboardPanel.disableEndOfProductionButton();
     }
 
+    @Override
+    public int howManyActivated(){
+        return (gameboardPanel.howManyActivated() + leaderCardsPanel.howManyActivated());
+    }
+
+
     public void setCurrentPlayer(String nick) {
 
         for (int i = 0; i < nicknames.size(); i++)
@@ -365,6 +371,8 @@ public class MainFrameMultiPlayer extends MainFrame {
 
     @Override
     public void enableProductionButtons() {
+        gameboardPanel.disableEndTurnButton();
+        gameboardPanel.disableEndOfProductionButton();
         gameboardPanel.enableProductionButtons();
         leaderCardsPanel.enableProductionButtons();
     }
