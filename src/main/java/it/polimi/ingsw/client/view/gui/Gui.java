@@ -30,7 +30,6 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
     private JButton enterButton ;
 
     private MainFrame mainFrameOfGame;
-    private MainFrame mainFrameOfPreGame;
 
     private Boolean isMultiOrNot;
 
@@ -300,6 +299,8 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
     @Override
     public void yourTurn() {
         SwingUtilities.invokeLater(() -> {
+            if (!mainFrameOfGame.isBackGroundNull())
+                mainFrameOfGame.switchToGameMode();
             mainFrameOfGame.setCurrentPlayer(viewController.getNickName());
             enableAllAction();
             applyChangesTo(mainFrameOfGame);
@@ -382,7 +383,7 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
     public void askLeaderCardToKeep(ArrayList<LeaderCard> leaderCards) {
         SwingUtilities.invokeLater(() -> {
             try {
-                mainFrameOfPreGame.askLeaderCardToKeep(leaderCards);
+                mainFrameOfGame.askLeaderCardToKeep(leaderCards);
             } catch (IOException | InterruptedException e) {
                 e.printStackTrace();
             }
@@ -759,17 +760,14 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
     public void powerToMainFrame()
     {
-        mainFrameOfPreGame.dispose();
-        mainFrameOfGame.setVisible(true);
-        mainFrameOfGame.paintComponents(mainFrameOfGame.getGraphics());
-        mainFrameOfGame.paintComponents(mainFrameOfGame.getGraphics());
-        mainFrameOfGame.paintComponents(mainFrameOfGame.getGraphics());
-        mainFrameOfGame.paintComponents(mainFrameOfGame.getGraphics());
-        mainFrameOfGame.paintComponents(mainFrameOfGame.getGraphics());
-        mainFrameOfGame.paintComponents(mainFrameOfGame.getGraphics());
-        mainFrameOfGame.paintComponents(mainFrameOfGame.getGraphics());
-        mainFrameOfGame.paintComponents(mainFrameOfGame.getGraphics());
-        mainFrameOfGame.paintComponents(mainFrameOfGame.getGraphics());
+        SwingUtilities.invokeLater(()-> {
+
+            mainFrameOfGame.switchToGameMode();
+            mainFrameOfGame.paintComponents(mainFrameOfGame.getGraphics());
+            mainFrameOfGame.paintComponents(mainFrameOfGame.getGraphics());
+
+        });
+
 
     }
 

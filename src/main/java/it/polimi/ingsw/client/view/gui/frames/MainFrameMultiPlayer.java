@@ -58,7 +58,7 @@ public class MainFrameMultiPlayer extends MainFrame {
 
     public MainFrameMultiPlayer(Gui gui){
         super(gui);
-        this.gui=gui;
+
 
         initGameMode();
     }
@@ -157,10 +157,11 @@ public class MainFrameMultiPlayer extends MainFrame {
 
 
     public void initGameMode() {
+
         for (JPanel p : attached) {
             mainPanel.remove(p);
         }
-        setGeneralFeatures();
+        mainPanel.setLayout(null);
         initNavigationBar();
 
         marketFrame = new MarketFrame(gui);

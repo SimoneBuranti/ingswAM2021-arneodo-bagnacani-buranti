@@ -24,7 +24,7 @@ public class appPopUp {
         int score=1;
         String nickname= "ale";
         Gui gui = new Gui();
-        MainFrame mainFrameOfGame = new MainFrameSinglePlayer(gui,"hello");
+        //MainFrame mainFrameOfGame = new MainFrameSinglePlayer(gui,"hello");
         /*mainFrameOfGame.showPopUp(new MyVictoryMessage(score));
         mainFrameOfGame.showPopUp(new MagnificentWinMessage());
         mainFrameOfGame.showPopUp("server is crashed, you i've been disconnected");

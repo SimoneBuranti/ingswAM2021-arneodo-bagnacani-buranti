@@ -22,19 +22,22 @@ public class MainFrameSinglePlayer extends MainFrame{
     private PanelContainer container;
     protected ActionMarkerPanel actionMarkerPanel;
     private JLabel errorLabel;
-    private Gui gui;
+
 
     private LorenzoGameboardPanel lorenzoGameboardPanel;
     private int readyToSend=0;
 
     public MainFrameSinglePlayer(Gui gui){
         super(gui);
-        this.gui=gui;
+
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+
         initGameMode();
+        pregameMode();
+
     }
 
-    public MainFrameSinglePlayer(Gui gui,String title){
+    /*public MainFrameSinglePlayer(Gui gui,String title){
         super(title,gui);
         this.gui=gui;
 
@@ -58,7 +61,7 @@ public class MainFrameSinglePlayer extends MainFrame{
 
         this.setVisible(true);
 
-    }
+    }*/
 
 
     public void initNavigationBar() {
@@ -75,7 +78,7 @@ public class MainFrameSinglePlayer extends MainFrame{
         this.navigationBar.add(marketButton);
         this.navigationBar.add(prodCardButton);
         this.navigationBar.add(reserveButton);
-        this.add(navigationBar, BorderLayout.NORTH);
+
 
         //---------------
         /*JPanel random = new JPanel();
@@ -89,11 +92,36 @@ public class MainFrameSinglePlayer extends MainFrame{
 
     }
 
+    public void pregameMode(){
+        //this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        //this.setLocation(475,208);
+        //this.setSize(820,420);
+
+        //this.setResizable(true);
+        ImageIcon icon = new ImageIcon("src/main/resources/resources/title.jpg");
+        Image image=icon.getImage();
+        background = new PBackground(image);
+        this.repaint();
+        background.setLayout(null);
+        this.add(background);
+        //mainFrame.add(errorText);
+
+        // Prepare the body container
+        container = new PanelContainer();
+        container.setBounds(230,170, 700, 400);
+        background.add(container);
+
+        this.setVisible(true);
+    }
+
     public void initGameMode() {
+
         for (JPanel p : attached) {
             mainPanel.remove(p);
         }
-        //setGeneralFeatures();
+        mainPanel.setLayout(null);
+
+
         initNavigationBar();
 
         marketFrame = new MarketFrame(gui);
@@ -244,7 +272,7 @@ public class MainFrameSinglePlayer extends MainFrame{
                 e.printStackTrace();
             }
         })).start();
-        gui.powerToMainFrame();
+        System.out.println("hey lo chiamo da qua0"+Thread.currentThread().getName());
     }
 
     public void getStrongBox(Map<Resource,Integer> map){

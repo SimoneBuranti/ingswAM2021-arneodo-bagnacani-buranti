@@ -43,6 +43,7 @@ public abstract class MainFrame  extends JFrame {
     protected JButton marketButton;
     protected JButton prodCardButton;
     protected JButton reserveButton;
+    protected JPanel background;
 
     protected ArrayList<JPanel> attached;
     protected JLabel[] blankLabels;
@@ -54,11 +55,6 @@ public abstract class MainFrame  extends JFrame {
         super(string);
         this.gui=gui;
 
-     /*   this.attached = new ArrayList<>();
-        this.setLocation(frameX, frameY);
-        this.setSize(frameWidth, frameHeigth);
-        this.setResizable(false);*/
-
     }
 
 
@@ -66,6 +62,7 @@ public abstract class MainFrame  extends JFrame {
         super();
         this.gui=gui;
 
+        this.mainPanel = new JPanel();
         this.setTitle("Master of Renaissance");
         this.attached = new ArrayList<>();
         this.setLocation(frameX, frameY);
@@ -73,7 +70,6 @@ public abstract class MainFrame  extends JFrame {
         this.setResizable(false);
         this.setVisible(false);
 
-        initGameMode();
     }
 
 
@@ -90,6 +86,15 @@ public abstract class MainFrame  extends JFrame {
     }*/
 
 
+    public void switchToGameMode(){
+
+        this.remove(background);
+        background = null;
+        this.setLayout(new BorderLayout());
+        this.add(navigationBar, BorderLayout.NORTH);
+        this.add(mainPanel);
+
+    }
 
 
 
@@ -138,16 +143,6 @@ public abstract class MainFrame  extends JFrame {
     }
 
 
-
-
-    public void setGeneralFeatures() {
-
-        this.setLayout(new BorderLayout());
-        this.mainPanel = new JPanel();
-        this.add(mainPanel);
-        mainPanel.setLayout(null);
-
-    }
     public abstract void getStrongBox(Map<Resource, Integer> map);
 
     public abstract void updateFaith(int i);
@@ -416,6 +411,12 @@ public abstract class MainFrame  extends JFrame {
     public abstract void disableEndOfProductionButton();
 
     public abstract int howManyActivated();
+
+    public boolean isBackGroundNull() {
+        if (background == null)
+            return true;
+        return false;
+    }
 }
 
 
