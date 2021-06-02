@@ -34,6 +34,32 @@ public class MainFrameSinglePlayer extends MainFrame{
         initGameMode();
     }
 
+    public MainFrameSinglePlayer(Gui gui,String title){
+        super(title,gui);
+        this.gui=gui;
+
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.setLocation(475,208);
+        this.setSize(820,420);
+
+        this.setResizable(true);
+        ImageIcon icon = new ImageIcon("src/main/resources/resources/title.jpg");
+        Image image=icon.getImage();
+        JPanel background = new PBackground(image);
+        this.repaint();
+        background.setLayout(null);
+        this.add(background);
+        //mainFrame.add(errorText);
+
+        // Prepare the body container
+        container = new PanelContainer();
+        container.setBounds(50,35, 700, 400);
+        background.add(container);
+
+        this.setVisible(true);
+
+    }
+
 
     public void initNavigationBar() {
         navigationBar = new JPanel();
@@ -67,7 +93,7 @@ public class MainFrameSinglePlayer extends MainFrame{
         for (JPanel p : attached) {
             mainPanel.remove(p);
         }
-        setGeneralFeatures();
+        //setGeneralFeatures();
         initNavigationBar();
 
         marketFrame = new MarketFrame(gui);
@@ -92,35 +118,6 @@ public class MainFrameSinglePlayer extends MainFrame{
         this.setVisible(false);
     }
 
-
-
-    public MainFrameSinglePlayer(Gui gui,String title){
-        super(title,gui);
-        this.gui=gui;
-
-            this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-            this.setLocation(475,208);
-            this.setSize(820,420);
-
-            this.setResizable(true);
-            ImageIcon icon = new ImageIcon("src/main/resources/resources/title.jpg");
-            Image image=icon.getImage();
-            JPanel background = new PBackground(image);
-            this.repaint();
-            background.setLayout(null);
-            this.add(background);
-            //mainFrame.add(errorText);
-
-            // Prepare the body container
-            container = new PanelContainer();
-            container.setBounds(50,35, 700, 400);
-            background.add(container);
-
-            this.setVisible(true);
-
-
-
-    }
 
 
     public void showLorenzoActionPopUp(String actionMarker) {

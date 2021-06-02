@@ -405,22 +405,26 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
     @Override
     public void showStartGame(GameTypeMessage msg) {
         SwingUtilities.invokeLater(() -> {
+
             mainFrame.dispose();
             if (msg.isMultiOrNot() == true) {
-                if (!viewController.getGame().isInitResource() || !viewController.getGame().isInitLeader()) {
+                /*if (!viewController.getGame().isInitResource() || !viewController.getGame().isInitLeader()) {
                     mainFrameOfPreGame = new MainFrameMultiPlayer(this, "your board");
-                }
+                }*/
                 mainFrameOfGame = new MainFrameMultiPlayer(this);
             } else {
 
-                if (!viewController.getGame().isInitResource() || !viewController.getGame().isInitLeader()) {
+                /*if (!viewController.getGame().isInitResource() || !viewController.getGame().isInitLeader()) {
                     mainFrameOfPreGame = new MainFrameSinglePlayer(this, "your board");
-                }
+                }*/
                 mainFrameOfGame = new MainFrameSinglePlayer(this);
+
             }
+
             isMultiOrNot = msg.isMultiOrNot();
 
             System.out.println("sono dentro all'edt e ho istanziato cazzi e mazzi");
+
         });}
 
     @Override
