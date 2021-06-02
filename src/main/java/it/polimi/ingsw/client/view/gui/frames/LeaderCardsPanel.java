@@ -208,7 +208,7 @@ public class LeaderCardsPanel extends JPanel {
             if(LightLeaderCards.leaderCardByKey(key) instanceof LeaderCardStorage){
                 leaderCardStorageFirst();
             }else if(LightLeaderCards.leaderCardByKey(key) instanceof LeaderCardProduction){
-                leaderCardProductionSecond();
+                leaderCardProductionFirst();
             }
             if(secondCard != null && secondCard instanceof LeaderCardLabel){
                 secondCard.setIndex(0);
@@ -291,7 +291,7 @@ public class LeaderCardsPanel extends JPanel {
             firstActivateButton.setEnabled(true);
         }
         if(secondActivateButton != null){
-            firstActivateButton.setToken(true);
+            secondActivateButton.setToken(true);
             secondActivateButton.setEnabled(true);
         }
 

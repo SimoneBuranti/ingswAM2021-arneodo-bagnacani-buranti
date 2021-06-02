@@ -4,6 +4,7 @@ import it.polimi.ingsw.client.ligtModelNotification.GameboardListNotification;
 import it.polimi.ingsw.client.view.gui.Gui;
 import it.polimi.ingsw.messages.*;
 import it.polimi.ingsw.messages.observable.ShowAllOfPlayerMessage;
+import it.polimi.ingsw.server.model.Reserve;
 import it.polimi.ingsw.server.model.Resource;
 import it.polimi.ingsw.server.model.leaderCards.LeaderCard;
 
@@ -326,104 +327,48 @@ public abstract class MainFrame  extends JFrame {
     public void  fullStoragePopUp(NotEnoughSpaceErrorMessage message){
 
         SwingUtilities.invokeLater(() -> {
-            int howManyC=0;
-            int howManyR=0;
-            int howManyS=0;
-            int howManyV=0;
-            AtomicInteger howManyCP= new AtomicInteger();
-            AtomicInteger howManyRP= new AtomicInteger();
-            AtomicInteger howManySP= new AtomicInteger();
-            AtomicInteger howManyVP= new AtomicInteger();
-            ArrayList<Resource> arrayList=new ArrayList<>(message.getReources().size());
-            for (Resource resource: message.getReources())
-            {
-                if (resource.equals(Resource.COIN))
-                    howManyR++;
-                else if (resource.equals(Resource.ROCK))
-                    howManyC++;
-                else if (resource.equals(Resource.SERVANT))
-                    howManyV++;
-                else if (resource.equals(Resource.SHIELD))
-                    howManyS++;
-            }
-            JButton coinButton;
-            JButton servantButton;
-            JButton shieldButton;
-            JButton rockButton;
-            JButton enterButton;
-
+            ArrayList<Resource> buffer = new ArrayList<>();
             JDialog dialog =new JDialog();
             dialog.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             dialog.setLocation(600, 400);
-            dialog.setSize(400, 400);
+            dialog.setSize(550, 200);
+            dialog.getContentPane().setBackground(new Color(232,228,212));
 
             dialog.setLayout(new FlowLayout());
-            JLabel errorLabel = new JLabel(message.toString());
-            dialog.add(errorLabel);
-            errorLabel.setLocation(475,108);
-            errorLabel.setSize(100,100);
 
-
-            if (howManyC>0){
-                coinButton= new JButton("COIN");
-                coinButton.setSize(new Dimension(50,50));
-                dialog.add(coinButton);
-                int finalHowManyC = howManyC;
-                coinButton.addActionListener(eNO -> {
-                    if (howManyCP.get() != finalHowManyC){
-                        arrayList.add(Resource.COIN);
-                        howManyCP.getAndIncrement();}
-                });}
-
-            if (howManyV>0){
-                servantButton= new JButton("SERVANT");
-                servantButton.setSize(new Dimension(50,50));
-                dialog.add(servantButton);
-                int finalHowManyV = howManyV;
-                servantButton.addActionListener(eYES -> {
-                    if (howManyVP.get() != finalHowManyV){
-                        arrayList.add(Resource.COIN);
-                        howManyVP.getAndIncrement();}
-                });}
-
-            if(howManyS>0){
-                shieldButton= new JButton("SHIELD");
-                shieldButton.setSize(new Dimension(50,50));
-                dialog.add(shieldButton);
-                int finalHowManyS = howManyS;
-                shieldButton.addActionListener(eNO -> {
-                    if (howManySP.get() != finalHowManyS){
-                        arrayList.add(Resource.COIN);
-                        howManySP.getAndIncrement();}
+            JLabel text1 = new JLabel("you don't have enough storage space,");
+            text1.setSize(350, 20);
+            text1.setBounds(5,5,350,20);
+            dialog.add(text1);
+            JLabel text2 = new JLabel("choose which resources to keep and press enter");
+            text2.setSize(350, 20);
+            text2.setBounds(5,25,350,20);
+            dialog.add(text2);
+            for(int i = 0; i < message.getReources().size(); i++){
+                ResourceButton resourceButton = new ResourceButton(message.getReources().get(i));
+                resourceButton.setSize(40,40);
+                resourceButton.setBounds(50*i, 60, 40, 40);
+                dialog.add(resourceButton);
+                resourceButton.addActionListener(e -> {
+                    buffer.add(resourceButton.getResource());
+                    resourceButton.setEnabled(false);
                 });
             }
 
-            if(howManyR>0){
-                rockButton= new JButton("ROCK");
-                rockButton.setSize(new Dimension(50,50));
-                dialog.add(rockButton);
-                int finalHowManyR = howManyR;
-                rockButton.addActionListener(eONe -> {
-                    if (howManyRP.get() != finalHowManyR){
-                        arrayList.add(Resource.COIN);
-                        howManyRP.getAndIncrement();
-                    }
-                });}
-
-
+            JButton enterButton;
 
             enterButton= new JButton("enter");
+            enterButton.setBackground(new Color(232,228,212));
             enterButton.setSize(new Dimension(60,60));
+            enterButton.setBounds(200, 60, 60,60);
 
             dialog.add(enterButton);
-
-
-
 
             enterButton.addActionListener(eNO -> {
                 (new Thread(() -> {
                     try {
-                        gui.notifyObserver(new KeepResourcesMessage(arrayList));
+                        System.out.println(buffer);
+                        gui.notifyObserver(new KeepResourcesMessage(buffer));
                     } catch (IOException | InterruptedException e1) {
                         e1.printStackTrace();
                     }
@@ -433,7 +378,8 @@ public abstract class MainFrame  extends JFrame {
             });
 
             dialog.setVisible(true);
-        }); }
+        });
+    }
 
 
     public void disableMarketButtons(){
@@ -486,7 +432,9 @@ public abstract class MainFrame  extends JFrame {
 
     public void setPlayers(ArrayList<String> arrayList){}
 
-    public abstract void callForCouncil(int i);
+    public abstract void givePapalCard(int i);
+
+    public abstract void removePapalCard(int i);
 
 
 

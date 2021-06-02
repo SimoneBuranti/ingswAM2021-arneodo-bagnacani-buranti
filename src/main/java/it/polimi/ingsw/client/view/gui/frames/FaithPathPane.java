@@ -54,10 +54,10 @@ public class FaithPathPane extends JPanel {
 
         for (int i = 0;i<3;i++){
             papalCards[i] = new JLabel();
-            papalIcon = new ImageIcon((Paths.getPapalCardImageFromCurrCall(i)).getScaledInstance(papalCardDimension,papalCardDimension,0));
+            papalIcon = new ImageIcon((Paths.getPapalCardBackImageFromCurrCall(i)).getScaledInstance(papalCardDimension,papalCardDimension,0));
             papalCards[i].setIcon(papalIcon);
             papalCards[i].setBounds(papalX[i], papalY[i], papalCardDimension,papalCardDimension);
-
+            this.add(papalCards[i]);
         }
 
     }
@@ -78,7 +78,16 @@ public class FaithPathPane extends JPanel {
 
 
     public void givePapalCard(int currCall) {
+        this.remove(papalCards[currCall]);
+        papalCards[currCall] = new JLabel();
+        ImageIcon papalIcon = new ImageIcon((Paths.getPapalCardFrontImageFromCurrCall(currCall)).getScaledInstance(papalCardDimension,papalCardDimension,0));
+        papalCards[currCall].setIcon(papalIcon);
+        papalCards[currCall].setBounds(papalX[currCall], papalY[currCall], papalCardDimension,papalCardDimension);
         this.add(papalCards[currCall]);
+    }
+
+    public void removePapalCard(int currCall){
+        this.remove(papalCards[currCall]);
     }
 
     public void addPapal() {

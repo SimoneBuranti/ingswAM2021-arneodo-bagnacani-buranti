@@ -387,8 +387,12 @@ public class MainFrameMultiPlayer extends MainFrame {
         leaderCardsPanel.enableProductionButtons();
     }
 
-    public void callForCouncil(int i){
+    public void givePapalCard(int i){
         this.gameboardPanel.givePapalcard(i);
+    }
+
+    public void removePapalCard(int i){
+        this.gameboardPanel.removePapalCard(i);
     }
 
     public void showAllOfPlayer(ShowAllOfPlayerMessage msg){

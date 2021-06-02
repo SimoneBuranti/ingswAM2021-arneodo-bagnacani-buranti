@@ -113,7 +113,7 @@ public abstract class Paths {
         return null;
     }
 
-    public static Image getPapalCardImageFromCurrCall(int currCall){
+    public static Image getPapalCardBackImageFromCurrCall(int currCall){
 
         String srcPath = "src/main/resources/resources/punchboard/";
 
@@ -125,6 +125,21 @@ public abstract class Paths {
             case 2:
                 return Toolkit.getDefaultToolkit().createImage(srcPath + "quadrato rosso.png");
             default: return Toolkit.getDefaultToolkit().createImage(srcPath + "quadrato rosso.png");
+        }
+    }
+
+    public static Image getPapalCardFrontImageFromCurrCall(int currCall){
+
+        String srcPath = "src/main/resources/resources/punchboard/";
+
+        switch(currCall) {
+            case 0:
+                return Toolkit.getDefaultToolkit().createImage(srcPath + "carte-05.png");
+            case 1:
+                return Toolkit.getDefaultToolkit().createImage(srcPath + "carte-03.png");
+            case 2:
+                return Toolkit.getDefaultToolkit().createImage(srcPath + "carte-04.png");
+            default: return Toolkit.getDefaultToolkit().createImage(srcPath + "carte-04.png");
         }
     }
 

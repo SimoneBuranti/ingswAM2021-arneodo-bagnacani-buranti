@@ -323,6 +323,10 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
         faithPathPane.givePapalCard(i);
     }
 
+    public void removePapalCard(int i) {
+        faithPathPane.removePapalCard(i);
+    }
+
     public void disableProductionButtons(){
         for(int i = 0; i < 3; i++){
             Gui.removeAllListeners(productionButtons[i]);

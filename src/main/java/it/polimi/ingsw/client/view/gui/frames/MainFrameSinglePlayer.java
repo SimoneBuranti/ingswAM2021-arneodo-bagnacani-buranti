@@ -286,8 +286,12 @@ public class MainFrameSinglePlayer extends MainFrame{
         lorenzoGameboardPanel.putCardMode();
     }
 
-    public void callForCouncil(int i){
+    public void givePapalCard(int i){
         this.lorenzoGameboardPanel.givePapalcard(i);
+    }
+
+    public void removePapalCard(int i){
+        this.lorenzoGameboardPanel.removePapalCard(i);
     }
 
     @Override
