@@ -607,7 +607,7 @@ public class Game extends Observable {
         deckProductionCardTwoGreen.saveInformationOfProductionDeck();
         deckProductionCardTwoViolet.saveInformationOfProductionDeck();
         deckProductionCardTwoYellow.saveInformationOfProductionDeck();
-        reserve.saveInformationOfReserve();
+
 
     }
 
@@ -620,9 +620,10 @@ public class Game extends Observable {
      */
     protected void restoreGame() throws IOException, InterruptedException {
         deckLeaderCard=new DeckLeaderCard();
+        reserve=new Reserve();
         restoreInformationOfMarket();
         restoreInformationOfProductionDeck();
-        restoreInformationOfReserve();
+
     }
 
     /**
@@ -747,20 +748,6 @@ public class Game extends Observable {
 
 
     /**
-     * restore information from backup
-     */
-  private void restoreInformationOfReserve() throws IOException, InterruptedException {
-      Gson gson=Reserve.gsonForEveryoneReserve();
-        Map map;
-        try {
-            map = gson.fromJson(new FileReader("src/main/resources/fileConfiguration/Reserve.json"),Map.class);
-            reserve= new Reserve(map);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-  }
-
-    /**
      * endGame method
      */
     public void endGame() throws IOException, InterruptedException {}
@@ -793,7 +780,6 @@ public class Game extends Observable {
         notifyObserver(new DeckProductionCardConfigMessage(deckProductionCardOneBlu.getDeckNumber(),deckProductionCardOneBlu.getDeck()));
         notifyObserver(new DeckProductionCardConfigMessage(deckProductionCardOneYellow.getDeckNumber(),deckProductionCardOneYellow.getDeck()));
         notifyObserver(new DeckProductionCardConfigMessage(deckProductionCardOneViolet.getDeckNumber(),deckProductionCardOneViolet.getDeck()));
-
 
         notifyObserver(new ConfigurationMarketMessage(market.getInitialMarbleList()));
 

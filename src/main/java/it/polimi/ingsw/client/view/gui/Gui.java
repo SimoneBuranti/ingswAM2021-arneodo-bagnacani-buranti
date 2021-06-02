@@ -203,7 +203,7 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
                         container.remove(textField);
                         container.remove(enterButton);
                     (new Thread(() -> {
-                        sendNumberUsernameResponse(nickname);
+                        sendUsernameResponse(nickname);
                     })).start();
                 }
             })).start());
@@ -211,7 +211,7 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
             applyChangesTo(container);
         });}
 
-    public void sendNumberUsernameResponse(String nickname){
+    public void sendUsernameResponse(String nickname){
         try {
             notifyObserver(new UsernameMessage(nickname));
         } catch (IOException e) {
@@ -397,21 +397,22 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
     @Override
     public void showStartGame(GameTypeMessage msg) {
-        mainFrame.dispose();
-        if(msg.isMultiOrNot()==true)
-        {
-            if(!viewController.getGame().isInitResource() || !viewController.getGame().isInitLeader())
-            { mainFrameOfPreGame = new MainFrameMultiPlayer(this,"your board");}
-            mainFrameOfGame= new MainFrameMultiPlayer(this);}
-        else {
+        SwingUtilities.invokeLater(() -> {
+            mainFrame.dispose();
+            if (msg.isMultiOrNot() == true) {
+                if (!viewController.getGame().isInitResource() || !viewController.getGame().isInitLeader()) {
+                    mainFrameOfPreGame = new MainFrameMultiPlayer(this, "your board");
+                }
+                mainFrameOfGame = new MainFrameMultiPlayer(this);
+            } else {
 
-            if(!viewController.getGame().isInitResource() || !viewController.getGame().isInitLeader()) {
-                mainFrameOfPreGame = new MainFrameSinglePlayer(this,"your board");
+                if (!viewController.getGame().isInitResource() || !viewController.getGame().isInitLeader()) {
+                    mainFrameOfPreGame = new MainFrameSinglePlayer(this, "your board");
+                }
+                mainFrameOfGame = new MainFrameSinglePlayer(this);
             }
-            mainFrameOfGame= new MainFrameSinglePlayer(this);
-        }
-        isMultiOrNot=msg.isMultiOrNot();
-    }
+            isMultiOrNot = msg.isMultiOrNot();
+        });}
 
     @Override
     public void showRestartMessage() {}

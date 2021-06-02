@@ -75,25 +75,6 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
 
     }
 
-    public GameboardPanel(){
-
-        initGameboardPanel();
-
-        initProductionSpaces();
-
-        initBaseProductionSpace();
-
-        initButtons();
-
-        initFaithPathPane();
-
-        initStorage();
-
-        initStrongBox();
-
-        this.setBorder(BorderFactory.createBevelBorder(1,Color.BLACK,Color.DARK_GRAY));
-
-    }
 
     public void setChosenDeckNumber(int n){
         this.chosenDeckNumber = n;
@@ -199,7 +180,7 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
 
                 productionCards[i][column] = cardLabel;
 
-                cardLabel.setOpaque(true);
+                cardLabel.setOpaque(false);
                 cardLabel.setBounds(2,12+(2-i)*(cardOffset),cardWidth,cardHeight);
                 productionSpaces[column].add(cardLabel,Integer.valueOf(i));
 

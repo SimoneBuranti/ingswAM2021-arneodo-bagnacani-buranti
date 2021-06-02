@@ -74,83 +74,12 @@ public class Reserve extends Observable {
 
         return reservePools.get(resource);
     }
-    /**
-     * method for saveInformationOfReserve
-     */
-    public void saveInformationOfReserve(){
 
-        Gson g=gsonForEveryoneReserve();
-        FileWriter config = null;
-        String jsonStrin = g.toJson(reservePools);
-        try {
-            // Constructs a FileWriter given a file name, using the platform's default charset
-            config = new FileWriter("src/main/resources/fileConfiguration/Reserve.json");
-            config.write(jsonStrin);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                config.flush();
-                config.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } } }
-
-
-
-    public  int getAmountOfInMAp(Map map,Resource resource) {
-        int amount;
-        amount= (int) map.get(resource);
-        return amount;
-    }
-
-    public Reserve(Map map) throws IOException, InterruptedException {
-        int amount;
-        amount=getAmountOfInMAp(map,Resource.COIN);
-        reservePools.put(Resource.COIN,amount);
-        amount=getAmountOfInMAp(map,Resource.ROCK);
-        reservePools.put(Resource.ROCK,amount);
-        amount=getAmountOfInMAp(map,Resource.SERVANT);
-        reservePools.put(Resource.SERVANT,amount);
-        amount=getAmountOfInMAp(map,Resource.SHIELD);
-        reservePools.put(Resource.SHIELD,amount);
-    }
 
     public Map<Resource , Integer> getReservePool(){
         return reservePools;
     }
 
-    public static Gson gsonForEveryoneReserve(){
-        RuntimeTypeAdapterFactory<Colour> adapterColour =
-                RuntimeTypeAdapterFactory
-                        .of(Colour.class)
-                        .registerSubtype(Green.class)
-                        .registerSubtype(Yellow.class)
-                        .registerSubtype(Blue.class)
-                        .registerSubtype(Violet.class);
-
-        RuntimeTypeAdapterFactory<Marble> adapterMarble =
-                RuntimeTypeAdapterFactory
-                        .of(Marble.class)
-                        .registerSubtype(Marble.class)
-                        .registerSubtype(GreyMarble.class)
-                        .registerSubtype(YellowMarble.class)
-                        .registerSubtype(BluMarble.class)
-                        .registerSubtype(WhiteMarble.class)
-                        .registerSubtype(PurpleMarble.class)
-                        .registerSubtype(RedMarble.class);
-
-
-
-        Gson gson=new GsonBuilder()
-                .setPrettyPrinting()
-                .registerTypeAdapterFactory(adapterMarble)
-                .registerTypeAdapterFactory(adapterColour)
-                .create();
-
-        return gson;
-
-    }
 }
 
 

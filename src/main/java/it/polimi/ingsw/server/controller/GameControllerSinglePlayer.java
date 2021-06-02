@@ -4,6 +4,7 @@ import it.polimi.ingsw.messages.*;
 import it.polimi.ingsw.server.model.Game;
 import it.polimi.ingsw.server.network.Server;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -46,7 +47,7 @@ public class GameControllerSinglePlayer extends GameController {
     }
 
     @Override
-    public void handleMessage(ExitMessage msg, ClientController clientController) {
+    public void handleMessage(ExitMessage msg, ClientController clientController) throws FileNotFoundException {
         if(!server.getGame().isOver()){
         boolean flag = false;
         if(game.disconnectPlayer(clientController.getNickname())) {

@@ -44,7 +44,8 @@ public class Server {
                 restartQuestion = 0;
                 setRestartAnswerReceived(false);
                 restartQuestionSent = false;
-                gameController.setNumberOfPlayers(nickNameInOrder.size());}
+                gameController.setNumberOfPlayers(nickNameInOrder.size());
+            }
         else{
             this.gameController = new GameControllerEmpty(this);
             gameController.setServer(this);
@@ -75,6 +76,8 @@ public class Server {
     }
 
     public int tempClientControllerSize() {
+        System.out.println("qui79");
+
         return tempClientController.size();
     }
 
@@ -100,11 +103,13 @@ public class Server {
                 return true;
         }
         return false;
+
     }
 
     //--------------------------------------------------------------------
 
     public void initNewSolitaireGame() throws IOException, InterruptedException {
+        System.out.println("qui78");
 
         game = new GameSolitaire(lobby.get(0),true,clientControllers.get(0));
 
@@ -255,13 +260,18 @@ public class Server {
         gameController.setServer(this);
     }
 
-    public void resetInfoPartial() {
+    public void resetInfoPartial() throws FileNotFoundException{
         this.game=null;
         clientControllers = new ArrayList<>();
         tempClientController = new ArrayList<>();
         clientControllersDisconnected = new ArrayList<>();
+        ArrayList<String> nickNameInOrder;
+        Gson gson=new Gson();
 
-     //   lobby = new ArrayList<>();
+
+        nickNameInOrder = gson.fromJson(new FileReader("src/main/resources/fileConfiguration/InformationAboutTurn.json"),ArrayList.class);
+
+         lobby = nickNameInOrder;
         this.gameController = new GameControllerRestart(this);
         gameController.setServer(this);
         sendRestartQuestion = true;
@@ -269,6 +279,9 @@ public class Server {
         setRestartAnswerReceived(false);
         restartQuestionSent = false;
         gameController.setNumberOfPlayers(lobby.size());
+        System.out.println(lobby.size());
 
     }
+
+
 }
