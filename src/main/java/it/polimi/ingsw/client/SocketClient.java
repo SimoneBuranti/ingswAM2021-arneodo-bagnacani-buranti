@@ -86,7 +86,7 @@ public class SocketClient {
     public synchronized void sendMessage(Message message){
 
         String msg = message.serialize();
-        //System.out.println("esco: "+msg);
+        System.out.println("esco: "+msg+Thread.currentThread().getName());
         out.println(msg);
     }
 

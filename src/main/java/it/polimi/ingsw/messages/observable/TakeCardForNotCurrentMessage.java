@@ -13,10 +13,10 @@ public class TakeCardForNotCurrentMessage extends Message {
     private int numberDeck;
 
 
-    private Player player;
+    private String player;
 
 
-    public TakeCardForNotCurrentMessage(Player player,int numberDeck){
+    public TakeCardForNotCurrentMessage(String player,int numberDeck){
         this.player=player;
         this.numberDeck=numberDeck;
 
@@ -33,7 +33,7 @@ public class TakeCardForNotCurrentMessage extends Message {
     }
 
 
-    public Player getPlayer() {
+    public String getPlayer() {
         return player;
     }
 
@@ -43,6 +43,6 @@ public class TakeCardForNotCurrentMessage extends Message {
 
     @Override
     public String toString(){
-        return player.getNickName() +" bought a card from the deck " + numberDeck;
+        return player +" bought a card from the deck " + numberDeck;
     }
 }

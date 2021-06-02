@@ -3,6 +3,7 @@ package it.polimi.ingsw.client.view.gui.frames;
 import it.polimi.ingsw.client.commands.BaseProductionCommand;
 import it.polimi.ingsw.client.view.ViewController;
 import it.polimi.ingsw.client.view.gui.Gui;
+import it.polimi.ingsw.messages.ActivateLeaderCardMessage;
 import it.polimi.ingsw.messages.BaseProductionOnMessage;
 
 import javax.swing.*;
@@ -47,15 +48,17 @@ public class BaseProductionPanel extends JPanel {
         productionButton.setToken(true);
         productionButton.setHorizontalTextPosition(SwingConstants.CENTER);
         productionButton.addActionListener( e -> {
-                    try {
-                        productionButton.setToken(false);
-                        this.productionButton.setEnabled(false);
-                        this.gui.disableAllExceptProductions();
-                        this.gui.notifyObserver(new BaseProductionOnMessage(this.input1.getResource(),this.input2.getResource(),this.output.getResource()));
-                    } catch (IOException | InterruptedException ioException) {
-                        ioException.printStackTrace();
-                    }
-            //System.out.println(new BaseProductionOnMessage(this.input1.getResource(),this.input2.getResource(),this.output.getResource()));
+            productionButton.setToken(false);
+            this.productionButton.setEnabled(false);
+            this.gui.disableAllExceptProductions();
+
+            (new Thread(() -> {
+                try {
+                    this.gui.notifyObserver(new BaseProductionOnMessage(this.input1.getResource(),this.input2.getResource(),this.output.getResource()));
+                } catch (IOException | InterruptedException e1) {
+                    e1.printStackTrace();
+                }
+            })).start();
         });
 
         this.setSize(psWidth,psHeight);

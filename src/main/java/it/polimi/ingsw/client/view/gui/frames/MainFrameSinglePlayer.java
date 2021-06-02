@@ -241,7 +241,13 @@ public class MainFrameSinglePlayer extends MainFrame{
 
     @Override
     public void askInitResource() throws IOException, InterruptedException {
-        gui.notifyObserver(new EndOfTurnMessage());
+        (new Thread(() -> {
+            try {
+                gui.notifyObserver(new EndOfTurnMessage());
+            } catch (IOException | InterruptedException e) {
+                e.printStackTrace();
+            }
+        })).start();
         gui.powerToMainFrame();
     }
 

@@ -2,10 +2,7 @@ package it.polimi.ingsw.client.view.gui.frames;
 
 import it.polimi.ingsw.client.ligtModelNotification.GameboardListNotification;
 import it.polimi.ingsw.client.view.gui.Gui;
-import it.polimi.ingsw.messages.KeepResourcesMessage;
-import it.polimi.ingsw.messages.Message;
-import it.polimi.ingsw.messages.NotEnoughSpaceErrorMessage;
-import it.polimi.ingsw.messages.WhiteMarbleChoosenResourcesMessage;
+import it.polimi.ingsw.messages.*;
 import it.polimi.ingsw.messages.observable.ShowAllOfPlayerMessage;
 import it.polimi.ingsw.server.model.Resource;
 import it.polimi.ingsw.server.model.leaderCards.LeaderCard;
@@ -243,10 +240,17 @@ public abstract class MainFrame  extends JFrame {
             JButton enterButton;
 
             JDialog dialog =new JDialog();
+            dialog.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             dialog.setLocation(600, 400);
             dialog.setSize(400, 400);
 
+
             dialog.setLayout(new FlowLayout());
+
+            JLabel errorLabel = new JLabel("error due white marble");
+            dialog.add(errorLabel);
+            errorLabel.setLocation(475,108);
+            errorLabel.setSize(100,100);
 
             if (howManyC>0){
                 coinButton= new JButton("COIN");
@@ -291,7 +295,7 @@ public abstract class MainFrame  extends JFrame {
                     }
                 });}
 
-            enterButton= new JButton("4");
+            enterButton= new JButton("enter");
             enterButton.setSize(new Dimension(60,60));
 
 
@@ -300,16 +304,18 @@ public abstract class MainFrame  extends JFrame {
 
 
             enterButton.addActionListener(eNO -> {
-                try {
-                    gui.notifyObserver(new WhiteMarbleChoosenResourcesMessage(arrayList));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            });
+                (new Thread(() -> {
+                    try {
+                        gui.notifyObserver(new KeepResourcesMessage(arrayList));
+                    } catch (IOException | InterruptedException e1) {
+                        e1.printStackTrace();
+                    }
+                })).start();
+                dialog.dispose();
 
+            });
             dialog.setVisible(true);
+
         });
 
 
@@ -319,7 +325,7 @@ public abstract class MainFrame  extends JFrame {
 
     public void  fullStoragePopUp(NotEnoughSpaceErrorMessage message){
 
-        //SwingUtilities.invokeLater(() -> {
+        SwingUtilities.invokeLater(() -> {
             int howManyC=0;
             int howManyR=0;
             int howManyS=0;
@@ -347,71 +353,87 @@ public abstract class MainFrame  extends JFrame {
             JButton enterButton;
 
             JDialog dialog =new JDialog();
+            dialog.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             dialog.setLocation(600, 400);
             dialog.setSize(400, 400);
 
             dialog.setLayout(new FlowLayout());
+            JLabel errorLabel = new JLabel(message.toString());
+            dialog.add(errorLabel);
+            errorLabel.setLocation(475,108);
+            errorLabel.setSize(100,100);
 
-            coinButton= new JButton("COIN");
-            coinButton.setSize(new Dimension(50,50));
 
-            servantButton= new JButton("SERVANT");
-            servantButton.setSize(new Dimension(50,50));
+            if (howManyC>0){
+                coinButton= new JButton("COIN");
+                coinButton.setSize(new Dimension(50,50));
+                dialog.add(coinButton);
+                int finalHowManyC = howManyC;
+                coinButton.addActionListener(eNO -> {
+                    if (howManyCP.get() != finalHowManyC){
+                        arrayList.add(Resource.COIN);
+                        howManyCP.getAndIncrement();}
+                });}
 
-            shieldButton= new JButton("SHIELD");
-            shieldButton.setSize(new Dimension(50,50));
+            if (howManyV>0){
+                servantButton= new JButton("SERVANT");
+                servantButton.setSize(new Dimension(50,50));
+                dialog.add(servantButton);
+                int finalHowManyV = howManyV;
+                servantButton.addActionListener(eYES -> {
+                    if (howManyVP.get() != finalHowManyV){
+                        arrayList.add(Resource.COIN);
+                        howManyVP.getAndIncrement();}
+                });}
 
-            rockButton= new JButton("ROCK");
-            rockButton.setSize(new Dimension(50,50));
+            if(howManyS>0){
+                shieldButton= new JButton("SHIELD");
+                shieldButton.setSize(new Dimension(50,50));
+                dialog.add(shieldButton);
+                int finalHowManyS = howManyS;
+                shieldButton.addActionListener(eNO -> {
+                    if (howManySP.get() != finalHowManyS){
+                        arrayList.add(Resource.COIN);
+                        howManySP.getAndIncrement();}
+                });
+            }
 
-            enterButton= new JButton("4");
+            if(howManyR>0){
+                rockButton= new JButton("ROCK");
+                rockButton.setSize(new Dimension(50,50));
+                dialog.add(rockButton);
+                int finalHowManyR = howManyR;
+                rockButton.addActionListener(eONe -> {
+                    if (howManyRP.get() != finalHowManyR){
+                        arrayList.add(Resource.COIN);
+                        howManyRP.getAndIncrement();
+                    }
+                });}
+
+
+
+            enterButton= new JButton("enter");
             enterButton.setSize(new Dimension(60,60));
 
-            dialog.add(coinButton);
-            dialog.add(rockButton);
-            dialog.add(servantButton);
-            dialog.add(shieldButton);
             dialog.add(enterButton);
 
 
-            int finalHowManyR = howManyR;
-            rockButton.addActionListener(eONe -> {
-                if (howManyRP.get() != finalHowManyR){
-                    arrayList.add(Resource.COIN);
-                    howManyRP.getAndIncrement();
-                }
-            });
-            int finalHowManyC = howManyC;
-            coinButton.addActionListener(eNO -> {
-                if (howManyCP.get() != finalHowManyC){
-                    arrayList.add(Resource.COIN);
-                    howManyCP.getAndIncrement();}
-            });
-            int finalHowManyV = howManyV;
-            servantButton.addActionListener(eYES -> {
-                if (howManyVP.get() != finalHowManyV){
-                    arrayList.add(Resource.COIN);
-                    howManyVP.getAndIncrement();}
-            });
-            int finalHowManyS = howManyS;
-            shieldButton.addActionListener(eNO -> {
-                if (howManySP.get() != finalHowManyS){
-                    arrayList.add(Resource.COIN);
-                    howManySP.getAndIncrement();}
-            });
+
+
             enterButton.addActionListener(eNO -> {
-                try {
-                    gui.notifyObserver(new KeepResourcesMessage(arrayList));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                (new Thread(() -> {
+                    try {
+                        gui.notifyObserver(new KeepResourcesMessage(arrayList));
+                    } catch (IOException | InterruptedException e1) {
+                        e1.printStackTrace();
+                    }
+                })).start();
+                dialog.dispose();
+
             });
 
             dialog.setVisible(true);
-       // });
-    }
+        }); }
 
 
     public void disableMarketButtons(){

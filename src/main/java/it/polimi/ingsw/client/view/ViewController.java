@@ -672,6 +672,8 @@ public class ViewController implements MessageVisitor, ViewObserver {
     public void update(Message message) throws IOException, InterruptedException {
         //System.out.println("prima della send : "+ message.toString());
         socketClient.sendMessage(message);
+
+
         //System.out.println("dopo la send : "+ message.toString());
     }
 

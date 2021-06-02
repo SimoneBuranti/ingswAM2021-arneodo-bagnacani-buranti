@@ -2,6 +2,8 @@ package it.polimi.ingsw.client.view.gui.frames;
 
 import it.polimi.ingsw.client.ligtModelNotification.GameboardListNotification;
 import it.polimi.ingsw.client.view.gui.*;
+import it.polimi.ingsw.messages.EndOfTurnMessage;
+import it.polimi.ingsw.messages.KeepResourcesMessage;
 import it.polimi.ingsw.messages.Message;
 import it.polimi.ingsw.messages.observable.ShowAllOfPlayerMessage;
 import it.polimi.ingsw.server.model.Resource;
@@ -240,7 +242,7 @@ public class MainFrameMultiPlayer extends MainFrame {
             if (gui.getViewController().getGame().getPosition()!=1)
             {
                 ResourceManager resourceManager = new ResourceManager(container,gui);
-                resourceManager.setHeading("Choose two cards:");
+                resourceManager.setHeading("if you are the second player, you have to choose only one, instead two resource like the third and the fourth player:");
                 resourceManager.showWhatToChoose(true);
             }
             else
@@ -253,6 +255,14 @@ public class MainFrameMultiPlayer extends MainFrame {
                 container.add(errorLabel);
                 errorLabel.setLocation(475,108);
                 errorLabel.setSize(100,100);
+                (new Thread(() -> {
+                    try {
+                        gui.notifyObserver(new EndOfTurnMessage());
+                    } catch (IOException | InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                })).start();
+                gui.powerToMainFrame();
             }
 
             applyChangesTo(container);

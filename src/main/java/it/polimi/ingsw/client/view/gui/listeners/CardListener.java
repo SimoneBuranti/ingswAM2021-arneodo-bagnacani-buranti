@@ -53,13 +53,15 @@ public class CardListener implements MouseListener {
      */
     public void mouseClicked(MouseEvent e) {
         addPlayerCardToArrayList(card);
-        if (gui.getReadyToSend()==2)
-            try {
+        if (gui.getReadyToSend()==2){
+            (new Thread(() -> {
+                try {
                 gui.notifyObserver(new KeepLeaderCardsMessage(CardListener.getSendableArrayInt().get(0),CardListener.getSendableArrayInt().get(1) ));
                 gui.askInitResource();
             } catch (IOException | InterruptedException e1) {
                 e1.printStackTrace();
             }
+                    })).start();}
     }
 
     private void addPlayerCardToArrayList(LeaderCard card) {

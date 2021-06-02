@@ -13,7 +13,7 @@ public class FaithConfigMessage extends Message {
 
 
     public FaithConfigMessage(int indicator, int currCall) {
-        this.faithConfig=faithConfig;
+        this.faithConfig=indicator;
         this.currCall=currCall;
     }
 

@@ -4,6 +4,7 @@ import it.polimi.ingsw.client.view.ViewController;
 import it.polimi.ingsw.client.view.gui.Gui;
 import it.polimi.ingsw.client.view.gui.PBackground;
 import it.polimi.ingsw.client.view.gui.PanelContainer;
+import it.polimi.ingsw.messages.EndOfTurnMessage;
 import it.polimi.ingsw.messages.PushColumnMessage;
 import it.polimi.ingsw.messages.PushRowMessage;
 import it.polimi.ingsw.messages.RestartAnswerMessage;
@@ -159,24 +160,26 @@ public class MarketFrame extends JFrame{
     }
 
     public void sendPushColumn(int column){
-        try {
-            gui.notifyObserver(new PushColumnMessage(column));
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        (new Thread(() -> {
+            try {
+                gui.notifyObserver(new PushColumnMessage(column));
+            } catch (IOException | InterruptedException e) {
+                e.printStackTrace();
+            }
+        })).start();
+
         gui.actionDoneMode();
     }
 
     public void sendPushRow(int row){
-        try {
-            gui.notifyObserver(new PushRowMessage(row));
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+
+        (new Thread(() -> {
+            try {
+                gui.notifyObserver(new PushRowMessage(row));
+            } catch (IOException | InterruptedException e) {
+                e.printStackTrace();
+            }
+        })).start();
         gui.actionDoneMode();
     }
 

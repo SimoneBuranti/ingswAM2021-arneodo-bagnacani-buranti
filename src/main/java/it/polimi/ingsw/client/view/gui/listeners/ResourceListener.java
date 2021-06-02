@@ -3,6 +3,7 @@ package it.polimi.ingsw.client.view.gui.listeners;
 import it.polimi.ingsw.client.view.gui.Gui;
 import it.polimi.ingsw.client.view.gui.ResourceManager;
 import it.polimi.ingsw.messages.EndOfTurnMessage;
+import it.polimi.ingsw.messages.InitialResourcesMessage;
 import it.polimi.ingsw.messages.KeepResourcesMessage;
 import it.polimi.ingsw.server.model.Resource;
 
@@ -25,38 +26,54 @@ public class ResourceListener implements MouseListener {
 
     }
 
+
     public void mouseClicked(MouseEvent e) {
         addToArrayList(resource);
 
         if (gui.getViewController().getGame().getPosition()==3 || gui.getViewController().getGame().getPosition()==4){
             if (gui.getReadyToSend()==2){
+                (new Thread(() -> {
                 try {
-                    gui.notifyObserver(new KeepResourcesMessage(sendableArray));
-                    gui.notifyObserver(new EndOfTurnMessage());
-                    gui.powerToMainFrame();
-                } catch (IOException | InterruptedException e1) {
-                    e1.printStackTrace();
-                }}}
+                    gui.notifyObserver(new InitialResourcesMessage(sendableArray));
+                } catch (IOException | InterruptedException e2) {
+                    e2.printStackTrace();
+                }
+            })).start();
+                (new Thread(() -> {
+                    try {
+                        gui.notifyObserver(new EndOfTurnMessage());
+                    } catch (IOException | InterruptedException e3) {
+                        e3.printStackTrace();
+                    }
+                })).start();
 
-        else if (gui.getViewController().getGame().getPosition()==2){
-            if (gui.getReadyToSend()==1){
-                try {
-                    gui.notifyObserver(new KeepResourcesMessage(sendableArray));
-                    gui.notifyObserver(new EndOfTurnMessage());
-                    gui.powerToMainFrame();
-                } catch (IOException | InterruptedException e1) {
-                    e1.printStackTrace();
-                }}}
-        else{
-            gui.powerToMainFrame();
-            try {
-                gui.notifyObserver(new EndOfTurnMessage());
-            } catch (IOException | InterruptedException ioException) {
-                ioException.printStackTrace();
+
+                gui.powerToMainFrame();
             }
         }
 
-    }
+        else if (gui.getViewController().getGame().getPosition()==2){
+            (new Thread(() -> {
+                try {
+                    gui.notifyObserver(new InitialResourcesMessage(sendableArray));
+                } catch (IOException | InterruptedException e3) {
+                    e3.printStackTrace();
+                }
+            })).start();
+
+            (new Thread(() -> {
+                try {
+                    gui.notifyObserver(new EndOfTurnMessage());
+                } catch (IOException | InterruptedException e3) {
+                    e3.printStackTrace();
+                }
+            })).start();
+
+
+            System.out.println("hey "+Thread.currentThread().getName());
+            gui.powerToMainFrame();
+            }
+        }
 
     private void addToArrayList(Resource resource) {
         sendableArray.add(resource);

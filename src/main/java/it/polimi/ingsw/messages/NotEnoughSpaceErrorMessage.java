@@ -30,6 +30,8 @@ public class NotEnoughSpaceErrorMessage extends Message {
 
     @Override
     public String toString(){
-        return "you don't have enough storage space, choose which resources to keep from the following ([none] for no resources) : " + resources;
+        return "you don't have enough storage space, choose which resources \n" +
+                "to keep from the following ([none] for no resources) : \n" +
+                "" + resources;
     }
 }

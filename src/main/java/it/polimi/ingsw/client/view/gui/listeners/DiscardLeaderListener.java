@@ -3,6 +3,7 @@ package it.polimi.ingsw.client.view.gui.listeners;
 import it.polimi.ingsw.client.view.gui.Gui;
 import it.polimi.ingsw.client.view.gui.frames.LeaderCardLabel;
 import it.polimi.ingsw.messages.ActivateLeaderCardMessage;
+import it.polimi.ingsw.messages.BuyProductionCardMessage;
 import it.polimi.ingsw.messages.DiscardLeaderCardMessage;
 
 import java.awt.event.ActionEvent;
@@ -26,13 +27,14 @@ public class DiscardLeaderListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        try {
-            gui.notifyObserver(new DiscardLeaderCardMessage(index));
-        } catch (IOException ioException) {
-            ioException.printStackTrace();
-        } catch (InterruptedException interruptedException) {
-            interruptedException.printStackTrace();
-        }
+
+        (new Thread(() -> {
+            try {
+                gui.notifyObserver(new DiscardLeaderCardMessage(index));
+            } catch (IOException | InterruptedException e1) {
+                e1.printStackTrace();
+            }
+        })).start();
         leaderCardLabel.disableButtons();
     }
 }

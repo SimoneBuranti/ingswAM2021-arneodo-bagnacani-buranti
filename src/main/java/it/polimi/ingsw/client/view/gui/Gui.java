@@ -21,7 +21,6 @@ import java.util.HashMap;
 
 public class Gui extends ViewControllerObservable implements View, NotificatorVisitor {
     private ViewController viewController;
-    private RestartFrame restartFrame;
     private JFrame mainFrame;
     private PanelContainer container;
 
@@ -68,7 +67,7 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
             ImageIcon icon = new ImageIcon("src/main/resources/resources/title.jpg");
             Image image=icon.getImage();
             JPanel background = new PBackground(image);
-          mainFrame.repaint();
+            mainFrame.repaint();
             background.setLayout(null);
             mainFrame.add(background);
             //mainFrame.add(errorText);
@@ -128,16 +127,25 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
 
             this.oneButton.addActionListener(eONe -> {
-                sendNumberPlayersResponse(1);
+                (new Thread(() -> {
+                    sendNumberPlayersResponse(1);
+                })).start();
+
             });
             this.twoButton.addActionListener(eNO -> {
-                sendNumberPlayersResponse(2);
+                (new Thread(() -> {
+                    sendNumberPlayersResponse(2);
+                })).start();
             });
             this.threeButton.addActionListener(eYES -> {
-                sendNumberPlayersResponse(3);
+                (new Thread(() -> {
+                    sendNumberPlayersResponse(3);
+                })).start();
             });
             this.fourButton.addActionListener(eNO -> {
-                sendNumberPlayersResponse(4);
+                (new Thread(() -> {
+                    sendNumberPlayersResponse(4);
+                })).start();
                 });
             applyChangesTo(container);
         }); }
@@ -192,18 +200,27 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
             this.enterButton.addActionListener(eENTER->(new Thread(() -> {
                 String nickname = textField.getText();
                 if(nickname.length() > 0){
-                    try {
                         container.remove(textField);
                         container.remove(enterButton);
-                        notifyObserver(new UsernameMessage(nickname));
-                    } catch (IOException | InterruptedException ioException) {
-                        ioException.printStackTrace();
-                    }
+                    (new Thread(() -> {
+                        sendNumberUsernameResponse(nickname);
+                    })).start();
                 }
             })).start());
 
             applyChangesTo(container);
         });}
+
+    public void sendNumberUsernameResponse(String nickname){
+        try {
+            notifyObserver(new UsernameMessage(nickname));
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+    }
 
 
 
@@ -227,28 +244,45 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
             container.add(noButton);
             container.add(yesButton);
             this.yesButton.addActionListener(eYES -> {
-                    try {
+
                         container.remove(yesButton);
                         container.remove(submitButton);
                         container.remove(noButton);
                         chosenResumeGame = true;
-                        notifyObserver(new RestartAnswerMessage(true));
-                    } catch (IOException | InterruptedException ioException) {
-                        ioException.printStackTrace();}});
+                (new Thread(() -> {
+                    sendRestartResponse(true);
+                })).start();
+
+                   });
                this.noButton.addActionListener(eNO -> {
-                    try {
+
                         container.remove(yesButton);
                         container.remove(submitButton);
                         container.remove(noButton);
                         chosenResumeGame = false;
-                        notifyObserver(new RestartAnswerMessage(false));
-                    } catch (IOException | InterruptedException ioException) {
-                        ioException.printStackTrace(); }});
+                           (new Thread(() -> {
+                               sendRestartResponse(false);
+                           })).start();}
+
+                   );
             applyChangesTo(container);
         });
 
 
     }
+
+    public void sendRestartResponse(boolean bool){
+        try {
+            notifyObserver(new RestartAnswerMessage(bool));
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
 
 
 
@@ -699,6 +733,12 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
     {
         mainFrameOfPreGame.dispose();
         mainFrameOfGame.setVisible(true);
+        mainFrameOfGame.paintComponents(mainFrameOfGame.getGraphics());
+        mainFrameOfGame.paintComponents(mainFrameOfGame.getGraphics());
+        mainFrameOfGame.paintComponents(mainFrameOfGame.getGraphics());
+        mainFrameOfGame.paintComponents(mainFrameOfGame.getGraphics());
+        mainFrameOfGame.paintComponents(mainFrameOfGame.getGraphics());
+        mainFrameOfGame.paintComponents(mainFrameOfGame.getGraphics());
         mainFrameOfGame.paintComponents(mainFrameOfGame.getGraphics());
         mainFrameOfGame.paintComponents(mainFrameOfGame.getGraphics());
         mainFrameOfGame.paintComponents(mainFrameOfGame.getGraphics());

@@ -19,6 +19,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.IOException;
 import java.util.Map;
 
 public class GameboardPanel extends JPanel implements ActionListener, MouseListener {
@@ -139,7 +140,13 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
         endTurnButton.setBounds(5,5,90,80);
         endTurnButton.addActionListener(e -> {
             endTurnButton.setEnabled(false);
-            gui.getViewController().sendMessage(new EndOfTurnMessage());
+            (new Thread(() -> {
+                try {
+                    gui.notifyObserver(new EndOfTurnMessage());
+                } catch (IOException | InterruptedException e1) {
+                    e1.printStackTrace();
+                }
+            })).start();
         });
         endTurnButton.setBackground(new Color(199,0,0));
         this.add(endTurnButton);
@@ -151,8 +158,14 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
         endOfproductionButton.setBackground(new Color(199,0,0));
         endOfproductionButton.addActionListener(e -> {
                     endOfproductionButton.setEnabled(false);
-                    gui.getViewController().sendMessage(new EndOfProductionMessage());
                     gui.actionDoneMode();
+            (new Thread(() -> {
+                try {
+                    gui.notifyObserver(new EndOfProductionMessage());
+                } catch (IOException | InterruptedException e1) {
+                    e1.printStackTrace();
+                }
+            })).start();
         });
         this.productionButtons = new ProductionButton[3];
         this.add(endOfproductionButton);

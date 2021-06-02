@@ -14,10 +14,10 @@ public class ResultFromMarketNotCurrentMessage extends Message {
 
 
     private ArrayList<Resource> resource;
-    private Player player;
+    private String player;
 
 
-    public ResultFromMarketNotCurrentMessage(Player player, ArrayList<Resource> resource){
+    public ResultFromMarketNotCurrentMessage(String player, ArrayList<Resource> resource){
         this.player=player;
         this.resource = resource;
     }
@@ -38,12 +38,12 @@ public class ResultFromMarketNotCurrentMessage extends Message {
     }
 
 
-    public Player getPlayer() {
+    public String getPlayer() {
         return player;
     }
 
     @Override
     public String toString(){
-        return player.getNickName() +" made a market action";
+        return player +" made a market action";
     }
 }

@@ -220,7 +220,7 @@ public class Game extends Observable {
             exceptionHandler(e);
         }
         notifyToOneObserver(new TakeCardMessage(deck.getDeckNumber(), chosenColumn));
-        notifyAllObserverLessOne(new TakeCardForNotCurrentMessage(currentPlayer,deck.getDeckNumber()));
+        notifyAllObserverLessOne(new TakeCardForNotCurrentMessage(currentPlayer.getNickName(),deck.getDeckNumber()));
         notifyObserver(new DeckProductionCardMessage(deck.getDeckNumber()));
     }
 
@@ -248,7 +248,7 @@ public class Game extends Observable {
         ProductionCard productionCard = currentPlayer.getGameBoardOfPlayer().getDevelopmentBoardCell(currentPlayer.getGameBoardOfPlayer().lastRowOccupied(chosenColumn),chosenColumn);
 
         notifyToOneObserver(new ProductionMessageForCurrentMessage(productionCard.getIn()));
-        notifyAllObserverLessOne(new ProductionMessageForNotCurrentMessage(currentPlayer,productionCard.getIn()) );
+        notifyAllObserverLessOne(new ProductionMessageForNotCurrentMessage(currentPlayer.getNickName(),productionCard.getIn()) );
 
         notifyToOneObserver(new FaithPathMessage(productionCard.isFaithPoint()));
         notifyAllObserverLessOne(new FaithPathOpponentMessage(currentPlayer.getNickName(),productionCard.isFaithPoint()));
@@ -269,7 +269,7 @@ public class Game extends Observable {
         list.add(i1);
         list.add(i2);
         notifyToOneObserver(new ProductionMessageForCurrentMessage(list) );
-        notifyAllObserverLessOne(new ProductionMessageForNotCurrentMessage(currentPlayer,list) );
+        notifyAllObserverLessOne(new ProductionMessageForNotCurrentMessage(currentPlayer.getNickName(),list) );
     }
 
     /**
@@ -290,7 +290,7 @@ public class Game extends Observable {
         ArrayList<Resource> list =new ArrayList<>();
         list.add(resourceLeader);
         notifyToOneObserver(new ProductionMessageForCurrentMessage(list));
-        notifyAllObserverLessOne(new ProductionMessageForNotCurrentMessage(currentPlayer, list) );
+        notifyAllObserverLessOne(new ProductionMessageForNotCurrentMessage(currentPlayer.getNickName(), list) );
         notifyToOneObserver(new FaithPathMessage(1));
         notifyAllObserverLessOne(new FaithPathOpponentMessage(currentPlayer.getNickName(), 1));
     }
@@ -313,7 +313,7 @@ public class Game extends Observable {
         ArrayList<Resource> list =new ArrayList<>();
         list.add(resourceLeader);
         notifyToOneObserver(new ProductionMessageForCurrentMessage(list));
-        notifyAllObserverLessOne(new ProductionMessageForNotCurrentMessage(currentPlayer, list) );
+        notifyAllObserverLessOne(new ProductionMessageForNotCurrentMessage(currentPlayer.getNickName(), list) );
         notifyToOneObserver(new FaithPathMessage(1));
         notifyAllObserverLessOne(new FaithPathOpponentMessage(currentPlayer.getNickName(), 1));
     }
@@ -325,7 +325,7 @@ public class Game extends Observable {
     public void endOfProduction() throws IOException, InterruptedException {
 
         notifyToOneObserver(new ResultOfProductionMessage(currentPlayer.getGameBoardOfPlayer().getProductionBuffer()) );
-        notifyAllObserverLessOne(new ResultOfProductionForNotCurrentMessage(currentPlayer,currentPlayer.getGameBoardOfPlayer().getProductionBuffer()) );
+        notifyAllObserverLessOne(new ResultOfProductionForNotCurrentMessage(currentPlayer.getNickName(),currentPlayer.getGameBoardOfPlayer().getProductionBuffer()) );
 
         currentPlayer.endOfProduction();
 
@@ -361,7 +361,7 @@ public class Game extends Observable {
             exceptionHandler(e);
         }
         notifyToOneObserver(new DiscardLeaderForCurrentMessage(index));
-        notifyAllObserverLessOne(new DiscardLeaderForNotCurrentMessage(currentPlayer));
+        notifyAllObserverLessOne(new DiscardLeaderForNotCurrentMessage(currentPlayer.getNickName()));
 
         notifyToOneObserver(new FaithPathMessage(1));
         notifyAllObserverLessOneByNickname(new FaithPathOpponentMessage(currentPlayer.getNickName(), 1),currentPlayer.getNickName());
@@ -378,7 +378,7 @@ public class Game extends Observable {
     public void activateLeaderCard(int index) throws RequirementsException, LeaderCardsGameBoardEmptyException, IOException, InterruptedException {
         currentPlayer.activationLeaderCard(index);
         notifyToOneObserver(new ActivationLeaderForCurrentMessage(index));
-        notifyAllObserverLessOne(new ActivationLeaderForNotCurrentMessage(currentPlayer));
+        notifyAllObserverLessOne(new ActivationLeaderForNotCurrentMessage(currentPlayer.getNickName()));
     }
 
 
@@ -430,8 +430,18 @@ public class Game extends Observable {
 
     public void notifyResultFromMarket(ArrayList<Resource> buffer) throws IOException, InterruptedException {
         notifyToOneObserver(new ResultFromMarketMessage(buffer) );
-        notifyAllObserverLessOne(new ResultFromMarketNotCurrentMessage(currentPlayer,buffer) );
+        notifyAllObserverLessOne(new ResultFromMarketNotCurrentMessage(currentPlayer.getNickName(),buffer) );
     }
+
+    public void notifyFromClientControllerColumn(int chosenColumn) throws IOException, InterruptedException {
+        notifyObserver(new ChangeMarketMessageColumn(chosenColumn));
+    }
+    public void notifyFromClientControllerRow(int chosenRow) throws IOException, InterruptedException {
+        notifyObserver(new ChangeMarketMessageRow(chosenRow));
+    }
+
+
+
 
     /**
      * This method returns the overall score of the player p

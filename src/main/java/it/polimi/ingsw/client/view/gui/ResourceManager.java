@@ -45,7 +45,7 @@ public class ResourceManager {
 
 
         Image scaledImage1 = Paths.getImageFromResource(Resource.COIN)
-                    .getScaledInstance(150, 300, Image.SCALE_SMOOTH);
+                    .getScaledInstance(50, 1000, Image.SCALE_SMOOTH);
 
         SensibleButton cardButton1 = new SensibleButton(scaledImage1);
         resourceContainer.add(cardButton1);
@@ -53,7 +53,7 @@ public class ResourceManager {
 
 
         Image scaledImage2 = Paths.getImageFromResource(Resource.ROCK)
-                .getScaledInstance(150, 300, Image.SCALE_SMOOTH);
+                .getScaledInstance(50, 1000, Image.SCALE_SMOOTH);
 
         SensibleButton cardButton2 = new SensibleButton(scaledImage2);
         resourceContainer.add(cardButton2);
@@ -62,7 +62,7 @@ public class ResourceManager {
 
 
         Image scaledImage3 = Paths.getImageFromResource(Resource.SERVANT)
-                .getScaledInstance(150, 300, Image.SCALE_SMOOTH);
+                .getScaledInstance(50, 1000, Image.SCALE_SMOOTH);
 
         SensibleButton cardButton3 = new SensibleButton(scaledImage3);
         resourceContainer.add(cardButton3);
@@ -71,7 +71,7 @@ public class ResourceManager {
 
 
         Image scaledImage4 = Paths.getImageFromResource(Resource.SHIELD)
-                .getScaledInstance(150, 300, Image.SCALE_SMOOTH);
+                .getScaledInstance(50, 1000, Image.SCALE_SMOOTH);
 
         SensibleButton cardButton4 = new SensibleButton(scaledImage4);
         resourceContainer.add(cardButton4);

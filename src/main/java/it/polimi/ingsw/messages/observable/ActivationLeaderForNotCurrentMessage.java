@@ -11,9 +11,9 @@ import java.io.IOException;
 public class ActivationLeaderForNotCurrentMessage extends Message {
     private final MessageType messageType = MessageType.ACTIVATIONLEADERCARDNOTIFICATION;
 
-    private Player player;
+    private String player;
 
-    public ActivationLeaderForNotCurrentMessage(Player player){
+    public ActivationLeaderForNotCurrentMessage(String player){
         this.player=player;
     }
 
@@ -27,12 +27,12 @@ public class ActivationLeaderForNotCurrentMessage extends Message {
         v.visit(this);
     }
 
-    public Player getPlayer() {
+    public String getPlayer() {
         return player;
     }
 
     @Override
     public String toString(){
-        return player.getNickName() +" has activated a leader card";
+        return player +" has activated a leader card";
     }
 }

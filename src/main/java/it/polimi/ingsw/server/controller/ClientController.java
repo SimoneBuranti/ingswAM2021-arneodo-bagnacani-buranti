@@ -296,7 +296,6 @@ public class ClientController implements MessageVisitor {
     @Override
     public void visit(InitialResourcesMessage msg) throws IOException, InterruptedException {
         if (turnCheck()){
-            System.out.println("Sono dentro : "+ msg.getResources());
             if(msg.getResources().size()==1){
                 game.initResourceOfPlayer(msg.getResources().get(0));
             } else {
@@ -338,8 +337,10 @@ public class ClientController implements MessageVisitor {
                 game.pushColumnInMarket(msg.getColumnNumber());
             } catch (NotEnoughSpaceInStorageException e) {
                 clientHandler.sendMessage(new NotEnoughSpaceErrorMessage(e.getResources()));
+                game.notifyFromClientControllerColumn(msg.getColumnNumber());
             } catch (WhiteMarbleException e) {
                 clientHandler.sendMessage(new DoubleWhiteMarbleEffectMessage(e.getN()));
+                game.notifyFromClientControllerColumn(msg.getColumnNumber());
             }
         } else {
             clientHandler.sendMessage(new NotYourTurnErrorMessage());
@@ -353,12 +354,15 @@ public class ClientController implements MessageVisitor {
                 game.pushRowInMarket(msg.getRowNumber());
             } catch (NotEnoughSpaceInStorageException e) {
                 clientHandler.sendMessage(new NotEnoughSpaceErrorMessage(e.getResources()));
+                game.notifyFromClientControllerRow(msg.getRowNumber());
             } catch (WhiteMarbleException e) {
                 clientHandler.sendMessage(new DoubleWhiteMarbleEffectMessage(e.getN()));
+                game.notifyFromClientControllerRow(msg.getRowNumber());
             }
         } else {
             clientHandler.sendMessage(new NotYourTurnErrorMessage());
         }
+
     }
 
     @Override

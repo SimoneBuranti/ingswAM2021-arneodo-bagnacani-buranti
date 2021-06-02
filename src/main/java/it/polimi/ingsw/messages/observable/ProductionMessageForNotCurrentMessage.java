@@ -17,9 +17,9 @@ public class ProductionMessageForNotCurrentMessage extends Message {
 
 
     private ArrayList<Resource> resource;
-    private Player player;
+    private String player;
 
-    public ProductionMessageForNotCurrentMessage(Player player, ArrayList<Resource> resource){
+    public ProductionMessageForNotCurrentMessage(String player, ArrayList<Resource> resource){
 
         this.player=player;
         this.resource = resource;
@@ -36,6 +36,9 @@ public class ProductionMessageForNotCurrentMessage extends Message {
         v.visit(this);
     }
 
+    public String getPlayer() {
+        return player;
+    }
 
     public ArrayList<Resource> getResource() {
         return resource;
@@ -43,6 +46,6 @@ public class ProductionMessageForNotCurrentMessage extends Message {
 
     @Override
     public String toString(){
-        return player.getNickName() +" has activated a production";
+        return player +" has activated a production";
     }
 }

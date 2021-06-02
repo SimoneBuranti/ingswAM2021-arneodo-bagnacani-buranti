@@ -10,9 +10,9 @@ import java.io.IOException;
 public class DiscardLeaderForNotCurrentMessage extends Message {
     private final MessageType messageType = MessageType.DISCARDLEADERCARDNOTIFICATION;
 
-    private Player player;
+    private String player;
 
-    public DiscardLeaderForNotCurrentMessage(Player player){
+    public DiscardLeaderForNotCurrentMessage(String player){
         this.player=player;
     }
 
@@ -26,12 +26,12 @@ public class DiscardLeaderForNotCurrentMessage extends Message {
         v.visit(this);
     }
 
-    public Player getPlayer() {
+    public String getPlayer() {
         return player;
     }
 
     @Override
     public String toString(){
-        return player.getNickName() +" has discarded a leader card";
+        return player +" has discarded a leader card";
     }
 }
