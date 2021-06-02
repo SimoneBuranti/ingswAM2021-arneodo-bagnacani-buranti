@@ -173,22 +173,17 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
         for(int i = 0 ; i<3; i++){
             if (productionCards[i][column] == null){
 
-                if (i == 0){
-                    productionButtons[column].setEnabled(true);
-                }
-
-
                 productionCards[i][column] = cardLabel;
 
                 cardLabel.setOpaque(false);
                 cardLabel.setBounds(2,12+(2-i)*(cardOffset),cardWidth,cardHeight);
-                productionSpaces[column].add(cardLabel,Integer.valueOf(i));
+                productionSpaces[column].add(cardLabel,Integer.valueOf(3-i));
 
                 i = 3;
             }
         }
 
-        this.repaint();
+        productionSpaces[column].repaint();
     }
 
 
@@ -208,25 +203,6 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
         faithPathPane.setOpaque(false);
         faithPathPane.setSize(faithPathWidth,faithPathHeight);
         faithPathPane.setBounds(0,0,faithPathWidth,faithPathHeight);
-
-        //move button Player--------
-        /*JButton moveButton = new JButton();
-        moveButton.setSize(20,20);
-        moveButton.addActionListener(e -> {
-            faithPathPane.move();
-        });
-        moveButton.setBounds(20,20,20,20);
-        faithPathPane.add(moveButton);
-
-        //addPapal button--------
-        JButton papalButton = new JButton();
-        papalButton.setSize(20,20);
-        papalButton.addActionListener(e -> {
-            this.faithPathPane.addPapal();
-            this.repaint();
-        });
-        papalButton.setBounds(20,50,20,20);
-        faithPathPane.add(papalButton);*/
 
         this.add(faithPathPane);
     }

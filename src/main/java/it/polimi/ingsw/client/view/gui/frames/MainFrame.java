@@ -214,7 +214,6 @@ public abstract class MainFrame  extends JFrame {
 
     public void marblePossibilityPopUp(int n, ArrayList<Resource> whiteMarbleResourceTypes){
 
-        SwingUtilities.invokeLater(() -> {
             ArrayList<WhiteMarbleLabel> whiteMarbleLabels = new ArrayList<>();
             ArrayList<Resource> buffer = new ArrayList<>();
             JDialog dialog =new JDialog();
@@ -266,14 +265,11 @@ public abstract class MainFrame  extends JFrame {
             });
 
             dialog.setVisible(true);
-        });
 
     }
     public abstract void updateProductionCard(GameboardListNotification gameboardListNotification);
 
     public void  fullStoragePopUp(NotEnoughSpaceErrorMessage message){
-
-        SwingUtilities.invokeLater(() -> {
             ArrayList<Resource> buffer = new ArrayList<>();
             JDialog dialog =new JDialog();
             dialog.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -324,7 +320,6 @@ public abstract class MainFrame  extends JFrame {
             });
 
             dialog.setVisible(true);
-        });
     }
 
 
@@ -397,7 +392,7 @@ public abstract class MainFrame  extends JFrame {
 
     public abstract void showLabel(Message message);
 
-    public abstract void askInitResource() throws IOException, InterruptedException;
+    public abstract void askInitResource();
 
     public void displayString(String string){
         serverMessagePanel.display(string);

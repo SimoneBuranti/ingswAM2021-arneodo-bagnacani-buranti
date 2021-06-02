@@ -63,7 +63,6 @@ public class MarketFrame extends JFrame{
     }*/
 
     public void initMarket(){
-        SwingUtilities.invokeLater(() -> {
             //marketFrame = new JFrame("Market");
             this.setSize(marketWidth, marketHeight);
             //marketFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -82,8 +81,6 @@ public class MarketFrame extends JFrame{
 
 
             addButtons();
-
-        });
     }
 
     public void changeVisibility(){
@@ -92,7 +89,7 @@ public class MarketFrame extends JFrame{
     }
 
     public void addButtons(){
-        SwingUtilities.invokeLater(() -> {
+
             container.setLayout(null);
 
             buttonC0 = new PushColumnButton();
@@ -135,7 +132,7 @@ public class MarketFrame extends JFrame{
                 sendPushRow(2);});
 
             applyChangesTo(container);
-        });
+
     }
 
     public void removeButton(){

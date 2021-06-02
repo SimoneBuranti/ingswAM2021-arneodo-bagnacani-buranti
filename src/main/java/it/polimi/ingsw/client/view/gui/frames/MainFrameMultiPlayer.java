@@ -31,31 +31,30 @@ public class MainFrameMultiPlayer extends MainFrame {
     private ArrayList<JLabel> nicknames;
 
 
-    public MainFrameMultiPlayer(Gui gui,String title){
-        super(title,gui);
-        this.gui=gui;
-        SwingUtilities.invokeLater(() -> {
-            this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-            this.setLocation(475,208);
-            this.setSize(820,420);
+    public MainFrameMultiPlayer(Gui gui,String title) {
+        super(title, gui);
+        this.gui = gui;
 
-            this.setResizable(true);
-            ImageIcon icon = new ImageIcon("src/main/resources/resources/title.jpg");
-            Image image=icon.getImage();
-            JPanel background = new PBackground(image);
-            this.repaint();
-            background.setLayout(null);
-            this.add(background);
-            //mainFrame.add(errorText);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.setLocation(475, 208);
+        this.setSize(820, 420);
 
-            // Prepare the body container
-            container = new PanelContainer();
-            container.setBounds(50,35, 700, 400);
-            background.add(container);
+        this.setResizable(true);
+        ImageIcon icon = new ImageIcon("src/main/resources/resources/title.jpg");
+        Image image = icon.getImage();
+        JPanel background = new PBackground(image);
+        this.repaint();
+        background.setLayout(null);
+        this.add(background);
+        //mainFrame.add(errorText);
 
-            this.setVisible(true);
+        // Prepare the body container
+        container = new PanelContainer();
+        container.setBounds(50, 35, 700, 400);
+        background.add(container);
 
-        });}
+        this.setVisible(true);
+    }
 
     public MainFrameMultiPlayer(Gui gui){
         super(gui);
@@ -146,7 +145,7 @@ public class MainFrameMultiPlayer extends MainFrame {
     @Override
     public void askLeaderCardToKeep(ArrayList<LeaderCard> leaderCards) throws IOException, InterruptedException {
 
-        SwingUtilities.invokeLater(() -> {
+
             clear(container);
 
             CardManager cardManager = new CardManager(container,gui);
@@ -154,8 +153,6 @@ public class MainFrameMultiPlayer extends MainFrame {
             cardManager.showWhatToChoose(true);
 
             applyChangesTo(container);
-        });
-
     }
 
 
@@ -220,7 +217,7 @@ public class MainFrameMultiPlayer extends MainFrame {
 
     @Override
     public void showLabel(Message message){
-        SwingUtilities.invokeLater(() -> {
+
             clear(container);
             container.setLayout(new FlowLayout());
             errorLabel = new JLabel(message.toString());
@@ -229,14 +226,13 @@ public class MainFrameMultiPlayer extends MainFrame {
             errorLabel.setSize(100,100);
             applyChangesTo(container);
 
-        });
+
     }
 
 
     @Override
-    public void askInitResource() throws IOException, InterruptedException {
+    public void askInitResource()  {
 
-        SwingUtilities.invokeLater(() -> {
             clear(container);
 
             if (gui.getViewController().getGame().getPosition()!=1)
@@ -266,7 +262,6 @@ public class MainFrameMultiPlayer extends MainFrame {
             }
 
             applyChangesTo(container);
-        });
     }
 
     @Override

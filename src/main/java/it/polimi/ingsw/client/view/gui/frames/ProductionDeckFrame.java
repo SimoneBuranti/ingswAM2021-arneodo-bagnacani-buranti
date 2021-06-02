@@ -40,7 +40,7 @@ public class ProductionDeckFrame extends JFrame{
 
 
     public void initDecks(){
-        SwingUtilities.invokeLater(() -> {
+
             //deckFrame = new JFrame("Production decks");
             this.setLocation(deckProductionX,deckProductionY);
             this.setSize(deckWidth, deckHeight);
@@ -59,7 +59,7 @@ public class ProductionDeckFrame extends JFrame{
             visible = false;
             this.setVisible(visible);
 
-        });
+
     }
 
     public void changeVisibility(){
@@ -68,7 +68,6 @@ public class ProductionDeckFrame extends JFrame{
     }
 
     public void addDecks(ArrayList<ProductionCard> productionCards){
-        SwingUtilities.invokeLater(() -> {
 
             clear(container);
             container.setLayout(null);
@@ -122,7 +121,8 @@ public class ProductionDeckFrame extends JFrame{
             container.add(decksPanel);
             applyChangesTo(container);
             System.out.println("Ho fatto tutto");
-        });
+
+
     }
 
     private void clear(JPanel panel){

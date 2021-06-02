@@ -377,8 +377,15 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
     }
 
     @Override
-    public void askLeaderCardToKeep(ArrayList<LeaderCard> leaderCards) throws IOException, InterruptedException {
-    mainFrameOfPreGame.askLeaderCardToKeep(leaderCards);
+    public void askLeaderCardToKeep(ArrayList<LeaderCard> leaderCards) {
+        SwingUtilities.invokeLater(() -> {
+            try {
+                mainFrameOfPreGame.askLeaderCardToKeep(leaderCards);
+            } catch (IOException | InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+
     }
 
     @Override
@@ -412,6 +419,8 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
                 mainFrameOfGame = new MainFrameSinglePlayer(this);
             }
             isMultiOrNot = msg.isMultiOrNot();
+
+            System.out.println("sono dentro all'edt e ho istanziato cazzi e mazzi");
         });}
 
     @Override
@@ -419,8 +428,11 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
 
     @Override
-    public void askInitResource() throws IOException, InterruptedException {
-        mainFrameOfPreGame.askInitResource();
+    public void askInitResource(){
+        SwingUtilities.invokeLater(() -> {
+            mainFrameOfPreGame.askInitResource();
+        });
+
     }
 
     @Override
@@ -625,7 +637,6 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
         SwingUtilities.invokeLater(() -> {
             mainFrameOfGame.getMarketFrame().setMarbleGrid(marketNotification.getList());
             applyChangesTo(mainFrameOfGame);
-
         });
 
     }
@@ -703,7 +714,7 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
 
     public void showLabel(Message message){
-        SwingUtilities.invokeLater(() -> {
+
             clear(container);
             container.setLayout(new FlowLayout());
             errorLabel = new JLabel(message.toString());
@@ -712,7 +723,7 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
             errorLabel.setSize(100,100);
             applyChangesTo(container);
 
-        });
+
     }
 
 
@@ -756,7 +767,6 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
             mainFrameOfGame.disableLeaderButtons();
             mainFrameOfGame.activateEndOfProductionButton();
             applyChangesTo(mainFrameOfGame);
-
         });
     }
 
@@ -778,6 +788,7 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
             mainFrameOfGame.disableProductionButtons();
             mainFrameOfGame.enableLeaderButtons();
             mainFrameOfGame.enableEndTurnButton();
+
             applyChangesTo(mainFrameOfGame);
 
         });

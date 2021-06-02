@@ -97,7 +97,7 @@ public class MainFrameSinglePlayer extends MainFrame{
     public MainFrameSinglePlayer(Gui gui,String title){
         super(title,gui);
         this.gui=gui;
-        SwingUtilities.invokeLater(() -> {
+
             this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             this.setLocation(475,208);
             this.setSize(820,420);
@@ -118,7 +118,7 @@ public class MainFrameSinglePlayer extends MainFrame{
 
             this.setVisible(true);
 
-        });
+
 
     }
 
@@ -183,7 +183,7 @@ public class MainFrameSinglePlayer extends MainFrame{
     @Override
     public void askLeaderCardToKeep(ArrayList<LeaderCard> leaderCards) throws IOException, InterruptedException {
 
-        SwingUtilities.invokeLater(() -> {
+
             clear(container);
 
             CardManager cardManager = new CardManager(container,gui);
@@ -191,7 +191,6 @@ public class MainFrameSinglePlayer extends MainFrame{
             cardManager.showWhatToChoose(true);
 
             applyChangesTo(container);
-        });
 
     }
 
@@ -240,7 +239,7 @@ public class MainFrameSinglePlayer extends MainFrame{
     }
 
     @Override
-    public void askInitResource() throws IOException, InterruptedException {
+    public void askInitResource() {
         (new Thread(() -> {
             try {
                 gui.notifyObserver(new EndOfTurnMessage());
