@@ -57,7 +57,7 @@ public class CardListener implements MouseListener {
             (new Thread(() -> {
                 try {
                 gui.notifyObserver(new KeepLeaderCardsMessage(CardListener.getSendableArrayInt().get(0),CardListener.getSendableArrayInt().get(1) ));
-                gui.askInitResource();
+                gui.askInitResource("Out of EDT");
             } catch (IOException | InterruptedException e1) {
                 e1.printStackTrace();
             }

@@ -95,6 +95,13 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
 
     public void initProductionSpaces(){
 
+        if (productionSpaces != null){
+            for(int i = 0;i<3;i++){
+                if (productionSpaces[i] != null)
+                    this.remove(productionSpaces[i]);
+            }
+        }
+
         productionSpaces = new JLayeredPane[3];
         productionCards = new JLabel[3][3];
         for(int i = 0;i<3;i++){
@@ -177,13 +184,27 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
 
                 cardLabel.setOpaque(false);
                 cardLabel.setBounds(2,12+(2-i)*(cardOffset),cardWidth,cardHeight);
-                productionSpaces[column].add(cardLabel,Integer.valueOf(3-i));
-
+                switch(i){
+                    case 0: {
+                        productionSpaces[column].add(cardLabel,JLayeredPane.DEFAULT_LAYER);
+                        break;
+                    }
+                    case 1:{
+                        productionSpaces[column].add(cardLabel,JLayeredPane.PALETTE_LAYER);
+                        break;
+                    }
+                    case 2:{
+                        productionSpaces[column].add(cardLabel,JLayeredPane.MODAL_LAYER);
+                        break;
+                    }
+                }
                 i = 3;
             }
         }
 
         productionSpaces[column].repaint();
+        productionSpaces[column].repaint();
+
     }
 
 
@@ -268,14 +289,15 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
     }
     public void updateProductionSpaces(GameboardListNotification gameboardListNotification){
         initProductionSpaces();
+
         for(int i=0; i<3; i++)
             for(int j=0; j<3; j++){
-                if (gameboardListNotification.getListOfFirstCard()[i][j]!=null)
+                if (gameboardListNotification.getListOfFirstCard()[i][j] != null)
                     addProductionCard(gameboardListNotification.getListOfFirstCard()[i][j].getKey(),j);
-
             }
 
     }
+
     public void givePapalcard(int i) {
         faithPathPane.givePapalCard(i);
     }

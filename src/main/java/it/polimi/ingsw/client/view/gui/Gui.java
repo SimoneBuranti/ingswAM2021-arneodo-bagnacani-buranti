@@ -429,11 +429,19 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
     @Override
     public void askInitResource(){
-        SwingUtilities.invokeLater(() -> {
-            mainFrameOfPreGame.askInitResource();
+
+        SwingUtilities.invokeLater( () -> {
+            mainFrameOfGame.askInitResource();
         });
 
     }
+
+    public void askInitResource(String outOfEDT){
+
+        mainFrameOfGame.askInitResource();
+
+    }
+
 
     @Override
     public void showGameBoardProductionCards(ProductionCard[][] productionCards) {}
@@ -761,28 +769,28 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
 
     public void disableAllExceptProductions() {
-        SwingUtilities.invokeLater(() -> {
+
             mainFrameOfGame.disableMarketButtons();
             mainFrameOfGame.disableDeckButtons();
             mainFrameOfGame.disableLeaderButtons();
             mainFrameOfGame.activateEndOfProductionButton();
             applyChangesTo(mainFrameOfGame);
-        });
+
     }
 
     public void putProdCardMode() {
-        SwingUtilities.invokeLater(() -> {
+
             mainFrameOfGame.disableMarketButtons();
             mainFrameOfGame.disableLeaderButtons();
             mainFrameOfGame.disableDeckButtons();
             mainFrameOfGame.putCardMode();
             applyChangesTo(mainFrameOfGame);
 
-        });
+
     }
 
     public void actionDoneMode() {
-        SwingUtilities.invokeLater(() -> {
+
             mainFrameOfGame.disableMarketButtons();
             mainFrameOfGame.disableDeckButtons();
             mainFrameOfGame.disableProductionButtons();
@@ -791,18 +799,17 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
             applyChangesTo(mainFrameOfGame);
 
-        });
     }
 
     public void enableAllAction() {
-        SwingUtilities.invokeLater(() -> {
+
             mainFrameOfGame.enableMarketButtons();
             mainFrameOfGame.enableDeckButtons();
             mainFrameOfGame.enableProductionButtons();
             mainFrameOfGame.enableLeaderButtons();
             applyChangesTo(mainFrameOfGame);
 
-        });
+
 
     }
 
