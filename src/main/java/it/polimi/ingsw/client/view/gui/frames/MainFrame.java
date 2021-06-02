@@ -243,6 +243,8 @@ public abstract class MainFrame  extends JFrame {
             JButton enterButton;
 
             JDialog dialog =new JDialog();
+            dialog.setLocation(600, 400);
+            dialog.setSize(400, 400);
 
             dialog.setLayout(new FlowLayout());
 
@@ -307,6 +309,7 @@ public abstract class MainFrame  extends JFrame {
                 }
             });
 
+            dialog.setVisible(true);
         });
 
 
@@ -316,7 +319,7 @@ public abstract class MainFrame  extends JFrame {
 
     public void  fullStoragePopUp(NotEnoughSpaceErrorMessage message){
 
-        SwingUtilities.invokeLater(() -> {
+        //SwingUtilities.invokeLater(() -> {
             int howManyC=0;
             int howManyR=0;
             int howManyS=0;
@@ -344,6 +347,8 @@ public abstract class MainFrame  extends JFrame {
             JButton enterButton;
 
             JDialog dialog =new JDialog();
+            dialog.setLocation(600, 400);
+            dialog.setSize(400, 400);
 
             dialog.setLayout(new FlowLayout());
 
@@ -404,7 +409,9 @@ public abstract class MainFrame  extends JFrame {
                 }
             });
 
-        }); }
+            dialog.setVisible(true);
+       // });
+    }
 
 
     public void disableMarketButtons(){

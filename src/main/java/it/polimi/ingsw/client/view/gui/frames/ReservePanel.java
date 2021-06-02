@@ -54,9 +54,10 @@ public class ReservePanel extends JPanel {
 
     public void updateReserve(Map<Resource,Integer> reserve){
         coinLabel.setValue(reserve.get(Resource.COIN));
-        rockLabel.setValue(reserve.get(Resource.COIN));
-        shieldLabel.setValue(reserve.get(Resource.COIN));
-        servantLabel.setValue(reserve.get(Resource.COIN));
+        rockLabel.setValue(reserve.get(Resource.ROCK));
+        shieldLabel.setValue(reserve.get(Resource.SHIELD));
+        servantLabel.setValue(reserve.get(Resource.SERVANT));
+        this.repaint();
     }
 
     @Override

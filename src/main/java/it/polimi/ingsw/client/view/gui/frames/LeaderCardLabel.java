@@ -13,6 +13,9 @@ public class LeaderCardLabel extends EmptyLeaderCardLabel {
     private static final int cardHeight = 222;
     private static final int panelHeight = 278;
 
+    ActivateLeaderListener activateListener;
+    DiscardLeaderListener discardListener;
+
     private Image cardImage;
     private JLabel cardLabel;
     private JLabel textLabel;
@@ -39,11 +42,13 @@ public class LeaderCardLabel extends EmptyLeaderCardLabel {
         buttonActivate = new JButton("A");
         buttonActivate.setBounds(15,243, 50, 28); //230
         buttonActivate.setBackground(new Color(232,228,212));
-        buttonActivate.addActionListener(new ActivateLeaderListener(gui, index, this));
+        activateListener = new ActivateLeaderListener(this.gui, this.index, this);
+        buttonActivate.addActionListener(activateListener);
         buttonDiscard = new JButton("D");
         buttonDiscard.setBounds(85,243, 50, 28);
         buttonDiscard.setBackground(new Color(232,228,212));
-        buttonDiscard.addActionListener(new DiscardLeaderListener(gui, index, this));
+        discardListener = new DiscardLeaderListener(this.gui, this.index, this);
+        buttonDiscard.addActionListener(discardListener);
         this.add(textLabel);
         this.add(cardLabel);
         this.add(buttonActivate);
@@ -58,6 +63,12 @@ public class LeaderCardLabel extends EmptyLeaderCardLabel {
 
     public int getIndex(){
         return index;
+    }
+
+    public void setIndex(int index){
+        this.index = index;
+        activateListener.setIndex(index);
+        discardListener.setIndex(index);
     }
 
     @Override

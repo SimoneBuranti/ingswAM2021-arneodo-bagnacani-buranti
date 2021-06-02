@@ -28,6 +28,6 @@ public class AlreadyActivatedErrorMessage extends Message {
 
     @Override
     public String toString(){
-        return "production already activated, try with another one or end the action.";
+        return "The chosen leader card was already used, please choose another card or another action.";
     }
 }

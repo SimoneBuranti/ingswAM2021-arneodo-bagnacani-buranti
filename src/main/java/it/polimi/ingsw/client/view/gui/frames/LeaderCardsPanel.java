@@ -210,6 +210,9 @@ public class LeaderCardsPanel extends JPanel {
             }else if(LightLeaderCards.leaderCardByKey(key) instanceof LeaderCardProduction){
                 leaderCardProductionSecond();
             }
+            if(secondCard != null && secondCard instanceof LeaderCardLabel){
+                secondCard.setIndex(0);
+            }
         }else{
             this.remove(secondCard);
             secondCard = new LeaderCardActivatedLabel(key, index);

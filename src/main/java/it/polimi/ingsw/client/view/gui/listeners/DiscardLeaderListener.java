@@ -20,6 +20,10 @@ public class DiscardLeaderListener implements ActionListener {
         this.leaderCardLabel = leaderCardLabel;
     }
 
+    public void setIndex(int index){
+        this.index = index;
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         try {
