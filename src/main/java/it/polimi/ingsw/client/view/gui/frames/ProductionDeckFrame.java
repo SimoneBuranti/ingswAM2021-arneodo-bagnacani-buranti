@@ -82,6 +82,7 @@ public class ProductionDeckFrame extends JFrame{
                     card.setSize(140, 248);
                     decksPanel.add(card);
                     cardLabelWithButtons.add(card);
+                    card.disableButton();
                 }else{
                     JLabel labelWhite = new JLabel();
                     labelWhite.setBackground(Color.WHITE);
@@ -92,6 +93,7 @@ public class ProductionDeckFrame extends JFrame{
                     card.setSize(140, 248);
                     decksPanel.add(card);
                     cardLabelWithButtons.add(card);
+                    card.disableButton();
                 }else{
                     JLabel labelWhite = new JLabel();
                     labelWhite.setBackground(Color.WHITE);
@@ -102,6 +104,7 @@ public class ProductionDeckFrame extends JFrame{
                     card.setSize(140, 248);
                     decksPanel.add(card);
                     cardLabelWithButtons.add(card);
+                    card.disableButton();
                 }else{
                     JLabel labelWhite = new JLabel();
                     labelWhite.setBackground(Color.WHITE);
@@ -112,6 +115,7 @@ public class ProductionDeckFrame extends JFrame{
                     card.setSize(140, 248);
                     decksPanel.add(card);
                     cardLabelWithButtons.add(card);
+                    card.disableButton();
                 }else{
                     JLabel labelWhite = new JLabel();
                     labelWhite.setBackground(Color.WHITE);
