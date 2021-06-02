@@ -49,6 +49,8 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
     private boolean chosenResumeGame;
 
+    private boolean isActionDoneMode;
+
 
     @Override
     public void startView() {
@@ -793,8 +795,13 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
     }
 
+    public boolean isActionDoneMode(){
+        return isActionDoneMode;
+    }
+
     public void actionDoneMode() {
 
+            isActionDoneMode = true;
             mainFrameOfGame.disableMarketButtons();
             mainFrameOfGame.disableDeckButtons();
             mainFrameOfGame.disableProductionButtons();
@@ -807,6 +814,7 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
     public void enableAllAction() {
 
+            isActionDoneMode = false;
             mainFrameOfGame.enableMarketButtons();
             mainFrameOfGame.enableDeckButtons();
             mainFrameOfGame.enableProductionButtons();

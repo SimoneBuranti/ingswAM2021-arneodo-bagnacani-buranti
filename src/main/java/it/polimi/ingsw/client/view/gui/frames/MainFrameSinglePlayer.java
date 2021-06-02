@@ -280,6 +280,7 @@ public class MainFrameSinglePlayer extends MainFrame{
     @Override
     public void putCardMode() {
         lorenzoGameboardPanel.putCardMode();
+        leaderCardsPanel.disableProductionButtons();
     }
 
     public void givePapalCard(int i){

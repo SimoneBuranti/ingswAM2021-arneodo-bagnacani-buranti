@@ -362,6 +362,7 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
             Gui.removeAllListeners(productionButtons[i]);
             productionButtons[i].addActionListener(new PutCardButtonListener(gui,chosenDeckNumber,i));
         }
+        baseProductionPanel.disableButton();
     }
 
     public void showAllOfPlayer(ShowAllOfPlayerMessage msg) {

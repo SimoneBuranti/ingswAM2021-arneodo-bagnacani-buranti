@@ -51,7 +51,7 @@ public class LeaderCardsPanel extends JPanel {
 
 
     public void addLeaderCards(ArrayList<LeaderCard> leaderCards, boolean activated){
-        if(leaderCards.size() < 3) {
+        if(leaderCards.size() < 3 && leaderCards.size()>0) {
             if (!activated) {
                 firstCard = new LeaderCardLabel(leaderCards.get(0).getKey(), gui, 0);
                 firstCard.setBounds(0, 0, 150, 278);
@@ -151,6 +151,9 @@ public class LeaderCardsPanel extends JPanel {
         firstActivateButton.setBounds(26, 268, 108, 20);
         this.add(firstActivateButton);
 
+        if(gui.isActionDoneMode())
+            firstActivateButton.setEnabled(false);
+
         firstActivateButton.addActionListener( e -> {
             try {
                 if(firstCard.getIndex() == 0)
@@ -179,6 +182,8 @@ public class LeaderCardsPanel extends JPanel {
         secondActivateButton.setText("Activate");
         secondActivateButton.setBounds(186, 268, 108, 20);
         this.add(secondActivateButton);
+        if(gui.isActionDoneMode())
+            secondActivateButton.setEnabled(false);
 
         secondActivateButton.addActionListener( e -> {
             try {

@@ -19,7 +19,7 @@ public abstract class MainFrame  extends JFrame {
 
     public final static int northHeight = 70;
     public final static int frameWidth = 1195;
-    public final static int frameHeigth = 673;
+    public final static int frameHeigth = 679;
     public final static int frameX = 230;
     public final static int frameY = 160;
     public final static int buttonWidth = 100;
