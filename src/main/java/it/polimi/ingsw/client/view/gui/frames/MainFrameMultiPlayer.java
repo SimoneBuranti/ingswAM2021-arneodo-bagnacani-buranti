@@ -361,6 +361,7 @@ public class MainFrameMultiPlayer extends MainFrame {
     @Override
     public void putCardMode() {
         gameboardPanel.putCardMode();
+        leaderCardsPanel.disableProductionButtons();
     }
 
     @Override
