@@ -214,100 +214,49 @@ public abstract class MainFrame  extends JFrame {
 
     public void marblePossibilityPopUp(int n, ArrayList<Resource> whiteMarbleResourceTypes){
 
-
         SwingUtilities.invokeLater(() -> {
-            int howManyC=0;
-            int howManyR=0;
-            int howManyS=0;
-            int howManyV=0;
-            int howManyChoosen=0;
-
-            ArrayList<Resource> arrayList=new ArrayList<>(whiteMarbleResourceTypes.size());
-            for (Resource resource: whiteMarbleResourceTypes)
-            {
-                if (resource.equals(Resource.COIN))
-                    howManyR++;
-                else if (resource.equals(Resource.ROCK))
-                    howManyC++;
-                else if (resource.equals(Resource.SERVANT))
-                    howManyV++;
-                else if (resource.equals(Resource.SHIELD))
-                    howManyS++;
-            }
-            JButton coinButton;
-            JButton servantButton;
-            JButton shieldButton;
-            JButton rockButton;
-            JButton enterButton;
-
+            ArrayList<WhiteMarbleLabel> whiteMarbleLabels = new ArrayList<>();
+            ArrayList<Resource> buffer = new ArrayList<>();
             JDialog dialog =new JDialog();
             dialog.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             dialog.setLocation(600, 400);
-            dialog.setSize(400, 400);
-
+            dialog.setSize(450, 200);
+            dialog.getContentPane().setBackground(new Color(232,228,212));
 
             dialog.setLayout(new FlowLayout());
 
-            JLabel errorLabel = new JLabel("error due white marble");
-            dialog.add(errorLabel);
-            errorLabel.setLocation(475,108);
-            errorLabel.setSize(100,100);
-
-            if (howManyC>0){
-                coinButton= new JButton("COIN");
-                coinButton.setSize(new Dimension(50,50));
-                dialog.add(coinButton);
-                coinButton.addActionListener(eNO -> {
-                    if (howManyChoosen<= n){
-                        arrayList.add(Resource.COIN);}
-
-                });}
-
-            if (howManyV>0){
-                servantButton= new JButton("SERVANT");
-                servantButton.setSize(new Dimension(50,50));
-                dialog.add(servantButton);
-
-                servantButton.addActionListener(eYES -> {
-                    if (howManyChoosen>=n){
-                        arrayList.add(Resource.COIN);
-                    }
-                });}
-
-            if(howManyS>0){
-                shieldButton= new JButton("SHIELD");
-                shieldButton.setSize(new Dimension(50,50));
-                dialog.add(shieldButton);
-
-                shieldButton.addActionListener(eNO -> {
-                    if (howManyChoosen>=n){
-                        arrayList.add(Resource.COIN);
-                    }
-                });
+            JLabel text1 = new JLabel("you've got " + n + " white marbles, ");
+            text1.setSize(350, 20);
+            text1.setBounds(5,5,350,20);
+            dialog.add(text1);
+            JLabel text2 = new JLabel("for each of them you must choose a resource");
+            text2.setSize(350, 20);
+            text2.setBounds(5,25,350,20);
+            dialog.add(text2);
+            for(int i = 0; i < n; i++) {
+                WhiteMarbleLabel whiteMarble = new WhiteMarbleLabel(70 * i, 60, whiteMarbleResourceTypes);
+                whiteMarble.setSize(40, 40);
+                whiteMarble.setBounds(70 * i, 60, 40, 40);
+                dialog.add(whiteMarble);
+                whiteMarbleLabels.add(whiteMarble);
             }
 
-            if(howManyR>0){
-                rockButton= new JButton("ROCK");
-                rockButton.setSize(new Dimension(50,50));
-                dialog.add(rockButton);
-                rockButton.addActionListener(eONe -> {
-                    if (howManyChoosen>=n){
-                        arrayList.add(Resource.COIN);
-                    }
-                });}
+            JButton enterButton;
 
             enterButton= new JButton("enter");
+            enterButton.setBackground(new Color(232,228,212));
             enterButton.setSize(new Dimension(60,60));
-
+            enterButton.setBounds(200, 60, 60,60);
 
             dialog.add(enterButton);
-
-
 
             enterButton.addActionListener(eNO -> {
                 (new Thread(() -> {
                     try {
-                        gui.notifyObserver(new KeepResourcesMessage(arrayList));
+                        for(WhiteMarbleLabel whiteMarble : whiteMarbleLabels)
+                            buffer.add(whiteMarble.getResource());
+                        System.out.println(buffer);
+                        gui.notifyObserver(new WhiteMarbleChoosenResourcesMessage(buffer));
                     } catch (IOException | InterruptedException e1) {
                         e1.printStackTrace();
                     }
@@ -315,11 +264,9 @@ public abstract class MainFrame  extends JFrame {
                 dialog.dispose();
 
             });
+
             dialog.setVisible(true);
-
         });
-
-
 
     }
     public abstract void updateProductionCard(GameboardListNotification gameboardListNotification);
@@ -367,7 +314,6 @@ public abstract class MainFrame  extends JFrame {
             enterButton.addActionListener(eNO -> {
                 (new Thread(() -> {
                     try {
-                        System.out.println(buffer);
                         gui.notifyObserver(new KeepResourcesMessage(buffer));
                     } catch (IOException | InterruptedException e1) {
                         e1.printStackTrace();
