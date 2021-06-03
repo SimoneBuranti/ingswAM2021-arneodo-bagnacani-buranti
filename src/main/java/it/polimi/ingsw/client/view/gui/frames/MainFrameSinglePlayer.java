@@ -272,6 +272,7 @@ public class MainFrameSinglePlayer extends MainFrame{
                 e.printStackTrace();
             }
         })).start();
+        gui.switchToGameMode();
         System.out.println("hey lo chiamo da qua0"+Thread.currentThread().getName());
     }
 

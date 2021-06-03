@@ -37,6 +37,13 @@ public class LightGameSolitaire extends LightGame{
     @Override
     public void setLorenzoTheMagnificent(int faithIndicator){
         lorenzoTheMagnificent.setLightLorenzoTheMagnificent(faithIndicator);
+        try {
+            notifyObserver(new FaithPathNotification(faithIndicator, true).serialize());
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

@@ -305,15 +305,14 @@ public class GameMultiPlayer extends Game {
                 try {
                     p.faithMove();
 
-                    notifyAllObserverLessOne(new FaithPathMessage(1));
-
-                    notifyAllObserverLessOneByNickname(new FaithPathOpponentMessage(p.getNickName(), 1),p.getNickName());
-
                 } catch (CallForCouncilException e1) {
                     exceptionHandler(e1);
                 } catch (LastSpaceReachedException e2) {
                     exceptionHandler(e2);
                 }
+                notifyAllObserverLessOne(new FaithPathMessage(1));
+
+                notifyAllObserverLessOneByNickname(new FaithPathOpponentMessage(p.getNickName(), 1),p.getNickName());
             }
         }
     }

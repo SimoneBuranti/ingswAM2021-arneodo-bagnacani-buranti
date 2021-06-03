@@ -48,7 +48,7 @@ public class ResourceListener implements MouseListener {
                 })).start();
 
                 System.out.println("hey lo chiamo da qua1"+Thread.currentThread().getName());
-                gui.powerToMainFrame();
+                gui.switchToGameMode();
             }
         }
 
@@ -71,7 +71,7 @@ public class ResourceListener implements MouseListener {
 
 
             System.out.println("hey lo chiamo da qua2"+Thread.currentThread().getName());
-            gui.powerToMainFrame();
+            gui.switchToGameMode();
             }
         }
 

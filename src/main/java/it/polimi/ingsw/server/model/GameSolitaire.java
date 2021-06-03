@@ -329,12 +329,13 @@ public class GameSolitaire extends Game {
     public void moveEveryoneExcept(Player player) throws IOException, InterruptedException {
         try {
             lorenzoTheMagnificent.moveBlackCross();
-            notifyObserver(new LorenzoMoveMessage());
         } catch (CallForCouncilException e1) {
             exceptionHandler(e1);
         }catch (EndOfSolitaireGame e2) {
             exceptionHandler(e2);
         }
+
+        notifyObserver(new LorenzoMoveMessage());
     }
 
     @Override
@@ -501,7 +502,6 @@ public class GameSolitaire extends Game {
 
         reConfigClient();
 
-            System.out.println("try to restore for please 10");
 
     } catch (FileNotFoundException e) {
         e.printStackTrace();
@@ -557,6 +557,7 @@ public class GameSolitaire extends Game {
         try {
             servList = gson.fromJson(new FileReader("src/main/resources/fileConfiguration/LoriMagnific.json"),int[].class);
             lorenzoTheMagnificent=new LorenzoTheMagnificent(servList);
+            notifyObserver(new LorenzoTheMagnificentConfigMessage(getLorenzoFaithIndicator()));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -587,7 +588,7 @@ public class GameSolitaire extends Game {
             }
             notifyObserver(new UpdateInitLeaderMessage(needForLeaderInitial));}
         else{
-
+            isFirstTurn = false;
             ArrayList<Integer> needForLeader = new ArrayList<>();
             ArrayList<Integer> needForLeader2 = new ArrayList<>();
             notifyObserver(new StorageConfigMessage(player.getGameBoardOfPlayer().getStorageOfGameBoard().getStorageResource()));

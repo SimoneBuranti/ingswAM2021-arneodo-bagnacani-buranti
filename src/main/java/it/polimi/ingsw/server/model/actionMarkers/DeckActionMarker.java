@@ -168,14 +168,12 @@ public class DeckActionMarker extends Observable {
         RuntimeTypeAdapterFactory<ActionMarker> adapterAction =
                 RuntimeTypeAdapterFactory
                         .of(ActionMarker.class)
-                        .registerSubtype(ActionMarker.class)
                         .registerSubtype(ActionMarkerProductionViolet.class)
                         .registerSubtype(ActionMarkerProductionYellow.class)
-                .registerSubtype(ActionMarkerProductionGreen.class)
-                .registerSubtype(ActionMarkerProductionBlue.class)
+                        .registerSubtype(ActionMarkerProductionGreen.class)
+                        .registerSubtype(ActionMarkerProductionBlue.class)
                         .registerSubtype(ActionMarkerForCrossDouble.class)
-                        .registerSubtype(ActionMarkerForCrossOnce.class)
-                ;
+                        .registerSubtype(ActionMarkerForCrossOnce.class);
 
 
         Gson gson=new GsonBuilder().setPrettyPrinting()

@@ -119,8 +119,9 @@ public class ClientController implements MessageVisitor {
 
     @Override
     public void visit(EndOfTurnMessage msg) throws IOException, InterruptedException {
-        if(turnCheck())
+        if(turnCheck()) {
             game.endOfTurn();
+        }
         else
             clientHandler.sendMessage(new NotYourTurnErrorMessage());
     }

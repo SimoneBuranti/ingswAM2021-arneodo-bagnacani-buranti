@@ -480,6 +480,7 @@ public class Game extends Observable {
     }
 
     protected void exceptionHandler(EmptyException e) {
+
     }
 
     protected void exceptionHandler(NotEnoughResourcesException e) {

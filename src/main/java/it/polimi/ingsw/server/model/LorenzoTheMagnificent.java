@@ -115,7 +115,6 @@ public class LorenzoTheMagnificent extends Observable {
     public LorenzoTheMagnificent(int[] list) throws IOException, InterruptedException {
         faithIndicator=list[0];
         currCall=list[1];
-        notifyObserver(new LorenzoTheMagnificentConfigMessage(faithIndicator));
     }
 
 

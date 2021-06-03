@@ -1,4 +1,5 @@
 package it.polimi.ingsw.client.view.gui;
+import it.polimi.ingsw.client.commands.commandParsers.StandardParser;
 import it.polimi.ingsw.client.ligtModelNotification.*;
 import it.polimi.ingsw.client.view.View;
 import it.polimi.ingsw.client.view.ViewController;
@@ -49,6 +50,7 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
     private boolean chosenResumeGame;
 
     private boolean isActionDoneMode;
+    private boolean isRestartMode = false;
 
 
     @Override
@@ -296,11 +298,26 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
         });
     }
 
+    public void switchToGameMode(){
+        //SwingUtilities.invokeLater(() -> {
+            if (!mainFrameOfGame.isBackGroundNull()) {
+                mainFrameOfGame.switchToGameMode();
+                mainFrameOfGame.paintComponents(mainFrameOfGame.getGraphics());
+                mainFrameOfGame.paintComponents(mainFrameOfGame.getGraphics());
+            }
+            //applyChangesTo(mainFrameOfGame);
+
+        //});
+
+    }
+
     @Override
     public void yourTurn() {
         SwingUtilities.invokeLater(() -> {
-            if (!mainFrameOfGame.isBackGroundNull())
-                mainFrameOfGame.switchToGameMode();
+            /*if (isRestartMode) {
+                switchToGameMode();
+                isRestartMode = false;
+            }*/
             mainFrameOfGame.setCurrentPlayer(viewController.getNickName());
             enableAllAction();
             applyChangesTo(mainFrameOfGame);
@@ -311,34 +328,39 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
     @Override
     public void notifyError(Message msg) {
-        SwingUtilities.invokeLater(() -> {
 
-            if (msg instanceof NoNicknameMessage || msg instanceof BootingLobbyErrorMessage
-                    || msg instanceof AlreadyExistingNickNameErrorMessage || msg instanceof CompleteRunningMatchErrorMessage)
-                showLabel(msg);
-            else
+        if (msg instanceof NoNicknameMessage || msg instanceof BootingLobbyErrorMessage
+                || msg instanceof AlreadyExistingNickNameErrorMessage || msg instanceof CompleteRunningMatchErrorMessage){
+            SwingUtilities.invokeLater(() -> {
+                showLabel(msg.toString());
+                applyChangesTo(mainFrame);
+            });
+        }else {
+            SwingUtilities.invokeLater(() -> {
+
                 mainFrameOfGame.displayString(msg.toString());
 
-            if (msg instanceof NotAvailableResourcesErrorMessage){
-                enableAllAction();
-            }
-
-            if (msg instanceof WrongColumnErrorMessage) {
-                mainFrameOfGame.putCardMode();
-            }
-
-            if (msg instanceof RequirementsErrorMessage){
-                mainFrameOfGame.enableLeaderButtons();
-            }
-
-            if (msg instanceof BaseProductionErrorMessage){
-                mainFrameOfGame.enableBaseProductionButton();
-                if (howManyActivated()<2)
+                if (msg instanceof NotAvailableResourcesErrorMessage) {
                     enableAllAction();
-            }
-            applyChangesTo(mainFrameOfGame);
+                }
 
-        });
+                if (msg instanceof WrongColumnErrorMessage) {
+                    mainFrameOfGame.putCardMode();
+                }
+
+                if (msg instanceof RequirementsErrorMessage) {
+                    mainFrameOfGame.enableLeaderButtons();
+                }
+
+                if (msg instanceof BaseProductionErrorMessage) {
+                    mainFrameOfGame.enableBaseProductionButton();
+                    if (howManyActivated() < 2)
+                        enableAllAction();
+                }
+                applyChangesTo(mainFrameOfGame);
+
+            });
+        }
 
     }
     @Override
@@ -424,14 +446,24 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
             }
 
+
             isMultiOrNot = msg.isMultiOrNot();
 
+            if (isRestartMode) {
+                switchToGameMode();
+                isRestartMode = false;
+            }
             System.out.println("sono dentro all'edt e ho istanziato cazzi e mazzi");
 
         });}
 
     @Override
-    public void showRestartMessage() {}
+    public void showRestartMessage() {
+        SwingUtilities.invokeLater(() -> {
+            showLabel("Enter your username of the previous game to resume the match...");
+            applyChangesTo(mainFrame);
+        });
+    }
 
 
     @Override
@@ -496,7 +528,12 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
     }
 
     @Override
-    public void checkThreadRestart() { }
+    public void checkThreadRestart() {
+        if (viewController.getGame().isInitResource()){
+            isRestartMode = true;
+        }
+        System.out.println("sono dentro check trhead restart");
+    }
 
     @Override
     public void showActionMarker(String actionType) {
@@ -728,11 +765,11 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
     }
 
 
-    public void showLabel(Message message){
+    public void showLabel(String text){
 
             clear(container);
             container.setLayout(new FlowLayout());
-            errorLabel = new JLabel(message.toString());
+            errorLabel = new JLabel(text);
             container.add(errorLabel);
             errorLabel.setLocation(475,108);
             errorLabel.setSize(100,100);

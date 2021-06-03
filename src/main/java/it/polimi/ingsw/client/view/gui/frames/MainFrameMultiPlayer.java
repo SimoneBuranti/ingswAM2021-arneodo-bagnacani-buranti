@@ -17,7 +17,6 @@ import java.util.Map;
 
 public class MainFrameMultiPlayer extends MainFrame {
 
-    private Gui gui;
     private PanelContainer container;
     private JLabel errorLabel;
     private GameboardPanel gameboardPanel;
@@ -31,7 +30,7 @@ public class MainFrameMultiPlayer extends MainFrame {
     private ArrayList<JLabel> nicknames;
 
 
-    public MainFrameMultiPlayer(Gui gui,String title) {
+    /*public MainFrameMultiPlayer(Gui gui,String title) {
         super(title, gui);
         this.gui = gui;
 
@@ -54,13 +53,14 @@ public class MainFrameMultiPlayer extends MainFrame {
         background.add(container);
 
         this.setVisible(true);
-    }
+    }*/
 
     public MainFrameMultiPlayer(Gui gui){
         super(gui);
-
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         initGameMode();
+        preGameMode();
     }
 
 
@@ -132,13 +132,35 @@ public class MainFrameMultiPlayer extends MainFrame {
         this.navigationBar.add(prodCardButton);
         this.navigationBar.add(reserveButton);
         this.navigationBar.add(menuPanel);
-        this.add(navigationBar, BorderLayout.NORTH);
+        //this.add(navigationBar, BorderLayout.NORTH);
 
         //---------------
         /*JPanel random = new JPanel();
         random.setBackground(Color.RED);
         random.setPreferredSize(new Dimension(buttonHeight,buttonHeight));
         random.setBorder(BorderFactory.createBevelBorder(0));*/
+    }
+
+    public void preGameMode(){
+        //this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        //this.setLocation(475,208);
+        //this.setSize(820,420);
+
+        //this.setResizable(true);
+        ImageIcon icon = new ImageIcon("src/main/resources/resources/title.jpg");
+        Image image=icon.getImage();
+        background = new PBackground(image);
+        this.repaint();
+        background.setLayout(null);
+        this.add(background);
+        //mainFrame.add(errorText);
+
+        // Prepare the body container
+        container = new PanelContainer();
+        container.setBounds(230,170, 700, 400);
+        background.add(container);
+
+        this.setVisible(true);
     }
 
 
@@ -259,7 +281,7 @@ public class MainFrameMultiPlayer extends MainFrame {
                         e.printStackTrace();
                     }
                 })).start();
-                gui.powerToMainFrame();
+                gui.switchToGameMode();
             }
 
             applyChangesTo(container);

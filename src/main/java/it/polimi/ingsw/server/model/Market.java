@@ -123,6 +123,7 @@ public class Market extends Observable {
             grid[chosenRow][j-1]=grid[chosenRow][j];
         grid[chosenRow][3]=temp;
 
+
         if(exception.getN() == 0) {
             player.takeFromMarket();
         }else
@@ -160,13 +161,11 @@ public class Market extends Observable {
             grid[i-1][chosenColumn]=grid[i][chosenColumn];
         grid[2][chosenColumn]=temp;
 
-
         if(exception.getN() == 0) {
             player.takeFromMarket();
         }else
             throw exception;
     }
-
 
     /**
      * this method initialises grid with the first 12 elements of the ArrayList passed as a parameter
