@@ -118,51 +118,7 @@ public class DeckActionMarker extends Observable {
 
 
 
-    public Gson DeckActionMarkerSaving(){
-
-        RuntimeTypeAdapterFactory<Storage> adapterStorage =
-                RuntimeTypeAdapterFactory
-                        .of(Storage.class)
-                        .registerSubtype(Storage.class)
-                        .registerSubtype(StorageExtraFirst.class)
-                        .registerSubtype(StorageExtraSecond.class);
-
-
-        RuntimeTypeAdapterFactory<Colour> adapterColour =
-                RuntimeTypeAdapterFactory
-                        .of(Colour.class)
-                        .registerSubtype(Green.class)
-                        .registerSubtype(Yellow.class)
-                        .registerSubtype(Blue.class)
-                        .registerSubtype(Violet.class);
-
-        RuntimeTypeAdapterFactory<GameBoardInterface> adapterGameBoard =
-                RuntimeTypeAdapterFactory
-                        .of(GameBoardInterface.class)
-                        .registerSubtype(GameBoard.class)
-                        .registerSubtype(ProductionGameBoardDouble.class)
-                        .registerSubtype(ProductionGameBoard.class)
-                        .registerSubtype(WhiteMarbleGameBoard.class)
-                        .registerSubtype(WhiteMarbleGameBoardDouble.class)
-                        .registerSubtype(ReductionGameBoard.class)
-                        .registerSubtype(ReductionGameBoardDouble.class);
-
-
-        RuntimeTypeAdapterFactory<Requirements> adapterRequirements =
-                RuntimeTypeAdapterFactory
-                        .of(Requirements.class)
-                        .registerSubtype(ResourceRequirement.class)
-                        .registerSubtype(SecondLevelRequirement.class)
-                        .registerSubtype(ThreeFlagsTwoColourRequirement.class)
-                        .registerSubtype(TwoFlagsTwoColourRequirement.class);
-
-        RuntimeTypeAdapterFactory<LeaderCard> adapterLeader =
-                RuntimeTypeAdapterFactory
-                        .of(LeaderCard.class)
-                        .registerSubtype(LeaderCardMarble.class)
-                        .registerSubtype(LeaderCardProduction.class)
-                        .registerSubtype(LeaderCardReduction.class)
-                        .registerSubtype(LeaderCardStorage.class);
+    public static Gson DeckActionMarkerSaving(){
 
 
         RuntimeTypeAdapterFactory<ActionMarker> adapterAction =
@@ -178,11 +134,6 @@ public class DeckActionMarker extends Observable {
 
         Gson gson=new GsonBuilder().setPrettyPrinting()
                 .registerTypeAdapterFactory(adapterAction)
-                .registerTypeAdapterFactory(adapterGameBoard)
-                .registerTypeAdapterFactory(adapterStorage)
-                .registerTypeAdapterFactory(adapterColour)
-                .registerTypeAdapterFactory(adapterRequirements)
-                .registerTypeAdapterFactory(adapterLeader)
                 .create();
 
         return gson;

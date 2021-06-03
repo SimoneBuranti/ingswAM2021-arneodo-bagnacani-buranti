@@ -567,7 +567,7 @@ public class GameSolitaire extends Game {
      * save information for a possible restart game
      */
     public void RestoreActionMarker() throws IOException, InterruptedException {
-        Gson gson=new Gson();
+        Gson gson= DeckActionMarker.DeckActionMarkerSaving();
         ActionMarker[] servList;
         try {
             servList= gson.fromJson(new FileReader("src/main/resources/fileConfiguration/DeckActionMarker.json"),ActionMarker[].class);
