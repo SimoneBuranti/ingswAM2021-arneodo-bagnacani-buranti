@@ -357,8 +357,8 @@ public class MainFrameMultiPlayer extends MainFrame {
 
     }
 
-    public void getStrongBox(Map<Resource,Integer> map){
-        this.gameboardPanel.strongboxPanel.updateStrongBox(map);
+    public void updateStrongBox(Map<Resource,Integer> map){
+        this.gameboardPanel.updateStrongBox(map);
 
     }
 

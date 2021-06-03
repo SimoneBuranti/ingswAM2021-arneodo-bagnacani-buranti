@@ -63,7 +63,7 @@ public class LeaderCardsPanel extends JPanel {
                 }
             } else {
                 new LightLeaderCards();
-                if (firstCard != null) {
+                if (firstCard == null) {
                     firstCard = new LeaderCardActivatedLabel(leaderCards.get(0).getKey(), 0);
                     firstCard.setBounds(0, 0, 150, 278);
                     if(LightLeaderCards.leaderCardByKey(firstCard.keyOfLeaderCard()) instanceof LeaderCardStorage){
@@ -156,8 +156,9 @@ public class LeaderCardsPanel extends JPanel {
 
         firstActivateButton.addActionListener( e -> {
             try {
-                if(firstCard.getIndex() == 0)
+                if(firstCard.getIndex() == 0) {
                     this.gui.notifyObserver(new ExtraProductionOnMessage(firstResourceProduction.getResource(), leaderCardResource(0)));
+                }
                 else
                     this.gui.notifyObserver(new DoubleProductionOnMessage(firstResourceProduction.getResource(), leaderCardResource(0)));
             } catch (IOException ioException) {
@@ -187,7 +188,7 @@ public class LeaderCardsPanel extends JPanel {
 
         secondActivateButton.addActionListener( e -> {
             try {
-                if(firstCard.getIndex() == 0)
+                if(secondCard.getIndex() == 0)
                     this.gui.notifyObserver(new ExtraProductionOnMessage(secondResourceProduction.getResource(), leaderCardResource(1)));
                 else
                     this.gui.notifyObserver(new DoubleProductionOnMessage(secondResourceProduction.getResource(), leaderCardResource(1)));
@@ -247,7 +248,7 @@ public class LeaderCardsPanel extends JPanel {
     }
 
     public void addToStorageExtra(int position, Resource resource, int quantity){
-        if(position == 0){
+        if(firstCard instanceof LeaderCardActivatedLabel && position == firstCard.getIndex()){
             for(ResourceLabel resourceLabel : firstResources){
                 this.remove(resourceLabel);
             }
@@ -267,10 +268,12 @@ public class LeaderCardsPanel extends JPanel {
                 secondLabel.setBounds(85, 250, 40, 40);
                 this.add(secondLabel);
             }
-        }else{
+        }else if(secondCard instanceof LeaderCardActivatedLabel && position == secondCard.getIndex()){
+
             for(ResourceLabel resourceLabel : secondResources){
                 this.remove(resourceLabel);
             }
+
             if(quantity == 1){
                 ResourceLabel firstLabel = new ResourceLabel(190, 250, 40, resource);
                 secondResources.add(firstLabel);

@@ -458,7 +458,6 @@ public class LightGame extends ViewObservable {
     public boolean isEachDeckConfig() {
         for(LightDeckProductionCard deck : listOfDeck){
             if(!deck.isConfig()) {
-                System.out.println(deck.getNumberDeck());
                 return false;
             }
         }

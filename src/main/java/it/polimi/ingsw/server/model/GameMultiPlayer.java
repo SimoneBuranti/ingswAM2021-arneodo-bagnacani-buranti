@@ -723,13 +723,16 @@ public class GameMultiPlayer extends Game {
         else{
             ArrayList<Integer> needForLeader = new ArrayList<>();
             ArrayList<Integer> needForLeader2 = new ArrayList<>();
-            notifyOnlyOneSpecificObserver(new StorageConfigMessage(p.getGameBoardOfPlayer().getStorageOfGameBoard().getStorageResource()), p.getNickName());
-            notifyOnlyOneSpecificObserver(new StrongboxConfigMessage(p.getGameBoardOfPlayer().getStrongboxOfGameBoard().getStrongBoxResource()), p.getNickName());
             for (int i=0; i<p.getGameBoardOfPlayer().getLeaderCards().size();i++)
                 needForLeader.add(p.getGameBoardOfPlayer().getLeaderCards().get(i).getKey());
             for (int i=0; i<p.getGameBoardOfPlayer().getLeaderCardsActivated().size();i++)
                 needForLeader2.add(p.getGameBoardOfPlayer().getLeaderCardsActivated().get(i).getKey());
             notifyOnlyOneSpecificObserver(new LeadercardconfigMessage(needForLeader,needForLeader2), p.getNickName());
+
+
+            notifyOnlyOneSpecificObserver(new StorageConfigMessage(p.getGameBoardOfPlayer().getStorageOfGameBoard().getStorageResource()), p.getNickName());
+            notifyOnlyOneSpecificObserver(new StrongboxConfigMessage(p.getGameBoardOfPlayer().getStrongboxOfGameBoard().getStrongBoxResource()), p.getNickName());
+
             notifyOnlyOneSpecificObserver(new FaithConfigMessage(p.getGameBoardOfPlayer().getIndicator(),p.getGameBoardOfPlayer().getCurrCall()), p.getNickName());
             notifyOnlyOneSpecificObserver(new PapalCardsConfigMessage(p.getPapalCards()), p.getNickName());
 

@@ -22,7 +22,7 @@ public class StrongboxConfigMessage extends Message {
 
 
     public StrongboxConfigMessage(Map<Resource, Integer> strongBoxResource) {
-        strongBoxResource=new HashMap<>();
+        this.strongBoxResource=new HashMap<>();
         this.strongBoxResource=strongBoxResource;
     }
 

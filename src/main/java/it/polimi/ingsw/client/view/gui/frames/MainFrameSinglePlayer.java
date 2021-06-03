@@ -276,7 +276,7 @@ public class MainFrameSinglePlayer extends MainFrame{
         System.out.println("hey lo chiamo da qua0"+Thread.currentThread().getName());
     }
 
-    public void getStrongBox(Map<Resource,Integer> map){
+    public void updateStrongBox(Map<Resource,Integer> map){
         this.lorenzoGameboardPanel.updateStrongBox(map);
 
     }

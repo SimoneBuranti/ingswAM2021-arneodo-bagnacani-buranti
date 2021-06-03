@@ -596,7 +596,7 @@ public class ViewController implements MessageVisitor, ViewObserver {
     @Override
     public void visit(StorageExtraConfig msg) {
         try {
-            game.addStrongbox(msg.getResourceProduction(), 2-msg.getQuantityIn());
+            game.addStorage(msg.getResourceProduction(), 2-msg.getQuantityIn());
         } catch (IOException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
@@ -607,7 +607,7 @@ public class ViewController implements MessageVisitor, ViewObserver {
     @Override
     public void visit(StorageExtraDoubleConfig msg) {
         try {
-            game.addStrongbox(msg.getResourceProduction(), 2-msg.getQuantityIn());
+            game.addStorage(msg.getResourceProduction(), 2-msg.getQuantityIn());
         } catch (IOException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {

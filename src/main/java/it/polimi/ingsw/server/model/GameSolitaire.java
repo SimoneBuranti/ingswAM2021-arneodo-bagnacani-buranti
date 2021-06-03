@@ -16,6 +16,7 @@ import it.polimi.ingsw.server.model.exceptions.*;
 import it.polimi.ingsw.server.model.gameBoard.GameBoardInterface;
 import it.polimi.ingsw.server.model.leaderCards.DeckLeaderCard;
 import it.polimi.ingsw.server.model.leaderCards.LeaderCardProduction;
+import it.polimi.ingsw.server.model.leaderCards.LeaderCardStorage;
 import it.polimi.ingsw.server.model.players.Player;
 import it.polimi.ingsw.server.model.players.PlayerFirst;
 import it.polimi.ingsw.server.model.productionCards.DeckProductionCard;
@@ -591,10 +592,6 @@ public class GameSolitaire extends Game {
             isFirstTurn = false;
             ArrayList<Integer> needForLeader = new ArrayList<>();
             ArrayList<Integer> needForLeader2 = new ArrayList<>();
-            notifyObserver(new StorageConfigMessage(player.getGameBoardOfPlayer().getStorageOfGameBoard().getStorageResource()));
-
-            notifyObserver(new StrongboxConfigMessage(player.getGameBoardOfPlayer().getStrongboxOfGameBoard().getStrongBoxResource()));
-
 
             for (int i=0; i<player.getGameBoardOfPlayer().getLeaderCards().size();i++)
                 needForLeader.add(player.getGameBoardOfPlayer().getLeaderCards().get(i).getKey());
@@ -602,6 +599,11 @@ public class GameSolitaire extends Game {
             for (int i=0; i<player.getGameBoardOfPlayer().getLeaderCardsActivated().size();i++)
                 needForLeader2.add(player.getGameBoardOfPlayer().getLeaderCardsActivated().get(i).getKey());
             notifyObserver(new LeadercardconfigMessage(needForLeader,needForLeader2));
+
+            notifyObserver(new StorageConfigMessage(player.getGameBoardOfPlayer().getStorageOfGameBoard().getStorageResource()));
+
+            notifyObserver(new StrongboxConfigMessage(player.getGameBoardOfPlayer().getStrongboxOfGameBoard().getStrongBoxResource()));
+
 
 
             notifyObserver(new FaithConfigMessage(player.getGameBoardOfPlayer().getIndicator(),player.getGameBoardOfPlayer().getCurrCall()));
@@ -619,15 +621,14 @@ public class GameSolitaire extends Game {
 
             if(player.getGameBoardOfPlayer().getLeaderCardsActivated().size()>0){
 
-                if(player.getGameBoardOfPlayer().getLeaderCardsActivated().get(0) instanceof LeaderCardProduction)
-
-                    notifyObserver(new StorageExtraConfig(player.getGameBoardOfPlayer().getStorageOfGameBoard().getNumExtraFirstAvailable(),((LeaderCardProduction) player.getGameBoardOfPlayer().getLeaderCardsActivated().get(0)).getResourceProduction()));
-
+                if(player.getGameBoardOfPlayer().getLeaderCardsActivated().get(0) instanceof LeaderCardStorage){
+                    notifyObserver(new StorageExtraConfig(player.getGameBoardOfPlayer().getStorageOfGameBoard().getNumExtraFirstAvailable(),player.getGameBoardOfPlayer().getLeaderCardsActivated().get(0).getResourceEffect()));
+                }
             }
 
             if(player.getGameBoardOfPlayer().getLeaderCardsActivated().size()>1){
-                if(player.getGameBoardOfPlayer().getLeaderCardsActivated().get(1) instanceof LeaderCardProduction)
-                    notifyObserver(new StorageExtraDoubleConfig(player.getGameBoardOfPlayer().getStorageOfGameBoard().getNumExtraFirstAvailable(),((LeaderCardProduction) player.getGameBoardOfPlayer().getLeaderCardsActivated().get(1)).getResourceProduction()));
+                if(player.getGameBoardOfPlayer().getLeaderCardsActivated().get(1) instanceof LeaderCardStorage)
+                    notifyObserver(new StorageExtraDoubleConfig(player.getGameBoardOfPlayer().getStorageOfGameBoard().getNUmExtraSecondAvailable(),player.getGameBoardOfPlayer().getLeaderCardsActivated().get(1).getResourceEffect()));
             }
 
         }

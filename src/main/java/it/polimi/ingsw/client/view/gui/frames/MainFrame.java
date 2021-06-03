@@ -143,7 +143,7 @@ public abstract class MainFrame  extends JFrame {
     }
 
 
-    public abstract void getStrongBox(Map<Resource, Integer> map);
+    public abstract void updateStrongBox(Map<Resource, Integer> map);
 
     public abstract void updateFaith(int i);
     public abstract void initLeader(ArrayList<LeaderCard> arrayList, boolean bool);

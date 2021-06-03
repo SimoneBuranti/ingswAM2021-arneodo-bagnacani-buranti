@@ -632,7 +632,7 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
             for(int i = 0; i<activated.size();i++){
                 if (activated.get(i) instanceof LeaderCardStorage){
                     extraTypes.add(activated.get(i).getResourceEffect());
-                    cardPositions.add(viewController.getGame().getIndexActivated(i));
+                    cardPositions.add(i);
                 }
             }
 
@@ -663,7 +663,7 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
     @Override
     public void visit(StrongboxNotification strongboxNotification) {
         SwingUtilities.invokeLater(() -> {
-            mainFrameOfGame.getStrongBox(strongboxNotification.getMap());
+            mainFrameOfGame.updateStrongBox(strongboxNotification.getMap());
             applyChangesTo(mainFrameOfGame);
 
         });
