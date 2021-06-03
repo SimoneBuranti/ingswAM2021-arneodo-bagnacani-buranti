@@ -22,6 +22,7 @@ public class MainFrameMultiPlayer extends MainFrame {
     private GameboardPanel gameboardPanel;
 
     private Font currentPlayerFont = new Font("Helvetica", Font.BOLD, 22);
+    private Font notCurrentPlayerFont = new Font("Helvetica", Font.BOLD, 18);
     private JPanel menuPanel;
     private JMenuBar menuBar;
     private JMenu playerMenu;
@@ -334,6 +335,9 @@ public class MainFrameMultiPlayer extends MainFrame {
             if (nicknames.get(i).getText().equals(nick)) {
                 nicknames.get(i).setForeground(new Color(199, 0, 0));
                 nicknames.get(i).setFont(currentPlayerFont);
+            }else{
+                //nicknames.get(i).setForeground(new Color);
+                nicknames.get(i).setFont(notCurrentPlayerFont);
             }
 
     }

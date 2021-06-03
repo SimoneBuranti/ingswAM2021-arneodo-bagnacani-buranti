@@ -141,13 +141,6 @@ public class ViewController implements MessageVisitor, ViewObserver {
 
     }
 
-    @Override
-    public void visit(ChangeCurrentPlayerMessage msg) {
-        game.setCurrentPlayer(msg.getNickname());
-        view.showChangeCurrent(msg.getNickname());
-    }
-
-
 
     @Override
     public void visit(EndOfTurnMessage msg) {
@@ -198,6 +191,7 @@ public class ViewController implements MessageVisitor, ViewObserver {
 
     @Override
     public void visit(UpdateInitBooleanMessage msg) {
+        System.out.println("Leader " + msg.isInitLeader()+ " Resources" + msg.isInitResource());
         game.setInitResource(msg.isInitResource());
         game.setInitLeader(msg.isInitLeader());
         view.checkThreadRestart();
@@ -663,7 +657,8 @@ public class ViewController implements MessageVisitor, ViewObserver {
 
     @Override
     public void visit(ChangeTurnMessage msg) {
-
+        game.setCurrentPlayer(msg.getNickName());
+        view.showChangeCurrent(msg.getNickName());
     }
 
     @Override

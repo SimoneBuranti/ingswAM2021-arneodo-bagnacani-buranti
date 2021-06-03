@@ -122,9 +122,6 @@ public abstract class Message{
             case ENDOFTURN:
                 return gson.fromJson(jsonObj, EndOfTurnMessage.class);
 
-            case CHANGECURRENTPLAYER:
-                return gson.fromJson(jsonObj, ChangeCurrentPlayerMessage.class);
-
             case LASTTURN:
                 return gson.fromJson(jsonObj, LastTurnMessage.class);
 

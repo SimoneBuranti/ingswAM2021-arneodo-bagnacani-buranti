@@ -113,9 +113,6 @@ public class ClientController implements MessageVisitor {
     @Override
     public void visit(RestartQuestionMessage msg) { }
 
-    @Override
-    public void visit(ChangeCurrentPlayerMessage msg) {}
-
 
     @Override
     public void visit(EndOfTurnMessage msg) throws IOException, InterruptedException {

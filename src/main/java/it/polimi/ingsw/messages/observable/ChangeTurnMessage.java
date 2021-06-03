@@ -24,4 +24,7 @@ public class ChangeTurnMessage extends Message {
         v.visit(this);
     }
 
+    public String getNickName() {
+        return nickName;
+    }
 }

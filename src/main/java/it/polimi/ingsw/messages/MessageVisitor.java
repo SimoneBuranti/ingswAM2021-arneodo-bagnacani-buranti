@@ -21,7 +21,6 @@ public interface MessageVisitor {
 
     //Server to client
     void visit(RestartQuestionMessage msg) throws IOException, InterruptedException;
-    void visit(ChangeCurrentPlayerMessage msg);
 
     void visit(EndOfTurnMessage msg) throws IOException, InterruptedException;
     void visit(LastTurnMessage msg);

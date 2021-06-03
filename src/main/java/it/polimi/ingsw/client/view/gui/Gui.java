@@ -293,6 +293,7 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
     public void showChangeCurrent(String currentNick) {
         SwingUtilities.invokeLater(() -> {
             mainFrameOfGame.setCurrentPlayer(currentNick);
+            disableAllButtons();
             applyChangesTo(mainFrameOfGame);
 
         });
@@ -453,7 +454,7 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
                 switchToGameMode();
                 isRestartMode = false;
             }
-            System.out.println("sono dentro all'edt e ho istanziato cazzi e mazzi");
+            //System.out.println("sono dentro all'edt e ho istanziato cazzi e mazzi");
 
         });}
 
@@ -532,7 +533,6 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
         if (viewController.getGame().isInitResource()){
             isRestartMode = true;
         }
-        System.out.println("sono dentro check trhead restart");
     }
 
     @Override
@@ -596,9 +596,7 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
     @Override
     public void visit(DeckListNotification deckListNotification) {
-        //System.out.println("decklist notific");
         SwingUtilities.invokeLater(() -> {
-            System.out.println("sono qui deckListNotification");
             mainFrameOfGame.getProductionDeckFrame().addDecks(deckListNotification.getListOfFirstCard());
             applyChangesTo(mainFrameOfGame);
 
@@ -608,7 +606,6 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
     @Override
     public void visit(GameboardListNotification gameboardListNotification) {
         SwingUtilities.invokeLater(() -> {
-            System.out.println("sono qui gameboardListNotification");
             mainFrameOfGame.updateProductionCard(gameboardListNotification);
             applyChangesTo(mainFrameOfGame);
 
@@ -689,7 +686,6 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
     @Override
     public void visit(MarketNotification marketNotification) {
         SwingUtilities.invokeLater(() -> {
-            System.out.println("sono qui marketNotification");
             mainFrameOfGame.getMarketFrame().setMarbleGrid(marketNotification.getList());
             applyChangesTo(mainFrameOfGame);
         });
@@ -699,7 +695,6 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
     @Override
     public void visit(ExtraMarketNotification extraMarketNotification) {
         SwingUtilities.invokeLater(() -> {
-            System.out.println("sono qui extraMarketNotification");
             mainFrameOfGame.getMarketFrame().setMarbleExtra(extraMarketNotification.getMarble());
             applyChangesTo(mainFrameOfGame);
 
@@ -710,7 +705,6 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
     @Override
     public void visit(FaithPathNotification faithPathNotification) {
         SwingUtilities.invokeLater(() -> {
-            System.out.println("sono qui faithPathNotification");
         if(!faithPathNotification.isLorenzo())
             mainFrameOfGame.updateFaith(faithPathNotification.getI());
         else
@@ -723,7 +717,6 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
     @Override
     public void visit(InitLeaderNotification initLeaderNotification) {
         SwingUtilities.invokeLater(() -> {
-            System.out.println("sono qui initLeaderNotification");
             mainFrameOfGame.initLeader(initLeaderNotification.getListOfFirstCard(), initLeaderNotification.isActivated());
             applyChangesTo(mainFrameOfGame);
 
@@ -753,7 +746,6 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
     @Override
     public void visit(PapalCardsConfigNotification papalCardsConfigNotification) {
         SwingUtilities.invokeLater(() -> {
-            System.out.println("sono qui papalCardsConfigNotification");
             for (int i=0; i<3;i++){
                 if(papalCardsConfigNotification.getPapalCards()[i] == 0){
                     mainFrameOfGame.removePapalCard(i);
@@ -880,6 +872,14 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
 
 
+    }
+
+    public void disableAllButtons(){
+        mainFrameOfGame.disableMarketButtons();
+        mainFrameOfGame.disableDeckButtons();
+        mainFrameOfGame.disableProductionButtons();
+        mainFrameOfGame.disableLeaderButtons();
+        applyChangesTo(mainFrameOfGame);
     }
 
 
