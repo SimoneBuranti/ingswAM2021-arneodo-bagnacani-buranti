@@ -95,16 +95,18 @@ public class MainFrameMultiPlayer extends MainFrame {
         this.turnPanel = new JPanel();
         int turnPanelWidth = 0;
         Font f = new Font("Helvetica", Font.BOLD, 18);
+
         turnPanel.setBackground(new Color(0xeaf1f7));
         turnPanel.setLayout(new GridLayout(1, nicknames.size(), 0, 0));
+
         for (int i = 0; i < nicknames.size(); i++) {
             turnPanelWidth = turnPanelWidth + nicknames.get(i).getText().length();
             nicknames.get(i).setFont(f);
             nicknames.get(i).setSize(new Dimension(nicknames.get(i).getText().length() * letterOffset, buttonHeight));
             turnPanel.add(nicknames.get(i));
         }
-        turnPanelWidth *= letterOffset;
-        turnPanel.setPreferredSize(new Dimension(turnPanelWidth, buttonHeight));
+        turnPanelWidth = turnPanelWidth*letterOffset;
+        turnPanel.setPreferredSize(new Dimension(turnPanelWidth+50*nicknames.size(), buttonHeight));
 
         blankLabels = new JLabel[2];
         for (int i = 0; i < blankLabels.length; i++) {
