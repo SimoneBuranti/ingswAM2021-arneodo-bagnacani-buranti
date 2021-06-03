@@ -1,5 +1,7 @@
 package it.polimi.ingsw.client.ligtModelNotification;
 
+import it.polimi.ingsw.messages.observable.PapalCardsConfigMessage;
+
 public interface NotificatorVisitor {
 
     void visit(DeckListNotification deckListNotification);
@@ -25,4 +27,6 @@ public interface NotificatorVisitor {
     void visit(ActivateLeaderNotification activateLeaderNotification);
 
     void visit(DiscardLeaderNotification discardLeaderNotification);
+
+    void visit(PapalCardsConfigNotification papalCardsConfigNotification);
 }

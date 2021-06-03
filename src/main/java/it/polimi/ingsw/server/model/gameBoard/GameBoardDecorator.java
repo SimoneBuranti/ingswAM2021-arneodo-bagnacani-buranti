@@ -257,6 +257,11 @@ public abstract class GameBoardDecorator extends GameBoardInterface {
     }
 
     @Override
+    public int[] getPapalCards(){
+        return gameBoard.getPapalCards();
+    }
+
+    @Override
     public ProductionCard[][] getDevelopmentBoard(){
         return gameBoard.getDevelopmentBoard(); }
 

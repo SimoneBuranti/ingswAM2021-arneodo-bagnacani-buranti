@@ -606,6 +606,7 @@ public class GameSolitaire extends Game {
 
             notifyObserver(new FaithConfigMessage(player.getGameBoardOfPlayer().getIndicator(),player.getGameBoardOfPlayer().getCurrCall()));
 
+            notifyObserver(new PapalCardsConfigMessage(player.getPapalCards()));
             int[][] list = new int[3][3];
             for (int i=0; i<3;i++){
                 for (int j=0; j<3;j++){

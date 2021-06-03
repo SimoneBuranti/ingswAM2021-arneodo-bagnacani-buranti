@@ -300,6 +300,9 @@ public abstract class Message{
             case CHANGETURN:
                 return gson.fromJson(jsonObj, ChangeTurnMessage.class);
 
+            case PAPALCARDSCONFIG:
+                return gson.fromJson(jsonObj, PapalCardsConfigMessage.class);
+
             default:
                 throw new IllegalArgumentException("Invalid topic " + msgTopicString);
         }

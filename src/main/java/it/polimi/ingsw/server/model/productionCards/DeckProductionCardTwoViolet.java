@@ -127,6 +127,7 @@ public class DeckProductionCardTwoViolet extends DeckProductionCard {
 
     public DeckProductionCardTwoViolet(ProductionCard[] deckRecover) throws IOException, InterruptedException {
         this.deck = new ArrayList<>();
+        deckNumber = 8;
         int l=deckRecover.length;
         for(int i=0; i < l; i++)
             deck.add(deckRecover[i]);

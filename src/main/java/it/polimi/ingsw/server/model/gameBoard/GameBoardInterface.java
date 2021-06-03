@@ -111,6 +111,8 @@ public abstract class GameBoardInterface {
 
     public abstract int getCurrCall();
 
+    public abstract int[] getPapalCards();
+
     public abstract ProductionCard[][] getDevelopmentBoard();
     public abstract ProductionCard getDevelopmentBoardCell(int i, int j);
 }

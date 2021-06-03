@@ -129,6 +129,7 @@ public class DeckProductionCardThreeYellow extends DeckProductionCard {
 
     public DeckProductionCardThreeYellow(ProductionCard[] deckRecover) throws IOException, InterruptedException {
         this.deck = new ArrayList<>();
+        deckNumber = 3;
         int l=deckRecover.length;
         for(int i=0; i < l; i++)
             deck.add(deckRecover[i]);

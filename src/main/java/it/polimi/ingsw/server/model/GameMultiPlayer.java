@@ -731,6 +731,7 @@ public class GameMultiPlayer extends Game {
                 needForLeader2.add(p.getGameBoardOfPlayer().getLeaderCardsActivated().get(i).getKey());
             notifyOnlyOneSpecificObserver(new LeadercardconfigMessage(needForLeader,needForLeader2), p.getNickName());
             notifyOnlyOneSpecificObserver(new FaithConfigMessage(p.getGameBoardOfPlayer().getIndicator(),p.getGameBoardOfPlayer().getCurrCall()), p.getNickName());
+            notifyOnlyOneSpecificObserver(new PapalCardsConfigMessage(p.getPapalCards()), p.getNickName());
 
             int[][] list = new int[3][3];
             for (int i=0; i<3;i++){

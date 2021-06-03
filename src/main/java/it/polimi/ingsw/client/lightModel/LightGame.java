@@ -308,7 +308,11 @@ public class LightGame extends ViewObservable {
 
     }
 
-    public void setPapalCards(int papalCard){
+    public void setPapalCard(int papalCard){
+
+    }
+
+    public void setPapalCards(int[] papalCards){
 
     }
 
@@ -453,8 +457,10 @@ public class LightGame extends ViewObservable {
 
     public boolean isEachDeckConfig() {
         for(LightDeckProductionCard deck : listOfDeck){
-            if(!deck.isConfig())
+            if(!deck.isConfig()) {
+                System.out.println(deck.getNumberDeck());
                 return false;
+            }
         }
 
         return true;

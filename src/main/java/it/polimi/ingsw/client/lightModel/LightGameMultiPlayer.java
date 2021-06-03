@@ -120,8 +120,19 @@ public class LightGameMultiPlayer extends LightGame{
     }
 
     @Override
-    public void setPapalCards(int papalCard){
+    public void setPapalCard(int papalCard){
        gameBoardOfPlayer.setPapal(papalCard);
+    }
+
+    public void setPapalCards(int[] papalCards){
+        gameBoardOfPlayer.setPapalCards(papalCards);
+        try {
+            notifyObserver(new PapalCardsConfigNotification(gameBoardOfPlayer.getPapalCards()).serialize());
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public int getPapalCard(int currCall){

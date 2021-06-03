@@ -131,4 +131,6 @@ public interface MessageVisitor {
     void visit(PositionMessage positionMessage);
 
     void visit(BaseProductionErrorMessage baseProductionErrorMessage);
+
+    void visit(PapalCardsConfigMessage papalCardsConfigMessage);
 }

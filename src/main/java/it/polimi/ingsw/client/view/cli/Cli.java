@@ -227,6 +227,17 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
         //gui method
     }
 
+    @Override
+    public void visit(PapalCardsConfigNotification papalCardsConfigNotification) {
+        for (int i=0; i<3;i++){
+            if(papalCardsConfigNotification.getPapalCards()[i] == 0){
+                System.out.println("you didn't get the papal favor card " + i+1);
+            }else if (papalCardsConfigNotification.getPapalCards()[i] == 1){
+                System.out.println("you've got the papal favor card " + (i+1) + " !");
+            }
+        }
+    }
+
 
     @Override
     public void notifyError(Message msg) {

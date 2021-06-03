@@ -337,4 +337,7 @@ public class LightGameBoard {
     }
 
 
+    public void setPapalCards(int[] papalCards) {
+        faithPath.setPapalCards(papalCards);
+    }
 }

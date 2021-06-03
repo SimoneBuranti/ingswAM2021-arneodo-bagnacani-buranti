@@ -185,6 +185,17 @@ public class LightGameSolitaire extends LightGame{
         return gameBoardOfPlayer.getPapalCard(currCall);
     }
 
+    public void setPapalCards(int[] papalCards){
+        gameBoardOfPlayer.setPapalCards(papalCards);
+        try {
+            notifyObserver(new PapalCardsConfigNotification(gameBoardOfPlayer.getPapalCards()).serialize());
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
     public int[] getPapalCards(){
         return gameBoardOfPlayer.getPapalCards();
     }
@@ -237,7 +248,7 @@ public class LightGameSolitaire extends LightGame{
     }
 
     @Override
-    public void setPapalCards(int papalCard){
+    public void setPapalCard(int papalCard){
         gameBoardOfPlayer.setPapal(papalCard);
     }
 

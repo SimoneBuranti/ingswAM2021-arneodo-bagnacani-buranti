@@ -89,4 +89,12 @@ public class LightFaithPath {
     public int[] getPapalCards(){
         return papalCards;
     }
+
+    public void setPapalCards(int[] papalCards) {
+        int i = 0;
+        while(i < 3){
+            this.papalCards[i] = papalCards[i];
+            i++;
+        }
+    }
 }

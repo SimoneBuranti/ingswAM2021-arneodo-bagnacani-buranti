@@ -700,6 +700,9 @@ public class  GameBoard extends GameBoardInterface{
         return faithPathOfGameBoard.getCurrCall();
     }
 
+    public int[] getPapalCards(){
+        return faithPathOfGameBoard.getPapalCards();
+    }
 
     public ProductionCard[][] getDevelopmentBoard(){
         return developmentBoard;

@@ -177,6 +177,11 @@ public class ClientController implements MessageVisitor {
 
     }
 
+    @Override
+    public void visit(PapalCardsConfigMessage papalCardsConfigMessage) {
+
+    }
+
     //***********************************************************************************************************
 
 

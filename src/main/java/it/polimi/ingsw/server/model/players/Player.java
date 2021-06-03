@@ -520,4 +520,8 @@ public class Player {
     public void setInitResource(boolean initResource) {
         this.initResource = initResource;
     }
+
+    public int[] getPapalCards(){
+        return gameBoardOfPlayer.getPapalCards();
+    }
 }

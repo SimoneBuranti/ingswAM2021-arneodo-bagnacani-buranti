@@ -191,7 +191,7 @@ public class ViewController implements MessageVisitor, ViewObserver {
     @Override
     public void visit(SetPapalsMessage msg) {
 
-        game.setPapalCards(msg.getPapalCard());
+        game.setPapalCard(msg.getPapalCard());
 
         view.showCallForCouncil(msg.getNickname(), msg.getPapalCard());
     }
@@ -226,6 +226,11 @@ public class ViewController implements MessageVisitor, ViewObserver {
     @Override
     public void visit(BaseProductionErrorMessage msg) {
         view.notifyError(msg);
+    }
+
+    @Override
+    public void visit(PapalCardsConfigMessage papalCardsConfigMessage) {
+        game.setPapalCards(papalCardsConfigMessage.getPapalCards());
     }
 
     @Override
@@ -387,8 +392,9 @@ public class ViewController implements MessageVisitor, ViewObserver {
     @Override
     public void visit(DeckProductionCardConfigMessage msg) throws IOException, InterruptedException {
         game.setDeckProductionCard(msg.getNumberDeck(), msg.getDeck());
-        if(game.isEachDeckConfig())
+        if(game.isEachDeckConfig()) {
             game.configInit();
+        }
 
     }
 
