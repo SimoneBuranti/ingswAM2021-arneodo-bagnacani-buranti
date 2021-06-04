@@ -41,11 +41,11 @@ public class ServerMessagePanel extends JPanel {
     }
 
     public void display(String message){
-
+        int i,cont;
         String line ="";
         boolean end = false;
 
-        for(int i = 0,cont = 0;i<n && cont<message.length();i++,cont++){
+        for(i = 0,cont = 0;i<n && cont<message.length();i++,cont++){
             for (int k =0;k<40 && cont<message.length();k++){
                 line = line + message.charAt(cont);
                 cont++;
@@ -53,6 +53,10 @@ public class ServerMessagePanel extends JPanel {
             cont--;
             this.textLabels[i].setText(line);
             line = "";
+        }
+        line = "";
+        for(;i<n;i++){
+            this.textLabels[i].setText(line);
         }
 
     }

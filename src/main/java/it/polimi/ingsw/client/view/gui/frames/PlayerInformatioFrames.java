@@ -3,6 +3,8 @@ package it.polimi.ingsw.client.view.gui.frames;
 import it.polimi.ingsw.client.ligtModelNotification.GameboardListNotification;
 import it.polimi.ingsw.client.view.ViewController;
 import it.polimi.ingsw.client.view.gui.Gui;
+import it.polimi.ingsw.client.view.gui.PBackground;
+import it.polimi.ingsw.messages.Message;
 import it.polimi.ingsw.messages.ProductionOnMessage;
 import it.polimi.ingsw.messages.observable.ShowAllOfPlayerMessage;
 import it.polimi.ingsw.server.model.Resource;
@@ -14,7 +16,9 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class PlayerInformatioFrames extends JPanel {
+public class PlayerInformatioFrames extends JFrame {
+    protected final static int frameWidth= 1190;
+    protected final static int frameHeight = 600;
     protected static final int gameboardWidth = 800;
     protected static final int gameboardHeight = 572;
     protected static final int faithPathWidth = 800;
@@ -27,7 +31,7 @@ public class PlayerInformatioFrames extends JPanel {
     protected static final int[] psx = {306,460,618};
     protected final static int psy =226;
 
-
+    private PBackground mainPanel;
 
     protected JLayeredPane[] productionSpaces;
     protected BaseProductionPanel baseProductionPanel;
@@ -38,13 +42,26 @@ public class PlayerInformatioFrames extends JPanel {
     protected StrongBoxPanel strongboxPanel;
 
     protected LeaderCardsPanel leaderCardsPanel;
-
+    private String nickName;
 
     protected Image backgroundImage;
 
 
-    public PlayerInformatioFrames(ShowAllOfPlayerMessage msg){
+    public PlayerInformatioFrames(String nickName){
+        super();
 
+        this.nickName = nickName;
+        this.mainPanel = new PBackground();
+        this.mainPanel.setBorder(BorderFactory.createBevelBorder(1,Color.BLACK,Color.DARK_GRAY));
+        this.setAlwaysOnTop(true);
+        this.setDefaultCloseOperation(HIDE_ON_CLOSE);
+        this.setLocation(200,220);
+        this.setResizable(false);
+        this.setLayout(null);
+        this.setSize(frameWidth,frameHeight);
+        this.leaderCardsPanel=new LeaderCardsPanel();
+
+        this.setTitle(this.nickName + "'s Gameboard");
 
         initGameboardPanel();
 
@@ -57,10 +74,12 @@ public class PlayerInformatioFrames extends JPanel {
 
         initStrongBox();
 
-        this.leaderCardsPanel=new LeaderCardsPanel();
 
-        this.setBorder(BorderFactory.createBevelBorder(1,Color.BLACK,Color.DARK_GRAY));
+        this.add(mainPanel);
 
+    }
+
+    public void showOpponent(ShowAllOfPlayerMessage msg){
         updateStorage(msg.getStorage());
 
         updateStrongBox(msg.getStrongBox());
@@ -73,17 +92,32 @@ public class PlayerInformatioFrames extends JPanel {
 
         addToStorageExtraPlayerOpponent(msg.getResource1(),msg.getResource2(),msg.getHowMany1(),msg.getHowMany2());
 
+        visibilityOn();
     }
 
+    public String getNickName(){
+        return this.nickName;
+    }
+
+    public void visibilityOff(){
+        this.setVisible(false);
+    }
+
+    public void visibilityOn(){
+        this.setVisible(true);
+        this.paintComponents(this.getGraphics());
+        this.paintComponents(this.getGraphics());
+    }
 
     public void initGameboardPanel(){
         Image image = Toolkit.getDefaultToolkit().createImage("src/main/resources/resources/board/Masters of Renaissance_PlayerBoard (11_2020)-1.png");
         this.backgroundImage = image.getScaledInstance(gameboardWidth,gameboardHeight,0);
 
-        this.setSize(gameboardWidth,gameboardHeight);
-        this.setBounds(0,0,gameboardWidth,gameboardHeight);
-        this.setLayout(null);
-        this.setVisible(true);
+        this.mainPanel.setSize(800,gameboardHeight);
+        this.mainPanel.setBounds(0,0,gameboardWidth,gameboardHeight);
+        this.mainPanel.setLayout(null);
+        this.mainPanel.setVisible(true);
+        this.mainPanel.setImage(backgroundImage);
     }
 
     public void initProductionSpaces(){
@@ -98,7 +132,7 @@ public class PlayerInformatioFrames extends JPanel {
 
             //productionSpaces[i].setBackground(Color.WHITE);
             productionSpaces[i].setOpaque(false);
-            add(productionSpaces[i]);
+            this.mainPanel.add(productionSpaces[i]);
 
         }
 
@@ -132,12 +166,12 @@ public class PlayerInformatioFrames extends JPanel {
     private void initStorage() {
         this.storagePanel = new StoragePanel();
 
-        this.add(storagePanel);
+        this.mainPanel.add(storagePanel);
     }
 
     private void initStrongBox() {
         this.strongboxPanel = new StrongBoxPanel();
-        this.add(strongboxPanel);
+        this.mainPanel.add(strongboxPanel);
     }
 
     private void initFaithPathPane() {
@@ -145,7 +179,7 @@ public class PlayerInformatioFrames extends JPanel {
         faithPathPane.setOpaque(false);
         faithPathPane.setSize(faithPathWidth,faithPathHeight);
         faithPathPane.setBounds(0,0,faithPathWidth,faithPathHeight);
-        this.add(faithPathPane);
+        this.mainPanel.add(faithPathPane);
     }
 
 
@@ -154,11 +188,7 @@ public class PlayerInformatioFrames extends JPanel {
         this.storagePanel.updateStorage(newStorage);
     }
 
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        g.drawImage(backgroundImage, 0, 0, null);
-    }
+
 
     public void updateProductionSpaces(GameboardListNotification gameboardListNotification){
         initProductionSpaces();
@@ -205,4 +235,6 @@ public class PlayerInformatioFrames extends JPanel {
         leaderCardsPanel.addToStorageExtraPlayerOpponent(resource1,resource2,howMany1,howMany2);
 
     }
+
+
 }

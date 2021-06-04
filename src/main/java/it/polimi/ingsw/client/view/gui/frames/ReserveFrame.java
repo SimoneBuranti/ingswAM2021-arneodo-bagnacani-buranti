@@ -45,6 +45,8 @@ public class ReserveFrame extends JFrame {
     public void changeVisibility(){
         this.visible = !visible;
         this.setVisible(visible);
+        this.paintComponents(this.getGraphics());
+        this.paintComponents(this.getGraphics());
     };
 
     public void updateReserve(Map<Resource,Integer> reserve){

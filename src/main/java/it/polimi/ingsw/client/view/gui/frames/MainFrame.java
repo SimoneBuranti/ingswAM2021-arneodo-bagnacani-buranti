@@ -94,6 +94,9 @@ public abstract class MainFrame  extends JFrame {
         this.add(navigationBar, BorderLayout.NORTH);
         this.add(mainPanel);
 
+        this.paintComponents(this.getGraphics());
+        this.paintComponents(this.getGraphics());
+
     }
 
 

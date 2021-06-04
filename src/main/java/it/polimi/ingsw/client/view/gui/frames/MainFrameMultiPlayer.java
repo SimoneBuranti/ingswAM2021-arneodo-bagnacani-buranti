@@ -2,6 +2,7 @@ package it.polimi.ingsw.client.view.gui.frames;
 
 import it.polimi.ingsw.client.ligtModelNotification.GameboardListNotification;
 import it.polimi.ingsw.client.view.gui.*;
+import it.polimi.ingsw.client.view.gui.listeners.OpponentItemListener;
 import it.polimi.ingsw.messages.EndOfTurnMessage;
 import it.polimi.ingsw.messages.KeepResourcesMessage;
 import it.polimi.ingsw.messages.Message;
@@ -35,7 +36,7 @@ public class MainFrameMultiPlayer extends MainFrame {
         super(title, gui);
         this.gui = gui;
 
-        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocation(475, 208);
         this.setSize(820, 420);
 
@@ -339,6 +340,7 @@ public class MainFrameMultiPlayer extends MainFrame {
                 nicknames.get(i).setFont(currentPlayerFont);
             }else{
                 //nicknames.get(i).setForeground(new Color);
+                nicknames.get(i).setForeground(Color.BLACK);
                 nicknames.get(i).setFont(notCurrentPlayerFont);
             }
 
@@ -347,12 +349,18 @@ public class MainFrameMultiPlayer extends MainFrame {
         this.players = new ArrayList<>();
         this.nicknames = new ArrayList<>();
         for (int i = 0; i < players.size(); i++) {
-
-            this.players.add(new JMenuItem(players.get(i)));
-            this.playerMenu.add(this.players.get(i));
+            if (!players.get(i).equals(gui.getViewController().getNickName())){
+                JMenuItem newPlayerItem = new JMenuItem(players.get(i));
+                newPlayerItem.addActionListener(new OpponentItemListener(gui.getViewController(),i));
+                System.out.println("in teoria dovrei aver messo il listener");
+                this.players.add(newPlayerItem);
+            }
             this.nicknames.add(new JLabel(players.get(i)));
             this.nicknames.get(i).setHorizontalAlignment(SwingConstants.CENTER);
             this.nicknames.get(i).setVerticalAlignment(SwingConstants.CENTER);
+        }
+        for(int i = 0; i<this.players.size();i++){
+            this.playerMenu.add(this.players.get(i));
         }
         initTurnPanel();
     }
@@ -420,10 +428,10 @@ public class MainFrameMultiPlayer extends MainFrame {
         this.gameboardPanel.removePapalCard(i);
     }
 
-    public void showAllOfPlayer(ShowAllOfPlayerMessage msg){
+    /*public void showAllOfPlayer(ShowAllOfPlayerMessage msg){
         gameboardPanel.showAllOfPlayer(msg);
 
-    }
+    }*/
 
 
 

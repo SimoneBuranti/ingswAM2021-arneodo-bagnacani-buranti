@@ -335,32 +335,23 @@ public class LeaderCardsPanel extends JPanel {
     }
 
     public void addLeaderCardsAsInt(ArrayList<Integer> leaderCards, boolean activated){
-        if(!activated){
-            firstCard = new LeaderCardLabel(leaderCards.get(0),gui,0);
-            firstCard.setBounds(0,0, 150, 278);
-            this.add(firstCard);
-            if(leaderCards.size() == 2) {
-                secondCard = new LeaderCardLabel(leaderCards.get(1),gui,1);
-                secondCard.setBounds(160, 0, 150, 278);
-                this.add(secondCard);
-            }
-        }else {
-            if(firstCard != null){
+        if (leaderCards.size()>0) {
+            if (firstCard != null) {
                 firstCard = new LeaderCardActivatedLabel(leaderCards.get(0), 0);
-                firstCard.setBounds(0,0, 150, 278);
+                firstCard.setBounds(0, 0, 150, 278);
                 this.add(firstCard);
-                if(leaderCards.size() == 2) {
+                if (leaderCards.size() == 2) {
                     secondCard = new LeaderCardActivatedLabel(leaderCards.get(1), 1);
                     secondCard.setBounds(160, 0, 150, 278);
                     this.add(secondCard);
                 }
-            }else{
-                secondCard = new LeaderCardActivatedLabel(leaderCards.get(0),0);
+            } else {
+                secondCard = new LeaderCardActivatedLabel(leaderCards.get(0), 0);
                 secondCard.setBounds(160, 0, 150, 278);
                 this.add(secondCard);
             }
         }
-}
+    }
     public void addToStorageExtraPlayerOpponent(Resource resource1, Resource resource2, int howmany1, int howmany2){
 
             if(howmany1 == 1){

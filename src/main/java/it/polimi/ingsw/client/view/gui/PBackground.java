@@ -19,6 +19,13 @@ public class PBackground extends JPanel {
         setBackground(new Color(0,0,0,0));
     }
 
+    public PBackground() {
+        setOpaque(false);
+    }
+
+    public void setImage(Image background){
+        this.image = background;
+    }
     /**
      * Paint the component
      *

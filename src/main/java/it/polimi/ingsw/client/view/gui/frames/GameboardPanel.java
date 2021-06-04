@@ -365,9 +365,9 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
         baseProductionPanel.disableButton();
     }
 
-    public void showAllOfPlayer(ShowAllOfPlayerMessage msg) {
+    /*public void showAllOfPlayer(ShowAllOfPlayerMessage msg) {
         new PlayerInformatioFrames(msg);
-    }
+    }*/
 
     public void enableBaseProductionButton() {
         baseProductionPanel.enableButton();

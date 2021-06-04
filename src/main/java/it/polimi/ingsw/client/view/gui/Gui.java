@@ -34,7 +34,7 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
     private Boolean isMultiOrNot;
 
-    protected PlayerInformatioFrames playerInformatioFrames;
+    protected PlayerInformatioFrames[] playerInformatioFrames;
 
     private JButton oneButton;
     private JButton twoButton ;
@@ -56,7 +56,6 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
     @Override
     public void startView() {
         SwingUtilities.invokeLater(() -> {
-
 
             mainFrame = new JFrame("Masters Of Renaissance");
             mainFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -205,6 +204,7 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
                 if(nickname.length() > 0){
                         container.remove(textField);
                         container.remove(enterButton);
+                        this.viewController.setNickName(nickname);
                     (new Thread(() -> {
                         sendUsernameResponse(nickname);
                     })).start();
@@ -306,6 +306,7 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
                 mainFrameOfGame.paintComponents(mainFrameOfGame.getGraphics());
                 mainFrameOfGame.paintComponents(mainFrameOfGame.getGraphics());
             }
+
             //applyChangesTo(mainFrameOfGame);
 
         //});
@@ -369,7 +370,10 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
         SwingUtilities.invokeLater(() -> {
             mainFrameOfGame.setPlayers(nickName);
             applyChangesTo(mainFrameOfGame);
-
+            this.playerInformatioFrames = new PlayerInformatioFrames[nickName.size()];
+            for ( int i=0;i<nickName.size();i++){
+                playerInformatioFrames[i] = new PlayerInformatioFrames(nickName.get(i));
+            }
         });
 
     }
@@ -884,7 +888,17 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
 
     public void showPlayerInfo(ShowAllOfPlayerMessage msg){
-        this.playerInformatioFrames= new PlayerInformatioFrames(msg);
+        SwingUtilities.invokeLater(() -> {
+
+            for(PlayerInformatioFrames frame : playerInformatioFrames){
+                if(frame.getNickName().equals(msg.getNickname())){
+                    System.out.println("In teoria ci sono entrato");
+                    frame.showOpponent(msg);
+                }
+
+            }
+            System.out.println("Sono appena uscito dal for di stampa delle informazione del giocatore");
+        });
     }
 
     public void setChosenDeckNumber(int key) {
