@@ -7,6 +7,7 @@ import it.polimi.ingsw.client.view.gui.Gui;
 import it.polimi.ingsw.client.view.gui.frames.IPInitialFrame;
 
 import java.io.IOException;
+import java.util.Scanner;
 
 public class ClientApp {
 
@@ -21,6 +22,9 @@ public class ClientApp {
 
         boolean cliParam = false;
 
+
+
+
      /*   for (String arg : args) {
             if (arg.equals("--cli") || arg.equals("-c")) {
                 cliParam = true;
@@ -29,7 +33,15 @@ public class ClientApp {
         }
 
 
+
+
         if (cliParam) {
+
+            do {
+                Scanner in = new Scanner(System.in);
+                hostName = in.nextLine();
+            } while (!IPInitialFrame.correctHostName(hostName));
+
             View cli = new Cli();
             SocketClient socketClient = new SocketClient(hostName, portNumber, cli );
             cli.startView();
