@@ -300,6 +300,10 @@ public abstract class Message{
             case PAPALCARDSCONFIG:
                 return gson.fromJson(jsonObj, PapalCardsConfigMessage.class);
 
+            case DISCONNECTIONOPPONENT:
+                return gson.fromJson(jsonObj, DisconnectionOpponentMessage.class);
+
+
             default:
                 throw new IllegalArgumentException("Invalid topic " + msgTopicString);
         }

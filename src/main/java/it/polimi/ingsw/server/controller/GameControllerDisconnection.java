@@ -19,7 +19,8 @@ public class GameControllerDisconnection extends GameController {
     }
 
     @Override
-    public void handleMessage(ExitMessage msg, ClientController clientController) throws FileNotFoundException {
+    public void handleMessage(ExitMessage msg, ClientController clientController) throws IOException, InterruptedException {
+
         game.disconnectPlayer(clientController.getNickname());
         server.addClientControllersDisconnected(clientController);
         try {
@@ -32,7 +33,14 @@ public class GameControllerDisconnection extends GameController {
         {
             server.resetInfoPartial();
         }
-    }
+        else{
+            for (int i=0;i< server.getClientController().size(); i++) {
+                for (int j = 0; j < server.getClientControllersDisconnected().size(); j++){
+                    if (!server.getClientController().get(i).equals(clientController) &&
+                            !server.getClientController().get(i).equals(server.getClientControllersDisconnected().get(j))){
+                        server.getClientController().get(i).getClientHandler().sendMessage(new DisconnectionOpponentMessage(clientController.getNickname()));
+                    }} }
+    }}
 
     @Override
     public void handleMessage(NumberPlayerMessage msg, ClientController clientController) throws IOException, InterruptedException {

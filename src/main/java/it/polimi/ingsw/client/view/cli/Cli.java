@@ -242,13 +242,7 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
     @Override
     public void notifyError(Message msg) {
         System.out.println(msg.toString());
-        /*if(msg.getMessageType() == MessageType.ALREADYEXISTINGNICKNAMEERROR || msg.getMessageType() == MessageType.NICKNAMENOTFOUNDERROR){
-            try {
-                askNickname();
-            } catch (IOException | InterruptedException e) {
-                e.printStackTrace();
-            }
-        }*/
+
     }
 
     @Override
@@ -257,23 +251,7 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
         System.out.println("How many players? [1...4]");
 
         changeCommandParser(new HowManyPlayerParser());
-        /*while (input.hasNext()){
-            if(input.hasNextInt()) {
-                nOfPlayers = input.nextInt();
-                if (nOfPlayers > 0 && nOfPlayers < 5) {
-                    notifyObserver(new NumberPlayerMessage(nOfPlayers));
-                    if (nOfPlayers > 1)
-                        System.out.println("Please wait for the missing players to start the game...");
-                    return;
-                } else {
-                    System.out.println("Invalid number of players, try with a number between 1 and 4");
-                }
-            }else if(input.hasNextLine()){
-                String line = input.nextLine();
-                System.out.println("Invalid command of players, try with a number between 1 and 4");
-            }
 
-        }*/
     }
 
 
@@ -283,11 +261,7 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
         System.out.println("What's your username?");
 
         changeCommandParser(new NickNameParser());
-        /*if (input.hasNextLine()){
-            nickname =input.nextLine();
-            viewController.setNickName(nickname);
-            notifyObserver(new UsernameMessage(nickname));
-        }*/
+
     }
     @Override
     public void askRestartGame() throws IOException, InterruptedException {
@@ -296,18 +270,6 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
 
         System.out.println("Do you want to resume the previous match? [yes / no]");
 
-        /*while (input.hasNextLine()){
-            answer =input.nextLine();
-            if (answer.equals("yes")){
-                notifyObserver(new RestartAnswerMessage(true));
-                return;
-            } else if (answer.equals("no")){
-                notifyObserver(new RestartAnswerMessage(false));
-                return;
-            } else {
-                System.out.println("Invalid command, try again");
-            }
-        }*/
     }
     @Override
     public void yourTurn() {
@@ -344,31 +306,7 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
         changeCommandParser(new InitLeaderCardParser());
         System.out.println("Please choose 2 from the following leader cards to keep in your game board [card1 card2]: ");
         showLeaderCards(leaderCards);
-        /*while (input.hasNext()){
 
-            if(input.hasNextInt()) {
-                cont++;
-                if (cont == 2)
-                {
-                    contSecond = input.nextInt() - 1;
-                    if (contSecond>4 || contSecond<0)
-                        System.out.println("Invalid command, try again");
-                    notifyObserver(new KeepLeaderCardsMessage(contOne,contSecond));
-                    String line = input.nextLine();
-                    return;
-                }
-                else
-                {   contOne = input.nextInt() - 1;
-                    if (contOne>4 || contOne<0)
-                        System.out.println("Invalid command, try again");
-                    //String line = input.nextLine();
-                }
-            }
-            else if(input.hasNextLine()){
-                String line = input.nextLine();
-                System.out.println("Invalid command for keep leader card");
-            }
-        }*/
     }
 
 
