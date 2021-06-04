@@ -4,17 +4,19 @@ import it.polimi.ingsw.client.SocketClient;
 import it.polimi.ingsw.client.view.View;
 import it.polimi.ingsw.client.view.cli.Cli;
 import it.polimi.ingsw.client.view.gui.Gui;
+import it.polimi.ingsw.client.view.gui.frames.IPInitialFrame;
 
 import java.io.IOException;
 
-public class
-        ClientApp {
+public class ClientApp {
 
+    private static String hostName;
+    private static int portNumber;
 
     public static void main(String[] args) throws IOException {
-        String hostName = "127.0.0.1";
+        hostName = "127.0.0.1";
 
-        int portNumber = 1236;
+        portNumber = 1236;
 
 
         boolean cliParam = false;
@@ -38,6 +40,8 @@ public class
             }.start(); }*/
 
        // else {
+            //new IPInitialFrame();
+
             View gui = new Gui();
             SocketClient socketClient = new SocketClient(hostName, portNumber, gui);
             gui.startView();
@@ -47,6 +51,15 @@ public class
                 }
             }.start();
         //}
+    }
+
+
+    public static void setIPAddress(String ipAddress){
+        hostName = ipAddress;
+    }
+
+    public static void setIPAddress(int portNumber){
+        portNumber = portNumber;
     }
 }
 

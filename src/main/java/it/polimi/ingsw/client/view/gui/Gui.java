@@ -21,6 +21,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Gui extends ViewControllerObservable implements View, NotificatorVisitor {
+
+    public static final int initFrameWidth = 700;
+    public static final int initFrameHeight = 420;
+    public static final int initFrameX = 450;
+    public static final int initFrameY = 208;
+
     private ViewController viewController;
     private JFrame mainFrame;
     private PanelContainer container;
@@ -59,7 +65,7 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
             mainFrame = new JFrame("Masters Of Renaissance");
             mainFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-            mainFrame.setLocation(475,208);
+            mainFrame.setLocation(450,208);
             mainFrame.setSize(820,420);
 
             mainFrame.setResizable(true);

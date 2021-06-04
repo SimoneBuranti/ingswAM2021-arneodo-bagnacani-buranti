@@ -13,11 +13,12 @@ public class SwingApp {
 
     public static void main(String[] args) {
 
-        MainFrame mainFrame = new MainFrameSinglePlayer(new Gui());
+        /*MainFrame mainFrame = new MainFrameSinglePlayer(new Gui());
         ArrayList<Resource> resources = new ArrayList<>();
         resources.add(Resource.ROCK);
         resources.add(Resource.SERVANT);
-        mainFrame.marblePossibilityPopUp(3, resources);
+        mainFrame.marblePossibilityPopUp(3, resources);*/
+        new IPInitialFrame();
         //JFrame market = new MarketFrame(new Gui());
         /*ProductionCardArray productionCardArray = new ProductionCardArray();
         ProductionDeckFrame productionDeckFrame;

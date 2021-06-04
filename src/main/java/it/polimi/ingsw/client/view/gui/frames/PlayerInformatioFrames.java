@@ -110,7 +110,7 @@ public class PlayerInformatioFrames extends JFrame {
     }
 
     public void initGameboardPanel(){
-        Image image = Toolkit.getDefaultToolkit().createImage("src/main/resources/resources/board/Masters of Renaissance_PlayerBoard (11_2020)-1.png");
+        Image image = Toolkit.getDefaultToolkit().createImage("src/main/resources/resources/board/opponent board.png");
         this.backgroundImage = image.getScaledInstance(gameboardWidth,gameboardHeight,0);
 
         this.mainPanel.setSize(800,gameboardHeight);
