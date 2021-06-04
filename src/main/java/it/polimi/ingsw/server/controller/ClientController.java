@@ -27,6 +27,7 @@ public class ClientController implements MessageVisitor {
     }
 
     public void restoreClientController(ClientController clientController){
+
         this.setNickname(clientController.getNickname());
         this.virtualView=clientController.getVirtualView();
         this.virtualView.setClientController(this);
@@ -184,13 +185,23 @@ public class ClientController implements MessageVisitor {
 
     }
 
+    @Override
+    public void visit(ReconnectedMessage reconnectedMessage) {
+
+    }
+
     //***********************************************************************************************************
 
 
     //---------------------------Game Controller Handled------------------------------------------------
     @Override
     public void visit(ExitMessage msg) throws IOException, InterruptedException {
-        server.getGameController().handleMessage(msg, this);
+        if (!turnCheck())
+            server.getGameController().handleMessage(msg, this);
+        else{
+            server.getGame().endOfTurn();
+            server.getGameController().handleMessage(msg, this);
+        }
     }
 
     @Override

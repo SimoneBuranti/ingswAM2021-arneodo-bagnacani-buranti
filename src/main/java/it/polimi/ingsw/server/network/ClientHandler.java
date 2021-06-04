@@ -163,19 +163,25 @@ public class ClientHandler implements Runnable {
 
             Message parsedMsg = Message.deserialize(msg);
             System.out.println(clientController.getNickname() + " " + parsedMsg.getMessageType()+"leggo da server");
-            parsedMsg.accept(clientController);
+             parsedMsg.accept(clientController);
 
     }
 
     public synchronized void sendMessage (Message msg) throws InterruptedException, IOException {
         System.out.println(clientController.getNickname() + " " + msg.getMessageType()+" invio da server  ("+msg+")");
+
         writeStream.println(msg.serialize());
         writeStream.flush();
 
     }
 
     public void pingDisconnection() throws IOException, InterruptedException {
-        server.getGameController().handleMessage(new ExitMessage(), this.clientController);
+        if (!(clientController.turnCheck()))
+            server.getGameController().handleMessage(new ExitMessage(), this.clientController);
+        else{
+            server.getGame().endOfTurn();
+            server.getGameController().handleMessage(new ExitMessage(), this.clientController);
+        }
     }
 
     public void disconnect() throws IOException, InterruptedException {

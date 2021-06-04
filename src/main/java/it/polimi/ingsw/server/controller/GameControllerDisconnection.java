@@ -2,6 +2,7 @@ package it.polimi.ingsw.server.controller;
 
 import it.polimi.ingsw.messages.*;
 import it.polimi.ingsw.server.model.Game;
+import it.polimi.ingsw.server.model.GameMultiPlayer;
 import it.polimi.ingsw.server.network.Server;
 
 import java.io.FileNotFoundException;
@@ -29,17 +30,18 @@ public class GameControllerDisconnection extends GameController {
         } catch (IOException | InterruptedException e) {
             //messaggio di errore
         }
-        if((server.getClientControllersDisconnected().size() ==server.getClientController().size()))
+        if((server.getClientController().size())==0)
         {
             server.resetInfoPartial();
         }
         else{
             for (int i=0;i< server.getClientController().size(); i++) {
-                for (int j = 0; j < server.getClientControllersDisconnected().size(); j++){
-                    if (!server.getClientController().get(i).equals(clientController) &&
-                            !server.getClientController().get(i).equals(server.getClientControllersDisconnected().get(j))){
+              //  for (int j = 0; j < server.getClientControllersDisconnected().size(); j++){
+                   // if (!server.getClientController().get(i).equals(clientController) &&
+                           // !server.getClientController().get(i).equals(server.getClientControllersDisconnected().get(j))){
                         server.getClientController().get(i).getClientHandler().sendMessage(new DisconnectionOpponentMessage(clientController.getNickname()));
-                    }} }
+                   // }}
+    }
     }}
 
     @Override
@@ -50,21 +52,30 @@ public class GameControllerDisconnection extends GameController {
     @Override
     public void handleMessage(UsernameMessage msg, ClientController clientController) throws IOException, InterruptedException {
         if(game.checkNickname(msg.getUsername())){
-            for(int i=0; i<server.getClientControllersDisconnected().size();i++) {
-                if (server.getClientControllersDisconnected().get(i).getNickname().equals(msg.getUsername())) {
+            for(int i=0; i<server.getClientControllersDisconnected().size();i++)
+            {
+                if (server.getClientControllersDisconnected().get(i).getNickname().equals(msg.getUsername()))
+            {
                     clientController.restoreClientController(server.removeClientControllersDisconnected(i));
                     server.addClientController(clientController);
-                }
+            }
+
             }
             game.connectPlayer(msg.getUsername());
-            if(game.numPlayersDisconnected() == 0)
-                if (numberOfPlayers!=1)
-                    server.setGameController(new GameControllerMultiplayer(this.server,this.game));
-                else
-                    server.setGameController(new GameControllerSinglePlayer(this.server,this.game));
-        }else{
-            clientController.getClientHandler().sendMessage(new NoNicknameMessage());
 
+            if(game.numPlayersDisconnected() == 0)
+            {
+                if (server.getGame() instanceof GameMultiPlayer)
+                    server.setGameController(new GameControllerMultiplayer(this.server, this.game));
+                else
+                    server.setGameController(new GameControllerSinglePlayer(this.server, this.game));
+            }
+
+
+        }
+        else
+        {
+            clientController.getClientHandler().sendMessage(new NoNicknameMessage());
         }
 
     }

@@ -45,7 +45,7 @@ public class GameControllerEmpty extends GameController {
     }
 
     @Override
-    public void handleMessage(ExitMessage msg, ClientController clientController) throws IOException, InterruptedException {
+    public synchronized void handleMessage(ExitMessage msg, ClientController clientController) throws IOException, InterruptedException {
         if(isFirstClient(clientController)){
             server.removePlayerToLobby(clientController.getNickname());
             server.removeClientController(clientController);
@@ -74,7 +74,7 @@ public class GameControllerEmpty extends GameController {
     }
 
     @Override
-    public void handleMessage(UsernameMessage msg, ClientController clientController) throws IOException, InterruptedException {
+    public synchronized void handleMessage(UsernameMessage msg, ClientController clientController) throws IOException, InterruptedException {
         if (server.getLobbySize()==0 && (clientController == firstClientController || firstClientController == null)) {
             if (server.addPlayerToLobby(msg.getUsername())){
                 clientController.setNickname(msg.getUsername());

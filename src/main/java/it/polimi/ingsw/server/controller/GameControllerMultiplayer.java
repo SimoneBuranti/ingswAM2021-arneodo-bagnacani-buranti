@@ -21,23 +21,29 @@ public class GameControllerMultiplayer extends GameController {
 
 
 
-     if(!server.getGame().isOver()){
-     boolean flag = false;
-     if(game.disconnectPlayer(clientController.getNickname())) {
-      flag = true;
-      server.addClientControllersDisconnected(clientController);
-     }
-     try {
-      clientController.getClientHandler().disconnect();
-     } catch (IOException | InterruptedException e) {
+     if(!server.getGame().isOver())
+        {
+        boolean flag = false;
+         if(game.disconnectPlayer(clientController.getNickname()))
+        {
+            flag = true;
+            server.addClientControllersDisconnected(clientController);
+        }
+            try
+        {
+            clientController.getClientHandler().disconnect();
+        }   catch (IOException | InterruptedException e)
+        {
      //messaggio di errore
-    }
-     if(flag && !(server.getClientControllersDisconnected().size() ==server.getClientController().size())) {
-      server.setGameController(new GameControllerDisconnection(this.server,this.game));
-     }
+        }
+        if(flag && !(server.getClientController().size()==0))
+            {
+                server.setGameController(new GameControllerDisconnection(this.server,this.game));
+            }
         }
         else
-        {game.disconnectPlayer(clientController.getNickname());
+        {
+            game.disconnectPlayer(clientController.getNickname());
             server.addClientControllersDisconnected(clientController);
             try {
                 clientController.getClientHandler().disconnect();
@@ -45,15 +51,18 @@ public class GameControllerMultiplayer extends GameController {
             } catch (IOException | InterruptedException e) {
                 //messaggio di errore
             }
-            if (server.getClientControllersDisconnected().size()==server.getClientController().size())
-            { server.resetInfo(); }
+            if (server.getClientController().size()==0)
+            {
+                server.resetInfo();
+            }
         }
         for (int i=0;i< server.getClientController().size(); i++) {
-            for (int j = 0; j < server.getClientControllersDisconnected().size(); j++){
-                if (!server.getClientController().get(i).equals(clientController) &&
-                        !server.getClientController().get(i).equals(server.getClientControllersDisconnected().get(j))){
+           // for (int j = 0; j < server.getClientControllersDisconnected().size(); j++){
+            //    if (!server.getClientController().get(i).equals(clientController) &&
+              //          !server.getClientController().get(i).equals(server.getClientControllersDisconnected().get(j))){
                     server.getClientController().get(i).getClientHandler().sendMessage(new DisconnectionOpponentMessage(clientController.getNickname()));
-                }} }
+               // }}
+        }
     }
 
     @Override

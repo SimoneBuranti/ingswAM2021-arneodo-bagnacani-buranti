@@ -1,18 +1,19 @@
-package it.polimi.ingsw.messages;
+package it.polimi.ingsw.messages.observable;
 
-import it.polimi.ingsw.server.model.Resource;
+import it.polimi.ingsw.messages.Message;
+import it.polimi.ingsw.messages.MessageType;
+import it.polimi.ingsw.messages.MessageVisitor;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
-public class DisconnectionOpponentMessage extends Message{
-    private final MessageType messageType = MessageType.DISCONNECTIONOPPONENT;
+public class ReconnectedMessage extends Message {
+    private final MessageType messageType = MessageType.RECONNECTIONOPPONENT;
 
 
 
     private String string;
 
-    public DisconnectionOpponentMessage(String player){
+    public ReconnectedMessage(String player){
 
         this.string=player;
 
@@ -37,6 +38,6 @@ public class DisconnectionOpponentMessage extends Message{
 
     @Override
     public String toString(){
-        return string+" " + "left the match";
+        return string+" " + " came back ";
     }
 }

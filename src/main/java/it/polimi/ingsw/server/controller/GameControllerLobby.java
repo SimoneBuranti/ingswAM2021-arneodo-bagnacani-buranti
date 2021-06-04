@@ -118,7 +118,7 @@ public class GameControllerLobby extends GameController {
 
     }
     @Override
-    public void handleMessage(ExitMessage msg, ClientController clientController) throws IOException, InterruptedException {
+    public synchronized void handleMessage(ExitMessage msg, ClientController clientController) throws IOException, InterruptedException {
 
         server.removePlayerToLobby(clientController.getNickname());
         server.removeClientController(clientController);
@@ -134,7 +134,7 @@ public class GameControllerLobby extends GameController {
     }
 
     @Override
-    public void handleMessage(UsernameMessage msg, ClientController clientController) throws IOException, InterruptedException {
+    public synchronized void handleMessage(UsernameMessage msg, ClientController clientController) throws IOException, InterruptedException {
         if (server.addPlayerToLobby(msg.getUsername())){
             clientController.setNickname(msg.getUsername());
             server.addClientController(clientController);

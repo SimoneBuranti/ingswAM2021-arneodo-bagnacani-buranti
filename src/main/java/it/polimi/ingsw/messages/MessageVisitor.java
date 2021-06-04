@@ -134,4 +134,6 @@ public interface MessageVisitor {
     void visit(PapalCardsConfigMessage papalCardsConfigMessage);
 
     void visit(DisconnectionOpponentMessage disconnectionOpponentMessage);
+
+    void visit(ReconnectedMessage reconnectedMessage);
 }

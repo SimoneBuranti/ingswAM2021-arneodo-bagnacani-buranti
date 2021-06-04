@@ -339,6 +339,12 @@ public class GameMultiPlayer extends Game {
                 configWhitPlayerInfo(playerList.get(i),i+1);
             }
         }
+        for (int i=0; i<playerList.size(); i++){
+            if(!playerList.get(i).getNickName().equals(nickname) && !(playerList.get(i).isConnected())){
+                notifyOnlyOneSpecificObserver(new ReconnectedMessage(nickname),playerList.get(i).getNickName());
+            }
+
+        }
     }
 
 

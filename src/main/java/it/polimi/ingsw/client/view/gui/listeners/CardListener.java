@@ -20,20 +20,7 @@ public class CardListener implements MouseListener {
     private ArrayList<LeaderCard> sendableArray = new ArrayList<>();
     private static ArrayList<Integer> sendableArrayInt = new ArrayList<>();
 
-    /**
-     * Constructor: build a CardListener with multiple selection enabled
-     *
-     * @param card         The managed card
-     * @param chosenCards  The chosen cards
-     * @param cardManager The card switcher to be controlled
-     * @param numCards     The number of cards to be selected
-     */
-    public CardListener(LeaderCard card, CardManager cardManager, List<LeaderCard> chosenCards, int numCards, Gui gui) {
 
-        this.card = card;
-        this.gui=gui;
-
-    }
 
     /**
      * Constructor: build a CardListener with single selection
@@ -61,7 +48,9 @@ public class CardListener implements MouseListener {
             } catch (IOException | InterruptedException e1) {
                 e1.printStackTrace();
             }
-                    })).start();}
+                    })).start();
+            
+        }
     }
 
     private void addPlayerCardToArrayList(LeaderCard card) {

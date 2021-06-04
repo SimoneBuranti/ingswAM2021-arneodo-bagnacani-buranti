@@ -244,7 +244,9 @@ public class Server {
 
     public void addClientControllersDisconnected(ClientController clientController){
         clientControllersDisconnected.add(clientController);
+        clientControllers.remove(clientController);
     }
+
     public void resetInfo(){
          this.game=null;
         clientControllers = new ArrayList<>();

@@ -233,6 +233,11 @@ public class ViewController implements MessageVisitor, ViewObserver {
     }
 
     @Override
+    public void visit(ReconnectedMessage reconnectedMessage) {
+        view.notifyError(reconnectedMessage);
+    }
+
+    @Override
     public void visit(RestartAnswerMessage msg) {
 
     }

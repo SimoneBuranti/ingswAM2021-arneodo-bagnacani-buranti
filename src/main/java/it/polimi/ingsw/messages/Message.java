@@ -303,6 +303,9 @@ public abstract class Message{
             case DISCONNECTIONOPPONENT:
                 return gson.fromJson(jsonObj, DisconnectionOpponentMessage.class);
 
+            case RECONNECTIONOPPONENT:
+                return gson.fromJson(jsonObj,ReconnectedMessage.class);
+
 
             default:
                 throw new IllegalArgumentException("Invalid topic " + msgTopicString);
