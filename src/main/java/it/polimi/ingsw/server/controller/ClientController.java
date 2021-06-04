@@ -179,6 +179,11 @@ public class ClientController implements MessageVisitor {
 
     }
 
+    @Override
+    public void visit(DisconnectionOpponentMessage disconnectionOpponentMessage) {
+
+    }
+
     //***********************************************************************************************************
 
 

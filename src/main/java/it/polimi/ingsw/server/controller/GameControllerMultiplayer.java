@@ -17,8 +17,11 @@ public class GameControllerMultiplayer extends GameController {
     }
 
     @Override
-    public void handleMessage(ExitMessage msg, ClientController clientController){
-        if(!server.getGame().isOver()){
+    public void handleMessage(ExitMessage msg, ClientController clientController) throws IOException, InterruptedException {
+
+
+
+     if(!server.getGame().isOver()){
      boolean flag = false;
      if(game.disconnectPlayer(clientController.getNickname())) {
       flag = true;
@@ -45,6 +48,12 @@ public class GameControllerMultiplayer extends GameController {
             if (server.getClientControllersDisconnected().size()==server.getClientController().size())
             { server.resetInfo(); }
         }
+        for (int i=0;i< server.getClientController().size(); i++) {
+            for (int j = 0; j < server.getClientControllersDisconnected().size(); j++){
+                if (!server.getClientController().get(i).equals(clientController) &&
+                        !server.getClientController().get(i).equals(server.getClientControllersDisconnected().get(j))){
+                    server.getClientController().get(i).getClientHandler().sendMessage(new DisconnectionOpponentMessage(clientController.getNickname()));
+                }} }
     }
 
     @Override

@@ -132,4 +132,6 @@ public interface MessageVisitor {
     void visit(BaseProductionErrorMessage baseProductionErrorMessage);
 
     void visit(PapalCardsConfigMessage papalCardsConfigMessage);
+
+    void visit(DisconnectionOpponentMessage disconnectionOpponentMessage);
 }
