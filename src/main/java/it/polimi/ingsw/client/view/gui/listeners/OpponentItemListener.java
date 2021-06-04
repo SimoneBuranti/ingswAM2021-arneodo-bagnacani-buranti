@@ -20,7 +20,7 @@ public class OpponentItemListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         (new Thread( () -> {
-            viewController.sendMessage(new AskInformationMessage(playerNumber));
+            viewController.sendMessage(new AskInformationMessage(playerNumber+1));
         })).start();
     }
 }

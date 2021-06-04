@@ -668,15 +668,28 @@ public class GameMultiPlayer extends Game {
     public void askInfoOnPlayer(int n, String nickname) throws IOException, InterruptedException {
         if(n<numberOfPlayer || n==numberOfPlayer){
             int[][] list = new int[3][3];
-            for (int i=0; i<3;i++)
-                for (int j=0; i<3;i++)
+            System.out.println("sono 1");
+            for (int i=0; i<3;i++){
+                for (int j=0; j<3;j++ ){
+                    System.out.println("sono i ." + i);
+                    System.out.println("sono j ." + j);
                     if (playerList.get(n-1).getGameBoardOfPlayer().getDevelopmentBoardCell(i,j)==null)
                         list[i][j]=0;
                     else
-                        list[i][j]=playerList.get(n-1).getGameBoardOfPlayer().getDevelopmentBoardCell(i,j).getKey();
+                        list[i][j]=playerList.get(n-1).getGameBoardOfPlayer().getDevelopmentBoardCell(i,j).getKey();}}
+
+
             ArrayList<Integer> needForLeader2 = new ArrayList<>();
-            for (int i=0; i<playerList.get(n-1).getGameBoardOfPlayer().getLeaderCardsActivated().size();i++)
-                needForLeader2.add(playerList.get(n-1).getGameBoardOfPlayer().getLeaderCardsActivated().get(i).getKey());
+            if (playerList.get(n-1).getGameBoardOfPlayer().getLeaderCardsActivated().size()>0){
+                System.out.println("sono attivato impossibbile");
+                for (int i=0; i<playerList.get(n-1).getGameBoardOfPlayer().getLeaderCardsActivated().size();i++)
+                    needForLeader2.add(playerList.get(n-1).getGameBoardOfPlayer().getLeaderCardsActivated().get(i).getKey());}
+
+
+            System.out.println("sono 3");
+
+
+
 
             Resource resource1=null;
             Resource resource2=null;
