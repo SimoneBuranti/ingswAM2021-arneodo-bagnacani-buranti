@@ -64,7 +64,6 @@ public class GameControllerRestart extends GameController {
                         clientController.getClientHandler().sendMessage(new AlreadyExistingNickNameErrorMessage());
                 }
                 else if(clientController == firstClientController){
-                    System.out.println("first connected");
                     if (!reconnected.contains(msg.getUsername())) {
                         clientController.setNickname(msg.getUsername());
                         reconnected.add(msg.getUsername());
@@ -94,13 +93,15 @@ public class GameControllerRestart extends GameController {
             }
 
             if (reconnected.size() == server.getLobbySize()){
-                if (numberOfPlayers==1){
+                if (server.getLobbySize()==1){
                     server.restoreGameSingleBackup();
                     server.setGameController(new GameControllerSinglePlayer(server,server.getGame()));
 
-                } else {
+                }
+                else
+                {
                     server.restoreGameMultiBackup();
-                    server.setGameController(new GameControllerMultiplayer(this.server,this.game));
+                    server.setGameController(new GameControllerMultiplayer(this.server,server.getGame()));
 
                 }
 

@@ -22,7 +22,11 @@ public class GameControllerDisconnection extends GameController {
     @Override
     public void handleMessage(ExitMessage msg, ClientController clientController) throws IOException, InterruptedException {
 
-        game.disconnectPlayer(clientController.getNickname());
+        if (!(server.getClientController().size()==1))
+            if (clientController.turnCheck())
+                server.getGame().endOfTurn();
+
+        server.getGame().disconnectPlayerOption(clientController.getNickname());
         server.addClientControllersDisconnected(clientController);
         try {
             clientController.getClientHandler().disconnect();
@@ -35,14 +39,11 @@ public class GameControllerDisconnection extends GameController {
             server.resetInfoPartial();
         }
         else{
+
             for (int i=0;i< server.getClientController().size(); i++) {
-              //  for (int j = 0; j < server.getClientControllersDisconnected().size(); j++){
-                   // if (!server.getClientController().get(i).equals(clientController) &&
-                           // !server.getClientController().get(i).equals(server.getClientControllersDisconnected().get(j))){
-                        server.getClientController().get(i).getClientHandler().sendMessage(new DisconnectionOpponentMessage(clientController.getNickname()));
-                   // }}
+                        server.getClientController().get(i).getClientHandler().sendMessage(new DisconnectionOpponentMessage(clientController.getNickname())); }
+        }
     }
-    }}
 
     @Override
     public void handleMessage(NumberPlayerMessage msg, ClientController clientController) throws IOException, InterruptedException {
@@ -51,7 +52,7 @@ public class GameControllerDisconnection extends GameController {
 
     @Override
     public void handleMessage(UsernameMessage msg, ClientController clientController) throws IOException, InterruptedException {
-        if(game.checkNickname(msg.getUsername())){
+        if(server.getGame().checkNickname(msg.getUsername())){
             for(int i=0; i<server.getClientControllersDisconnected().size();i++)
             {
                 if (server.getClientControllersDisconnected().get(i).getNickname().equals(msg.getUsername()))
@@ -61,14 +62,14 @@ public class GameControllerDisconnection extends GameController {
             }
 
             }
-            game.connectPlayer(msg.getUsername());
+            server.getGame().connectPlayer(msg.getUsername());
 
-            if(game.numPlayersDisconnected() == 0)
+            if(server.getGame().numPlayersDisconnected() == 0)
             {
                 if (server.getGame() instanceof GameMultiPlayer)
-                    server.setGameController(new GameControllerMultiplayer(this.server, this.game));
+                    server.setGameController(new GameControllerMultiplayer(this.server, server.getGame()));
                 else
-                    server.setGameController(new GameControllerSinglePlayer(this.server, this.game));
+                    server.setGameController(new GameControllerSinglePlayer(this.server, server.getGame()));
             }
 
 

@@ -451,9 +451,10 @@ public class Game extends Observable {
     public int scoreOfPlayerP(Player p){
         return p.playerScore();
     }
-    
 
-    public boolean disconnectPlayer(String nickname){
+    public void disconnectPlayerOption(String nickname) {}
+
+    public boolean disconnectPlayer(String nickname) {
         return false;
     }
 

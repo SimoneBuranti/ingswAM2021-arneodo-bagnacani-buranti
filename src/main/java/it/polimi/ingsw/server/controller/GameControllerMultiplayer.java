@@ -2,6 +2,7 @@ package it.polimi.ingsw.server.controller;
 
 import it.polimi.ingsw.messages.*;
 import it.polimi.ingsw.server.model.Game;
+import it.polimi.ingsw.server.model.GameMultiPlayer;
 import it.polimi.ingsw.server.network.Server;
 
 import java.io.IOException;
@@ -20,30 +21,41 @@ public class GameControllerMultiplayer extends GameController {
     public void handleMessage(ExitMessage msg, ClientController clientController) throws IOException, InterruptedException {
 
 
-
      if(!server.getGame().isOver())
         {
-        boolean flag = false;
-         if(game.disconnectPlayer(clientController.getNickname()))
-        {
-            flag = true;
-            server.addClientControllersDisconnected(clientController);
-        }
-            try
-        {
-            clientController.getClientHandler().disconnect();
-        }   catch (IOException | InterruptedException e)
-        {
-     //messaggio di errore
-        }
-        if(flag && !(server.getClientController().size()==0))
+
+            if (clientController.turnCheck())
+                server.getGame().endOfTurn();
+
+            boolean flag = false;
+
+            server.getGame().disconnectPlayerOption(clientController.getNickname());
+
+            if(!server.getGame().disconnectPlayer(clientController.getNickname()))
             {
-                server.setGameController(new GameControllerDisconnection(this.server,this.game));
+                flag = true;
+                server.addClientControllersDisconnected(clientController);
+                try
+             {
+                clientController.getClientHandler().disconnect();
             }
+            catch (IOException | InterruptedException e)
+                {
+                //messaggio di errore+//
+                }
+                for (int i=0;i< server.getClientController().size(); i++) {
+                    server.getClientController().get(i).getClientHandler().sendMessage(new DisconnectionOpponentMessage(clientController.getNickname()));
+                }
+
+         if(flag && !(server.getClientController().size()==0))
+         {
+                server.setGameController(new GameControllerDisconnection(this.server,server.getGame()));
+         }
+        }
         }
         else
         {
-            game.disconnectPlayer(clientController.getNickname());
+            server.getGame().disconnectPlayerOption(clientController.getNickname());
             server.addClientControllersDisconnected(clientController);
             try {
                 clientController.getClientHandler().disconnect();
@@ -51,17 +63,16 @@ public class GameControllerMultiplayer extends GameController {
             } catch (IOException | InterruptedException e) {
                 //messaggio di errore
             }
+
             if (server.getClientController().size()==0)
             {
                 server.resetInfo();
             }
-        }
-        for (int i=0;i< server.getClientController().size(); i++) {
-           // for (int j = 0; j < server.getClientControllersDisconnected().size(); j++){
-            //    if (!server.getClientController().get(i).equals(clientController) &&
-              //          !server.getClientController().get(i).equals(server.getClientControllersDisconnected().get(j))){
+            else
+            { for (int i=0;i< server.getClientController().size(); i++) {
                     server.getClientController().get(i).getClientHandler().sendMessage(new DisconnectionOpponentMessage(clientController.getNickname()));
-               // }}
+                }
+            }
         }
     }
 

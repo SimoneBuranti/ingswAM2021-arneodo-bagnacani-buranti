@@ -109,9 +109,9 @@ public class Server {
     //--------------------------------------------------------------------
 
     public void initNewSolitaireGame() throws IOException, InterruptedException {
-        System.out.println("qui78");
 
-        game = new GameSolitaire(lobby.get(0),true,clientControllers.get(0));
+
+        this.game = new GameSolitaire(lobby.get(0),true,clientControllers.get(0));
 
         gameController = new GameControllerSinglePlayer(this,this.getGame());
 
@@ -120,9 +120,9 @@ public class Server {
 
 
     public void initNewMultiplayerGame() throws IOException, InterruptedException {
-        game = new GameMultiPlayer(lobby.size(),lobby,true,clientControllers);
+        this.game = new GameMultiPlayer(lobby.size(),lobby,true,clientControllers);
 
-        gameController = new GameControllerMultiplayer(this,this.game);
+        gameController = new GameControllerMultiplayer(this,this.getGame());
 
         for(ClientController client : clientControllers){
             client.setGame(this.game);
@@ -243,6 +243,8 @@ public class Server {
     }
 
     public void addClientControllersDisconnected(ClientController clientController){
+        System.out.println(this.getClientController().size() + " " + "loooc");
+        System.out.println(this.getClientControllersDisconnected().size() + " " + "cooooc");
         clientControllersDisconnected.add(clientController);
         clientControllers.remove(clientController);
     }

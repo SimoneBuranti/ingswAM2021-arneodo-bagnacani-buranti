@@ -131,6 +131,7 @@ public class ClientHandler implements Runnable {
                     if(ack==4){
                     try {
                             pingDisconnection();
+                        System.out.println("passo da qui " + ack);
                             pinger.shutdown();
 
                     } catch (IOException | InterruptedException e) {
@@ -162,7 +163,11 @@ public class ClientHandler implements Runnable {
     public synchronized void readMessageServer(String msg) throws IOException, InterruptedException {
 
             Message parsedMsg = Message.deserialize(msg);
-            System.out.println(clientController.getNickname() + " " + parsedMsg.getMessageType()+"leggo da server");
+        System.out.println(server.getClientController().size() + " " + "lc");
+        System.out.println(server.getClientControllersDisconnected().size() + " " + "cc");
+
+        System.out.println(clientController.getNickname() + " " + parsedMsg.getMessageType()+"leggo da server");
+
              parsedMsg.accept(clientController);
 
     }
@@ -176,12 +181,10 @@ public class ClientHandler implements Runnable {
     }
 
     public void pingDisconnection() throws IOException, InterruptedException {
-        if (!(clientController.turnCheck()))
+        System.out.println("poi qui" + ack);
             server.getGameController().handleMessage(new ExitMessage(), this.clientController);
-        else{
-            server.getGame().endOfTurn();
-            server.getGameController().handleMessage(new ExitMessage(), this.clientController);
-        }
+        System.out.println("esco da qui?" + ack);
+
     }
 
     public void disconnect() throws IOException, InterruptedException {

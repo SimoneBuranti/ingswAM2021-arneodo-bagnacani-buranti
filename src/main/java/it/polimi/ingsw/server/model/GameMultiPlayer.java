@@ -103,9 +103,12 @@ public class GameMultiPlayer extends Game {
             restoreGameMultiPlayer(clientControllers);
         }
 
-
         saveInformation();
         notifyOnlyOneSpecificObserver(new YourTurnMessage(),currentPlayer.getNickName());
+        for(Player player: playerList)
+            if (!player.equals(currentPlayer))
+                notifyOnlyOneSpecificObserver(new ChangeTurnMessage(currentPlayer.getNickName()),player.getNickName());
+
 
 
     }
@@ -319,14 +322,20 @@ public class GameMultiPlayer extends Game {
 
     @Override
     public boolean disconnectPlayer(String nickname){
-        for(Player p : playerList){
-            if(p.getNickName().equals(nickname) && p.isConnected()){
-                p.setConnected();
-                return true;
-            }
-        }
-        return false;
+        for(int i=0; i<playerList.size(); i++){
+            if(playerList.get(i).getNickName().equals(nickname))
+                return playerList.get(i).isConnected();}
+        return true;
     }
+
+
+    public void disconnectPlayerOption(String nickname) {
+        for(int i=0; i<playerList.size(); i++){
+            if(playerList.get(i).getNickName().equals(nickname) && playerList.get(i).isConnected())
+                playerList.get(i).setConnected();
+    }}
+
+
 
     @Override
     public void connectPlayer(String nickname) throws IOException, InterruptedException {
@@ -339,11 +348,11 @@ public class GameMultiPlayer extends Game {
                 configWhitPlayerInfo(playerList.get(i),i+1);
             }
         }
-        for (int i=0; i<playerList.size(); i++){
-            if(!playerList.get(i).getNickName().equals(nickname) && !(playerList.get(i).isConnected())){
-                notifyOnlyOneSpecificObserver(new ReconnectedMessage(nickname),playerList.get(i).getNickName());
-            }
 
+        for (Player player : playerList) {
+            if (!player.getNickName().equals(nickname) && !(player.isConnected())) {
+                notifyOnlyOneSpecificObserver(new ReconnectedMessage(nickname), player.getNickName());
+            }
         }
     }
 
@@ -575,8 +584,9 @@ public class GameMultiPlayer extends Game {
         notifyObserver(new GameTypeMessage(true));
         notifyObserver(new NicknameStartedMessage(nickNameInOrder));
         createPlayerRestore(numberOfPlayer,nickNameInOrder);
-        this.reConfigClient();
         currentPlayer = playerList.get(currentPlayerPosition);
+        this.reConfigClient();
+
     }
 
 
@@ -606,8 +616,8 @@ public class GameMultiPlayer extends Game {
         else if (numberOfPlayer==3)
         {
             firstPlayer=new PlayerFirst(nickNameInOrder.get(0),this,false,clientControllersInOrder.get(0).getVirtualView());
-            secondPlayer= new PlayerSecond(nickNameInOrder.get(1),this,false,clientControllersInOrder.get(0).getVirtualView());
-            thirdPlayer= new PlayerThird(nickNameInOrder.get(2),this ,false,clientControllersInOrder.get(0).getVirtualView());
+            secondPlayer= new PlayerSecond(nickNameInOrder.get(1),this,false,clientControllersInOrder.get(1).getVirtualView());
+            thirdPlayer= new PlayerThird(nickNameInOrder.get(2),this ,false,clientControllersInOrder.get(2).getVirtualView());
             playerList.add(firstPlayer);
             playerList.add(secondPlayer);
             playerList.add(thirdPlayer);
@@ -616,9 +626,9 @@ public class GameMultiPlayer extends Game {
         else if (numberOfPlayer==4)
         {
             firstPlayer=new PlayerFirst(nickNameInOrder.get(0),this,false,clientControllersInOrder.get(0).getVirtualView());
-            secondPlayer= new PlayerSecond(nickNameInOrder.get(1),this ,false,clientControllersInOrder.get(0).getVirtualView());
-            thirdPlayer= new PlayerThird(nickNameInOrder.get(2),this ,false,clientControllersInOrder.get(0).getVirtualView());
-            fourthPlayer=new PlayerFourth(nickNameInOrder.get(3),this,false,clientControllersInOrder.get(0).getVirtualView());
+            secondPlayer= new PlayerSecond(nickNameInOrder.get(1),this ,false,clientControllersInOrder.get(1).getVirtualView());
+            thirdPlayer= new PlayerThird(nickNameInOrder.get(2),this ,false,clientControllersInOrder.get(2).getVirtualView());
+            fourthPlayer=new PlayerFourth(nickNameInOrder.get(3),this,false,clientControllersInOrder.get(3).getVirtualView());
             playerList.add(firstPlayer);
             playerList.add(secondPlayer);
             playerList.add(thirdPlayer);

@@ -50,7 +50,7 @@ public class GameControllerSinglePlayer extends GameController {
     public void handleMessage(ExitMessage msg, ClientController clientController) throws FileNotFoundException {
         if(!server.getGame().isOver()){
         boolean flag = false;
-        if(game.disconnectPlayer(clientController.getNickname())) {
+        if(server.getGame().disconnectPlayer(clientController.getNickname())) {
             flag = true;
             server.addClientControllersDisconnected(clientController);
             System.out.println("Ho disconnesso client ");
@@ -68,7 +68,7 @@ public class GameControllerSinglePlayer extends GameController {
 
         }
         else
-        { game.disconnectPlayer(clientController.getNickname());
+        { server.getGame().disconnectPlayer(clientController.getNickname());
             server.addClientControllersDisconnected(clientController);
             try {
                 clientController.getClientHandler().disconnect();
