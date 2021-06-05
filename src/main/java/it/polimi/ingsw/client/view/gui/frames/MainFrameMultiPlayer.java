@@ -352,7 +352,6 @@ public class MainFrameMultiPlayer extends MainFrame {
             if (!players.get(i).equals(gui.getViewController().getNickName())){
                 JMenuItem newPlayerItem = new JMenuItem(players.get(i));
                 newPlayerItem.addActionListener(new OpponentItemListener(gui.getViewController(),i));
-                System.out.println("in teoria dovrei aver messo il listener");
                 this.players.add(newPlayerItem);
             }
             this.nicknames.add(new JLabel(players.get(i)));

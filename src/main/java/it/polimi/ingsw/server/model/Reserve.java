@@ -82,6 +82,9 @@ public class Reserve extends Observable {
     }
 
 
+    /**
+     * @return reservePools so reserve
+     */
     public Map<Resource , Integer> getReservePool(){
         return reservePools;
     }

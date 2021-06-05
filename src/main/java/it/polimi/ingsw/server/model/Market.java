@@ -270,15 +270,18 @@ public class Market extends Observable {
     }
 
 
-
-
-
+    /**
+     * @return initial marble list for configuration
+     */
     public ArrayList<Marble> getInitialMarbleList(){
         return initialMarbleList;
     }
 
 
-public static Gson gsonForEveryoneMArket(){
+    /**
+     * @return Gson adapter for market saving and restoring
+     */
+    public static Gson gsonForEveryoneMArket(){
 
 
     RuntimeTypeAdapterFactory<Marble> adapterMarble =
@@ -303,8 +306,10 @@ return gson;
 }
 
 
-
-
+    /**
+     * @param i
+     * @return false if are not present red marble in i column
+     */
 public boolean getRedInColumn(int i){
         for(int j=0; j<3 ; j++)
             if(grid[j][i] instanceof RedMarble)
@@ -312,7 +317,10 @@ public boolean getRedInColumn(int i){
 
         return false; }
 
-
+    /**
+     * @param i
+     * @return false if are not present red marble in i row
+     */
     public boolean getRedInRow(int i){
         for(int j=0; j<4 ; j++)
             if(grid[i][j] instanceof RedMarble)

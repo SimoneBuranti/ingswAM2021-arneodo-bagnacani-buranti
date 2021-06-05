@@ -696,19 +696,33 @@ public class  GameBoard extends GameBoardInterface{
     }
 
 
+    /**
+     * @return faithPathOfGameBoard.getCurrCall();
+     */
     public int getCurrCall(){
         return faithPathOfGameBoard.getCurrCall();
     }
 
+    /**
+     * @return faithPathOfGameBoard.getPapalCards()
+     */
     public int[] getPapalCards(){
         return faithPathOfGameBoard.getPapalCards();
     }
 
+    /**
+     * @return developmentBoard
+     */
     public ProductionCard[][] getDevelopmentBoard(){
         return developmentBoard;
     }
 
 
+    /**
+     * @param i
+     * @param j
+     * @return personal developmentBoard[i][j]
+     */
     public ProductionCard getDevelopmentBoardCell(int i,int j){
 
        return developmentBoard[i][j];

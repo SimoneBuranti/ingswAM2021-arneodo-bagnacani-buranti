@@ -26,6 +26,9 @@ public class ClientController implements MessageVisitor {
         this.nickname = null;
     }
 
+    /**
+     * @param clientController restore del client controller disconnected and now reconnected
+     */
     public void restoreClientController(ClientController clientController){
 
         this.setNickname(clientController.getNickname());
@@ -34,30 +37,50 @@ public class ClientController implements MessageVisitor {
         this.game=clientController.getGame();
     }
 
+    /**
+     * @return game
+     */
     public Game getGame() {
         return game;
     }
 
+    /**
+     * set te game for te class
+     * @param game
+     */
     public void setGame(Game game){
         this.game = game;
     }
 
+    /**
+     * @return nick name of the client controller
+     */
     public String getNickname() {
         return nickname;
     }
 
+    /**
+     * @return clientHandler of the client controller
+     */
     public ClientHandler getClientHandler() {
         return clientHandler;
     }
-
+    /**
+     * set nick name of the client controller
+     */
     public void setNickname(String nickname) {
         this.nickname = nickname;
     }
-
+    /**
+     * ceck if the player is the current
+     */
     public boolean turnCheck(){
         return nickname.equals(game.getCurrentNickname());
     }
 
+    /**
+     * set virtual view of the client controller
+     */
     public VirtualView getVirtualView() {
         return virtualView;
     }
@@ -115,6 +138,12 @@ public class ClientController implements MessageVisitor {
     public void visit(RestartQuestionMessage msg) { }
 
 
+    /**
+     * mathod which communicate to the game about end turn
+     * @param msg
+     * @throws IOException
+     * @throws InterruptedException
+     */
     @Override
     public void visit(EndOfTurnMessage msg) throws IOException, InterruptedException {
         if(turnCheck()) {
@@ -150,6 +179,13 @@ public class ClientController implements MessageVisitor {
 
     }
 
+
+    /**
+     * method which communicate to the game that someone ask for opponent info
+     * @param askInformationmessage
+     * @throws IOException
+     * @throws InterruptedException
+     */
     @Override
     public void visit(AskInformationMessage askInformationmessage) throws IOException, InterruptedException {
         server.getGame().askInfoOnPlayer(askInformationmessage.getN(),clientHandler.getClientController().getNickname());
@@ -194,6 +230,13 @@ public class ClientController implements MessageVisitor {
 
 
     //---------------------------Game Controller Handled------------------------------------------------
+    /**
+     * mathod which communicate to the server that one client want exit from the game
+     * @param msg
+     * @throws IOException
+     * @throws InterruptedException
+     */
+
     @Override
     public void visit(ExitMessage msg) throws IOException, InterruptedException {
         if (!turnCheck())
@@ -204,6 +247,12 @@ public class ClientController implements MessageVisitor {
         }
     }
 
+    /**
+     * mathod which communicate to the server how many player want in is game
+     * @param msg
+     * @throws IOException
+     * @throws InterruptedException
+     */
     @Override
     public void visit(NumberPlayerMessage msg) throws IOException, InterruptedException {
         server.getGameController().handleMessage(msg, this);

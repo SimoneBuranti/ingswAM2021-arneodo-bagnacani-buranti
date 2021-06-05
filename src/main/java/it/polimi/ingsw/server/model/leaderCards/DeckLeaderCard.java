@@ -148,6 +148,10 @@ public class DeckLeaderCard {
     }
 
 
+    /**
+     * @param key
+     * @return return leader card defined whit key
+     */
     public static LeaderCard controlKey(int key){
        for(int i=0; i<cloneOfLeadercard.size(); i++)
            if (key==cloneOfLeadercard.get(i).key)

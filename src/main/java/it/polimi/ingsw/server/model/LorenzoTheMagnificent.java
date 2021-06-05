@@ -96,7 +96,6 @@ public class LorenzoTheMagnificent extends Observable {
         FileWriter config = null;
         String jsonStrin = gson.toJson(servList);
         try {
-            // Constructs a FileWriter given a file name, using the platform's default charset
             config = new FileWriter("src/main/resources/fileConfiguration/LoriMagnific.json");
             config.write(jsonStrin);
         } catch (IOException e) {
@@ -110,9 +109,10 @@ public class LorenzoTheMagnificent extends Observable {
             } } }
 
 
-
-
-    public LorenzoTheMagnificent(int[] list) throws IOException, InterruptedException {
+    /**
+     * this constructor initializes faithIndicator and currCall attributes to old info
+     */
+    public LorenzoTheMagnificent(int[] list) {
         faithIndicator=list[0];
         currCall=list[1];
     }

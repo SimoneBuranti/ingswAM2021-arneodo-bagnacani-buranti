@@ -470,27 +470,37 @@ public class Player {
     }
 
 
-    public boolean isNewMatch() {
-        return newMatch;
-    }
-
+    /**
+     * @return buffer for different use on resource filling
+     */
     public ArrayList<Resource> getBuffer(){
         return  buffer;
     }
 
+    /**
+     * @return personal leader
+     */
     public ArrayList<LeaderCard> getPersonalLeaderCard(){
         ArrayList<LeaderCard> leaderCard = personalLeaderCard;
         return leaderCard;
     }
-
+    /**
+     * return if true or not according to the initial leader coice
+     */
     public boolean isInitLeader() {
         return initLeader;
     }
 
+    /**
+     * @param initLeader set if true or not according to the initial leader coice
+     */
     public void setInitLeader(boolean initLeader) {
         this.initLeader = initLeader;
     }
 
+    /**
+     * generate leader list as key
+     */
     public void getPersonalLeaderCardAskey()
     {
         int k=0;
@@ -501,10 +511,16 @@ public class Player {
             k++; }
     }
 
+    /**
+     * @return leader card as key
+     */
     public int[] getLeaderCard() {
         return leaderCard;
     }
 
+    /**
+     * it does te reverse from key to leader
+     */
     public void reverseAddPersonalLeaderCardAskey()
     {
         for(int i=0; i<getLeaderCard().length; i++)
@@ -512,15 +528,23 @@ public class Player {
             this.personalLeaderCard.add(DeckLeaderCard.controlKey(leaderCard[i]));
         }
     }
-
+    /**
+     * return if true or not according to the initial resource coice
+     */
     public boolean isInitResource() {
         return initResource;
     }
 
+    /**
+     * @param initResource set if true or not according to the initial resource coice
+     */
     public void setInitResource(boolean initResource) {
         this.initResource = initResource;
     }
 
+    /**
+     * @return gameBoardOfPlayer.getPapalCards()
+     */
     public int[] getPapalCards(){
         return gameBoardOfPlayer.getPapalCards();
     }

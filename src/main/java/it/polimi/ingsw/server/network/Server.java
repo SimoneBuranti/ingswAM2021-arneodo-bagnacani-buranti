@@ -9,16 +9,44 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
-
+/**
+ * Main server class that starts a socket server.
+ * It can handle different types of connections.
+ * it organised the creation of the game and also his restoring
+ */
 public class Server {
 
+    /**
+     * manager of the game
+     */
     private GameController gameController;
-    private Game game;
-    private ArrayList<ClientController> clientControllers = new ArrayList<>();
-    private ArrayList<ClientController> tempClientController = new ArrayList<>();
 
+    /**
+     * attribute of the game active or not on server
+     */
+    private Game game;
+
+    /**
+     * client controller connected
+     */
+    private ArrayList<ClientController> clientControllers = new ArrayList<>();
+    /**
+     * client controller in waiting to be reconnected in game
+     */
+    private ArrayList<ClientController> tempClientController = new ArrayList<>();
+    /**
+     * client controller disconnected
+     */
     private ArrayList<ClientController> clientControllersDisconnected = new ArrayList<>();
+    /**
+     * client controller which attempt to be accept in game
+     */
     private ArrayList<String> lobby = new ArrayList<>();
+
+
+    /**
+     * attributes specify under in the code
+     */
     private boolean sendRestartQuestion;
     private int restartQuestion;
     private boolean restartAnswerReceived;
@@ -77,46 +105,77 @@ public class Server {
 
     //------------------------Getter--------------------------------------
 
+    /**
+     * @return lobbby size
+     */
     public int getLobbySize() {
         return lobby.size();
     }
 
 
+    /**
+     * @return gamecontroller
+     */
     public GameController getGameController() {
         return gameController;
     }
 
 
+    /**
+     * @return sendRestartQuestion
+     */
     public boolean getSendRestartQuestion() {
         return sendRestartQuestion;
     }
 
+    /**
+     * @return temporary lobby
+     */
     public ArrayList<ClientController> getTempClientController() {
         return tempClientController;
     }
 
+    /**
+     * @return tempClientController.size() temporary lobby size
+     */
     public int tempClientControllerSize() {
-        System.out.println("qui79");
-
         return tempClientController.size();
     }
 
+    /**
+     * @return restartQuestion
+     */
     public int getRestartQuestion(){
         return restartQuestion;
     }
 
+    /**
+     * @return restartAnswer
+     */
     public boolean isRestartAnswer() {
         return restartAnswer;
     }
 
+    /**
+     * @return restartAnswerReceived
+     */
     public boolean isRestartAnswerReceived() {
         return restartAnswerReceived;
     }
 
+    /**
+     * @return restartQuestionSent
+     */
     public boolean isRestartQuestionSent() {
         return restartQuestionSent;
     }
 
+
+
+    /**
+     * @param nickname
+     * @return false or true according to the presence or not of the player in lobby
+     */
     public boolean isInLobby(String nickname){
         for (String nick : lobby){
             if(nick.equals(nickname))
@@ -128,6 +187,11 @@ public class Server {
 
     //--------------------------------------------------------------------
 
+    /**
+     * method which create singleplayer game, after  the client number player choice
+     * @throws IOException
+     * @throws InterruptedException
+     */
     public void initNewSolitaireGame() throws IOException, InterruptedException {
 
 
@@ -139,6 +203,12 @@ public class Server {
     }
 
 
+    /**
+     * method which create multiplayer game, after  the relative filing of the lobby
+     * @throws IOException
+     * @throws InterruptedException
+     */
+
     public void initNewMultiplayerGame() throws IOException, InterruptedException {
         this.game = new GameMultiPlayer(lobby.size(),lobby,true,clientControllers);
 
@@ -149,12 +219,22 @@ public class Server {
         }
     }
 
+    /**
+     * method which restore singleplayer game, after a total disconnection or server crashing, and the relative filing of the lobby
+     * @throws IOException
+     * @throws InterruptedException
+     */
     public void restoreGameSingleBackup() throws IOException, InterruptedException {
         this.game=new GameSolitaire(clientControllers.get(0).getNickname(),false,clientControllers.get(0));
 
         clientControllers.get(0).setGame(this.game);
     }
 
+    /**
+     * method which restore multiplayer game, after a total disconnection or server crashing, and the relative filing of the lobby
+     * @throws IOException
+     * @throws InterruptedException
+     */
     public void restoreGameMultiBackup() throws IOException, InterruptedException {
         this.clientControllers=orderRestart();
         this.game=new GameMultiPlayer(this.getLobbySize(),lobby,false,clientControllers);
@@ -163,44 +243,72 @@ public class Server {
         }
     }
 
+    /**
+     * @param clientController add to client controller
+     */
 
     public void addClientController(ClientController clientController){
         clientControllers.add(clientController);
     }
 
+    /**
+     * @param clientController is removed from clientcontroller list
+     */
     public void removeClientController(ClientController clientController){
         clientControllers.remove(clientController);
     }
 
+    /**
+     * @return clientControllers, list of client Controllers
+     */
     public ArrayList<ClientController> getClientController(){
         return clientControllers;
     }
     //------------------------Setter--------------------------------------
 
+    /**
+     * method which set sendRestartQuestion
+     */
     public void setSendRestartQuestion(){
         sendRestartQuestion = false;
     }
 
+    /**
+     * @param restartAnswerReceived set if answer restart was received or not
+     */
     public void setRestartAnswerReceived(boolean restartAnswerReceived) {
         this.restartAnswerReceived = restartAnswerReceived;
     }
 
+    /**
+     * @param restartQuestionSent if restart question has to be sent or not
+     */
     public void setRestartQuestionSent(boolean restartQuestionSent) {
         this.restartQuestionSent = restartQuestionSent;
     }
 
+    /**
+     * @param restartAnswer if restart answer is true or not
+     */
     public void setRestartAnswer(boolean restartAnswer) {
         this.restartAnswer = restartAnswer;
     }
+
+
+
+    /**
+     * @param clientController add to temp lobby
+     *
+     */
 
     public void addTempClientController(ClientController clientController){
         tempClientController.add(clientController);
     }
 
-    public void removeTempClientController(ClientController clientController){
-        tempClientController.remove(clientController);
-    }
 
+    /**
+     * method call when restart question is sent
+     */
     public void setRestartQuestion(){
         if(restartQuestion == 0)
             restartQuestion = 1;
@@ -208,11 +316,19 @@ public class Server {
             restartQuestion = 0;
     }
 
+    /**
+     * set the correct game controller according to disconnection/reconnection/startMatch/lobby/emptyServer
+     * @param gameController
+     */
     public synchronized void  setGameController(GameController gameController) {
         this.gameController = gameController;
     }
 
 
+    /**
+     * @param nickname add to lobby
+     * @return true if the operation was succesful
+     */
     public synchronized boolean addPlayerToLobby(String nickname){
         for(String nick : lobby){
             if (nick.equals(nickname))
@@ -222,6 +338,10 @@ public class Server {
         return true;
     }
 
+
+    /**
+     * @param nickname is removed from lobby list
+     */
     public synchronized void removePlayerToLobby(String nickname){
         for(int i=0;i<lobby.size();i++){
             if (lobby.get(i).equals(nickname)) {
@@ -231,12 +351,18 @@ public class Server {
         }
     }
 
+
+    /**
+     * reset lobby info
+     */
     public synchronized void restartLobby(){
         lobby = new ArrayList<>();
     }
 
 
-
+    /**
+     * @return game in progress
+     */
     public Game getGame(){
         return this.game;
     }
@@ -244,6 +370,9 @@ public class Server {
         this.clientHandlers.add(clientHandler);
     }*/
 
+    /**
+     * @return reorder client old controller from file information
+     */
     public ArrayList<ClientController> orderRestart(){
         ArrayList<ClientController> client = new ArrayList<>();
         for(int i=0; i<lobby.size();i++)
@@ -254,21 +383,34 @@ public class Server {
         return client;
     }
 
+    /**
+     * @return list of client controller disconnected
+     */
     public ArrayList<ClientController> getClientControllersDisconnected() {
         return clientControllersDisconnected;
     }
 
+
+    /**
+     * @param i index of the old client controller
+     * @return the reconnected client controller is removed from the list of client disconnected
+     */
     public ClientController removeClientControllersDisconnected(int i){
         return clientControllersDisconnected.remove(i);
     }
 
+    /**
+     * add client contreoller when this client controller digits exit on cli, or due by ping disconnection
+     * @param clientController the disconnected client
+     */
     public void addClientControllersDisconnected(ClientController clientController){
-        System.out.println(this.getClientController().size() + " " + "loooc");
-        System.out.println(this.getClientControllersDisconnected().size() + " " + "cooooc");
         clientControllersDisconnected.add(clientController);
         clientControllers.remove(clientController);
     }
 
+    /**
+     * resetAll server info at the end of the game, to be ready for a new game
+     */
     public void resetInfo(){
          this.game=null;
         clientControllers = new ArrayList<>();
@@ -283,6 +425,9 @@ public class Server {
         this.gameController = new GameControllerEmpty(this);
         gameController.setServer(this);
     }
+    /**
+     * reset Partial server info when all clients of the match were disconnected
+     */
 
     public void resetInfoPartial() throws FileNotFoundException{
         this.game=null;

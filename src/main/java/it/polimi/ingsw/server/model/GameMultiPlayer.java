@@ -185,12 +185,7 @@ public class GameMultiPlayer extends Game {
         }
     }
 
-    /**
-     * this method returns the number of participant in the game
-     */
-    public int getNumberOfPlayer() {
-        return numberOfPlayer;
-    }
+
 
     /**
      * this method creates all the players in the game starting from the number of players and their nicknames
@@ -327,6 +322,10 @@ public class GameMultiPlayer extends Game {
     }
 
 
+    /**
+     * method which set not connected nickname
+     * @param nickname is disconnected
+     */
     public void disconnectPlayerOption(String nickname) {
         for(int i=0; i<playerList.size(); i++){
             if(playerList.get(i).getNickName().equals(nickname) && playerList.get(i).isConnected())
@@ -465,6 +464,9 @@ public class GameMultiPlayer extends Game {
     }
 
 
+    /**
+     * save information the inkwell
+     */
 
     private void saveInformationOfInkwel() { Gson gson = new Gson();
         FileWriter config = null;
@@ -484,6 +486,9 @@ public class GameMultiPlayer extends Game {
             } }
     }
 
+    /**
+     * save information te saveCurrentPosition of the current
+     */
 
     private void saveCurrentPosition() {
         Gson gson = new Gson();
@@ -503,7 +508,9 @@ public class GameMultiPlayer extends Game {
                 e.printStackTrace();
             } } }
 
-
+    /**
+     * save information if is te last turn or not
+     */
 
     private void saveIfLastTurnOrNot() {
         Gson gson = new Gson();
@@ -523,7 +530,9 @@ public class GameMultiPlayer extends Game {
                 e.printStackTrace();
             } } }
 
-
+    /**
+     * save information about turn
+     */
 
     private void saveInformationAboutTurn() {
         Gson gson = new Gson();
@@ -606,7 +615,11 @@ public class GameMultiPlayer extends Game {
     }
 
 
-
+    /**
+     * this metod restore player after total disconnection or server crashing
+     * @throws IOException
+     * @throws InterruptedException
+     */
 
     public void reConfigClient() throws IOException, InterruptedException {
         super.configClient();
@@ -698,15 +711,16 @@ public class GameMultiPlayer extends Game {
         notifyAllObserverLessOne(new ChangeTurnMessage(currentPlayer.getNickName()));}
 
 
-
+    /**
+     * this method recover all information request from client, about opponent player
+     * @throws IOException
+     * @throws InterruptedException
+     */
     public void askInfoOnPlayer(int n, String nickname) throws IOException, InterruptedException {
         if(n<numberOfPlayer || n==numberOfPlayer){
             int[][] list = new int[3][3];
-            System.out.println("sono 1");
             for (int i=0; i<3;i++){
                 for (int j=0; j<3;j++ ){
-                    System.out.println("sono i ." + i);
-                    System.out.println("sono j ." + j);
                     if (playerList.get(n-1).getGameBoardOfPlayer().getDevelopmentBoardCell(i,j)==null)
                         list[i][j]=0;
                     else
@@ -715,13 +729,9 @@ public class GameMultiPlayer extends Game {
 
             ArrayList<Integer> needForLeader2 = new ArrayList<>();
             if (playerList.get(n-1).getGameBoardOfPlayer().getLeaderCardsActivated().size()>0){
-                System.out.println("sono attivato impossibbile");
                 for (int i=0; i<playerList.get(n-1).getGameBoardOfPlayer().getLeaderCardsActivated().size();i++)
-                    needForLeader2.add(playerList.get(n-1).getGameBoardOfPlayer().getLeaderCardsActivated().get(i).getKey());}
-
-
-            System.out.println("sono 3");
-
+                    needForLeader2.add(playerList.get(n-1).getGameBoardOfPlayer().getLeaderCardsActivated().get(i).getKey());
+            }
 
 
 
@@ -738,7 +748,7 @@ public class GameMultiPlayer extends Game {
                         howMany1=2-playerList.get(n-1).getGameBoardOfPlayer().getStorageOfGameBoard().getNumExtraFirstAvailable();
                     }
                 }
-                if(playerList.get(n-1).getGameBoardOfPlayer().getLeaderCardsActivated()!=null && playerList.get(n-1).getGameBoardOfPlayer().getLeaderCardsActivated().get(1)!=null){
+                if(playerList.get(n-1).getGameBoardOfPlayer().getLeaderCardsActivated().get(1)!=null){
                     if(playerList.get(n-1).getGameBoardOfPlayer().getLeaderCardsActivated().get(1) instanceof LeaderCardStorage)
                     {
                         resource2=playerList.get(n-1).getGameBoardOfPlayer().getLeaderCardsActivated().get(0).getResourceEffect();
@@ -758,6 +768,13 @@ public class GameMultiPlayer extends Game {
         }
         else
             notifyOnlyOneSpecificObserver(new NoPlayersErrorMessage(),nickname);}
+
+
+    /**
+     * this metod restore player after total disconnection or server crashing
+     * @throws IOException
+     * @throws InterruptedException
+     */
 
     public void configWhitPlayerInfo(Player p, int pos) throws IOException, InterruptedException {
         notifyOnlyOneSpecificObserver(new PositionMessage(pos), p.getNickName());

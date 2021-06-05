@@ -10,12 +10,18 @@ public class SocketServer {
     ServerSocket serverSocket;
     private final int portNumber;
 
-
+    /**
+     * Socket server that handles all the new socket connection.
+     */
     public SocketServer(Server server, int port){
         this.portNumber = port;
         this.server = server;
     }
 
+    /**
+     * asynchronously accepts connection request of a new client.
+     *
+     */
     public void create(){
 
         try {
@@ -42,8 +48,4 @@ public class SocketServer {
         executor.shutdown();
     }
 
-
-    public int getPortNumber() {
-        return portNumber;
-    }
 }

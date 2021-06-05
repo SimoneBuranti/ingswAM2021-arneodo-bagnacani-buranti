@@ -480,6 +480,12 @@ public class GameSolitaire extends Game {
     }
 
 
+    /**
+     * this metod restore te game after total disconnection or server crashing
+     * @param clientController
+     * @throws IOException
+     * @throws InterruptedException
+     */
     public void  restoreGameSolitaire(ClientController clientController) throws IOException, InterruptedException {
 
         Gson gson=new Gson();
@@ -512,7 +518,9 @@ public class GameSolitaire extends Game {
 
     }
 
-
+    /**
+     * method for saveNickNamePlayer
+     */
 
     public void saveNickNamePlayer(){
         Gson gson = new Gson();
@@ -583,7 +591,11 @@ public class GameSolitaire extends Game {
         //    e.printStackTrace();
         //}
     }
-
+    /**
+     * this metod restore player after total disconnection or server crashing
+     * @throws IOException
+     * @throws InterruptedException
+     */
     public void reConfigClient() throws IOException, InterruptedException {
         super.configClient();
         notifyObserver(new UpdateInitBooleanMessage(player.isInitLeader(),player.isInitResource()));
