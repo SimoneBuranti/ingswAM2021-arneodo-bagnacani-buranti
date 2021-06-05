@@ -165,7 +165,7 @@ public class Game extends Observable {
      */
     public void initResourceOfPlayer(Resource resource) throws IOException, InterruptedException {
         try {
-            //System.out.println("Curent player "+ currentPlayer);
+
             currentPlayer.initResource(resource);
         } catch (CallForCouncilException e) {
             exceptionHandler(e);
@@ -199,6 +199,10 @@ public class Game extends Observable {
 
     }
 
+    /**
+     * @param deckNumber
+     * @return key of the deck
+     */
     public DeckProductionCard deckFromDeckNumber(int deckNumber){
         for(DeckProductionCard deck : productionCardDecks)
             if(deck.getDeckNumber() == deckNumber)
@@ -428,14 +432,33 @@ public class Game extends Observable {
         notifyObserver(new ChangeMarketMessageColumn(chosenColumn));
     }
 
+    /**
+     * notify all virtual view about reserve for opponent, and reserve and storage for current
+     * @param buffer
+     * @throws IOException
+     * @throws InterruptedException
+     */
     public void notifyResultFromMarket(ArrayList<Resource> buffer) throws IOException, InterruptedException {
         notifyToOneObserver(new ResultFromMarketMessage(buffer) );
         notifyAllObserverLessOne(new ResultFromMarketNotCurrentMessage(currentPlayer.getNickName(),buffer) );
     }
 
+    /**
+     * notify all virtual view about market changes
+     * @param chosenColumn
+     * @throws IOException
+     * @throws InterruptedException
+     */
     public void notifyFromClientControllerColumn(int chosenColumn) throws IOException, InterruptedException {
         notifyObserver(new ChangeMarketMessageColumn(chosenColumn));
     }
+
+    /**
+     * notify all virtual view about market changes
+     * @param chosenRow
+     * @throws IOException
+     * @throws InterruptedException
+     */
     public void notifyFromClientControllerRow(int chosenRow) throws IOException, InterruptedException {
         notifyObserver(new ChangeMarketMessageRow(chosenRow));
     }
@@ -754,10 +777,25 @@ public class Game extends Observable {
      */
     public void endGame() throws IOException, InterruptedException {}
 
+
+    /**
+     * method which gave resource to current
+     * @param list
+     * @throws NotEnoughSpaceInStorageException
+     * @throws IOException
+     * @throws InterruptedException
+     */
     public void giveResourceFromClient(ArrayList<Resource> list) throws NotEnoughSpaceInStorageException, IOException, InterruptedException {
         currentPlayer.takeResourceFromClientToGameboard(list);
     }
 
+    /**
+     * method which gave resource to current, to the buffer of the client for verify the correctness of the new buffer
+     * @param whiteMarbleList
+     * @throws NotEnoughSpaceInStorageException
+     * @throws IOException
+     * @throws InterruptedException
+     */
     public void continueTakeFromMarketAfterChoosenWhiteMarble(ArrayList<Resource> whiteMarbleList) throws NotEnoughSpaceInStorageException, IOException, InterruptedException {
         for(Resource r : whiteMarbleList){
             currentPlayer.addToBuffer(r);
@@ -766,6 +804,12 @@ public class Game extends Observable {
         currentPlayer.takeFromMarket();
     }
 
+
+    /**
+     * this metod restore player after total disconnection or server crashing
+     * @throws IOException
+     * @throws InterruptedException
+     */
 
     protected void configClient() throws IOException, InterruptedException {
         notifyObserver(new DeckProductionCardConfigMessage(deckProductionCardThreeGreen.getDeckNumber(),deckProductionCardThreeGreen.getDeck()));
@@ -791,6 +835,12 @@ public class Game extends Observable {
     }
 
 
+    /**
+     * this metod restore player after total disconnection or server crashing
+     * @throws IOException
+     * @throws InterruptedException
+     */
+
     protected void configClientReconnected(String nickname) throws IOException, InterruptedException {
         notifyOnlyOneSpecificObserver(new DeckProductionCardConfigMessage(deckProductionCardThreeGreen.getDeckNumber(),deckProductionCardThreeGreen.getDeck()), nickname);
         notifyOnlyOneSpecificObserver(new DeckProductionCardConfigMessage(deckProductionCardThreeBlu.getDeckNumber(),deckProductionCardThreeBlu.getDeck()), nickname);
@@ -813,10 +863,16 @@ public class Game extends Observable {
 
 ////
 
+    /**
+     * @return match is over or not
+     */
     public boolean isOver() {
         return isOver;
     }
 
+    /**
+     * @param bool match is over or not
+     */
     public void setOver(boolean bool) {
         this.isOver=bool;
     }

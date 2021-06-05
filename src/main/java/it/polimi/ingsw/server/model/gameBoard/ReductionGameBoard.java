@@ -80,6 +80,11 @@ public class ReductionGameBoard extends GameBoardDecorator{
         return resourceTypeFirst;
     }
 
+    /**
+     * @param i
+     * @param j
+     * @return it return DevelopmentBoardCell(i, j)
+     */
     @Override
     public ProductionCard getDevelopmentBoardCell(int i, int j) {
         return gameBoard.getDevelopmentBoardCell(i, j);

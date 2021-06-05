@@ -116,7 +116,9 @@ public class DeckActionMarker extends Observable {
             } } }
 
 
-
+    /**
+     * @return Gson adapter for deckactionMarker saving and restoring
+     */
 
     public static Gson DeckActionMarkerSaving(){
 

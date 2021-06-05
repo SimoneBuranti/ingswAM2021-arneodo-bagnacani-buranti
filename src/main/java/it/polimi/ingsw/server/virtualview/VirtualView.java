@@ -6,6 +6,9 @@ import it.polimi.ingsw.server.controller.ClientController;
 
 import java.io.IOException;
 
+/**
+ * all clients have a virtual view  on server, which notify about model changes
+ */
 public class VirtualView implements Observer {
 
     private ClientController clientController;
@@ -20,6 +23,10 @@ public class VirtualView implements Observer {
         this.clientController = clientController;
     }
 
+
+    /**
+     * @param clientController set tthe right client controller
+     */
     public void setClientController(ClientController clientController) {
         this.clientController = clientController;
     }

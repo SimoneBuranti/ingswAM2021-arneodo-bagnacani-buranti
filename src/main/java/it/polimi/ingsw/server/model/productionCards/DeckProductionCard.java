@@ -112,6 +112,9 @@ public abstract class DeckProductionCard extends Observable {
     public void saveInformationOfProductionDeck(){ }
 
 
+    /**
+     * @return Gson adapter for market saving and restoring
+     */
     public static Gson gsonForEveryoneDeckProduction(){
 
         RuntimeTypeAdapterFactory<Colour> adapterColour =
@@ -129,12 +132,17 @@ public abstract class DeckProductionCard extends Observable {
         return gson;
     }
 
+    /**
+     * @return decknumber
+     */
     public int getDeckNumber() {
         return deckNumber;
     }
 
 
-
+    /**
+     * @return coosen deck
+     */
     public ArrayList<Integer> getDeck(){
         ArrayList<Integer> list = new ArrayList<Integer>();
         return list;

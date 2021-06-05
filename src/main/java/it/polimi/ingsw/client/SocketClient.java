@@ -10,12 +10,24 @@ import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 
+/**
+ * socket client read messages from server(clientHandler) and send message to the server(clientHandler)
+ */
 public class SocketClient {
 
     private final Socket serverSocket;
+
     private ViewController viewController;
+
     private BufferedReader in;
+
     private PrintWriter out;
+
+
+
+    /**
+     * two values utils for check if the server is active or not
+     */
     private int ack;
     private boolean checkServer;
 
@@ -29,9 +41,11 @@ public class SocketClient {
 
     }
 
+    /**
+     * Asynchronously reads a message from the server via socket and notifies the viewController.
+     */
 
     public void readMessage(){
-
 
         ScheduledThreadPoolExecutor pinger = new ScheduledThreadPoolExecutor(1);
         pinger.scheduleAtFixedRate( () -> {
@@ -76,6 +90,11 @@ public class SocketClient {
 
     }
 
+    /**
+     * read a message to the server via socket, and pass it to view contreoller.
+     *
+     * @param msg  the message to be read.
+     */
 
     public synchronized void readMessageClient(String msg) throws IOException, InterruptedException {
         //System.out.println(msg);
@@ -83,6 +102,12 @@ public class SocketClient {
         parsedMsg.accept(viewController);
     }
 
+
+    /**
+     * Sends a message to the server via socket.
+     *
+     * @param message the message to be sent.
+     */
     public synchronized void sendMessage(Message message){
 
         String msg = message.serialize();
@@ -90,6 +115,9 @@ public class SocketClient {
         out.println(msg);
     }
 
+    /**
+     * Disconnect the socket from the server.
+     */
     public void disconnect() throws IOException {
         in.close();
         out.close();
@@ -97,10 +125,17 @@ public class SocketClient {
         System.exit(0);
     }
 
+
+    /**
+     * @return checkserver
+     */
     public boolean isCheckServer() {
         return checkServer;
     }
 
+    /**
+     * @param checkServer set by ping of server
+     */
     public void setCheckServer(boolean checkServer) {
         this.checkServer = checkServer;
     }

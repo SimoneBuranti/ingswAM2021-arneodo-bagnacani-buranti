@@ -39,12 +39,6 @@ public class ClientHandler implements Runnable {
      */
     private String outputStreamForTests;
 
-    /**
-     * This attribute is used in tests only in order to change the "outputStream" during tests;
-     */
-    //private final boolean testMode=true;
-
-
 
     public ClientHandler(Socket client, Server server) throws IOException {
         this.socketClient = client;
@@ -80,14 +74,13 @@ public class ClientHandler implements Runnable {
         this.clientController = clientController;
     }
 
-    public InputStream getInputStream() {
-        return inputStream;
-    }
 
-    public OutputStream getOutputStream() {
-        return outputStream;
-    }
-
+    /**
+     * Handles the connection of a new client and keep listening to the socket for new messages.
+     * used also for response and check if the pinger communication is still active
+     *
+     * @throws IOException any of the usual Input/Output related exceptions.
+     */
     public void run() {
 
         try {
@@ -159,34 +152,40 @@ public class ClientHandler implements Runnable {
             Thread.currentThread().interrupt();
         }
 
-
+    /**
+     * read message from the client via socket.
+     *
+     * @param msg the message to be read.
+     */
     public synchronized void readMessageServer(String msg) throws IOException, InterruptedException {
 
             Message parsedMsg = Message.deserialize(msg);
-        System.out.println(server.getClientController().size() + " " + "lc");
-        System.out.println(server.getClientControllersDisconnected().size() + " " + "cc");
-
-        System.out.println(clientController.getNickname() + " " + parsedMsg.getMessageType()+"leggo da server");
-
-             parsedMsg.accept(clientController);
+            parsedMsg.accept(clientController);
 
     }
-
+    /**
+     * Sends a message to the client via socket.
+     *
+     * @param msg the message to be sent.
+     */
     public synchronized void sendMessage (Message msg) throws InterruptedException, IOException {
-        System.out.println(clientController.getNickname() + " " + msg.getMessageType()+" invio da server  ("+msg+")");
-
         writeStream.println(msg.serialize());
         writeStream.flush();
 
     }
 
+    /**
+     * Disconnects due to pingDisconnection
+     */
     public void pingDisconnection() throws IOException, InterruptedException {
-        System.out.println("poi qui" + ack);
+
             server.getGameController().handleMessage(new ExitMessage(), this.clientController);
-        System.out.println("esco da qui?" + ack);
 
     }
 
+    /**
+     * Disconnects fte clientandler due to exit or pingDisconnection
+     */
     public void disconnect() throws IOException, InterruptedException {
 
         if(!disconnectedDueExit)
@@ -207,6 +206,8 @@ public class ClientHandler implements Runnable {
         return pongo;
     }
 
+
+
     /**
      * @param pongo set for response to ping client
      */
@@ -225,14 +226,6 @@ public class ClientHandler implements Runnable {
         return clientController;
     }
 
-    /**
-     *Test Only method
-     */
-    public String getOutputStreamForTests() {
-        String out = outputStreamForTests;
-        outputStreamForTests = null;
-        return out;
-    }
 
 }
 

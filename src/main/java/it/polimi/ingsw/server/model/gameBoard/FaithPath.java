@@ -142,6 +142,9 @@ public class FaithPath {
         return papalCards[papalCardNumber];
     }
 
+    /**
+     * @return papalCard
+     */
     public int[] getPapalCards(){
         return papalCards;
     }
