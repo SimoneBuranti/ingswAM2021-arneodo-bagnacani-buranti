@@ -34,9 +34,7 @@ public class PlayerInformatioFrames extends JFrame {
     private PBackground mainPanel;
 
     protected JLayeredPane[] productionSpaces;
-    protected BaseProductionPanel baseProductionPanel;
     protected JLabel[][] productionCards;
-    protected JButton[] productionButtons;
     protected FaithPathPane faithPathPane;
     protected StoragePanel storagePanel;
     protected StrongBoxPanel strongboxPanel;
@@ -147,9 +145,6 @@ public class PlayerInformatioFrames extends JFrame {
 
         for(int i = 0 ; i<3; i++){
             if (productionCards[i][column] == null){
-
-                if (i == 0)
-                    productionButtons[column].setEnabled(true);
 
                 productionCards[i][column] = cardLabel;
 

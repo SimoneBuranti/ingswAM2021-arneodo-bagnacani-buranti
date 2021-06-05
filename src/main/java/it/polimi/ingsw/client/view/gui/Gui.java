@@ -910,12 +910,11 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
             for(PlayerInformatioFrames frame : playerInformatioFrames){
                 if(frame.getNickName().equals(msg.getNickname())){
-                    System.out.println("In teoria ci sono entrato");
                     frame.showOpponent(msg);
+                    frame.paintComponents(frame.getGraphics());
                 }
 
             }
-            System.out.println("Sono appena uscito dal for di stampa delle informazione del giocatore");
         });
     }
 

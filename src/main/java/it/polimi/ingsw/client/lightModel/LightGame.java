@@ -256,6 +256,14 @@ public class LightGame extends ViewObservable {
 
     }
 
+    public void buyProductionCardOpponent(int deckNumber) throws IOException, InterruptedException {
+        for(LightDeckProductionCard deck : listOfDeck){
+            if(deck.getNumberDeck() == deckNumber)
+                reserve.addResource(deck.pickUpFirstCard().getCost());
+        }
+        notifyObserver(new ReserveNotification(reserve.getReserve()).serialize());
+    }
+
     public void payResourcesProduction(ArrayList<Resource> list) throws IOException, InterruptedException {
 
     }

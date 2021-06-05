@@ -414,6 +414,13 @@ public class ViewController implements MessageVisitor, ViewObserver {
 
     @Override
     public void visit(TakeCardForNotCurrentMessage msg) {
+        try {
+            game.buyProductionCardOpponent(msg.getNumberDeck());
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         view.showOpponentAction(msg);
 
     }

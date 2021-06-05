@@ -82,4 +82,9 @@ public class LightReserve {
         return reservePools;
     }
 
+    public void addResource(Map<Resource, Integer> cost) {
+        for(Resource resource : cost.keySet()){
+            reservePools.put(resource, reservePools.remove(resource) + cost.get(resource));
+        }
+    }
 }
