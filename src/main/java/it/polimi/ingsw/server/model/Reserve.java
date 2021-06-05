@@ -65,6 +65,12 @@ public class Reserve extends Observable {
         throw new UnavailableResourceException();
     }
 
+    public void removeResources(Map<Resource,Integer> map){
+        for(Resource resource : map.keySet()){
+            reservePools.put(resource, reservePools.remove(resource) - map.get(resource));
+        }
+    }
+
     /**
      * Test only method: getter method for the amount of the resource passed as a parameter in the reserve
      * @param resource : type of resource

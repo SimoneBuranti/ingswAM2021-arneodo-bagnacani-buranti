@@ -3,11 +3,10 @@ package it.polimi.ingsw.server.network;
 import com.google.gson.Gson;
 import it.polimi.ingsw.server.controller.*;
 import it.polimi.ingsw.server.model.*;
+import it.polimi.ingsw.server.model.gameBoard.GameBoardInterface;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 
@@ -32,11 +31,32 @@ public class Server {
             ArrayList<String> nickNameInOrder;
             String nickname;
             Gson gson = new Gson();
-            File f = new File("src/main/resources/fileConfiguration/InformationAboutTurn.json");
+            //File f = new File("src/main/resources/fileConfiguration/InformationAboutTurn.json");
+
+            try{
+                Reader reader = new InputStreamReader(this.getClass().getResourceAsStream("/fileConfiguration/InformationAboutTurn.json"), StandardCharsets.UTF_8);
+                nickNameInOrder = gson.fromJson(reader, ArrayList.class);
+                //nickNameInOrder = gson.fromJson(new FileReader("src/main/resources/fileConfiguration/InformationAboutTurn.json"),ArrayList.class);
+                this.gameController = new GameControllerRestart(this);
+                gameController.setServer(this);
+                lobby = nickNameInOrder;
+                sendRestartQuestion = true;
+                restartQuestion = 0;
+                setRestartAnswerReceived(false);
+                restartQuestionSent = false;
+                gameController.setNumberOfPlayers(nickNameInOrder.size());
+            }catch (NullPointerException e){
+                this.gameController = new GameControllerEmpty(this);
+                gameController.setServer(this);
+                lobby = new ArrayList<>();
+                sendRestartQuestion = false;
+            }
 
 
-            if (f.exists()){
-                nickNameInOrder = gson.fromJson(new FileReader("src/main/resources/fileConfiguration/InformationAboutTurn.json"),ArrayList.class);
+            /*if (f.exists()){
+                Reader reader = new InputStreamReader(this.getClass().getResourceAsStream("/fileConfiguration/InformationAboutTurn.json"), StandardCharsets.UTF_8);
+                nickNameInOrder = gson.fromJson(reader, ArrayList.class);
+                //nickNameInOrder = gson.fromJson(new FileReader("src/main/resources/fileConfiguration/InformationAboutTurn.json"),ArrayList.class);
                 this.gameController = new GameControllerRestart(this);
                 gameController.setServer(this);
                 lobby = nickNameInOrder;
@@ -51,7 +71,7 @@ public class Server {
             gameController.setServer(this);
             lobby = new ArrayList<>();
             sendRestartQuestion = false;
-        }
+        }*/
 
     }
 

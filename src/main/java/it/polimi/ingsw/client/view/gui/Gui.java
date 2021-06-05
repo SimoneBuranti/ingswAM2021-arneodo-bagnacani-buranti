@@ -31,7 +31,6 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
     private JFrame mainFrame;
     private PanelContainer container;
 
-    private JButton submitButton;
     private JButton yesButton;
     private JButton noButton ;
     private JButton enterButton ;
@@ -64,7 +63,8 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
         SwingUtilities.invokeLater(() -> {
 
             mainFrame = new JFrame("Masters Of Renaissance");
-            mainFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            //mainFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
             mainFrame.setLocation(450,208);
             mainFrame.setSize(820,420);
 
@@ -112,8 +112,10 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
             container.setLayout(new FlowLayout());
 
-            submitButton= new JButton("How many players?");
-            submitButton.setSize(new Dimension(300,100));
+            JLabel questionLabel= new JLabel("How many players?");
+            questionLabel.setOpaque(true);
+            questionLabel.setBackground(Color.WHITE);
+            questionLabel.setBorder(BorderFactory.createBevelBorder(0));
 
             oneButton= new JButton("1");
             oneButton.setSize(new Dimension(10,5));
@@ -127,7 +129,7 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
             fourButton= new JButton("4");
             fourButton.setSize(new Dimension(10,5));
 
-            container.add(submitButton);
+            container.add(questionLabel);
             container.add(oneButton);
             container.add(twoButton);
             container.add(threeButton);
@@ -173,6 +175,9 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
             clear(container);
             container.setLayout(new FlowLayout());
             lobbyLabel = new JLabel("Please wait for the missing players to start the game...");
+            lobbyLabel.setOpaque(true);
+            lobbyLabel.setBackground(Color.WHITE);
+            lobbyLabel.setBorder(BorderFactory.createBevelBorder(0));
             container.add(lobbyLabel);
             applyChangesTo(container);
         });
@@ -240,8 +245,10 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
             clear(container);
 
             container.setLayout(new FlowLayout());
-            submitButton= new JButton("Do you want restart the previous match?");
-            submitButton.setSize(new Dimension(200,100));
+            JLabel restartQuestion = new JLabel("Do you want restart the previous match?");
+            restartQuestion.setOpaque(true);
+            restartQuestion.setBackground(Color.WHITE);
+            restartQuestion.setBorder(BorderFactory.createBevelBorder(0));
 
             yesButton= new JButton("yes");
             yesButton.setSize(new Dimension(50,10));
@@ -249,13 +256,13 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
             noButton= new JButton("no");
             noButton.setSize(new Dimension(50,10));
-            container.add(submitButton);
+            container.add(restartQuestion);
             container.add(noButton);
             container.add(yesButton);
             this.yesButton.addActionListener(eYES -> {
 
                         container.remove(yesButton);
-                        container.remove(submitButton);
+                        container.remove(restartQuestion);
                         container.remove(noButton);
                         chosenResumeGame = true;
                 (new Thread(() -> {
@@ -266,7 +273,7 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
                this.noButton.addActionListener(eNO -> {
 
                         container.remove(yesButton);
-                        container.remove(submitButton);
+                        container.remove(restartQuestion);
                         container.remove(noButton);
                         chosenResumeGame = false;
                            (new Thread(() -> {
@@ -403,7 +410,9 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
             container.setLayout(new FlowLayout());
 
             lobbyLabel = new JLabel("There are " + playersInLobby + " players in the lobby out of " + playerInGame +", waiting for the missing players to start the game...");
-
+            lobbyLabel.setOpaque(true);
+            lobbyLabel.setBackground(Color.WHITE);
+            lobbyLabel.setBorder(BorderFactory.createBevelBorder(0));
 
             container.add(lobbyLabel);
 
@@ -797,6 +806,9 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
             container.add(errorLabel);
             errorLabel.setLocation(475,108);
             errorLabel.setSize(100,100);
+            errorLabel.setOpaque(true);
+            errorLabel.setBackground(Color.WHITE);
+            errorLabel.setBorder(BorderFactory.createBevelBorder(0));
             applyChangesTo(container);
 
 

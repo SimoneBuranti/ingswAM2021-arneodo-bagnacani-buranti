@@ -17,13 +17,14 @@ import java.io.IOException;
 public class MarketFrame extends JFrame{
     private static final int marketWidth = 390;
     private static final int marketHeight = 504;
-    private static final int marbleWidth = 44;
-    private static final int marbleHeight = 44;
+    private static final int marbleWidth = 40;
+    private static final int marbleHeight = 40;
     private final static int marketX = 20;
     private final static int marketY = 122;
 
     private Gui gui;
     private PanelContainer container;
+    private JPanel blackPanel;
 
     private JPanel gridPanel;
     private JPanel extraPanel;
@@ -74,9 +75,16 @@ public class MarketFrame extends JFrame{
             background.setLayout(null);
             this.add(background);
 
+            blackPanel = new JPanel();
+            blackPanel.setBackground(new Color(28, 28, 28));
+            blackPanel.setBounds(60, 57, 257, 205);
+            blackPanel.setOpaque(true);
+
             container = new PanelContainer();
             container.setBounds(0, 0, marketWidth, marketHeight);
             background.add(container);
+
+            container.add(blackPanel);
 
 
 
@@ -184,36 +192,39 @@ public class MarketFrame extends JFrame{
     public void setMarbleGrid(Marble[][] grid){
         //SwingUtilities.invokeLater(() -> {
             if(gridPanel != null)
-                clear(container);
+                clear(blackPanel);
             container.setLayout(null);
+        blackPanel.setLayout(null);
             gridPanel = new JPanel();
             gridPanel.setOpaque(true);
             gridPanel.setBackground(new Color(28, 28, 28));
-            gridPanel.setLayout(new GridLayout(3, 4));
-            gridPanel.setBounds(100, 95, 192, 144);
+            gridPanel.setLayout(new GridLayout(3, 4, 5,5));
+            //gridPanel.setBounds(43, 40, 192, 144);
+            gridPanel.setBounds(52, 55, 175, 130);
 
             for (int i = 0; i < 3; i++) {
                 for (int j = 0; j < 4; j++) {
                     gridPanel.add(getMarble(grid[i][j].getColour()));
                 }
             }
-            container.add(gridPanel);
-            applyChangesTo(container);
+            blackPanel.add(gridPanel);
+            applyChangesTo(blackPanel);
             //this.repaint();
         //});
     }
 
     public void setMarbleExtra(Marble extra){
         //SwingUtilities.invokeLater(() -> {
-            container.setLayout(null);
+        blackPanel.setLayout(null);
+        //container.setLayout(null);
             extraPanel = new JPanel();
             extraPanel.setOpaque(false);
             extraPanel.setSize(marbleWidth, marbleHeight);
-            extraPanel.setLocation(250, 45);
+            extraPanel.setLocation(200, 0);
 
             extraPanel.add(getMarble(extra.getColour()));
-            container.add(extraPanel);
-            applyChangesTo(container);
+        blackPanel.add(extraPanel);
+            applyChangesTo(blackPanel);
         //});
 
     }
@@ -259,6 +270,56 @@ public class MarketFrame extends JFrame{
                 ImageIcon redMarbleImage = new ImageIcon("src/main/resources/resources/marbles/palline-02.png");
                 image = redMarbleImage.getImage();
                 image = image.getScaledInstance(marbleWidth, marbleHeight, 0);
+                redMarbleImage.setImage(image);
+                JLabel redMarble=new JLabel(redMarbleImage);
+                return redMarble;
+
+
+        }
+        return null;
+    }
+
+    public JLabel getMarbleExtra(String color){
+        switch (color) {
+            case "white":
+                ImageIcon whiteMarbleImage = new ImageIcon("src/main/resources/resources/marbles/palline-04.png");
+                Image image = whiteMarbleImage.getImage();
+                image = image.getScaledInstance(marbleWidth-10, marbleHeight-10, 0);
+                whiteMarbleImage.setImage(image);
+                JLabel whiteMarble=new JLabel(whiteMarbleImage);
+                return whiteMarble;
+            case "blue":
+                ImageIcon bluMarbleImage = new ImageIcon("src/main/resources/resources/marbles/palline-03.png");
+                image = bluMarbleImage.getImage();
+                image = image.getScaledInstance(marbleWidth-10, marbleHeight-10, 0);
+                bluMarbleImage.setImage(image);
+                JLabel bluMarble=new JLabel(bluMarbleImage);
+                return bluMarble;
+            case "grey":
+                ImageIcon greyMarbleImage = new ImageIcon("src/main/resources/resources/marbles/palline-05.png");
+                image = greyMarbleImage.getImage();
+                image = image.getScaledInstance(marbleWidth-10, marbleHeight-10, 0);
+                greyMarbleImage.setImage(image);
+                JLabel greyMarble=new JLabel(greyMarbleImage);
+                return greyMarble;
+            case "yellow":
+                ImageIcon yellowMarbleImage = new ImageIcon("src/main/resources/resources/marbles/palline-07.png");
+                image = yellowMarbleImage.getImage();
+                image = image.getScaledInstance(marbleWidth-10, marbleHeight-10, 0);
+                yellowMarbleImage.setImage(image);
+                JLabel yellowMarble=new JLabel(yellowMarbleImage);
+                return yellowMarble;
+            case "purple":
+                ImageIcon violetMarbleImage = new ImageIcon("src/main/resources/resources/marbles/palline-06.png");
+                image = violetMarbleImage.getImage();
+                image = image.getScaledInstance(marbleWidth-10, marbleHeight-10, 0);
+                violetMarbleImage.setImage(image);
+                JLabel violetMarble=new JLabel(violetMarbleImage);
+                return violetMarble;
+            case "red":
+                ImageIcon redMarbleImage = new ImageIcon("src/main/resources/resources/marbles/palline-02.png");
+                image = redMarbleImage.getImage();
+                image = image.getScaledInstance(marbleWidth-10, marbleHeight-10, 0);
                 redMarbleImage.setImage(image);
                 JLabel redMarble=new JLabel(redMarbleImage);
                 return redMarble;

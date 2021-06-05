@@ -29,10 +29,10 @@ public class ReserveFrame extends JFrame {
         this.setAlwaysOnTop(true);
 
         resources = new HashMap<>();
-        resources.put(Resource.COIN,0);
-        resources.put(Resource.ROCK,0);
-        resources.put(Resource.SHIELD,0);
-        resources.put(Resource.SERVANT,0);
+        resources.put(Resource.COIN,100);
+        resources.put(Resource.ROCK,100);
+        resources.put(Resource.SHIELD,100);
+        resources.put(Resource.SERVANT,100);
 
         reservePanel = new ReservePanel();
         this.add(reservePanel);

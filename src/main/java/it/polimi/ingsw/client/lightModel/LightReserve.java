@@ -29,7 +29,9 @@ public class LightReserve {
 
 
     public void setLightReserve(Map<Resource, Integer> map){
-        reservePools.putAll(map);
+        for(Resource resource : map.keySet()){
+            reservePools.put(resource, reservePools.remove(resource) - map.get(resource));
+        }
     }
 
 

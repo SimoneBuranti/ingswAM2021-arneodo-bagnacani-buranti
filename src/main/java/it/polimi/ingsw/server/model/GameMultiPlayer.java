@@ -12,12 +12,15 @@ import it.polimi.ingsw.server.model.leaderCards.DeckLeaderCard;
 import it.polimi.ingsw.server.model.leaderCards.LeaderCardProduction;
 import it.polimi.ingsw.server.model.leaderCards.LeaderCardStorage;
 import it.polimi.ingsw.server.model.players.*;
+import it.polimi.ingsw.server.model.productionCards.DeckProductionCardThreeViolet;
+import it.polimi.ingsw.server.model.productionCards.ProductionCard;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * this class represents the game multi player
  */
@@ -96,10 +99,7 @@ public class GameMultiPlayer extends Game {
             notifyObserver(new GameTypeMessage(true));
             notifyObserver(new NicknameStartedMessage(nickNameInOrder));
             configClient();
-        }
-
-        else
-        {
+        } else {
             restoreGameMultiPlayer(clientControllers);
         }
 
@@ -108,8 +108,6 @@ public class GameMultiPlayer extends Game {
         for(Player player: playerList)
             if (!player.equals(currentPlayer))
                 notifyOnlyOneSpecificObserver(new ChangeTurnMessage(currentPlayer.getNickName()),player.getNickName());
-
-
 
     }
 
@@ -346,11 +344,14 @@ public class GameMultiPlayer extends Game {
                 notifyOnlyOneSpecificObserver(new GameTypeMessage(true),playerList.get(i).getNickName());
                 super.configClientReconnected(playerList.get(i).getNickName());
                 configWhitPlayerInfo(playerList.get(i),i+1);
+                notifyOnlyOneSpecificObserver(new NicknameStartedMessage(nickNameInOrder),playerList.get(i).getNickName());
+                notifyOnlyOneSpecificObserver(new ChangeTurnMessage(currentPlayer.getNickName()),playerList.get(i).getNickName());
+                notifyOnlyOneSpecificObserver(new ReserveValueMessage(playerResources()),playerList.get(i).getNickName());
             }
         }
 
         for (Player player : playerList) {
-            if (!player.getNickName().equals(nickname) && !(player.isConnected())) {
+            if (!player.getNickName().equals(nickname) && player.isConnected()) {
                 notifyOnlyOneSpecificObserver(new ReconnectedMessage(nickname), player.getNickName());
             }
         }
@@ -557,8 +558,21 @@ public class GameMultiPlayer extends Game {
      */
     public void restoreGameTurn(ArrayList<ClientController> clientControllers) throws IOException, InterruptedException {
         Gson gson=new Gson();
+        Reader reader;
 
-        try {
+        reader = new InputStreamReader(this.getClass().getResourceAsStream("/fileConfiguration/InformationAboutTurn.json"), StandardCharsets.UTF_8);
+        nickNameInOrder = gson.fromJson(reader, ArrayList.class);
+
+        reader = new InputStreamReader(this.getClass().getResourceAsStream("/fileConfiguration/InformationAboutTurnPlayerNumber.json"), StandardCharsets.UTF_8);
+        numberOfPlayer = gson.fromJson(reader, Integer.class);
+
+        reader = new InputStreamReader(this.getClass().getResourceAsStream("/fileConfiguration/InformationAboutCurrentPosition.json"), StandardCharsets.UTF_8);
+        currentPlayerPosition = gson.fromJson(reader, Integer.class);
+
+        reader = new InputStreamReader(this.getClass().getResourceAsStream("/fileConfiguration/lastTurn.json"), StandardCharsets.UTF_8);
+        lastTurn = gson.fromJson(reader, Boolean.class);
+
+        /*try {
             nickNameInOrder = gson.fromJson(new FileReader("src/main/resources/fileConfiguration/InformationAboutTurn.json"),ArrayList.class);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -578,7 +592,7 @@ public class GameMultiPlayer extends Game {
             lastTurn= gson.fromJson(new FileReader("src/main/resources/fileConfiguration/lastTurn.json"),Boolean.class);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-        }
+        }*/
         this.clientControllersInOrder=clientControllers;
         addObservators();
         notifyObserver(new GameTypeMessage(true));
@@ -586,7 +600,9 @@ public class GameMultiPlayer extends Game {
         createPlayerRestore(numberOfPlayer,nickNameInOrder);
         currentPlayer = playerList.get(currentPlayerPosition);
         this.reConfigClient();
-
+        Map<Resource, Integer> map = playerResources();
+        this.reserve.removeResources(map);
+        notifyObserver(new ReserveValueMessage(map));
     }
 
 
@@ -595,7 +611,9 @@ public class GameMultiPlayer extends Game {
     public void reConfigClient() throws IOException, InterruptedException {
         super.configClient();
         for(int i=0; i<playerList.size(); i++){
-            configWhitPlayerInfo(playerList.get(i), i + 1);}}
+            configWhitPlayerInfo(playerList.get(i), i + 1);
+        }
+    }
 
 
     /**
@@ -782,10 +800,36 @@ public class GameMultiPlayer extends Game {
                 if(p.getGameBoardOfPlayer().getLeaderCardsActivated()!=null && p.getGameBoardOfPlayer().getLeaderCardsActivated().get(1)!=null){
                     if(p.getGameBoardOfPlayer().getLeaderCardsActivated().get(1) instanceof LeaderCardProduction)
                         notifyOnlyOneSpecificObserver(new StorageExtraDoubleConfig(p.getGameBoardOfPlayer().getStorageOfGameBoard().getNumExtraFirstAvailable(),((LeaderCardProduction) p.getGameBoardOfPlayer().getLeaderCardsActivated().get(1)).getResourceProduction()), p.getNickName());
-                } } } }
+                }
+            }
+        }
+    }
 
+
+    public Map<Resource, Integer> playerResources(){
+        Map<Resource, Integer> map = new HashMap();
+
+        int coin = 0;
+        int rock = 0;
+        int servant = 0;
+        int shield = 0;
+
+        for(Player player : playerList) {
+            coin = coin + player.getGameBoardOfPlayer().getStorageOfGameBoard().getResource(Resource.COIN) + player.getGameBoardOfPlayer().getStrongboxOfGameBoard().getResource(Resource.COIN);
+            rock = rock + player.getGameBoardOfPlayer().getStorageOfGameBoard().getResource(Resource.ROCK) + player.getGameBoardOfPlayer().getStrongboxOfGameBoard().getResource(Resource.ROCK);
+            servant = servant + player.getGameBoardOfPlayer().getStorageOfGameBoard().getResource(Resource.SERVANT) + player.getGameBoardOfPlayer().getStrongboxOfGameBoard().getResource(Resource.SERVANT);
+            shield = shield + player.getGameBoardOfPlayer().getStorageOfGameBoard().getResource(Resource.SHIELD) + player.getGameBoardOfPlayer().getStrongboxOfGameBoard().getResource(Resource.SHIELD);
+        }
+        map.put(Resource.COIN, coin);
+        map.put(Resource.ROCK, rock);
+        map.put(Resource.SERVANT, servant);
+        map.put(Resource.SHIELD, shield);
+
+        return map;
 
     }
+
+}
 
 
 

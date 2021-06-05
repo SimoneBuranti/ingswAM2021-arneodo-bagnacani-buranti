@@ -9,9 +9,8 @@ import it.polimi.ingsw.server.model.marbles.*;
 import it.polimi.ingsw.server.model.players.Player;
 import it.polimi.ingsw.server.model.productionCards.*;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -20,16 +19,16 @@ import java.util.Map;
  */
 public class Game extends Observable {
 
-    private boolean isOver;
+    protected boolean isOver;
 
     /**
      * this attribute represents the game market
      */
-    private Market market;
+    protected Market market;
     /**
      * this attribute represents the game reserve
      */
-    private Reserve reserve;
+    protected Reserve reserve;
     /**
      * this attribute represents the game current player
      */
@@ -634,10 +633,58 @@ public class Game extends Observable {
     private void restoreInformationOfProductionDeck() throws IOException, InterruptedException {
         Gson gson=DeckProductionCard.gsonForEveryoneDeckProduction();
         ProductionCard[] deck;
+        Reader reader;
 
         productionCardDecks = new ArrayList<>();
 
-        try {
+        reader = new InputStreamReader(this.getClass().getResourceAsStream("/fileConfiguration/DeckProductionCardOneBluLatest.json"), StandardCharsets.UTF_8);
+        deck = gson.fromJson(reader, ProductionCard[].class);
+        deckProductionCardOneBlu = new DeckProductionCardOneBlu(deck);
+
+        reader = new InputStreamReader(this.getClass().getResourceAsStream("/fileConfiguration/DeckProductionCardTwoBluLatest.json"), StandardCharsets.UTF_8);
+        deck = gson.fromJson(reader, ProductionCard[].class);
+        deckProductionCardTwoBlu = new DeckProductionCardTwoBlu(deck);
+
+        reader = new InputStreamReader(this.getClass().getResourceAsStream("/fileConfiguration/DeckProductionCardThreeBluLatest.json"), StandardCharsets.UTF_8);
+        deck = gson.fromJson(reader, ProductionCard[].class);
+        deckProductionCardThreeBlu = new DeckProductionCardThreeBlu(deck);
+
+        reader = new InputStreamReader(this.getClass().getResourceAsStream("/fileConfiguration/DeckProductionCardOneGreenLatest.json"), StandardCharsets.UTF_8);
+        deck = gson.fromJson(reader, ProductionCard[].class);
+        deckProductionCardOneGreen = new DeckProductionCardOneGreen(deck);
+
+        reader = new InputStreamReader(this.getClass().getResourceAsStream("/fileConfiguration/DeckProductionCardTwoGreenLatest.json"), StandardCharsets.UTF_8);
+        deck = gson.fromJson(reader, ProductionCard[].class);
+        deckProductionCardTwoGreen = new DeckProductionCardTwoGreen(deck);
+
+        reader = new InputStreamReader(this.getClass().getResourceAsStream("/fileConfiguration/DeckProductionCardThreeGreenLatest.json"), StandardCharsets.UTF_8);
+        deck = gson.fromJson(reader, ProductionCard[].class);
+        deckProductionCardThreeGreen = new DeckProductionCardThreeGreen(deck);
+
+        reader = new InputStreamReader(this.getClass().getResourceAsStream("/fileConfiguration/DeckProductionCardOneYellowLatest.json"), StandardCharsets.UTF_8);
+        deck = gson.fromJson(reader, ProductionCard[].class);
+        deckProductionCardOneYellow = new DeckProductionCardOneYellow(deck);
+
+        reader = new InputStreamReader(this.getClass().getResourceAsStream("/fileConfiguration/DeckProductionCardTwoYellowLatest.json"), StandardCharsets.UTF_8);
+        deck = gson.fromJson(reader, ProductionCard[].class);
+        deckProductionCardTwoYellow = new DeckProductionCardTwoYellow(deck);
+
+        reader = new InputStreamReader(this.getClass().getResourceAsStream("/fileConfiguration/DeckProductionCardThreeYellowLatest.json"), StandardCharsets.UTF_8);
+        deck = gson.fromJson(reader, ProductionCard[].class);
+        deckProductionCardThreeYellow = new DeckProductionCardThreeYellow(deck);
+
+        reader = new InputStreamReader(this.getClass().getResourceAsStream("/fileConfiguration/DeckProductionCardOneVioletLatest.json"), StandardCharsets.UTF_8);
+        deck = gson.fromJson(reader, ProductionCard[].class);
+        deckProductionCardOneViolet = new DeckProductionCardOneViolet(deck);
+
+        reader = new InputStreamReader(this.getClass().getResourceAsStream("/fileConfiguration/DeckProductionCardTwoVioletLatest.json"), StandardCharsets.UTF_8);
+        deck = gson.fromJson(reader, ProductionCard[].class);
+        deckProductionCardTwoViolet = new DeckProductionCardTwoViolet(deck);
+
+        reader = new InputStreamReader(this.getClass().getResourceAsStream("/fileConfiguration/DeckProductionCardThreeVioletLatest.json"), StandardCharsets.UTF_8);
+        deck = gson.fromJson(reader, ProductionCard[].class);
+        deckProductionCardThreeViolet = new DeckProductionCardThreeViolet(deck);
+        /*try {
             deck = gson.fromJson(new FileReader("src/main/resources/fileConfiguration/DeckProductionCardOneBluLatest.json"), ProductionCard[].class);
             deckProductionCardOneBlu = new DeckProductionCardOneBlu(deck);
         } catch (FileNotFoundException e) {
@@ -713,7 +760,7 @@ public class Game extends Observable {
             deckProductionCardThreeViolet = new DeckProductionCardThreeViolet(deck);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-        }
+        }*/
         productionCardDecks.add(deckProductionCardOneBlu);
         productionCardDecks.add(deckProductionCardTwoBlu);
         productionCardDecks.add(deckProductionCardThreeBlu);
@@ -738,12 +785,16 @@ public class Game extends Observable {
 
         Marble[] list;
 
-        try {
+        Reader reader = new InputStreamReader(this.getClass().getResourceAsStream("/fileConfiguration/Market.json"), StandardCharsets.UTF_8);
+        list = gson.fromJson(reader, Marble[].class);
+        market= new Market(list);
+
+        /*try {
             list = gson.fromJson(new FileReader("src/main/resources/fileConfiguration/Market.json"),Marble[].class);
             market= new Market(list);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-        }
+        }*/
 
     }
 
@@ -785,7 +836,7 @@ public class Game extends Observable {
 
         notifyObserver(new ConfigurationMarketMessage(market.getInitialMarbleList()));
 
-        notifyObserver(new ReserveValueMessage(reserve.getReservePool()));
+        //notifyObserver(new ReserveValueMessage(reserve.getReservePool()));
 
 
     }

@@ -9,6 +9,7 @@ import java.util.Map;
 public class ReserveNotification extends Notification{
     private final NotificationType notificationType = NotificationType.RESERVENOTIFY;
     private Map<Resource,Integer> map;
+
     public ReserveNotification(Map<Resource,Integer> map){
         this.map =new HashMap<>();
         this.map =map;

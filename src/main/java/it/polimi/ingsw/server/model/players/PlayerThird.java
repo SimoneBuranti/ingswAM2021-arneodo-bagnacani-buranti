@@ -6,10 +6,8 @@ import it.polimi.ingsw.server.model.exceptions.*;
 import it.polimi.ingsw.server.model.gameBoard.*;
 import it.polimi.ingsw.server.virtualview.VirtualView;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 
 /**
  * This class represents the third player in the multiplayer game to play in a round
@@ -55,7 +53,21 @@ public class PlayerThird extends Player {
         super(nickName,game,newmatch,virtualView);
 
         Gson gson=gsonForEveryone();
-        try {
+        Reader reader;
+
+        reader = new InputStreamReader(this.getClass().getResourceAsStream("/fileConfiguration/fileInformationPlayerThird.json"), StandardCharsets.UTF_8);
+        this.gameBoardOfPlayer = gson.fromJson(reader, GameBoardInterface.class);
+
+        reader = new InputStreamReader(this.getClass().getResourceAsStream("/fileConfiguration/fileInformationLeaderInitLeaderPlayerThird.json"), StandardCharsets.UTF_8);
+        this.leaderCard = gson.fromJson(reader, int[].class);
+
+        reader = new InputStreamReader(this.getClass().getResourceAsStream("/fileConfiguration/fileInformationInitOnLeaderPlayerThird.json"), StandardCharsets.UTF_8);
+        this.initLeader = gson.fromJson(reader, boolean.class);
+
+        reader = new InputStreamReader(this.getClass().getResourceAsStream("/fileConfiguration/fileInformationInitOnResourcePlayerThird.json"), StandardCharsets.UTF_8);
+        this.initResource = gson.fromJson(reader, boolean.class);
+
+        /*try {
             this.gameBoardOfPlayer= gson.fromJson(new FileReader("src/main/resources/fileConfiguration/fileInformationPlayerThird.json"),GameBoardInterface.class);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -76,7 +88,7 @@ public class PlayerThird extends Player {
             this.initResource = gson.fromJson(new FileReader("src/main/resources/fileConfiguration/fileInformationInitOnResourcePlayerThird.json"),boolean.class);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
 

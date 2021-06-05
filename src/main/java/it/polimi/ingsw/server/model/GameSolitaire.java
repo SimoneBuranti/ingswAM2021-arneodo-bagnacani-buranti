@@ -22,11 +22,11 @@ import it.polimi.ingsw.server.model.players.PlayerFirst;
 import it.polimi.ingsw.server.model.productionCards.DeckProductionCard;
 import it.polimi.ingsw.server.virtualview.VirtualView;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * this class represents the game in solitary
@@ -356,7 +356,7 @@ public class GameSolitaire extends Game {
             notifyObserver(new GameTypeMessage(false));
             this.reConfigClient();
         }
-        }
+    }
 
 
     @Override
@@ -485,8 +485,10 @@ public class GameSolitaire extends Game {
         Gson gson=new Gson();
         ArrayList<String> strings= new ArrayList<>();
 
-        try {
-            strings= gson.fromJson(new FileReader("src/main/resources/fileConfiguration/InformationAboutNickname.json"), ArrayList.class);
+        Reader reader = new InputStreamReader(this.getClass().getResourceAsStream("/fileConfiguration/InformationAboutNickname.json"), StandardCharsets.UTF_8);
+        strings = gson.fromJson(reader,  ArrayList.class);
+        //try {
+            //strings= gson.fromJson(new FileReader("src/main/resources/fileConfiguration/InformationAboutNickname.json"), ArrayList.class);
 
             nickNamePlayer=strings.get(0);
 
@@ -504,9 +506,9 @@ public class GameSolitaire extends Game {
         reConfigClient();
 
 
-    } catch (FileNotFoundException e) {
-        e.printStackTrace();
-    }
+    //} catch (FileNotFoundException e) {
+    //    e.printStackTrace();
+    //}
 
     }
 
@@ -555,13 +557,15 @@ public class GameSolitaire extends Game {
         Gson gson=new Gson();
         int[] servList;
 
-        try {
-            servList = gson.fromJson(new FileReader("src/main/resources/fileConfiguration/LoriMagnific.json"),int[].class);
+        Reader reader = new InputStreamReader(this.getClass().getResourceAsStream("/fileConfiguration/LoriMagnific.json"), StandardCharsets.UTF_8);
+        servList = gson.fromJson(reader,  int[].class);
+        //try {
+        //    servList = gson.fromJson(new FileReader("src/main/resources/fileConfiguration/LoriMagnific.json"),int[].class);
             lorenzoTheMagnificent=new LorenzoTheMagnificent(servList);
             notifyObserver(new LorenzoTheMagnificentConfigMessage(getLorenzoFaithIndicator()));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+        //} catch (FileNotFoundException e) {
+        //    e.printStackTrace();
+        //}
     }
 
     /**
@@ -570,12 +574,14 @@ public class GameSolitaire extends Game {
     public void RestoreActionMarker() throws IOException, InterruptedException {
         Gson gson= DeckActionMarker.DeckActionMarkerSaving();
         ActionMarker[] servList;
-        try {
-            servList= gson.fromJson(new FileReader("src/main/resources/fileConfiguration/DeckActionMarker.json"),ActionMarker[].class);
+        Reader reader = new InputStreamReader(this.getClass().getResourceAsStream("/fileConfiguration/DeckActionMarker.json"), StandardCharsets.UTF_8);
+        servList = gson.fromJson(reader, ActionMarker[].class);
+        //try {
+        //    servList= gson.fromJson(new FileReader("src/main/resources/fileConfiguration/DeckActionMarker.json"),ActionMarker[].class);
             this.deckActionMarker = new DeckActionMarker(servList);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+        //} catch (FileNotFoundException e) {
+        //    e.printStackTrace();
+        //}
     }
 
     public void reConfigClient() throws IOException, InterruptedException {
@@ -632,6 +638,10 @@ public class GameSolitaire extends Game {
             }
 
         }
+
+        Map<Resource, Integer> map = playerResources();
+        this.reserve.removeResources(map);
+        notifyObserver(new ReserveValueMessage(map));
     }
 
     /**
@@ -651,8 +661,24 @@ public class GameSolitaire extends Game {
         }else {
             revealAndActivateActionMarker();
         }
-        saveInformation(); }
+        saveInformation();
+    }
 
+    public Map<Resource, Integer> playerResources(){
+        Map<Resource, Integer> map = new HashMap();
 
+        int coin = player.getGameBoardOfPlayer().getStorageOfGameBoard().getResource(Resource.COIN) + player.getGameBoardOfPlayer().getStrongboxOfGameBoard().getResource(Resource.COIN);
+        int rock = player.getGameBoardOfPlayer().getStorageOfGameBoard().getResource(Resource.ROCK) + player.getGameBoardOfPlayer().getStrongboxOfGameBoard().getResource(Resource.ROCK);
+        int servant = player.getGameBoardOfPlayer().getStorageOfGameBoard().getResource(Resource.SERVANT) + player.getGameBoardOfPlayer().getStrongboxOfGameBoard().getResource(Resource.SERVANT);
+        int shield = player.getGameBoardOfPlayer().getStorageOfGameBoard().getResource(Resource.SHIELD) + player.getGameBoardOfPlayer().getStrongboxOfGameBoard().getResource(Resource.SHIELD);
+
+        map.put(Resource.COIN, coin);
+        map.put(Resource.ROCK, rock);
+        map.put(Resource.SERVANT, servant);
+        map.put(Resource.SHIELD, shield);
+
+        return map;
+
+    }
 
 }
