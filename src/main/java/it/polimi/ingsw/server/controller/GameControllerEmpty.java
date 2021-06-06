@@ -5,7 +5,9 @@ import it.polimi.ingsw.server.network.Server;
 
 import java.io.IOException;
 import java.util.ArrayList;
-
+/**
+ * game controller first state when server is put on and no file of old game exist
+ */
 public class GameControllerEmpty extends GameController {
 
     private ArrayList<String> tempLobbyName = new ArrayList<>();
@@ -43,7 +45,13 @@ public class GameControllerEmpty extends GameController {
 
         return false;
     }
-
+    /**
+     * method which received the request to exit from client or the possible disconnection due ping
+     * @param msg
+     * @param clientController
+     * @throws IOException
+     * @throws InterruptedException
+     */
     @Override
     public synchronized void handleMessage(ExitMessage msg, ClientController clientController) throws IOException, InterruptedException {
         if(isFirstClient(clientController)){
@@ -56,6 +64,14 @@ public class GameControllerEmpty extends GameController {
         System.out.println("Ho disconnesso client");
     }
 
+
+    /**
+     * method which received the answer to number player, it is managed only during in emptyState
+     * @param msg
+     * @param clientController
+     * @throws IOException
+     * @throws InterruptedException
+     */
     @Override
     public void handleMessage(NumberPlayerMessage msg, ClientController clientController) throws IOException, InterruptedException {
         if (server.getLobbySize()>0){
@@ -72,7 +88,13 @@ public class GameControllerEmpty extends GameController {
             }
         }
     }
-
+    /**
+     * method which received the username for the registration and the authentication of user on server
+     * @param msg
+     * @param clientController
+     * @throws IOException
+     * @throws InterruptedException
+     */
     @Override
     public synchronized void handleMessage(UsernameMessage msg, ClientController clientController) throws IOException, InterruptedException {
         if (server.getLobbySize()==0 && (clientController == firstClientController || firstClientController == null)) {
@@ -114,6 +136,11 @@ public class GameControllerEmpty extends GameController {
         //unreachable
     }
 
+    /**
+     * method for control and check for the starts of game
+     * @param clientController
+     * @return
+     */
     @Override
     public boolean isFirstClient(ClientController clientController) {
         return clientController == firstClientController;
@@ -124,6 +151,10 @@ public class GameControllerEmpty extends GameController {
         firstClientController = null;
     }
 
+    /**
+     * method used for disconnect user from lobby
+     * @param clientController
+     */
     @Override
     public void disconnectClientTempLobby(ClientController clientController) {
         for(int i = 0; i < tempLobbyController.size(); i++){

@@ -322,7 +322,7 @@ public abstract class Message{
     }
 
 
-    /**
+    /** defined in all messages classes
      */
     public abstract MessageType getMessageType();
 }

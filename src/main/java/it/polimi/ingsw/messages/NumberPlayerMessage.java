@@ -6,8 +6,9 @@ public class NumberPlayerMessage extends Message {
 
     private int nOfPlayers;
 
+
     /**
-     * type of message
+     * message which contain the information of the answer to number player question from client to server
      */
     private final MessageType messageType=MessageType.PLAYERNUMBER;
 

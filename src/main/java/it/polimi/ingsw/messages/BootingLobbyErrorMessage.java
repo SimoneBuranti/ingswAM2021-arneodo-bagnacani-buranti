@@ -1,6 +1,11 @@
 package it.polimi.ingsw.messages;
 
 public class BootingLobbyErrorMessage extends Message{
+    /**
+     * message which contain the information of waited match
+     * is message from server to client when user
+     * are waited to join in game
+     */
     private final MessageType messageType = MessageType.BOOTINGLOBBYERROR;
 
     @Override

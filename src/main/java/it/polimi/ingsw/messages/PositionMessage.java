@@ -7,7 +7,7 @@ public class PositionMessage extends Message {
     private int pos;
 
     /**
-     * type of message
+     * message which contain the information of position of the player from server to client
      */
     private final MessageType messageType=MessageType.POSITION;
 

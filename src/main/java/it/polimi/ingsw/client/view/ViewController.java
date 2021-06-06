@@ -337,8 +337,7 @@ public class ViewController implements MessageVisitor, ViewObserver {
     @Override
     public void visit(PongMessage msg) {}
 
-    @Override
-    public void visit(OkMessage msg) {}
+
 
     @Override
     public void visit(NicknameStartedMessage msg) {

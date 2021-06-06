@@ -3,6 +3,10 @@ package it.polimi.ingsw.messages;
 import it.polimi.ingsw.server.model.Resource;
 
 public class NotYourTurnErrorMessage extends Message{
+    /**
+     * message error of not your turn from server to client
+     * due to all possible action turn
+     */
     private final MessageType messageType = MessageType.NOTYOURTURNERROR;
 
 

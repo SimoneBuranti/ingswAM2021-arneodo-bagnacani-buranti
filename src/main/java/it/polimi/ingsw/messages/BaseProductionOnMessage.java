@@ -6,7 +6,8 @@ import java.io.IOException;
 
 public class BaseProductionOnMessage extends Message{
     /**
-     * type of message
+     * message which contain the information of base produciton activate
+     * cause production leader action
      */
     private final MessageType messageType=MessageType.BASEPRODUCTIONON;
 

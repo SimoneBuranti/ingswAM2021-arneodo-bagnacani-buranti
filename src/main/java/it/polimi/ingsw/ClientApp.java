@@ -17,7 +17,7 @@ public class ClientApp {
     public static void main(String[] args) throws IOException {
         hostName = "127.0.0.1";
 
-        portNumber = 1236;
+        portNumber = 12345;
 
 
         boolean cliParam = false;

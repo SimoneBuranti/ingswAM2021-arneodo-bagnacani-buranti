@@ -1,6 +1,10 @@
 package it.polimi.ingsw.messages;
 
 public class DoubleWhiteMarbleEffectMessage extends Message {
+    /**
+     * message error of DoubleWhiteMarble from server to client
+     * due to market action
+     */
     private final MessageType messageType = MessageType.DOUBLEWHITEMARBLEEFFECT;
 
     private int whiteMarbleNumber;

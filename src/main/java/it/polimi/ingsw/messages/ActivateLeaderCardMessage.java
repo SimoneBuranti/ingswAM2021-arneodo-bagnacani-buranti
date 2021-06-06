@@ -3,7 +3,11 @@ package it.polimi.ingsw.messages;
 import java.io.IOException;
 
 public class ActivateLeaderCardMessage extends Message {
-
+    /**
+     * message which contain the information
+     * for activate leader card
+     * from client to server
+     */
     private final MessageType messageType = MessageType.ACTIVATELEADERCARD;
 
     private int cardNumber;

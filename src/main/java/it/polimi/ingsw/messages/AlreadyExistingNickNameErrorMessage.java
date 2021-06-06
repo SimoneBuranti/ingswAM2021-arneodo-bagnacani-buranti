@@ -4,7 +4,9 @@ import java.io.IOException;
 
 public class AlreadyExistingNickNameErrorMessage extends Message{
     /**
-     * type of message
+     * message which contain the information
+     * error, cause in server cannot bbe present two equals nickname
+     * from server to client
      */
     private final MessageType messageType=MessageType.ALREADYEXISTINGNICKNAMEERROR;
 

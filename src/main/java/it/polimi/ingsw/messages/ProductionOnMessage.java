@@ -12,7 +12,8 @@ public class ProductionOnMessage extends Message {
 
 
     /**
-     * type of message
+     * message which contain the information of column production activate
+     * cause production action
      */
     private final MessageType messageType=MessageType.PRODUCTIONON;
 

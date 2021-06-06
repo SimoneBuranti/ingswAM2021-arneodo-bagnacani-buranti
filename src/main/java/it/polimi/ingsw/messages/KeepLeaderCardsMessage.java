@@ -4,7 +4,8 @@ import java.io.IOException;
 
 public class KeepLeaderCardsMessage extends Message{
     /**
-     * type of message
+     * message  of chosen resource choose from client to server
+     * after leader card choice at the first
      */
     private final MessageType messageType=MessageType.KEEPLEADERCARDS;
 

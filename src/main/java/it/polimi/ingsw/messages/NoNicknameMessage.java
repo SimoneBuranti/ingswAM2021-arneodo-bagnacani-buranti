@@ -4,7 +4,8 @@ import java.io.IOException;
 
 public class NoNicknameMessage extends Message{
     /**
-     * type of message
+     * message error of no nickname  from server to client
+     * due to request of show all of a player
      */
     private final MessageType messageType=MessageType.NICKNAMENOTFOUNDERROR;
 

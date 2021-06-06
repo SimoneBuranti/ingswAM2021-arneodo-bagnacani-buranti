@@ -13,7 +13,7 @@ public class clientFourth {
             String hostName = "127.0.0.1";
 
 
-            int portNumber = 1236;
+            int portNumber = 12345;
 
             View cli = new Cli();
             SocketClient socketClient = new SocketClient(hostName, portNumber, cli);

@@ -3,9 +3,8 @@ package it.polimi.ingsw.messages;
 import java.io.IOException;
 
 public class UsernameMessage extends Message{
-
     /**
- * type of message
+ *message for say the username from client to server
  */
 private final MessageType messageType=MessageType.USERNAME;
 
@@ -23,8 +22,7 @@ private final MessageType messageType=MessageType.USERNAME;
         this.username = username;
     }
 
-    /**
-     */@Override
+   @Override
     public MessageType getMessageType() {
         return messageType;
     }

@@ -6,6 +6,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class DisconnectionOpponentMessage extends Message{
+    /**
+     * message which contain the notification of a opponent disconnection
+     */
     private final MessageType messageType = MessageType.DISCONNECTIONOPPONENT;
 
 

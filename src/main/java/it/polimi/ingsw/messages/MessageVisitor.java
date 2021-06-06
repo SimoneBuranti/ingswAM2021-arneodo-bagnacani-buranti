@@ -5,7 +5,12 @@ import it.polimi.ingsw.messages.observable.LeadercardconfigMessage;
 
 import java.io.IOException;
 
+/**
+ * two class (viewcotnroller and clientController) used this ploy/trick to do an action or activate something
+ * according to the information contained in message
+ */
 public interface MessageVisitor {
+
     //Error messages
     void visit(AlreadyActivatedErrorMessage msg) throws IOException, InterruptedException;
     void visit(AlreadyExistingNickNameErrorMessage msg) throws IOException, InterruptedException;
@@ -21,14 +26,13 @@ public interface MessageVisitor {
 
     //Server to client
     void visit(RestartQuestionMessage msg) throws IOException, InterruptedException;
-
-    void visit(EndOfTurnMessage msg) throws IOException, InterruptedException;
     void visit(LastTurnMessage msg);
-
     void visit(ReserveValueMessage msg) throws IOException, InterruptedException;
     void visit(DoubleWhiteMarbleEffectMessage msg);
     void visit(NPlayersMessage msg) throws IOException, InterruptedException;
     void visit(PickedLeaderCardsMessage msg) throws IOException, InterruptedException;
+    void visit(DisconnectionOpponentMessage disconnectionOpponentMessage);
+    void visit(ReconnectedMessage reconnectedMessage);
 
 
     //Client to server
@@ -49,57 +53,43 @@ public interface MessageVisitor {
     void visit(PushColumnMessage msg) throws IOException, InterruptedException;
     void visit(PushRowMessage msg) throws IOException, InterruptedException;
     void visit(UsernameMessage msg) throws IOException, InterruptedException;
+    void visit(EndOfTurnMessage msg) throws IOException, InterruptedException;
     void visit(WhiteMarbleChoosenResourcesMessage msg) throws IOException, InterruptedException;
 
     //General messages
     void visit(PingMessage msg);
     void visit(PongMessage msg);
-    void visit(OkMessage msg);
 
-
-    //Observer
+    //Observable notification from model
     void visit(NicknameStartedMessage msg);
     void visit(UpdateForNotCurrentResourceMessage msg) throws IOException, InterruptedException;
     void visit(UpdateInitResourceMessage msg) throws IOException, InterruptedException;
     void visit(UpdateInitLeaderMessage msg);
     void visit(UpdateChosenLeaderMessage msg);
-
     void visit(DeckProductionCardMessage msg) throws IOException, InterruptedException;
     void visit(DeckProductionCardConfigMessage msg) throws IOException, InterruptedException;
     void visit(TakeCardMessage msg);
     void visit(TakeCardForNotCurrentMessage msg);
-
     void visit(ConfigurationMarketMessage msg) throws IOException, InterruptedException;
     void visit(ChangeMarketMessageColumn msg) throws IOException, InterruptedException;
     void visit(ChangeMarketMessageRow msg) throws IOException, InterruptedException;
     void visit(ResultFromMarketMessage msg) throws IOException, InterruptedException;
     void visit(ResultFromMarketNotCurrentMessage msg) throws IOException, InterruptedException;
-
-
     void visit(MagnificentWinMessage msg);
     void visit(LorenzoTheMagnificentConfigMessage msg);
     void visit(MyVictoryMessage msg);
-
-
     void visit(UseActionMarkerMessage msg);
-
-
     void visit(ProductionMessageForNotCurrentMessage msg) throws IOException, InterruptedException;
     void visit(ProductionMessageForCurrentMessage msg) throws IOException, InterruptedException;
     void visit(ResultOfProductionMessage msg) throws IOException, InterruptedException;
     void visit(ResultOfProductionForNotCurrentMessage msg) throws IOException, InterruptedException;
-
-
     void visit(ActivationLeaderForNotCurrentMessage msg);
     void visit(ActivationLeaderForCurrentMessage msg) throws IOException, InterruptedException;
     void visit(DiscardLeaderForNotCurrentMessage msg);
     void visit(DiscardLeaderForCurrentMessage msg);
-
     void visit(FaithPathMessage msg);
     void visit(FaithPathOpponentMessage msg);
-
     void visit(EndGamePlayerWinnerMessage msg);
-
     void visit(StorageConfigMessage msg);
     void visit(StrongboxConfigMessage msg);
     void visit(LeadercardconfigMessage msg);
@@ -107,33 +97,17 @@ public interface MessageVisitor {
     void visit(StorageExtraDoubleConfig msg);
     void visit(FaithConfigMessage msg);
     void visit(ProductionCardConfigMessage msg);
-
     void visit(LorenzoMoveMessage msg);
-
     void visit(YourTurnMessage msg) throws IOException, InterruptedException;
-
     void visit(ChangeTurnMessage msg);
-
     void visit(GameTypeMessage msg) throws IOException, InterruptedException;
-
     void visit(SetPapalsMessage msg) throws IOException, InterruptedException;
-
     void visit(UpdateInitBooleanMessage msg);
-
-
     void visit(AskInformationMessage askInformationmessage) throws IOException, InterruptedException;
-
     void visit(NoPlayersErrorMessage noPlayersErrorMessage);
-
     void visit(ShowAllOfPlayerMessage showAllOfPlayerMessage);
-
     void visit(PositionMessage positionMessage);
-
     void visit(BaseProductionErrorMessage baseProductionErrorMessage);
-
     void visit(PapalCardsConfigMessage papalCardsConfigMessage);
 
-    void visit(DisconnectionOpponentMessage disconnectionOpponentMessage);
-
-    void visit(ReconnectedMessage reconnectedMessage);
 }

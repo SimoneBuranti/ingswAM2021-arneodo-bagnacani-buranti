@@ -1,8 +1,10 @@
 package it.polimi.ingsw.messages;
 
+/**
+ * message type can distinguished one message from another
+ */
 public enum MessageType {
     EXIT,
-    OK,
     RESTARTQUESTIONMESSAGE,
     RESTARTANSWERMESSAGE,
     BOOTINGLOBBYERROR,
@@ -48,9 +50,7 @@ public enum MessageType {
     RESERVEVALUE,
     PING,
     PONG,
-   /* ****** ********************* */
-
-   DECKPRODUCTIONCARD,
+    DECKPRODUCTIONCARD,
     TAKECARD,
     REMOVECARD,
     CONFIGURATIONMARKET,

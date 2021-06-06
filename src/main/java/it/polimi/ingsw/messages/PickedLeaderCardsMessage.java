@@ -11,12 +11,11 @@ public class PickedLeaderCardsMessage extends Message{
     private ArrayList<LeaderCard> initLeaderCards;
 
     /**
-     * type of message
+     * message which contain the information of the answer for choose leader card answer from server to client
      */
     private final MessageType messageType=MessageType.PICKEDLEADERCARDS;
 
-    /**
-     */@Override
+    @Override
     public MessageType getMessageType() {
         return messageType;
     }

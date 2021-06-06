@@ -4,6 +4,9 @@ import java.io.IOException;
 
 public class RestartQuestionMessage extends Message{
 
+    /**
+     * message which contain the information of the answer to restart question from client to server
+     */
     private final MessageType messageType = MessageType.RESTARTQUESTIONMESSAGE;
 
     private int lobbySize;

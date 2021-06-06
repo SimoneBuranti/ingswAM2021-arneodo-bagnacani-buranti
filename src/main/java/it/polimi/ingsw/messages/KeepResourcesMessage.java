@@ -6,6 +6,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class KeepResourcesMessage extends Message{
+    /**
+     * message  of chosen resource choose from client to server
+     * after an error in model
+     */
     private final MessageType messageType = MessageType.KEEPRESOURCES;
 
     private ArrayList<Resource> choosenResources;

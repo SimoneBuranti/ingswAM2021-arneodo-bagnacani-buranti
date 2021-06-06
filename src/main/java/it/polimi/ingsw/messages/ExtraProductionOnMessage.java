@@ -7,7 +7,8 @@ import java.io.IOException;
 
 public class ExtraProductionOnMessage extends Message {
     /**
-     * type of message
+     * message which contain the information of extra produciton activate
+     * cause production leader action
      */
     private final MessageType messageType=MessageType.EXTRAPRODUCTIONON;
 

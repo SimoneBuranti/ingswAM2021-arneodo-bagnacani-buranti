@@ -3,7 +3,12 @@ package it.polimi.ingsw.messages;
 import java.io.IOException;
 
 public class BaseProductionErrorMessage extends Message {
-
+    /**
+     * message which contain the information of extra produciton activate
+     * error cause production  action
+     * when user doesn't have input resources
+     * from server to client
+     */
     private final MessageType messageType = MessageType.BASEPRODUCTIONERROR;
 
     @Override

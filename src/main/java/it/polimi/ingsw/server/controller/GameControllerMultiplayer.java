@@ -7,7 +7,9 @@ import it.polimi.ingsw.server.network.Server;
 
 import java.io.IOException;
 import java.util.ArrayList;
-
+/**
+ * game controller which manage a multiplayer game
+ */
 public class GameControllerMultiplayer extends GameController {
 
 
@@ -16,7 +18,13 @@ public class GameControllerMultiplayer extends GameController {
         this.server = server;
         this.game = game;
     }
-
+    /**
+     * method which received the request to exit from client or the possible disconnection due ping
+     * @param msg
+     * @param clientController
+     * @throws IOException
+     * @throws InterruptedException
+     */
     @Override
     public void handleMessage(ExitMessage msg, ClientController clientController) throws IOException, InterruptedException {
 
@@ -76,11 +84,29 @@ public class GameControllerMultiplayer extends GameController {
         }
     }
 
+
+    /**
+     * method which received the answer to number player, it is managed only during in emptyState
+     * user receives error
+     * @param msg
+     * @param clientController
+     * @throws IOException
+     * @throws InterruptedException
+     */
+
     @Override
     public void handleMessage(NumberPlayerMessage msg, ClientController clientController) throws IOException, InterruptedException {
     clientController.getClientHandler().sendMessage(new CompleteRunningMatchErrorMessage());
     }
 
+    /**
+     * method which received the username for the registration and the authentication of user on server
+     * send error to client
+     * @param msg
+     * @param clientController
+     * @throws IOException
+     * @throws InterruptedException
+     */
     @Override
     public void handleMessage(UsernameMessage msg, ClientController clientController) throws IOException, InterruptedException {
     clientController.getClientHandler().sendMessage(new CompleteRunningMatchErrorMessage());

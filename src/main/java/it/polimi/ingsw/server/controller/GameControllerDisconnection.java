@@ -9,6 +9,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * game controller fall here if one of the client will eb disconnected during multiplayer game
+ */
 public class GameControllerDisconnection extends GameController {
 
 
@@ -19,6 +22,13 @@ public class GameControllerDisconnection extends GameController {
         this.game = game;
     }
 
+    /**
+     * method which received the request to exit from client or the possible disconnection due ping
+     * @param msg
+     * @param clientController
+     * @throws IOException
+     * @throws InterruptedException
+     */
     @Override
     public void handleMessage(ExitMessage msg, ClientController clientController) throws IOException, InterruptedException {
 
@@ -45,11 +55,28 @@ public class GameControllerDisconnection extends GameController {
         }
     }
 
+
+
+    /**
+     * method which received the answer to number player, it is managed only during in emptyState
+     * user receives error
+     * @param msg
+     * @param clientController
+     * @throws IOException
+     * @throws InterruptedException
+     */
     @Override
     public void handleMessage(NumberPlayerMessage msg, ClientController clientController) throws IOException, InterruptedException {
         clientController.getClientHandler().sendMessage(new CompleteRunningMatchErrorMessage());
     }
 
+    /**
+     * method which received the username for authentication of user on server
+     * @param msg
+     * @param clientController
+     * @throws IOException
+     * @throws InterruptedException
+     */
     @Override
     public void handleMessage(UsernameMessage msg, ClientController clientController) throws IOException, InterruptedException {
         if(server.getGame().checkNickname(msg.getUsername())){

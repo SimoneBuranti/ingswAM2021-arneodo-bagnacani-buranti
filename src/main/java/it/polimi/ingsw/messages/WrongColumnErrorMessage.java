@@ -2,6 +2,10 @@ package it.polimi.ingsw.messages;
 
 public class WrongColumnErrorMessage extends Message {
 
+    /**
+     * message error of WrongColumn from server to client
+     * due to buy production card error
+     */
     private final MessageType messageType = MessageType.WRONGCOLUMNERROR;
 
 

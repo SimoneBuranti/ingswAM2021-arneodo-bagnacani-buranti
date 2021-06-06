@@ -3,7 +3,11 @@ package it.polimi.ingsw.messages;
 import java.io.IOException;
 
 public class AlreadyUsedLeaderCardErrorMessage extends Message {
-
+    /**
+     * message which contain the information
+     * error cause activation of leader card
+     * from server to client
+     */
     private final MessageType messageType = MessageType.ALREADYUSEDLEADERCARDERROR;
 
     @Override

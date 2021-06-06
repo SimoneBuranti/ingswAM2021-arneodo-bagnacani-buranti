@@ -5,13 +5,13 @@ import java.io.IOException;
 public class ExitMessage extends Message{
 
     /**
-     * type of message
+     * message which contain the information oof exit from client to server
+     * the consequence is the disconnection
      */
     private final MessageType messageType=MessageType.EXIT;
 
 
-    /**
-     */@Override
+    @Override
     public MessageType getMessageType() {
         return messageType;
     }

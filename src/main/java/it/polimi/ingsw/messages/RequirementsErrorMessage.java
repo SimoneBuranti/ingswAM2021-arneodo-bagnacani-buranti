@@ -1,7 +1,10 @@
 package it.polimi.ingsw.messages;
 
 public class RequirementsErrorMessage extends Message {
-
+    /**
+     * message error of Requirements from server to client
+     * due to activation leader card error
+     */
     private final MessageType messageType = MessageType.REQUIREMENTSERROR;
 @Override
     public MessageType getMessageType() {

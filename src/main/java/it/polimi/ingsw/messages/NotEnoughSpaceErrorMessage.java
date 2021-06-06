@@ -5,6 +5,10 @@ import it.polimi.ingsw.server.model.Resource;
 import java.util.ArrayList;
 
 public class NotEnoughSpaceErrorMessage extends Message {
+    /**
+     * message error of not enough space from server to client
+     * due to market action
+     */
     private final MessageType messageType = MessageType.NOTENOUGHSPACEERROR;
 
     private ArrayList<Resource> resources;

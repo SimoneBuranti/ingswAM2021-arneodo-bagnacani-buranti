@@ -6,6 +6,9 @@ import it.polimi.ingsw.server.network.Server;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * game controller state bbefore the first connection and the decision of single or multi game
+ */
 public class GameControllerLobby extends GameController {
 
     private int lobbySize;
@@ -36,6 +39,11 @@ public class GameControllerLobby extends GameController {
 
     }
 
+    /**
+     * initialize lobby for pre game
+     * @throws IOException
+     * @throws InterruptedException
+     */
     public void initLobby() throws IOException, InterruptedException {
         if(lobbySize-1 > tempLobbyName.size()) {
             for (int i = 0; i < tempLobbyName.size(); i++) {
@@ -83,6 +91,13 @@ public class GameControllerLobby extends GameController {
         }
 
     }
+    /**
+     * method which received the request to exit from client or the possible disconnection due ping
+     * @param msg
+     * @param clientController
+     * @throws IOException
+     * @throws InterruptedException
+     */
     @Override
     public synchronized void handleMessage(ExitMessage msg, ClientController clientController) throws IOException, InterruptedException {
 
@@ -98,7 +113,14 @@ public class GameControllerLobby extends GameController {
     public void handleMessage(NumberPlayerMessage msg, ClientController clientController) {
         //unreachable
     }
-
+    /**
+     * method which received the username for the registration and the authentication of user on server
+     * if lobby is full for game, send error to client
+     * @param msg
+     * @param clientController
+     * @throws IOException
+     * @throws InterruptedException
+     */
     @Override
     public synchronized void handleMessage(UsernameMessage msg, ClientController clientController) throws IOException, InterruptedException {
         if (server.addPlayerToLobby(msg.getUsername())){
@@ -140,6 +162,9 @@ public class GameControllerLobby extends GameController {
 
     }
 
+    /**
+     * @return lobby size before game
+     */
     @Override
     public int getLobbySize() {
         return lobbySize;

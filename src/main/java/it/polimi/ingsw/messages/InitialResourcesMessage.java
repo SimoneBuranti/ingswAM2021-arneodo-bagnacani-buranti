@@ -8,7 +8,8 @@ import java.util.ArrayList;
 public class InitialResourcesMessage extends Message {
 
     /**
-     * type of message
+     * message  of chosen resource choose from client to server
+     * after the initial resource choice
      */
     private final MessageType messageType=MessageType.INITIALRESOURCES;
 

@@ -3,6 +3,9 @@ package it.polimi.ingsw.messages;
 import java.io.IOException;
 
 public class RestartAnswerMessage extends Message{
+    /**
+     * message which contain the information of the question for restart answer from server to client
+     */
     private final MessageType messageType = MessageType.RESTARTANSWERMESSAGE;
 
     private boolean answer;

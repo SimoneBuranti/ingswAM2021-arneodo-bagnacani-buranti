@@ -3,6 +3,11 @@ package it.polimi.ingsw.messages;
 import java.io.IOException;
 
 public class PushRowMessage extends Message{
+
+    /**
+     * message which contain the information of row pushed in market
+     * cause market action
+     */
     private final MessageType messageType = MessageType.PUSHROW;
 
     private int rowNumber;

@@ -2,7 +2,10 @@ package it.polimi.ingsw.messages;
 
 public class CompleteRunningMatchErrorMessage extends Message{
     /**
-     * type of message
+     * message which contain the information of complete match
+     * is a error message from server to client when user
+     * tries to connected to match
+     * but game is full and complete
      */
     private final MessageType messageType=MessageType.COMPLETERUNNINGMATCHERROR;
 

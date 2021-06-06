@@ -258,14 +258,34 @@ public class ClientController implements MessageVisitor {
         server.getGameController().handleMessage(msg, this);
     }
 
+    /**
+     * mathod which communicate to the gamecontroller player's nickname
+     * @param msg
+     * @throws IOException
+     * @throws InterruptedException
+     */
     @Override
     public void visit(UsernameMessage msg) throws IOException, InterruptedException {
         server.getGameController().handleMessage(msg, this);
     }
 
+    /**
+     * mathod which communicate to the server thr willingness to restart the match or not
+     * @param msg
+     * @throws IOException
+     * @throws InterruptedException
+     */
     @Override
-    public void visit(RestartAnswerMessage msg) throws IOException, InterruptedException { server.getGameController().handleMessage(msg, this); }
+    public void visit(RestartAnswerMessage msg) throws IOException, InterruptedException {
+        server.getGameController().handleMessage(msg, this);
+    }
 
+    /**
+     * mathod which communicate to the server thr willingness of player to activate a leader card in game
+     * @param msg
+     * @throws IOException
+     * @throws InterruptedException
+     */
 
     @Override
     public void visit(ActivateLeaderCardMessage msg) throws IOException, InterruptedException {
@@ -282,6 +302,13 @@ public class ClientController implements MessageVisitor {
         }
     }
 
+    /**
+     * mathod which communicate to the server thr willingness of player to activate base production in game
+     * @param msg
+     * @throws IOException
+     * @throws InterruptedException
+     */
+
 
     @Override
     public void visit(BaseProductionOnMessage msg) throws IOException, InterruptedException {
@@ -295,6 +322,13 @@ public class ClientController implements MessageVisitor {
             clientHandler.sendMessage(new NotYourTurnErrorMessage());
         }
     }
+
+    /**
+     * mathod which communicate to the server thr willingness of player to bui a production card in game
+     * @param msg
+     * @throws IOException
+     * @throws InterruptedException
+     */
 
     @Override
     public void visit(BuyProductionCardMessage msg) throws IOException, InterruptedException {
@@ -312,6 +346,13 @@ public class ClientController implements MessageVisitor {
         }
     }
 
+    /**
+     * mathod which communicate to the server thr willingness of player to discard a leader card in game
+     * @param msg
+     * @throws IOException
+     * @throws InterruptedException
+     */
+
     @Override
     public void visit(DiscardLeaderCardMessage msg) throws IOException, InterruptedException {
         if (turnCheck()){
@@ -325,6 +366,12 @@ public class ClientController implements MessageVisitor {
         }
 
     }
+    /**
+     * mathod which communicate to the server thr willingness of player to activate double production in game
+     * @param msg
+     * @throws IOException
+     * @throws InterruptedException
+     */
 
     @Override
     public void visit(DoubleProductionOnMessage msg) throws IOException, InterruptedException {
@@ -338,6 +385,13 @@ public class ClientController implements MessageVisitor {
             clientHandler.sendMessage(new NotYourTurnErrorMessage());
         }
     }
+    /**
+     * mathod which communicate to the server thr willingness of player to communicate the end of personal production in game
+     * @param msg
+     * @throws IOException
+     * @throws InterruptedException
+     */
+
 
     @Override
     public void visit(EndOfProductionMessage msg) throws IOException, InterruptedException {
@@ -347,6 +401,13 @@ public class ClientController implements MessageVisitor {
             clientHandler.sendMessage(new NotYourTurnErrorMessage());
         }
     }
+
+    /**
+     * mathod which communicate to the server thr willingness of player to activate an extra production in game
+     * @param msg
+     * @throws IOException
+     * @throws InterruptedException
+     */
 
     @Override
     public void visit(ExtraProductionOnMessage msg) throws IOException, InterruptedException {
@@ -361,6 +422,12 @@ public class ClientController implements MessageVisitor {
         }
     }
 
+    /**
+     * mathod which communicate to the game the choice about first resource
+     * @param msg
+     * @throws IOException
+     * @throws InterruptedException
+     */
     @Override
     public void visit(InitialResourcesMessage msg) throws IOException, InterruptedException {
         if (turnCheck()){
@@ -373,6 +440,12 @@ public class ClientController implements MessageVisitor {
             clientHandler.sendMessage(new NotYourTurnErrorMessage());
         }
     }
+    /**
+     * mathod which communicate to the game the choice about first four leader card
+     * @param msg
+     * @throws IOException
+     * @throws InterruptedException
+     */
 
     @Override
     public void visit(KeepLeaderCardsMessage msg) throws IOException, InterruptedException {
@@ -383,6 +456,12 @@ public class ClientController implements MessageVisitor {
         }
     }
 
+    /**
+     * mathod which communicate to the server thr willingness of player to activate a productionOn in game
+     * @param msg
+     * @throws IOException
+     * @throws InterruptedException
+     */
     @Override
     public void visit(ProductionOnMessage msg) throws IOException, InterruptedException {
         if (turnCheck()){
@@ -397,7 +476,12 @@ public class ClientController implements MessageVisitor {
             clientHandler.sendMessage(new NotYourTurnErrorMessage());
         }
     }
-
+    /**
+     * mathod which communicate to the server thr willingness of player to activate action market on column
+     * @param msg
+     * @throws IOException
+     * @throws InterruptedException
+     */
     @Override
     public void visit(PushColumnMessage msg) throws IOException, InterruptedException {
         if (turnCheck()){
@@ -415,6 +499,12 @@ public class ClientController implements MessageVisitor {
         }
     }
 
+    /**
+     * mathod which communicate to the server thr willingness of player to activate action market on row
+     * @param msg
+     * @throws IOException
+     * @throws InterruptedException
+     */
     @Override
     public void visit(PushRowMessage msg) throws IOException, InterruptedException {
         if (turnCheck()){
@@ -433,6 +523,12 @@ public class ClientController implements MessageVisitor {
 
     }
 
+    /**
+     * mathod which communicate to the server thr willingness to save/choice some number of resource cause double white marle
+     * @param msg
+     * @throws IOException
+     * @throws InterruptedException
+     */
     @Override
     public void visit(WhiteMarbleChoosenResourcesMessage msg) throws IOException, InterruptedException {
         if (turnCheck()){
@@ -445,7 +541,13 @@ public class ClientController implements MessageVisitor {
             clientHandler.sendMessage(new NotYourTurnErrorMessage());
         }
     }
-
+    /**
+     * mathod which communicate to the server the willingness to save/choice some number of
+     * resource cause full storage or against storgae's rules
+     * @param msg
+     * @throws IOException
+     * @throws InterruptedException
+     */
     @Override
     public void visit(KeepResourcesMessage msg) throws IOException, InterruptedException {
         if (turnCheck()){
@@ -471,10 +573,7 @@ public class ClientController implements MessageVisitor {
         clientHandler.setPongo(true);
     }
 
-    @Override
-    public void visit(OkMessage msg) {
 
-    }
 
     @Override
     public void visit(UpdateChosenLeaderMessage msg) {

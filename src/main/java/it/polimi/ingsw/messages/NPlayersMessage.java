@@ -6,9 +6,11 @@ public class NPlayersMessage extends Message {
 
     private int nOfPlayers;
     private int lobbySize;
+
     /**
-    * type of message
-    */
+     * message which contain the information for new and old connected for
+     * missing user number from server to client
+     */
     private final MessageType messageType=MessageType.MESSAGEFORNPLAYERS;
 
     public NPlayersMessage(int nOfPlayers,int lobbySize){

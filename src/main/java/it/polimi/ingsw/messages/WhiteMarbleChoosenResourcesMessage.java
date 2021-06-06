@@ -7,6 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WhiteMarbleChoosenResourcesMessage extends Message {
+
+    /**
+     * message  of White marble resource choose from client to server
+     */
     private final MessageType messageType = MessageType.WHITEMARBLECHOOSENRESOURCES;
 
     private ArrayList<Resource> choosenResources;

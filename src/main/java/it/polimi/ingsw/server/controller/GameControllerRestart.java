@@ -5,7 +5,11 @@ import it.polimi.ingsw.server.network.Server;
 
 import java.io.IOException;
 import java.util.ArrayList;
-
+/**
+ * game controller fall here if all clients are disconnected during multiplayer game
+ * or single player is disconnected
+ * or on the power on, server read from existing file of old match
+ */
 public class GameControllerRestart extends GameController {
 
     private ArrayList<String> reconnected = new ArrayList<>();
@@ -21,6 +25,10 @@ public class GameControllerRestart extends GameController {
         this.server = server;
     }
 
+    /**
+     * @param nickname
+     * @return true if nick name is in lobby
+     */
     public boolean isInTempLobby(String nickname){
         for(String nick : tempLobbyName)
             if(nick.equals(nickname))
@@ -29,6 +37,13 @@ public class GameControllerRestart extends GameController {
         return false;
     }
 
+    /**
+     * method which received the request to exit from client or the possible disconnection due ping
+     * @param msg
+     * @param clientController
+     * @throws IOException
+     * @throws InterruptedException
+     */
     @Override
     public synchronized void handleMessage(ExitMessage msg, ClientController clientController) throws IOException, InterruptedException {
         if(thereIsTempLobby()){
@@ -48,6 +63,13 @@ public class GameControllerRestart extends GameController {
         //unreachable
     }
 
+    /**
+     * method which received the username for the registration and the authentication of user on server
+     * @param msg
+     * @param clientController
+     * @throws IOException
+     * @throws InterruptedException
+     */
     @Override
     public synchronized void handleMessage(UsernameMessage msg, ClientController clientController) throws IOException, InterruptedException {
         if (!restartAnswerReceived){
@@ -113,7 +135,13 @@ public class GameControllerRestart extends GameController {
         }
     }
 
-
+    /**
+     * method which received the answer about restart possibility, it is managed only during in restart state
+     * @param msg
+     * @param clientController
+     * @throws IOException
+     * @throws InterruptedException
+     */
     @Override
     public synchronized void handleMessage(RestartAnswerMessage msg, ClientController clientController) throws IOException, InterruptedException {
         server.setRestartAnswerReceived(true);
@@ -156,6 +184,10 @@ public class GameControllerRestart extends GameController {
         return false;
     }
 
+    /**
+     * disconnected client controller from lobby
+     * @param clientController
+     */
     @Override
     public void disconnectClientTempLobby(ClientController clientController) {
         for(int i = 0; i < tempLobbyController.size(); i++){
@@ -167,6 +199,10 @@ public class GameControllerRestart extends GameController {
         }
     }
 
+    /**
+     * remove nickname from reconnected player's nickname
+     * @param nickname
+     */
     @Override
     public void removeNameFromReconnected(String nickname) {
         for(int i = 0; i < reconnected.size(); i++){
@@ -177,12 +213,22 @@ public class GameControllerRestart extends GameController {
         }
     }
 
+    /**
+     * send message to all user, who tries to reconnect to old game
+     * @throws IOException
+     * @throws InterruptedException
+     */
     public void reconnectionLobby() throws IOException, InterruptedException {
         for(ClientController c : server.getTempClientController()){
             c.getClientHandler().sendMessage(new RestartQuestionMessage(1));
         }
     }
 
+    /**
+     * method which add client controller to temporary lobby
+     * @throws IOException
+     * @throws InterruptedException
+     */
     public void reconnectionTempLobby() throws IOException, InterruptedException {
         int i = 0;
         for(; i < tempLobbyName.size(); i++){
