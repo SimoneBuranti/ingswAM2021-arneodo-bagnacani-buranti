@@ -105,7 +105,7 @@ public class WhiteMarbleParser implements CommandParser {
                     }
                     if (n < 1 || n > 4)
                         throw new InvalidCommandException();
-                    return new ShowPlayerCommand(n - 1, viewController);
+                    return new ShowPlayerCommand(n, viewController);
 
                 }
                 case "showProductionDecks": {

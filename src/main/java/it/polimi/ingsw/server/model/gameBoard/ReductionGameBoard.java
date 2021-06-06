@@ -2,6 +2,7 @@ package it.polimi.ingsw.server.model.gameBoard;
 
 import it.polimi.ingsw.server.model.Resource;
 import it.polimi.ingsw.server.model.exceptions.*;
+import it.polimi.ingsw.server.model.leaderCards.LeaderCard;
 import it.polimi.ingsw.server.model.productionCards.DeckProductionCard;
 import it.polimi.ingsw.server.model.productionCards.ProductionCard;
 
@@ -89,6 +90,15 @@ public class ReductionGameBoard extends GameBoardDecorator{
     public ProductionCard getDevelopmentBoardCell(int i, int j) {
         return gameBoard.getDevelopmentBoardCell(i, j);
     }
+
+
+    @Override
+    public ArrayList<LeaderCard> getLeaderCardsActivated() {
+        System.out.println("are you looking here");
+
+        return gameBoard.getLeaderCardsActivated();
+    }
+
 
 
 

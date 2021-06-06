@@ -50,7 +50,7 @@ public class PlayerSecond extends Player{
 
         reader = new InputStreamReader(this.getClass().getResourceAsStream("/fileConfiguration/fileInformationLeaderInitLeaderPlayerSecond.json"), StandardCharsets.UTF_8);
         this.leaderCard = gson.fromJson(reader, int[].class);
-
+        reverseAddPersonalLeaderCardAskey();
         reader = new InputStreamReader(this.getClass().getResourceAsStream("/fileConfiguration/fileInformationInitOnLeaderPlayerSecond.json"), StandardCharsets.UTF_8);
         this.initLeader = gson.fromJson(reader, boolean.class);
 

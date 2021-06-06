@@ -67,7 +67,7 @@ public class ClientHandler implements Runnable {
         outputStream = new ByteArrayOutputStream();
         readStream = new BufferedReader(new InputStreamReader(inputStream));
         writeStream = new PrintWriter(outputStream);
-        //testMode = true;
+
     }
 
     public void setClientController(ClientController clientController) {
@@ -158,7 +158,7 @@ public class ClientHandler implements Runnable {
      * @param msg the message to be read.
      */
     public synchronized void readMessageServer(String msg) throws IOException, InterruptedException {
-
+        System.out.println(clientController.getNickname()+"here in lettura"+msg);
             Message parsedMsg = Message.deserialize(msg);
             parsedMsg.accept(clientController);
 
@@ -169,6 +169,7 @@ public class ClientHandler implements Runnable {
      * @param msg the message to be sent.
      */
     public synchronized void sendMessage (Message msg) throws InterruptedException, IOException {
+        System.out.println(clientController.getNickname()+"here in send"+msg.toString());
         writeStream.println(msg.serialize());
         writeStream.flush();
 

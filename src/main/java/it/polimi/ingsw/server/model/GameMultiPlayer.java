@@ -570,44 +570,23 @@ public class GameMultiPlayer extends Game {
         Reader reader;
 
         reader = new InputStreamReader(this.getClass().getResourceAsStream("/fileConfiguration/InformationAboutTurn.json"), StandardCharsets.UTF_8);
-        nickNameInOrder = gson.fromJson(reader, ArrayList.class);
+        this.nickNameInOrder = gson.fromJson(reader, ArrayList.class);
 
         reader = new InputStreamReader(this.getClass().getResourceAsStream("/fileConfiguration/InformationAboutTurnPlayerNumber.json"), StandardCharsets.UTF_8);
-        numberOfPlayer = gson.fromJson(reader, Integer.class);
+        this.numberOfPlayer = gson.fromJson(reader, Integer.class);
 
         reader = new InputStreamReader(this.getClass().getResourceAsStream("/fileConfiguration/InformationAboutCurrentPosition.json"), StandardCharsets.UTF_8);
-        currentPlayerPosition = gson.fromJson(reader, Integer.class);
+        this.currentPlayerPosition = gson.fromJson(reader, Integer.class);
 
         reader = new InputStreamReader(this.getClass().getResourceAsStream("/fileConfiguration/lastTurn.json"), StandardCharsets.UTF_8);
-        lastTurn = gson.fromJson(reader, Boolean.class);
+        this.lastTurn = gson.fromJson(reader, Boolean.class);
 
-        /*try {
-            nickNameInOrder = gson.fromJson(new FileReader("src/main/resources/fileConfiguration/InformationAboutTurn.json"),ArrayList.class);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            numberOfPlayer = gson.fromJson(new FileReader("src/main/resources/fileConfiguration/InformationAboutTurnPlayerNumber.json"),Integer.class);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        try {
-            currentPlayerPosition= gson.fromJson(new FileReader("src/main/resources/fileConfiguration/InformationAboutCurrentPosition.json"),Integer.class);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        try {
-            lastTurn= gson.fromJson(new FileReader("src/main/resources/fileConfiguration/lastTurn.json"),Boolean.class);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }*/
         this.clientControllersInOrder=clientControllers;
         addObservators();
         notifyObserver(new GameTypeMessage(true));
         notifyObserver(new NicknameStartedMessage(nickNameInOrder));
         createPlayerRestore(numberOfPlayer,nickNameInOrder);
-        currentPlayer = playerList.get(currentPlayerPosition);
+        this.currentPlayer = playerList.get(currentPlayerPosition);
         this.reConfigClient();
         Map<Resource, Integer> map = playerResources();
         this.reserve.removeResources(map);
@@ -703,6 +682,11 @@ public class GameMultiPlayer extends Game {
     }
 
 
+    /**
+     * end of turn method for multiplayer
+     * @throws IOException
+     * @throws InterruptedException
+     */
     @Override
     public synchronized void endOfTurn() throws IOException, InterruptedException {
         setCurrentPlayer();
@@ -716,6 +700,7 @@ public class GameMultiPlayer extends Game {
      * @throws IOException
      * @throws InterruptedException
      */
+    @Override
     public void askInfoOnPlayer(int n, String nickname) throws IOException, InterruptedException {
         if(n<numberOfPlayer || n==numberOfPlayer){
             int[][] list = new int[3][3];
@@ -724,7 +709,8 @@ public class GameMultiPlayer extends Game {
                     if (playerList.get(n-1).getGameBoardOfPlayer().getDevelopmentBoardCell(i,j)==null)
                         list[i][j]=0;
                     else
-                        list[i][j]=playerList.get(n-1).getGameBoardOfPlayer().getDevelopmentBoardCell(i,j).getKey();}}
+                        list[i][j]=playerList.get(n-1).getGameBoardOfPlayer().getDevelopmentBoardCell(i,j).getKey();}
+              }
 
 
             ArrayList<Integer> needForLeader2 = new ArrayList<>();
@@ -751,12 +737,11 @@ public class GameMultiPlayer extends Game {
                 if(playerList.get(n-1).getGameBoardOfPlayer().getLeaderCardsActivated().get(1)!=null){
                     if(playerList.get(n-1).getGameBoardOfPlayer().getLeaderCardsActivated().get(1) instanceof LeaderCardStorage)
                     {
-                        resource2=playerList.get(n-1).getGameBoardOfPlayer().getLeaderCardsActivated().get(0).getResourceEffect();
-                        howMany2=2-playerList.get(n-1).getGameBoardOfPlayer().getStorageOfGameBoard().getNumExtraFirstAvailable();
+                        resource2=playerList.get(n-1).getGameBoardOfPlayer().getLeaderCardsActivated().get(1).getResourceEffect();
+                        howMany2=2-playerList.get(n-1).getGameBoardOfPlayer().getStorageOfGameBoard().getNUmExtraSecondAvailable();
                     }
                 }
             }
-
     notifyOnlyOneSpecificObserver(new ShowAllOfPlayerMessage(list,
                     needForLeader2,
                     playerList.get(n-1).getGameBoardOfPlayer().getStorageOfGameBoard().getStorageResource(),
@@ -766,12 +751,14 @@ public class GameMultiPlayer extends Game {
                     playerList.get(n-1).getNickName(),
                     resource1,resource2,howMany1,howMany2),nickname);
         }
-        else
-            notifyOnlyOneSpecificObserver(new NoPlayersErrorMessage(),nickname);}
+        else{
+            notifyOnlyOneSpecificObserver(new NoPlayersErrorMessage(),nickname);
+        }
+    }
 
 
     /**
-     * this metod restore player after total disconnection or server crashing
+     * this method restore player after total disconnection or server crashing
      * @throws IOException
      * @throws InterruptedException
      */

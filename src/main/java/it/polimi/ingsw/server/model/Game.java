@@ -935,5 +935,5 @@ public class Game extends Observable {
      * @throws IOException
      * @throws InterruptedException
      */
-    public void askInfoOnPlayer(int n, String nickname) throws IOException, InterruptedException {}
+    public void askInfoOnPlayer(int n, String nickname) throws IOException, InterruptedException{}
 }

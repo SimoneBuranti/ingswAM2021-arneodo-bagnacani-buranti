@@ -44,12 +44,6 @@ public class VirtualView implements Observer {
     }
 
 
-
-
-
-
-
-
     /**
      * Receives an update message from the model.
      * The message is sent over the network to the client.

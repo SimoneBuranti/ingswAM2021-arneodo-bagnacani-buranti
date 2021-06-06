@@ -60,7 +60,8 @@ public class GameControllerRestart extends GameController {
                         tempLobbyName.add(msg.getUsername());
                         tempLobbyController.add(clientController);
                         clientController.getClientHandler().sendMessage(new BootingLobbyErrorMessage());
-                    }else
+                    }
+                    else
                         clientController.getClientHandler().sendMessage(new AlreadyExistingNickNameErrorMessage());
                 }
                 else if(clientController == firstClientController){
@@ -80,6 +81,8 @@ public class GameControllerRestart extends GameController {
                 if (!reconnected.contains(msg.getUsername())){
                     clientController.setNickname(msg.getUsername());
                     reconnected.add(msg.getUsername());
+                    System.out.println("here");
+                    System.out.println(msg.getUsername());
                     server.addClientController(clientController);
                     for(ClientController c : server.getClientController())
                         c.getClientHandler().sendMessage(new NPlayersMessage(reconnected.size(), server.getLobbySize()));
@@ -88,6 +91,7 @@ public class GameControllerRestart extends GameController {
                     clientController.getClientHandler().sendMessage(new AlreadyExistingNickNameErrorMessage());
                 }
             }
+
             else {
                 clientController.getClientHandler().sendMessage(new NoNicknameMessage());
             }
