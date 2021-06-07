@@ -18,9 +18,9 @@ public class SwingApp {
         resources.add(Resource.ROCK);
         resources.add(Resource.SERVANT);
         mainFrame.marblePossibilityPopUp(3, resources);*/
-        //new IPInitialFrame();
-        JFrame market = new MarketFrame(new Gui());
-        market.setVisible(true);
+        new IPInitialFrame();
+        /*JFrame market = new MarketFrame(new Gui());
+        market.setVisible(true);*/
         /*ProductionCardArray productionCardArray = new ProductionCardArray();
         ProductionDeckFrame productionDeckFrame;
 

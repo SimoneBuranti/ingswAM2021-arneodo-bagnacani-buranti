@@ -7,18 +7,23 @@ import it.polimi.ingsw.client.view.gui.Gui;
 import it.polimi.ingsw.client.view.gui.frames.IPInitialFrame;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Scanner;
 
 public class ClientApp {
+
+    public static final String defHostName = "127.0.0.1";
+    public static final int defPortNumber = 12345;
+
 
     private static String hostName;
     private static int portNumber;
 
     public static void main(String[] args) throws IOException {
-        hostName = "127.0.0.1";
+        hostName = null;
+        portNumber = -1;
 
-        portNumber = 12345;
-
+        //Scanner inputScanner;
 
         boolean cliParam = false;
 
@@ -52,11 +57,27 @@ public class ClientApp {
             }.start(); }*/
 
        // else {
-            //new IPInitialFrame();
 
-            View gui = new Gui();
+            //InputStream initStream = new In
+
+            new IPInitialFrame();
+
+            while(ClientApp.getIPAddress() == null || ClientApp.getPortNumber() == -1){
+                try {
+                    Thread.sleep(200);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        /*try {
+            Thread.currentThread().wait();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }*/
+        View gui = new Gui();
             SocketClient socketClient = new SocketClient(hostName, portNumber, gui);
             gui.startView();
+
             new Thread() {
                 public void run() {
                     socketClient.readMessage();
@@ -66,12 +87,22 @@ public class ClientApp {
     }
 
 
-    public static void setIPAddress(String ipAddress){
-        hostName = ipAddress;
+    public static synchronized void setIPAddress(String ipAddress){
+        ClientApp.hostName = ipAddress;
     }
 
-    public static void setIPAddress(int portNumber){
-        portNumber = portNumber;
+    public static synchronized void setPortNumber(int portNumber){
+        ClientApp.portNumber = portNumber;
     }
+
+    public static synchronized String getIPAddress(){
+        return ClientApp.hostName;
+    }
+
+    public static synchronized int getPortNumber(){
+        return ClientApp.portNumber;
+    }
+
+
 }
 

@@ -69,9 +69,24 @@ public abstract class Command {
 
         for(int i = 0;i<number.length();i++){
             n*=10;
-            n+= number.charAt(0) -'0';
+            n+= number.charAt(i) -'0';
         }
         return n;
+    }
+
+    public static String fromIntToString(int num){
+        String parsed = "";
+        String temp = "";
+        char figure;
+        while( num>0 ){
+            figure = (char) ((num%10) + '0');
+            num /= 10;
+            temp += figure;
+        }
+        for (int i=temp.length()-1;i>=0;i--){
+            parsed += temp.charAt(i);
+        }
+        return parsed;
     }
 
     public String toString(){

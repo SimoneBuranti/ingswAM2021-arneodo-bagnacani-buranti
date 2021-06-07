@@ -420,6 +420,10 @@ public abstract class MainFrame  extends JFrame {
             return true;
         return false;
     }
+
+    public void refreshMessagePanel() {
+        this.serverMessagePanel.refreshMessagePanel();
+    }
 }
 
 

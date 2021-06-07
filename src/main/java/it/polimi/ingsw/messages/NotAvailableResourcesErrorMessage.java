@@ -23,6 +23,6 @@ public class NotAvailableResourcesErrorMessage extends Message {
 
     @Override
     public String toString(){
-        return "you don't have enough resources to activate the production, try with another one or end the action";
+        return "you don't have enough resources for this action, try with another one";
     }
 }

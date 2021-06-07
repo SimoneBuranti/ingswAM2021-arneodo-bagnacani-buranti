@@ -61,6 +61,12 @@ public class ServerMessagePanel extends JPanel {
 
     }
 
+    public void refreshMessagePanel(){
+        for(int i = 0;i<n ;i++){
+            this.textLabels[i].setText("");
+        }
+    }
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);

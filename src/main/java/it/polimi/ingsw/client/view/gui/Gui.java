@@ -335,6 +335,7 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
             }*/
             mainFrameOfGame.setCurrentPlayer(viewController.getNickName());
             enableAllAction();
+            mainFrameOfGame.refreshMessagePanel();
             applyChangesTo(mainFrameOfGame);
 
         });
