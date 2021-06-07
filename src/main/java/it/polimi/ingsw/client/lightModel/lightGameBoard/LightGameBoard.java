@@ -7,22 +7,53 @@ import it.polimi.ingsw.server.model.leaderCards.LeaderCardReduction;
 import it.polimi.ingsw.server.model.productionCards.ProductionCard;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * This class represents the player's game board of the light model
+ */
 public class LightGameBoard {
+    /**
+     * This attribute represents the nickname of the player
+     */
     private final String nickname;
+    /**
+     * This attribute represents the storage of the player
+     */
     private final LightStorage storage;
+    /**
+     * This attribute represents the strongbox of the player
+     */
     private final LightStrongbox strongbox;
+    /**
+     * This attribute represents the faith path of the player
+     */
     private final LightFaithPath faithPath;
+    /**
+     * This attribute represents the production cards of the player
+     */
     private final ProductionCard[][] productionCards;
+    /**
+     * This attribute represents the leader cards of the player
+     */
     private ArrayList<LeaderCard> leaderCards;
+    /**
+     * This attribute represents the activated leader cards of the player
+     */
     private final ArrayList<LeaderCard> leaderCardsActivated;
+    /**
+     * This attribute contains all the production cards
+     */
     private final LightProductionCards productionCardsByKey;
+    /**
+     * This attribute contains all the leader cards
+     */
     private final LightLeaderCards leaderCardsByKey;
 
-    private ArrayList<Integer> indexLeaderActivated;
 
+    /**
+     * This constructor initialises all the attributes of the game board
+     */
     public LightGameBoard(String nickname){
         this.nickname = nickname;
         storage = new LightStorage();
@@ -33,30 +64,32 @@ public class LightGameBoard {
         leaderCardsActivated = new ArrayList<>();
         productionCardsByKey = new LightProductionCards();
         leaderCardsByKey = new LightLeaderCards();
-        indexLeaderActivated = new ArrayList<>();
     }
 
-    public String getNickname(){
-        return nickname;
-    }
+    /**
+     * This method sets the values of player faith path
+     * @param faithIndicator : the position of player faith indicator
+     * @param currCall : the current currCall value
+     */
     public void setFaithPath(int faithIndicator, int currCall){
         this.faithPath.setFaithPath(faithIndicator, currCall);
     }
 
+    /**
+     * This method returns the game board columns where there is at least one production card
+     */
     public ArrayList<Integer> getAvailableProductionCards(){
         ArrayList<Integer> available = new ArrayList<>();
         for(int i= 0;i<3;i++){
             if(productionCards[0][i] != null)
                 available.add(i+1);
-            /*for (int j = 0;j<3;j++){
-                if ((productionCards[j][i] == null && i!=0) || (productionCards[i][j] != null && j==2))
-                    available.add();
-            }*/
         }
         return available;
     }
 
-
+    /**
+     * This method sets the initial production cards of the player's game board
+     */
     public void setProductionCards(int[][] keys){
         for(int i = 0; i < 3; i++){
             for(int j = 0; j < 3; j++){
@@ -68,6 +101,10 @@ public class LightGameBoard {
             }
         }
     }
+
+    /**
+     * This method returns the first available position in the chosen column received as a parameter
+     */
     public int firstRowFree(int chosenColumn){
         int i;
         for(i=0; i<3; i++)
@@ -76,6 +113,9 @@ public class LightGameBoard {
         return i;
     }
 
+    /**
+     * This method returns the top card position in the chosen column received as a parameter
+     */
     public int lastRowOccupied(int chosenColumn) {
         int i=0;
 
@@ -86,6 +126,11 @@ public class LightGameBoard {
         return 2;
     }
 
+    /**
+     * This method adds the production card passed as a parameter to the first row free of the column passed as a parameter
+     * @param chosenColumn : the column in which add the card
+     * @param productionCard : the card to add
+     */
     public void addProductionCard(int chosenColumn, ProductionCard productionCard){
         int row = firstRowFree(chosenColumn);
 
@@ -93,6 +138,11 @@ public class LightGameBoard {
             productionCards[row][chosenColumn] = productionCard;
     }
 
+    /**
+     * This method returns the highest level production card in the column passed as a parameter if there is, null otherwise
+     * @param chosenColumn : the column of the game board
+     * @return ProductionCard : the production card in the chosenColumn
+     */
     public ProductionCard getProductionCard(int chosenColumn){
         int row = lastRowOccupied(chosenColumn);
 
@@ -102,59 +152,77 @@ public class LightGameBoard {
         return productionCards[row][chosenColumn];
     }
 
-    public void addLeaderCard(LeaderCard leaderCard){
-        leaderCards.add(leaderCard);
-    }
-
+    /**
+     * This method initialises the initial leader cards of the player
+     * @param leaderCardKeys : the keys of the initial leader cards
+     */
     public void addLeaderCard(ArrayList<Integer> leaderCardKeys){
         for(int i = 0; i < leaderCardKeys.size(); i++) {
             leaderCards.add(leaderCardsByKey.leaderCardByKey(leaderCardKeys.get(i)));
         }
     }
+
+    /**
+     * This method initialises the initial activated leader cards of the player
+     * @param leaderCardKeys : the keys of the initial activated leader cards
+     */
     public void addLeaderCardActivated(ArrayList<Integer> leaderCardKeys){
         for(int i = 0; i < leaderCardKeys.size(); i++) {
             leaderCardsActivated.add(leaderCardsByKey.leaderCardByKey(leaderCardKeys.get(i)));
         }
     }
 
+    /**
+     * This method return the leader card in position index
+     * @param index : the position of the card
+     * @return LeaderCard : the card in index position
+     */
     public LeaderCard getLeaderCard(int index){
         return leaderCards.get(index);
     }
 
 
+    /**
+     * This method activates the leader card in index position by removing it from the leaderCards list and adding
+     * to the leaderCardsActivated list
+     * @param index : the position of the leader card to activate
+     */
     public void activateLeaderCard(int index){
-        indexLeaderActivated.add(index);
         leaderCardsActivated.add(leaderCards.remove(index));
     }
 
-
-    public int getIndexActivated(int i){
-        return indexLeaderActivated.get(i);
-    }
-
+    /**
+     * This method discards the leader card in index position by removing it from the leaderCards list
+     * @param index : the position of the leader card to discard
+     */
     public void discardLeaderCard(int index){
         leaderCards.remove(index);
     }
 
-    public LeaderCard getLeaderCardActivated(int index){
-        return leaderCardsActivated.get(index);
-    }
-
+    /**
+     * This method returns the list of activated leader cards
+     */
     public ArrayList<LeaderCard> getLeaderCardActivated(){
         return (ArrayList) leaderCardsActivated.clone();
     }
 
+    /**
+     * This method pays the cost of the activated production
+     * @param list : the cost to be paid
+     */
     public void payResourcesProduction(ArrayList<Resource> list){
         strongbox.removeResource(storage.removeAvailableResource(list));
     }
 
+    /**
+     * This method pays the cost of the bought production card
+     * @param map : the cost to be paid
+     */
     public ArrayList<Resource> payResourcesBuy(Map<Resource, Integer> map){
         ArrayList<Resource> list = fromMapToList(map);
         for(LeaderCard lc : leaderCardsActivated){
             if(lc instanceof LeaderCardReduction){
                 list.remove(lc.getResourceEffect());
-                //if(map.get(lc.getResourceEffect()) > 0)
-                //    map.put(lc.getResourceEffect(), map.remove(lc.getResourceEffect())-1);
             }
         }
         strongbox.removeResource(storage.removeAvailableResource(list));
@@ -162,6 +230,9 @@ public class LightGameBoard {
         return list;
     }
 
+    /**
+     * This method produces a list from the map passed as a parameter
+     */
     public ArrayList<Resource> fromMapToList(Map<Resource, Integer> map){
         ArrayList<Resource> list = new ArrayList<>();
         for(Resource resource : map.keySet()){
@@ -169,113 +240,82 @@ public class LightGameBoard {
                 list.add(resource);
             }
         }
-        /*for(Resource resource : list){
-            if(map.containsKey(resource)){
-                map.put(resource, map.remove(resource)+1);
-            }else{
-                map.put(resource, 1);
-            }
-        }
-        return map;*/
         return list;
     }
 
-    public void addResourceStorage(Resource resource){
-        storage.addResource(resource);
-    }
-
+    /**
+     * This method adds the quantity of the resource passed as a parameter to the storage
+     * @param resource : the type of resource
+     * @param quantity : the quantity to add
+     */
     public void addResourceStorage(Resource resource, int quantity){
         storage.addResource(resource, quantity);
     }
 
+    /**
+     * This method adds the resources to the storage
+     * @param map : the map of resources to add
+     */
     public void addResourceStorage(Map<Resource,Integer> map){
         storage.addResource(map);
     }
 
+    /**
+     * This method adds the resources to the storage
+     * @param list : the list of resources to add
+     */
     public void addResourceStorage(ArrayList<Resource> list){
         storage.addResource(list);
     }
 
-    public void removeResourceStorage(Resource resource, int quantity){
-        storage.removeResource(resource, quantity);
-    }
-
-    public void removeResourceStorage(Map<Resource,Integer> map){
-        storage.removeResource(map);
-    }
-
-    public  ArrayList<Resource> removeAvailableResourceStorage(Map<Resource,Integer> map){
-        return storage.removeAvailableResource(fromMapToList(map));
-    }
-
-    public void removeResourceStorage(ArrayList<Resource> list){
-        storage.removeResource(list);
-    }
-
+    /**
+     * This method returns the storage of the game board
+     */
     public Map<Resource,Integer> getStorage(){
         return storage.getStorage();
     }
 
-    public ArrayList<Resource> availableResourcesStorage(){
-        return storage.availableResources();
-    }
-
-    public int getResourceStorage(Resource resource){
-        return storage.getResource(resource);
-    }
-
-    public void addResourceStrongbox(Resource resource, int quantity){
-        strongbox.addResource(resource, quantity);
-    }
-
+    /**
+     * This method adds the resources to the strongbox
+     * @param map : the map of resources to add
+     */
     public void addResourceStrongbox(Map<Resource,Integer> map){
         strongbox.addResource(map);
     }
-
+    /**
+     * This method adds the resources to the strongbox
+     * @param list : the list of resources to add
+     */
     public void addResourceStrongbox(ArrayList<Resource> list){
         strongbox.addResource(list);
     }
 
-    public void removeResourceStrongbox(Resource resource, int quantity){
-        strongbox.removeResource(resource, quantity);
-    }
-
-    public void removeResourceStrongbox(Map<Resource,Integer> map){
-        strongbox.removeResource(map);
-    }
-
-    public void removeResourceStrongbox(ArrayList<Resource> list){
-        strongbox.removeResource(list);
-    }
-
+    /**
+     * This method returns the strongbox of the game board
+     */
     public Map<Resource,Integer> getStrongbox(){
         return strongbox.getStrongbox();
     }
 
-    public ArrayList<Resource> availableResourcesStrongbox(){
-        return strongbox.availableResources();
-    }
-
-    public int getResourceStrongbox(Resource resource){
-        return strongbox.getResource(resource);
-    }
-
+    /**
+     * This method moves the player's faith indicator to pos positions
+     * @param pos : the number of positions to move forward the indicator
+     */
     public void moveFaithIndicator(int pos){
         faithPath.move(pos);
     }
 
-
     /**
-     * This method checks the current position compared with the current vatican space
-     * and the related papal cards will be assigned or not depending on player position
-     * It also increases the currCall attribute
+     * This method sets the value of the papal card in the current position with the value passed as a parameter
+     * and increases the currCall attribute
+     * @param papalCard : the value to set
      */
     public void setPapal(int papalCard) {
         faithPath.setPapal(papalCard);
     }
 
     /**
-     * Test only method: getter method for the current position of the faithIndicator
+     * Getter method for the current position of the faithIndicator
      * @return int : current position of the faithIndicator
      */
     public int getIndicator() {
@@ -283,7 +323,7 @@ public class LightGameBoard {
     }
 
     /**
-     * Test only method: getter method for the currCall attribute
+     * Getter method for the currCall attribute
      * @return int : the current value of the currCall attribute
      */
     public int getCurrCall() {
@@ -291,44 +331,50 @@ public class LightGameBoard {
     }
 
     /**
-     * Test only method: getter method to show if the papal card in papalCardNumber position has been gained or not
+     * This method returns the value of the papal card in papalCardNumber position
      * @param papalCardNumber : the position of the papal card
-     * @return int : 1 if the card has been gained, 0 if the card has not been gained, -1 if no player has reached the papal space
+     * @return int : the value of the papal card
      */
     public int getPapalCard(int papalCardNumber){
         return faithPath.getPapalCard(papalCardNumber);
     }
 
+    /**
+     * This method returns the values of the player's papal cards
+     * @return int[] : the values of the player's papal cards
+     */
     public int[] getPapalCards(){
         return faithPath.getPapalCards();
     }
 
+    /**
+     * This method returns the player's production cards
+     */
     public ProductionCard[][] getProductionCards() {
         return productionCards;
     }
 
-    public ProductionCard[] getFirstProductionCards(){
-        int row;
-        ProductionCard[] cards = new ProductionCard[3];
-        for(int i = 0; i < 3; i++){
-            row = lastRowOccupied(i);
-            if(row == -1)
-                cards[i] = null;
-            else
-                cards[i] = productionCards[row][i];
-        }
-        return cards;
-    }
-
+    /**
+     * This method returns the player's leader cards
+     * @return ArrayList<LeaderCard> : the player's leader cards
+     */
     public ArrayList<LeaderCard> getLeaderCards() {
         return leaderCards;
     }
 
-
+    /**
+     * This method returns the player's activated leader cards
+     * @return ArrayList<LeaderCard> : the player's activated leader cards
+     */
     public ArrayList<LeaderCard> getLeaderCardsActivated() {
         return leaderCardsActivated;
     }
 
+    /**
+     * This method sets the chosen leader cards
+     * @param cardFirst : the position of the first leader card
+     * @param cardSec : the position of the second leader card
+     */
     public void setLeaderPersonal(int cardFirst, int cardSec) {
         ArrayList<LeaderCard> arrayList = new ArrayList<>();
         arrayList.add(LightLeaderCards.leaderCardByKey(leaderCards.get(cardFirst).getKey()));
@@ -336,7 +382,10 @@ public class LightGameBoard {
         leaderCards=arrayList;
     }
 
-
+    /**
+     * This method sets the initial values of the player's papal cards
+     * @param papalCards : the initial values of the player's papal cards
+     */
     public void setPapalCards(int[] papalCards) {
         faithPath.setPapalCards(papalCards);
     }

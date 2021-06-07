@@ -3,12 +3,13 @@ package it.polimi.ingsw.client.lightModel.lightActionMarkers;
 import it.polimi.ingsw.client.lightModel.LightGameSolitaire;
 
 /**
- * this class implements the ActionMarker interface and
- * represents the action marker that moves the black cross forward two spaces
+ * this class represents the action marker that moves the black cross forward two spaces
  */
 public class LightActionMarkerForCrossDouble extends LightActionMarker {
 
-
+    /**
+     * This attributes represents the type of action marker
+     */
     private String type="ActionMarkerForCrossDouble";
 
     /**
@@ -17,6 +18,9 @@ public class LightActionMarkerForCrossDouble extends LightActionMarker {
     public LightActionMarkerForCrossDouble() {
     }
 
+    /**
+     * @return type of action marker
+     */
     @Override
     public String getType() {
         return type;
@@ -25,7 +29,7 @@ public class LightActionMarkerForCrossDouble extends LightActionMarker {
 
 
     /**
-     * the implemented method of the interface that calls a SolitaireGame method: moveBlackCrossDouble
+     * This method calls a SolitaireGame method: moveBlackCrossDouble
      * @param game : the instantiated solitaire game a player is playing
      */
     public void actionMarkerEffect(LightGameSolitaire game) {

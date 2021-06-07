@@ -5,9 +5,18 @@ import it.polimi.ingsw.client.lightModel.LightGameSolitaire;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * This class represents the action markers deck of the light model
+ */
 public class LightActionMarkerDeck{
+    /**
+     * This attribute collects all the types of action markers
+     */
     ArrayList<LightActionMarker> deck;
 
+    /**
+     * This constructor adds all the types of action markers to the deck
+     */
     public LightActionMarkerDeck(){
         deck = new ArrayList<>();
 
@@ -25,6 +34,10 @@ public class LightActionMarkerDeck{
         deck.add(actionMarkerCrossDouble);
     }
 
+    /**
+     * This method activates the effect of the type of action marker passed as a parameter
+     * @param type : the type of action marker
+     */
     public void actionMarkerEffect(String type, LightGameSolitaire game) throws IOException, InterruptedException {
         for(LightActionMarker actionMarker: deck){
             if(actionMarker.getType().equals(type))

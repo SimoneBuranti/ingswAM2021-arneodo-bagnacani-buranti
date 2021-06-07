@@ -6,18 +6,19 @@ import it.polimi.ingsw.server.model.colours.Violet;
 import java.io.IOException;
 
 /**
- * this class implements the ActionMarker interface and
- * represents the action marker that discards two violet production cards from level one deck up to level three deck
+ * this class represents the action marker that discards two violet production cards from level one deck up to level three deck
  */
 public class LightActionMarkerProductionViolet extends LightActionMarker {
 
 
     /**
-     * type of object
+     * This attributes represents the type of action marker
      */
     private String type="ActionMarkerProductionViolet";
 
-
+    /**
+     * @return type of action marker
+     */
     @Override
     public String getType() {
         return type;
@@ -31,8 +32,7 @@ public class LightActionMarkerProductionViolet extends LightActionMarker {
 
 
     /**
-     * the implemented method of the interface that calls twice the removeProductionCard game method passing it a violet colour
-     * and that spreads the two exceptions EmptyException and EndOfSolitaireGame
+     * This method calls the removeProductionCard SolitaireGame method by passing it a violet colour
      * @param game : the instantiated solitaire game a player is playing
      */
     public void actionMarkerEffect(LightGameSolitaire game) throws IOException, InterruptedException {
