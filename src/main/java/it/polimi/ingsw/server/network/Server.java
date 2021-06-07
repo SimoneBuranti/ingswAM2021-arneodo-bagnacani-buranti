@@ -55,16 +55,15 @@ public class Server {
 
 
 
-    public Server() throws FileNotFoundException {
+    public Server()  {
             ArrayList<String> nickNameInOrder;
             String nickname;
             Gson gson = new Gson();
-            //File f = new File("src/main/resources/fileConfiguration/InformationAboutTurn.json");
+            //File f = new File("fileConfiguration/InformationAboutTurn.json");
 
             try{
-                Reader reader = new InputStreamReader(this.getClass().getResourceAsStream("/fileConfiguration/InformationAboutTurn.json"), StandardCharsets.UTF_8);
-                nickNameInOrder = gson.fromJson(reader, ArrayList.class);
-                //nickNameInOrder = gson.fromJson(new FileReader("src/main/resources/fileConfiguration/InformationAboutTurn.json"),ArrayList.class);
+
+                nickNameInOrder = gson.fromJson(new FileReader("fileConfiguration/InformationAboutTurn.json"),ArrayList.class);
                 this.gameController = new GameControllerRestart(this);
                 gameController.setServer(this);
                 lobby = nickNameInOrder;
@@ -73,7 +72,7 @@ public class Server {
                 setRestartAnswerReceived(false);
                 restartQuestionSent = false;
                 gameController.setNumberOfPlayers(nickNameInOrder.size());
-            }catch (NullPointerException e){
+            }catch (FileNotFoundException e){
                 this.gameController = new GameControllerEmpty(this);
                 gameController.setServer(this);
                 lobby = new ArrayList<>();
@@ -84,7 +83,7 @@ public class Server {
             /*if (f.exists()){
                 Reader reader = new InputStreamReader(this.getClass().getResourceAsStream("/fileConfiguration/InformationAboutTurn.json"), StandardCharsets.UTF_8);
                 nickNameInOrder = gson.fromJson(reader, ArrayList.class);
-                //nickNameInOrder = gson.fromJson(new FileReader("src/main/resources/fileConfiguration/InformationAboutTurn.json"),ArrayList.class);
+                //nickNameInOrder = gson.fromJson(new FileReader("fileConfiguration/InformationAboutTurn.json"),ArrayList.class);
                 this.gameController = new GameControllerRestart(this);
                 gameController.setServer(this);
                 lobby = nickNameInOrder;
@@ -225,8 +224,9 @@ public class Server {
      * @throws InterruptedException
      */
     public void restoreGameSingleBackup() throws IOException, InterruptedException {
+        System.out.println("qui restore01");
         this.game=new GameSolitaire(clientControllers.get(0).getNickname(),false,clientControllers.get(0));
-
+        System.out.println("qui restore02");
         clientControllers.get(0).setGame(this.game);
     }
 
@@ -236,11 +236,15 @@ public class Server {
      * @throws InterruptedException
      */
     public void restoreGameMultiBackup() throws IOException, InterruptedException {
+        System.out.println("qui restore01");
         this.clientControllers=orderRestart();
+        System.out.println("qui restore 02");
         this.game=new GameMultiPlayer(this.getLobbySize(),lobby,false,clientControllers);
+        System.out.println("qui restore03");
         for(ClientController client : clientControllers){
             client.setGame(this.game);
         }
+
     }
 
     /**
@@ -438,7 +442,7 @@ public class Server {
         Gson gson=new Gson();
 
 
-        nickNameInOrder = gson.fromJson(new FileReader("src/main/resources/fileConfiguration/InformationAboutTurn.json"),ArrayList.class);
+        nickNameInOrder = gson.fromJson(new FileReader("fileConfiguration/InformationAboutTurn.json"),ArrayList.class);
 
          lobby = nickNameInOrder;
         this.gameController = new GameControllerRestart(this);

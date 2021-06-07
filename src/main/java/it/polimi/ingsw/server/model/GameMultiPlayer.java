@@ -473,7 +473,7 @@ public class GameMultiPlayer extends Game {
         String jsonStrin = gson.toJson(inkwell);
         try {
 
-            config = new FileWriter("src/main/resources/fileConfiguration/InformationAboutInkwell.json");
+            config = new FileWriter("fileConfiguration/InformationAboutInkwell.json");
             config.write(jsonStrin);
         } catch (IOException e) {
             e.printStackTrace();
@@ -496,7 +496,7 @@ public class GameMultiPlayer extends Game {
         String jsonStrin = gson.toJson(currentPlayerPosition);
         try {
 
-            config = new FileWriter("src/main/resources/fileConfiguration/InformationAboutCurrentPosition.json");
+            config = new FileWriter("fileConfiguration/InformationAboutCurrentPosition.json");
             config.write(jsonStrin);
         } catch (IOException e) {
             e.printStackTrace();
@@ -518,7 +518,7 @@ public class GameMultiPlayer extends Game {
         String jsonStrin = gson.toJson(lastTurn);
         try {
 
-            config = new FileWriter("src/main/resources/fileConfiguration/lastTurn.json");
+            config = new FileWriter("fileConfiguration/lastTurn.json");
             config.write(jsonStrin);
         } catch (IOException e) {
             e.printStackTrace();
@@ -539,7 +539,7 @@ public class GameMultiPlayer extends Game {
         FileWriter config = null;
         String jsonStrin = gson.toJson(nickNameInOrder);
         try {
-            config = new FileWriter("src/main/resources/fileConfiguration/InformationAboutTurn.json");
+            config = new FileWriter("fileConfiguration/InformationAboutTurn.json");
             config.write(jsonStrin);
         } catch (IOException e) {
             e.printStackTrace();
@@ -567,19 +567,28 @@ public class GameMultiPlayer extends Game {
      */
     public void restoreGameTurn(ArrayList<ClientController> clientControllers) throws IOException, InterruptedException {
         Gson gson=new Gson();
-        Reader reader;
 
-        reader = new InputStreamReader(this.getClass().getResourceAsStream("/fileConfiguration/InformationAboutTurn.json"), StandardCharsets.UTF_8);
-        this.nickNameInOrder = gson.fromJson(reader, ArrayList.class);
+       try {
+            nickNameInOrder = gson.fromJson(new FileReader("fileConfiguration/InformationAboutTurn.json"),ArrayList.class);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
 
-        reader = new InputStreamReader(this.getClass().getResourceAsStream("/fileConfiguration/InformationAboutTurnPlayerNumber.json"), StandardCharsets.UTF_8);
-        this.numberOfPlayer = gson.fromJson(reader, Integer.class);
-
-        reader = new InputStreamReader(this.getClass().getResourceAsStream("/fileConfiguration/InformationAboutCurrentPosition.json"), StandardCharsets.UTF_8);
-        this.currentPlayerPosition = gson.fromJson(reader, Integer.class);
-
-        reader = new InputStreamReader(this.getClass().getResourceAsStream("/fileConfiguration/lastTurn.json"), StandardCharsets.UTF_8);
-        this.lastTurn = gson.fromJson(reader, Boolean.class);
+        try {
+            numberOfPlayer = gson.fromJson(new FileReader("fileConfiguration/InformationAboutTurnPlayerNumber.json"),Integer.class);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        try {
+            currentPlayerPosition= gson.fromJson(new FileReader("fileConfiguration/InformationAboutCurrentPosition.json"),Integer.class);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        try {
+            lastTurn= gson.fromJson(new FileReader("fileConfiguration/lastTurn.json"),Boolean.class);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
 
         this.clientControllersInOrder=clientControllers;
         addObservators();
@@ -657,7 +666,7 @@ public class GameMultiPlayer extends Game {
         FileWriter config = null;
         String jsonStrin = gson.toJson(numberOfPlayer);
         try {
-            config = new FileWriter("src/main/resources/fileConfiguration/InformationAboutTurnPlayerNumber.json");
+            config = new FileWriter("fileConfiguration/InformationAboutTurnPlayerNumber.json");
             config.write(jsonStrin);
         } catch (IOException e) {
             e.printStackTrace();
@@ -809,6 +818,10 @@ public class GameMultiPlayer extends Game {
         }
     }
 
+
+    /**
+     * @return from the resource of the player, this method restore the old reserve
+     */
 
     public Map<Resource, Integer> playerResources(){
         Map<Resource, Integer> map = new HashMap();

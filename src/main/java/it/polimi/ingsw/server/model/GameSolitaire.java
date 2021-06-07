@@ -78,11 +78,14 @@ public class GameSolitaire extends Game {
         }
         else
         {
-
+            System.out.println("qui restore g1");
             restoreGameSolitaire(clientController);
+            System.out.println("qui restoreg2");
         }
 
+        System.out.println("qui restoreg3");
         saveInformation();
+        System.out.println("qui restoreg4");
         notifyObserver(new PositionMessage(1));
         notifyObserver(new YourTurnMessage());
     }
@@ -490,18 +493,16 @@ public class GameSolitaire extends Game {
 
         Gson gson=new Gson();
         ArrayList<String> strings= new ArrayList<>();
-
-        Reader reader = new InputStreamReader(this.getClass().getResourceAsStream("/fileConfiguration/InformationAboutNickname.json"), StandardCharsets.UTF_8);
-        strings = gson.fromJson(reader,  ArrayList.class);
-        //try {
-            //strings= gson.fromJson(new FileReader("src/main/resources/fileConfiguration/InformationAboutNickname.json"), ArrayList.class);
+        System.out.println("qui restore r1");
+        try {
+            strings= gson.fromJson(new FileReader("fileConfiguration/InformationAboutNickname.json"), ArrayList.class);
 
             nickNamePlayer=strings.get(0);
-
+            System.out.println("qui restore r2");
         RestoreActionMarker();
-
+            System.out.println("qui restore r3");
         player = new PlayerFirst(nickNamePlayer,this,false,clientController.getVirtualView());
-
+            System.out.println("qui restore r4");
         currentPlayer = player;
         this.addObserver(clientController.getVirtualView());
 
@@ -512,9 +513,9 @@ public class GameSolitaire extends Game {
         reConfigClient();
 
 
-    //} catch (FileNotFoundException e) {
-    //    e.printStackTrace();
-    //}
+    } catch (FileNotFoundException e) {
+      e.printStackTrace();
+    }
 
     }
 
@@ -530,7 +531,7 @@ public class GameSolitaire extends Game {
         strings.add(nickNamePlayer);
         String jsonStrin = gson.toJson(strings,ArrayList.class);
         try {
-            config = new FileWriter("src/main/resources/fileConfiguration/InformationAboutTurn.json");
+            config = new FileWriter("fileConfiguration/InformationAboutTurn.json");
             config.write(jsonStrin);
         } catch (IOException e) {
             e.printStackTrace();
@@ -544,7 +545,7 @@ public class GameSolitaire extends Game {
 
 
         try {
-            config = new FileWriter("src/main/resources/fileConfiguration/InformationaboutNickname.json");
+            config = new FileWriter("fileConfiguration/InformationAboutNickname.json");
             config.write(jsonStrin);
         } catch (IOException e) {
             e.printStackTrace();
@@ -565,31 +566,30 @@ public class GameSolitaire extends Game {
         Gson gson=new Gson();
         int[] servList;
 
-        Reader reader = new InputStreamReader(this.getClass().getResourceAsStream("/fileConfiguration/LoriMagnific.json"), StandardCharsets.UTF_8);
-        servList = gson.fromJson(reader,  int[].class);
-        //try {
-        //    servList = gson.fromJson(new FileReader("src/main/resources/fileConfiguration/LoriMagnific.json"),int[].class);
+
+        try {
+           servList = gson.fromJson(new FileReader("fileConfiguration/LoriMagnific.json"),int[].class);
             lorenzoTheMagnificent=new LorenzoTheMagnificent(servList);
             notifyObserver(new LorenzoTheMagnificentConfigMessage(getLorenzoFaithIndicator()));
-        //} catch (FileNotFoundException e) {
-        //    e.printStackTrace();
-        //}
+        } catch (FileNotFoundException e) {
+        e.printStackTrace();
+        }
     }
 
     /**
      * save information for a possible restart game
      */
     public void RestoreActionMarker() throws IOException, InterruptedException {
+        System.out.println("qui restore ak 1");
         Gson gson= DeckActionMarker.DeckActionMarkerSaving();
         ActionMarker[] servList;
-        Reader reader = new InputStreamReader(this.getClass().getResourceAsStream("/fileConfiguration/DeckActionMarker.json"), StandardCharsets.UTF_8);
-        servList = gson.fromJson(reader, ActionMarker[].class);
-        //try {
-        //    servList= gson.fromJson(new FileReader("src/main/resources/fileConfiguration/DeckActionMarker.json"),ActionMarker[].class);
+        try {
+           servList= gson.fromJson(new FileReader("fileConfiguration/DeckActionMarker.json"),ActionMarker[].class);
             this.deckActionMarker = new DeckActionMarker(servList);
-        //} catch (FileNotFoundException e) {
-        //    e.printStackTrace();
-        //}
+        } catch (FileNotFoundException e) {
+          e.printStackTrace();
+        }
+        System.out.println("qui restore ak 2");
     }
     /**
      * this metod restore player after total disconnection or server crashing
@@ -676,6 +676,9 @@ public class GameSolitaire extends Game {
         saveInformation();
     }
 
+    /**
+     * @return from the resource of the player, this method restore the old reserve
+     */
     public Map<Resource, Integer> playerResources(){
         Map<Resource, Integer> map = new HashMap();
 

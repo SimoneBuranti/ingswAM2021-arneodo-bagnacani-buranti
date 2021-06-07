@@ -4,176 +4,176 @@ import java.io.File;
 
 public class FileClass {
     public static void FileDestroyer(){
-        File f = new File("src/main/resources/fileConfiguration/GameInit.json");
+        File f = new File("fileConfiguration/GameInit.json");
         if (f.exists())
             f.delete();
 
-       f = new File("src/main/resources/fileConfiguration/InformationAboutInkwell.json");
+       f = new File("fileConfiguration/InformationAboutInkwell.json");
         if (f.exists())
             f.delete();
 
-        f = new File("src/main/resources/fileConfiguration/DeckProductionCardOneBluLatest.json");
+        f = new File("fileConfiguration/DeckProductionCardOneBluLatest.json");
         if (f.exists())
             f.delete();
 
-        f = new File("src/main/resources/fileConfiguration/DeckProductionCardOneGreenLatest.json");
+        f = new File("fileConfiguration/DeckProductionCardOneGreenLatest.json");
         if (f.exists())
             f.delete();
 
-        f = new File("src/main/resources/fileConfiguration/DeckProductionCardOneYellowLatest.json");
+        f = new File("fileConfiguration/DeckProductionCardOneYellowLatest.json");
         if (f.exists())
             f.delete();
-        f = new File("src/main/resources/fileConfiguration/DeckProductionCardOneVioletLatest.json");
-        if (f.exists())
-            f.delete();
-
-        f = new File("src/main/resources/fileConfiguration/InformationaboutNickname.json");
+        f = new File("fileConfiguration/DeckProductionCardOneVioletLatest.json");
         if (f.exists())
             f.delete();
 
-        f = new File("src/main/resources/fileConfiguration/DeckProductionCardTwoBluLatest.json");
+        f = new File("fileConfiguration/InformationAboutNickname.json");
         if (f.exists())
             f.delete();
 
-        f = new File("src/main/resources/fileConfiguration/DeckProductionCardTwoGreenLatest.json");
+        f = new File("fileConfiguration/DeckProductionCardTwoBluLatest.json");
         if (f.exists())
             f.delete();
 
-        f = new File("src/main/resources/fileConfiguration/DeckProductionCardTwoYellowLatest.json");
-        if (f.exists())
-            f.delete();
-        f = new File("src/main/resources/fileConfiguration/DeckProductionCardTwoVioletLatest.json");
+        f = new File("fileConfiguration/DeckProductionCardTwoGreenLatest.json");
         if (f.exists())
             f.delete();
 
-
-        f = new File("src/main/resources/fileConfiguration/DeckProductionCardThreeBluLatest.json");
+        f = new File("fileConfiguration/DeckProductionCardTwoYellowLatest.json");
         if (f.exists())
             f.delete();
-
-        f = new File("src/main/resources/fileConfiguration/DeckProductionCardThreeGreenLatest.json");
-        if (f.exists())
-            f.delete();
-
-        f = new File("src/main/resources/fileConfiguration/DeckProductionCardThreeYellowLatest.json");
-        if (f.exists())
-            f.delete();
-        f = new File("src/main/resources/fileConfiguration/DeckProductionCardThreeVioletLatest.json");
-        if (f.exists())
-            f.delete();
-
-        f = new File("src/main/resources/fileConfiguration/fileInformationPlayerFirst.json");
-        if (f.exists())
-            f.delete();
-
-        f = new File("src/main/resources/fileConfiguration/fileInformationPlayerSecond.json");
-        if (f.exists())
-            f.delete();
-
-        f = new File("src/main/resources/fileConfiguration/fileInformationPlayerThird.json");
-        if (f.exists())
-            f.delete();
-
-        f = new File("src/main/resources/fileConfiguration/fileInformationPlayerFourth.json");
+        f = new File("fileConfiguration/DeckProductionCardTwoVioletLatest.json");
         if (f.exists())
             f.delete();
 
 
-        f = new File("src/main/resources/fileConfiguration/InformationAboutCurrentPosition.json");
+        f = new File("fileConfiguration/DeckProductionCardThreeBluLatest.json");
+        if (f.exists())
+            f.delete();
+
+        f = new File("fileConfiguration/DeckProductionCardThreeGreenLatest.json");
+        if (f.exists())
+            f.delete();
+
+        f = new File("fileConfiguration/DeckProductionCardThreeYellowLatest.json");
+        if (f.exists())
+            f.delete();
+        f = new File("fileConfiguration/DeckProductionCardThreeVioletLatest.json");
+        if (f.exists())
+            f.delete();
+
+        f = new File("fileConfiguration/fileInformationPlayerFirst.json");
+        if (f.exists())
+            f.delete();
+
+        f = new File("fileConfiguration/fileInformationPlayerSecond.json");
+        if (f.exists())
+            f.delete();
+
+        f = new File("fileConfiguration/fileInformationPlayerThird.json");
+        if (f.exists())
+            f.delete();
+
+        f = new File("fileConfiguration/fileInformationPlayerFourth.json");
         if (f.exists())
             f.delete();
 
 
-        f = new File("src/main/resources/fileConfiguration/InformationAboutTurn.json");
+        f = new File("fileConfiguration/InformationAboutCurrentPosition.json");
         if (f.exists())
             f.delete();
 
 
-        f = new File("src/main/resources/fileConfiguration/InformationAboutTurnPlayerNumber.json");
+        f = new File("fileConfiguration/InformationAboutTurn.json");
         if (f.exists())
             f.delete();
 
 
-        f = new File("src/main/resources/fileConfiguration/LoriMagnific.json");
+        f = new File("fileConfiguration/InformationAboutTurnPlayerNumber.json");
         if (f.exists())
             f.delete();
 
 
-        f = new File("src/main/resources/fileConfiguration/Reserve.json");
+        f = new File("fileConfiguration/LoriMagnific.json");
         if (f.exists())
             f.delete();
 
 
-        f = new File("src/main/resources/fileConfiguration/Market.json");
+        f = new File("fileConfiguration/Reserve.json");
         if (f.exists())
             f.delete();
 
 
-        f = new File("src/main/resources/fileConfiguration/lastTurn.json");
-        if (f.exists())
-            f.delete();
-
-        f = new File("src/main/resources/fileConfiguration/DeckActionMarker.json");
+        f = new File("fileConfiguration/Market.json");
         if (f.exists())
             f.delete();
 
 
-        f = new File("src/main/resources/fileConfiguration/fileInformationLeaderInitLeaderPlayerFirst.json");
+        f = new File("fileConfiguration/lastTurn.json");
         if (f.exists())
             f.delete();
 
-        f = new File("src/main/resources/fileConfiguration/fileInformationInitOnLeaderPlayerFirst.json");
+        f = new File("fileConfiguration/DeckActionMarker.json");
+        if (f.exists())
+            f.delete();
+
+
+        f = new File("fileConfiguration/fileInformationLeaderInitLeaderPlayerFirst.json");
+        if (f.exists())
+            f.delete();
+
+        f = new File("fileConfiguration/fileInformationInitOnLeaderPlayerFirst.json");
         if (f.exists())
             f.delete();
 
         
 
-        f = new File("src/main/resources/fileConfiguration/fileInformationInitOnResourcePlayerFirst.json");
+        f = new File("fileConfiguration/fileInformationInitOnResourcePlayerFirst.json");
         if (f.exists())
             f.delete();
 
 
-        f = new File("src/main/resources/fileConfiguration/fileInformationLeaderInitLeaderPlayerSecond.json");
+        f = new File("fileConfiguration/fileInformationLeaderInitLeaderPlayerSecond.json");
         if (f.exists())
             f.delete();
 
-        f = new File("src/main/resources/fileConfiguration/fileInformationInitOnLeaderPlayerSecond.json");
-        if (f.exists())
-            f.delete();
-
-
-
-        f = new File("src/main/resources/fileConfiguration/fileInformationInitOnResourcePlayerSecond.json");
-        if (f.exists())
-            f.delete();
-
-
-        f = new File("src/main/resources/fileConfiguration/fileInformationLeaderInitLeaderPlayerThird.json");
-        if (f.exists())
-            f.delete();
-
-        f = new File("src/main/resources/fileConfiguration/fileInformationInitOnLeaderPlayerThird.json");
+        f = new File("fileConfiguration/fileInformationInitOnLeaderPlayerSecond.json");
         if (f.exists())
             f.delete();
 
 
 
-        f = new File("src/main/resources/fileConfiguration/fileInformationInitOnResourcePlayerThird.json");
+        f = new File("fileConfiguration/fileInformationInitOnResourcePlayerSecond.json");
         if (f.exists())
             f.delete();
 
 
-        f = new File("src/main/resources/fileConfiguration/fileInformationLeaderInitLeaderPlayerFourth.json");
+        f = new File("fileConfiguration/fileInformationLeaderInitLeaderPlayerThird.json");
         if (f.exists())
             f.delete();
 
-        f = new File("src/main/resources/fileConfiguration/fileInformationInitOnLeaderPlayerFourth.json");
+        f = new File("fileConfiguration/fileInformationInitOnLeaderPlayerThird.json");
         if (f.exists())
             f.delete();
 
 
 
-        f = new File("src/main/resources/fileConfiguration/fileInformationInitOnResourcePlayerFourth.json");
+        f = new File("fileConfiguration/fileInformationInitOnResourcePlayerThird.json");
+        if (f.exists())
+            f.delete();
+
+
+        f = new File("fileConfiguration/fileInformationLeaderInitLeaderPlayerFourth.json");
+        if (f.exists())
+            f.delete();
+
+        f = new File("fileConfiguration/fileInformationInitOnLeaderPlayerFourth.json");
+        if (f.exists())
+            f.delete();
+
+
+
+        f = new File("fileConfiguration/fileInformationInitOnResourcePlayerFourth.json");
         if (f.exists())
             f.delete();
 

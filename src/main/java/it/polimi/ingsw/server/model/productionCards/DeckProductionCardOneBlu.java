@@ -115,7 +115,7 @@ public class DeckProductionCardOneBlu extends DeckProductionCard {
         String jsonStrin = gson.toJson(deck);
         try {
             // Constructs a FileWriter given a file name, using the platform's default charset
-            config = new FileWriter("src/main/resources/fileConfiguration/DeckProductionCardOneBluLatest.json");
+            config = new FileWriter("fileConfiguration/DeckProductionCardOneBluLatest.json");
             config.write(jsonStrin);
         } catch (IOException e) {
             e.printStackTrace();
