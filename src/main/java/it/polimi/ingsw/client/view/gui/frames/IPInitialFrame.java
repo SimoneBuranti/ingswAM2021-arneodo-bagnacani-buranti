@@ -60,7 +60,6 @@ public class IPInitialFrame extends JFrame {
             if (correctHostName(hostName) && correctPortNumber(portNumber)) {
                 ClientApp.setIPAddress(hostName);
                 ClientApp.setPortNumber(Command.fromStringToInt(portNumber));
-                notifyAll();
                 this.dispose();
             } else {
                 if (!correctHostName(hostName))
