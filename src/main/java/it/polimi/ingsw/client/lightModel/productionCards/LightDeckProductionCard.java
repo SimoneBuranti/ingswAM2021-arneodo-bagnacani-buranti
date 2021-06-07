@@ -1,14 +1,11 @@
 package it.polimi.ingsw.client.lightModel.productionCards;
 
-import it.polimi.ingsw.server.model.Resource;
-import it.polimi.ingsw.server.model.colours.Colour;
 import it.polimi.ingsw.server.model.productionCards.ProductionCard;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 /**
- * this abstract class represents the production card deck
+ * this abstract class represents the production card deck of light model
  */
 public abstract class LightDeckProductionCard {
 
@@ -17,33 +14,29 @@ public abstract class LightDeckProductionCard {
      */
     protected ArrayList<ProductionCard> deck = new ArrayList<>();
 
+    /**
+     * This attribute represents the number of the deck
+     */
     protected int numberDeck;
 
+    /**
+     * This attributes indicates if the deck has been set
+     */
     protected boolean isConfig = false;
 
+    /**
+     * This attributes collects all the production cards
+     */
     protected LightProductionCards productionCards = new LightProductionCards();
 
+    /**
+     * This method sets the deck
+     */
     public void setDeckProductionCard(ArrayList<Integer> listKey){
     }
-    /**
-     * this method returns the cost of the first deck card
-     * @return ArrayList<Resource> : a collection of all the resources of the first card cost
-     */
-    public ArrayList<Resource> requiredResources() {
-        ArrayList<Resource> cost = new ArrayList<>();
-
-        Map<Resource,Integer> m = deck.get(0).getCost();
-
-        for(Resource key : m.keySet()) {
-            for(int i=0;i<m.get(key);i++)
-                cost.add(key);
-        }
-        return cost;
-    }
 
     /**
-     * this method removes the first deck card returning it to the caller if the deck is not empty,
-     * otherwise it throws an EmptyException
+     * this method returns the first deck card if the deck is not empty
      * @return ProductionCard : the first production card of the deck
      */
     public ProductionCard pickUpFirstCard(){
@@ -54,9 +47,7 @@ public abstract class LightDeckProductionCard {
     }
 
     /**
-     * this method throws an EmptyException if there are no more cards in the deck,
-     * otherwise it removes the first card. If after the removal the deck is empty and is a level three
-     * the method throws an EndOfSolitaireGame exception.
+     * this method removes the first card if the deck is not empty
      */
     public void removeOneCard(){
         if(!(deck.isEmpty())){
@@ -65,49 +56,29 @@ public abstract class LightDeckProductionCard {
     }
 
     /**
-     * Getter method for the top card victory level
-     * @return int : level of the first production card of the deck
+     * This method return true if the deck is empty, false otherwise
      */
-    public int getLevel(){
-        return deck.get(0).getLevel();
-    }
-
-    /**
-     * Getter method for the top card victory colour
-     * @return Colour : colour of the first production card of the deck
-     */
-    public Colour getColour(){
-        return deck.get(0).getColour();
-    }
-
-    /**
-     * Getter method for the deck size
-     * @return int: the number of cards in the deck
-     */
-    public int size(){
-        return deck.size();
-    }
-
     public boolean isEmpty(){
         return deck.isEmpty();
     }
 
     /**
-     * Test only method: getter method for the top card victory points
-     * @return int : points of the first production card of the deck
+     * This method return the number of the deck
      */
-    public int getPoints() {
-        return deck.get(0).getPoints();
-    }
-
     public int getNumberDeck(){
         return numberDeck;
     }
 
+    /**
+     * This method returns the production card to position i in the deck
+     */
     public ProductionCard get(int i) {
         return  deck.get(i);
     }
 
+    /**
+     * This method returns the value of the boolean isConfig
+     */
     public boolean isConfig(){
         return isConfig;
     }

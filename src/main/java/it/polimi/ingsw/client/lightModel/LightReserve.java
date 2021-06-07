@@ -6,6 +6,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * This class represent the resource reserve of the light model
+ */
+
 public class LightReserve {
     /**
      * AMOUNT indicates the finite initial amount per resource type
@@ -28,6 +32,10 @@ public class LightReserve {
     }
 
 
+    /**
+     * This method sets the initial reserve values when a match is resumed
+     * @param map : contains the values to subtract for each resource from the reservePools map
+     */
     public void setLightReserve(Map<Resource, Integer> map){
         for(Resource resource : map.keySet()){
             reservePools.put(resource, reservePools.remove(resource) - map.get(resource));
@@ -37,7 +45,7 @@ public class LightReserve {
 
 
     /**
-     * static method that adds the resource passed as a parameter to the reserve
+     * This method adds the resources passed as a parameter to the reserve
      */
     public void addResource(ArrayList<Resource> list) {
 
@@ -45,13 +53,8 @@ public class LightReserve {
             reservePools.put(resource, reservePools.remove(resource) + 1);
     }
 
-    public void addResource(Resource resource, int quantity) {
-        reservePools.put(resource, reservePools.remove(resource) + quantity);
-    }
-
     /**
-     * static method that decreases a resource type counter one at a time only if
-     * available, otherwise it throws an UnavailableResourceException
+     * This method removes the resources passed as a parameter from the reserve
      */
     public void useResource(ArrayList<Resource> list){
 
@@ -60,6 +63,9 @@ public class LightReserve {
                 reservePools.put(resource, reservePools.remove(resource) - 1);
     }
 
+    /**
+     * This method removes the amount passed as a parameter of the resource passed as a parameter to the reserve
+     */
     public void useResource(Resource resource, int quantity){
 
         if(reservePools.get(resource) >= quantity)
@@ -67,21 +73,16 @@ public class LightReserve {
     }
 
     /**
-     * Test only method: getter method for the amount of the resource passed as a parameter in the reserve
-     * @param resource : type of resource
-     * @return int : resource current amount
+     *  This method return the reserve
      */
-    public int getAmountOf(Resource resource) {
-
-        return reservePools.get(resource);
-    }
-
-
-
-    public Map getReserve(){
+    public Map<Resource, Integer> getReserve(){
         return reservePools;
     }
 
+    /**
+     * This method adds the resource values to the reserve
+     * @param cost : the map containing the values to be added,it represents the cost of the production card bought by an opponent
+     */
     public void addResource(Map<Resource, Integer> cost) {
         for(Resource resource : cost.keySet()){
             reservePools.put(resource, reservePools.remove(resource) + cost.get(resource));

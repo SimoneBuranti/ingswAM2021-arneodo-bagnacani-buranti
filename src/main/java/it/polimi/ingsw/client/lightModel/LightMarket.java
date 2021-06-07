@@ -1,11 +1,12 @@
 package it.polimi.ingsw.client.lightModel;
 
-import com.google.gson.Gson;
 import it.polimi.ingsw.server.model.marbles.*;
 
-import java.io.*;
 import java.util.ArrayList;
 
+/**
+ * This class represent the market of the light model
+ */
 public class LightMarket {
     /**
      * this attribute is the market structure and contains 12 marbles
@@ -18,67 +19,12 @@ public class LightMarket {
     /**
      * this attribute is the list of balls in the initial order
      */
-    private ArrayList<Marble> initialMarbleList = new ArrayList<>(13);
-
+    private ArrayList<Marble> initialMarbleList;
 
     /**
-     * This constructor creates the 13 marbles by adding them to the list.
-     * After shuffling the list, it initialises the two attributes grid and extra
+     * This constructor initializes the grid and the extra marble with the list of marbles passed as a parameter
+     * @param listMarble : collection containing the initial order of marbles
      */
-    public LightMarket(File file){
-        Gson gson = new Gson();
-        ArrayList<Marble> listMarble = new ArrayList<>();
-        RedMarble redOne = new RedMarble();
-        listMarble.add(redOne);
-
-        YellowMarble yellowFirst = new YellowMarble();
-        listMarble.add(yellowFirst);
-        YellowMarble yellowSecond = new YellowMarble();
-        listMarble.add(yellowSecond);
-
-        BluMarble bluFirst = new BluMarble();
-        listMarble.add(bluFirst);
-        BluMarble bluSecond = new BluMarble();
-        listMarble.add(bluSecond);
-
-        GreyMarble greyFirst = new GreyMarble();
-        listMarble.add(greyFirst);
-        GreyMarble greySecond = new GreyMarble();
-        listMarble.add(greySecond);
-
-        PurpleMarble purpleFirst = new PurpleMarble();
-        listMarble.add(purpleFirst);
-        PurpleMarble purpleSecond = new PurpleMarble();
-        listMarble.add(purpleSecond);
-
-        WhiteMarble whiteFirst = new WhiteMarble();
-        listMarble.add(whiteFirst);
-        WhiteMarble whiteSecond = new WhiteMarble();
-        listMarble.add(whiteSecond);
-        WhiteMarble whiteThird = new WhiteMarble();
-        listMarble.add(whiteThird);
-        WhiteMarble whiteFourth = new WhiteMarble();
-        listMarble.add(whiteFourth);
-
-        try {
-            String[] listColour = gson.fromJson(new FileReader(file), String[].class);
-
-            for(String colour : listColour) {
-                for (Marble marble : listMarble) {
-                    if (marble.getColour() == colour)
-                        initialMarbleList.add(marble);
-                }
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        setGrid();
-        setExtra();
-
-
-    }
-
     public LightMarket(ArrayList<Marble> listMarble){
         this.initialMarbleList = listMarble;
         setGrid();
@@ -87,11 +33,8 @@ public class LightMarket {
 
 
     /**
-     * This method calls the marble's giveResource method for each marble in the market grid in the chosen row
-     * to give the corresponding resource to the player. Then the method puts the extra marble in the last place
-     * of the chosen row and shifts all the other marbles of the row back by one position until a new extra marble is obtained.
-     * If at the end no exceptions were caught then it calls the player's takeFromMarket method,
-     * otherwise it throws a new WhiteMarbleException which has as a parameter the total number of exceptions caught
+     * This method puts the extra marble in the last place of the chosen row and shifts all the other marbles
+     * of the row back by one position until a new extra marble is obtained.
      * @param chosenRow : the chosen row on which to make the market action
      */
     public void pushRow(int chosenRow) {
@@ -105,11 +48,8 @@ public class LightMarket {
 
 
     /**
-     * This method calls the marble's giveResource method for each marble in the market grid in the chosen column
-     * to give the corresponding resource to the player. Then the method puts the extra marble in the last place
-     * of the chosen column and shifts all the other marbles of the column back by one position until a new extra marble is obtained.
-     * If at the end no exceptions were caught then it calls the player's takeFromMarket method,
-     * otherwise it throws a new WhiteMarbleException which has as a parameter the total number of exceptions caught
+     * This method puts the extra marble in the last place of the chosen column and shifts all the other marbles
+     * of the column back by one position until a new extra marble is obtained.
      * @param chosenColumn : the chosen column on which to make the market action
      */
     public void pushColumn(int chosenColumn) {
@@ -123,8 +63,7 @@ public class LightMarket {
     }
 
     /**
-     * this method initialises grid with the first 12 elements of the ArrayList passed as a parameter
-
+     * this method initialises grid with the first 12 elements of the initialMarbleList
      */
     private void setGrid(){
         int i;
@@ -145,16 +84,6 @@ public class LightMarket {
         extra=initialMarbleList.get(12);
     }
 
-
-    /**
-     * Test only method : it returns the marble to the i position in the initialMarbleList
-     * @param i : the marble position in the list
-     * @return Marble : the marble in the position i in the list
-     */
-    public Marble getCellInitialMarbleList(int i) {
-        return initialMarbleList.get(i);
-    }
-
     /**
      * Getter method for the extra marble
      * @return Marble : the extra marble
@@ -170,16 +99,5 @@ public class LightMarket {
     public Marble[][] getGrid() {
         return grid;
     }
-
-    /**
-     * Getter method for the marble in the market structure cell in position i,j
-     * @param i : cell row
-     * @param j : cell column
-     * @return Marble : the marble in the market structure cell
-     */
-    public Marble getCellGrid(int i, int j) {
-        return grid[i][j];
-    }
-
 
 }

@@ -2,7 +2,6 @@ package it.polimi.ingsw.client.view;
 
 import it.polimi.ingsw.client.SocketClient;
 import it.polimi.ingsw.client.lightModel.LightGame;
-import it.polimi.ingsw.client.lightModel.LightGameMultiPlayer;
 import it.polimi.ingsw.client.lightModel.LightGameSolitaire;
 import it.polimi.ingsw.messages.*;
 import it.polimi.ingsw.messages.observable.*;
@@ -32,7 +31,7 @@ public class ViewController implements MessageVisitor, ViewObserver {
 
     public void setGame(boolean multiOrNot) throws IOException, InterruptedException {
         if(multiOrNot)
-            this.game=new LightGameMultiPlayer(nickName);
+            this.game=new LightGame(nickName);
         else
             this.game=new LightGameSolitaire(nickName);
         game.setObserver(view);
@@ -341,7 +340,6 @@ public class ViewController implements MessageVisitor, ViewObserver {
 
     @Override
     public void visit(NicknameStartedMessage msg) {
-        game.setPlayersInOrder(msg.getNickname());
         view.showPlayersOrder(msg.getNickname());
     }
 
@@ -672,7 +670,6 @@ public class ViewController implements MessageVisitor, ViewObserver {
 
     @Override
     public void visit(ChangeTurnMessage msg) {
-        game.setCurrentPlayer(msg.getNickName());
         view.showChangeCurrent(msg.getNickName());
     }
 

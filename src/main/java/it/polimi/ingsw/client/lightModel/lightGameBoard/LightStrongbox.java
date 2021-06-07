@@ -6,9 +6,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * This class represents the strongbox of the light model
+ */
 public class LightStrongbox {
     /**
-     * This attribute collects the current amount of resources of the storage
+     * This attribute collects the current amount of resources of the strongbox
      */
     private final Map<Resource,Integer> strongboxResource = new HashMap<>();
 
@@ -22,35 +25,30 @@ public class LightStrongbox {
         strongboxResource.put(Resource.SHIELD, 0);
     }
 
-
-    public void addResource(Resource resource, int quantity){
-        strongboxResource.put(resource, strongboxResource.remove(resource) + quantity);
-    }
-
+    /**
+     * This method adds the resources to the strongbox
+     * @param map : the map of resources to add
+     */
     public void addResource(Map<Resource,Integer> map){
         for(Resource key :map.keySet()){
             strongboxResource.put(key,strongboxResource.remove(key) +  map.get(key));
         }
     }
 
+    /**
+     * This method adds the resources to the strongbox
+     * @param list : the list of resources to add
+     */
     public void addResource(ArrayList<Resource> list){
         for(Resource resource : list){
             strongboxResource.put(resource, strongboxResource.remove(resource) + 1);
         }
     }
 
-    public void removeResource(Resource resource, int quantity){
-        if(strongboxResource.get(resource) >= quantity)
-            strongboxResource.put(resource, strongboxResource.remove(resource) - quantity);
-    }
-
-    public void removeResource(Map<Resource,Integer> map){
-        for(Resource key :map.keySet()){
-            if(strongboxResource.get(key) >= map.get(key))
-                strongboxResource.put(key,strongboxResource.remove(key) -  map.get(key));
-        }
-    }
-
+    /**
+     * This method removes the resources from the strongbox
+     * @param list : the list of resources to remove
+     */
     public void removeResource(ArrayList<Resource> list){
         for(Resource resource : list){
             if(strongboxResource.get(resource) != 0)
@@ -58,24 +56,12 @@ public class LightStrongbox {
         }
     }
 
+    /**
+     * This method returns the strongbox
+     */
     public Map<Resource,Integer> getStrongbox(){
         Map<Resource,Integer> map = strongboxResource;
         return map;
-    }
-
-    public ArrayList<Resource> availableResources(){
-        ArrayList<Resource> list = new ArrayList<>();
-
-        for(Resource key : strongboxResource.keySet()) {
-            for(int i=0;i<strongboxResource.get(key);i++)
-                list.add(key);
-        }
-
-        return list;
-    }
-
-    public int getResource(Resource resource){
-        return strongboxResource.get(resource);
     }
 
 }

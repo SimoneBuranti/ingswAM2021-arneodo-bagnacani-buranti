@@ -1,5 +1,8 @@
 package it.polimi.ingsw.client.lightModel;
 
+/**
+ * This class represent the indicator of Lorenzo the Magnificent of the light model
+ */
 public class LightLorenzoTheMagnificent {
     /**
      * faithIndicator is the black cross current position on faithPath
@@ -7,26 +10,29 @@ public class LightLorenzoTheMagnificent {
     private int faithIndicator;
 
     /**
-     * this constructor initializes faithIndicator and currCall attributes to zero
+     * this constructor initializes faithIndicator to zero
      */
     public LightLorenzoTheMagnificent() {
         this.faithIndicator = 0;
     }
 
+    /**
+     * this constructor initializes faithIndicator to the number passed as a parameter
+     */
     public void setLightLorenzoTheMagnificent(int faithIndicator) {
         this.faithIndicator = faithIndicator;
     }
 
     /**
-     *  this method increases the faithIndicator counter by one and
-     *  if the counter is located on the current papal space the method throws an CallForCouncilException
-     *  if instead the counter is located on the last papal space it throws an EndOfSolitaireGame,
-     *  which means that the player has lost
+     *  this method increases the faithIndicator counter by one
      */
     public void moveBlackCross(){
         faithIndicator++;
     }
 
+    /**
+     *  this method increases the faithIndicator counter by two
+     */
     public void moveBlackCrossDouble(){
         faithIndicator += 2;
     }

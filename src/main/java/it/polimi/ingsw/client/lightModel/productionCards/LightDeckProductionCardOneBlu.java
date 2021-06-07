@@ -7,13 +7,17 @@ import java.util.ArrayList;
  */
 public class LightDeckProductionCardOneBlu extends LightDeckProductionCard {
 
+    /**
+     * The constructor sets the number of the deck
+     */
     public LightDeckProductionCardOneBlu(){
         numberDeck = 10;
     }
-    /**
-     * this constructor creates all the production cards and adds them to the list and shuffles the newly created deck
-     */
 
+    /**
+     * This method sets the boolean isConfig to true and the initial deck production cards
+     * @param listKey : array containing card keys
+     */
     @Override
     public void setDeckProductionCard(ArrayList<Integer> listKey){
         isConfig = true;

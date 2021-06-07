@@ -6,9 +6,9 @@ import it.polimi.ingsw.client.lightModel.LightGameSolitaire;
 import java.io.IOException;
 
 /**
- * This interface represents the action markers and contains only one method not implemented
+ * This class represents the action markers of the light model
  */
-public  class LightActionMarker {
+public abstract  class LightActionMarker {
 
     /**
      * method not implemented that represents the effect of the action marker
@@ -17,7 +17,7 @@ public  class LightActionMarker {
     public void actionMarkerEffect(LightGameSolitaire game) throws IOException, InterruptedException {};
 
     /**
-     * @return type of object
+     * @return type of action marker
      */
     public String getType(){return null;};
 }

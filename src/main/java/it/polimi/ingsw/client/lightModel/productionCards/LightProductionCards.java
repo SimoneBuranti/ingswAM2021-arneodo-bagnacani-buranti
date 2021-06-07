@@ -11,6 +11,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * This class contains all the production cards of the game
+ */
 public class LightProductionCards {
     private static ArrayList<ProductionCard> productionCards ;
 
@@ -890,6 +893,9 @@ public class LightProductionCards {
 
     }
 
+    /**
+     * This method returns the production card corresponding to the key passed as a parameter
+     */
     public static ProductionCard productionCardByKey(int key){
         return productionCards.get(key-1);
     }
