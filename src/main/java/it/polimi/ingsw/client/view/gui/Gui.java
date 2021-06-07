@@ -306,6 +306,7 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
     public void showChangeCurrent(String currentNick) {
         SwingUtilities.invokeLater(() -> {
             mainFrameOfGame.setCurrentPlayer(currentNick);
+            mainFrameOfGame.refreshMessagePanel();
             disableAllButtons();
             applyChangesTo(mainFrameOfGame);
 
