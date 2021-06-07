@@ -6,8 +6,19 @@ import it.polimi.ingsw.messages.Message;
 
 public class BuyActionCommand extends Command {
 
+    /**
+     * Attribute for the chosen deck number
+     */
     private int deckNumber;
+
+    /**
+     * Attribute for the chosen column number
+     */
     private int columnNumber;
+
+    /**
+     * Attribute for the viewController reference.
+     */
     private ViewController viewController;
 
     public BuyActionCommand(int deckNumber, int column, ViewController viewController) {
@@ -17,7 +28,12 @@ public class BuyActionCommand extends Command {
     }
 
 
-
+    /**
+     * The commandOn() method returns a BuyProductionCardMessage instance if the action token is available. Otherwise it
+     * throws a SpentTokenException
+     * @return BuyProductionCardMessage
+     * @throws SpentTokenException
+     */
     public Message commandOn() throws SpentTokenException {
         if(viewController.isActionToken()){
             viewController.setActionToken(false);
@@ -26,10 +42,18 @@ public class BuyActionCommand extends Command {
         throw new SpentTokenException();
     }
 
+    /**
+     * Deck number getter
+     * @return
+     */
     public int getDeckNumber() {
         return deckNumber;
     }
 
+    /**
+     * ColumnNumber getter
+     * @return
+     */
     public int getColumnNumber() {
         return columnNumber;
     }

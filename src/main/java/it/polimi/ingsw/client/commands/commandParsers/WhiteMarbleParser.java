@@ -12,8 +12,14 @@ import java.util.Map;
 
 public class WhiteMarbleParser implements CommandParser {
 
+    /**
+     * This attribute contains the number of white marble picked.
+     */
     private int numberOfWhiteMarbles;
 
+    /**
+     * This attribute contains the possible resource types.
+     */
     private ArrayList<Resource> possibleResources;
 
     public WhiteMarbleParser(int numberOfWhiteMarbles, ArrayList<Resource> possibleResources) {
@@ -21,6 +27,15 @@ public class WhiteMarbleParser implements CommandParser {
         this.possibleResources = possibleResources;
     }
 
+    /**
+     *  This parser is set in case of two activated white-marble leader cards. It also recognise non-action command so
+     *  that the player can check other game information.
+     * @param commandText
+     * @param viewController
+     * @param cli
+     * @return Command
+     * @throws InvalidCommandException
+     */
     @Override
     public Command parseCommand(String commandText, ViewController viewController, Cli cli) throws InvalidCommandException {
 

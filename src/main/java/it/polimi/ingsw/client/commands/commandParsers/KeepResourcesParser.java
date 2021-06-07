@@ -12,13 +12,24 @@ import java.util.Map;
 
 public class KeepResourcesParser implements CommandParser{
 
+    /**
+     * This attribute contains the list of Resources which can be chosen by the player.
+     */
     private ArrayList<Resource> choosableResources;
 
     public KeepResourcesParser(ArrayList<Resource> resources) {
         this.choosableResources = resources;
     }
 
-
+    /**
+     * This parser represents the keep resources phase in case of unavailable space in storage. It accepts also non-action
+     * commands.
+     * @param commandText
+     * @param viewController
+     * @param cli
+     * @return Command
+     * @throws InvalidCommandException
+     */
     @Override
     public Command parseCommand(String commandText, ViewController viewController, Cli cli) throws InvalidCommandException {
 

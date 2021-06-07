@@ -5,16 +5,31 @@ import it.polimi.ingsw.messages.NumberPlayerMessage;
 
 public class HowManyPlayersCommand extends Command{
 
+    /**
+     * Number of players attribute.
+     */
     private int nOfPlayers;
 
+    /**
+     * Class constructor.
+     * @param nOfPlayers
+     */
     public HowManyPlayersCommand(int nOfPlayers) {
         this.nOfPlayers = nOfPlayers;
     }
 
+    /**
+     * Number of players getter.
+     * @return
+     */
     public int getnOfPlayers() {
         return nOfPlayers;
     }
 
+    /**
+     * This commandOn method return a NumberPlayerMessage.
+     * @return
+     */
     @Override
     public Message commandOn(){
 

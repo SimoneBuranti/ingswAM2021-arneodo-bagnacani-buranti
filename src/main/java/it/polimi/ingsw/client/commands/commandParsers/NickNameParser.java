@@ -9,6 +9,15 @@ import it.polimi.ingsw.client.view.cli.Cli;
 
 public class NickNameParser implements CommandParser{
 
+
+    /**
+     * This parser represents the initial nickname choice phase. It returns a UsernameCommand
+     * @param commandText
+     * @param viewController
+     * @param cli
+     * @return UsernameCommand
+     * @throws InvalidCommandException
+     */
     @Override
     public Command parseCommand(String commandText, ViewController viewController, Cli cli) throws InvalidCommandException {
 

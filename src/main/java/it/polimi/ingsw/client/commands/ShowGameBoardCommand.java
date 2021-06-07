@@ -6,12 +6,20 @@ import it.polimi.ingsw.messages.Message;
 
 public class ShowGameBoardCommand extends Command {
 
+    /**
+     * Cli reference.
+     */
     private Cli cli;
 
     public ShowGameBoardCommand(Cli cli) {
         this.cli = cli;
     }
-
+    /**
+     * This commandOn method call the corresponding view show method. It returns a NoMessageReturnException as
+     * no return message is required.
+     * @return
+     * @throws NoMessageReturnException
+     */
     public Message commandOn() throws NoMessageReturnException {
 
         cli.showGameBoardOfPlayer();

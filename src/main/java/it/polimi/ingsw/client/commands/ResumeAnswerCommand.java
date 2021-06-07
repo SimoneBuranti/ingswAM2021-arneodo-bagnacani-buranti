@@ -7,6 +7,9 @@ import it.polimi.ingsw.messages.RestartAnswerMessage;
 
 public class ResumeAnswerCommand extends Command {
 
+    /**
+     * Answer attribute.
+     */
     private boolean answer;
     //private Cli cli;
 
@@ -15,10 +18,17 @@ public class ResumeAnswerCommand extends Command {
         //this.cli = cli;
     }
 
+    /**
+     * Answer attribute getter.
+     * @return
+     */
     public boolean getAnswer() {
         return answer;
     }
 
+    /**
+     * @return RestartAnswerMessage
+     */
     @Override
     public Message commandOn(){
 

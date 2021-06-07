@@ -7,13 +7,28 @@ import it.polimi.ingsw.server.model.Resource;
 
 import java.util.Scanner;
 
+/**
+ * When a base-production command is recognised the commandOn() method is called.
+ */
+
 public class BaseProductionCommand extends Command {
+
+    /**
+     * Attribute for the viewController reference.
+     */
     private ViewController viewController;
 
     public BaseProductionCommand(ViewController viewController) {
         this.viewController = viewController;
     }
 
+
+    /**
+     * When the commandOn() method is called it checks the local production flag, if it is available it returns a
+     * BaseProductionOnMessage; otherwise it throws an AlreadyActivatedProductionException.
+     * @return BaseProductionOnMessage
+     * @throws AlreadyActivatedProductionException
+     */
     public Message commandOn() throws AlreadyActivatedProductionException {
         if(viewController.isProductionToken(0) && viewController.isActionToken()) {
             Resource i1;

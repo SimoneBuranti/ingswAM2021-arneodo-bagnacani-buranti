@@ -6,6 +6,17 @@ import it.polimi.ingsw.client.view.ViewController;
 import it.polimi.ingsw.client.view.cli.Cli;
 
 public class MyTurnParser implements CommandParser {
+
+
+    /**
+     * MyTurnParser represents the turn phase and all the commands are accepted. Depending on the recognised commandText
+     * a specific Command is returned.
+     * @param commandText
+     * @param viewController
+     * @param cli
+     * @return
+     * @throws InvalidCommandException
+     */
     @Override
     public Command parseCommand(String commandText, ViewController viewController, Cli cli) throws InvalidCommandException {
 

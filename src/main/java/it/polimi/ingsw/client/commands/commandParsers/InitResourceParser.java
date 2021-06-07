@@ -9,12 +9,23 @@ import java.util.ArrayList;
 
 public class InitResourceParser implements CommandParser{
 
+    /**
+     * This attributes indicates how many initial resources are needed.
+     */
     private int nOfResources;
 
+    /**
+     * Class constructor providing the nOfResources attribute.
+     * @param nOfResources
+     */
     public InitResourceParser(int nOfResources) {
         this.nOfResources = nOfResources;
     }
 
+    /**
+     * InitResourceParser represents the state of the initial resource choice. It accepts only the exit command besides
+     * the resource types. It returns an InitResourceCommand instance.
+     */
     @Override
     public Command parseCommand(String commandText, ViewController viewController, Cli cli) throws InvalidCommandException {
 

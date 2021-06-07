@@ -9,7 +9,17 @@ import java.util.Scanner;
 
 public class InitLeaderCardParser implements CommandParser{
 
+
+    /**
+     * This attribute provides a leader card index buffer
+     */
     private int[] chosenLeaderCards = {0,0};
+
+
+    /**
+     * This parseCommand accepts only the leader card indexes and the cexit command. When two cards have been selected the parser
+     * returns a KeepLeaderCardsCommand.
+     */
 
     @Override
     public Command parseCommand(String commandText, ViewController viewController, Cli cli){

@@ -6,13 +6,20 @@ import it.polimi.ingsw.messages.Message;
 
 public class ShowReserveCommand extends Command {
 
-
+    /**
+     * Cli reference.
+     */
     private Cli cli;
 
     public ShowReserveCommand(Cli cli) {
         this.cli = cli;
     }
 
+    /**
+     * This method is called when a player wants to see the available resources in the reserve
+     * @return
+     * @throws NoMessageReturnException
+     */
     public Message commandOn() throws NoMessageReturnException {
 
         cli.showReserve();

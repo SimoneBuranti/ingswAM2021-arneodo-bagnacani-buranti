@@ -6,6 +6,15 @@ import it.polimi.ingsw.client.view.cli.Cli;
 
 public class ResumeGameParser implements CommandParser{
 
+
+    /**
+     *This parser recognise only the "resume game" answer and returns a ResumeAnswerCommand.
+     * @param commandText
+     * @param viewController
+     * @param cli
+     * @return ResumeAnswerCommand
+     * @throws InvalidCommandException
+     */
     @Override
     public Command parseCommand(String commandText, ViewController viewController, Cli cli) throws InvalidCommandException {
 

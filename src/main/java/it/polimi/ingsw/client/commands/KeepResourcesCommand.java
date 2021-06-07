@@ -11,21 +11,45 @@ import java.util.ArrayList;
 
 public class KeepResourcesCommand extends Command{
 
+    /**
+     * Resource arrayList.
+     */
     private ArrayList<Resource> resources;
+
+    /**
+     * Cli reference.
+     */
     private Cli cli;
+
+    /**
+     * Class constructor
+     * @param resources
+     * @param cli
+     */
     public KeepResourcesCommand(ArrayList<Resource> resources,Cli cli) {
         this.cli = cli;
         this.resources = resources;
     }
 
-
+    /**
+     * This commandOn method changes the current parser in a MyTurnParser and returns a KeepResourcesMessage instance.
+     * @return
+     * @throws SpentTokenException
+     * @throws InvalidCommandException
+     * @throws AlreadyActivatedProductionException
+     * @throws NoMessageReturnException
+     */
     public Message commandOn() throws SpentTokenException, InvalidCommandException, AlreadyActivatedProductionException, NoMessageReturnException {
-        System.out.println("Sono qui a");
+        //System.out.println("Sono qui a");
         this.cli.changeCommandParser(new MyTurnParser());
-        System.out.println("Sono qui b, resources: "+resources);
+        //System.out.println("Sono qui b, resources: "+resources);
         return new KeepResourcesMessage(resources);
     }
 
+    /**
+     * Resources arraylist getter
+     * @return
+     */
     public ArrayList<Resource> getResources() {
         return resources;
     }

@@ -8,6 +8,15 @@ import it.polimi.ingsw.client.view.cli.Cli;
 public class StandardParser implements CommandParser{
 
 
+    /**
+     * The standard parser accepts any type of non-action command and is set on the end of turn command.
+     * It returns a specific command type according to the commandText.
+     * @param commandText
+     * @param viewController
+     * @param cli
+     * @return
+     * @throws InvalidCommandException
+     */
     @Override
     public Command parseCommand(String commandText, ViewController viewController, Cli cli) throws InvalidCommandException {
 

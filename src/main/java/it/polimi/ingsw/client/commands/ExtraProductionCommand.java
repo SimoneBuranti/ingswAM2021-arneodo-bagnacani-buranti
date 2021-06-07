@@ -14,12 +14,23 @@ import java.util.Scanner;
 
 public class ExtraProductionCommand extends Command {
 
+    /**
+     * View controller reference
+     */
     private ViewController viewController;
 
     public ExtraProductionCommand(ViewController viewController) {
         this.viewController = viewController;
     }
 
+    /**
+     * This commandOn method returns an ExtraProductionOnMessage if one only production leader card is activated. Otherwise
+     * it asks for which one to activate and then returns the corresponding messaeg.
+     * @return
+     * @throws InvalidCommandException
+     * @throws AlreadyActivatedProductionException
+     * @throws SpentTokenException
+     */
     public Message commandOn() throws InvalidCommandException, AlreadyActivatedProductionException, SpentTokenException {
         if(viewController.isActionToken()) {
             Scanner in = new Scanner(System.in);
@@ -63,6 +74,10 @@ public class ExtraProductionCommand extends Command {
             throw new SpentTokenException();
     }
 
+    /**
+     * This method sets the right boolean token to a false value.
+     * @param choosenLeaderCard
+     */
     public void setFalseProductionBools(int choosenLeaderCard){
         if (choosenLeaderCard == 1){
             viewController.getGame().setProductionToken(4,false);
@@ -71,6 +86,11 @@ public class ExtraProductionCommand extends Command {
         }
     }
 
+    /**
+     * ExtraProductionToke getter, this method distinguish which method to call.
+     * @param choosenLeaderCard
+     * @return
+     */
     public boolean getExtraProductionToken(int choosenLeaderCard){
         if (choosenLeaderCard == 1){
             return viewController.getGame().isProductionToken(4);

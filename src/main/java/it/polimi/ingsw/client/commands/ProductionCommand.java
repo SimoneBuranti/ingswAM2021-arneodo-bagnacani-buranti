@@ -15,12 +15,26 @@ import java.util.Scanner;
 
 public class ProductionCommand extends Command {
 
+    /**
+     * View controller reference.
+     */
     private ViewController viewController;
 
+    /**
+     * Class constructor.
+     * @param viewController
+     */
     public ProductionCommand(ViewController viewController) {
         this.viewController = viewController;
     }
 
+    /**
+     * This commandOn method checks if an action is possible. If it is it asks for the column of the card to activate.
+     * @return
+     * @throws InvalidCommandException
+     * @throws AlreadyActivatedProductionException
+     * @throws SpentTokenException
+     */
     public Message commandOn() throws InvalidCommandException, AlreadyActivatedProductionException, SpentTokenException {
         if(viewController.isActionToken()) {
             Scanner in = new Scanner(System.in);
@@ -52,6 +66,10 @@ public class ProductionCommand extends Command {
             throw new SpentTokenException();
     }
 
+    /**
+     * Production token setter method.
+     * @param choosenLeaderCard
+     */
     public void setFalseProductionBools(int choosenLeaderCard){
         if (choosenLeaderCard == 1){
             viewController.getGame().setProductionToken(4,false);
@@ -60,6 +78,11 @@ public class ProductionCommand extends Command {
         }
     }
 
+    /**
+     * Extra production token getter method (unused).
+     * @param choosenLeaderCard
+     * @return
+     */
     public boolean getExtraProductionToken(int choosenLeaderCard){
         if (choosenLeaderCard == 1){
             return viewController.getGame().isProductionToken(4);

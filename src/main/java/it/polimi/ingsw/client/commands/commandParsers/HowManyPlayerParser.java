@@ -8,6 +8,15 @@ import it.polimi.ingsw.messages.NumberPlayerMessage;
 public class HowManyPlayerParser implements CommandParser{
 
 
+    /**
+     * State for the initial number of player choice. This parser accepts only the exit command besides the number of players.
+     * @param commandText
+     * @param viewController
+     * @param cli
+     * @return HowManyPlayersCommand
+     * @throws InvalidCommandException
+     */
+
     @Override
     public Command parseCommand(String commandText, ViewController viewController, Cli cli) throws InvalidCommandException {
 

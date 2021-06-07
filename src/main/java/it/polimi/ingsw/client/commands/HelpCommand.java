@@ -4,8 +4,15 @@ import it.polimi.ingsw.messages.Message;
 
 public class HelpCommand extends Command{
 
+    /**
+     * Grid offset value.
+     */
     private static final int space = 25;
 
+    /**
+     * This is the list of commands to be displayed when an exit command is parsed. It provides the correct command
+     * structure.
+     */
     private final String[] commands = {
 
             HelpCommand.defToString(),
@@ -38,6 +45,12 @@ public class HelpCommand extends Command{
         };
 
 
+    /**
+     * The commandOn displays the list of accepted command formats. This command throws a NoMessageReturnException
+     * as no return message is needed.
+     * @return none
+     * @throws NoMessageReturnException
+     */
     public Message commandOn() throws NoMessageReturnException {
         for (int i = 0; i < commands.length ;i++){
             if (i%4==0){

@@ -6,17 +6,39 @@ import it.polimi.ingsw.server.model.Resource;
 
 import java.util.Scanner;
 
+/**
+ * The Command class represents the general features of a command.
+ */
+
 public abstract class Command {
 
-
+    /**
+     * The commandOn() method represents the specific command action. Every command implements this method in a different
+     * way depending on the command aim.
+     * @return
+     * @throws SpentTokenException
+     * @throws InvalidCommandException
+     * @throws AlreadyActivatedProductionException
+     * @throws NoMessageReturnException
+     * @throws EndAfterThisException
+     * @throws InitLeaderCardsException
+     */
     public Message commandOn() throws SpentTokenException, InvalidCommandException, AlreadyActivatedProductionException, NoMessageReturnException, EndAfterThisException, InitLeaderCardsException {
         throw new NoMessageReturnException();
     }
 
+    /**
+     * This method returns the command structure which is printed whenever the player types the help command.
+     * @return
+     */
     public static String defToString(){
         return "";
     }
 
+    /**
+     * This method parses the resource type from a string to a Resource type.
+     * @param resource
+     */
     public static Resource fromStringToResource(String resource){
         //resource.toLowerCase();
         switch (resource) {
@@ -33,6 +55,11 @@ public abstract class Command {
         }
     }
 
+    /**
+     *This method displays the resource accepted text and parse the written word.
+     *If it is correct it returns the resource type.
+     *@return
+     */
     public static Resource askForOutputResource(){
         Scanner in = new Scanner(System.in);
         Resource o;
@@ -44,6 +71,11 @@ public abstract class Command {
         return o;
     }
 
+    /**
+     * This method displays the resource accepted text and parse the written word.
+     * If it is correct it returns the resource type.
+     * @return
+     */
     public static Resource askForInputResource(){
         Scanner in = new Scanner(System.in);
         Resource i;
@@ -55,6 +87,11 @@ public abstract class Command {
         return i;
     }
 
+    /**
+     * This method cuts the initial spaces of a string.
+     * @param word
+     * @return
+     */
     public static String deleteInitSpaces(String word){
         for(int s = 0; s <word.length();s++){
             if(word.charAt(s)!=' '){
@@ -64,6 +101,11 @@ public abstract class Command {
         return "";
     }
 
+    /**
+     * This is the general implementation of the conversion from a string to its int value.
+     * @param number
+     * @return
+     */
     public static int fromStringToInt(String number){
         int n = 0;
 
@@ -74,6 +116,11 @@ public abstract class Command {
         return n;
     }
 
+    /**
+     * This is the general implementation of the conversion from an int to its string representation.
+     * @param num
+     * @return
+     */
     public static String fromIntToString(int num){
         String parsed = "";
         String temp = "";
@@ -89,148 +136,13 @@ public abstract class Command {
         return parsed;
     }
 
+    /**
+     * Every command has a different to string. If the command has a state this method returns the command type and the
+     * value of its attributes. If it does not it return the default command type.
+     * @return
+     */
     public String toString(){
         return defToString();
     }
 
 }
-
-
-/*public static Command parseCommand(String commandText, ViewController viewController,View view) throws InvalidCommandException {
-
-        String prefix = "";
-        String suffix = "";
-
-        for (int i = 0;i<commandText.length();i++){
-            if (commandText.charAt(i) != ' '){
-                prefix = prefix + commandText.charAt(i);
-            } else {
-                for (i++;i<commandText.length();i++)
-                    suffix = suffix + commandText.charAt(i);
-            }
-        }
-
-        //System.out.println(prefix);
-
-        if (prefix.equals(""))
-            throw new InvalidCommandException();
-
-        switch(prefix){
-
-            case "baseProductionOn" : {
-                return new BaseProductionCommand(viewController);
-            }
-            case "buy" : {
-                int column = 0;
-                int deckNumber = 0;
-                int cont = 0;
-
-                for(int i = 0;i<suffix.length();i++){
-                    if (cont == 0 && (suffix.charAt(i) == 'b' || suffix.charAt(i)=='g' || suffix.charAt(i)=='y' || suffix.charAt(i)=='v')){
-                        deckNumber = suffix.charAt(i+1) - '0';
-                        cont++;
-                    } else if (cont == 1 && suffix.charAt(i)==' '){
-                        cont++;
-                        column = suffix.charAt(i+1) - '0';
-                    }
-
-                }
-
-                if (cont != 3 || deckNumber<1 || deckNumber>12 || column<1 || column>3)
-                    throw new InvalidCommandException();
-                return new BuyActionCommand(deckNumber,column, viewController);
-            }
-            case "endProduction" : {
-                return new EndOfProductionCommand(viewController);
-            }
-            case "endTurn" : {
-                return new EndOfTurnCommand(viewController);
-            }
-            case "exit" : {
-                return new ExitCommand();
-            }
-            case "extraProductionOn" : {
-                return new ExtraProductionCommand(viewController);
-            }
-            case "help" : {
-                return new HelpCommand();
-            }
-            case "leader" : {
-                char ad = 'a';
-                int n = 0;
-                int cont = 0;
-
-                for(int i = 0;i<suffix.length();i++){
-                    if (cont == 0 && (suffix.charAt(i) == 'x' || suffix.charAt(i)=='a')){
-                        ad = suffix.charAt(i);
-                        cont++;
-                    } else if (cont == 1 && suffix.charAt(i)==' '){
-                        cont++;
-                        n = suffix.charAt(i+1) - '0';
-                    }
-
-                }
-
-                if (cont != 2 || n<0 || n>1)
-                    throw new InvalidCommandException();
-                return new MarketActionCommand(ad,n,viewController);
-            }
-            case "market": {
-                char rc = 'c';
-                int n = 0;
-                int cont = 0;
-
-                for(int i = 0;i<suffix.length();i++){
-                    if (cont == 0 && (suffix.charAt(i) == 'r' || suffix.charAt(i)=='c')){
-                        rc = suffix.charAt(i);
-                        cont++;
-                    } else if (cont == 1 && suffix.charAt(i)==' '){
-                        cont++;
-                        n = suffix.charAt(i+1) - '0';
-                    }
-
-                }
-                if (cont != 2 || n<1 || n>3)
-                    throw new InvalidCommandException();
-                return new MarketActionCommand(rc,n,viewController);
-            }
-            case "productionOn" : {
-                return new ProductionCommand(viewController);
-            }
-            case "showGameboard" : {
-                return new ShowGameBoardCommand(view);
-            }
-            case "showMarket" : {
-                return new ShowMarketCommand(view);
-            }
-            case "showPlayer" : {
-
-                int n = 0;
-                int cont = 0;
-
-                for(int i = 0;i<suffix.length();i++){
-                    if (cont == 0 ){
-                        cont++;
-                    } else if (cont == 1 && suffix.charAt(i)==' '){
-                        cont++;
-                        n = suffix.charAt(i+1) - '0';
-                    }
-
-                }
-                if ( n<0 || n>4)
-                    throw new InvalidCommandException();
-                return new ShowPlayerCommand(n,viewController);
-
-            }
-            case "showDecks" : {
-                return new ShowProductionDeckCommand(view);
-            }
-            case "showReserve" : {
-                return new ShowReserveCommand(view);
-            }
-            default: {
-                throw new InvalidCommandException();
-            }
-        }
-
-    }*/
