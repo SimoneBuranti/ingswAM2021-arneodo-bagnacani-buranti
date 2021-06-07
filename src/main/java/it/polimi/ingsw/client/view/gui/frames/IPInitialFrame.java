@@ -59,7 +59,7 @@ public class IPInitialFrame extends JFrame {
             String portNumber = portNumberField.getText();
             if (correctHostName(hostName) && correctPortNumber(portNumber)) {
                 ClientApp.setIPAddress(hostName);
-                ClientApp.setPortNumber(fromStringToInt(portNumber));
+                ClientApp.setPortNumber(Command.fromStringToInt(portNumber));
                 this.dispose();
             } else {
                 if (!correctHostName(hostName))
@@ -119,9 +119,15 @@ public class IPInitialFrame extends JFrame {
     public static boolean correctPortNumber(String portNumber){
         String cha;
         int pn,i;
+
+        if (portNumber.length() == 0)
+            return false;
         for(pn = 0,i=0;i<portNumber.length();i++){
             pn*=10;
             pn += portNumber.charAt(i) -'0';
+            if (portNumber.charAt(i) -'0' > 9 || portNumber.charAt(i) -'0' <0 ){
+                return false;
+            }
         }
 
         if (pn < 0 || pn > 100000)
@@ -130,17 +136,5 @@ public class IPInitialFrame extends JFrame {
         return true;
     }
 
-    public static int fromStringToInt(String number){
-        int n = 0;
-
-        for(int i = 0;i<number.length();i++){
-            n*=10;
-            n+= number.charAt(i) -'0';
-            if (number.charAt(i) -'0' > 9 || number.charAt(i) -'0' <0 ){
-                return -1;
-            }
-        }
-        return n;
-    }
 
 }
