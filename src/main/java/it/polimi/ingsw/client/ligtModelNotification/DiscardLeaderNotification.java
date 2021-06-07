@@ -1,13 +1,18 @@
 package it.polimi.ingsw.client.ligtModelNotification;
 
-import it.polimi.ingsw.server.model.leaderCards.LeaderCard;
-
 import java.io.IOException;
-import java.util.ArrayList;
-
+/**
+ * Notification of the discard of a leader card
+ */
 public class DiscardLeaderNotification extends Notification{
+    /**
+     * The type of notification
+     */
     private final NotificationType notificationType = NotificationType.DISCARDLEADER;
 
+    /**
+     * The index of the discarded card in the leader card list
+     */
     private int index;
 
     public DiscardLeaderNotification(int index){

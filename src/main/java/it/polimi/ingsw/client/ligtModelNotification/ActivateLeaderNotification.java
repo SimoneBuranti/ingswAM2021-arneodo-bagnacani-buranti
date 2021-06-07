@@ -1,14 +1,24 @@
 package it.polimi.ingsw.client.ligtModelNotification;
 
-import it.polimi.ingsw.server.model.leaderCards.LeaderCard;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
+/**
+ * Notification of activation of a leader card
+ */
 public class ActivateLeaderNotification extends Notification{
+    /**
+     * The type of notification
+     */
     private final NotificationType notificationType = NotificationType.ACTIVATELEADER;
 
+    /**
+     * The key of the activated leader card
+     */
     private int key;
+    /**
+     * The index of the card in the activated leader card list
+     */
     private int newIndex;
 
     public ActivateLeaderNotification(int key, int newIndex){
