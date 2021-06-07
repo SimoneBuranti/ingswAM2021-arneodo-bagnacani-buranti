@@ -12,19 +12,24 @@ import it.polimi.ingsw.server.model.requirements.*;
 
 import java.io.IOException;
 
+/**
+ * This class contains methods common to all notifications
+ */
 public abstract class Notification {
-    static Gson gson = new Gson();
+    /**
+     * This attribute is used to parse notifications
+     */
     private static JsonParser jsonParser = new JsonParser();
 
-
-    public abstract void accept( NotificatorVisitor v) throws IOException, InterruptedException;
     /**
-     * Contains the method to deserialize messages from Json and to serialize
-     * object in Json messages.
-     *
-     *
-     * @param jsonMsg the json msg
-     * @return the abstract message
+     * Pattern visitor method
+     */
+    public abstract void accept( NotificatorVisitor v) throws IOException, InterruptedException;
+
+    /**
+     * This method deserializes notification from Json
+     * @param jsonMsg the json notification
+     * @return the abstract notification
      */
     public static Notification deserialize (String jsonMsg) {
 
@@ -84,16 +89,19 @@ public abstract class Notification {
         }
     }
 
+
     /**
-     * Serialize string.
-     *
-     * @return the string
+     * This method serializes notification to json
+     * @return the json notification
      */
     public String serialize () {
         Gson gson = gsonAdapter();
         return gson.toJson(this);
     }
 
+    /**
+     * This method returns a Gson object build with the adapters
+     */
     public static Gson gsonAdapter(){
         RuntimeTypeAdapterFactory<Colour> adapterColour =
                 RuntimeTypeAdapterFactory
@@ -132,6 +140,7 @@ public abstract class Notification {
 
 
     /**
+     * This method returns the notification type
      */
     public abstract NotificationType getNotificationType();
 }

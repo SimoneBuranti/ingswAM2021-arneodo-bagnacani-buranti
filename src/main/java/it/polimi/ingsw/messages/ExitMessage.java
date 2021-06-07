@@ -5,7 +5,7 @@ import java.io.IOException;
 public class ExitMessage extends Message{
 
     /**
-     * message which contain the information oof exit from client to server
+     * message which contains the information of exit from client to server
      * the consequence is the disconnection
      */
     private final MessageType messageType=MessageType.EXIT;

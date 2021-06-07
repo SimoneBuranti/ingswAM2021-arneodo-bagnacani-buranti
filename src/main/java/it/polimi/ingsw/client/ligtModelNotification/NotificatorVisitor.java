@@ -1,7 +1,8 @@
 package it.polimi.ingsw.client.ligtModelNotification;
 
-import it.polimi.ingsw.messages.observable.PapalCardsConfigMessage;
-
+/**
+ * This interface contains the visit method of each notification to be implemented in the visitor classes (Cli and Gui)
+ */
 public interface NotificatorVisitor {
 
     void visit(DeckListNotification deckListNotification);

@@ -5,9 +5,17 @@ import it.polimi.ingsw.server.model.productionCards.ProductionCard;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Notification of the first production card of each deck
+ */
 public class DeckListNotification extends Notification{
-
+    /**
+     * The type of notification
+     */
     private final NotificationType notificationType = NotificationType.DECKLISTNOTIFY;
+    /**
+     * The list containing the first production card of each deck
+     */
     private ArrayList<ProductionCard> listOfFirstCard;
 
     public DeckListNotification(ArrayList<ProductionCard> listOfFirstCard){

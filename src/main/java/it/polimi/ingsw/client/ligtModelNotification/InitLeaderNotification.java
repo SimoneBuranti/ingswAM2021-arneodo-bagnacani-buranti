@@ -5,9 +5,21 @@ import it.polimi.ingsw.server.model.leaderCards.LeaderCard;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Notification of the initial player's leader cards
+ */
 public class InitLeaderNotification extends Notification{
+    /**
+     * The type of notification
+     */
     private final NotificationType notificationType = NotificationType.INITLEADER;
+    /**
+     * The list containing the initial player's leader cards
+     */
     private ArrayList<LeaderCard> listOfFirstCard;
+    /**
+     * This attribute indicates whether the list contains cards already activated
+     */
     private boolean activated;
 
 
