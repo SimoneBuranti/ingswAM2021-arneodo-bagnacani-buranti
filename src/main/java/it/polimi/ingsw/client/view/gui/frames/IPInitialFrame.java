@@ -1,6 +1,7 @@
 package it.polimi.ingsw.client.view.gui.frames;
 
-import it.polimi.ingsw.ClientApp;
+
+import it.polimi.ingsw.MainApp;
 import it.polimi.ingsw.client.commands.Command;
 import it.polimi.ingsw.client.view.gui.Gui;
 import it.polimi.ingsw.client.view.gui.PBackground;
@@ -38,13 +39,13 @@ public class IPInitialFrame extends JFrame {
         this.textLabel.setForeground(Color.WHITE);
         this.textLabel.setOpaque(false);
 
-        this.textField = new JTextField(ClientApp.defHostName);
+        this.textField = new JTextField(MainApp.defHostName);
         this.textField.setForeground(Color.WHITE);
         this.textField.setBounds(270,170,150,40);
         this.textField.setFont(new Font("Helvetica", Font.BOLD, 16));
         this.textField.setOpaque(false);
 
-        this.portNumberField = new JTextField(Command.fromIntToString(ClientApp.defPortNumber));
+        this.portNumberField = new JTextField(Command.fromIntToString(MainApp.defPortNumber));
         this.portNumberField.setForeground(Color.WHITE);
         this.portNumberField.setBounds(270,212,150,40);
         this.portNumberField.setFont(new Font("Helvetica", Font.BOLD, 14));
@@ -58,8 +59,8 @@ public class IPInitialFrame extends JFrame {
             String hostName = textField.getText();
             String portNumber = portNumberField.getText();
             if (correctHostName(hostName) && correctPortNumber(portNumber)) {
-                ClientApp.setIPAddress(hostName);
-                ClientApp.setPortNumber(Command.fromStringToInt(portNumber));
+                MainApp.setIPAddress(hostName);
+                MainApp.setPortNumber(Command.fromStringToInt(portNumber));
                 this.dispose();
             } else {
                 if (!correctHostName(hostName))
@@ -115,6 +116,7 @@ public class IPInitialFrame extends JFrame {
         }
         return true;
     }
+
 
     public static boolean correctPortNumber(String portNumber){
         String cha;

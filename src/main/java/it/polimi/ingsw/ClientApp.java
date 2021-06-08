@@ -23,24 +23,8 @@ public class ClientApp {
         hostName = null;
         portNumber = -1;
 
-        //Scanner inputScanner;
 
-        boolean cliParam = false;
-
-
-
-
-     /*   for (String arg : args) {
-            if (arg.equals("--cli") || arg.equals("-c")) {
-                cliParam = true;
-                break;
-            }
-        }
-
-
-
-
-        if (cliParam) {
+        if (false) {
 
             do {
                 Scanner in = new Scanner(System.in);
@@ -54,11 +38,11 @@ public class ClientApp {
                 public void run() {
                     socketClient.readMessage();
                 }
-            }.start(); }*/
+            }.start(); }
 
-       // else {
+        else {
 
-            //InputStream initStream = new In
+
 
             new IPInitialFrame();
 
@@ -69,12 +53,8 @@ public class ClientApp {
                     e.printStackTrace();
                 }
             }
-        /*try {
-            Thread.currentThread().wait();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }*/
-        View gui = new Gui();
+
+            View gui = new Gui();
             SocketClient socketClient = new SocketClient(hostName, portNumber, gui);
             gui.startView();
 
@@ -83,7 +63,7 @@ public class ClientApp {
                     socketClient.readMessage();
                 }
             }.start();
-        //}
+        }
     }
 
 
