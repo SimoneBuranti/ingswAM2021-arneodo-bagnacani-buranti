@@ -25,7 +25,7 @@ public class ServerApp {
 
         }else{
             Gson g = new Gson();
-            Map map = g.fromJson(new FileReader("src/main/resources/defaultServer.json"),Map.class);
+            Map map = g.fromJson(new FileReader("fileConfiguration/defaultServer.json"),Map.class);
             socketServer = new SocketServer(server,((Double) map.get("defaultServerPort")).intValue());
         }
 
