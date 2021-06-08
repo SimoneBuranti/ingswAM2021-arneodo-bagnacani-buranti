@@ -8,6 +8,11 @@ import it.polimi.ingsw.server.model.actionMarkers.ActionMarker;
 import java.io.IOException;
 
 public class UseActionMarkerMessage extends Message {
+    /**
+     * message which contain the information
+     * for notify you about action marker application
+     * from server to client
+     */
     private final MessageType messageType = MessageType.USEACTIONMARKER;
 
     private String actionType;

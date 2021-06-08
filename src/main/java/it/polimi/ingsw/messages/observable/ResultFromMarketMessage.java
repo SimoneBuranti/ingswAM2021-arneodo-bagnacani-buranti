@@ -9,6 +9,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class ResultFromMarketMessage extends Message {
+    /**
+     * message which contain the information
+     * for notify light strorage
+     * after market action
+     * from server to client
+     */
     private final MessageType messageType = MessageType.RESULTFROMARKET;
 
 

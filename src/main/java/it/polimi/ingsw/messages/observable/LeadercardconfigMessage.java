@@ -9,6 +9,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class LeadercardconfigMessage extends Message {
+    /**
+     * message which contain the information
+     * for notify your light gameboard about personal leader card after game restart
+     * it includes the list of card activate and te list of disactivate
+     * from server to client
+     */
     private final MessageType messageType = MessageType.LEADERCONFIGMESSAGE;
     private ArrayList<Integer> notActivated;
     private ArrayList<Integer> activated;

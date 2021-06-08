@@ -9,6 +9,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class UpdateInitLeaderMessage extends Message {
+    /**
+     * message which contain the information
+     * for notify your if you choose leader cards or not in your old game
+     * from server to client
+     */
     private final MessageType messageType = MessageType.UPDATEINITLEADERCARD;
 
 

@@ -8,6 +8,12 @@ import java.io.IOException;
 
 public class GameTypeMessage extends Message {
  private boolean multiOrNot;
+    /**
+     * message which contain the information
+     * for notify the type of game, in which the player is playing
+     * it is crucial for create the right light model (also frame in gui) for te view
+     * from server to client
+     */
  public GameTypeMessage(boolean multiOrNot){
      this.multiOrNot=multiOrNot;
 

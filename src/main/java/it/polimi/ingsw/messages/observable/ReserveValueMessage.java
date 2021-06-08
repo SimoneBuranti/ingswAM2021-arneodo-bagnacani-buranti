@@ -9,6 +9,11 @@ import java.io.IOException;
 import java.util.Map;
 
 public class ReserveValueMessage extends Message {
+    /**
+     * message which contain the information
+     * for notify opponent light reserve configuration after game restart
+     * from server to client
+     */
     private final MessageType messageType = MessageType.RESERVEVALUE;
     private Map<Resource, Integer> reserve;
 

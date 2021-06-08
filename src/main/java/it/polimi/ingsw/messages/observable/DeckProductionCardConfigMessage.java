@@ -10,7 +10,13 @@ import java.util.ArrayList;
 
 public class DeckProductionCardConfigMessage extends Message {
 
-
+    /**
+     * message which contain the information
+     * for configure light model deck at restart or simple start game
+     * it includes te list of production card in right order bby key
+     * it includes also the deck number
+     * from server to client
+     */
     private final MessageType messageType = MessageType.DECKPRODUCTIONCARDCONFIG;
 
     private int NumberDeck;

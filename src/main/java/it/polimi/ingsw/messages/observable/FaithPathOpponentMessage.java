@@ -7,6 +7,11 @@ import it.polimi.ingsw.messages.MessageVisitor;
 import java.io.IOException;
 
 public class FaithPathOpponentMessage extends Message {
+    /**
+     * message which contain the information
+     * for notify opponent light faith path of server model changes
+     * from server to client
+     */
     private final MessageType messageType = MessageType.OPPONENTFAITHPATHMOVE;
     private String nickname;
     private int faithMove;

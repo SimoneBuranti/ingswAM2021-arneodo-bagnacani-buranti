@@ -7,6 +7,11 @@ import it.polimi.ingsw.messages.MessageVisitor;
 import java.io.IOException;
 
 public class LorenzoMoveMessage extends Message {
+    /**
+     * message which contain the information
+     * for notify you about lorenzo moving update
+     * from server to client
+     */
     private final MessageType messageType = MessageType.LORENZOMAGNIFICFAITHMOVE;
 
     @Override

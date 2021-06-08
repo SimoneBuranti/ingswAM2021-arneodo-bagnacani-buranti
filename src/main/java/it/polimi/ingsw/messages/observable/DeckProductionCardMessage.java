@@ -8,6 +8,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class DeckProductionCardMessage extends Message {
+    /**
+     * message which contain the information
+     * for notify all (opponent or current) light model to remove te first card of
+     * number deck(attribute of te message)
+     * due buy production card
+     * from server to client
+     */
     private final MessageType messageType = MessageType.REMOVECARD;
 
     private int NumberDeck;

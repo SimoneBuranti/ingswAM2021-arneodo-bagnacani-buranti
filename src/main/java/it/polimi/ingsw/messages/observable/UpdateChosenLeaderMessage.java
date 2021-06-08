@@ -8,6 +8,11 @@ import it.polimi.ingsw.server.model.leaderCards.LeaderCard;
 import java.io.IOException;
 
 public class UpdateChosenLeaderMessage extends Message {
+    /**
+     * message which contain the information
+     * for notify your light model about your first chosen leader cards
+     * from server to client
+     */
     private final MessageType messageType = MessageType.UPDATECHOSENLEADERCARD;
 
 

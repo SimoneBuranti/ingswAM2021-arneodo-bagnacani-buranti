@@ -8,6 +8,12 @@ import it.polimi.ingsw.server.model.leaderCards.LeaderCard;
 import java.io.IOException;
 
 public class ActivationLeaderForCurrentMessage extends Message {
+    /**
+     * message which contain the information
+     * for notify your light model about activation of a leader card
+     * after leader activation action
+     * from server to client
+     */
     private final MessageType messageType = MessageType.ACTIVATIONLEADERCARDRESPONSE;
 
     private int index;

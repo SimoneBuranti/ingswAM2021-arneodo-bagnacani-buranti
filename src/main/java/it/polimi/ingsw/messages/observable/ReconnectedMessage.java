@@ -7,6 +7,12 @@ import it.polimi.ingsw.messages.MessageVisitor;
 import java.io.IOException;
 
 public class ReconnectedMessage extends Message {
+    /**
+     * message which contain the information
+     * for notify players view about reconnection of opponent
+     * after old disconnection
+     * from server to client
+     */
     private final MessageType messageType = MessageType.RECONNECTIONOPPONENT;
 
 

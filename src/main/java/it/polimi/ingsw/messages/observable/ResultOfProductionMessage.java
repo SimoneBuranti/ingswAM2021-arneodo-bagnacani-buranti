@@ -10,6 +10,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class ResultOfProductionMessage extends Message {
+    /**
+     * message which contain the information
+     * for notify personal light strongBox
+     * after production
+     * from server to client
+     */
     private final MessageType messageType = MessageType.PRODUCTIONRESULT;
 
 

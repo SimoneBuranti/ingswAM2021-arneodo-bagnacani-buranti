@@ -8,6 +8,11 @@ import it.polimi.ingsw.server.model.players.Player;
 import java.io.IOException;
 
 public class FaithPathMessage extends Message {
+    /**
+     * message which contain the information
+     * for notify your light faith path of server model changes
+     * from server to client
+     */
     private final MessageType messageType = MessageType.MYFAITHMOVE;
     private int faithmove;
 

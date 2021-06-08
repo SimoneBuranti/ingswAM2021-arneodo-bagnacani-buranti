@@ -10,6 +10,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class ResultOfProductionForNotCurrentMessage extends Message {
+    /**
+     * message which contain the information
+     * for notify opponent light reserve about some resource differences
+     * after production
+     * from server to client
+     */
     private final MessageType messageType = MessageType.PRODUCTIONUPDATEFORNOTCURRENT;
 
 

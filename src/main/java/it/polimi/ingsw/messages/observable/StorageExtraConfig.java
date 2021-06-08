@@ -8,6 +8,12 @@ import it.polimi.ingsw.server.model.Resource;
 import java.io.IOException;
 
 public class StorageExtraConfig extends Message {
+    /**
+     * message which contain the information
+     * for notify your light storage after game restart
+     *about the possibility of extra or not
+     * from server to client
+     */
     private final MessageType messageType = MessageType.CONFIGURATIONSTORAGEEXTRA;
     private int quantityIn;
 

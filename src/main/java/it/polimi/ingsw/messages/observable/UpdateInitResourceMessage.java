@@ -8,6 +8,11 @@ import it.polimi.ingsw.server.model.Resource;
 import java.io.IOException;
 
 public class UpdateInitResourceMessage extends Message {
+    /**
+     * message which contain the information
+     * for notify your light model about your first chosen resource
+     * from server to client
+     */
     private final MessageType messageType = MessageType.UPDATEINITRESOURCE;
 
 

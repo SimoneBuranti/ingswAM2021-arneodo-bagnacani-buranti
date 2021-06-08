@@ -8,6 +8,11 @@ import it.polimi.ingsw.server.model.Resource;
 import java.io.IOException;
 
 public class UpdateForNotCurrentResourceMessage extends Message {
+    /**
+     * message which contain the information
+     * for notify opponents light models for update their light reserve
+     * from server to client
+     */
     private final MessageType messageType = MessageType.OPPONENTUPDATEINITRESOURCE;
 
 

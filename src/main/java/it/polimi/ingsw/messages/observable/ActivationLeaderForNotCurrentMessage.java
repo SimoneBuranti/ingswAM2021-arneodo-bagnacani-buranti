@@ -9,6 +9,12 @@ import it.polimi.ingsw.server.model.players.Player;
 import java.io.IOException;
 
 public class ActivationLeaderForNotCurrentMessage extends Message {
+    /**
+     * message which contain the information
+     * for notify opponent view about activation of a leader card
+     * after leader activation action
+     * from server to client
+     */
     private final MessageType messageType = MessageType.ACTIVATIONLEADERCARDNOTIFICATION;
 
     private String player;

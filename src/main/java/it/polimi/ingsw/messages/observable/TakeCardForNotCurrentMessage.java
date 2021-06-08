@@ -8,6 +8,12 @@ import it.polimi.ingsw.server.model.players.Player;
 import java.io.IOException;
 
 public class TakeCardForNotCurrentMessage extends Message {
+    /**
+     * message which contain the information
+     * for notify opponent light model about buying production card
+     * after buy production card action
+     * from server to client
+     */
     private final MessageType messageType = MessageType.TAKECARDFORNOTCURRENT;
 
     private int numberDeck;

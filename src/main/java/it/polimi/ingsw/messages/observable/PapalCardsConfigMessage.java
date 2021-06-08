@@ -7,6 +7,11 @@ import it.polimi.ingsw.messages.MessageVisitor;
 import java.io.IOException;
 
 public class PapalCardsConfigMessage extends Message {
+    /**
+     * message which contain the information
+     * for notify papal card configuration in game  restart
+     * from server to client
+     */
     private final MessageType messageType = MessageType.PAPALCARDSCONFIG;
 
     private int[] papalCards;

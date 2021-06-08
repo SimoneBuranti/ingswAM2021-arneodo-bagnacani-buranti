@@ -7,6 +7,11 @@ import it.polimi.ingsw.messages.MessageVisitor;
 import java.io.IOException;
 
 public class YourTurnMessage extends Message {
+    /**
+     * message which contain the information
+     * for notify your turn moment
+     * from server to client
+     */
     private final MessageType messageType = MessageType.YOURTURN;
 
     @Override

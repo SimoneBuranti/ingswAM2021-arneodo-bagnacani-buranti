@@ -12,6 +12,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class StrongboxConfigMessage extends Message {
+    /**
+     * message which contain the information
+     * for notify your light strongbox after game restart
+     * it map of strongbox
+     * from server to client
+     */
     private final MessageType messageType = MessageType.CONFIGURATIONSTRONGBOX;
 
 

@@ -14,7 +14,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class StorageConfigMessage extends Message {
-
+    /**
+     * message which contain the information
+     * for notify your light storage after game restart
+     * it map of storage
+     * from server to client
+     */
     private final MessageType messageType = MessageType.CONFIGURATIONSTORAGE;
     private Map<Resource, Integer> resource;
 

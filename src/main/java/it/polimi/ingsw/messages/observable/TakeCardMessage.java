@@ -8,6 +8,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class TakeCardMessage extends Message {
+    /**
+     * message which contain the information
+     * for notify your light model about buying production card
+     * after buy production card action
+     * from server to client
+     */
     private final MessageType messageType = MessageType.TAKECARD;
 
     private int NumberDeck;

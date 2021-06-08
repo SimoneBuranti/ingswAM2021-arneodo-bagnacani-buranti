@@ -10,6 +10,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class ResultFromMarketNotCurrentMessage extends Message {
+    /**
+     * message which contain the information
+     * for notify opponent light reserve about some resource differences
+     * after market action
+     * from server to client
+     */
     private final MessageType messageType = MessageType.RESULTFROMARKETNOTCURRENT;
 
 

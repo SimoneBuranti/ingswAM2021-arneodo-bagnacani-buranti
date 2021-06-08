@@ -7,6 +7,11 @@ import it.polimi.ingsw.messages.MessageVisitor;
 import java.io.IOException;
 
 public class MyVictoryMessage extends Message {
+    /**
+     * message which contain the information
+     * for notify your victory
+     * from server to client
+     */
     private final MessageType messageType = MessageType.MYVICTORY;
 
     int score;

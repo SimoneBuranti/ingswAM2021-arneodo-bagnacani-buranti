@@ -8,6 +8,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class NicknameStartedMessage extends Message {
+    /**
+     * message which contain the information
+     * for notify view about nickname grid
+     * it all nicknames
+     * from server to client
+     */
     private final MessageType messageType = MessageType.NICKNAME;
     private ArrayList<String> nickname;
 

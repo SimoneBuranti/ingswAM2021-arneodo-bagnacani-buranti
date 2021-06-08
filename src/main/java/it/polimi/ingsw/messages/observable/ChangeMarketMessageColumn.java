@@ -9,6 +9,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class ChangeMarketMessageColumn extends Message {
+    /**
+     * message which contain the information
+     * for notify your light model and opponent light model about changes on market
+     * after market action (column push)
+     * from server to client
+     */
     private final MessageType messageType = MessageType.CHANGEMARKETMESSAGECOLUMN;
 private int column;
     public ChangeMarketMessageColumn(int column){

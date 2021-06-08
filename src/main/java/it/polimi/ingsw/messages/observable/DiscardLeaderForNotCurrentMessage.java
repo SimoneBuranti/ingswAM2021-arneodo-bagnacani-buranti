@@ -8,6 +8,12 @@ import it.polimi.ingsw.server.model.players.Player;
 import java.io.IOException;
 
 public class DiscardLeaderForNotCurrentMessage extends Message {
+    /**
+     * message which contain the information
+     * for notify opponent view about discard of a leader card
+     * after leader discard action
+     * from server to client
+     */
     private final MessageType messageType = MessageType.DISCARDLEADERCARDNOTIFICATION;
 
     private String player;

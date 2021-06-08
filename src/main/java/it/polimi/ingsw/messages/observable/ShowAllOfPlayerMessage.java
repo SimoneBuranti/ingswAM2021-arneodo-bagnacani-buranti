@@ -11,6 +11,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ShowAllOfPlayerMessage extends Message {
+    /**
+     * message which contain the information
+     * of chosen player
+     * it includes all information
+     * about leader card, only te activated
+     * from server to client
+     */
     private final MessageType messageType = MessageType.ALLOFPLAYER;
 
     int[][] productioncard;

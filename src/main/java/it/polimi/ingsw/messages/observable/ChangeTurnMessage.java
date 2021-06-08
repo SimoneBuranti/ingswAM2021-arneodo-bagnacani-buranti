@@ -11,7 +11,12 @@ public class ChangeTurnMessage extends Message {
     public ChangeTurnMessage(String nickName) {
         this.nickName=nickName;
     }
-
+    /**
+     * message which contain the information
+     * for notify changes turn
+     * due end turn of old current player
+     * from server to client
+     */
     private final MessageType messageType = MessageType.CHANGETURN;
 
     @Override

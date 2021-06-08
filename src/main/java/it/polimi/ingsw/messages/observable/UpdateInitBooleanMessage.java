@@ -7,9 +7,15 @@ import it.polimi.ingsw.messages.MessageVisitor;
 import java.io.IOException;
 
 public class UpdateInitBooleanMessage extends Message {
-    private boolean initResource;
+
+    /**
+     * message which contain the information
+     * for notify your if you choose resource or not in your old game
+     * from server to client
+     */
     private final MessageType messageType = MessageType.INIT;
     private boolean initLeader;
+    private boolean initResource;
 
     public UpdateInitBooleanMessage(boolean initResource,boolean initLeader) {
         this.initResource = initResource;

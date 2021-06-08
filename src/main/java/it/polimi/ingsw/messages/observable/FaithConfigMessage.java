@@ -7,6 +7,12 @@ import it.polimi.ingsw.messages.MessageVisitor;
 import java.io.IOException;
 
 public class FaithConfigMessage extends Message {
+    /**
+     * message which contain the information
+     * for notify your light faith path after game restart
+     * it includes the indicator but also te currCall value
+     * from server to client
+     */
     private final MessageType messageType = MessageType.MYFAITHMOVECONFIG;
     private int faithConfig;
     private int currCall;
