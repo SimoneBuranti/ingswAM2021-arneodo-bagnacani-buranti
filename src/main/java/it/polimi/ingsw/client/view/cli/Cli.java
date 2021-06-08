@@ -1077,7 +1077,7 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
 
     /**
      * This method asks the player to choose the resources to hold when his storage does not have
-     * enough space  and sets the right command parser
+     * enough space and sets the right command parser
      */
     @Override
     public void showSpaceError(NotEnoughSpaceErrorMessage msg) {

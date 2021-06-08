@@ -1,5 +1,4 @@
 package it.polimi.ingsw.client.view.gui;
-import it.polimi.ingsw.client.commands.commandParsers.StandardParser;
 import it.polimi.ingsw.client.ligtModelNotification.*;
 import it.polimi.ingsw.client.view.View;
 import it.polimi.ingsw.client.view.ViewController;
@@ -20,50 +19,127 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * This class represents the GUI and it implements view interface.
+ * It changes the frame when it receives updates from the light model or messages from the server
+ */
 public class Gui extends ViewControllerObservable implements View, NotificatorVisitor {
 
+    /**
+     * This attribute represents the width of the frame
+     */
     public static final int initFrameWidth = 700;
+    /**
+     * This attribute represents the height of the frame
+     */
     public static final int initFrameHeight = 420;
+    /**
+     * This attribute represents the position of the frame
+     */
     public static final int initFrameX = 450;
+    /**
+     * This attribute represents the position of the frame
+     */
     public static final int initFrameY = 208;
 
+    /**
+     * This attribute represents the controller of the view
+     */
     private ViewController viewController;
+
+    /**
+     * This attribute represents the initial frame
+     */
     private JFrame mainFrame;
+    /**
+     * This attribute is the component container of the mainFrame
+     */
     private PanelContainer container;
 
+    /**
+     * This attribute is a button with "yes" text
+     */
     private JButton yesButton;
+    /**
+     * This attribute is a button with "no" text
+     */
     private JButton noButton ;
+    /**
+     * This attribute is a button with "enter" text
+     */
     private JButton enterButton ;
 
+    /**
+     * This attribute represents the frame of the game
+     */
     private MainFrame mainFrameOfGame;
 
+    /**
+     * This attribute is true if the game is multiplayer
+     */
     private Boolean isMultiOrNot;
 
+    /**
+     * This attribute contains the frames of opponent players
+     */
     protected PlayerInformatioFrames[] playerInformatioFrames;
 
+    /**
+     * This attribute is a button with "1" text
+     */
     private JButton oneButton;
+    /**
+     * This attribute is a button with "2" text
+     */
     private JButton twoButton ;
+    /**
+     * This attribute is a button with "3" text
+     */
     private JButton threeButton;
+    /**
+     * This attribute is a button with "4" text
+     */
     private JButton fourButton ;
 
+    /**
+     * This attribute contains a lobby message
+     */
     private JLabel lobbyLabel;
 
+    /**
+     * This attribute contains an error message
+     */
     private JLabel errorLabel;
-    
+
+    /**
+     * This attribute contains a value to check if the listener is ready to send a message to the server
+     */
     private int readyToSend=0;
 
+    /**
+     * This attribute is true if the player wants to resume the game
+     */
     private boolean chosenResumeGame;
 
+    /**
+     * This attribute is true if the player has made an action
+     */
     private boolean isActionDoneMode;
+
+    /**
+     * This attribute is true if the player has yet to choose the initial leader cards and the initial resources
+     */
     private boolean isRestartMode = false;
 
 
+    /**
+     * This method sets the initial frame
+     */
     @Override
     public void startView() {
         SwingUtilities.invokeLater(() -> {
 
             mainFrame = new JFrame("Masters Of Renaissance");
-            //mainFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
             mainFrame.setLocation(450,208);
             mainFrame.setSize(820,420);
@@ -78,7 +154,6 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
             mainFrame.repaint();
             background.setLayout(null);
             mainFrame.add(background);
-            //mainFrame.add(errorText);
 
             // Prepare the body container
             container = new PanelContainer();
@@ -87,25 +162,41 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
             mainFrame.setVisible(true);
 
-        });}
+        });
+    }
 
+    /**
+     * This method deserializes the light model notification
+     */
     @Override
     public void update(String notification) throws IOException, InterruptedException {
         Notification parsedMsg = Notification.deserialize(notification);
         parsedMsg.accept(this);
     }
+
+    /**
+     * This method sets the viewController attribute and adds it to the observers
+     * @param viewController : the cli observer
+     */
     @Override
     public void setViewController(ViewController viewController){
         this.viewController=viewController;
         setObserver(viewController);
     }
 
+    /**
+     * @return the controller of the view
+     */
     public ViewController getViewController(){
         return this.viewController;
     }
 
+    /**
+     * This method asks the player how many he wants to play with by showing the right components in the frame and notifies the observer
+     * of the player's response
+     */
     @Override
-    public void askNumberOfPlayers() throws IOException, InterruptedException {
+    public void askNumberOfPlayers(){
         SwingUtilities.invokeLater(() -> {
 
             clear(container);
@@ -158,8 +249,13 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
                 })).start();
                 });
             applyChangesTo(container);
-        }); }
+        });
+    }
 
+    /**
+     * This method sends the response of the previous question to the observer
+     * @param n : the number of players
+     */
     public void sendNumberPlayersResponse(int n){
         try {
             notifyObserver(new NumberPlayerMessage(n)); }
@@ -169,6 +265,9 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
     }
 
 
+    /**
+     * This method shows the player to wait for the other players
+     */
     public void showLabel(){
         SwingUtilities.invokeLater(() -> {
 
@@ -183,8 +282,12 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
         });
     }
 
+    /**
+     * This method asks the player its username by showing the right components in the frame and notifies the observer
+     * of the player's response
+     */
     @Override
-    public void askNickname() throws IOException, InterruptedException {
+    public void askNickname(){
         SwingUtilities.invokeLater(() -> {
             //clear(container);
 
@@ -223,23 +326,28 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
             })).start());
 
             applyChangesTo(container);
-        });}
+        });
+    }
 
+    /**
+     * This method sends the response of the previous question to the observer
+     * @param nickname : the player's username
+     */
     public void sendUsernameResponse(String nickname){
         try {
             notifyObserver(new UsernameMessage(nickname));
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
+        } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
 
     }
 
-
-
+    /**
+     * This method asks the player if he wants to resume the game by showing the right components in the frame
+     * and notifies the observer of the player's response
+     */
     @Override
-    public void askRestartGame() throws IOException, InterruptedException {
+    public void askRestartGame(){
         SwingUtilities.invokeLater(() -> {
 
             clear(container);
@@ -287,21 +395,23 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
     }
 
+    /**
+     * This method sends the response of the previous question to the observer
+     * @param bool : true if the player wants to resume the previous game
+     */
     public void sendRestartResponse(boolean bool){
         try {
             notifyObserver(new RestartAnswerMessage(bool));
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
+        } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
 
     }
 
 
-
-
-
+    /**
+     * This method shows the current player
+     */
     @Override
     public void showChangeCurrent(String currentNick) {
         SwingUtilities.invokeLater(() -> {
@@ -313,27 +423,23 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
         });
     }
 
+    /**
+     * This method switch the frame from pre game mode to game mode
+     */
     public void switchToGameMode(){
-        //SwingUtilities.invokeLater(() -> {
             if (!mainFrameOfGame.isBackGroundNull()) {
                 mainFrameOfGame.switchToGameMode();
                 mainFrameOfGame.paintComponents(mainFrameOfGame.getGraphics());
                 mainFrameOfGame.paintComponents(mainFrameOfGame.getGraphics());
             }
-
-            //applyChangesTo(mainFrameOfGame);
-
-        //});
-
     }
 
+    /**
+     * This method shows the current player and enables all the player's buttons
+     */
     @Override
     public void yourTurn() {
         SwingUtilities.invokeLater(() -> {
-            /*if (isRestartMode) {
-                switchToGameMode();
-                isRestartMode = false;
-            }*/
             mainFrameOfGame.setCurrentPlayer(viewController.getNickName());
             enableAllAction();
             mainFrameOfGame.refreshMessagePanel();
@@ -343,6 +449,9 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
     }
 
+    /**
+     * This method shows an error message
+     */
     @Override
     public void notifyError(Message msg) {
 
@@ -380,6 +489,10 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
         }
 
     }
+
+    /**
+     * This method shows the players round
+     */
     @Override
     public void showPlayersOrder(ArrayList<String> nickName) {
         SwingUtilities.invokeLater(() -> {
@@ -393,6 +506,9 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
     }
 
+    /**
+     * This method shows the last turn message
+     */
     @Override
     public void showLastTurn(String nickName) {
         SwingUtilities.invokeLater(() -> {
@@ -403,7 +519,11 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
     }
 
-
+    /**
+     * This method shows the server lobby
+     * @param playersInLobby : the actual number of players
+     * @param playerInGame : the number of players of the game
+     */
     @Override
     public void showLobby(int playersInLobby, int playerInGame) {
         SwingUtilities.invokeLater(() -> {
@@ -423,6 +543,9 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
         });
     }
 
+    /**
+     * This method asks the player to choose two leader cards
+     */
     @Override
     public void askLeaderCardToKeep(ArrayList<LeaderCard> leaderCards) {
         SwingUtilities.invokeLater(() -> {
@@ -435,6 +558,11 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
     }
 
+    /**
+     * This method shows the call for council message and gives to the player the papal card if he got it
+     * @param nickname : the name of the player who activated the papal card
+     * @param papalCard : the value of the current papal card
+     */
     @Override
     public void showCallForCouncil(String nickname, int papalCard) {
         SwingUtilities.invokeLater(() -> {
@@ -449,25 +577,19 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
     }
 
+    /**
+     * This method initialises the game frame
+     */
     @Override
     public void showStartGame(GameTypeMessage msg) {
         SwingUtilities.invokeLater(() -> {
 
             mainFrame.dispose();
-            if (msg.isMultiOrNot() == true) {
-                /*if (!viewController.getGame().isInitResource() || !viewController.getGame().isInitLeader()) {
-                    mainFrameOfPreGame = new MainFrameMultiPlayer(this, "your board");
-                }*/
+            if (msg.isMultiOrNot()) {
                 mainFrameOfGame = new MainFrameMultiPlayer(this);
             } else {
-
-                /*if (!viewController.getGame().isInitResource() || !viewController.getGame().isInitLeader()) {
-                    mainFrameOfPreGame = new MainFrameSinglePlayer(this, "your board");
-                }*/
                 mainFrameOfGame = new MainFrameSinglePlayer(this);
-
             }
-
 
             isMultiOrNot = msg.isMultiOrNot();
 
@@ -475,10 +597,13 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
                 switchToGameMode();
                 isRestartMode = false;
             }
-            //System.out.println("sono dentro all'edt e ho istanziato cazzi e mazzi");
 
-        });}
+        });
+    }
 
+    /**
+     * This method shows the player to put the name he had in the previous game
+     */
     @Override
     public void showRestartMessage() {
         SwingUtilities.invokeLater(() -> {
@@ -487,7 +612,9 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
         });
     }
 
-
+    /**
+     * This method asks the player to choose the initial resources
+     */
     @Override
     public void askInitResource(){
 
@@ -497,6 +624,9 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
     }
 
+    /**
+     * This method asks the player to choose the initial resources
+     */
     public void askInitResource(String outOfEDT){
 
         mainFrameOfGame.askInitResource();
@@ -531,6 +661,11 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
     @Override
     public void showMarket() {}
 
+    /**
+     * This method asks the player to choose which resources to get from the white marbles with a pop up
+     * @param n : the number of white marbles
+     * @param whiteMarbleResourceTypes : the types of resources with which the white marble can be exchanged
+     */
     @Override
     public void showWhiteMarbleResources(int n, ArrayList<Resource> whiteMarbleResourceTypes) {
         SwingUtilities.invokeLater(() -> {
@@ -540,6 +675,10 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
         });
     }
 
+    /**
+     * This method asks the player to choose the resources to hold when his storage does not have
+     * enough space with a pop up
+     */
     @Override
     public void showSpaceError(NotEnoughSpaceErrorMessage msg) {
         SwingUtilities.invokeLater(() -> {
@@ -549,6 +688,10 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
         });
     }
 
+
+    /**
+     * This method sets the correct value to the isRestartMode attribute
+     */
     @Override
     public void checkThreadRestart() {
         if (viewController.getGame().isInitResource()){
@@ -556,6 +699,9 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
         }
     }
 
+    /**
+     * This method shows the effect of the revealed action marker with a pop up
+     */
     @Override
     public void showActionMarker(String actionType) {
         SwingUtilities.invokeLater(()-> {
@@ -565,6 +711,10 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
     }
 
+    /**
+     * This method shows the player that he is the winner with a pop up
+     * @param score : the player's score
+     */
     @Override
     public void youWin(int score) {
         SwingUtilities.invokeLater(() -> {
@@ -575,6 +725,9 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
     }
 
+    /**
+     * This method shows the player that the Lorenzo the Magnificent is the winner with a pop up
+     */
     @Override
     public void lorenzoWin() {
         SwingUtilities.invokeLater(() -> {
@@ -585,6 +738,9 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
     }
 
+    /**
+     * This method shows the player the winner with a pop up
+     */
     @Override
     public void showWinner(String nickname) {
         SwingUtilities.invokeLater(() -> {
@@ -595,6 +751,9 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
     }
 
+    /**
+     * This method shows the player the action of another player
+     */
     @Override
     public void showOpponentAction(Message msg) {
         SwingUtilities.invokeLater(() -> {
@@ -605,6 +764,9 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
     }
 
+    /**
+     * This method shows the player that the server is crashed with a pop up
+     */
     @Override
     public void sayDisconnect() {
 
@@ -615,6 +777,9 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
         });
     }
 
+    /**
+     * This method shows the production card decks received with a notification
+     */
     @Override
     public void visit(DeckListNotification deckListNotification) {
         SwingUtilities.invokeLater(() -> {
@@ -624,6 +789,9 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
         });
     }
 
+    /**
+     * This method shows the player's production cards received with a notification
+     */
     @Override
     public void visit(GameboardListNotification gameboardListNotification) {
         SwingUtilities.invokeLater(() -> {
@@ -635,9 +803,11 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
     }
 
     @Override
-    public void visit(LeaderListCardNotification leaderListCardNotification){
-    }
+    public void visit(LeaderListCardNotification leaderListCardNotification){}
 
+    /**
+     * This method shows the player's storage received with a notification
+     */
     @Override
     public void visit(StorageNotification storageNotification) {
         SwingUtilities.invokeLater(() -> {
@@ -676,7 +846,7 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
     }
 
     /**
-     * @param strongboxNotification
+     * This method shows the player's strongbox received with a notification
      */
     @Override
     public void visit(StrongboxNotification strongboxNotification) {
@@ -689,7 +859,7 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
     }
 
     /**
-     * @param reserveNotification
+     * This method shows the reserve received with a notification
      */
     @Override
     public void visit(ReserveNotification reserveNotification) {
@@ -702,7 +872,7 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
     }
 
     /**
-     * @param marketNotification
+     * This method shows the market grid received with a notification
      */
     @Override
     public void visit(MarketNotification marketNotification) {
@@ -713,6 +883,9 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
     }
 
+    /**
+     * This method shows the market extra marble received with a notification
+     */
     @Override
     public void visit(ExtraMarketNotification extraMarketNotification) {
         SwingUtilities.invokeLater(() -> {
@@ -723,6 +896,9 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
     }
 
+    /**
+     * This method shows the player's faith indicator or Lorenzo's indicator received with a notification
+     */
     @Override
     public void visit(FaithPathNotification faithPathNotification) {
         SwingUtilities.invokeLater(() -> {
@@ -735,6 +911,9 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
         });
     }
 
+    /**
+     * This method shows the player's initial leader cards received with a notification
+     */
     @Override
     public void visit(InitLeaderNotification initLeaderNotification) {
         SwingUtilities.invokeLater(() -> {
@@ -744,6 +923,9 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
         });
     }
 
+    /**
+     * This method shows the activation of a leader card received with a notification
+     */
     @Override
     public void visit(ActivateLeaderNotification activateLeaderNotification) {
         SwingUtilities.invokeLater(() -> {
@@ -753,6 +935,9 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
         });
     }
 
+    /**
+     * This method shows the discarding of a leader card received with a notification
+     */
     @Override
     public void visit(DiscardLeaderNotification discardLeaderNotification) {
         SwingUtilities.invokeLater(() -> {
@@ -764,6 +949,9 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
     }
 
+    /**
+     * This method shows the player's papal cards initial configuration received with a notification
+     */
     @Override
     public void visit(PapalCardsConfigNotification papalCardsConfigNotification) {
         SwingUtilities.invokeLater(() -> {
@@ -799,7 +987,10 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
         panel.removeAll();
     }
 
-
+    /**
+     * This method shows a text label
+     * @param text : the text to show
+     */
     public void showLabel(String text){
 
             clear(container);
@@ -816,13 +1007,17 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
     }
 
-
+    /**
+     * This method increases readyToSend attribute
+     */
     public void setReadyToSend() {
         this.readyToSend++;
     }
 
-    
-    
+
+    /**
+     * @return readyToSend value
+     */
     public int getReadyToSend() {
         return readyToSend;
 
@@ -830,23 +1025,9 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
     }
 
-    public void showLoading () { }
-
-
-    public void powerToMainFrame()
-    {
-        SwingUtilities.invokeLater(()-> {
-
-            mainFrameOfGame.switchToGameMode();
-            mainFrameOfGame.paintComponents(mainFrameOfGame.getGraphics());
-            mainFrameOfGame.paintComponents(mainFrameOfGame.getGraphics());
-
-        });
-
-
-    }
-
-
+    /**
+     * This method disables all buttons except those of the productions
+     */
     public void disableAllExceptProductions() {
 
             mainFrameOfGame.disableMarketButtons();
@@ -857,6 +1038,9 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
     }
 
+    /**
+     * This method disables all buttons and activates buttons to choose the game board column
+     */
     public void putProdCardMode() {
 
             mainFrameOfGame.disableMarketButtons();
@@ -868,10 +1052,16 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
     }
 
+    /**
+     * @return true if the player has made an action, false otherwise
+     */
     public boolean isActionDoneMode(){
         return isActionDoneMode;
     }
 
+    /**
+     * This method disables all action buttons and activates leader card and end turn buttons
+     */
     public void actionDoneMode() {
 
             isActionDoneMode = true;
@@ -885,6 +1075,9 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
     }
 
+    /**
+     * This method activates all action buttons and leader card buttons
+     */
     public void enableAllAction() {
 
             isActionDoneMode = false;
@@ -898,6 +1091,9 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
     }
 
+    /**
+     * This method disables all buttons
+     */
     public void disableAllButtons(){
         mainFrameOfGame.disableMarketButtons();
         mainFrameOfGame.disableDeckButtons();
@@ -906,7 +1102,9 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
         applyChangesTo(mainFrameOfGame);
     }
 
-
+    /**
+     * This method shows an opponent's game board
+     */
     public void showPlayerInfo(ShowAllOfPlayerMessage msg){
         SwingUtilities.invokeLater(() -> {
 
@@ -920,10 +1118,17 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
         });
     }
 
+    /**
+     * This method sets the chosen deck number
+     * @param key : the number of the deck
+     */
     public void setChosenDeckNumber(int key) {
         mainFrameOfGame.setChosenDeckNumber(key);
     }
 
+    /**
+     * This method removes all listener of the button passed as a parameter
+     */
     public static void removeAllListeners(JButton button) {
         ActionListener[] listenerList;
         listenerList = button.getActionListeners();
@@ -933,6 +1138,9 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
         }
     }
 
+    /**
+     * @return the number of productions activated
+     */
     public int howManyActivated() {
         return mainFrameOfGame.howManyActivated();
     }

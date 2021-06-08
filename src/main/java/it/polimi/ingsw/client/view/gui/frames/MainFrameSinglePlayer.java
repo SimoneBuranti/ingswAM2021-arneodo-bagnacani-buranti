@@ -273,7 +273,6 @@ public class MainFrameSinglePlayer extends MainFrame{
             }
         })).start();
         gui.switchToGameMode();
-        System.out.println("hey lo chiamo da qua0"+Thread.currentThread().getName());
     }
 
     public void updateStrongBox(Map<Resource,Integer> map){
