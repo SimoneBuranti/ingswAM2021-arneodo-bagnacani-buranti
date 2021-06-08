@@ -12,6 +12,11 @@ import it.polimi.ingsw.server.model.productionCards.ProductionCard;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * This interface represents the client side view, it is implemented by Cli and Gui classes.
+ * Also it is the observer of the light model.
+ */
+
 public interface View  {
 
     void startView();

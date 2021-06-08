@@ -23,115 +23,145 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.Scanner;
 
+/**
+ * This class represents the CLI and it implements view interface.
+ * It reads the player's input from System.in and shows video elements of the game and messages to the player
+ */
 public class Cli extends ViewControllerObservable implements View, NotificatorVisitor {
 
+    /**
+     * This attribute represents the controller of the view
+     */
     private ViewController viewController;
 
+    /**
+     * This attribute represents the parser of the player's commands and it changes dynamically depending on what
+     * the player can write
+     */
     private CommandParser commandParser;
 
+    /**
+     * This attribute reads the player's input
+     */
     private Scanner input = new Scanner(System.in);
 
+    /**
+     * This attribute contains all resource types
+     */
     public static final Resource[] resourceTypes = {Resource.COIN,Resource.ROCK,Resource.SHIELD,Resource.SERVANT};
 
+
+    /**
+     * Class constructor. The player can only write an exit command.
+     */
     public Cli() {
         this.commandParser = new ExitOnlyParser();
         commandThread();
     }
 
-    public static int readInt() throws NotIntException {
-        Scanner in = new Scanner(System.in);
-        String input;
-        input = in.nextLine();
-        int n = 0;
-        for (int i = 0; i<input.length();i++){
-            if(input.charAt(i) - '0' >9)
-                throw new NotIntException();
-            n*=10;
-            n+= input.charAt(i) - '0';
-        }
-
-        return n;
-    }
-
+    /**
+     * This method reads the player's commands and sends them to the command parser and
+     * it handles exceptions that can be launched
+     */
     public void commandThread(){
 
         (new Thread( () -> {
-                                String commandText;
-                                while(true){
+                            String commandText;
+                            while(true){
+                                try {
+                                    commandText = input.nextLine();
+                                    this.notifyObserver((commandParser.parseCommand(commandText,this.viewController,this).commandOn()));
+                                } catch (InvalidCommandException e) {
+                                    System.out.println("Invalid command, type 'help' to check the command list");
+                                } catch (SpentTokenException e) {
+                                    System.out.println("Impossible request, you have already done an action");
+                                } catch (AlreadyActivatedProductionException e) {
+                                    System.out.println("Impossible request, you have already activated this production");
+                                } catch (InterruptedException | IOException e) {
+                                    e.printStackTrace();
+                                } catch (EndAfterThisException e) {
                                     try {
-                                        commandText = input.nextLine();
-                                        this.notifyObserver((commandParser.parseCommand(commandText,this.viewController,this).commandOn()));
-                                    } catch (InvalidCommandException e) {
-                                        System.out.println("Invalid command, type 'help' to check the command list");
-                                    } catch (SpentTokenException e) {
-                                        System.out.println("Impossible request, you have already done an action");
-                                    } catch (AlreadyActivatedProductionException e) {
-                                        System.out.println("Impossible request, you have already activated this production");
-                                    } catch (InterruptedException | IOException e) {
-                                        e.printStackTrace();
-                                    } catch (EndAfterThisException e) {
-                                        try {
-                                            //System.out.println(e.getExtraMessage());
-                                            notifyObserver(e.getExtraMessage());
-                                            notifyObserver(new EndOfTurnMessage());
-                                        } catch (IOException | InterruptedException ioException) {
-                                            ioException.printStackTrace();
-                                        }
-                                        changeCommandParser(new StandardParser());
-                                    } catch (NoMessageReturnException ignored) {
-                                    } catch (InitLeaderCardsException e) {
-                                        viewController.getGame().setInitLeader(true);
-                                        try {
-                                            notifyObserver(e.getInitLeaderCardsMessage());
-                                            askInitResource();
-                                        } catch (IOException | InterruptedException ioException) {
-                                            ioException.printStackTrace();
-                                        }
+                                        notifyObserver(e.getExtraMessage());
+                                        notifyObserver(new EndOfTurnMessage());
+                                    } catch (IOException | InterruptedException ioException) {
+                                        ioException.printStackTrace();
+                                    }
+                                    changeCommandParser(new StandardParser());
+                                } catch (NoMessageReturnException ignored) {
+                                } catch (InitLeaderCardsException e) {
+                                    viewController.getGame().setInitLeader(true);
+                                    try {
+                                        notifyObserver(e.getInitLeaderCardsMessage());
+                                        askInitResource();
+                                    } catch (IOException | InterruptedException ioException) {
+                                        ioException.printStackTrace();
                                     }
                                 }
-
                             }
+
+                        }
                     )
         ).start();
 
     }
 
+    /**
+     * This method changes the dynamic type of the command parser
+     * @param commandParser : the dynamic type of the command parser
+     */
     public void changeCommandParser(CommandParser commandParser){
         this.commandParser = commandParser;
     }
 
 
-
+    /**
+     * This method sets the viewController attribute and adds it to the observers
+     * @param viewController : the cli observer
+     */
     @Override
     public void setViewController(ViewController viewController){
         this.viewController=viewController;
         setObserver(viewController);
     }
 
+    /**
+     * This method shows the initial message
+     */
     @Override
     public void startView() {
         System.out.println("Welcome to MASTERS OF THE RENAISSANCE!");
     }
 
+    /**
+     * This method deserializes the light model notification
+     */
     @Override
     public void update(String notification) throws IOException, InterruptedException {
         Notification parsedMsg = Notification.deserialize(notification);
         parsedMsg.accept(this);
     }
 
+    /**
+     * This method calls the method to show the production card decks received with a notification
+     */
     @Override
     public void visit(DeckListNotification deckListNotification) {
         showDeckProductionCards(deckListNotification.getListOfFirstCard());
 
     }
 
+    /**
+     * This method calls the method to show the player's production cards received with a notification
+     */
     @Override
     public void visit(GameboardListNotification gameboardListNotification) {
         System.out.println("Production cards of your game board:" );
         showGameBoardProductionCards(gameboardListNotification.getListOfFirstCard());
     }
 
-
+    /**
+     * This method calls the method to show the player's leader cards received with a notification
+     */
     @Override
     public void visit(LeaderListCardNotification leaderListCardNotification) {
         if(leaderListCardNotification.isActivated())
@@ -145,6 +175,9 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
 
     }
 
+    /**
+     * This method shows the player's leader cards
+     */
     public void showLeaderCards(ArrayList<LeaderCard> leaderCards){
         for(int i = 0; i < leaderCards.size(); i++){
             printSpaces(8);
@@ -171,41 +204,56 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
         }
     }
 
+    /**
+     * This method calls the method to show the player's storage received with a notification
+     */
     @Override
     public void visit(StorageNotification storageNotification) {
         System.out.println("Your storage now contains: ");
         showResourceBox(storageNotification.getMap());
     }
 
+    /**
+     * This method calls the method to show the player's strongbox received with a notification
+     */
     @Override
     public void visit(StrongboxNotification strongboxNotification) {
         System.out.println("Your strongbox now contains: ");
         showResourceBox(strongboxNotification.getMap());
     }
 
+    /**
+     * This method calls the method to show the reserve received with a notification
+     */
     @Override
     public void visit(ReserveNotification reserveNotification) {
         System.out.println("The reserve now contains: ");
         showResourceBox(reserveNotification.getMap());
     }
 
+    /**
+     * This method calls the method to show the market grid received with a notification
+     */
     @Override
     public void visit(MarketNotification marketNotification) {
         System.out.println("The market now is: ");
         showMarketGrid(marketNotification.getList());
     }
 
+    /**
+     * This method calls the method to show the market extra marble received with a notification
+     */
     @Override
     public void visit(ExtraMarketNotification extraMarketNotification) {
         System.out.print("The extra marble of the market now is: ");
         showMarketExtra(extraMarketNotification.getMarble());
     }
 
+    /**
+     * This method calls the method to show the player's faith indicator received with a notification
+     */
     @Override
     public void visit(FaithPathNotification faithPathNotification) {
-        //if (faithPathNotification.isLorenzo())
-        //    System.out.println("Lorenzo's position in the faith track is: ");
-       // else
         if(!faithPathNotification.isLorenzo())
             System.out.println("Your faith indicator position in the faith track is: ");
 
@@ -227,6 +275,9 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
         //gui method
     }
 
+    /**
+     * This method shows the player's papal cards initial configuration received with a notification
+     */
     @Override
     public void visit(PapalCardsConfigNotification papalCardsConfigNotification) {
         for (int i=0; i<3;i++){
@@ -238,78 +289,108 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
         }
     }
 
-
+    /**
+     * This method shows an error message
+     */
     @Override
     public void notifyError(Message msg) {
         System.out.println(msg.toString());
 
     }
 
+    /**
+     * This method asks the player how many he wants to play with and sets the right command parser
+     */
     @Override
-    public void askNumberOfPlayers() throws IOException, InterruptedException {
-        int nOfPlayers;
+    public void askNumberOfPlayers() {
         System.out.println("How many players? [1...4]");
 
         changeCommandParser(new HowManyPlayerParser());
 
     }
 
-
+    /**
+     * This method asks the player its username and sets the right command parser
+     */
     @Override
-    public void askNickname() throws IOException, InterruptedException {
-        String nickname;
+    public void askNickname() {
         System.out.println("What's your username?");
 
         changeCommandParser(new NickNameParser());
 
     }
+
+    /**
+     * This method asks the player if he wants to resume the game and sets the right command parser
+     */
     @Override
-    public void askRestartGame() throws IOException, InterruptedException {
-        String answer;
+    public void askRestartGame(){
         changeCommandParser(new ResumeGameParser());
 
         System.out.println("Do you want to resume the previous match? [yes / no]");
 
     }
+
+    /**
+     * This method shows your turn message and sets the right command parser
+     */
     @Override
     public void yourTurn() {
         changeCommandParser(new MyTurnParser());
         System.out.println("It's your turn");
     }
 
+    /**
+     * This method shows the current player
+     */
     @Override
     public void showChangeCurrent(String currentNick) {
         System.out.println("Current player: "+currentNick);
     }
 
+    /**
+     * This method shows the players round
+     */
     @Override
     public void showPlayersOrder(ArrayList<String> nickName){
         System.out.println("The players round is : " + nickName);
     }
 
+    /**
+     * This method shows the last turn message
+     */
     @Override
     public void showLastTurn(String nickName){
         System.out.println("Player " + nickName + " activated the last turn round");
     }
+
+    /**
+     * This method shows the server lobby
+     * @param playersInLobby : the actual number of players
+     * @param playerInGame : the number of players of the game
+     */
     @Override
     public void showLobby(int playersInLobby, int playerInGame){
         System.out.println("There are " + playersInLobby + " players in the lobby out of " + playerInGame +
                 ", waiting for the missing players to start the game...");
     }
+
+    /**
+     * This method asks the player to choose two leader cards and sets the right command parser
+     */
     @Override
-    public void askLeaderCardToKeep(ArrayList<LeaderCard> leaderCards)  throws IOException, InterruptedException {
-
-        int contOne =0;
-        int contSecond=0;
-        int cont=0;
-
+    public void askLeaderCardToKeep(ArrayList<LeaderCard> leaderCards){
         changeCommandParser(new InitLeaderCardParser());
         System.out.println("Please choose 2 from the following leader cards to keep in your game board [card1 card2]: ");
         showLeaderCards(leaderCards);
 
     }
 
-
+    /**
+     * This method shows the call for council message and tells the player whether or not he got the papal card
+     * @param nickname : the name of the player who activated the papal card
+     * @param papalCard : the value of the current papal card
+     */
     @Override
     public void showCallForCouncil(String nickname, int papalCard){
         if(papalCard == 0){
@@ -319,17 +400,26 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
         }
     }
 
+    /**
+     * This method shows that the game has started and sets the right command parser
+     */
     @Override
     public void showStartGame(GameTypeMessage msg) {
         System.out.println("The game has started!");
         this.commandParser = new StandardParser();
     }
 
+    /**
+     * This method shows the player to put the name he had in the previous game
+     */
     @Override
     public void showRestartMessage() {
         System.out.println("Enter your username of the previous game to resume the match...");
     }
 
+    /**
+     * This method shows an opponent's game board
+     */
     @Override
     public void showPlayerInfo(ShowAllOfPlayerMessage msg) {
         System.out.println("Player" + msg.getNickname() + "game board information : ");
@@ -364,6 +454,9 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
         showFaithIndicator(msg.getFaithIndicator());
     }
 
+    /**
+     * This method sets the right command parser
+     */
     @Override
     public void checkThreadRestart(){
         if (viewController.getGame().isInitResource()){
@@ -371,6 +464,9 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
         }
     }
 
+    /**
+     * This method shows the effect of the revealed action marker
+     */
     @Override
     public void showActionMarker(String actionType) {
         System.out.print("Lorenzo the Magnificent ");
@@ -404,6 +500,10 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
         }
     }
 
+    /**
+     * This method shows the player that he is the winner and sets the right command parser
+     * @param score : the player's score
+     */
     @Override
     public void youWin(int score) {
         System.out.println("YOU WIN !!!");
@@ -411,38 +511,45 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
         changeCommandParser(new StandardParser());
     }
 
+    /**
+     * This method shows the player that the Lorenzo the Magnificent is the winner and sets the right command parser
+     */
     @Override
     public void lorenzoWin() {
         System.out.println("YOU LOSE :(");
         changeCommandParser(new StandardParser());
     }
 
+    /**
+     * This method shows the player the winner and sets the right command parser
+     */
     @Override
     public void showWinner(String nickname) {
         System.out.println("The winner is : " + nickname);
         changeCommandParser(new StandardParser());
     }
 
+    /**
+     * This method shows the player the action of another player
+     */
     @Override
     public void showOpponentAction(Message msg) {
         System.out.println(msg.toString());
     }
 
+    /**
+     * This method shows the player that the server is crashed
+     */
     @Override
     public void sayDisconnect() {
         System.out.println(" Server is crashed, please try again after few minutes");
     }
 
+    /**
+     * This method asks the player to choose the initial resources and sets the right command parser
+     */
     @Override
     public void askInitResource() throws IOException, InterruptedException {
-        Resource msg=null;
-        Resource msg2=null;
-        String s=null;
-        int count=0;
-
-
-        ArrayList<Resource> resources=new ArrayList<>();
-        int cont=0;
         System.out.println("for resource [coin,rock,servant,shield]");
         if(viewController.getGame().getPosition()==1){
             System.out.println("hey my Lord you can't take any init resource");
@@ -458,52 +565,12 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
             System.out.println("hey " + viewController.getNickName() +" please say me two resource for be happy, after first press enter");
             changeCommandParser(new InitResourceParser(2));
         }
-
-        /*else if(viewController.getGame().getPosition()==2)
-        {
-            System.out.println(" hey " + viewController.getNickName() +" please say me your favourite resource ");
-            while (input.hasNextLine())
-            {
-                s=input.nextLine();
-                if ((Command.fromStringToResource(s) instanceof Resource))
-                {   msg = (Command.fromStringToResource(s));
-                    resources.add(msg);
-                    notifyObserver(new InitialResourcesMessage(resources));
-                    notifyObserver(new EndOfTurnMessage());
-                    changeCommandParser(new StandardParser());
-                    commandThread();
-                    return;
-                }
-                else
-                { System.out.println("Invalid resource ,**** try again"); }
-            }
-        }
-        else {
-            System.out.println("hey " + viewController.getNickName() +" please say me two resource for be happy, after first press enter");
-            while (input.hasNextLine())
-            {
-                s=input.nextLine();
-                if (Command.fromStringToResource(s) instanceof Resource)
-                {
-                    msg = (Command.fromStringToResource(s));
-                    resources.add(msg);
-                    cont++;
-                    if (cont==2)
-                    {
-                        notifyObserver(new InitialResourcesMessage(resources));
-                        notifyObserver(new EndOfTurnMessage());
-                        changeCommandParser(new StandardParser());
-                        commandThread();
-                        return;
-                    }
-                }
-                else
-                { System.out.println("Invalid resource, try again"); }
-            } }*/
     }
 
 
-
+    /**
+     * This method shows game board's production cards
+     */
     @Override
     public void showGameBoardProductionCards(ProductionCard[][] productionCards) {
         int spaces = 50;
@@ -587,6 +654,9 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
         }
     }
 
+    /**
+     * This method shows the market grid
+     */
     @Override
     public void showMarketGrid(Marble[][] grid) {
         int spaces = 10;
@@ -633,17 +703,26 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
         System.out.println();
     }
 
+    /**
+     * This method shows the extra marble
+     */
     @Override
     public void showMarketExtra(Marble extra) {
         System.out.println(extra.getColour());
     }
 
+    /**
+     * This method calls the method to show production decks
+     */
     @Override
     public void showProductionDecks(){
         ArrayList<ProductionCard> deckList = viewController.getGame().deckNotification();
         showDeckProductionCards(deckList);
     }
 
+    /**
+     * This method shows game board's faith path
+     */
     @Override
     public void showFaithIndicator(int pos) {
         int cornerOffset = 10;
@@ -706,7 +785,9 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
     }
 
 
-
+    /**
+     * This method shows the production card decks
+     */
     @Override
     public void showDeckProductionCards(ArrayList<ProductionCard> productionCards) {
         int spaces = 42;
@@ -796,6 +877,9 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
         }
     }
 
+    /**
+     * This method shows the number of the deck
+     */
     public void showNumDeck(int numDeck, int spaces){
         String temp;
         int chars;
@@ -805,6 +889,9 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
         printSpaces(spaces - chars);
     }
 
+    /**
+     * This method shows the level of the production card
+     */
     public void showLevelProductionCard(ProductionCard productionCard, int spaces){
         String temp;
         int chars;
@@ -821,6 +908,9 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
         }
     }
 
+    /**
+     * This method shows the color of the production card
+     */
     public void showColourProductionCard(ProductionCard productionCard, int spaces){
         String temp;
         int chars;
@@ -837,6 +927,9 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
         }
     }
 
+    /**
+     * This method shows the cost of the production card
+     */
     public void showCostProductionCard(ProductionCard productionCard, int spaces){
         String temp;
         int chars;
@@ -853,6 +946,9 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
         }
     }
 
+    /**
+     * This method shows the production input of the production card
+     */
     public void showInputProductionCard(ProductionCard productionCard, int spaces){
         String temp;
         int chars;
@@ -869,6 +965,9 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
         }
     }
 
+    /**
+     * This method shows the production output of the production card
+     */
     public void showOutputProductionCard(ProductionCard productionCard, int spaces){
         String temp;
         int chars;
@@ -885,6 +984,9 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
         }
     }
 
+    /**
+     * This method shows the faith points of the production card
+     */
     public void showFaithPointProductionCard(ProductionCard productionCard, int spaces){
         String temp;
         int chars;
@@ -901,6 +1003,9 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
         }
     }
 
+    /**
+     * This method shows the victory points of the production card
+     */
     public void showVictoryPointProductionCard(ProductionCard productionCard, int spaces){
         String temp;
         int chars;
@@ -917,6 +1022,9 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
         }
     }
 
+    /**
+     * This method shows the player's game board
+     */
     @Override
     public void showGameBoardOfPlayer() {
 
@@ -938,10 +1046,16 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
     }
 
 
+    /**
+     * This method calls the method to show the reserve
+     */
     public void showReserve(){
         showResourceBox(viewController.getGame().getReserve());
     }
 
+    /**
+     * This method calls the methods to show the market
+     */
     @Override
     public void showMarket() {
         System.out.println("Market grid:");
@@ -950,18 +1064,31 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
         showMarketExtra(viewController.getGame().getMarketExtra());
     }
 
+    /**
+     * This method asks the player to choose which resources to get from the white marbles and sets the right command parser
+     * @param n : the number of white marbles
+     * @param whiteMarbleResourceTypes : the types of resources with which the white marble can be exchanged
+     */
     @Override
     public void showWhiteMarbleResources(int n,ArrayList<Resource> whiteMarbleResourceTypes) {
         System.out.println("You can exchange white marbles with "+ whiteMarbleResourceTypes);
         changeCommandParser(new WhiteMarbleParser(n,whiteMarbleResourceTypes));
     }
 
+    /**
+     * This method asks the player to choose the resources to hold when his storage does not have
+     * enough space  and sets the right command parser
+     */
     @Override
     public void showSpaceError(NotEnoughSpaceErrorMessage msg) {
         System.out.println(msg.toString());
         changeCommandParser(new KeepResourcesParser(msg.getReources()));
     }
 
+    /**
+     * This method shows the map passed as a parameter
+     * @param resourceBox : the resource map to show
+     */
     public void showResourceBox(Map<Resource,Integer> resourceBox) {
 
         int n = 10;
@@ -987,11 +1114,17 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
 
     }
 
+    /**
+     * This method prints n spaces
+     */
     public void printSpaces(int n){
         for(int i=0;i<n;i++)
             System.out.print(" ");
     }
 
+    /**
+     * This method prints n dashes
+     */
     public void printDash(int n){
         for(int i=0;i<n;i++)
             System.out.print("-");
