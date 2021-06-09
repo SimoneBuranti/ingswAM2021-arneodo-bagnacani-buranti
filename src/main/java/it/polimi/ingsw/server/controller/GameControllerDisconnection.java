@@ -32,26 +32,43 @@ public class GameControllerDisconnection extends GameController {
     @Override
     public void handleMessage(ExitMessage msg, ClientController clientController) throws IOException, InterruptedException {
 
-        if (!(server.getClientController().size()==1))
-            if (clientController.turnCheck())
-                server.getGame().endOfTurn();
+       if(!server.getGame().isOver()) {
+           if (!(server.getClientController().size() == 1))
+               if (clientController.turnCheck())
+                   server.getGame().endOfTurn();
 
-        server.getGame().disconnectPlayerOption(clientController.getNickname());
-        server.addClientControllersDisconnected(clientController);
-        try {
-            clientController.getClientHandler().disconnect();
-            System.out.println("Ho disconnesso client ");
-        } catch (IOException | InterruptedException e) {
-            //messaggio di errore
-        }
-        if((server.getClientController().size())==0)
-        {
-            server.resetInfoPartial();
-        }
+           server.getGame().disconnectPlayerOption(clientController.getNickname());
+           server.addClientControllersDisconnected(clientController);
+           try {
+               clientController.getClientHandler().disconnect();
+               System.out.println("Ho disconnesso client ");
+           } catch (IOException | InterruptedException e) {
+               //messaggio di errore
+           }
+           if ((server.getClientController().size()) == 0) {
+               server.resetInfoPartial();
+           } else {
+
+               for (int i = 0; i < server.getClientController().size(); i++) {
+                   server.getClientController().get(i).getClientHandler().sendMessage(new DisconnectionOpponentMessage(clientController.getNickname()));
+               }
+           }
+       }
         else{
+           server.getGame().disconnectPlayerOption(clientController.getNickname());
+           server.addClientControllersDisconnected(clientController);
+           try {
+               clientController.getClientHandler().disconnect();
+               System.out.println("Ho disconnesso client");
+           } catch (IOException | InterruptedException e) {
+               //messaggio di errore
+           }
 
-            for (int i=0;i< server.getClientController().size(); i++) {
-                        server.getClientController().get(i).getClientHandler().sendMessage(new DisconnectionOpponentMessage(clientController.getNickname())); }
+           if (server.getClientController().size()==0)
+           {
+               server.resetInfo();
+           }
+
         }
     }
 

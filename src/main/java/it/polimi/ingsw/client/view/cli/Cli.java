@@ -297,7 +297,7 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
             if(viewController.isActionToken()) {
                 viewController.resetLastProduction();
             }else {
-                viewController.setActionToken(false);
+                viewController.setActionToken(true);
             }
         }else if (msg instanceof WrongColumnErrorMessage || msg instanceof BaseProductionErrorMessage)
             viewController.resetLastProduction();
