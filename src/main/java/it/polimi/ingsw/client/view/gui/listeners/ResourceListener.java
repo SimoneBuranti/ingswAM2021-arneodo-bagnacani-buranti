@@ -12,13 +12,30 @@ import java.awt.event.MouseListener;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * This class represents the listener of the initial resources that are chosen
+ */
 public class ResourceListener implements MouseListener {
+    /**
+     * This attribute represents the reference to the resource to listen
+     */
     private Resource resource ;
+    /**
+     * This attribute represents the reference to the gui
+     */
     private Gui gui;
+    /**
+     * This attribute contains the resources to send to the server
+     */
     private ArrayList<Resource> sendableArray = new ArrayList<>();
 
 
-
+    /**
+     * Constructor: build a CardListener with single selection
+     * @param resource                 The manager resource
+     * @param resourceManager          The resource switcher to be controlled
+     * @param gui                      The reference to the gui
+     */
     public ResourceListener(Resource resource , ResourceManager resourceManager, Gui gui) {
 
         this.resource=resource;
@@ -27,6 +44,10 @@ public class ResourceListener implements MouseListener {
     }
 
 
+    /**
+     * This method sends an initial resource and end of turn messages to the server when the initial resources
+     * have been chosen
+     */
     public void mouseClicked(MouseEvent e) {
         addToArrayList(resource);
 
@@ -47,7 +68,6 @@ public class ResourceListener implements MouseListener {
                     }
                 })).start();
 
-                System.out.println("hey lo chiamo da qua1"+Thread.currentThread().getName());
                 gui.switchToGameMode();
             }
         }
@@ -69,39 +89,28 @@ public class ResourceListener implements MouseListener {
                 }
             })).start();
 
-
-            System.out.println("hey lo chiamo da qua2"+Thread.currentThread().getName());
             gui.switchToGameMode();
             }
         }
 
+
+    /**
+     * This method adds the resource passed as a parameter to the sendableArray
+     */
     private void addToArrayList(Resource resource) {
         sendableArray.add(resource);
     }
 
 
-    /**
-     * Mouse on-card-press manager: same as on-card-click
-     * @param e The mouse event
-     */
-    public void mousePressed(MouseEvent e) {
-        mouseClicked(e);
-    }
 
-
+    public void mousePressed(MouseEvent e) {}
 
     @Override
-    public void mouseReleased(MouseEvent e) {
-
-    }
+    public void mouseReleased(MouseEvent e) {}
 
     @Override
-    public void mouseEntered(MouseEvent e) {
-
-    }
+    public void mouseEntered(MouseEvent e) {}
 
     @Override
-    public void mouseExited(MouseEvent e) {
-
-    }
+    public void mouseExited(MouseEvent e) {}
 }

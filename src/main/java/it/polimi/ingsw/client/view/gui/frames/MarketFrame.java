@@ -1,44 +1,105 @@
 package it.polimi.ingsw.client.view.gui.frames;
 
-import it.polimi.ingsw.client.view.ViewController;
 import it.polimi.ingsw.client.view.gui.Gui;
 import it.polimi.ingsw.client.view.gui.PBackground;
 import it.polimi.ingsw.client.view.gui.PanelContainer;
-import it.polimi.ingsw.messages.EndOfTurnMessage;
 import it.polimi.ingsw.messages.PushColumnMessage;
 import it.polimi.ingsw.messages.PushRowMessage;
-import it.polimi.ingsw.messages.RestartAnswerMessage;
 import it.polimi.ingsw.server.model.marbles.Marble;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 
+/**
+ * This class is used to create the frame of the market.
+ */
 public class MarketFrame extends JFrame{
+    /**
+     * This attribute indicates the width of the frame
+     */
     private static final int marketWidth = 390;
+    /**
+     * This attribute indicates the height of the frame
+     */
     private static final int marketHeight = 504;
+    /**
+     * This attribute indicates the width of the marble
+     */
     private static final int marbleWidth = 40;
+    /**
+     * This attribute indicates the height of the marble
+     */
     private static final int marbleHeight = 40;
+    /**
+     * This attribute indicates the position of the frame
+     */
     private final static int marketX = 20;
+    /**
+     * This attribute indicates the position of the frame
+     */
     private final static int marketY = 122;
 
+    /**
+     * This attribute represents the reference to the gui
+     */
     private Gui gui;
+    /**
+     * This attribute is the component container of the frame
+     */
     private PanelContainer container;
+    /**
+     * This attribute is a panel with black background
+     */
     private JPanel blackPanel;
 
+    /**
+     * This component contains the gird of the market
+     */
     private JPanel gridPanel;
+    /**
+     * This component contains the extra marble of the market
+     */
     private JPanel extraPanel;
 
+    /**
+     * This attribute represents the zero column button
+     */
     private PushColumnButton buttonC0;
+    /**
+     * This attribute represents the one column button
+     */
     private PushColumnButton buttonC1;
+    /**
+     * This attribute represents the two column button
+     */
     private PushColumnButton buttonC2;
+    /**
+     * This attribute represents the three column button
+     */
     private PushColumnButton buttonC3;
+    /**
+     * This attribute represents the zero row button
+     */
     private PushRowButton buttonR0;
+    /**
+     * This attribute represents the one row button
+     */
     private PushRowButton buttonR1;
+    /**
+     * This attribute represents the two row button
+     */
     private PushRowButton buttonR2;
 
+    /**
+     * This attribute is tre if the market is visible
+     */
     private boolean visible;
 
+    /**
+     * Constructor of the class. It creates the market frame.
+     * @param gui : the reference to the gui
+     */
     public MarketFrame(Gui gui){
         super();
         this.gui = gui;
@@ -52,21 +113,11 @@ public class MarketFrame extends JFrame{
 
     }
 
-    /*public MarketFrame(){// SOLO PER GRAFICA
-        super();
-        this.setLocation(marketX,marketY);
-        this.setAlwaysOnTop(true);
-        this.setDefaultCloseOperation(HIDE_ON_CLOSE);
-        visible = false;
-        this.setVisible(visible);
-        initMarket();
-
-    }*/
-
+    /**
+     * This method initialises the market background and the buttons.
+     */
     public void initMarket(){
-            //marketFrame = new JFrame("Market");
             this.setSize(marketWidth, marketHeight);
-            //marketFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
             this.setResizable(false);
             ImageIcon icon = new ImageIcon("src/main/resources/resources/punchboard/plancia portabiglie.png");
             Image image = icon.getImage();
@@ -86,16 +137,20 @@ public class MarketFrame extends JFrame{
 
             container.add(blackPanel);
 
-
-
             addButtons();
     }
 
+    /**
+     * This method changes the visibility of the frame
+     */
     public void changeVisibility(){
         this.visible = !visible;
         this.setVisible(visible);
     }
 
+    /**
+     * This method creates and adds to the frame the buttons
+     */
     public void addButtons(){
 
             container.setLayout(null);
@@ -143,6 +198,9 @@ public class MarketFrame extends JFrame{
 
     }
 
+    /**
+     * This method disables all buttons
+     */
     public void removeButton(){
         buttonC0.setEnabled(false);
         buttonC1.setEnabled(false);
@@ -153,6 +211,10 @@ public class MarketFrame extends JFrame{
         buttonR2.setEnabled(false);
 
     }
+
+    /**
+     * This method enables all buttons
+     */
     public void enableButton(){
         buttonC0.setEnabled(true);
         buttonC1.setEnabled(true);
@@ -164,6 +226,10 @@ public class MarketFrame extends JFrame{
 
     }
 
+    /**
+     * This method sends a push column message when a column button has been clicked
+     * @param column : the number of the column
+     */
     public void sendPushColumn(int column){
         (new Thread(() -> {
             try {
@@ -176,6 +242,10 @@ public class MarketFrame extends JFrame{
         gui.actionDoneMode();
     }
 
+    /**
+     * This method sends a push row message when a row button has been clicked
+     * @param row : the number of the row
+     */
     public void sendPushRow(int row){
 
         (new Thread(() -> {
@@ -189,8 +259,11 @@ public class MarketFrame extends JFrame{
     }
 
 
+    /**
+     * This method sets the marbles in the market grid
+     * @param grid : the marbles of the grid
+     */
     public void setMarbleGrid(Marble[][] grid){
-        //SwingUtilities.invokeLater(() -> {
             if(gridPanel != null)
                 clear(blackPanel);
             container.setLayout(null);
@@ -209,26 +282,30 @@ public class MarketFrame extends JFrame{
             }
             blackPanel.add(gridPanel);
             applyChangesTo(blackPanel);
-            //this.repaint();
-        //});
     }
 
+    /**
+     * This method sets the extra marble of the market
+     * @param extra : the extra marble
+     */
     public void setMarbleExtra(Marble extra){
-        //SwingUtilities.invokeLater(() -> {
         blackPanel.setLayout(null);
-        //container.setLayout(null);
             extraPanel = new JPanel();
             extraPanel.setOpaque(false);
             extraPanel.setSize(marbleWidth, marbleHeight);
             extraPanel.setLocation(200, 0);
 
             extraPanel.add(getMarble(extra.getColour()));
-        blackPanel.add(extraPanel);
+            blackPanel.add(extraPanel);
             applyChangesTo(blackPanel);
-        //});
 
     }
 
+    /**
+     * This method returns a label containing the marble with the color passed as a parameter
+     * @param color : the marble color
+     * @return : a label containing the marble
+     */
     public JLabel getMarble(String color){
         switch (color) {
             case "white":
@@ -279,56 +356,9 @@ public class MarketFrame extends JFrame{
         return null;
     }
 
-    public JLabel getMarbleExtra(String color){
-        switch (color) {
-            case "white":
-                ImageIcon whiteMarbleImage = new ImageIcon("src/main/resources/resources/marbles/palline-04.png");
-                Image image = whiteMarbleImage.getImage();
-                image = image.getScaledInstance(marbleWidth-10, marbleHeight-10, 0);
-                whiteMarbleImage.setImage(image);
-                JLabel whiteMarble=new JLabel(whiteMarbleImage);
-                return whiteMarble;
-            case "blue":
-                ImageIcon bluMarbleImage = new ImageIcon("src/main/resources/resources/marbles/palline-03.png");
-                image = bluMarbleImage.getImage();
-                image = image.getScaledInstance(marbleWidth-10, marbleHeight-10, 0);
-                bluMarbleImage.setImage(image);
-                JLabel bluMarble=new JLabel(bluMarbleImage);
-                return bluMarble;
-            case "grey":
-                ImageIcon greyMarbleImage = new ImageIcon("src/main/resources/resources/marbles/palline-05.png");
-                image = greyMarbleImage.getImage();
-                image = image.getScaledInstance(marbleWidth-10, marbleHeight-10, 0);
-                greyMarbleImage.setImage(image);
-                JLabel greyMarble=new JLabel(greyMarbleImage);
-                return greyMarble;
-            case "yellow":
-                ImageIcon yellowMarbleImage = new ImageIcon("src/main/resources/resources/marbles/palline-07.png");
-                image = yellowMarbleImage.getImage();
-                image = image.getScaledInstance(marbleWidth-10, marbleHeight-10, 0);
-                yellowMarbleImage.setImage(image);
-                JLabel yellowMarble=new JLabel(yellowMarbleImage);
-                return yellowMarble;
-            case "purple":
-                ImageIcon violetMarbleImage = new ImageIcon("src/main/resources/resources/marbles/palline-06.png");
-                image = violetMarbleImage.getImage();
-                image = image.getScaledInstance(marbleWidth-10, marbleHeight-10, 0);
-                violetMarbleImage.setImage(image);
-                JLabel violetMarble=new JLabel(violetMarbleImage);
-                return violetMarble;
-            case "red":
-                ImageIcon redMarbleImage = new ImageIcon("src/main/resources/resources/marbles/palline-02.png");
-                image = redMarbleImage.getImage();
-                image = image.getScaledInstance(marbleWidth-10, marbleHeight-10, 0);
-                redMarbleImage.setImage(image);
-                JLabel redMarble=new JLabel(redMarbleImage);
-                return redMarble;
-
-
-        }
-        return null;
-    }
-
+    /**
+     * This method removes all the marbles
+     */
     private void clear(JPanel panel){
         panel.remove(gridPanel);
         panel.remove(extraPanel);

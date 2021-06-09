@@ -12,12 +12,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The mouse event manager for the card switcher
+ * This class represents the listener of the initial leader cards that are chosen
  */
 public class CardListener implements MouseListener {
+    /**
+     * This attribute represents the reference to the card to listen
+     */
     private final LeaderCard card;
+    /**
+     * This attribute represents the reference to the gui
+     */
     private Gui gui;
-    private ArrayList<LeaderCard> sendableArray = new ArrayList<>();
+    /**
+     * This attribute contains the values to send to the server
+     */
     private static ArrayList<Integer> sendableArrayInt = new ArrayList<>();
 
 
@@ -34,8 +42,7 @@ public class CardListener implements MouseListener {
     }
 
     /**
-     * Mouse on-card-click manager: if multiple selection is enabled update the guiView, otherwise
-     * if single selection is enabled update the guiView, otherwise do nothing
+     * Mouse on-card-click manager: if multiple selection is enabled update the guiView, otherwise do nothing
      * @param e The mouse event
      */
     public void mouseClicked(MouseEvent e) {
@@ -53,10 +60,16 @@ public class CardListener implements MouseListener {
         }
     }
 
+    /**
+     * This method adds a leader card to the listener
+     */
     private void addPlayerCardToArrayList(LeaderCard card) {
         addPlayerCardToArrayListInt(card);
     }
 
+    /**
+     * This method adds the number corresponding to the leader card to be added
+     */
     private void addPlayerCardToArrayListInt(LeaderCard card) {
         for(int i=0; i<gui.getViewController().getGame().getGameBoardOfPlayer().getLeaderCards().size(); i++){
             if (gui.getViewController().getGame().getGameBoardOfPlayer().getLeaderCards().get(i).equals(card)){
@@ -78,31 +91,20 @@ public class CardListener implements MouseListener {
         }
     }
 
+    public void mousePressed(MouseEvent e) {}
 
-    /**
-     * Mouse on-card-press manager: same as on-card-click
-     * @param e The mouse event
-     */
-    public void mousePressed(MouseEvent e) {
-    }
-
-    /**
-     * Do nothing
-     * @param e The mouse event
-     */
     public void mouseReleased(MouseEvent e) {}
 
     @Override
-    public void mouseEntered(MouseEvent e) {
-
-    }
+    public void mouseEntered(MouseEvent e) {}
 
     @Override
-    public void mouseExited(MouseEvent e) {
-
-    }
+    public void mouseExited(MouseEvent e) {}
 
 
+    /**
+     * @return the array list sendableArrayInt
+     */
     public static ArrayList<Integer> getSendableArrayInt(){
         return sendableArrayInt;
     }
