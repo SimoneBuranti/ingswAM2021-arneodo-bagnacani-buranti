@@ -35,7 +35,7 @@ public class BuyActionCommand extends Command {
      * @throws SpentTokenException
      */
     public Message commandOn() throws SpentTokenException {
-        if(viewController.isActionToken()){
+        if(viewController.isActionToken() && !viewController.isProductionMode()){
             viewController.setActionToken(false);
             return new BuyProductionCardMessage(this.deckNumber,this.columnNumber);
         }

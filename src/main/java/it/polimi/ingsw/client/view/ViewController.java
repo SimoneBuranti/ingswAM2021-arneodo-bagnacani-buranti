@@ -116,6 +116,27 @@ public class ViewController implements MessageVisitor, ViewObserver {
     }
 
     /**
+     * @return true if at least one production has been activated, false otherwise
+     */
+    public boolean isProductionMode(){
+        return game.isProductionMode();
+    }
+
+    /**
+     * This method resets the value of all vector productionTokens booleans to true
+     */
+    public void resetProductionTokens() {
+        game.resetProductionTokens();
+    }
+
+    /**
+     * This method resets the value of the last production activated in the productionTokens vector
+     */
+    public void resetLastProduction() {
+        game.resetLastProduction();
+    }
+
+    /**
      * This method calls view method to show error message
      */
     @Override

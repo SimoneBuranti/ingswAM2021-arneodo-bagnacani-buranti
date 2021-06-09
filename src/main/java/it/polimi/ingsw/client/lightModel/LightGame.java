@@ -113,6 +113,11 @@ public class LightGame extends ViewObservable {
       */
     protected boolean[] productionTokens = {true,true,true,true,true,true};
 
+     /**
+      * This attribute contains the number of the last production activated
+      */
+    protected int lastProduction = -1;
+
     /**
      * this constructor instantiates all the game attributes
      */
@@ -192,6 +197,9 @@ public class LightGame extends ViewObservable {
       */
     public void setProductionToken(int n,boolean token){
         this.productionTokens[n] = token;
+        if(!token){
+            lastProduction = n;
+        }
     }
 
      /**
@@ -202,6 +210,23 @@ public class LightGame extends ViewObservable {
             setProductionToken(i,true);
         }
     }
+     /**
+      * @return true if at least one production has been activated, false otherwise
+      */
+     public boolean isProductionMode() {
+         for(int i = 0; i < 6 ; i++){
+             if(!productionTokens[i])
+                 return true;
+         }
+         return false;
+     }
+
+     /**
+      * This method resets the value of the last production activated in the productionTokens vector
+      */
+     public void resetLastProduction(){
+         productionTokens[lastProduction] = true;
+     }
 
      /**
       * This method returns the types of the resources with which to exchange the white marble
@@ -719,4 +744,5 @@ public class LightGame extends ViewObservable {
     public int getLorenzoPosition(){
         return 0;
     }
-}
+
+ }

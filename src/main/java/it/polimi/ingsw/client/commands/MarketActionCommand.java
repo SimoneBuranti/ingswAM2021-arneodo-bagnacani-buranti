@@ -54,7 +54,7 @@ public class MarketActionCommand extends Command {
      */
     public Message commandOn() throws SpentTokenException {
 
-        if(viewController.isActionToken()){
+        if(viewController.isActionToken() && !viewController.isProductionMode()){
             viewController.setActionToken(false);
 
             if (rc=='c'){

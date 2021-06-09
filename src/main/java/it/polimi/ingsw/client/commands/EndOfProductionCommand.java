@@ -36,6 +36,7 @@ public class EndOfProductionCommand extends Command {
         for (int i = 0; i<6;i++){
             if(!game.isProductionToken(i)) {
                 viewController.setActionToken(false);
+                viewController.resetProductionTokens();
                 return new EndOfProductionMessage();
             }
         }

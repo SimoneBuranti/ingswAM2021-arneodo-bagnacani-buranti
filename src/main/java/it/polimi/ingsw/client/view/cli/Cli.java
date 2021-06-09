@@ -8,9 +8,7 @@ import it.polimi.ingsw.client.ligtModelNotification.*;
 import it.polimi.ingsw.client.view.View;
 import it.polimi.ingsw.client.view.ViewController;
 import it.polimi.ingsw.client.view.ViewControllerObservable;
-import it.polimi.ingsw.messages.EndOfTurnMessage;
-import it.polimi.ingsw.messages.Message;
-import it.polimi.ingsw.messages.NotEnoughSpaceErrorMessage;
+import it.polimi.ingsw.messages.*;
 import it.polimi.ingsw.messages.observable.GameTypeMessage;
 import it.polimi.ingsw.messages.observable.ShowAllOfPlayerMessage;
 import it.polimi.ingsw.server.model.Resource;
@@ -295,6 +293,14 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
     @Override
     public void notifyError(Message msg) {
         System.out.println(msg.toString());
+        if(msg instanceof NotAvailableResourcesErrorMessage) {
+            if(viewController.isActionToken()) {
+                viewController.resetLastProduction();
+            }else {
+                viewController.setActionToken(false);
+            }
+        }else if (msg instanceof WrongColumnErrorMessage || msg instanceof BaseProductionErrorMessage)
+            viewController.resetLastProduction();
 
     }
 

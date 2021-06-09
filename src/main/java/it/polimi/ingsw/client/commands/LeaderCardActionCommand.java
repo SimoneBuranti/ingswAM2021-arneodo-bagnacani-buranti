@@ -53,15 +53,15 @@ public class LeaderCardActionCommand extends Command{
 
     /**
      * This commandOn method returns the correct ActivateLeaderCardMessage instance.
-     * @return
-     * @throws SpentTokenException
      */
-    public Message commandOn() throws SpentTokenException {
+    public Message commandOn() throws InvalidCommandException {
+        if(!viewController.isProductionMode()) {
+            if (ad == 'a')
+                return new ActivateLeaderCardMessage(n);
 
-        if (ad == 'a')
-            return new ActivateLeaderCardMessage(n);
-
-        return new DiscardLeaderCardMessage(n);
+            return new DiscardLeaderCardMessage(n);
+        }
+        throw new InvalidCommandException();
     }
 
 
