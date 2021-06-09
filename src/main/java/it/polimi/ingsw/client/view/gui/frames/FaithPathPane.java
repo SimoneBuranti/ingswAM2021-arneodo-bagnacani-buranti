@@ -65,7 +65,10 @@ public class FaithPathPane extends JPanel {
 
 
     public void updateIndicator(int indicator){
-        crossLabel.setBounds(trackX[indicator],trackY[indicator],crossDimension,crossDimension);
+        if(indicator < 25)
+            crossLabel.setBounds(trackX[indicator],trackY[indicator],crossDimension,crossDimension);
+        else
+            crossLabel.setBounds(trackX[24],trackY[24],crossDimension,crossDimension);
     }
 
     public void move(){

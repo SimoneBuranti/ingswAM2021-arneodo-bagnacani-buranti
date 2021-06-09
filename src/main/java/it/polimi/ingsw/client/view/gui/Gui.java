@@ -718,6 +718,7 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
     @Override
     public void youWin(int score) {
         SwingUtilities.invokeLater(() -> {
+            disableAllButtons();
             mainFrameOfGame.showPopUp(new MyVictoryMessage(score));
             applyChangesTo(mainFrameOfGame);
 
@@ -731,6 +732,7 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
     @Override
     public void lorenzoWin() {
         SwingUtilities.invokeLater(() -> {
+            disableAllButtons();
             mainFrameOfGame.showPopUp(new MagnificentWinMessage());
             applyChangesTo(mainFrameOfGame);
 
@@ -744,6 +746,7 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
     @Override
     public void showWinner(String nickname) {
         SwingUtilities.invokeLater(() -> {
+            disableAllButtons();
             mainFrameOfGame.showPopUp(new EndGamePlayerWinnerMessage(nickname));
             applyChangesTo(mainFrameOfGame);
 
@@ -1092,7 +1095,7 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
     }
 
     /**
-     * This method disables all buttons
+     * This method disables all action and leader buttons
      */
     public void disableAllButtons(){
         mainFrameOfGame.disableMarketButtons();

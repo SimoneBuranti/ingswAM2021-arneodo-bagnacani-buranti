@@ -47,7 +47,10 @@ public class LorenzoGameboardPanel extends GameboardPanel{
     }
 
     public void updateLorenzoIndicator(int indicator){
-        blackCrossLabel.setBounds(trackX[indicator],trackY[indicator],crossDimension,crossDimension);
+        if(indicator < 25)
+            blackCrossLabel.setBounds(trackX[indicator],trackY[indicator],crossDimension,crossDimension);
+        else
+            blackCrossLabel.setBounds(trackX[24],trackY[24],crossDimension,crossDimension);
     }
 
 
