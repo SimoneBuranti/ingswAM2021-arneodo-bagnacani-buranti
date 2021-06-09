@@ -8,17 +8,43 @@ import java.awt.*;
  * A cards switcher with an action listener that enable multiple or single selection
  */
 public class CardManager {
+
+    /**
+     * Gui reference.
+     */
     private Gui gui;
+
+    /**
+     * Panel container attribute.
+     */
     private  PanelContainer container;
 
+    /**
+     * Card container attribute.
+     */
     private PanelContainer cardDetailsContainer;
+
+    /**
+     * Card container attribute.
+     */
     private PanelContainer cardContainer;
+
+    /**
+     * Name label attribute.
+     */
     private Label nameLabel;
+
+    /**
+     * User interface label.
+     */
     private Label descriptionLabel;
-    private PanelContainer labelContainer;
 
 
-
+    /**
+     * Card manager constructor.
+     * @param container
+     * @param gui
+     */
     public CardManager(PanelContainer container, Gui gui){
         this.container=container;
         this.gui=gui;
@@ -57,6 +83,10 @@ public class CardManager {
         container.add(label);
     }
 
+    /**
+     * This method shows the four initial leader cards so that the player can pick two of them.
+     * @param selectable
+     */
     public void showWhatToChoose(boolean selectable) {
 
         container.add(cardContainer);

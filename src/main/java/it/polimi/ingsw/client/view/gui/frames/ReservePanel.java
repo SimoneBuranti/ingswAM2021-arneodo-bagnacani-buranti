@@ -10,18 +10,31 @@ import java.util.Map;
 
 public class ReservePanel extends JPanel {
 
+    /**
+     * Reserve panel graphic parameters.
+     */
     private static final int reserveWidth = 400;
     private static final int reserveHeight = 100;
     private static final int reserveX = 0;
     private static final int reserveY = 0;
     private static final int reserveDimension = 40;
 
+    /**
+     * Reserve image attribute.
+     */
     private Image reserveImage;
+
+    /**
+     * Resource type labels.
+     */
     private ResourceLabel coinLabel;
     private ResourceLabel rockLabel;
     private ResourceLabel shieldLabel;
     private ResourceLabel servantLabel;
 
+    /**
+     * Reserve panel constructor.
+     */
     public ReservePanel() {
         super();
 
@@ -52,6 +65,10 @@ public class ReservePanel extends JPanel {
         this.setBounds(reserveX,reserveY,reserveWidth,reserveHeight);
     }
 
+    /**
+     * For each resource type a new value is set.
+     * @param reserve
+     */
     public void updateReserve(Map<Resource,Integer> reserve){
         coinLabel.setValue(reserve.get(Resource.COIN));
         rockLabel.setValue(reserve.get(Resource.ROCK));
@@ -60,6 +77,10 @@ public class ReservePanel extends JPanel {
         this.repaint();
     }
 
+    /**
+     * Overriding method to display a background image.
+     * @param g
+     */
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);

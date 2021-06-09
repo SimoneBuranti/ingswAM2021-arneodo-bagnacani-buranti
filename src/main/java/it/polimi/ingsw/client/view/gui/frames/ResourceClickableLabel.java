@@ -9,8 +9,16 @@ import java.awt.event.MouseListener;
 
 public class ResourceClickableLabel extends ResourceLabel implements MouseListener {
 
+    /**
+     * Graphic parameters.
+     */
     private static final int resourceDimension = 27;
 
+    /**
+     * ResourceClickableLabel constructor. This label changes its resource type when pressed.
+     * @param x
+     * @param y
+     */
     public ResourceClickableLabel(int x,int y){
         super(x,y,resourceDimension,Resource.COIN);
         this.setSize(resourceDimension,resourceDimension);
@@ -19,6 +27,10 @@ public class ResourceClickableLabel extends ResourceLabel implements MouseListen
         this.addMouseListener(this);
     }
 
+    /**
+     * Implementation of mouse listener interface methods.
+     * @param e
+     */
     @Override
     public void mouseClicked(MouseEvent e) {
         switch(this.resource) {

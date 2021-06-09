@@ -8,10 +8,23 @@ import java.awt.*;
 
 public class ResourceLabel extends JLabel{
 
+    /**
+     * Resource type of the label.
+     */
     protected Resource resource;
 
+    /**
+     * Amount of the displayed resource.
+     */
     private int resourceDimension;
 
+    /**
+     * Resource label constructor.
+     * @param x
+     * @param y
+     * @param dimension
+     * @param resource
+     */
     public ResourceLabel(int x,int y,int dimension,Resource resource){
         this.resourceDimension = dimension;
         this.resource = resource;
@@ -20,10 +33,18 @@ public class ResourceLabel extends JLabel{
         this.setIcon(new ImageIcon((Paths.getImageFromResource(this.resource)).getScaledInstance(resourceDimension,resourceDimension,0)));
     }
 
+    /**
+     * Resource type getter.
+     * @return
+     */
     public Resource getResource() {
         return resource;
     }
 
+    /**
+     * Resource amount setter.
+     * @param value
+     */
     public void setValue(Integer value) {
         String val = "" + value.intValue();
 

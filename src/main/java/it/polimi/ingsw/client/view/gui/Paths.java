@@ -4,10 +4,18 @@ import it.polimi.ingsw.server.model.Resource;
 
 import java.awt.*;
 
+
+/**
+ * This abstract class contains several useful method for the graphical part of the game.
+ */
 public abstract class Paths {
 
 
-
+    /**
+     * Given the production card key this method returns the corresponding image.
+     * @param key
+     * @return
+     */
     public static Image getProdImageFromKey(int key){
 
         String srcPath = "src/main/resources/resources/front/";
@@ -113,6 +121,11 @@ public abstract class Paths {
         return null;
     }
 
+    /**
+     * This method returns the correct papal card back image given its index.
+     * @param currCall
+     * @return
+     */
     public static Image getPapalCardBackImageFromCurrCall(int currCall){
 
         String srcPath = "src/main/resources/resources/punchboard/";
@@ -128,6 +141,11 @@ public abstract class Paths {
         }
     }
 
+    /**
+     * This method returns the correct papal card front image given its index.
+     * @param currCall
+     * @return
+     */
     public static Image getPapalCardFrontImageFromCurrCall(int currCall){
 
         String srcPath = "src/main/resources/resources/punchboard/";
@@ -143,6 +161,10 @@ public abstract class Paths {
         }
     }
 
+    /**
+     * This method returns the correct leader card image given its key.
+     * @param key
+     */
     public static Image getLeaderImageFromKey(int key){
 
         String srcPath = "src/main/resources/resources/front/";
@@ -191,14 +213,21 @@ public abstract class Paths {
     }
 
 
-
-
-
+    /**
+     * General method: it returns the image of a general path.
+     * @param path
+     * @return
+     */
     public static Image getImageFromPath(String path){
         return Toolkit.getDefaultToolkit().createImage(path);
 
     }
 
+    /**
+     * Given the resource type this method returns the corresponding image.
+     * @param selected
+     * @return
+     */
     public static Image getImageFromResource(Resource selected) {
 
         switch(selected) {
@@ -219,6 +248,11 @@ public abstract class Paths {
     }
 
 
+    /**
+     * Given the action marker type this method returns the corresponding image.
+     * @param actionMarker
+     * @return
+     */
     public static Image getImageFromActionMarker(String actionMarker) {
         switch(actionMarker) {
             case "ActionMarkerProductionYellow" : {

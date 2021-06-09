@@ -5,17 +5,34 @@ import it.polimi.ingsw.client.view.gui.Paths;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * ServerMessagePanel main aim is to show every kind of server textual message in order to give information to the player.
+ */
 public class ServerMessagePanel extends JPanel {
 
+    /**
+     * Graphic parameters.
+     */
     private final static int n = 8;
     private final static int messageWidth = 380;
     private final static int messageHeight = 275;
 
-
+    /**
+     * ServerMessagePanel background image.
+     */
     private Image backgroundImage;
+    /**
+     * Text label array.
+     */
     private JLabel[] textLabels;
+    /**
+     * Text label container.
+     */
     private JPanel lineBox;
 
+    /**
+     * Class constructor.
+     */
     public ServerMessagePanel(){
         super();
         this.lineBox = new JPanel();
@@ -26,7 +43,7 @@ public class ServerMessagePanel extends JPanel {
         this.lineBox.setBackground(new Color(232,228,212));
 
         this.backgroundImage = (Paths.getImageFromPath("src/main/resources/resources/board/pergamena.png")).getScaledInstance(messageWidth,messageHeight,0);
-        //this.setBounds(800,70,messageWidth,messageHeight);
+
         this.setLayout(null);
 
         this.textLabels = new JLabel[n];
@@ -40,6 +57,10 @@ public class ServerMessagePanel extends JPanel {
         }
     }
 
+    /**
+     * Given a message as a parameter this method shows the its text.
+     * @param message
+     */
     public void display(String message){
         int i,cont;
         String line ="";
@@ -61,12 +82,19 @@ public class ServerMessagePanel extends JPanel {
 
     }
 
+    /**
+     * This method clean up each text label. Usually called before a new message or after the endTurn message.
+     */
     public void refreshMessagePanel(){
         for(int i = 0;i<n ;i++){
             this.textLabels[i].setText("");
         }
     }
 
+    /**
+     * Override of the paintComponent method to paint a background image.
+     * @param g
+     */
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);

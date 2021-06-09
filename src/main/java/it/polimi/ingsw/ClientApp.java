@@ -24,7 +24,7 @@ public class ClientApp {
         portNumber = -1;
 
 
-        if (false) {
+        if (true) {
 
             do {
                 Scanner in = new Scanner(System.in);
@@ -32,7 +32,7 @@ public class ClientApp {
             } while (!IPInitialFrame.correctHostName(hostName));
 
             View cli = new Cli();
-            SocketClient socketClient = new SocketClient(hostName, portNumber, cli );
+            SocketClient socketClient = new SocketClient(hostName, 12345, cli );
             cli.startView();
             new Thread() {
                 public void run() {

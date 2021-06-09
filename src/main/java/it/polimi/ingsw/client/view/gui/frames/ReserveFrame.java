@@ -9,16 +9,32 @@ import java.util.Map;
 
 public class ReserveFrame extends JFrame {
 
+    /**
+     * Reserve graphic parameters.
+     */
     private final static int reserveX = 10;
     private final static int reserveY = 20;
     private final static int reserveWidth = 400;
     private final static int reserveHeight = 100;
 
+    /**
+     * Reserve panel reference.
+     */
     private ReservePanel reservePanel;
+
+    /**
+     * Frame visibility attribute.
+     */
     private boolean visible;
+    /**
+     * Reserve resources.
+     */
     private Map<Resource,Integer> resources;
 
 
+    /**
+     * Reserve frame constructor.
+     */
     public ReserveFrame() {
         super();
         this.setSize(reserveWidth,reserveHeight);
@@ -42,6 +58,9 @@ public class ReserveFrame extends JFrame {
         this.setVisible(visible);
     }
 
+    /**
+     * Change visibility to the frame.
+     */
     public void changeVisibility(){
         this.visible = !visible;
         this.setVisible(visible);
@@ -49,6 +68,10 @@ public class ReserveFrame extends JFrame {
         this.paintComponents(this.getGraphics());
     };
 
+    /**
+     * UpdateReserve method displays new reserve resources.
+     * @param reserve
+     */
     public void updateReserve(Map<Resource,Integer> reserve){
         reservePanel.updateReserve(reserve);
     }

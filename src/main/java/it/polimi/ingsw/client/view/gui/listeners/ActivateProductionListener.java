@@ -12,12 +12,28 @@ import java.io.IOException;
 
 public class ActivateProductionListener implements ActionListener {
 
+    /**
+     * Player's gui reference.
+     */
     private Gui gui;
+
+    /**
+     * Button to which the ActionListener is added.
+     */
     private ProductionButton button;
+
+    /**
+     * Production parameter.
+     */
     private int column;
 
 
-
+    /**
+     * Listener constructor.
+     * @param gui
+     * @param button
+     * @param column
+     */
     public ActivateProductionListener(Gui gui, ProductionButton button, int column) {
         this.gui = gui;
         this.button = button;
@@ -27,6 +43,10 @@ public class ActivateProductionListener implements ActionListener {
     }
 
 
+    /**
+     * When the button is pressed, a new ProductionOnMessage instance is notified and the production button is disabled.
+     * @param e
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
 

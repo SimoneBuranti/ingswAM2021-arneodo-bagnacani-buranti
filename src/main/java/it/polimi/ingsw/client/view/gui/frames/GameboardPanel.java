@@ -24,6 +24,9 @@ import java.util.Map;
 
 public class GameboardPanel extends JPanel implements ActionListener, MouseListener {
 
+    /**
+     * Graphic parameters.
+     */
     protected static final int gameboardWidth = 800;
     protected static final int gameboardHeight = 572;
     protected static final int faithPathWidth = 800;
@@ -36,9 +39,14 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
     protected static final int[] psx = {306,460,618};
     protected final static int psy =226;
 
+    /**
+     * Gui reference.
+     */
     protected Gui gui;
 
-
+    /**
+     * Background image of gameboard.
+     */
     protected Image backgroundImage;
 
     protected int chosenDeckNumber;

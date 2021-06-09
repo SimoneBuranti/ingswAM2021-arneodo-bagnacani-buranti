@@ -6,8 +6,14 @@ import it.polimi.ingsw.server.model.actionMarkers.ActionMarker;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Action marker panel class.
+ */
 public class ActionMarkerPanel extends JPanel {
 
+    /**
+     * Graphic parameters.
+     */
     private final static int markerDimension = 90;
     private final static int panelWidth = 305;
     private final static int panelHeight = 150;
@@ -19,14 +25,31 @@ public class ActionMarkerPanel extends JPanel {
     private final static int pickedMarkerLabelY = 45;
 
 
-
-
+    /**
+     * Marker deck label.
+     */
     private JLabel markerDeckLabel;
+
+    /**
+     * Picked marker label.
+     */
     private JLabel pickedMarkerLabel;
+    /**
+     * Picked marker icon.
+     */
     private ImageIcon pickedIcon;
+    /**
+     * Back image icon.
+     */
     private ImageIcon backIcon;
+    /**
+     * Title Label.
+     */
     private JLabel titleLabel;
 
+    /**
+     * Action marker constructor.
+     */
     public ActionMarkerPanel(){
         super();
 
@@ -38,7 +61,7 @@ public class ActionMarkerPanel extends JPanel {
 
         updatePickedMarkerImage("ActionMarkerProductionYellow");
 
-        //removeActionMarketDeck();
+
 
         this.setLayout(null);
         this.setBackground(new Color(232,228,212));
@@ -46,6 +69,10 @@ public class ActionMarkerPanel extends JPanel {
         this.setBorder(BorderFactory.createBevelBorder(0));
     }
 
+
+    /**
+     * Title label initialising method.
+     */
     private void initTitleLabel() {
         this.titleLabel = new JLabel();
         titleLabel.setBounds(0,0,panelWidth,30);
@@ -54,7 +81,9 @@ public class ActionMarkerPanel extends JPanel {
         this.add(titleLabel);
     }
 
-
+    /**
+     * Back initialising method.
+     */
     public void initBackIcon(){
 
         this.backIcon = new ImageIcon();
@@ -63,11 +92,18 @@ public class ActionMarkerPanel extends JPanel {
     }
 
 
+    /**
+     * Picked action marker image initialising.
+     */
     public void initPickedIcon(){
         this.pickedIcon = new ImageIcon();
 
     }
 
+    /**
+     * This method update the picked marker image.
+     * @param actionMarker
+     */
     public void updatePickedMarkerImage(String actionMarker){
         this.pickedIcon.setImage((Paths.getImageFromActionMarker(actionMarker).getScaledInstance(markerDimension,markerDimension,0)));
 
@@ -77,6 +113,9 @@ public class ActionMarkerPanel extends JPanel {
         this.backIcon.setImage((Paths.getImageFromPath("src/main/resources/resources/punchboard/EmptyMarker.png").getScaledInstance(markerDimension,markerDimension,0)));
     }
 
+    /**
+     * Marker deck label initialising.
+     */
     public void initMarkerDeckLabel(){
 
         this.markerDeckLabel = new JLabel();
@@ -88,7 +127,9 @@ public class ActionMarkerPanel extends JPanel {
 
     }
 
-
+    /**
+     * Picked action marker label initialising
+     */
     public void initPickedMarkerLabel(){
 
         this.pickedMarkerLabel = new JLabel();

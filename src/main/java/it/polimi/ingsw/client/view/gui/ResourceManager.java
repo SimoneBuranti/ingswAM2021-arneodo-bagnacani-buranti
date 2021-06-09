@@ -6,17 +6,28 @@ import it.polimi.ingsw.server.model.Resource;
 import java.awt.*;
 
 public class ResourceManager {
+
+    /**
+     * Gui reference.
+     */
     private Gui gui;
+
+    /**
+     * Panel container attribute.
+     */
     private  PanelContainer container;
 
-    private PanelContainer cardDetailsContainer;
+    /**
+     * Resource container attribute.
+     */
     private PanelContainer resourceContainer;
-    private Label nameLabel;
-    private Label descriptionLabel;
-    private PanelContainer labelContainer;
 
 
-
+    /**
+     * Resurce manager constructor.
+     * @param container
+     * @param gui
+     */
     public ResourceManager(PanelContainer container, Gui gui){
         this.container=container;
         this.gui=gui;
@@ -39,6 +50,11 @@ public class ResourceManager {
         container.add(label);
     }
 
+
+    /**
+     * This method shows the resource types at the beginning in order to let the player choose them.
+     * @param selectable
+     */
     public void showWhatToChoose(boolean selectable) {
 
         container.add(resourceContainer);

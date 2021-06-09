@@ -12,11 +12,28 @@ import java.io.IOException;
 
 public class PutCardButtonListener implements ActionListener {
 
+    /**
+     * Gui reference.
+     */
     private Gui gui;
+
+    /**
+     * Deck key parameter.
+     */
     private int deckKey;
+
+    /**
+     * Column parameter.
+     */
     private int column;
 
 
+    /**
+     * PutCardButtonListener constructor.
+     * @param gui
+     * @param deckKey
+     * @param column
+     */
     public PutCardButtonListener(Gui gui, int deckKey,int column) {
         this.gui = gui;
         this.deckKey = deckKey;
@@ -24,6 +41,10 @@ public class PutCardButtonListener implements ActionListener {
     }
 
 
+    /**
+     * When the button is pressed, the actionDoneMode is set and a BuyProductionCardMessage instance is sent.
+     * @param e
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         (new Thread(() -> {

@@ -37,32 +37,6 @@ public class MainFrameSinglePlayer extends MainFrame{
 
     }
 
-    /*public MainFrameSinglePlayer(Gui gui,String title){
-        super(title,gui);
-        this.gui=gui;
-
-        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        this.setLocation(475,208);
-        this.setSize(820,420);
-
-        this.setResizable(true);
-        ImageIcon icon = new ImageIcon("src/main/resources/resources/title.jpg");
-        Image image=icon.getImage();
-        JPanel background = new PBackground(image);
-        this.repaint();
-        background.setLayout(null);
-        this.add(background);
-        //mainFrame.add(errorText);
-
-        // Prepare the body container
-        container = new PanelContainer();
-        container.setBounds(50,35, 700, 400);
-        background.add(container);
-
-        this.setVisible(true);
-
-    }*/
-
 
     public void initNavigationBar() {
         navigationBar = new JPanel();
@@ -80,11 +54,6 @@ public class MainFrameSinglePlayer extends MainFrame{
         this.navigationBar.add(reserveButton);
 
 
-        //---------------
-        /*JPanel random = new JPanel();
-        random.setBackground(Color.RED);
-        random.setPreferredSize(new Dimension(buttonHeight,buttonHeight));
-        random.setBorder(BorderFactory.createBevelBorder(0));*/
     }
 
     public void updateStorage(Map<Resource, Integer> newStorage) {
@@ -93,20 +62,14 @@ public class MainFrameSinglePlayer extends MainFrame{
     }
 
     public void pregameMode(){
-        //this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        //this.setLocation(475,208);
-        //this.setSize(820,420);
 
-        //this.setResizable(true);
         ImageIcon icon = new ImageIcon("src/main/resources/resources/title.jpg");
         Image image=icon.getImage();
         background = new PBackground(image);
         this.repaint();
         background.setLayout(null);
         this.add(background);
-        //mainFrame.add(errorText);
 
-        // Prepare the body container
         container = new PanelContainer();
         container.setBounds(230,170, 700, 400);
         background.add(container);
@@ -136,8 +99,7 @@ public class MainFrameSinglePlayer extends MainFrame{
         mainPanel.add(serverMessagePanel);
         leaderCardsPanel = new LeaderCardsPanel(gui);
         leaderCardsPanel.setBounds(805, 280, leaderWidth, leaderHeight);
-        //leaderCardsPanel.setBackground(Color.BLUE);
-        //leaderCardsPanel.setOpaque(true);
+
         mainPanel.add(leaderCardsPanel);
 
         actionMarkerPanel = new ActionMarkerPanel();

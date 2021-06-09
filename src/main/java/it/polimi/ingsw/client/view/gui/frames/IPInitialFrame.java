@@ -11,18 +11,50 @@ import java.awt.*;
 
 public class IPInitialFrame extends JFrame {
 
+    /**
+     * Graphic parameters.
+     */
     private final static int initFrameWidth = 600;
     private final static int initFrameHeight = 450;
 
+    /**
+     * Gui reference.
+     */
     private Gui gui;
 
+    /**
+     * Host name textField
+     */
     private JTextField textField;
+
+    /**
+     * Background image attribute.
+     */
     private Image background;
+
+    /**
+     * Backgournd panel.
+     */
     private PBackground uniquePanel;
+
+    /**
+     * Text label.
+     */
     private JLabel textLabel;
+    /**
+     * Submit button.
+     */
     private JButton submitButton;
+
+    /**
+     * Port number textField
+     */
     private JTextField portNumberField;
 
+
+    /**
+     * Class constructor.
+     */
     public IPInitialFrame(){
         super();
 
@@ -95,6 +127,11 @@ public class IPInitialFrame extends JFrame {
         this.paintComponents(this.getGraphics());
     }
 
+    /**
+     * This method checks the given host name string and returns whether it is correct or not.
+     * @param hostName
+     * @return
+     */
     public static boolean correctHostName(String hostName){
         String cha;
         int figure;
@@ -118,6 +155,9 @@ public class IPInitialFrame extends JFrame {
     }
 
 
+    /**
+     * This method checks whether the given port number string is correct or not.
+     */
     public static boolean correctPortNumber(String portNumber){
         String cha;
         int pn,i;

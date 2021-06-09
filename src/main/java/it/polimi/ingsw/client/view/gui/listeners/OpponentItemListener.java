@@ -8,15 +8,31 @@ import java.awt.event.ActionListener;
 
 public class OpponentItemListener implements ActionListener {
 
+    /**
+     * View controller reference.
+     */
     private ViewController viewController;
 
+    /**
+     * Action listener parameter. It contains the player number so that a correct message is sent.
+     */
     private int playerNumber;
 
+    /**
+     * Class constructor.
+     * @param viewController
+     * @param playerNumber
+     */
     public OpponentItemListener(ViewController viewController, int playerNumber) {
         this.viewController = viewController;
         this.playerNumber = playerNumber;
     }
 
+    /**
+     * When the button is pressed a new thread calls the view controller sendMessage method to send the corresponding
+     * message request to the server.
+     * @param e
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         (new Thread( () -> {

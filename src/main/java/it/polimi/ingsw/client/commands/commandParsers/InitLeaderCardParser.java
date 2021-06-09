@@ -51,15 +51,32 @@ public class InitLeaderCardParser implements CommandParser{
                     } else {
                         if (c != chosenLeaderCards[0])
                             chosenLeaderCards[1] = c;
-                        /*else {
+                        else {
                             System.out.println("You have chosen the same card twice, please type another number");
-                        }*/
+                        }
                     }
                 }
                 w = "";
             }
         }
-        //System.out.println("Chosen dopo il for: "+chosenLeaderCards[0]+chosenLeaderCards[1]);
+
+        if (chosenLeaderCards[0] == 0){
+            System.out.println("You have to insert a valid leader card number:");
+            w = "";
+            c = 0 ;
+            while(c<1 || c>4){
+                w = in.nextLine();
+                if (w.equals("exit"))
+                    return new ExitCommand();
+                c = Command.fromStringToInt(w);
+                if (c<1 || c>4){
+                    System.out.println("Please type a number between 1 and 4...");
+                } else {
+                    chosenLeaderCards[0] = c;
+                }
+            }
+        }
+
 
         if (chosenLeaderCards[1] == 0){
             System.out.println("You have to insert another leader card number to continue:");
@@ -81,7 +98,6 @@ public class InitLeaderCardParser implements CommandParser{
             }
         }
 
-        //System.out.println("mo ritorno il command");
         return new KeepLeaderCardsCommand(chosenLeaderCards,viewController);
     }
 }

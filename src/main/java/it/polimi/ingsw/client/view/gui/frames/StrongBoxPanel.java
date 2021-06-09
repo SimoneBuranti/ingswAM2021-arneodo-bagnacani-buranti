@@ -8,18 +8,26 @@ import java.util.Map;
 
 public class StrongBoxPanel extends JPanel {
 
+    /**
+     * Graphic parameters.
+     */
     private static final int strongBoxWidth = 130;
     private static final int strongBoxHeight = 108;
     private static final int strongBoxX = 25;
     private static final int strongBoxY = 422;
     private static final int resourceDimension = 35;
 
-
+    /**
+     * Resource type labels.
+     */
     private ResourceLabel coinLabel;
     private ResourceLabel rockLabel;
     private ResourceLabel shieldLabel;
     private ResourceLabel servantLabel;
 
+    /**
+     * Strongbox panel constructor.
+     */
     public StrongBoxPanel() {
 
         this.setLayout(new GridLayout(2,2,2,2));
@@ -42,6 +50,10 @@ public class StrongBoxPanel extends JPanel {
         this.setBounds(strongBoxX,strongBoxY,strongBoxWidth,strongBoxHeight);
     }
 
+    /**
+     * Updates strongbox amount of resources.
+     * @param strongBox
+     */
     public void updateStrongBox(Map<Resource,Integer> strongBox){
         coinLabel.setValue(strongBox.get(Resource.COIN));
         rockLabel.setValue(strongBox.get(Resource.ROCK));

@@ -82,7 +82,7 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
     /**
      * This attribute contains the frames of opponent players
      */
-    protected PlayerInformatioFrames[] playerInformatioFrames;
+    protected PlayerInformationFrames[] playerInformationFrames;
 
     /**
      * This attribute is a button with "1" text
@@ -498,9 +498,9 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
         SwingUtilities.invokeLater(() -> {
             mainFrameOfGame.setPlayers(nickName);
             applyChangesTo(mainFrameOfGame);
-            this.playerInformatioFrames = new PlayerInformatioFrames[nickName.size()];
+            this.playerInformationFrames = new PlayerInformationFrames[nickName.size()];
             for ( int i=0;i<nickName.size();i++){
-                playerInformatioFrames[i] = new PlayerInformatioFrames(nickName.get(i));
+                playerInformationFrames[i] = new PlayerInformationFrames(nickName.get(i));
             }
         });
 
@@ -1111,7 +1111,7 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
     public void showPlayerInfo(ShowAllOfPlayerMessage msg){
         SwingUtilities.invokeLater(() -> {
 
-            for(PlayerInformatioFrames frame : playerInformatioFrames){
+            for(PlayerInformationFrames frame : playerInformationFrames){
                 if(frame.getNickName().equals(msg.getNickname())){
                     frame.showOpponent(msg);
                     frame.paintComponents(frame.getGraphics());

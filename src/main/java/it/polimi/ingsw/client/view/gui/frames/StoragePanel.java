@@ -10,7 +10,9 @@ import java.util.Map;
 
 public class StoragePanel extends JPanel {
 
-
+    /**
+     * Graphic parameters.
+     */
     private static final int storageWidth = 146;
     private static final int storageHeight = 155;
     private static final int storageX = 24;
@@ -23,10 +25,19 @@ public class StoragePanel extends JPanel {
     private static final int tripleY = 343-storageY;
     private static final int resourceDimension = 40;
 
+    /**
+     * toPrintDownUp attribute contains player's resources to be printed from the bigger to the smaller storage space.
+     */
     private ArrayList<Resource> toPrintDownUp;
 
+    /**
+     * Resource labels.
+     */
     private ArrayList<ResourceLabel> printed;
 
+    /**
+     * Storage panel constructor.
+     */
     public StoragePanel() {
         super();
         this.setLayout(null);
@@ -35,6 +46,10 @@ public class StoragePanel extends JPanel {
         setOpaque(false);
     }
 
+    /**
+     * Updates storage resources.
+     * @param newStorage
+     */
     public void updateStorage(Map<Resource,Integer> newStorage){
 
         refreshPrinted();
@@ -62,11 +77,18 @@ public class StoragePanel extends JPanel {
         this.setVisible(true);
     }
 
+    /**
+     * Remove every resource label from the gameboard panel.
+     */
     private void refreshPrinted() {
         for(ResourceLabel label : printed)
             this.remove(label);
     }
 
+    /**
+     * This method initialises toPrintDownUp attribute to accept a new resource set to display.
+     * @param newStorage
+     */
     private void createToPrintDownUp(Map<Resource,Integer> newStorage){
 
         toPrintDownUp = new ArrayList<>();

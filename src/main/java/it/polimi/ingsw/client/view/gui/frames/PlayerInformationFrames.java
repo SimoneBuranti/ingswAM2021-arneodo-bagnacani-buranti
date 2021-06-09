@@ -16,7 +16,15 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class PlayerInformatioFrames extends JFrame {
+/**
+ * PlayerInformationFrames class represents the opponents' gameboard frame. This is displayed whenever
+ * the player press the corresponding menu item.
+ */
+public class PlayerInformationFrames extends JFrame {
+
+    /**
+     * Graphic parameters.
+     */
     protected final static int frameWidth= 1190;
     protected final static int frameHeight = 600;
     protected static final int gameboardWidth = 800;
@@ -31,21 +39,56 @@ public class PlayerInformatioFrames extends JFrame {
     protected static final int[] psx = {306,460,618};
     protected final static int psy =226;
 
+    /**
+     * Main panel with background image.
+     */
     private PBackground mainPanel;
 
+    /**
+     * Production space array. These spaces contain production card images.
+     */
     protected JLayeredPane[] productionSpaces;
+
+    /**
+     * Production card matrix. It contains current references to the player cards.
+     */
     protected JLabel[][] productionCards;
+
+    /**
+     * Opponent's faith path panel
+     */
     protected FaithPathPane faithPathPane;
+
+    /**
+     * Opponent's storage panel.
+     */
     protected StoragePanel storagePanel;
+
+    /**
+     * Opponent's strongbox panel.
+     */
     protected StrongBoxPanel strongboxPanel;
 
+    /**
+     * Opponent's leader card panel.
+     */
     protected LeaderCardsPanel leaderCardsPanel;
+    /**
+     * Opponent's nickname.
+     */
     private String nickName;
 
+    /**
+     * Background image attribute.
+     */
     protected Image backgroundImage;
 
 
-    public PlayerInformatioFrames(String nickName){
+    /**
+     * PlayerInformationFrames constructor.
+     * @param nickName
+     */
+    public PlayerInformationFrames(String nickName){
         super();
 
         this.nickName = nickName;
@@ -77,6 +120,10 @@ public class PlayerInformatioFrames extends JFrame {
 
     }
 
+    /**
+     * When this method is called it shows every updated opponent's gameboard features.
+     * @param msg
+     */
     public void showOpponent(ShowAllOfPlayerMessage msg){
         updateStorage(msg.getStorage());
 
@@ -93,20 +140,34 @@ public class PlayerInformatioFrames extends JFrame {
         visibilityOn();
     }
 
+    /**
+     * Opponent's nickname getter.
+     * @return
+     */
     public String getNickName(){
         return this.nickName;
     }
 
+
+    /**
+     * This method turns the frame visibility off.
+     */
     public void visibilityOff(){
         this.setVisible(false);
     }
 
+    /**
+     * This method turns the frame visibility on.
+     */
     public void visibilityOn(){
         this.setVisible(true);
         this.paintComponents(this.getGraphics());
         this.paintComponents(this.getGraphics());
     }
 
+    /**
+     * Initial gameboard panel settings.
+     */
     public void initGameboardPanel(){
         Image image = Toolkit.getDefaultToolkit().createImage("src/main/resources/resources/board/opponent board.png");
         this.backgroundImage = image.getScaledInstance(gameboardWidth,gameboardHeight,0);
@@ -118,6 +179,9 @@ public class PlayerInformatioFrames extends JFrame {
         this.mainPanel.setImage(backgroundImage);
     }
 
+    /**
+     * Initialisation of production spaces.
+     */
     public void initProductionSpaces(){
 
         productionSpaces = new JLayeredPane[3];
@@ -137,8 +201,11 @@ public class PlayerInformatioFrames extends JFrame {
     }
 
 
-
-
+    /**
+     * Given the card key and the column, the corresponding image is displayed on the production panel.
+     * @param key
+     * @param column
+     */
     public void addProductionCard(int key,int column){
 
         CardLabel cardLabel = new CardLabel(key);
@@ -157,18 +224,26 @@ public class PlayerInformatioFrames extends JFrame {
         }
     }
 
-
+    /**
+     * Initialisation of storage panel.
+     */
     private void initStorage() {
         this.storagePanel = new StoragePanel();
 
         this.mainPanel.add(storagePanel);
     }
 
+    /**
+     * Initialisation of strongbox panel.
+     */
     private void initStrongBox() {
         this.strongboxPanel = new StrongBoxPanel();
         this.mainPanel.add(strongboxPanel);
     }
 
+    /**
+     * Initialisation of faith path panel.
+     */
     private void initFaithPathPane() {
         this.faithPathPane = new FaithPathPane();
         faithPathPane.setOpaque(false);
@@ -178,7 +253,10 @@ public class PlayerInformatioFrames extends JFrame {
     }
 
 
-
+    /**
+     * This method updates the
+     * @param newStorage
+     */
     public void updateStorage(Map<Resource,Integer> newStorage){
         this.storagePanel.updateStorage(newStorage);
     }
@@ -196,33 +274,61 @@ public class PlayerInformatioFrames extends JFrame {
 
     }
 
+    /**
+     * When notified this method adds the corresponding papal card to the faith path.
+     * @param i
+     */
     public void givePapalcard(int i) {
         faithPathPane.givePapalCard(i);
 
     }
 
+    /**
+     * This method updates production card spaces.
+     * @param prod
+     */
     public void updateProductionSpaces(int[][] prod){
         initProductionSpaces();
-        for(int i=0; i<3; i++)
+        for(int i=0; i<3; i++){
             for(int j=0; j<3; j++){
                 if (prod[i][j]!=0)
                     addProductionCard(prod[i][j],j);
 
-            } }
+            }
+        }
+    }
 
+    /**
+     * The given resources are displayed on the strongbox panel.
+     * @param newStorage
+     */
     public void updateStrongBox(Map<Resource,Integer> newStorage){
         this.strongboxPanel.updateStrongBox(newStorage);
     }
 
-
+    /**
+     * Update opponent's faith path indicator.
+     * @param i
+     */
     public void updateIndicator(int i){
         this.faithPathPane.updateIndicator(i);
     }
 
+    /**
+     * This method adds leader cards to opponent's information frame.
+     * @param arrayList
+     */
     public void addLeaderCardsAsInt(ArrayList<Integer> arrayList){
         leaderCardsPanel.addLeaderCardsAsInt(arrayList,true);
     }
 
+    /**
+     * When an opponent activates an extra-storage-leader card this added to the frame.
+     * @param resource1
+     * @param resource2
+     * @param howMany1
+     * @param howMany2
+     */
     public void addToStorageExtraPlayerOpponent(Resource resource1,
                                                Resource resource2,
                                                int howMany1,

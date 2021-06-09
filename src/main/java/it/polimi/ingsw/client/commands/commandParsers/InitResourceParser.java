@@ -40,6 +40,9 @@ public class InitResourceParser implements CommandParser{
         if (commandText.equals("exit"))
             return new ExitCommand();
 
+        if (commandText.equals("help"))
+            return new HelpCommand();
+
 
         Resource r;
         for (int i = 0;i<commandText.length();i++){
