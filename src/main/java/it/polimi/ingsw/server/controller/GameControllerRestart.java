@@ -48,7 +48,10 @@ public class GameControllerRestart extends GameController {
     public synchronized void handleMessage(ExitMessage msg, ClientController clientController) throws IOException, InterruptedException {
         if(thereIsTempLobby()){
             disconnectClientTempLobby(clientController);
-        }else {
+        }else if(reconnected.size() == 0){
+            server.setRestartQuestionSent(false);
+            server.setRestartQuestion();
+        }else{
             removeNameFromReconnected(clientController.getNickname());
             server.removeClientController(clientController);
             for (ClientController c : server.getClientController())
