@@ -12,6 +12,9 @@ import java.io.IOException;
 
 public class BaseProductionPanel extends JPanel {
 
+    /**
+     * Graphic parameters.
+     */
     private static final int psWidth = 90;
     private static final int psHeight = 340;
     private static final int resourceDimension = 27;
@@ -21,14 +24,35 @@ public class BaseProductionPanel extends JPanel {
     private static final int oX = 56;
     private static final int oY = 195;
 
+    /**
+     * Player's Gui reference.
+     */
     private Gui gui;
 
+    /**
+     * Clickable resource label representing the first input resource.
+     */
     private ResourceClickableLabel input1;
+
+    /**
+     * Clickable resource label representing the second input resource.
+     */
     private ResourceClickableLabel input2;
+
+    /**
+     * Clickable resource label representing the base production output.
+     */
     private ResourceClickableLabel output;
 
+    /**
+     * Base-production button.
+     */
     private ProductionButton productionButton;
 
+    /**
+     * Panel constructor.
+     * @param gui
+     */
     public BaseProductionPanel(Gui gui){
 
         this.gui = gui;
@@ -70,6 +94,9 @@ public class BaseProductionPanel extends JPanel {
     }
 
 
+    /**
+     * Initial input settings - first input resource.
+     */
     public void initInput1(){
         input1 = new ResourceClickableLabel(iX,i1Y);
         input1.setBounds(iX,i1Y,resourceDimension,resourceDimension);
@@ -77,6 +104,9 @@ public class BaseProductionPanel extends JPanel {
         this.add(input1);
     }
 
+    /**
+     * Initial input settings - second input resource.
+     */
     public void initInput2(){
         input2 = new ResourceClickableLabel(iX,i2Y);
         input2.setBounds(iX,i2Y,resourceDimension,resourceDimension);
@@ -84,6 +114,9 @@ public class BaseProductionPanel extends JPanel {
         this.add(input2);
     }
 
+    /**
+     * Initial output settings - output resource.
+     */
     public void initOutput(){
         output = new ResourceClickableLabel(oX,oY);
         output.setBounds(oX,oY,resourceDimension,resourceDimension);
@@ -91,16 +124,26 @@ public class BaseProductionPanel extends JPanel {
         this.add(output);
     }
 
+    /**
+     * Enables the base-prouction button.
+     */
     public void enableButton(){
         this.productionButton.setToken(true);
         this.productionButton.setEnabled(true);
     }
 
+    /**
+     * Disable the base-production button.
+     */
     public void disableButton(){
         this.productionButton.setToken(false);
         this.productionButton.setEnabled(false);
     }
 
+    /**
+     * Base-production button getter.
+     * @return
+     */
     public ProductionButton getProductionButton(){
         return productionButton;
     }

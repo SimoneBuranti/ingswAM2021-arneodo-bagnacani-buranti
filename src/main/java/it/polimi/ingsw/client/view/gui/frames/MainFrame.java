@@ -17,6 +17,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public abstract class MainFrame  extends JFrame {
 
+    /**
+     * Graphic parameters.
+     */
     public final static int northHeight = 70;
     public final static int frameWidth = 1195;
     public final static int frameHeigth = 679;
@@ -28,36 +31,77 @@ public abstract class MainFrame  extends JFrame {
     public final static int leaderHeight = 290;
     public final static int letterOffset = 10;
 
+    /**
+     * Player's Gui reference.
+     */
     protected Gui gui;
 
+    /**
+     * Reference to the server communication panel.
+     */
     protected ServerMessagePanel serverMessagePanel;
+
+    /**
+     * Reference to the leader cards panel.
+     */
     protected LeaderCardsPanel leaderCardsPanel;
 
 
+    /**
+     * Reference to the reserve frame.
+     */
     protected ReserveFrame reserveFrame;
+
+    /**
+     * Reference to the market frame.
+     */
     protected MarketFrame marketFrame;
+
+    /**
+     * Reference to the production-deck frame.
+     */
     protected ProductionDeckFrame productionDeckFrame;
 
+    /**
+     * Main panel contains is the main component container in main frame.
+     */
     protected JPanel mainPanel;
+    /**
+     * Navigation bar, this component contains all the frame buttons, turn information labels and opponents menu.
+     */
     protected JPanel navigationBar;
+    /**
+     * Market button shows or hides the market frame.
+     */
     protected JButton marketButton;
+    /**
+     * Production-card button shows or hides the production-card frame.
+     */
     protected JButton prodCardButton;
+    /**
+     * Reserve button shows or hides the reserve frame.
+     */
     protected JButton reserveButton;
+    /**
+     * Background panel contains the background image beside other graphic components.
+     */
     protected JPanel background;
 
+    /**
+     * The main aim of attached attribute is to keep a reference to all the components attached to the main panel so that it is possible
+     * to remove them whenever required.
+     */
     protected ArrayList<JPanel> attached;
+    /**
+     * Blank labels are used only for layout purposes.
+     */
     protected JLabel[] blankLabels;
 
 
-
-
-    public MainFrame(String string,Gui gui){
-        super(string);
-        this.gui=gui;
-
-    }
-
-
+    /**
+     * Main frame constructor.
+     * @param gui
+     */
     public MainFrame(Gui gui){
         super();
         this.gui=gui;
@@ -73,19 +117,9 @@ public abstract class MainFrame  extends JFrame {
     }
 
 
-
-    /*public MainFrame(String title) {
-        //this.setLocation(frameX,frameY);
-        //this.setSize(frameWidth,frameHeigth);
-
-        this.attached = new ArrayList<>();
-        this.setLocation(frameX, frameY);
-        this.setSize(frameWidth, frameHeigth);
-        this.setResizable(true);
-        this.setVisible(true);
-    }*/
-
-
+    /**
+     * SwitchToGameMode() changes the game environment to the real game after initial settings.
+     */
     public void switchToGameMode(){
 
         this.remove(background);
@@ -100,8 +134,9 @@ public abstract class MainFrame  extends JFrame {
     }
 
 
-
-
+    /**
+     * Initial settings of market button.
+     */
     public void initMarketButton() {
         this.marketButton = new JButton();
         marketButton.setText("Market");
@@ -112,10 +147,12 @@ public abstract class MainFrame  extends JFrame {
         marketButton.addActionListener(e -> {
             this.marketFrame.changeVisibility();
         });
-        //marketButton.setBorder(BorderFactory.createBevelBorder(0));
+
     }
 
-
+    /**
+     * Initial settings of production card button.
+     */
     public void initProdCardButton() {
         this.prodCardButton = new JButton();
         prodCardButton.setText("Decks");
@@ -126,10 +163,13 @@ public abstract class MainFrame  extends JFrame {
         prodCardButton.addActionListener(e -> {
             this.productionDeckFrame.changeVisibility();
         });
-        //prodCardButton.setBorder(BorderFactory.createBevelBorder(0));
+
 
     }
 
+    /**
+     * Initial settings of reserve button.
+     */
     public void initReserveButton() {
         this.reserveButton = new JButton();
         reserveButton.setText("Reserve");
@@ -141,75 +181,65 @@ public abstract class MainFrame  extends JFrame {
             reserveFrame.changeVisibility();
             reserveFrame.paintComponents(reserveFrame.getGraphics());
         });
-        //reserveButton.setBorder(BorderFactory.createBevelBorder(0));
+
 
     }
 
 
-    public abstract void updateStrongBox(Map<Resource, Integer> map);
+    /**
+     * Returns true if background panel is not initialised.
+     * @return
+     */
+    public boolean isBackGroundNull() {
+        if (background == null)
+            return true;
+        return false;
+    }
 
-    public abstract void updateFaith(int i);
-    public abstract void initLeader(ArrayList<LeaderCard> arrayList, boolean bool);
-    public abstract void activateLeader(int key, int index);
-    public abstract void discardLeader(int bool);
-
-
-
-    public void initGameMode() {}
-
-    /*public void initGameMode() {
-        for (JPanel p : attached) {
-            mainPanel.remove(p);
-        }
-        setGeneralFeatures();
-        initNavigationBar();
-
-        marketFrame = new MarketFrame();
-        productionDeckFrame = new ProductionDeckFrame();
-        reserveFrame = new ReserveFrame();
-
-        gameboardPanel = new LorenzoGameboardPanel();
-        gameboardPanel.setBounds(0, 0, 800, 572);
-        mainPanel.add(gameboardPanel);
-        serverMessagePanel = new ServerMessagePanel();
-        serverMessagePanel.setBounds(800, 0, 380, 275);
-        mainPanel.add(serverMessagePanel);
-        leaderCardsPanel = new LeaderCardsPanel();
-        leaderCardsPanel.setBounds(805, 280, leaderWidth, leaderHeight);
-        leaderCardsPanel.setBackground(Color.BLUE);
-        leaderCardsPanel.setOpaque(true);
-        mainPanel.add(leaderCardsPanel);
-
-        actionMarkerPanel = new ActionMarkerPanel();
-        serverMessagePanel.display("Ha un grande valore rappresentativo, essendo \n architettonicamente e artisticamente incentrato \nsul Risorgimento, il complesso processo di unità nazionale e liberazione dalla dominazione straniera portato a compimento sotto il regno di Vittorio Emanuele II di Savoia, cui il monumento è dedicato: per tale motivo il Vittoriano è considerato uno dei simboli patri italiani.");
+    /**
+     * Updates server messages on the paper image.
+     */
+    public void refreshMessagePanel() {
+        this.serverMessagePanel.refreshMessagePanel();
+    }
 
 
-        this.setVisible(true);
-    }*/
-
-
-
-
-
+    /**
+     * When called it adds new resources to extra storages.
+     * @param position
+     * @param resourceType
+     * @param quantity
+     */
     public void addToExtraStorage(int position, Resource resourceType, int quantity) {
         leaderCardsPanel.addToStorageExtra(position, resourceType, quantity);
     }
 
-    public abstract void updateStorage(Map<Resource, Integer> newStorage);
-
-
+    /**
+     * Shows a server high-priority message on a pop-up.
+     * @param message
+     */
     public void showPopUp(Message message){
 
         JOptionPane.showMessageDialog(this,message.toString(),message.getMessageType().toString(),
                 JOptionPane.WARNING_MESSAGE);;
 
     }
+
+    /**
+     * Shows a server high-priority message string on a pop-up.
+     * @param string
+     */
     public void showPopUp(String string){
         JOptionPane.showMessageDialog(this,string,"Network Error",JOptionPane.WARNING_MESSAGE);
     }
 
 
-
+    /**
+     * When a player has activated two white-marble-effect leader cards and get new white marbles from the market
+     * this pop-up let them choose the resource types they want.
+     * @param n
+     * @param whiteMarbleResourceTypes
+     */
     public void marblePossibilityPopUp(int n, ArrayList<Resource> whiteMarbleResourceTypes){
 
             ArrayList<WhiteMarbleLabel> whiteMarbleLabels = new ArrayList<>();
@@ -265,8 +295,13 @@ public abstract class MainFrame  extends JFrame {
             dialog.setVisible(true);
 
     }
-    public abstract void updateProductionCard(GameboardListNotification gameboardListNotification);
 
+
+    /**
+     * When a player gets new resources from the market and there is not enough space in storage this pop-up is
+     * displayed so that they can choose which resources to keep.
+     * @param message
+     */
     public void  fullStoragePopUp(NotEnoughSpaceErrorMessage message){
             ArrayList<Resource> buffer = new ArrayList<>();
             JDialog dialog =new JDialog();
@@ -320,54 +355,108 @@ public abstract class MainFrame  extends JFrame {
             dialog.setVisible(true);
     }
 
+    /**
+     * This method displayes a string on the message panel.
+     * @param string
+     */
+    public void displayString(String string){
+        serverMessagePanel.display(string);
+    }
 
+    /**
+     * Disables all the market buttons.
+     */
     public void disableMarketButtons(){
         marketFrame.removeButton();
     }
 
+    /**
+     * Enables all the market buttons.
+     */
     public void enableMarketButtons(){
         marketFrame.enableButton();
     }
 
+    /**
+     * Disables all the deck buttons.
+     */
     public void disableDeckButtons(){
         productionDeckFrame.disableButtons();
     }
 
+    /**
+     * Enables all the deck buttons.
+     */
     public void enableDeckButtons(){
         productionDeckFrame.enableButtons();
     }
 
-    public abstract void putCardMode();
-
-    public abstract void setChosenDeckNumber(int n);
-
+    /**
+     * Disable all the leader card buttons.
+     */
     public void disableLeaderButtons(){
         leaderCardsPanel.disableButtons();
     }
 
+    /**
+     * Enable all the leader card buttons.
+     */
     public void enableLeaderButtons() {
         leaderCardsPanel.enableButtons();
     }
 
+    /**
+     * Returns the marketFrame reference.
+     * @return
+     */
+    public MarketFrame getMarketFrame() {
+        return marketFrame;
+    }
 
+    /**
+     * Returns the reserveFrame reference.
+     * @return
+     */
+    public ReserveFrame getReserveFrame(){
+        return reserveFrame;
+    }
+
+    /**
+     * Returns the productionDecksFrame reference.
+     * @return
+     */
+    public ProductionDeckFrame getProductionDeckFrame(){
+        return productionDeckFrame;
+    }
+
+
+
+
+    /**
+     * Abstract methods are implemented in subtypes of MainFrame because they require different behaviour.
+     */
+
+    public abstract void updateStrongBox(Map<Resource, Integer> map);
+
+    public abstract void updateFaith(int i);
+
+    public abstract void initLeader(ArrayList<LeaderCard> arrayList, boolean bool);
+
+    public abstract void activateLeader(int key, int index);
+
+    public abstract void discardLeader(int bool);
+
+    public abstract void initGameMode();
+
+    public abstract void updateStorage(Map<Resource, Integer> newStorage);
 
     public abstract void disableProductionButtons();
 
     public abstract void enableProductionButtons();
 
+    public abstract void putCardMode();
 
-
-    public MarketFrame getMarketFrame() {
-        return marketFrame;
-    }
-
-    public ReserveFrame getReserveFrame(){
-        return reserveFrame;
-    }
-
-    public ProductionDeckFrame getProductionDeckFrame(){
-        return productionDeckFrame;
-    }
+    public abstract void setChosenDeckNumber(int n);
 
     public void setPlayers(ArrayList<String> arrayList){}
 
@@ -375,10 +464,7 @@ public abstract class MainFrame  extends JFrame {
 
     public abstract void removePapalCard(int i);
 
-
-
-    public  void setCurrentPlayer(String currentNick){}
-
+    public void setCurrentPlayer(String currentNick){}
 
     public abstract void askLeaderCardToKeep(ArrayList<LeaderCard> leaderCards) throws IOException, InterruptedException;
 
@@ -392,16 +478,10 @@ public abstract class MainFrame  extends JFrame {
 
     public abstract void askInitResource();
 
-    public void displayString(String string){
-        serverMessagePanel.display(string);
-    }
-
-    public abstract void showLorenzoActionPopUp(String string);
+    public void showLorenzoActionPopUp(String string){}
 
     public abstract void updateLorenzoIndicator(int i);
 
-    public void showAllOfPlayer(ShowAllOfPlayerMessage msg){
-    }
 
     public abstract void enableEndTurnButton();
 
@@ -415,15 +495,8 @@ public abstract class MainFrame  extends JFrame {
 
     public abstract int howManyActivated();
 
-    public boolean isBackGroundNull() {
-        if (background == null)
-            return true;
-        return false;
-    }
+    public abstract void updateProductionCard(GameboardListNotification gameboardListNotification);
 
-    public void refreshMessagePanel() {
-        this.serverMessagePanel.refreshMessagePanel();
-    }
 }
 
 
