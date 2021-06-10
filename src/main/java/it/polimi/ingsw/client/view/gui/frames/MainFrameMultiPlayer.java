@@ -18,21 +18,60 @@ import java.util.Map;
 
 public class MainFrameMultiPlayer extends MainFrame {
 
+    /**
+     * Graphic components panel container.
+     */
     private PanelContainer container;
+
+    /**
+     * The error label displays every type of error in the initial phase of the game.
+     */
     private JLabel errorLabel;
+
+    /**
+     * GameboardPanel represents an extension of the normal GameboardPanel.
+     */
     private GameboardPanel gameboardPanel;
 
+    /**
+     * Current player font type.
+     */
     private Font currentPlayerFont = new Font("Helvetica", Font.BOLD, 22);
+    /**
+     * Not current player font type.
+     */
     private Font notCurrentPlayerFont = new Font("Helvetica", Font.BOLD, 18);
+
+    /**
+     * Menu panel reference.
+     */
     private JPanel menuPanel;
+    /**
+     * Player menu bar.
+     */
     private JMenuBar menuBar;
+    /**
+     * Player menu object.
+     */
     private JMenu playerMenu;
+    /**
+     * Turn panel reference.
+     */
     private JPanel turnPanel;
+    /**
+     * Players' items in menuBar.
+     */
     private ArrayList<JMenuItem> players;
+    /**
+     * Players'nicknames.
+     */
     private ArrayList<JLabel> nicknames;
 
 
-
+    /**
+     * Multi-player main frame constructor.
+     * @param gui
+     */
     public MainFrameMultiPlayer(Gui gui){
         super(gui);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -42,7 +81,9 @@ public class MainFrameMultiPlayer extends MainFrame {
     }
 
 
-
+    /**
+     * Initial settings of player menu object.
+     */
     public void initPlayerMenu() {
         Font f = new Font("Helvetica", Font.BOLD, 16);
 
@@ -68,6 +109,9 @@ public class MainFrameMultiPlayer extends MainFrame {
         menuPanel.add(menuBar);
     }
 
+    /**
+     * Initial settings of turn panel object.
+     */
     public void initTurnPanel() {
         this.turnPanel = new JPanel();
         int turnPanelWidth = 0;
@@ -95,7 +139,9 @@ public class MainFrameMultiPlayer extends MainFrame {
         this.navigationBar.add(turnPanel);
     }
 
-
+    /**
+     * This method overrides the Main frame one adding setting the multi-player navigation bar.
+     */
     public void initNavigationBar() {
         navigationBar = new JPanel();
         navigationBar.setBackground(new Color(199, 0, 0));
@@ -112,28 +158,21 @@ public class MainFrameMultiPlayer extends MainFrame {
         this.navigationBar.add(prodCardButton);
         this.navigationBar.add(reserveButton);
         this.navigationBar.add(menuPanel);
-        //this.add(navigationBar, BorderLayout.NORTH);
 
-        //---------------
-        /*JPanel random = new JPanel();
-        random.setBackground(Color.RED);
-        random.setPreferredSize(new Dimension(buttonHeight,buttonHeight));
-        random.setBorder(BorderFactory.createBevelBorder(0));*/
     }
 
+    /**
+     * The pre-game mode corresponds to the initial connection and setting phase.
+     */
     public void preGameMode(){
-        //this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        //this.setLocation(475,208);
-        //this.setSize(820,420);
 
-        //this.setResizable(true);
         ImageIcon icon = new ImageIcon("src/main/resources/resources/title.jpg");
         Image image=icon.getImage();
         background = new PBackground(image);
         this.repaint();
         background.setLayout(null);
         this.add(background);
-        //mainFrame.add(errorText);
+
 
         // Prepare the body container
         container = new PanelContainer();
@@ -144,6 +183,12 @@ public class MainFrameMultiPlayer extends MainFrame {
     }
 
 
+    /**
+     * At the beginning of the match this method shows the leader cards the player can choose.
+     * @param leaderCards
+     * @throws IOException
+     * @throws InterruptedException
+     */
     @Override
     public void askLeaderCardToKeep(ArrayList<LeaderCard> leaderCards) throws IOException, InterruptedException {
 
@@ -158,6 +203,9 @@ public class MainFrameMultiPlayer extends MainFrame {
     }
 
 
+    /**
+     * After the initial pre-game mode the real game mode is casted.
+     */
     public void initGameMode() {
 
         for (JPanel p : attached) {
@@ -218,6 +266,10 @@ public class MainFrameMultiPlayer extends MainFrame {
         panel.removeAll();
     }
 
+    /**
+     * This method displays a new Jlabel containing a server message at the beginning of the game.
+     * @param message
+     */
     @Override
     public void showLabel(Message message){
 
@@ -233,6 +285,9 @@ public class MainFrameMultiPlayer extends MainFrame {
     }
 
 
+    /**
+     * At the beginning of the match this method shows the resources the player can choose.
+     */
     @Override
     public void askInitResource()  {
 
@@ -267,47 +322,78 @@ public class MainFrameMultiPlayer extends MainFrame {
             applyChangesTo(container);
     }
 
+    /**
+     * This method is not called int multi-player matches.
+     * @param string
+     */
     @Override
     public void showLorenzoActionPopUp(String string) {
 
     }
 
+    /**
+     * This method is not called int multi-player matches.
+     * @param i
+     */
     @Override
     public void updateLorenzoIndicator(int i) {
 
     }
 
+    /**
+     * This method enables the end-turn button by calling the same method in the GameboardPanel.
+     */
     @Override
     public void enableEndTurnButton() {
         gameboardPanel.enableEndTurnButton();
     }
 
+    /**
+     * This method disables the end-turn button by calling the same method in the GameboardPanel instance.
+     */
     @Override
     public void disableEndTurnButton() {
         gameboardPanel.disableEndTurnButton();
     }
 
+    /**
+     * This method enables the end-turn button by calling the same method in the GameboardPanel instance.
+     */
     @Override
     public void activateEndOfProductionButton() {
         gameboardPanel.enableEndOfProductionButton();
     }
 
+    /**
+     * This method enables the base-production button by calling the same method in the GameboardPanel instance.
+     */
     @Override
     public void enableBaseProductionButton() {
         gameboardPanel.enableBaseProductionButton();
     }
 
+    /**
+     * This method disables the end-production button by calling the same method in the GameboardPanel instance.
+     */
     @Override
     public void disableEndOfProductionButton() {
         gameboardPanel.disableEndOfProductionButton();
     }
 
+    /**
+     * This method returns the overall number of activated leader cards.
+     * @return
+     */
     @Override
     public int howManyActivated(){
         return (gameboardPanel.howManyActivated() + leaderCardsPanel.howManyActivated());
     }
 
 
+    /**
+     * Every time a player starts the turn it is notified on the turn panel.
+     * @param nick
+     */
     public void setCurrentPlayer(String nick) {
 
         for (int i = 0; i < nicknames.size(); i++)
@@ -315,12 +401,17 @@ public class MainFrameMultiPlayer extends MainFrame {
                 nicknames.get(i).setForeground(new Color(199, 0, 0));
                 nicknames.get(i).setFont(currentPlayerFont);
             }else{
-                //nicknames.get(i).setForeground(new Color);
+
                 nicknames.get(i).setForeground(Color.BLACK);
                 nicknames.get(i).setFont(notCurrentPlayerFont);
             }
 
     }
+
+    /**
+     * At the beginning of the match every player is set in the navigation bar.
+     * @param players
+     */
     public void setPlayers(ArrayList<String> players) {
         this.players = new ArrayList<>();
         this.nicknames = new ArrayList<>();
@@ -340,53 +431,99 @@ public class MainFrameMultiPlayer extends MainFrame {
         initTurnPanel();
     }
 
+    /**
+     * This method updates the resources in the storage by calling the same method in the GameboardPanel instance.
+     * @param newStorage
+     */
     public void updateStorage(Map<Resource, Integer> newStorage) {
 
         this.gameboardPanel.updateStorage(newStorage);
 
     }
 
+    /**
+     * This method updates the resources in the strongbox by calling the same method in the GameboardPanel instance.
+     * @param map
+     */
     public void updateStrongBox(Map<Resource,Integer> map){
         this.gameboardPanel.updateStrongBox(map);
-
     }
 
+    /**
+     * This method updates lorenzo's indicator by calling the same method in the GameboardPanel instance.
+     * @param i
+     */
     public void updateFaith(int i){
         this.gameboardPanel.faithPathPane.updateIndicator(i);
-
     }
 
+    /**
+     * This method initialise the leader card panel by calling th same method in LeaderCardsPanel instance.
+     * @param arrayList
+     * @param bool
+     */
     public void initLeader(ArrayList<LeaderCard> arrayList, boolean bool){
         this.leaderCardsPanel.addLeaderCards(arrayList,bool);
     }
+
+    /**
+     * This method activates the indicated leader card by calling th same method in LeaderCardsPanel instance.
+     * @param key
+     * @param index
+     */
     public void activateLeader(int key, int index){
         this.leaderCardsPanel.activatedLeaderCard(key, index);
     }
+
+    /**
+     * This method discards the indicated leader card by calling th same method in the GameboardPanel instance.
+     * @param bool
+     */
     public void discardLeader(int bool){
         this.leaderCardsPanel.discardLeaderCard(bool);
     }
 
+    /**
+     * This method updates the production card spaces by calling th same method in the GameboardPanel instance.
+     * @param gameboardListNotification
+     */
     public void updateProductionCard(GameboardListNotification gameboardListNotification){
         this.gameboardPanel.updateProductionSpaces(gameboardListNotification);
     }
 
+    /**
+     * When a player press a production card deck button the put card mode is set.
+     */
     @Override
     public void putCardMode() {
         gameboardPanel.putCardMode();
         leaderCardsPanel.disableProductionButtons();
     }
 
+    /**
+     * This method sets the production deck number chosen by the player by calling th same method in the GameboardPanel
+     * instance.
+     * @param n
+     */
     @Override
     public void setChosenDeckNumber(int n) {
         gameboardPanel.setChosenDeckNumber(n);
     }
 
+    /**
+     * This method disables all the production buttons by calling the same method in the GameboardPanel and LeaderCardspanel
+     * instances.
+     */
     @Override
     public void disableProductionButtons() {
         gameboardPanel.disableProductionButtons();
         leaderCardsPanel.disableProductionButtons();
     }
 
+    /**
+     * This method enables all the production buttons by calling the same method in the GameboardPanel and LeaderCardspanel
+     * instances and by disabling the endProduction and endTurn buttons.
+     */
     @Override
     public void enableProductionButtons() {
         gameboardPanel.disableEndTurnButton();
@@ -395,10 +532,18 @@ public class MainFrameMultiPlayer extends MainFrame {
         leaderCardsPanel.enableProductionButtons();
     }
 
+    /**
+     * This method adds the current papal card by calling the same method in the Gameboardpanel instance.
+     * @param i
+     */
     public void givePapalCard(int i){
         this.gameboardPanel.givePapalcard(i);
     }
 
+    /**
+     * This method removes the current papal card by calling the same method in the Gameboardpanel instance.
+     * @param i
+     */
     public void removePapalCard(int i){
         this.gameboardPanel.removePapalCard(i);
     }
