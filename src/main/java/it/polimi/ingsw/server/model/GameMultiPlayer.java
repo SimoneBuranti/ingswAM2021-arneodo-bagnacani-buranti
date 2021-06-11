@@ -724,6 +724,7 @@ public class GameMultiPlayer extends Game {
 
             ArrayList<Integer> needForLeader2 = new ArrayList<>();
             if (playerList.get(n-1).getGameBoardOfPlayer().getLeaderCardsActivated().size()>0){
+                System.out.println(playerList.get(n-1).getGameBoardOfPlayer().getLeaderCardsActivated().size());
                 for (int i=0; i<playerList.get(n-1).getGameBoardOfPlayer().getLeaderCardsActivated().size();i++)
                     needForLeader2.add(playerList.get(n-1).getGameBoardOfPlayer().getLeaderCardsActivated().get(i).getKey());
             }
@@ -755,6 +756,7 @@ public class GameMultiPlayer extends Game {
                     needForLeader2,
                     playerList.get(n-1).getGameBoardOfPlayer().getStorageOfGameBoard().getStorageResource(),
                     playerList.get(n-1).getGameBoardOfPlayer().getStrongboxOfGameBoard().getStrongBoxResource(),
+                    playerList.get(n-1).getGameBoardOfPlayer().getPapalCards(),
                     playerList.get(n-1).getGameBoardOfPlayer().getIndicator(),
                     playerList.get(n-1).isConnected(),
                     playerList.get(n-1).getNickName(),

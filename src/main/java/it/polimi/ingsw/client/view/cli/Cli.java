@@ -280,9 +280,9 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
     public void visit(PapalCardsConfigNotification papalCardsConfigNotification) {
         for (int i=0; i<3;i++){
             if(papalCardsConfigNotification.getPapalCards()[i] == 0){
-                System.out.println("you didn't get the papal favor card " + i+1);
+                System.out.println("you didn't get the papal favor card with" + (i+2) + " points");
             }else if (papalCardsConfigNotification.getPapalCards()[i] == 1){
-                System.out.println("you've got the papal favor card " + (i+1) + " !");
+                System.out.println("you've got the papal favor card  with" + (i+2) + " points!");
             }
         }
     }
@@ -458,6 +458,12 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
         showResourceBox(msg.getStorage());
         System.out.println("> faith indicator : ");
         showFaithIndicator(msg.getFaithIndicator());
+        for(int i = 0; i < 3; i++){
+            if(msg.getPapalCards()[i] == 1)
+                System.out.println("> he got the papal card with " +(i+2) + " points");
+            else if(msg.getPapalCards()[i] == 0)
+                System.out.println("> he didn't get the papal card with " +(i+2) + " points");
+        }
     }
 
     /**
@@ -1034,6 +1040,12 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
     @Override
     public void showGameBoardOfPlayer() {
 
+        for(int i = 0; i < 3; i++){
+            if(viewController.getGame().getPapalCards()[i] == 1)
+                System.out.println("You got the papal card with " +(i+2) + " points");
+            else if(viewController.getGame().getPapalCards()[i] == 0)
+                System.out.println("You didn't get the papal card with " +(i+2) + " points");
+        }
         System.out.println("Your FaithPath:");
         showFaithIndicator(viewController.getGame().getFaithIndicator());
         System.out.println("Your Production cards:");

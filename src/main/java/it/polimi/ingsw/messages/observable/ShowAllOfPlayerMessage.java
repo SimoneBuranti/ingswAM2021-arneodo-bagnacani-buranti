@@ -24,6 +24,7 @@ public class ShowAllOfPlayerMessage extends Message {
     ArrayList<Integer> listLeaderActivated;
     Map<Resource,Integer> storage;
     Map<Resource,Integer> strongBox;
+    int[] papalCards;
     int faithIndicator;
 
     boolean connected;
@@ -34,13 +35,13 @@ public class ShowAllOfPlayerMessage extends Message {
     int howMany1=0;
     int howMany2=0;
 
-   public ShowAllOfPlayerMessage (int[][] productioncard,ArrayList<Integer> listLeaderActivated,Map<Resource,Integer> storage,Map<Resource,Integer> strongBox,int faithIndicator, boolean connected,String nickname
+   public ShowAllOfPlayerMessage (int[][] productioncard,ArrayList<Integer> listLeaderActivated,Map<Resource,Integer> storage,Map<Resource,Integer> strongBox, int[] papalCards, int faithIndicator, boolean connected,String nickname
      ,Resource resource1,
              Resource resource2,
              int howMany1,
              int howMany2)
    {
-
+       this.papalCards = papalCards;
        this.faithIndicator=faithIndicator;
        this.listLeaderActivated=new ArrayList<>();
        this.listLeaderActivated=listLeaderActivated;
@@ -113,5 +114,9 @@ public class ShowAllOfPlayerMessage extends Message {
 
     public Resource getResource2() {
         return resource2;
+    }
+
+    public int[] getPapalCards() {
+        return papalCards;
     }
 }

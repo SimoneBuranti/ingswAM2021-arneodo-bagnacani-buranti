@@ -137,6 +137,13 @@ public class PlayerInformationFrames extends JFrame {
 
         addToStorageExtraPlayerOpponent(msg.getResource1(),msg.getResource2(),msg.getHowMany1(),msg.getHowMany2());
 
+        for(int i = 0; i < 3; i++){
+            if(msg.getPapalCards()[i] == 1)
+                givePapalcard(i);
+            else if(msg.getPapalCards()[i] == 0)
+                faithPathPane.removePapalCard(i);
+        }
+
         visibilityOn();
     }
 
