@@ -594,6 +594,7 @@ public class GameSolitaire extends Game {
      */
     public void reConfigClient() throws IOException, InterruptedException {
         super.configClient();
+        boolean extraStorage = false;
         notifyObserver(new UpdateInitBooleanMessage(player.isInitLeader(),player.isInitResource()));
         if(!player.isInitLeader()){
             ArrayList<Integer> needForLeaderInitial = new ArrayList<>();
@@ -636,13 +637,17 @@ public class GameSolitaire extends Game {
             if(player.getGameBoardOfPlayer().getLeaderCardsActivated().size()>0){
 
                 if(player.getGameBoardOfPlayer().getLeaderCardsActivated().get(0) instanceof LeaderCardStorage){
+                    extraStorage = true;
                     notifyObserver(new StorageExtraConfig(player.getGameBoardOfPlayer().getStorageOfGameBoard().getNumExtraFirstAvailable(),player.getGameBoardOfPlayer().getLeaderCardsActivated().get(0).getResourceEffect()));
                 }
             }
 
             if(player.getGameBoardOfPlayer().getLeaderCardsActivated().size()>1){
                 if(player.getGameBoardOfPlayer().getLeaderCardsActivated().get(1) instanceof LeaderCardStorage)
-                    notifyObserver(new StorageExtraDoubleConfig(player.getGameBoardOfPlayer().getStorageOfGameBoard().getNUmExtraSecondAvailable(),player.getGameBoardOfPlayer().getLeaderCardsActivated().get(1).getResourceEffect()));
+                    if(extraStorage)
+                        notifyObserver(new StorageExtraDoubleConfig(player.getGameBoardOfPlayer().getStorageOfGameBoard().getNUmExtraSecondAvailable(),player.getGameBoardOfPlayer().getLeaderCardsActivated().get(1).getResourceEffect()));
+                    else
+                        notifyObserver(new StorageExtraDoubleConfig(player.getGameBoardOfPlayer().getStorageOfGameBoard().getNumExtraFirstAvailable(),player.getGameBoardOfPlayer().getLeaderCardsActivated().get(1).getResourceEffect()));
             }
 
         }

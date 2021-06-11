@@ -1115,6 +1115,7 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
                 if(frame.getNickName().equals(msg.getNickname())){
                     frame.showOpponent(msg);
                     frame.paintComponents(frame.getGraphics());
+                    frame.paintComponents(frame.getGraphics());
                 }
 
             }

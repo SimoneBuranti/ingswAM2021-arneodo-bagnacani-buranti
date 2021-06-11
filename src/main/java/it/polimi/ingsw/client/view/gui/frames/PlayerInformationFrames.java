@@ -26,11 +26,13 @@ public class PlayerInformationFrames extends JFrame {
      * Graphic parameters.
      */
     protected final static int frameWidth= 1190;
-    protected final static int frameHeight = 600;
+    protected final static int frameHeight = 615;
     protected static final int gameboardWidth = 800;
     protected static final int gameboardHeight = 572;
     protected static final int faithPathWidth = 800;
     protected static final int faithPathHeight = 172;
+    public final static int leaderWidth = 370;
+    public final static int leaderHeight = 290;
     protected static final int cardWidth = 140;
     protected static final int cardHeight = 212;
     protected static final int cardOffset = 38;
@@ -101,6 +103,10 @@ public class PlayerInformationFrames extends JFrame {
         this.setLayout(null);
         this.setSize(frameWidth,frameHeight);
         this.leaderCardsPanel=new LeaderCardsPanel();
+        this.leaderCardsPanel.setBounds(805, 280, leaderWidth, leaderHeight);
+        //leaderCardsPanel.setBackground(Color.BLUE);
+        //leaderCardsPanel.setOpaque(true);
+        this.add(leaderCardsPanel);
 
         this.setTitle(this.nickName + "'s Gameboard");
 
@@ -215,6 +221,7 @@ public class PlayerInformationFrames extends JFrame {
      */
     public void addProductionCard(int key,int column){
 
+
         CardLabel cardLabel = new CardLabel(key);
 
         for(int i = 0 ; i<3; i++){
@@ -222,13 +229,28 @@ public class PlayerInformationFrames extends JFrame {
 
                 productionCards[i][column] = cardLabel;
 
-                cardLabel.setOpaque(true);
+                cardLabel.setOpaque(false);
                 cardLabel.setBounds(2,12+(2-i)*(cardOffset),cardWidth,cardHeight);
-                productionSpaces[column].add(cardLabel,Integer.valueOf(i));
-
+                switch(i){
+                    case 0: {
+                        productionSpaces[column].add(cardLabel,JLayeredPane.DEFAULT_LAYER);
+                        break;
+                    }
+                    case 1:{
+                        productionSpaces[column].add(cardLabel,JLayeredPane.PALETTE_LAYER);
+                        break;
+                    }
+                    case 2:{
+                        productionSpaces[column].add(cardLabel,JLayeredPane.MODAL_LAYER);
+                        break;
+                    }
+                }
                 i = 3;
             }
         }
+
+        productionSpaces[column].repaint();
+        productionSpaces[column].repaint();
     }
 
     /**

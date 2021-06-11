@@ -712,6 +712,7 @@ public class GameMultiPlayer extends Game {
     @Override
     public void askInfoOnPlayer(int n, String nickname) throws IOException, InterruptedException {
         if(n<numberOfPlayer || n==numberOfPlayer){
+            boolean extraStorage = false;
             int[][] list = new int[3][3];
             for (int i=0; i<3;i++){
                 for (int j=0; j<3;j++ ){
@@ -740,6 +741,7 @@ public class GameMultiPlayer extends Game {
                 if (playerList.get(n-1).getGameBoardOfPlayer().getLeaderCardsActivated().get(0)!=null){
                     if(playerList.get(n-1).getGameBoardOfPlayer().getLeaderCardsActivated().get(0) instanceof LeaderCardStorage)
                     {
+                        extraStorage = true;
                         resource1=playerList.get(n-1).getGameBoardOfPlayer().getLeaderCardsActivated().get(0).getResourceEffect();
                         howMany1=2-playerList.get(n-1).getGameBoardOfPlayer().getStorageOfGameBoard().getNumExtraFirstAvailable();
                     }
@@ -748,7 +750,10 @@ public class GameMultiPlayer extends Game {
                     if(playerList.get(n-1).getGameBoardOfPlayer().getLeaderCardsActivated().get(1) instanceof LeaderCardStorage)
                     {
                         resource2=playerList.get(n-1).getGameBoardOfPlayer().getLeaderCardsActivated().get(1).getResourceEffect();
-                        howMany2=2-playerList.get(n-1).getGameBoardOfPlayer().getStorageOfGameBoard().getNUmExtraSecondAvailable();
+                        if(extraStorage)
+                            howMany2=2-playerList.get(n-1).getGameBoardOfPlayer().getStorageOfGameBoard().getNUmExtraSecondAvailable();
+                        else
+                            howMany2=2-playerList.get(n-1).getGameBoardOfPlayer().getStorageOfGameBoard().getNumExtraFirstAvailable();
                     }
                 }
             }
@@ -775,6 +780,7 @@ public class GameMultiPlayer extends Game {
      */
 
     public void configWhitPlayerInfo(Player p, int pos) throws IOException, InterruptedException {
+        boolean extraStorage = false;
         notifyOnlyOneSpecificObserver(new PositionMessage(pos), p.getNickName());
         notifyOnlyOneSpecificObserver(new UpdateInitBooleanMessage(p.isInitLeader(),p.isInitResource()),p.getNickName());
         if(!p.isInitLeader()){
@@ -810,12 +816,17 @@ public class GameMultiPlayer extends Game {
 
             if(p.getGameBoardOfPlayer().getLeaderCardsActivated().size() != 0){
                 if (p.getGameBoardOfPlayer().getLeaderCardsActivated().get(0)!=null){
-                    if(p.getGameBoardOfPlayer().getLeaderCardsActivated().get(0) instanceof LeaderCardStorage)
-                        notifyOnlyOneSpecificObserver(new StorageExtraConfig(p.getGameBoardOfPlayer().getStorageOfGameBoard().getNumExtraFirstAvailable(),p.getGameBoardOfPlayer().getLeaderCardsActivated().get(0).getResourceEffect()), p.getNickName());
+                    if(p.getGameBoardOfPlayer().getLeaderCardsActivated().get(0) instanceof LeaderCardStorage) {
+                        extraStorage = true;
+                        notifyOnlyOneSpecificObserver(new StorageExtraConfig(p.getGameBoardOfPlayer().getStorageOfGameBoard().getNumExtraFirstAvailable(), p.getGameBoardOfPlayer().getLeaderCardsActivated().get(0).getResourceEffect()), p.getNickName());
+                    }
                 }
                 if(p.getGameBoardOfPlayer().getLeaderCardsActivated().size() == 2){
                     if(p.getGameBoardOfPlayer().getLeaderCardsActivated().get(1) instanceof LeaderCardStorage)
-                        notifyOnlyOneSpecificObserver(new StorageExtraDoubleConfig(p.getGameBoardOfPlayer().getStorageOfGameBoard().getNUmExtraSecondAvailable(),p.getGameBoardOfPlayer().getLeaderCardsActivated().get(1).getResourceEffect()), p.getNickName());
+                        if(extraStorage)
+                            notifyOnlyOneSpecificObserver(new StorageExtraDoubleConfig(p.getGameBoardOfPlayer().getStorageOfGameBoard().getNUmExtraSecondAvailable(),p.getGameBoardOfPlayer().getLeaderCardsActivated().get(1).getResourceEffect()), p.getNickName());
+                        else
+                            notifyOnlyOneSpecificObserver(new StorageExtraDoubleConfig(p.getGameBoardOfPlayer().getStorageOfGameBoard().getNumExtraFirstAvailable(),p.getGameBoardOfPlayer().getLeaderCardsActivated().get(1).getResourceEffect()), p.getNickName());
                 }
             }
         }

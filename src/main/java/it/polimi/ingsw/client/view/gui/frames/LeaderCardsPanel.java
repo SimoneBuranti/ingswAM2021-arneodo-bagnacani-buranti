@@ -420,19 +420,20 @@ public class LeaderCardsPanel extends JPanel {
      */
     public void addLeaderCardsAsInt(ArrayList<Integer> leaderCards, boolean activated){
         if (leaderCards.size()>0) {
-            if (firstCard != null) {
-                firstCard = new LeaderCardActivatedLabel(leaderCards.get(0), 0);
-                firstCard.setBounds(0, 0, 150, 278);
-                this.add(firstCard);
-                if (leaderCards.size() == 2) {
-                    secondCard = new LeaderCardActivatedLabel(leaderCards.get(1), 1);
-                    secondCard.setBounds(160, 0, 150, 278);
-                    this.add(secondCard);
-                }
-            } else {
-                secondCard = new LeaderCardActivatedLabel(leaderCards.get(0), 0);
+            firstCard = new LeaderCardActivatedLabel(leaderCards.get(0), 0);
+            firstCard.setBounds(0, 0, 150, 278);
+            this.add(firstCard);
+            new LightLeaderCards();
+            if(LightLeaderCards.leaderCardByKey(leaderCards.get(0)) instanceof LeaderCardStorage) {
+                leaderCardStorageFirst();
+            }
+            if (leaderCards.size() == 2) {
+                secondCard = new LeaderCardActivatedLabel(leaderCards.get(1), 1);
                 secondCard.setBounds(160, 0, 150, 278);
                 this.add(secondCard);
+                if(LightLeaderCards.leaderCardByKey(secondCard.keyOfLeaderCard()) instanceof LeaderCardStorage) {
+                    leaderCardStorageSecond();
+                }
             }
         }
     }
@@ -445,7 +446,6 @@ public class LeaderCardsPanel extends JPanel {
      * @param howMany2 : second quantity to add
      */
     public void addToStorageExtraPlayerOpponent(Resource resource1, Resource resource2, int howMany1, int howMany2){
-
             if(howMany1 == 1){
                 ResourceLabel firstLabel = new ResourceLabel(30, 250, 40, resource1);
                 firstResources.add(firstLabel);
