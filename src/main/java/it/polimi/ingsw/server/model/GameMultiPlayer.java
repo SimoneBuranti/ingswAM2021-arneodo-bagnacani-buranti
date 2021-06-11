@@ -807,14 +807,15 @@ public class GameMultiPlayer extends Game {
                         list[i][j]=p.getGameBoardOfPlayer().getDevelopmentBoardCell(i,j).getKey();}}
 
             notifyOnlyOneSpecificObserver(new ProductionCardConfigMessage(list),p.getNickName());
+
             if(p.getGameBoardOfPlayer().getLeaderCardsActivated().size() != 0){
                 if (p.getGameBoardOfPlayer().getLeaderCardsActivated().get(0)!=null){
-                    if(p.getGameBoardOfPlayer().getLeaderCardsActivated().get(0) instanceof LeaderCardProduction)
-                        notifyOnlyOneSpecificObserver(new StorageExtraConfig(p.getGameBoardOfPlayer().getStorageOfGameBoard().getNumExtraFirstAvailable(),((LeaderCardProduction) p.getGameBoardOfPlayer().getLeaderCardsActivated().get(0)).getResourceProduction()), p.getNickName());
+                    if(p.getGameBoardOfPlayer().getLeaderCardsActivated().get(0) instanceof LeaderCardStorage)
+                        notifyOnlyOneSpecificObserver(new StorageExtraConfig(p.getGameBoardOfPlayer().getStorageOfGameBoard().getNumExtraFirstAvailable(),p.getGameBoardOfPlayer().getLeaderCardsActivated().get(0).getResourceEffect()), p.getNickName());
                 }
-                if(p.getGameBoardOfPlayer().getLeaderCardsActivated()!=null && p.getGameBoardOfPlayer().getLeaderCardsActivated().get(1)!=null){
-                    if(p.getGameBoardOfPlayer().getLeaderCardsActivated().get(1) instanceof LeaderCardProduction)
-                        notifyOnlyOneSpecificObserver(new StorageExtraDoubleConfig(p.getGameBoardOfPlayer().getStorageOfGameBoard().getNumExtraFirstAvailable(),((LeaderCardProduction) p.getGameBoardOfPlayer().getLeaderCardsActivated().get(1)).getResourceProduction()), p.getNickName());
+                if(p.getGameBoardOfPlayer().getLeaderCardsActivated().size() == 2){
+                    if(p.getGameBoardOfPlayer().getLeaderCardsActivated().get(1) instanceof LeaderCardStorage)
+                        notifyOnlyOneSpecificObserver(new StorageExtraDoubleConfig(p.getGameBoardOfPlayer().getStorageOfGameBoard().getNUmExtraSecondAvailable(),p.getGameBoardOfPlayer().getLeaderCardsActivated().get(1).getResourceEffect()), p.getNickName());
                 }
             }
         }

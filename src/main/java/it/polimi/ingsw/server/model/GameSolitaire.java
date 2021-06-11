@@ -78,14 +78,10 @@ public class GameSolitaire extends Game {
         }
         else
         {
-            System.out.println("qui restore g1");
             restoreGameSolitaire(clientController);
-            System.out.println("qui restoreg2");
         }
 
-        System.out.println("qui restoreg3");
         saveInformation();
-        System.out.println("qui restoreg4");
         notifyObserver(new PositionMessage(1));
         notifyObserver(new YourTurnMessage());
     }

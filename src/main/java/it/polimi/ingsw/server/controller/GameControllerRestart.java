@@ -124,11 +124,8 @@ public class GameControllerRestart extends GameController {
 
             if (reconnected.size() == server.getLobbySize()){
                 if (server.getLobbySize()==1){
-                    System.out.println("qui restore");
                     server.restoreGameSingleBackup();
-                    System.out.println("qui restore1");
                     server.setGameController(new GameControllerSinglePlayer(server,server.getGame()));
-                    System.out.println("qui restore2");
 
                 }
                 else

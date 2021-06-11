@@ -690,9 +690,11 @@ public class  GameBoard extends GameBoardInterface{
 
     @Override
     public ArrayList<LeaderCard> getLeaderCardsActivated() {
-        System.out.println("are you looking here");
+        System.out.println("are you looking here :" + leaderCardsActivated.size());
 
-        return leaderCardsActivated;
+        ArrayList<LeaderCard> list = new ArrayList<>();
+        list.addAll(leaderCardsActivated);
+        return list;
     }
 
 

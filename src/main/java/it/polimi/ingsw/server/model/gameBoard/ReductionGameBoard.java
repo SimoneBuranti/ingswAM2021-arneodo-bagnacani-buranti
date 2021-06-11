@@ -92,15 +92,5 @@ public class ReductionGameBoard extends GameBoardDecorator{
     }
 
 
-    @Override
-    public ArrayList<LeaderCard> getLeaderCardsActivated() {
-        System.out.println("are you looking here");
-
-        return gameBoard.getLeaderCardsActivated();
-    }
-
-
-
-
 }
 
