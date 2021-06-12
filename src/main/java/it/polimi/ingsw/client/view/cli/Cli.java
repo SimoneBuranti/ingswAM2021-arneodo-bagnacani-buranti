@@ -293,13 +293,13 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
     @Override
     public void notifyError(Message msg) {
         System.out.println(msg.toString());
-        if(msg instanceof NotAvailableResourcesErrorMessage) {
+        if(msg instanceof NotAvailableResourcesErrorMessage || msg instanceof WrongColumnErrorMessage) {
             if(viewController.isActionToken()) {
                 viewController.resetLastProduction();
             }else {
                 viewController.setActionToken(true);
             }
-        }else if (msg instanceof WrongColumnErrorMessage || msg instanceof BaseProductionErrorMessage)
+        }else if (msg instanceof BaseProductionErrorMessage)
             viewController.resetLastProduction();
 
     }
