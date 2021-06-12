@@ -224,9 +224,7 @@ public class Server {
      * @throws InterruptedException
      */
     public void restoreGameSingleBackup() throws IOException, InterruptedException {
-        System.out.println("qui restore01");
         this.game=new GameSolitaire(clientControllers.get(0).getNickname(),false,clientControllers.get(0));
-        System.out.println("qui restore02");
         clientControllers.get(0).setGame(this.game);
     }
 
@@ -236,11 +234,8 @@ public class Server {
      * @throws InterruptedException
      */
     public void restoreGameMultiBackup() throws IOException, InterruptedException {
-        System.out.println("qui restore01");
         this.clientControllers=orderRestart();
-        System.out.println("qui restore 02");
         this.game=new GameMultiPlayer(this.getLobbySize(),lobby,false,clientControllers);
-        System.out.println("qui restore03");
         for(ClientController client : clientControllers){
             client.setGame(this.game);
         }
@@ -416,6 +411,7 @@ public class Server {
      * resetAll server info at the end of the game, to be ready for a new game
      */
     public void resetInfo(){
+        FileClass.FileDestroyer();
          this.game=null;
         clientControllers = new ArrayList<>();
         tempClientController = new ArrayList<>();

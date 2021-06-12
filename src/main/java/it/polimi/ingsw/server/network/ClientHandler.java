@@ -92,7 +92,8 @@ public class ClientHandler implements Runnable {
                     server.setRestartQuestion();
                 server.setRestartQuestionSent(true);
                 //server.setSendRestartQuestion();
-            }else if(server.getSendRestartQuestion() && server.isRestartQuestionSent() && !server.isRestartAnswerReceived()) {
+            }
+            else if(server.getSendRestartQuestion() && server.isRestartQuestionSent() && !server.isRestartAnswerReceived()) {
                 sendMessage(new BootingLobbyErrorMessage());
                 server.addTempClientController(clientController);
             }else if(server.getSendRestartQuestion() && server.isRestartQuestionSent() && server.isRestartAnswerReceived()){

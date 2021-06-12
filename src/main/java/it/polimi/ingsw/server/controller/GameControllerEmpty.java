@@ -58,6 +58,16 @@ public class GameControllerEmpty extends GameController {
             server.removePlayerToLobby(clientController.getNickname());
             server.removeClientController(clientController);
             disconnectFirstClient();
+            if(tempLobbyController.size()!=0)
+            {
+                setFirstClient(tempLobbyController.get(0));
+                server.addClientController(tempLobbyController.get(0));
+                server.addPlayerToLobby(tempLobbyController.get(0).getNickname());
+                tempLobbyController.get(0).getClientHandler().sendMessage(new NPlayersMessage(-1));
+                tempLobbyName.remove(0);
+                tempLobbyController.remove(0);
+
+            }
         }
         else{ disconnectClientTempLobby(clientController); }
         clientController.getClientHandler().disconnect();
@@ -129,6 +139,16 @@ public class GameControllerEmpty extends GameController {
         }
 
 
+    }
+
+
+    /**
+     * method for set the first client cotntroller
+     * @param clientController
+     * @return
+     */
+    public void setFirstClient(ClientController clientController) {
+        firstClientController=clientController;
     }
 
     @Override
