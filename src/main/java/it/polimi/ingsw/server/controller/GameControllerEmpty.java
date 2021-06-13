@@ -62,7 +62,8 @@ public class GameControllerEmpty extends GameController {
             {
                 setFirstClient(tempLobbyController.get(0));
                 server.addClientController(tempLobbyController.get(0));
-                server.addPlayerToLobby(tempLobbyController.get(0).getNickname());
+                server.addPlayerToLobby(tempLobbyName.get(0));
+                tempLobbyController.get(0).setNickname(tempLobbyName.get(0));
                 tempLobbyController.get(0).getClientHandler().sendMessage(new NPlayersMessage(-1));
                 tempLobbyName.remove(0);
                 tempLobbyController.remove(0);

@@ -50,21 +50,17 @@ public class GameControllerRestart extends GameController {
         if(thereIsTempLobby()){
             disconnectClientTempLobby(clientController);
         }
-        else if(reconnected.size() == 0 && server.isRestartAnswerReceived()){
-            server.setRestartQuestionSent(false);
-            server.setRestartQuestion();
-        }
-        else if(!server.isRestartAnswerReceived())
-        {
-            if(server.tempClientControllerSize()>0)
-            {
+        else if(reconnected.size() == 0 && !server.isRestartAnswerReceived()){
+            if(server.tempClientControllerSize()==0) {
+                server.setRestartQuestionSent(false);
+                server.setRestartQuestion();
+            }else{
                 server.getTempClientController().get(0).getClientHandler().sendMessage(new RestartQuestionMessage(0));
                 server.getTempClientController().remove(0);
                 if(server.getRestartQuestion() == 0)
                     server.setRestartQuestion();
                 server.setRestartQuestionSent(true);
             }
-
         }
         else{
             removeNameFromReconnected(clientController.getNickname());
@@ -99,14 +95,11 @@ public class GameControllerRestart extends GameController {
      */
     @Override
     public synchronized void handleMessage(UsernameMessage msg, ClientController clientController) throws IOException, InterruptedException {
-        System.out.println("1");
         if (!restartAnswerReceived){
             clientController.getClientHandler().sendMessage(new BootingLobbyErrorMessage());
         }
         else {
-            System.out.println("2");
             if(server.isInLobby(msg.getUsername()) && !firstName){
-                System.out.println("5");
                 if(clientController != firstClientController){
                     if(!isInTempLobby(msg.getUsername())) {
                         tempLobbyName.add(msg.getUsername());
@@ -117,7 +110,6 @@ public class GameControllerRestart extends GameController {
                         clientController.getClientHandler().sendMessage(new AlreadyExistingNickNameErrorMessage());
                 }
                 else if(clientController == firstClientController){
-                    System.out.println("6");
                     if (!reconnected.contains(msg.getUsername())) {
                         System.out.println("");
                         clientController.setNickname(msg.getUsername());
@@ -132,13 +124,10 @@ public class GameControllerRestart extends GameController {
                 }
             }
             else if(server.isInLobby(msg.getUsername()) && firstName){
-                System.out.println("3");
                 if (!reconnected.contains(msg.getUsername())){
-                    System.out.println("4");
                     clientController.setNickname(msg.getUsername());
                     reconnected.add(msg.getUsername());
                     server.addClientController(clientController);
-                    System.out.println("5");
                     for(ClientController c : server.getClientController())
                         c.getClientHandler().sendMessage(new NPlayersMessage(reconnected.size(), server.getLobbySize()));
                 }
