@@ -24,7 +24,7 @@ public class ClientApp {
         portNumber = -1;
 
 
-        if (true) {
+        if (false) {
 
             do {
                 Scanner in = new Scanner(System.in);

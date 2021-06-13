@@ -48,7 +48,7 @@ public class ExtraProductionCommand extends Command {
             if (cont == 0)
                 throw new InvalidCommandException();
             if (cont == 1) {
-                if (getExtraProductionToken(1))
+                if (!getExtraProductionToken(1))
                     throw new AlreadyActivatedProductionException();
                 o = askForOutputResource();
                 setFalseProductionBools(1);

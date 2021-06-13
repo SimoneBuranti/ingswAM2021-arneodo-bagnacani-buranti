@@ -322,7 +322,6 @@ public class PlayerInformationFrames extends JFrame {
             for(int j=0; j<3; j++){
                 if (prod[i][j]!=0)
                     addProductionCard(prod[i][j],j);
-
             }
         }
     }

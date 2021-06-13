@@ -7,7 +7,7 @@ public class HelpCommand extends Command{
     /**
      * Grid offset value.
      */
-    private static final int space = 25;
+    private static final int space = 45;
 
     /**
      * This is the list of commands to be displayed when an exit command is parsed. It provides the correct command

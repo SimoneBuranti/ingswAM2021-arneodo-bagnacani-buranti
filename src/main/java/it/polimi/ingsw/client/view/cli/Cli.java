@@ -438,7 +438,7 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
         ProductionCard[][] gameBoardProductionCards = new ProductionCard[3][3];
 
         for (int i=0; i<3;i++)
-            for (int j=0; i<3;i++)
+            for (int j=0; j<3;j++)
                 if (msg.getProductioncard()[i][j]==0)
                     gameBoardProductionCards[i][j] = null;
                 else
