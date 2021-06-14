@@ -227,24 +227,45 @@ public class GameMultiPlayer extends Game {
     /**
      * this method sets the new current player at the end of old current player turn
      */
-    public void setCurrentPlayer() {
-        int cont;
-        if(currentPlayerPosition == numberOfPlayer-1)
-            cont = 0;
-        else
-            cont = currentPlayerPosition+1;
-
-        while(!(playerList.get(cont).isConnected())){
-            cont++;
-            if(cont == numberOfPlayer)
+    public void setCurrentPlayer() throws IOException, InterruptedException {
+        if(!lastTurn) {
+            int cont;
+            if (currentPlayerPosition == numberOfPlayer - 1)
                 cont = 0;
-            if(cont == currentPlayerPosition && !(playerList.get(cont).isConnected())){
-                currentPlayer = null;
-                return;
+            else
+                cont = currentPlayerPosition + 1;
+
+            while (!(playerList.get(cont).isConnected())) {
+                cont++;
+                if (cont == numberOfPlayer)
+                    cont = 0;
+                if (cont == currentPlayerPosition && !(playerList.get(cont).isConnected())) {
+                    currentPlayer = null;
+                    return;
+                }
             }
+            currentPlayerPosition = cont;
+            currentPlayer = playerList.get(currentPlayerPosition);
+        }else{
+            int cont = 0;
+            if (currentPlayerPosition == numberOfPlayer - 1) {
+                currentPlayerPosition = -1;
+                endOfLastTurn();
+                return;
+            }else
+                cont = currentPlayerPosition + 1;
+
+            while (!(playerList.get(cont).isConnected())) {
+                cont++;
+                if (cont == numberOfPlayer) {
+                    currentPlayerPosition = -1;
+                    endOfLastTurn();
+                    return;
+                }
+            }
+            currentPlayerPosition = cont;
+            currentPlayer = playerList.get(currentPlayerPosition);
         }
-        currentPlayerPosition = cont;
-        currentPlayer = playerList.get(currentPlayerPosition);
     }
 
 
@@ -409,7 +430,7 @@ public class GameMultiPlayer extends Game {
 
 
     /**
-     * this method handles the CallForC ouncilException by setting the lastTurn attribute to true
+     * this method handles the CallForCouncilException by setting the lastTurn attribute to true
      * @param e : the exception to handle
      */
     @Override
@@ -422,9 +443,8 @@ public class GameMultiPlayer extends Game {
 
     /**
      * this method handles the CallForCouncilException by setting the lastTurn attribute to true
-     * @param e : the exception to handle
      */
-    protected void endOfLastTurn(EndGameException e) throws IOException, InterruptedException {
+    protected void endOfLastTurn() throws IOException, InterruptedException {
         endGame();
     }
 
@@ -700,8 +720,11 @@ public class GameMultiPlayer extends Game {
     public synchronized void endOfTurn() throws IOException, InterruptedException {
         setCurrentPlayer();
         saveInformation();
-        notifyToOneObserver(new YourTurnMessage());
-        notifyAllObserverLessOne(new ChangeTurnMessage(currentPlayer.getNickName()));}
+        if(currentPlayerPosition >= 0) {
+            notifyToOneObserver(new YourTurnMessage());
+            notifyAllObserverLessOne(new ChangeTurnMessage(currentPlayer.getNickName()));
+        }
+    }
 
 
     /**

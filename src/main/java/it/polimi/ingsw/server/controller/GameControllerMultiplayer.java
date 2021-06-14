@@ -29,59 +29,47 @@ public class GameControllerMultiplayer extends GameController {
     public void handleMessage(ExitMessage msg, ClientController clientController) throws IOException, InterruptedException {
 
 
-     if(!server.getGame().isOver())
-        {
+         if(!server.getGame().isOver()) {
+                if (clientController.turnCheck())
+                    server.getGame().endOfTurn();
 
-            if (clientController.turnCheck())
-                server.getGame().endOfTurn();
+                boolean flag = false;
 
-            boolean flag = false;
+                server.getGame().disconnectPlayerOption(clientController.getNickname());
 
-            server.getGame().disconnectPlayerOption(clientController.getNickname());
+                if(!server.getGame().disconnectPlayer(clientController.getNickname())){
+                    flag = true;
+                    server.addClientControllersDisconnected(clientController);
+                    try{
+                    clientController.getClientHandler().disconnect();
+                    }catch (IOException | InterruptedException ignored){}
 
-            if(!server.getGame().disconnectPlayer(clientController.getNickname()))
-            {
-                flag = true;
+                    for (int i=0;i< server.getClientController().size(); i++) {
+                        server.getClientController().get(i).getClientHandler().sendMessage(new DisconnectionOpponentMessage(clientController.getNickname()));
+                    }
+
+                    if(flag && !(server.getClientController().size()==0)){
+                        server.setGameController(new GameControllerDisconnection(this.server,server.getGame()));
+                    }
+                }
+         }else{
+                server.getGame().disconnectPlayerOption(clientController.getNickname());
                 server.addClientControllersDisconnected(clientController);
-                try
-             {
-                clientController.getClientHandler().disconnect();
-            }
-            catch (IOException | InterruptedException e)
-                {
-                //messaggio di errore+//
-                }
-                for (int i=0;i< server.getClientController().size(); i++) {
-                    server.getClientController().get(i).getClientHandler().sendMessage(new DisconnectionOpponentMessage(clientController.getNickname()));
+                try {
+                    clientController.getClientHandler().disconnect();
+                    System.out.println("Ho disconnesso client");
+                } catch (IOException | InterruptedException e) {
+                    //messaggio di errore
                 }
 
-         if(flag && !(server.getClientController().size()==0))
-         {
-                server.setGameController(new GameControllerDisconnection(this.server,server.getGame()));
+                if (server.getClientController().size()==0){
+                    server.resetInfo();
+                }else{
+                    for (int i=0;i< server.getClientController().size(); i++) {
+                        server.getClientController().get(i).getClientHandler().sendMessage(new DisconnectionOpponentMessage(clientController.getNickname()));
+                    }
+                }
          }
-        }
-        }
-        else
-        {
-            server.getGame().disconnectPlayerOption(clientController.getNickname());
-            server.addClientControllersDisconnected(clientController);
-            try {
-                clientController.getClientHandler().disconnect();
-                System.out.println("Ho disconnesso client");
-            } catch (IOException | InterruptedException e) {
-                //messaggio di errore
-            }
-
-            if (server.getClientController().size()==0)
-            {
-                server.resetInfo();
-            }
-            else
-            { for (int i=0;i< server.getClientController().size(); i++) {
-                    server.getClientController().get(i).getClientHandler().sendMessage(new DisconnectionOpponentMessage(clientController.getNickname()));
-                }
-            }
-        }
     }
 
 
