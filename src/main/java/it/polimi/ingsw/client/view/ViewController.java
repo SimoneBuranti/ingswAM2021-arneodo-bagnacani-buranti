@@ -372,6 +372,11 @@ public class ViewController implements MessageVisitor, ViewObserver {
         game.setPapalCards(papalCardsConfigMessage.getPapalCards());
     }
 
+    @Override
+    public void visit(GameEndedMessage gameEndedMessage) {
+        view.notifyError(gameEndedMessage);
+    }
+
     /**
      * This method calls view method to show error message
      */

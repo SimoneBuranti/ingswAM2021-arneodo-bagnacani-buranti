@@ -306,6 +306,9 @@ public abstract class Message{
             case RECONNECTIONOPPONENT:
                 return gson.fromJson(jsonObj,ReconnectedMessage.class);
 
+            case ENDGAME:
+                return gson.fromJson(jsonObj,GameEndedMessage.class);
+
 
             default:
                 throw new IllegalArgumentException("Invalid topic " + msgTopicString);

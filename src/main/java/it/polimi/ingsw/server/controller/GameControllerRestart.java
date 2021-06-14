@@ -169,7 +169,6 @@ public class GameControllerRestart extends GameController {
         server.setRestartAnswerReceived(true);
         server.setRestartAnswer(msg.getAnswer());
         if(!msg.getAnswer()){
-            FileClass.FileDestroyer();
             server.setSendRestartQuestion();
             server.restartLobby();
             server.setGameController(new GameControllerEmpty(this.server, clientController));

@@ -217,6 +217,11 @@ public class ClientController implements MessageVisitor {
     }
 
     @Override
+    public void visit(GameEndedMessage gameEndedMessage) {
+
+    }
+
+    @Override
     public void visit(DisconnectionOpponentMessage disconnectionOpponentMessage) {
 
     }

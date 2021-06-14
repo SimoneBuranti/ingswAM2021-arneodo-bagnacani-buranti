@@ -96,6 +96,7 @@ public class GameControllerDisconnection extends GameController {
      */
     @Override
     public void handleMessage(UsernameMessage msg, ClientController clientController) throws IOException, InterruptedException {
+        if(!server.getGame().isOver()){
         if(server.getGame().checkNickname(msg.getUsername())){
             for(int i=0; i<server.getClientControllersDisconnected().size();i++)
             {
@@ -121,6 +122,15 @@ public class GameControllerDisconnection extends GameController {
         else
         {
             clientController.getClientHandler().sendMessage(new NoNicknameMessage());
+        }}
+        else
+        {
+            clientController.getClientHandler().sendMessage(new GameEndedMessage());
+            try {
+                clientController.getClientHandler().disconnect();
+            } catch (IOException e) {
+                //messaggio di errore
+            }
         }
 
     }
