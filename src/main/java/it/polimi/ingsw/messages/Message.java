@@ -306,7 +306,7 @@ public abstract class Message{
             case RECONNECTIONOPPONENT:
                 return gson.fromJson(jsonObj,ReconnectedMessage.class);
 
-            case ENDGAME:
+            case GAMEERROREND:
                 return gson.fromJson(jsonObj,GameEndedMessage.class);
 
 

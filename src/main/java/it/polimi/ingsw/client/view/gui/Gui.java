@@ -456,7 +456,8 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
     public void notifyError(Message msg) {
 
         if (msg instanceof NoNicknameMessage || msg instanceof BootingLobbyErrorMessage
-                || msg instanceof AlreadyExistingNickNameErrorMessage || msg instanceof CompleteRunningMatchErrorMessage){
+                || msg instanceof AlreadyExistingNickNameErrorMessage || msg instanceof CompleteRunningMatchErrorMessage
+                || msg instanceof GameEndedMessage){
             SwingUtilities.invokeLater(() -> {
                 showLabel(msg.toString());
                 applyChangesTo(mainFrame);
@@ -670,6 +671,7 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
     public void showWhiteMarbleResources(int n, ArrayList<Resource> whiteMarbleResourceTypes) {
         SwingUtilities.invokeLater(() -> {
             mainFrameOfGame.marblePossibilityPopUp(n,whiteMarbleResourceTypes);
+            mainFrameOfGame.disableEndTurnButton();
             applyChangesTo(mainFrameOfGame);
 
         });
@@ -683,6 +685,7 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
     public void showSpaceError(NotEnoughSpaceErrorMessage msg) {
         SwingUtilities.invokeLater(() -> {
             mainFrameOfGame.fullStoragePopUp(msg);
+            mainFrameOfGame.disableEndTurnButton();
             applyChangesTo(mainFrameOfGame);
 
         });
@@ -774,8 +777,13 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
     public void sayDisconnect() {
 
         SwingUtilities.invokeLater(() -> {
-            mainFrameOfGame.showPopUp("server is crashed, you i've been disconnected");
-            applyChangesTo(mainFrameOfGame);
+            if(mainFrameOfGame != null) {
+                mainFrameOfGame.showPopUp("server is crashed, you i've been disconnected");
+                applyChangesTo(mainFrameOfGame);
+            }else{
+                JOptionPane.showMessageDialog(mainFrame,"server is crashed, you i've been disconnected","Network Error",JOptionPane.WARNING_MESSAGE);
+                applyChangesTo(mainFrame);
+            }
 
         });
     }

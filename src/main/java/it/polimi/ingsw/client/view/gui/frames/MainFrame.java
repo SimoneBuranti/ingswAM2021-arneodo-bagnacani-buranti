@@ -282,14 +282,13 @@ public abstract class MainFrame  extends JFrame {
                     try {
                         for(WhiteMarbleLabel whiteMarble : whiteMarbleLabels)
                             buffer.add(whiteMarble.getResource());
-                        System.out.println(buffer);
                         gui.notifyObserver(new WhiteMarbleChoosenResourcesMessage(buffer));
                     } catch (IOException | InterruptedException e1) {
                         e1.printStackTrace();
                     }
                 })).start();
                 dialog.dispose();
-
+                enableEndTurnButton();
             });
 
             dialog.setVisible(true);
@@ -349,6 +348,7 @@ public abstract class MainFrame  extends JFrame {
                     }
                 })).start();
                 dialog.dispose();
+                enableEndTurnButton();
 
             });
 

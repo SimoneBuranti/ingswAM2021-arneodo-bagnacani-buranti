@@ -448,7 +448,6 @@ public class Server {
         setRestartAnswerReceived(false);
         restartQuestionSent = false;
         gameController.setNumberOfPlayers(lobby.size());
-        System.out.println(lobby.size());
 
     }
 
