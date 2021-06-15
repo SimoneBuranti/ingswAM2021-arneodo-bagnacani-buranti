@@ -322,6 +322,8 @@ public class ViewController implements MessageVisitor, ViewObserver {
     public void visit(UpdateInitBooleanMessage msg) {
         game.setInitResource(msg.isInitResource());
         game.setInitLeader(msg.isInitLeader());
+
+
         view.checkThreadRestart();
     }
 
@@ -859,6 +861,8 @@ public class ViewController implements MessageVisitor, ViewObserver {
             game.setInitResource(true);
         }
         else if(game.isInitLeader()&&!game.isInitResource()){
+            view.askInitResource();
+            game.setInitResource(true);
             view.yourTurn();
             view.askInitResource();
             game.setInitResource(true);

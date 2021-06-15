@@ -805,7 +805,7 @@ public class GameMultiPlayer extends Game {
     public void configWhitPlayerInfo(Player p, int pos) throws IOException, InterruptedException {
         boolean extraStorage = false;
         notifyOnlyOneSpecificObserver(new PositionMessage(pos), p.getNickName());
-        notifyOnlyOneSpecificObserver(new UpdateInitBooleanMessage(p.isInitLeader(),p.isInitResource()),p.getNickName());
+        notifyOnlyOneSpecificObserver(new UpdateInitBooleanMessage(p.isInitResource(),p.isInitLeader()),p.getNickName());
         if(!p.isInitLeader()){
             ArrayList<Integer> needForLeaderInitial = new ArrayList<>();
             for (int i=0; i<4;i++)

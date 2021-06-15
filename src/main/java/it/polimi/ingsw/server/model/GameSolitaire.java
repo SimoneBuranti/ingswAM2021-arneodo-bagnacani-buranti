@@ -595,7 +595,7 @@ public class GameSolitaire extends Game {
     public void reConfigClient() throws IOException, InterruptedException {
         super.configClient();
         boolean extraStorage = false;
-        notifyObserver(new UpdateInitBooleanMessage(player.isInitLeader(),player.isInitResource()));
+        notifyObserver(new UpdateInitBooleanMessage(player.isInitResource(),player.isInitLeader()));
         if(!player.isInitLeader()){
             ArrayList<Integer> needForLeaderInitial = new ArrayList<>();
             for (int i=0; i<4;i++){

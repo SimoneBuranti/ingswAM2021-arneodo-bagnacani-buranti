@@ -617,14 +617,14 @@ public class LightGame extends ViewObservable {
      /**
       * This method returns the value of the boolean initLeader
       */
-    public boolean isInitLeader() {
+    public synchronized boolean isInitLeader() {
         return initLeader;
     }
 
      /**
       * This method sets the value of the boolean initLeader
       */
-    public void setInitLeader(boolean initLeader) {
+    public synchronized void setInitLeader(boolean initLeader) {
         this.initLeader = initLeader;
     }
 
@@ -638,14 +638,14 @@ public class LightGame extends ViewObservable {
      /**
       * This method returns the value of the boolean initResource
       */
-    public boolean isInitResource() {
+    public synchronized boolean isInitResource() {
         return initResource;
     }
 
      /**
       * This method sets the value of the boolean initResource
       */
-    public void setInitResource(boolean initResource) {
+    public synchronized void setInitResource(boolean initResource) {
         this.initResource = initResource;
     }
 
