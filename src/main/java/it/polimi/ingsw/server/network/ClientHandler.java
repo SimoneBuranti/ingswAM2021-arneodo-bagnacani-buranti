@@ -86,7 +86,7 @@ public class ClientHandler implements Runnable {
         try {
             String msg;
 
-            if(server.getSendRestartQuestion() && !server.isRestartQuestionSent() && !server.isRestartAnswerReceived()){
+            if(server.getSendRestartQuestion() && !server.isRestartQuestionSent()){
                 sendMessage(new RestartQuestionMessage(server.getRestartQuestion()));
                 if(server.getRestartQuestion() == 0)
                     server.setRestartQuestion();
@@ -97,9 +97,10 @@ public class ClientHandler implements Runnable {
                 sendMessage(new BootingLobbyErrorMessage());
                 server.addTempClientController(clientController);
             }else if(server.getSendRestartQuestion() && server.isRestartQuestionSent() && server.isRestartAnswerReceived()){
-                if(server.isRestartAnswer())
+                if(server.isRestartAnswer()) {
                     sendMessage(new RestartQuestionMessage(server.getRestartQuestion()));
-                else
+                    server.addTempClientController(this.clientController);
+                }else
                     sendMessage(new UsernameMessage(null));
             }
             else if(server.getGameController().getGameControllerState().equals("Disconnection")) {
