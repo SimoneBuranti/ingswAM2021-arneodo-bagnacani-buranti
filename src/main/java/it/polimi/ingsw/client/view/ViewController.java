@@ -314,6 +314,7 @@ public class ViewController implements MessageVisitor, ViewObserver {
      */
     @Override
     public void visit(UpdateInitBooleanMessage msg) {
+        System.out.println(msg.isInitResource() + " " + msg.isInitLeader());
         game.setInitResource(msg.isInitResource());
         game.setInitLeader(msg.isInitLeader());
 

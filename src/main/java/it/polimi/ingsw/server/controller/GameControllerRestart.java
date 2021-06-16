@@ -47,7 +47,7 @@ public class GameControllerRestart extends GameController {
      */
     @Override
     public synchronized void handleMessage(ExitMessage msg, ClientController clientController) throws IOException, InterruptedException {
-        if(thereIsTempLobby()){
+        if(thereIsTempLobby() && clientController != firstClientController){
             disconnectClientTempLobby(clientController);
         }
         else if(reconnected.size() == 0 && !server.isRestartAnswerReceived()){
@@ -63,17 +63,43 @@ public class GameControllerRestart extends GameController {
                 server.setRestartQuestionSent(true);
             }
         }
-        else if(reconnected.size() == 0 && server.isRestartAnswerReceived()){
-            server.removeClientController(clientController);
-            server.setRestartQuestionSent(false);
-            server.setRestartQuestion();
+        else if(reconnected.size() == 0 && server.isRestartAnswerReceived() && clientController == firstClientController){
+
+            if(server.tempClientControllerSize()==0) {
+                server.removeClientController(clientController);
+                server.setRestartQuestionSent(false);
+                server.setRestartQuestion();
+                server.setRestartAnswerReceived(false);
+            }
+            else{
+                server.removeClientController(clientController);
+                server.getTempClientController().get(0).getClientHandler().sendMessage(new RestartQuestionMessage(0));
+                server.getTempClientController().remove(0);
+                if(server.getRestartQuestion() == 0)
+                    server.setRestartQuestion();
+                server.setRestartQuestionSent(true);
+                server.setRestartAnswerReceived(false);
+            }
         }
 
-        else if(reconnected.size() == 1 && server.isRestartAnswerReceived()){
-            removeNameFromReconnected(clientController.getNickname());
-            server.removeClientController(clientController);
-            server.setRestartQuestionSent(false);
-            server.setRestartQuestion();
+        else if(reconnected.size() == 1 && clientController == firstClientController){
+            if(server.tempClientControllerSize()==0) {
+                removeNameFromReconnected(clientController.getNickname());
+                server.removeClientController(clientController);
+                server.setRestartQuestionSent(false);
+                server.setRestartQuestion();
+                server.setRestartAnswerReceived(false);
+            }
+            else{
+                removeNameFromReconnected(clientController.getNickname());
+                server.removeClientController(clientController);
+                server.getTempClientController().get(0).getClientHandler().sendMessage(new RestartQuestionMessage(0));
+                server.getTempClientController().remove(0);
+                if(server.getRestartQuestion() == 0)
+                    server.setRestartQuestion();
+                server.setRestartQuestionSent(true);
+                server.setRestartAnswerReceived(false);
+            }
         }
         else{
             removeNameFromReconnected(clientController.getNickname());
