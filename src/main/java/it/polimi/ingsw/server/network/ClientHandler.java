@@ -86,7 +86,7 @@ public class ClientHandler implements Runnable {
         try {
             String msg;
 
-            if(server.getSendRestartQuestion() && !server.isRestartQuestionSent()){
+            if(server.getSendRestartQuestion() && !server.isRestartQuestionSent() && !server.isRestartAnswerReceived()){
                 sendMessage(new RestartQuestionMessage(server.getRestartQuestion()));
                 if(server.getRestartQuestion() == 0)
                     server.setRestartQuestion();
@@ -101,7 +101,8 @@ public class ClientHandler implements Runnable {
                     sendMessage(new RestartQuestionMessage(server.getRestartQuestion()));
                 else
                     sendMessage(new UsernameMessage(null));
-            }else if(server.getGameController().getGameControllerState().equals("Disconnection")) {
+            }
+            else if(server.getGameController().getGameControllerState().equals("Disconnection")) {
                 sendMessage(new RestartQuestionMessage(1));
             }else{
                 sendMessage(new UsernameMessage(null));
@@ -122,7 +123,7 @@ public class ClientHandler implements Runnable {
                 if (!getPongo()){
                     ack++;
                     System.out.println("ack error: " + ack);
-                    if(ack==4){
+                    if(ack==2){
                     try {
                             pingDisconnection();
                         System.out.println("passo da qui " + ack);

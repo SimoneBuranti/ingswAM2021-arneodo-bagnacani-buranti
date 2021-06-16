@@ -167,12 +167,6 @@ public class ViewController implements MessageVisitor, ViewObserver {
     @Override
     public void visit(CompleteRunningMatchErrorMessage msg) {
         view.notifyError(msg);
-        try {
-            socketClient.disconnect();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
     }
 
     /**
@@ -220,9 +214,9 @@ public class ViewController implements MessageVisitor, ViewObserver {
     }
 
     @Override
-    public void visit(NotYourTurnErrorMessage msg) {
+    public void visit(NotYourTurnErrorMessage msg)
+    {
         view.notifyError(msg);
-
     }
 
     /**
@@ -231,7 +225,6 @@ public class ViewController implements MessageVisitor, ViewObserver {
     @Override
     public void visit(BootingLobbyErrorMessage msg) {
         view.notifyError(msg);
-
     }
 
     /**
@@ -240,6 +233,7 @@ public class ViewController implements MessageVisitor, ViewObserver {
      */
     @Override
     public void visit(RestartQuestionMessage msg) throws IOException, InterruptedException {
+        System.out.println(msg.getLobbySize());
         if(msg.getLobbySize() == 0)
             view.askRestartGame();
         else {

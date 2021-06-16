@@ -54,13 +54,27 @@ public class GameControllerRestart extends GameController {
             if(server.tempClientControllerSize()==0) {
                 server.setRestartQuestionSent(false);
                 server.setRestartQuestion();
-            }else{
+            }
+            else{
                 server.getTempClientController().get(0).getClientHandler().sendMessage(new RestartQuestionMessage(0));
                 server.getTempClientController().remove(0);
                 if(server.getRestartQuestion() == 0)
                     server.setRestartQuestion();
                 server.setRestartQuestionSent(true);
             }
+        }
+        else if(reconnected.size() == 0 && server.isRestartAnswerReceived()){
+
+            server.removeClientController(clientController);
+            server.setRestartQuestionSent(false);
+            server.setRestartQuestion();
+        }
+
+        else if(reconnected.size() == 1 && server.isRestartAnswerReceived()){
+            removeNameFromReconnected(clientController.getNickname());
+            server.removeClientController(clientController);
+            server.setRestartQuestionSent(false);
+            server.setRestartQuestion();
         }
         else{
             removeNameFromReconnected(clientController.getNickname());
@@ -242,7 +256,7 @@ public class GameControllerRestart extends GameController {
      */
     public void reconnectionLobby() throws IOException, InterruptedException {
         for(ClientController c : server.getTempClientController()){
-            c.getClientHandler().sendMessage(new RestartQuestionMessage(1));
+            c.getClientHandler().sendMessage(new RestartQuestionMessage(0));
         }
     }
 
