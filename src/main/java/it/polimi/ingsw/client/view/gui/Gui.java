@@ -776,7 +776,7 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
     @Override
     public void sayDisconnect() {
 
-        SwingUtilities.invokeLater(() -> {
+
             if(mainFrameOfGame != null) {
                 mainFrameOfGame.showPopUp("server is crashed, you i've been disconnected");
                 applyChangesTo(mainFrameOfGame);
@@ -785,7 +785,6 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
                 applyChangesTo(mainFrame);
             }
 
-        });
     }
 
     /**
