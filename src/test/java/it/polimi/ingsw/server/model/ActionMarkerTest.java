@@ -184,5 +184,7 @@ public class ActionMarkerTest {
         assertEquals(24, game.getLorenzoFaithIndicator());
         assertEquals(actionMarker1, game.showFirst());
 
+        FileClass.FileDestroyer();
+
     }
 }

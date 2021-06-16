@@ -51,6 +51,7 @@ public class MarketTest {
         !( game.getCellGridMarket(2, 1) instanceof WhiteMarble)||
         !( game.getCellGridMarket(2, 2) instanceof WhiteMarble)||
         !( game.getCellGridMarket(2, 3) instanceof WhiteMarble));
+        FileClass.FileDestroyer();
     }
 
 
@@ -390,6 +391,6 @@ public class MarketTest {
         assertEquals(game.getCellGridMarket(1, 0), game.getInitialMarbleListMarket(4));
         assertEquals(game.getCellGridMarket(2, 0), game.getInitialMarbleListMarket(8));
         assertEquals(game.getExtraMarket(), game.getInitialMarbleListMarket(12));
-
+FileClass.FileDestroyer();
     }*/}
 

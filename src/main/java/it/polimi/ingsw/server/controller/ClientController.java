@@ -3,6 +3,7 @@ package it.polimi.ingsw.server.controller;
 import it.polimi.ingsw.messages.*;
 import it.polimi.ingsw.messages.observable.*;
 import it.polimi.ingsw.server.model.Game;
+import it.polimi.ingsw.server.model.GameMultiPlayer;
 import it.polimi.ingsw.server.model.exceptions.*;
 import it.polimi.ingsw.server.model.exceptions.LeaderCardsGameBoardEmptyException;
 import it.polimi.ingsw.server.network.*;
@@ -247,7 +248,10 @@ public class ClientController implements MessageVisitor {
         if (!turnCheck())
             server.getGameController().handleMessage(msg, this);
         else{
+            if(server.getGame() instanceof GameMultiPlayer)
+            {
             server.getGame().endOfTurn();
+            }
             server.getGameController().handleMessage(msg, this);
         }
     }

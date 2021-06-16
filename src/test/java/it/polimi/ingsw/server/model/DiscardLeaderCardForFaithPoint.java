@@ -74,7 +74,7 @@ class DiscardLeaderCardForFaithPoint {
         game.getPlayerFromList(1).discardLeaderCard(0);
         assertEquals(2, game.getPlayerFromList(1).getIndicator());
         assertEquals(0, game.getPlayerFromList(1).getGameBoardOfPlayer().leaderCardsSize());
-
+        FileClass.FileDestroyer();
     }
 
 }
