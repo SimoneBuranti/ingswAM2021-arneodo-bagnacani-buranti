@@ -256,7 +256,7 @@ public class GameControllerRestart extends GameController {
      */
     public void reconnectionLobby() throws IOException, InterruptedException {
         for(ClientController c : server.getTempClientController()){
-            c.getClientHandler().sendMessage(new RestartQuestionMessage(0));
+            c.getClientHandler().sendMessage(new RestartQuestionMessage(1));
         }
     }
 
