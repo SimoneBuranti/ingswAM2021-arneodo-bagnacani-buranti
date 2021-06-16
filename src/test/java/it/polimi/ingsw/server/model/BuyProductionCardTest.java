@@ -72,6 +72,7 @@ public class BuyProductionCardTest {
         assertEquals(0, game.deckSize(game.deckProductionCardOneViolet));
         assertEquals(0, game.deckSize(game.deckProductionCardTwoViolet));
         assertEquals(0, game.deckSize(game.deckProductionCardThreeViolet));*/
+        FileClass.FileDestroyer();
     }
 
 }

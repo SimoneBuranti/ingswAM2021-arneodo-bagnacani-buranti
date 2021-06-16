@@ -64,7 +64,6 @@ public class GameControllerRestart extends GameController {
             }
         }
         else if(reconnected.size() == 0 && server.isRestartAnswerReceived()){
-
             server.removeClientController(clientController);
             server.setRestartQuestionSent(false);
             server.setRestartQuestion();

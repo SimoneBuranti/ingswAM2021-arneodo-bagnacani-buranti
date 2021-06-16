@@ -114,7 +114,7 @@ public class GameMultiPlayerTest {
             System.out.println(game.getCurrentPlayer());
 
 
-
+        FileClass.FileDestroyer();
 
     }
 }

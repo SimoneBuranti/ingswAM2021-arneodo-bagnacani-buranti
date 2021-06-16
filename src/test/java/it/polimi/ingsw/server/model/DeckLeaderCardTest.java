@@ -128,7 +128,7 @@ class DeckLeaderCardTest {
         GameMultiPlayer game= new GameMultiPlayer(2,nickname,true, clientControllers);
         assertTrue(game.getPlayerFromList(0) instanceof PlayerFirst);
         assertTrue(game.getPlayerFromList(1) instanceof PlayerSecond);
-
+        FileClass.FileDestroyer();
 
     }
 
