@@ -34,7 +34,7 @@ public class ExtraProductionCommand extends Command {
     public Message commandOn() throws InvalidCommandException, AlreadyActivatedProductionException, SpentTokenException {
         if(viewController.isActionToken()) {
             Scanner in = new Scanner(System.in);
-            String input = null;
+            String input = "nothing";
             int cont = 0;
             Resource o;
 
@@ -50,9 +50,8 @@ public class ExtraProductionCommand extends Command {
             if (cont == 1) {
                 if (!getExtraProductionToken(1))
                     throw new AlreadyActivatedProductionException();
-                o = askForOutputResource();
                 setFalseProductionBools(1);
-                return new ExtraProductionOnMessage(o);
+                return new ExtraProductionOnMessage(askForOutputResource(),viewController.getGame().getLeaderCardActivated().get(0).getResourceEffect());
 
             } else {
 

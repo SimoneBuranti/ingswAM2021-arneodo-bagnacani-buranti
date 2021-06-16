@@ -52,9 +52,16 @@ public class LightReserve {
             System.out.println("La lista passata è nulla e sono in addResource");
             return;
         }
-        System.out.println(reservePools.keySet()+"\n");
-        for(Resource resource : list)
-            reservePools.put(resource, reservePools.remove(resource) + 1);
+        /*System.out.println("Stampo reserve\n");
+        for(Resource resource : reservePools.keySet()){
+            System.out.println(resource+": "+reservePools.get(resource));
+        }
+        System.out.println("Stampo list: "+list+"\n");*/
+
+        for(Resource resource : list){
+            reservePools.put(resource,reservePools.remove(resource) + 1);
+        }
+
     }
 
     /**
