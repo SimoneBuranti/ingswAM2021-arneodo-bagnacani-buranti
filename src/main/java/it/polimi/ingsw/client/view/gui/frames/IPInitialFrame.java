@@ -135,6 +135,10 @@ public class IPInitialFrame extends JFrame {
     public static boolean correctHostName(String hostName){
         String cha;
         int figure;
+
+        if(hostName.length() ==0)
+            return false;
+
         for(int i=0,cont = 0;i<hostName.length();i++){
             if (cont >0 && hostName.charAt(i) =='.')
                 cont = 0;

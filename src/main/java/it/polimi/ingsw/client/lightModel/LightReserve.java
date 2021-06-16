@@ -48,7 +48,11 @@ public class LightReserve {
      * This method adds the resources passed as a parameter to the reserve
      */
     public void addResource(ArrayList<Resource> list) {
-
+        if (list == null || list.size() == 0){
+            System.out.println("La lista passata è nulla e sono in addResource");
+            return;
+        }
+        System.out.println(reservePools.keySet()+"\n");
         for(Resource resource : list)
             reservePools.put(resource, reservePools.remove(resource) + 1);
     }

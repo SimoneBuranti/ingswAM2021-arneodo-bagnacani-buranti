@@ -58,7 +58,7 @@ public class MarketTest {
     /**
      * test on creation of Market(Extra) with mixed functionality
      */
-    @Test
+    /*@Test
     public void initializationOfExtraMarket() throws IOException, InterruptedException {
 
         ArrayList<String> nickname =new ArrayList<>(2);
@@ -92,7 +92,7 @@ public class MarketTest {
                 ( game.getExtraMarket() instanceof WhiteMarble)||
                 ( game.getExtraMarket() instanceof WhiteMarble)||
                 ( game.getExtraMarket() instanceof WhiteMarble));
-    }
+    }*/
 
 
     /*/*
