@@ -22,7 +22,7 @@ import java.awt.event.MouseListener;
 import java.io.IOException;
 import java.util.Map;
 
-public class GameboardPanel extends JPanel implements ActionListener, MouseListener {
+public class GameboardPanel extends JPanel{
 
     /**
      * Graphic parameters.
@@ -49,17 +49,51 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
      */
     protected Image backgroundImage;
 
+    /**
+     * Chosen deck number.
+     */
     protected int chosenDeckNumber;
+    /**
+     * Production stack references.
+     */
     protected JLayeredPane[] productionSpaces;
+    /**
+     * Panel containing the base production action.
+     */
     protected BaseProductionPanel baseProductionPanel;
+    /**
+     * Grid of production card references.
+     */
     protected JLabel[][] productionCards;
+    /**
+     * Production button references.
+     */
     protected ProductionButton[] productionButtons;
+    /**
+     * End production button reference.
+     */
     protected JButton endOfproductionButton;
+    /**
+     * Panel containing the faith track of the player.
+     */
     protected FaithPathPane faithPathPane;
+    /**
+     * Panel containing the resources in the storage.
+     */
     protected StoragePanel storagePanel;
+    /**
+     * Panel containing the resources in the strongbox.
+     */
     protected StrongBoxPanel strongboxPanel;
+    /**
+     * End turn button reference.
+     */
     protected JButton endTurnButton;
 
+    /**
+     * Gameboard panel constructor.
+     * @param gui
+     */
     public GameboardPanel(Gui gui){
 
         this.gui = gui;
@@ -84,12 +118,18 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
     }
 
 
+    /**
+     * Chosen deck number setter.
+     * @param n
+     */
     public void setChosenDeckNumber(int n){
         this.chosenDeckNumber = n;
     }
 
 
-
+    /**
+     * Initialization of gameboard panel components.
+     */
     public void initGameboardPanel(){
         Image image = Toolkit.getDefaultToolkit().createImage("src/main/resources/resources/board/Masters of Renaissance_PlayerBoard (11_2020)-1.png");
         this.backgroundImage = image.getScaledInstance(gameboardWidth,gameboardHeight,0);
@@ -97,10 +137,13 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
         this.setSize(gameboardWidth,gameboardHeight);
         this.setBounds(0,0,gameboardWidth,gameboardHeight);
         this.setLayout(null);
-        this.addMouseListener(this);
+        //this.addMouseListener(this);
         this.setVisible(true);
     }
 
+    /**
+     * Initialization of graphic components of production spaces.
+     */
     public void initProductionSpaces(){
 
         if (productionSpaces != null){
@@ -127,8 +170,9 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
     }
 
 
-
-
+    /**
+     * Initialization of buttons.
+     */
     public void initButtons() {
         this.endTurnButton = new JButton();
         endTurnButton.setText("End turn");
@@ -181,6 +225,11 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
     }
 
 
+    /**
+     * This method adds a production card given its key number to the specified column.
+     * @param key
+     * @param column
+     */
     public void addProductionCard(int key,int column){
 
         CardLabel cardLabel = new CardLabel(key);
@@ -215,18 +264,26 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
 
     }
 
-
+    /**
+     * Initialization of storage.
+     */
     private void initStorage() {
         this.storagePanel = new StoragePanel();
 
         this.add(storagePanel);
     }
 
+    /**
+     * Initialization f strongbox.
+     */
     private void initStrongBox() {
         this.strongboxPanel = new StrongBoxPanel();
         this.add(strongboxPanel);
     }
 
+    /**
+     * Initialization of faith track.
+     */
     private void initFaithPathPane() {
         this.faithPathPane = new FaithPathPane();
         faithPathPane.setOpaque(false);
@@ -236,6 +293,9 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
         this.add(faithPathPane);
     }
 
+    /**
+     * Initialization of base production panel.
+     */
     public void initBaseProductionSpace(){
         this.baseProductionPanel = new BaseProductionPanel(gui);
 
@@ -243,22 +303,34 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
     }
 
 
+    /**
+     *
+     * @param newStorage
+     */
     public void updateStorage(Map<Resource,Integer> newStorage){
         this.storagePanel.updateStorage(newStorage);
 
     }
 
+    /**
+     * Updates Lorenzo the Magnificent's position on the faith path.
+     * @param indicator
+     */
     public void updateLorenzoIndicator(int indicator){
 
     }
 
+    /*
     public void lorenzoMove(){
 
     }
+    */
 
 
-
-
+    /**
+     * This method overrides the paintCommponents of the class so that it is possible to add a background image.
+     * @param g
+     */
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -266,6 +338,7 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
 
     }
 
+    /*
     @Override
     public void actionPerformed(ActionEvent e) {
 
@@ -294,7 +367,12 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
     @Override
     public void mouseExited(MouseEvent e) {
         //System.out.println("You exited");
-    }
+    }*/
+
+    /**
+     * Updates production spaces.
+     * @param gameboardListNotification
+     */
     public void updateProductionSpaces(GameboardListNotification gameboardListNotification){
         initProductionSpaces();
 
@@ -306,14 +384,25 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
 
     }
 
+    /**
+     * This method gives the current papal card when called.
+     * @param i
+     */
     public void givePapalcard(int i) {
         faithPathPane.givePapalCard(i);
     }
 
+    /**
+     * This method discards the current papal card when called.
+     * @param i
+     */
     public void removePapalCard(int i) {
         faithPathPane.removePapalCard(i);
     }
 
+    /**
+     * This method disables every production button in the gameboard.
+     */
     public void disableProductionButtons(){
         for(int i = 0; i < 3; i++){
             Gui.removeAllListeners(productionButtons[i]);
@@ -324,6 +413,9 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
         baseProductionPanel.disableButton();
     }
 
+    /**
+     * This method enables every production button in the gameboard.
+     */
     public void enableProductionButtons(){
         for(int i = 0; i < 3; i++){
             productionButtons[i].setText("Activate");
@@ -340,24 +432,38 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
         baseProductionPanel.enableButton();
     }
 
-
+    /**
+     * This method enables the end turn button.
+     */
     public void enableEndTurnButton(){
         this.endTurnButton.setEnabled(true);
     }
 
+    /**
+     * This method enables the end production button.
+     */
     public void enableEndOfProductionButton(){
         this.endOfproductionButton.setEnabled(true);
     }
 
+    /**
+     * This method disables the end turn button.
+     */
     public void disableEndTurnButton(){
 
         this.endTurnButton.setEnabled(false);
     }
 
+    /**
+     * This method disables the end production button.
+     */
     public void disableEndOfProductionButton(){
         this.endOfproductionButton.setEnabled(false);
     }
 
+    /**
+     * When called this method allows the player to place a new production card in a production card column.
+     */
     public void putCardMode(){
         for(int i = 0; i<3 ; i++){
             productionButtons[i].setText("Put here");
@@ -377,10 +483,17 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
         new PlayerInformatioFrames(msg);
     }*/
 
+    /**
+     * This method enables the base production button.
+     */
     public void enableBaseProductionButton() {
         baseProductionPanel.enableButton();
     }
 
+    /**
+     * This method returns the number of activated leader cards in the gameboard of the player.
+     * @return
+     */
     public int howManyActivated() {
         int cont = 0;
         if(!baseProductionPanel.getProductionButton().isToken())
@@ -392,6 +505,10 @@ public class GameboardPanel extends JPanel implements ActionListener, MouseListe
         return cont;
     }
 
+    /**
+     * This method updates the resources in the strongbox.
+     * @param map
+     */
     public void updateStrongBox(Map<Resource, Integer> map) {
         this.strongboxPanel.updateStrongBox(map);
     }
