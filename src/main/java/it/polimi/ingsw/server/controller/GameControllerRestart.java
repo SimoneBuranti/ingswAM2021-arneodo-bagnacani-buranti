@@ -53,7 +53,7 @@ public class GameControllerRestart extends GameController {
                 System.out.println("SONO QUI 1");
                 server.setRestartQuestionSent(false);
                 server.setRestartQuestion();
-            }else if(clientController == firstClientController){
+            }else if(!server.isInTempLobby(clientController)){
                 System.out.println("SONO QUI 2");
                 server.getTempClientController().get(0).getClientHandler().sendMessage(new RestartQuestionMessage(0));
                 server.getTempClientController().remove(0);

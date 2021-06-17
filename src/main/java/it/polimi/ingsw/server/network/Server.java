@@ -460,4 +460,12 @@ public class Server {
         for(int i = 0; i < tempClientControllerSize(); i++)
             tempClientController.remove(0);
     }
+
+    public boolean isInTempLobby(ClientController clientController) {
+        for(ClientController c : tempClientController)
+            if(c == clientController)
+                return true;
+
+        return false;
+    }
 }
