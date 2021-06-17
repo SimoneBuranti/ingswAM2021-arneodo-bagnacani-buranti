@@ -221,7 +221,6 @@ public class PlayerInformationFrames extends JFrame {
      */
     public void addProductionCard(int key,int column){
 
-
         CardLabel cardLabel = new CardLabel(key);
 
         for(int i = 0 ; i<3; i++){
@@ -318,6 +317,7 @@ public class PlayerInformationFrames extends JFrame {
      */
     public void updateProductionSpaces(int[][] prod){
         initProductionSpaces();
+
         for(int i=0; i<3; i++){
             for(int j=0; j<3; j++){
                 if (prod[i][j]!=0)

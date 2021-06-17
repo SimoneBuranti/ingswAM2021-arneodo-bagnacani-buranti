@@ -245,7 +245,8 @@ public class ClientController implements MessageVisitor {
 
     @Override
     public void visit(ExitMessage msg) throws IOException, InterruptedException {
-        if (!turnCheck())
+        server.getGameController().handleMessage(msg, this);
+        /*if (!turnCheck())
             server.getGameController().handleMessage(msg, this);
         else{
             if(server.getGame() instanceof GameMultiPlayer)
@@ -253,7 +254,7 @@ public class ClientController implements MessageVisitor {
             server.getGame().endOfTurn();
             }
             server.getGameController().handleMessage(msg, this);
-        }
+        }*/
     }
 
     /**
