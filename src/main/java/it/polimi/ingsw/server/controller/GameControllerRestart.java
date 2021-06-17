@@ -47,61 +47,93 @@ public class GameControllerRestart extends GameController {
      */
     @Override
     public synchronized void handleMessage(ExitMessage msg, ClientController clientController) throws IOException, InterruptedException {
-        if(thereIsTempLobby() && clientController != firstClientController){
-            disconnectClientTempLobby(clientController);
-        }
-        else if(reconnected.size() == 0 && !server.isRestartAnswerReceived()){
-            if(server.tempClientControllerSize()==0) {
+        System.out.println("SONO QUI 0");
+        if(!server.isRestartAnswerReceived()){
+            if(server.tempClientControllerSize() == 0){
+                System.out.println("SONO QUI 1");
                 server.setRestartQuestionSent(false);
                 server.setRestartQuestion();
-            }
-            else{
+            }else if(clientController == firstClientController){
+                System.out.println("SONO QUI 2");
                 server.getTempClientController().get(0).getClientHandler().sendMessage(new RestartQuestionMessage(0));
                 server.getTempClientController().remove(0);
                 if(server.getRestartQuestion() == 0)
                     server.setRestartQuestion();
                 server.setRestartQuestionSent(true);
+            }else{
+                System.out.println("SONO QUI 3");
+                server.removeTempClientController(clientController);
             }
-        }
-        else if(reconnected.size() == 0 && server.isRestartAnswerReceived() && clientController == firstClientController){
-
-            if(server.tempClientControllerSize()==0) {
-                server.removeClientController(clientController);
+        }else if(server.isRestartAnswerReceived() && reconnected.size() == 0){
+            if(server.tempClientControllerSize() == 0){
+                System.out.println("SONO QUI 4");
+                firstClientController = null;
                 server.setRestartQuestionSent(false);
                 server.setRestartQuestion();
                 server.setRestartAnswerReceived(false);
-            }
-            else{
-                server.removeClientController(clientController);
+            }else if(!thereIsTempLobby() && clientController == firstClientController){
+                System.out.println("SONO QUI 5");
+                firstClientController = null;
                 server.getTempClientController().get(0).getClientHandler().sendMessage(new RestartQuestionMessage(0));
                 server.getTempClientController().remove(0);
                 if(server.getRestartQuestion() == 0)
                     server.setRestartQuestion();
                 server.setRestartQuestionSent(true);
-                server.setRestartAnswerReceived(false);
-            }
-        }
+                for(ClientController c : server.getTempClientController())
+                    c.getClientHandler().sendMessage(new BootingLobbyErrorMessage());
+            }else if(!thereIsTempLobby() && clientController != firstClientController){
+                System.out.println("SONO QUI 6");
+                server.removeTempClientController(clientController);
+            }else if(thereIsTempLobby() && clientController == firstClientController){
+                System.out.println("SONO QUI 7");
+                firstClientController = tempLobbyController.get(0);
+                tempLobbyController.get(0).setNickname(tempLobbyName.get(0));
+                reconnected.add(tempLobbyName.get(0));
+                server.addClientController(tempLobbyController.get(0));
+                server.removeTempClientController(tempLobbyController.get(0));
+                disconnectClientTempLobby(tempLobbyController.get(0));
+                firstName = true;
+                reconnectionTempLobby();
 
-        else if(reconnected.size() == 1 && clientController == firstClientController){
-            if(server.tempClientControllerSize()==0) {
+                if (reconnected.size() == server.getLobbySize()){
+                    if (server.getLobbySize()==1){
+                        server.restoreGameSingleBackup();
+                        server.setGameController(new GameControllerSinglePlayer(server,server.getGame()));
+                    }
+                    else {
+                        server.restoreGameMultiBackup();
+                        server.setGameController(new GameControllerMultiplayer(this.server,server.getGame()));
+                    }
+                }else{
+                    for(ClientController c : server.getClientController())
+                        c.getClientHandler().sendMessage(new NPlayersMessage(reconnected.size(), server.getLobbySize()));
+                }
+            }else if(thereIsTempLobby() && clientController != firstClientController){
+                System.out.println("SONO QUI 8");
+                disconnectClientTempLobby(clientController);
+                server.removeTempClientController(clientController);
+            }
+        }else if(reconnected.size() == 1){
+            System.out.println(server.tempClientControllerSize());
+            if(server.tempClientControllerSize() == 0){
+                System.out.println("SONO QUI 9");
                 removeNameFromReconnected(clientController.getNickname());
                 server.removeClientController(clientController);
+                firstClientController = null;
                 server.setRestartQuestionSent(false);
                 server.setRestartQuestion();
                 server.setRestartAnswerReceived(false);
-            }
-            else{
+            }else if(server.tempClientControllerSize() > 0 && clientController == firstClientController){
+                System.out.println("SONO QUI 10");
                 removeNameFromReconnected(clientController.getNickname());
                 server.removeClientController(clientController);
-                server.getTempClientController().get(0).getClientHandler().sendMessage(new RestartQuestionMessage(0));
-                server.getTempClientController().remove(0);
-                if(server.getRestartQuestion() == 0)
-                    server.setRestartQuestion();
-                server.setRestartQuestionSent(true);
-                server.setRestartAnswerReceived(false);
+                firstClientController = server.getTempClientController().get(0);
+            }else if(server.tempClientControllerSize() > 0 && clientController != firstClientController){
+                System.out.println("SONO QUI 11");
+                server.removeTempClientController(clientController);
             }
-        }
-        else{
+        }else if(reconnected.size() >= 1){
+            System.out.println("SONO QUI 12");
             removeNameFromReconnected(clientController.getNickname());
             server.removeClientController(clientController);
             for (ClientController c : server.getClientController())
@@ -261,6 +293,14 @@ public class GameControllerRestart extends GameController {
     }
 
     /**
+     * disconnected all client controllers from lobby
+     */
+    public void disconnectAllClientTempLobby() {
+        tempLobbyController = null;
+        tempLobbyName = null;
+    }
+
+    /**
      * remove nickname from reconnected player's nickname
      * @param nickname
      */
@@ -271,6 +311,15 @@ public class GameControllerRestart extends GameController {
                 reconnected.remove(i);
                 break;
             }
+        }
+    }
+
+    /**
+     * remove all nicknames from reconnected player's nickname
+     */
+    public void removeAllNameFromReconnected() {
+        for(int i = 0; i < reconnected.size(); i++){
+            reconnected.remove(0);
         }
     }
 
@@ -297,6 +346,7 @@ public class GameControllerRestart extends GameController {
                 tempLobbyController.get(i).setNickname(tempLobbyName.get(i));
                 reconnected.add(tempLobbyName.get(i));
                 server.addClientController(tempLobbyController.get(i));
+                server.removeTempClientController(tempLobbyController.get(i));
                 /*for(ClientController c : server.getClientController())
                     c.getClientHandler().sendMessage(new NPlayersMessage(reconnected.size(), server.getLobbySize()));*/
             }
@@ -308,6 +358,7 @@ public class GameControllerRestart extends GameController {
                 for(int j = 0; j < i; j++)
                     if(tempLobbyName.get(j) == null) {
                         tempLobbyController.get(j).getClientHandler().sendMessage(new CompleteRunningMatchErrorMessage());
+                        server.removeTempClientController(tempLobbyController.get(j));
                     }
                 break;
             }
@@ -315,10 +366,10 @@ public class GameControllerRestart extends GameController {
 
         for(i++ ; i < tempLobbyName.size(); i++){
             tempLobbyController.get(i).getClientHandler().sendMessage(new CompleteRunningMatchErrorMessage());
+            server.removeTempClientController(tempLobbyController.get(i));
         }
 
-
-
+        disconnectAllClientTempLobby();
     }
 
 }

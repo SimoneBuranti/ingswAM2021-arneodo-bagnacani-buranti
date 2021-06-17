@@ -452,4 +452,12 @@ public class Server {
     }
 
 
+    public void removeTempClientController(ClientController clientController) {
+        tempClientController.remove(clientController);
+    }
+
+    public void removeAllTempClientController() {
+        for(int i = 0; i < tempClientControllerSize(); i++)
+            tempClientController.remove(0);
+    }
 }
