@@ -58,11 +58,9 @@ public class MarketActionCommand extends Command {
             viewController.setActionToken(false);
 
             if (rc=='c'){
-                System.out.println("push column");
                 return new PushColumnMessage(n);
             }
             if (rc=='r'){
-                System.out.println("push row");
                 return new PushRowMessage(n);
             }
 

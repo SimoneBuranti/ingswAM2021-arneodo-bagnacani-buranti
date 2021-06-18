@@ -74,6 +74,21 @@ public class LightGameSolitaire extends LightGame{
         }
     }
 
+
+    /**
+     * this method calls the Lorenzo the magnificent method to move the black cross and notifies the observer
+     */
+    @Override
+    public void moveBlackCross(){
+        lorenzoTheMagnificent.moveBlackCross();
+        try {
+            notifyObserver((new LorenzoNotification(lorenzoTheMagnificent.getFaithIndicator()).serialize()));
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+
     /**
      * this method calls the Lorenzo the magnificent method to move the black cross twice and notifies the observer
      */

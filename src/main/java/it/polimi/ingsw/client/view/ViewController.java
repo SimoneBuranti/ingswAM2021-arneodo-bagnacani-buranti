@@ -233,7 +233,6 @@ public class ViewController implements MessageVisitor, ViewObserver {
      */
     @Override
     public void visit(RestartQuestionMessage msg) throws IOException, InterruptedException {
-        System.out.println(msg.getLobbySize());
         if(msg.getLobbySize() == 0)
             view.askRestartGame();
         else {
@@ -840,7 +839,7 @@ public class ViewController implements MessageVisitor, ViewObserver {
      */
     @Override
     public void visit(LorenzoMoveMessage msg) {
-        game.moveBlackCrossOnce();
+        game.moveBlackCross();
     }
 
     /**

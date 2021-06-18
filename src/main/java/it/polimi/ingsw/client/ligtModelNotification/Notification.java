@@ -83,6 +83,9 @@ public abstract class Notification {
             case PAPALCARDSCONFIG:
                 return gson.fromJson(jsonObj, PapalCardsConfigNotification.class);
 
+            case LORENZOMOVE:
+                return gson.fromJson(jsonObj, LorenzoNotification.class);
+
 
                 default:
                 throw new IllegalArgumentException("Invalid topic " + notificationType);

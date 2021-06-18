@@ -671,7 +671,7 @@ public class GameSolitaire extends Game {
         if(isFirstTurn){
             isFirstTurn = false;
             notifyObserver(new YourTurnMessage());
-        }else {
+        }else if(!isOver){
             revealAndActivateActionMarker();
         }
         saveInformation();

@@ -30,4 +30,6 @@ public interface NotificatorVisitor {
     void visit(DiscardLeaderNotification discardLeaderNotification);
 
     void visit(PapalCardsConfigNotification papalCardsConfigNotification);
+
+    void visit(LorenzoNotification lorenzoNotification);
 }

@@ -741,6 +741,8 @@ public class LightGame extends ViewObservable {
 
     public void moveBlackCrossOnce(){}
 
+    public void moveBlackCross(){}
+
     public int getLorenzoPosition(){
         return 0;
     }
