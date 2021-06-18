@@ -489,16 +489,12 @@ public class GameSolitaire extends Game {
 
         Gson gson=new Gson();
         ArrayList<String> strings= new ArrayList<>();
-        System.out.println("qui restore r1");
         try {
             strings= gson.fromJson(new FileReader("fileConfiguration/InformationAboutNickname.json"), ArrayList.class);
 
             nickNamePlayer=strings.get(0);
-            System.out.println("qui restore r2");
         RestoreActionMarker();
-            System.out.println("qui restore r3");
         player = new PlayerFirst(nickNamePlayer,this,false,clientController.getVirtualView());
-            System.out.println("qui restore r4");
         currentPlayer = player;
         this.addObserver(clientController.getVirtualView());
 
@@ -518,7 +514,6 @@ public class GameSolitaire extends Game {
     /**
      * method for saveNickNamePlayer
      */
-
     public void saveNickNamePlayer(){
         Gson gson = new Gson();
 
@@ -537,7 +532,8 @@ public class GameSolitaire extends Game {
                 config.close();
             } catch (IOException e) {
                 e.printStackTrace();
-            } }
+            }
+        }
 
 
         try {

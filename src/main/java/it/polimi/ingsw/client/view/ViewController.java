@@ -849,19 +849,22 @@ public class ViewController implements MessageVisitor, ViewObserver {
      */
     @Override
     public void visit(YourTurnMessage msg) throws IOException, InterruptedException {
-        if (!game.isInitLeader() && !game.isInitResource()) {
+        if (!game.isInitLeader() && !game.isInitResource())
+        {
             view.yourTurn();
             view.askLeaderCardToKeep(game.getLeaderCards());
             game.setInitResource(true);
         }
-        else if(game.isInitLeader()&&!game.isInitResource()){
+        else if(game.isInitLeader() && !game.isInitResource() && game.getPosition()!=1)
+        {
             view.askInitResource();
             game.setInitResource(true);
             view.yourTurn();
             view.askInitResource();
             game.setInitResource(true);
         }
-        else{
+        else
+        {
             view.yourTurn();
         }
         game.setActionToken(true);

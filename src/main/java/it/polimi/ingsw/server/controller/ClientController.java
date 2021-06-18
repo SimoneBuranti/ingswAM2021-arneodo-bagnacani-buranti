@@ -148,7 +148,7 @@ public class ClientController implements MessageVisitor {
     @Override
     public void visit(EndOfTurnMessage msg) throws IOException, InterruptedException {
         if(turnCheck()) {
-            game.endOfTurn();
+            server.getGame().endOfTurn();
         }
         else
             clientHandler.sendMessage(new NotYourTurnErrorMessage());
@@ -344,7 +344,7 @@ public class ClientController implements MessageVisitor {
     public void visit(BuyProductionCardMessage msg) throws IOException, InterruptedException {
         if (turnCheck()){
             try {
-                game.buyProductionCard(game.deckFromDeckNumber(msg.getDeckNumber()),msg.getColumnNumber());
+                server.getGame().buyProductionCard(game.deckFromDeckNumber(msg.getDeckNumber()),msg.getColumnNumber());
             } catch (EmptyException | FullColumnException | LevelException e) {
                 clientHandler.sendMessage(new WrongColumnErrorMessage());
             } catch (NotEnoughResourcesException e) {
@@ -367,7 +367,7 @@ public class ClientController implements MessageVisitor {
     public void visit(DiscardLeaderCardMessage msg) throws IOException, InterruptedException {
         if (turnCheck()){
             try {
-                game.discardLeaderCard(msg.getCardNumber());
+                server.getGame().discardLeaderCard(msg.getCardNumber());
             } catch (LeaderCardsGameBoardEmptyException e) {
                 clientHandler.sendMessage(new AlreadyActivatedErrorMessage());
             }
@@ -387,7 +387,7 @@ public class ClientController implements MessageVisitor {
     public void visit(DoubleProductionOnMessage msg) throws IOException, InterruptedException {
         if (turnCheck()){
             try {
-                game.anotherExtraProductionOn(msg.getOutputResource(),msg.getResourceLeader());
+                server.getGame().anotherExtraProductionOn(msg.getOutputResource(),msg.getResourceLeader());
             } catch (ImpossibleProductionException e) {
                 clientHandler.sendMessage(new NotAvailableResourcesErrorMessage());
             }
@@ -406,7 +406,7 @@ public class ClientController implements MessageVisitor {
     @Override
     public void visit(EndOfProductionMessage msg) throws IOException, InterruptedException {
         if (turnCheck()){
-            game.endOfProduction();
+            server.getGame().endOfProduction();
         } else {
             clientHandler.sendMessage(new NotYourTurnErrorMessage());
         }
@@ -423,7 +423,7 @@ public class ClientController implements MessageVisitor {
     public void visit(ExtraProductionOnMessage msg) throws IOException, InterruptedException {
         if (turnCheck()){
             try {
-                game.extraProductionOn(msg.getOutputResource(),msg.getResourceLeader());
+                server.getGame().extraProductionOn(msg.getOutputResource(),msg.getResourceLeader());
             } catch (ImpossibleProductionException e) {
                 clientHandler.sendMessage(new NotAvailableResourcesErrorMessage());
             }
@@ -442,7 +442,7 @@ public class ClientController implements MessageVisitor {
     public void visit(InitialResourcesMessage msg) throws IOException, InterruptedException {
         if (turnCheck()){
             if(msg.getResources().size()==1){
-                game.initResourceOfPlayer(msg.getResources().get(0));
+                server.getGame().initResourceOfPlayer(msg.getResources().get(0));
             } else {
                 game.initResourceOfPlayer((msg.getResources().get(0)),msg.getResources().get(1));
             }
@@ -460,7 +460,7 @@ public class ClientController implements MessageVisitor {
     @Override
     public void visit(KeepLeaderCardsMessage msg) throws IOException, InterruptedException {
         if (turnCheck()){
-            game.saveLeaderCardChosen(msg.getChosenLeaderCards()[0],msg.getChosenLeaderCards()[1]);
+            server.getGame().saveLeaderCardChosen(msg.getChosenLeaderCards()[0],msg.getChosenLeaderCards()[1]);
         } else {
             clientHandler.sendMessage(new NotYourTurnErrorMessage());
         }
@@ -476,7 +476,7 @@ public class ClientController implements MessageVisitor {
     public void visit(ProductionOnMessage msg) throws IOException, InterruptedException {
         if (turnCheck()){
             try {
-                game.productionOn(msg.getColumnNumber());
+                server.getGame().productionOn(msg.getColumnNumber());
             } catch (ImpossibleProductionException e) {
                 clientHandler.sendMessage(new NotAvailableResourcesErrorMessage());
             } catch (EmptyColumnException e) {
@@ -496,7 +496,7 @@ public class ClientController implements MessageVisitor {
     public void visit(PushColumnMessage msg) throws IOException, InterruptedException {
         if (turnCheck()){
             try {
-                game.pushColumnInMarket(msg.getColumnNumber());
+                server.getGame().pushColumnInMarket(msg.getColumnNumber());
             } catch (NotEnoughSpaceInStorageException e) {
                 game.notifyFromClientControllerColumn(msg.getColumnNumber());
                 clientHandler.sendMessage(new NotEnoughSpaceErrorMessage(e.getResources()));
@@ -519,7 +519,7 @@ public class ClientController implements MessageVisitor {
     public void visit(PushRowMessage msg) throws IOException, InterruptedException {
         if (turnCheck()){
             try {
-                game.pushRowInMarket(msg.getRowNumber());
+                server.getGame().pushRowInMarket(msg.getRowNumber());
             } catch (NotEnoughSpaceInStorageException e) {
                 game.notifyFromClientControllerRow(msg.getRowNumber());
                 clientHandler.sendMessage(new NotEnoughSpaceErrorMessage(e.getResources()));
@@ -543,7 +543,7 @@ public class ClientController implements MessageVisitor {
     public void visit(WhiteMarbleChoosenResourcesMessage msg) throws IOException, InterruptedException {
         if (turnCheck()){
             try {
-                game.continueTakeFromMarketAfterChoosenWhiteMarble(msg.getChoosenResources());
+                server.getGame().continueTakeFromMarketAfterChoosenWhiteMarble(msg.getChoosenResources());
             } catch (NotEnoughSpaceInStorageException e) {
                 clientHandler.sendMessage(new NotEnoughSpaceErrorMessage(e.getResources()));
             }
@@ -562,7 +562,7 @@ public class ClientController implements MessageVisitor {
     public void visit(KeepResourcesMessage msg) throws IOException, InterruptedException {
         if (turnCheck()){
             try {
-                game.giveResourceFromClient(msg.getChoosenResources());
+                server.getGame().giveResourceFromClient(msg.getChoosenResources());
             } catch (NotEnoughSpaceInStorageException e) {
                 clientHandler.sendMessage(new NotEnoughSpaceErrorMessage(e.getResources()));
             }
@@ -787,16 +787,3 @@ public class ClientController implements MessageVisitor {
 
 
 }
-
-
-//-----------------------------Client Controller Handled ------------------------------------------------------
-
-    /*
-        if (turnCheck()){
-
-        } else {
-            clientHandler.sendMessage(new NotYourTurnErrorMessage());
-        }
-     */
-
-//***********************************************************************************************************

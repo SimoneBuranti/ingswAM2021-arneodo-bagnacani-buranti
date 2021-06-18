@@ -57,49 +57,34 @@ public class Server {
 
     public Server()  {
             ArrayList<String> nickNameInOrder;
-            String nickname;
             Gson gson = new Gson();
-            //File f = new File("fileConfiguration/InformationAboutTurn.json");
 
             try{
-
                 nickNameInOrder = gson.fromJson(new FileReader("fileConfiguration/InformationAboutTurn.json"),ArrayList.class);
-                this.gameController = new GameControllerRestart(this);
-                gameController.setServer(this);
-                lobby = nickNameInOrder;
-                sendRestartQuestion = true;
-                restartQuestion = 0;
-                setRestartAnswerReceived(false);
-                restartQuestionSent = false;
-                gameController.setNumberOfPlayers(nickNameInOrder.size());
+                if(nickNameInOrder!=null)
+                {
+                    this.gameController = new GameControllerRestart(this);
+                    gameController.setServer(this);
+                    lobby = nickNameInOrder;
+                    sendRestartQuestion = true;
+                    restartQuestion = 0;
+                    setRestartAnswerReceived(false);
+                    restartQuestionSent = false;
+                    this.gameController.setNumberOfPlayers(nickNameInOrder.size());
+                }
+                else
+                {
+                    this.gameController = new GameControllerEmpty(this);
+                    gameController.setServer(this);
+                    lobby = new ArrayList<>();
+                    sendRestartQuestion = false;
+                }
             }catch (FileNotFoundException e){
                 this.gameController = new GameControllerEmpty(this);
                 gameController.setServer(this);
                 lobby = new ArrayList<>();
                 sendRestartQuestion = false;
             }
-
-
-            /*if (f.exists()){
-                Reader reader = new InputStreamReader(this.getClass().getResourceAsStream("/fileConfiguration/InformationAboutTurn.json"), StandardCharsets.UTF_8);
-                nickNameInOrder = gson.fromJson(reader, ArrayList.class);
-                //nickNameInOrder = gson.fromJson(new FileReader("fileConfiguration/InformationAboutTurn.json"),ArrayList.class);
-                this.gameController = new GameControllerRestart(this);
-                gameController.setServer(this);
-                lobby = nickNameInOrder;
-                sendRestartQuestion = true;
-                restartQuestion = 0;
-                setRestartAnswerReceived(false);
-                restartQuestionSent = false;
-                gameController.setNumberOfPlayers(nickNameInOrder.size());
-            }
-        else{
-            this.gameController = new GameControllerEmpty(this);
-            gameController.setServer(this);
-            lobby = new ArrayList<>();
-            sendRestartQuestion = false;
-        }*/
-
     }
 
     //------------------------Getter--------------------------------------

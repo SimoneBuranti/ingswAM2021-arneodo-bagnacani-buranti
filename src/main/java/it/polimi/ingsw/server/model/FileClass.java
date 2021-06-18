@@ -1,6 +1,11 @@
 package it.polimi.ingsw.server.model;
 
+import com.google.gson.Gson;
+
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class FileClass {
     public static void FileDestroyer(){
@@ -83,10 +88,6 @@ public class FileClass {
         if (f.exists())
             f.delete();
 
-
-        f = new File("fileConfiguration/InformationAboutTurn.json");
-        if (f.exists())
-            f.delete();
 
 
         f = new File("fileConfiguration/InformationAboutTurnPlayerNumber.json");
@@ -178,6 +179,22 @@ public class FileClass {
             f.delete();
 
 
+        Gson gson = new Gson();
+        FileWriter config = null;
+        String jsonStrin = gson.toJson(null,ArrayList.class);
+        try {
+            config = new FileWriter("fileConfiguration/InformationAboutTurn.json");
+            config.write(jsonStrin);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                config.flush();
+                config.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
 
 
