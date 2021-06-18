@@ -322,6 +322,7 @@ public class LeaderCardsPanel extends JPanel {
                 firstResources.add(firstLabel);
                 firstLabel.setBounds(30, 250, 40, 40);
                 this.add(firstLabel);
+
             }else if(quantity == 2){
                 ResourceLabel firstLabel = new ResourceLabel(30, 250, 40, resource);
                 firstResources.add(firstLabel);
@@ -446,39 +447,48 @@ public class LeaderCardsPanel extends JPanel {
      * @param howMany2 : second quantity to add
      */
     public void addToStorageExtraPlayerOpponent(Resource resource1, Resource resource2, int howMany1, int howMany2){
-            if(howMany1 == 1){
-                ResourceLabel firstLabel = new ResourceLabel(30, 250, 40, resource1);
-                firstResources.add(firstLabel);
-                firstLabel.setBounds(30, 250, 40, 40);
-                this.add(firstLabel);
-            }else if(howMany1 == 2){
-                ResourceLabel firstLabel = new ResourceLabel(30, 250, 40, resource1);
-                firstResources.add(firstLabel);
-                firstLabel.setBounds(30, 250, 40, 40);
-                this.add(firstLabel);
+        for(ResourceLabel resourceLabel : firstResources){
+            this.remove(resourceLabel);
+        }
 
-                ResourceLabel secondLabel = new ResourceLabel(85, 250, 40, resource1);
-                firstResources.add(secondLabel);
-                secondLabel.setBounds(85, 250, 40, 40);
-                this.add(secondLabel);
-            }
 
-            if(howMany2 == 1){
-                ResourceLabel firstLabel = new ResourceLabel(190, 250, 40, resource2);
-                secondResources.add(firstLabel);
-                firstLabel.setBounds(190, 250, 40, 40);
-                this.add(firstLabel);
-            }else if(howMany2 == 2){
-                ResourceLabel firstLabel = new ResourceLabel(190, 250, 40, resource2);
-                secondResources.add(firstLabel);
-                firstLabel.setBounds(190, 250, 40, 40);
-                this.add(firstLabel);
+        if(howMany1 == 1){
+            ResourceLabel firstLabel = new ResourceLabel(30, 250, 40, resource1);
+            firstResources.add(firstLabel);
+            firstLabel.setBounds(30, 250, 40, 40);
+            this.add(firstLabel);
+        }else if(howMany1 == 2){
+            ResourceLabel firstLabel = new ResourceLabel(30, 250, 40, resource1);
+            firstResources.add(firstLabel);
+            firstLabel.setBounds(30, 250, 40, 40);
+            this.add(firstLabel);
 
-                ResourceLabel secondLabel = new ResourceLabel(245, 250, 40, resource2);
-                secondResources.add(secondLabel);
-                secondLabel.setBounds(245, 250, 40, 40);
-                this.add(secondLabel);
-            }
+            ResourceLabel secondLabel = new ResourceLabel(85, 250, 40, resource1);
+            firstResources.add(secondLabel);
+            secondLabel.setBounds(85, 250, 40, 40);
+            this.add(secondLabel);
+        }
+
+        for(ResourceLabel resourceLabel : secondResources){
+            this.remove(resourceLabel);
+        }
+
+        if(howMany2 == 1){
+            ResourceLabel firstLabel = new ResourceLabel(190, 250, 40, resource2);
+            secondResources.add(firstLabel);
+            firstLabel.setBounds(190, 250, 40, 40);
+            this.add(firstLabel);
+        }else if(howMany2 == 2){
+            ResourceLabel firstLabel = new ResourceLabel(190, 250, 40, resource2);
+            secondResources.add(firstLabel);
+            firstLabel.setBounds(190, 250, 40, 40);
+            this.add(firstLabel);
+
+            ResourceLabel secondLabel = new ResourceLabel(245, 250, 40, resource2);
+            secondResources.add(secondLabel);
+            secondLabel.setBounds(245, 250, 40, 40);
+            this.add(secondLabel);
+        }
 
     }
 
