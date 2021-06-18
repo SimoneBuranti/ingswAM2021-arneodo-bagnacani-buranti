@@ -30,8 +30,7 @@ public class GameControllerMultiplayer extends GameController {
 
 
          if(!server.getGame().isOver()) {
-                if (clientController.turnCheck())
-                    server.getGame().endOfTurn();
+
 
                 boolean flag = false;
 
@@ -52,6 +51,8 @@ public class GameControllerMultiplayer extends GameController {
                         server.setGameController(new GameControllerDisconnection(this.server,server.getGame()));
                     }
                 }
+             if (clientController.turnCheck())
+                 server.getGame().endOfTurn();
          }else{
                 server.getGame().disconnectPlayerOption(clientController.getNickname());
                 server.addClientControllersDisconnected(clientController);
