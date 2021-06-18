@@ -174,8 +174,11 @@ public class PlayerInformationFrames extends JFrame {
      */
     public void visibilityOn(){
         this.setVisible(true);
+
         this.paintComponents(this.getGraphics());
-        this.paintComponents(this.getGraphics());
+        this.repaint();
+
+        this.setVisible(true);
     }
 
     /**
@@ -197,8 +200,16 @@ public class PlayerInformationFrames extends JFrame {
      */
     public void initProductionSpaces(){
 
+        if (productionSpaces != null){
+            for(int i = 0;i<3;i++){
+                if (productionSpaces[i] != null)
+                    this.mainPanel.remove(productionSpaces[i]);
+            }
+        }
+
         productionSpaces = new JLayeredPane[3];
         productionCards = new JLabel[3][3];
+
         for(int i = 0;i<3;i++){
             productionSpaces[i] = new JLayeredPane();
 

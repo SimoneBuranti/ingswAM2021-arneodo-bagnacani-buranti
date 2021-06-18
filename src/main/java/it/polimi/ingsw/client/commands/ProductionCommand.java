@@ -71,11 +71,8 @@ public class ProductionCommand extends Command {
      * @param choosenLeaderCard
      */
     public void setFalseProductionBools(int choosenLeaderCard){
-        if (choosenLeaderCard == 1){
-            viewController.getGame().setProductionToken(4,false);
-        } else {
-            viewController.getGame().setProductionToken(5,false);
-        }
+
+        viewController.getGame().setProductionToken(choosenLeaderCard,false);
     }
 
     /**
