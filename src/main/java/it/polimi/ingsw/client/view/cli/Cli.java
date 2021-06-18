@@ -252,10 +252,10 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
      */
     @Override
     public void visit(FaithPathNotification faithPathNotification) {
-        if(!faithPathNotification.isLorenzo())
+        if(!faithPathNotification.isLorenzo()) {
             System.out.println("Your faith indicator position in the faith track is: ");
-
-        showFaithIndicator(faithPathNotification.getI());
+            showFaithIndicator(faithPathNotification.getI());
+        }
     }
 
     @Override
@@ -285,6 +285,12 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
                 System.out.println("you've got the papal favor card  with" + (i+2) + " points!");
             }
         }
+    }
+
+    @Override
+    public void visit(LorenzoNotification lorenzoNotification) {
+        System.out.println("The black cross position in the faith track now is: ");
+        showFaithIndicator(lorenzoNotification.getI());
     }
 
     /**

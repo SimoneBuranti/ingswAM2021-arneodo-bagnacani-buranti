@@ -498,11 +498,11 @@ public class ClientController implements MessageVisitor {
             try {
                 game.pushColumnInMarket(msg.getColumnNumber());
             } catch (NotEnoughSpaceInStorageException e) {
+                game.notifyFromClientControllerColumn(msg.getColumnNumber());
                 clientHandler.sendMessage(new NotEnoughSpaceErrorMessage(e.getResources()));
-                game.notifyFromClientControllerColumn(msg.getColumnNumber());
             } catch (WhiteMarbleException e) {
-                clientHandler.sendMessage(new DoubleWhiteMarbleEffectMessage(e.getN()));
                 game.notifyFromClientControllerColumn(msg.getColumnNumber());
+                clientHandler.sendMessage(new DoubleWhiteMarbleEffectMessage(e.getN()));
             }
         } else {
             clientHandler.sendMessage(new NotYourTurnErrorMessage());
@@ -521,11 +521,11 @@ public class ClientController implements MessageVisitor {
             try {
                 game.pushRowInMarket(msg.getRowNumber());
             } catch (NotEnoughSpaceInStorageException e) {
+                game.notifyFromClientControllerRow(msg.getRowNumber());
                 clientHandler.sendMessage(new NotEnoughSpaceErrorMessage(e.getResources()));
-                game.notifyFromClientControllerRow(msg.getRowNumber());
             } catch (WhiteMarbleException e) {
-                clientHandler.sendMessage(new DoubleWhiteMarbleEffectMessage(e.getN()));
                 game.notifyFromClientControllerRow(msg.getRowNumber());
+                clientHandler.sendMessage(new DoubleWhiteMarbleEffectMessage(e.getN()));
             }
         } else {
             clientHandler.sendMessage(new NotYourTurnErrorMessage());

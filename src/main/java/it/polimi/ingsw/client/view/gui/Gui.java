@@ -977,6 +977,15 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
         });
     }
 
+    @Override
+    public void visit(LorenzoNotification lorenzoNotification) {
+        SwingUtilities.invokeLater(() -> {
+            mainFrameOfGame.updateLorenzoIndicator(lorenzoNotification.getI());
+            applyChangesTo(mainFrameOfGame);
+
+        });
+    }
+
 
     /**
      * Apply changes to a component
