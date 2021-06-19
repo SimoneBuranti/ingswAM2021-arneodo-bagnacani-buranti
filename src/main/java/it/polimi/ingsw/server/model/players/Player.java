@@ -457,8 +457,9 @@ public class Player {
             throw new NotEnoughSpaceInStorageException(buffer);
         }
         delta= buffer.size()-list.size();
-        for(;delta>0;delta--)
+        for(;delta>0;delta--) {
             game.moveEveryoneExcept(this);
+        }
         game.notifyResultFromMarket(list);
         buffer = new ArrayList<>();
 

@@ -1,9 +1,13 @@
 package it.polimi.ingsw.client.view.gui;
 
 import it.polimi.ingsw.client.view.gui.listeners.ResourceListener;
+import it.polimi.ingsw.messages.EndOfTurnMessage;
+import it.polimi.ingsw.messages.InitialResourcesMessage;
 import it.polimi.ingsw.server.model.Resource;
 
 import java.awt.*;
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class ResourceManager {
 
@@ -21,6 +25,8 @@ public class ResourceManager {
      * Resource container attribute.
      */
     private PanelContainer resourceContainer;
+
+    ArrayList<Resource> buffer = new ArrayList<>();
 
 
     /**
@@ -65,7 +71,10 @@ public class ResourceManager {
 
         SensibleButton cardButton1 = new SensibleButton(scaledImage1);
         resourceContainer.add(cardButton1);
-        cardButton1.addMouseListener(new ResourceListener(Resource.COIN, this,gui));
+        cardButton1.addActionListener(e -> {
+            buffer.add(Resource.COIN);
+            sendInitResource();
+        });
 
 
         Image scaledImage2 = Paths.getImageFromResource(Resource.ROCK)
@@ -73,7 +82,10 @@ public class ResourceManager {
 
         SensibleButton cardButton2 = new SensibleButton(scaledImage2);
         resourceContainer.add(cardButton2);
-        cardButton2.addMouseListener(new ResourceListener(Resource.ROCK, this,gui));
+        cardButton2.addActionListener(e -> {
+            buffer.add(Resource.ROCK);
+            sendInitResource();
+        });
 
 
 
@@ -82,7 +94,10 @@ public class ResourceManager {
 
         SensibleButton cardButton3 = new SensibleButton(scaledImage3);
         resourceContainer.add(cardButton3);
-        cardButton3.addMouseListener(new ResourceListener(Resource.SERVANT, this,gui));
+        cardButton3.addActionListener(e -> {
+            buffer.add(Resource.SERVANT);
+            sendInitResource();
+        });
 
 
 
@@ -91,8 +106,54 @@ public class ResourceManager {
 
         SensibleButton cardButton4 = new SensibleButton(scaledImage4);
         resourceContainer.add(cardButton4);
-        cardButton4.addMouseListener(new ResourceListener(Resource.SHIELD, this,gui));
+        cardButton4.addActionListener(e -> {
+            buffer.add(Resource.SHIELD);
+            sendInitResource();
+        });
 
+    }
+
+    private void sendInitResource(){
+        if (gui.getViewController().getGame().getPosition()==4){
+            if (buffer.size()==2){
+                (new Thread(() -> {
+                    try {
+                        gui.notifyObserver(new InitialResourcesMessage(buffer));
+                    } catch (IOException | InterruptedException e2) {
+                        e2.printStackTrace();
+                    }
+                })).start();
+                (new Thread(() -> {
+                    try {
+                        gui.notifyObserver(new EndOfTurnMessage());
+                    } catch (IOException | InterruptedException e3) {
+                        e3.printStackTrace();
+                    }
+                })).start();
+
+                gui.switchToGameMode();
+            }
+        }
+
+        else if (gui.getViewController().getGame().getPosition()==2 || gui.getViewController().getGame().getPosition()==3){
+            (new Thread(() -> {
+                try {
+                    gui.notifyObserver(new InitialResourcesMessage(buffer));
+                } catch (IOException | InterruptedException e3) {
+                    e3.printStackTrace();
+                }
+            })).start();
+
+            (new Thread(() -> {
+                try {
+                    gui.notifyObserver(new EndOfTurnMessage());
+                } catch (IOException | InterruptedException e3) {
+                    e3.printStackTrace();
+                }
+            })).start();
+
+            gui.switchToGameMode();
+        }
     }
 
 }
