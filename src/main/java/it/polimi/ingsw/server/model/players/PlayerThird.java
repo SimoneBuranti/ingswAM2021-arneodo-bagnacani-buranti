@@ -35,12 +35,15 @@ public class PlayerThird extends Player {
         getGameBoardOfPlayer().addToStorage(resourceOne);
         try {
             getGameBoardOfPlayer().faithMove();
+            game.notifyFaithPath();
         } catch (CallForCouncilException e) {
             e.setNickName(nickName);
             throw e;
         } catch (LastSpaceReachedException e) {
             e.setNickName(nickName);
             throw e;
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
         }
     }
 

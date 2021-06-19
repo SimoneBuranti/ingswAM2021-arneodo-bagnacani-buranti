@@ -869,4 +869,16 @@ public class Game extends Observable {
      * @throws InterruptedException
      */
     public void askInfoOnPlayer(int n, String nickname) throws IOException, InterruptedException{}
+
+    /**
+     * notify faith changes
+
+     * @throws IOException
+     * @throws InterruptedException
+     */
+    public void notifyFaithPath() throws IOException, InterruptedException{
+
+        notifyToOneObserver(new FaithPathMessage(1));
+        notifyAllObserverLessOneByNickname(new FaithPathOpponentMessage(currentPlayer.getNickName(), 1),currentPlayer.getNickName());
+    }
 }

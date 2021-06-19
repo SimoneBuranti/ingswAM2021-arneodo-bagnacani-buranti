@@ -1,6 +1,8 @@
 package it.polimi.ingsw.server.model.players;
 
 import com.google.gson.Gson;
+import it.polimi.ingsw.messages.observable.FaithPathMessage;
+import it.polimi.ingsw.messages.observable.FaithPathOpponentMessage;
 import it.polimi.ingsw.server.model.*;
 import it.polimi.ingsw.server.model.exceptions.*;
 import it.polimi.ingsw.server.model.gameBoard.*;
@@ -35,12 +37,15 @@ public class PlayerFourth extends Player {
         getGameBoardOfPlayer().addToStorage(resourceTwo);
         try {
             getGameBoardOfPlayer().faithMove();
+            game.notifyFaithPath();
         } catch (CallForCouncilException e) {
             e.setNickName(nickName);
             throw e;
         } catch (LastSpaceReachedException e) {
             e.setNickName(nickName);
             throw e;
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
         }
     }
 
