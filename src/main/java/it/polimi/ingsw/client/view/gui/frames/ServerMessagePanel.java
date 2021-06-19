@@ -58,14 +58,26 @@ public class ServerMessagePanel extends JPanel {
     }
 
     /**
-     * Given a message as a parameter this method shows the its text.
+     * Given a message as a parameter this method shows its text.
      * @param message
      */
     public void display(String message){
         int i,cont;
-        String line ="";
-        boolean end = false;
+        String line;
+        int offset;
 
+        if ( message.length() % 40 == 0)
+            offset = message.length() / 40;
+        else
+            offset = (message.length() / 40) +1;
+
+        for (i = n-1; i>=offset;i--){
+            line = this.textLabels[i].getText();
+            this.textLabels[i].setText(this.textLabels[i-offset].getText());
+            this.textLabels[i-offset].setText(line);
+        }
+
+        line = "";
         for(i = 0,cont = 0;i<n && cont<message.length();i++,cont++){
             for (int k =0;k<40 && cont<message.length();k++){
                 line = line + message.charAt(cont);
@@ -75,10 +87,10 @@ public class ServerMessagePanel extends JPanel {
             this.textLabels[i].setText(line);
             line = "";
         }
-        line = "";
+        /*line = "";
         for(;i<n;i++){
             this.textLabels[i].setText(line);
-        }
+        }*/
 
     }
 
