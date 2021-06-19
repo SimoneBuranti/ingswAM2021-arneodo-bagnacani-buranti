@@ -698,7 +698,8 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
      */
     @Override
     public void checkThreadRestart() {
-        if (viewController.getGame().isInitResource()){
+        if (viewController.getGame().isInitResource() ||
+                (!viewController.getGame().isInitResource() && viewController.getGame().getPosition() == 1)){
             isRestartMode = true;
         }
     }
