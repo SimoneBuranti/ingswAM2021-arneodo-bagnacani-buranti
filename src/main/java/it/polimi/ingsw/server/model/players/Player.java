@@ -242,11 +242,6 @@ public class Player {
         return gameBoardOfPlayer.getPapalCard(papalCardNumber);
     }
 
-    public void discardResource(Resource resource) throws IOException, InterruptedException {
-        Reserve.addResource(resource);
-        game.moveEveryoneExcept(this);
-    }
-
 
     public void takeFromMarket() throws NotEnoughSpaceInStorageException, IOException, InterruptedException {
             Resource resource;

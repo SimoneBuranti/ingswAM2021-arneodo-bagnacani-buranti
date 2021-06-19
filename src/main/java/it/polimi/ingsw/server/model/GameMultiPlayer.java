@@ -325,7 +325,7 @@ public class GameMultiPlayer extends Game {
                 } catch (LastSpaceReachedException e2) {
                     exceptionHandler(e2);
                 }
-                notifyAllObserverLessOne(new FaithPathMessage(1));
+                notifyOnlyOneSpecificObserver(new FaithPathMessage(1), p.getNickName());
 
                 notifyAllObserverLessOneByNickname(new FaithPathOpponentMessage(p.getNickName(), 1),p.getNickName());
             }
