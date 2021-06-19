@@ -68,25 +68,12 @@ public class ProductionCommand extends Command {
 
     /**
      * Production token setter method.
-     * @param choosenLeaderCard
      */
-    public void setFalseProductionBools(int choosenLeaderCard){
+    public void setFalseProductionBools(int chosenColumn){
 
-        viewController.getGame().setProductionToken(choosenLeaderCard,false);
+        viewController.getGame().setProductionToken(chosenColumn,false);
     }
 
-    /**
-     * Extra production token getter method (unused).
-     * @param choosenLeaderCard
-     * @return
-     */
-    public boolean getExtraProductionToken(int choosenLeaderCard){
-        if (choosenLeaderCard == 1){
-            return viewController.getGame().isProductionToken(4);
-        } else {
-            return viewController.getGame().isProductionToken(5);
-        }
-    }
 
     public static String defToString(){
         return "productionOn";

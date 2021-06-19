@@ -1,6 +1,4 @@
 package it.polimi.ingsw.client.view.gui;
-
-import it.polimi.ingsw.client.view.gui.listeners.ResourceListener;
 import it.polimi.ingsw.messages.EndOfTurnMessage;
 import it.polimi.ingsw.messages.InitialResourcesMessage;
 import it.polimi.ingsw.server.model.Resource;

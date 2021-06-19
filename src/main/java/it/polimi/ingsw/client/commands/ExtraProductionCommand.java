@@ -59,10 +59,12 @@ public class ExtraProductionCommand extends Command {
                     System.out.println("Insert the number of the activated production card you want to use (1/2): ");
                     input = in.nextLine();
                 }
+
+                if (!getExtraProductionToken((input.charAt(0) - '0')))
+                    throw new AlreadyActivatedProductionException();
+
                 setFalseProductionBools((input.charAt(0) - '0'));
 
-                if (getExtraProductionToken((input.charAt(0) - '0')))
-                    throw new AlreadyActivatedProductionException();
 
                 if ((input.charAt(0) - '0') == 1) {
                     return new ExtraProductionOnMessage(askForOutputResource(),viewController.getGame().getLeaderCardActivated().get(0).getResourceEffect());
