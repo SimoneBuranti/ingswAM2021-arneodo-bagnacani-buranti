@@ -296,7 +296,7 @@ public class MainFrameMultiPlayer extends MainFrame {
             if (gui.getViewController().getGame().getPosition()!=1)
             {
                 ResourceManager resourceManager = new ResourceManager(container,gui);
-                resourceManager.setHeading("if you are the second player, you have to choose only one, instead two resource like the third and the fourth player:");
+                resourceManager.setHeading("if you are the second or the third player, you have to choose only one, instead two resources like and the fourth player:");
                 resourceManager.showWhatToChoose(true);
             }
             else

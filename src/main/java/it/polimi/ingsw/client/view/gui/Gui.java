@@ -18,6 +18,7 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * This class represents the GUI and it implements view interface.
@@ -747,10 +748,10 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
      * This method shows the player the winner with a pop up
      */
     @Override
-    public void showWinner(String nickname) {
+    public void showWinner(String nickname, Map<String, Integer> scoreOfPlayers) {
         SwingUtilities.invokeLater(() -> {
             disableAllButtons();
-            mainFrameOfGame.showPopUp(new EndGamePlayerWinnerMessage(nickname));
+            mainFrameOfGame.showPopUp(new EndGamePlayerWinnerMessage(nickname, scoreOfPlayers));
             applyChangesTo(mainFrameOfGame);
 
         });

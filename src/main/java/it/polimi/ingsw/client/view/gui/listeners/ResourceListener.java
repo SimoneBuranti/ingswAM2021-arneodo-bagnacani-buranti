@@ -51,7 +51,7 @@ public class ResourceListener implements MouseListener {
     public void mouseClicked(MouseEvent e) {
         addToArrayList(resource);
 
-        if (gui.getViewController().getGame().getPosition()==3 || gui.getViewController().getGame().getPosition()==4){
+        if (gui.getViewController().getGame().getPosition()==4){
             if (gui.getReadyToSend()==2){
                 (new Thread(() -> {
                 try {
@@ -72,7 +72,7 @@ public class ResourceListener implements MouseListener {
             }
         }
 
-        else if (gui.getViewController().getGame().getPosition()==2){
+        else if (gui.getViewController().getGame().getPosition()==2 || gui.getViewController().getGame().getPosition()==3){
             (new Thread(() -> {
                 try {
                     gui.notifyObserver(new InitialResourcesMessage(sendableArray));

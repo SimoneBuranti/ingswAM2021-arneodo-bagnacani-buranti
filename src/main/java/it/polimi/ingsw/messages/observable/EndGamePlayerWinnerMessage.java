@@ -5,6 +5,7 @@ import it.polimi.ingsw.messages.MessageType;
 import it.polimi.ingsw.messages.MessageVisitor;
 
 import java.io.IOException;
+import java.util.Map;
 
 public class EndGamePlayerWinnerMessage extends Message {
     /**
@@ -15,9 +16,11 @@ public class EndGamePlayerWinnerMessage extends Message {
      */
     private final MessageType messageType = MessageType.ENDGAMEWINNER;
    private String nickname;
+   private Map<String, Integer> scoreOfPlayers;
 
-    public EndGamePlayerWinnerMessage(String nickname){
+    public EndGamePlayerWinnerMessage(String nickname, Map<String,Integer> map){
         this.nickname=nickname;
+        this.scoreOfPlayers = map;
     }
 
     @Override
@@ -30,7 +33,9 @@ public class EndGamePlayerWinnerMessage extends Message {
         v.visit(this);
     }
 
-
+    public Map<String, Integer> getScoreOfPlayers() {
+        return scoreOfPlayers;
+    }
 
     public String getNickname() {
         return nickname;
@@ -38,6 +43,6 @@ public class EndGamePlayerWinnerMessage extends Message {
 
     @Override
     public String toString(){
-        return "the winner is: "+getNickname();
+        return "The winner is: "+getNickname() + " \n The scores of the players are: " + scoreOfPlayers;
     }
 }

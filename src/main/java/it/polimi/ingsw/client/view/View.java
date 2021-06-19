@@ -11,6 +11,7 @@ import it.polimi.ingsw.server.model.productionCards.ProductionCard;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Map;
 
 /**
  * This interface represents the client side view, it is implemented by Cli and Gui classes.
@@ -86,7 +87,7 @@ public interface View  {
 
     void lorenzoWin();
 
-    void showWinner(String nickname);
+    void showWinner(String nickname, Map<String, Integer> scoreOfPlayers);
 
     void showOpponentAction(Message msg);
 

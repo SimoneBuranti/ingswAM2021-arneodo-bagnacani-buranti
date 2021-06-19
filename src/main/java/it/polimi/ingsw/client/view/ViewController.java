@@ -745,7 +745,7 @@ public class ViewController implements MessageVisitor, ViewObserver {
      */
     @Override
     public void visit(EndGamePlayerWinnerMessage msg) {
-        view.showWinner(msg.getNickname());
+        view.showWinner(msg.getNickname(), msg.getScoreOfPlayers());
 
     }
 

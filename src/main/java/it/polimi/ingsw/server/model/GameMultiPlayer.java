@@ -186,6 +186,33 @@ public class GameMultiPlayer extends Game {
     }
 
 
+    /**
+     * this method initialises the current player resource and catches CallForCouncilException and LastSpaceReachedException.
+     * When the exceptions are caught, the method calls the exceptionHandler method.
+     * @param resource : initial resource of the current player
+     */
+    public void initResourceOfPlayer(Resource resource) throws IOException, InterruptedException {
+        super.initResourceOfPlayer(resource);
+        for(int i = 0; i < playerList.size(); i++){
+            if(currentPlayer.getNickName().equals(nickNameInOrder.get(i)) && i == 3){
+                notifyToOneObserver(new FaithPathMessage(1));
+                notifyAllObserverLessOne(new FaithPathOpponentMessage(currentPlayer.getNickName(), 1));
+            }
+        }
+    }
+
+    /**
+     * this method initialises the current player resources and catches CallForCouncilException and LastSpaceReachedException.
+     * When the exceptions are caught, the method calls the exceptionHandler method.
+     * @param resourceOne : first initial resource type of the current player
+     * @param resourceTwo : second initial resource type of the current player
+     */
+    public void initResourceOfPlayer(Resource resourceOne, Resource resourceTwo) throws IOException, InterruptedException {
+        super.initResourceOfPlayer(resourceOne, resourceTwo);
+        notifyToOneObserver(new FaithPathMessage(1));
+        notifyAllObserverLessOne(new FaithPathOpponentMessage(currentPlayer.getNickName(), 1));
+
+    }
 
     /**
      * this method creates all the players in the game starting from the number of players and their nicknames
@@ -705,7 +732,10 @@ public class GameMultiPlayer extends Game {
      */
     @Override
     public void endGame() throws IOException, InterruptedException {
-        notifyObserver(new EndGamePlayerWinnerMessage(theWinnerIs().getNickName()));
+        Map<String, Integer> scoreOfPlayers = new HashMap<>();
+        for(Player p : playerList)
+            scoreOfPlayers.put(p.getNickName(), p.playerScore());
+        notifyObserver(new EndGamePlayerWinnerMessage(theWinnerIs().getNickName(), scoreOfPlayers));
         FileClass.FileDestroyer();
         setOver(true);
     }

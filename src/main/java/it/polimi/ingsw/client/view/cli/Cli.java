@@ -542,8 +542,9 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
      * This method shows the player the winner and sets the right command parser
      */
     @Override
-    public void showWinner(String nickname) {
+    public void showWinner(String nickname, Map<String, Integer> scoreOfPlayers) {
         System.out.println("The winner is : " + nickname);
+        System.out.println("The scores of the players are : " + scoreOfPlayers);
         changeCommandParser(new StandardParser());
     }
 
@@ -574,13 +575,13 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
             notifyObserver(new EndOfTurnMessage());
             changeCommandParser(new StandardParser());
         }
-        else if(viewController.getGame().getPosition()==2)
+        else if(viewController.getGame().getPosition()==2 || viewController.getGame().getPosition() == 3)
         {
             System.out.println(" hey " + viewController.getNickName() +" please say me your favourite resource ");
             changeCommandParser(new InitResourceParser(1));
         }
         else {
-            System.out.println("hey " + viewController.getNickName() +" please say me two resource for be happy, after first press enter");
+            System.out.println("hey " + viewController.getNickName() +" please say me two resource for be happy");
             changeCommandParser(new InitResourceParser(2));
         }
     }
