@@ -52,7 +52,7 @@ public class ResourceListener implements MouseListener {
         addToArrayList(resource);
 
         if (gui.getViewController().getGame().getPosition()==4){
-            if (gui.getReadyToSend()==2){
+            if (sendableArray.size()==2){
                 (new Thread(() -> {
                 try {
                     gui.notifyObserver(new InitialResourcesMessage(sendableArray));
