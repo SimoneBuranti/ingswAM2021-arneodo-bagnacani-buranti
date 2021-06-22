@@ -111,7 +111,7 @@ java -jar AM7.jar -server -p
 
 ```
 #### Parametri
-- `--port` `-p` : permette di specificare la porta del server. Se non specificato il valore di default è quello slavato nel file defaultServer;
+- `--port` o `-p` : permette di specificare la porta del server. Se non specificato il valore di default è quello slavato nel file defaultServer;
 
 ## Componenti del gruppo
 - [__Alice Arneodo__]()
