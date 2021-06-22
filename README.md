@@ -20,7 +20,7 @@ I seguenti diagrammi delle classi rappresentano rispettivamente il modello inizi
 
 ### JavaDoc
 La seguente documentazione include una descrizione per la maggior parte delle classi e dei metodi utilizzati:
-[Javadoc]()
+[Javadoc](https://github.com/SimoneBuranti/ingswAM2021-arneodo-bagnacani-buranti/tree/master/JAVADOC)
 
 
 ### Librerie e Plugins
