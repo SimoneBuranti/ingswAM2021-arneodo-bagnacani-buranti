@@ -15,8 +15,8 @@ Interazione e gameplay: linea di comando (CLI) e grafica (GUI).
 
 ### UML
 I seguenti diagrammi delle classi rappresentano rispettivamente il modello iniziale sviluppato durante la fase di progettazione e il diagramma del prodotto finale.
-- [UML Iniziali]()
-- [UML Finali]()
+- [UML Iniziali](https://github.com/SimoneBuranti/ingswAM2021-arneodo-bagnacani-buranti/blob/master/initialUML.pdf)
+- [UML Finali](https://github.com/SimoneBuranti/ingswAM2021-arneodo-bagnacani-buranti/blob/master/finalUML.pdf)
 
 ### JavaDoc
 La seguente documentazione include una descrizione per la maggior parte delle classi e dei metodi utilizzati:
