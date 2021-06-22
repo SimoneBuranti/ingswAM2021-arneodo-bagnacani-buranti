@@ -1,12 +1,30 @@
 package it.polimi.ingsw.server.model;
 
+import it.polimi.ingsw.server.controller.ClientController;
+import it.polimi.ingsw.server.model.colours.*;
+import it.polimi.ingsw.server.model.exceptions.LeaderCardsGameBoardEmptyException;
+import it.polimi.ingsw.server.model.exceptions.RequirementsException;
+import it.polimi.ingsw.server.model.gameBoard.ReductionGameBoard;
+import it.polimi.ingsw.server.model.leaderCards.*;
+import it.polimi.ingsw.server.model.productionCards.ProductionCard;
+import it.polimi.ingsw.server.model.requirements.*;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 class LeaderCardTestActivation {
     /**
      * Check of the correct behavior of the action marker that discards two production cards from level one deck up to level three deck
      */
-   /* @Test
+    @Test
     @DisplayName("Action Marker Production Cards Test")
-    public void activate() throws RequirementsException, LeaderCardsGameBoardEmptyException, IOException, InterruptedException {
+    public void activate() throws RequirementsException, LeaderCardsGameBoardEmptyException, IOException, InterruptedException, IOException {
         ArrayList<String> nickname = new ArrayList<>(2);
         nickname.add("aa");
         nickname.add("bb");
@@ -74,6 +92,6 @@ class LeaderCardTestActivation {
 
         assertTrue(gameMultiPlayer.getPlayerFromList(0).getGameBoardOfPlayer() instanceof ReductionGameBoard);
 
-
-    }*/
+        FileClass.FileDestroyer();
+    }
 }

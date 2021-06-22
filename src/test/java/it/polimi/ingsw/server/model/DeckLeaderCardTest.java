@@ -42,6 +42,7 @@ class DeckLeaderCardTest {
 
         GameMultiPlayer game= new GameMultiPlayer(2,nickname,true, clientControllers);
         assertEquals(8,game.leaderDeckSize());
+        FileClass.FileDestroyer();
     }
 
 

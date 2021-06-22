@@ -1084,7 +1084,7 @@ class ReductionGameBoardDoubleTest {
      * This test checks the correct behaviour in case of resource payment all the resources needed and all the resources
      * paid
      */
-   /* @Test
+   @Test
     @DisplayName("PayResources Test 2 - all the resources needed and all the resources payed")
     public void payResourcesTest2(){
         GameBoardInterface gameBoard = new GameBoard();
@@ -1151,7 +1151,7 @@ class ReductionGameBoardDoubleTest {
         assertEquals(0,availableMap.get(Resource.ROCK));
         assertEquals(0,availableMap.get(Resource.SHIELD));
         assertEquals(0,availableMap.get(Resource.SERVANT));
-    }*/
+    }
 
 
     /**

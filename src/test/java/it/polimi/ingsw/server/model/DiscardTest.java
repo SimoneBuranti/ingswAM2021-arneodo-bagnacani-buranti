@@ -1,5 +1,15 @@
 package it.polimi.ingsw.server.model;
 
+import it.polimi.ingsw.server.controller.ClientController;
+import it.polimi.ingsw.server.network.ClientHandler;
+import it.polimi.ingsw.server.network.Server;
+import org.junit.jupiter.api.Test;
+
+import java.io.IOException;
+import java.util.ArrayList;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 /**
  * test class about DiscardLeaderCard action
  */
@@ -12,8 +22,8 @@ class DiscardTest {
      * for two players
      *
      */
-   /* @Test
-    public void discardTest() throws IOException, InterruptedException {
+    @Test
+    public void discardTest() throws IOException, InterruptedException, IOException {
 
     ArrayList<String> nickname= new ArrayList<>(3);
     nickname.add("ale");
@@ -48,16 +58,16 @@ class DiscardTest {
     gameMultiPlayer.getPlayerFromList(1).saveLeaderCard(0,3);
     assertEquals(4, gameMultiPlayer.getPlayerFromList(1).personalLeaderCardSize());
     assertEquals(2, gameMultiPlayer.getPlayerFromList(1).getGameBoardOfPlayer().leaderCardsSize());
+        FileClass.FileDestroyer();
 
-
-    }*/
+    }
 
 
 
     /**
      * test which controls the correctness of savage of two leader cards (base)
      */
-   /* @Test
+    @Test
     public void discardTestOne() throws IOException, InterruptedException {
 
         ArrayList<String> nickname= new ArrayList<>(3);
@@ -90,9 +100,9 @@ class DiscardTest {
         assertEquals(4, gameMultiPlayer.getPlayerFromList(0).personalLeaderCardSize());
         assertEquals(2, gameMultiPlayer.getPlayerFromList(0).getGameBoardOfPlayer().leaderCardsSize());
 
+ FileClass.FileDestroyer();
 
-
-    }*/
+    }
 
 
 
@@ -101,7 +111,7 @@ class DiscardTest {
      *
      */
 
-   /* @Test
+   @Test
     public void discardTestTwo() throws IOException, InterruptedException {
 
         ArrayList<String> nickname= new ArrayList<>(3);
@@ -130,7 +140,7 @@ class DiscardTest {
         gameMultiPlayer.getPlayerFromList(0).saveLeaderCard(1,2);
         assertEquals(gameMultiPlayer.getPlayerFromList(0).getGameBoardOfPlayer().reportLeaderCardToGameBoard(0), gameMultiPlayer.getPlayerFromList(0).getCardFromPersonalLeaderCard(1));
 
-
-    }*/
+ FileClass.FileDestroyer();
+    }
 
 }

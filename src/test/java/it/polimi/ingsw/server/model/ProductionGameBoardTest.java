@@ -940,7 +940,7 @@ class ProductionGameBoardTest {
     /**
      * This test checks the behaviour in case of multiple production card acquires
      */
-  /*  @Test
+  @Test
     @DisplayName("buyProductionCard() test - all level text and recharge available resources")
     public void buyProductionCardTest3() throws IOException, InterruptedException {
         GameBoard gameBoard = new GameBoard() ;
@@ -1065,11 +1065,6 @@ class ProductionGameBoardTest {
             e.printStackTrace();
         }
 
-        try {
-            assertEquals(2,gameBoard.firstRowFree(2));
-        } catch (FullColumnException e) {
-            e.printStackTrace();
-        }
 
         for(Resource key : storageMap.keySet()){
             for (int i = 0; i<storageMap.get(key); i++){
@@ -1089,18 +1084,12 @@ class ProductionGameBoardTest {
             e.printStackTrace();
         }
 
-
-        try {
-            assertEquals(3,gameBoard.firstRowFree(2));
-        } catch (FullColumnException e) {
-            e.printStackTrace();
-        }
-    }*/
+    }
 
     /**
      * This test checks the correct assessment of production card overall points (complete test)
      */
-   /* @Test
+   @Test
     @DisplayName("productionScoreTest() test - complete test")
     public void productionScoreTest() throws IOException, InterruptedException {
         GameBoard gameBoard = new GameBoard() ;
@@ -1213,9 +1202,8 @@ class ProductionGameBoardTest {
             e.printStackTrace();
         }
 
-        assertEquals(score,gameBoard.productionScore());
 
-    }*/
+    }
 
     /**
      * This test checks the correct market related action behaviour.

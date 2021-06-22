@@ -221,7 +221,7 @@ class GameBoardTest {
   /**
      * This test checks the correct behaviour of availableResources() method in case of empty storage and strongbox
      */
-   /* @Test
+   @Test
     @DisplayName("Available resources test - Empty storage and Strongbox")
     public void availableResourcesTest(){
         GameBoard gameBoard = new GameBoard();
@@ -275,12 +275,12 @@ class GameBoardTest {
 
 
 
-    }*/
+    }
 
     /**
      * This test checks the correct behaviour of availableResources() method
      */
-   /* @Test
+   @Test
     @DisplayName("Available resources test 1 - simple")
     public void availableResourcesTest1(){
         GameBoard gameBoard = new GameBoard();
@@ -339,7 +339,7 @@ class GameBoardTest {
     /**
      * This test checks the correct behaviour in case of resource payment
      */
-   /* @Test
+    @Test
     @DisplayName("Available resources test 2 - simple")
     public void availableResourcesTest2(){
         GameBoard gameBoard = new GameBoard();
@@ -932,7 +932,7 @@ class GameBoardTest {
     /**
      * This test checks the correct assessment of production card overall points (complete test)
      */
-   /* @Test
+   @Test
     @DisplayName("productionScoreTest() test - complete test")
     public void productionScoreTest() throws IOException, InterruptedException {
         GameBoard gameBoard = new GameBoard() ;
@@ -1046,9 +1046,8 @@ class GameBoardTest {
             e.printStackTrace();
         }
 
-        //assertEquals(score,gameBoard.productionScore());
 
-    }*/
+    }
 
     /**
      * This test checks the correct market related action behaviour.
