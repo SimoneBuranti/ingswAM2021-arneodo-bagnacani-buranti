@@ -5,11 +5,11 @@
 Implementazione del gioco da tavolo [Maestri Del Rinascimento](http://www.craniocreations.it/prodotto/masters-of-renaissance/).
 
 Il progetto consiste nell’implementazione di un sistema distribuito composto da un singolo server in grado di gestire una partita alla volta.
-La partita si può svolgere in modalita multiplayer e in modalita giocatore singolo.
+Si può svolgere la partita in modalità multiplayer oppure in modalità giocatore singolo.
 
-La rete è stata implementata con l'utilizzo delle socket.
-Il server è stato gestito e testato per essere in grado di resistere alle disconnessioni dei client, dando in oltre la possibilità 
-(in caso di disconnessione di tutti i client o di cras del server) di riprendere la "vecchia" partita.
+La rete è stata implementata con l'utilizzo dei socket.
+Il server è stato gestito e testato per essere in grado di resistere alle disconnessioni dei client, dando inoltre la possibilità 
+(in caso di disconnessione di tutti i client o di crash del server) di riprendere la "vecchia" partita.
 
 Interazione e gameplay: linea di comando (CLI) e grafica (GUI).
 
@@ -60,9 +60,13 @@ Il Jar del progetto può essere scaricati al seguente link: [Jar]().
 
 ################AVVERTENZE:
 -dopo aver effettuato il download del jar, eseguire questa procedura:
-1) posizionarsi nella cartella del jar salvato.
+1) posizionarsi nella cartella dove si trova il jar salvato.
 2) creare una cartella fileConfiguration, dove verranno salvati i file di partita.
 3) per avere una porta di default per il server, creare un file defaultServer, con estensione .json.
+    Il contenuto del file deve essere: 
+   {
+   "defaultServerPort": <port_number>
+   }
 
 
 ## Esecuzione
@@ -101,17 +105,17 @@ java -jar AM7.jar --c --gui
 ### Mestri del Rinascimento Server
 Per lanciare il jar come Server digitare da terminale il comando:
 ```
-java -jar AM7.jar -s -p   
+java -jar AM7.jar -s [-p <port_number>]
 
 ```
 oppure
 
 ```
-java -jar AM7.jar -server -p   
+java -jar AM7.jar -server [--port <port_number>]   
 
 ```
 #### Parametri
-- `--port` o `-p` : permette di specificare la porta del server. Se non specificato il valore di default è quello slavato nel file defaultServer;
+- `--port` o `-p` : permette di specificare la porta del server. Se non specificato il valore di default è quello salvato nel file defaultServer;
 
 ## Componenti del gruppo
 - [__Alice Arneodo__]()
