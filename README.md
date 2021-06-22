@@ -111,7 +111,7 @@ java -jar AM7.jar -s [-p <port_number>]
 oppure
 
 ```
-java -jar AM7.jar -server [--port <port_number>]   
+java -jar AM7.jar --server [--port <port_number>]   
 
 ```
 #### Parametri
