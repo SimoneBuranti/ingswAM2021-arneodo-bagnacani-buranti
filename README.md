@@ -97,7 +97,7 @@ java -jar AM7.jar --c --gui
 ```
 
 ### Mestri del Rinascimento Server
-Per lanciare Santorini Server digitare da terminale il comando:
+Per lanciare il jar come Server digitare da terminale il comando:
 ```
 java -jar AM7.jar -s -p   
 
