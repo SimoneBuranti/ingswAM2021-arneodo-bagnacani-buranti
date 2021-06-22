@@ -1,5 +1,6 @@
 # ingswAM2021-arneodo-bagnacani-buranti
-![alt text](src/main/resources/title.jpg)
+
+![alt text](src/main/resources/resources/title.jpg)
 
 Implementazione del gioco da tavolo [Maestri Del Rinascimento](http://www.craniocreations.it/prodotto/masters-of-renaissance/).
 
