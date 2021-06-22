@@ -154,14 +154,6 @@ public class ViewController implements MessageVisitor, ViewObserver {
     }
 
     /**
-     * This method calls view method to show error message
-     */
-    @Override
-    public void visit(AlreadyUsedLeaderCardErrorMessage msg) {
-        view.notifyError(msg);
-    }
-
-    /**
      * This method calls view method to show error message and disconnects the client
      */
     @Override

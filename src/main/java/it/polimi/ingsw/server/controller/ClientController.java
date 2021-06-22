@@ -99,10 +99,6 @@ public class ClientController implements MessageVisitor {
     public void visit(AlreadyExistingNickNameErrorMessage msg) {
     }
 
-    @Override
-    public void visit(AlreadyUsedLeaderCardErrorMessage msg) throws IOException, InterruptedException {
-
-    }
 
     @Override
     public void visit(CompleteRunningMatchErrorMessage msg) {

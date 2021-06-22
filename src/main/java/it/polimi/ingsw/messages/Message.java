@@ -110,9 +110,6 @@ public abstract class Message{
             case ACTIVATELEADERCARD:
                 return gson.fromJson(jsonObj, ActivateLeaderCardMessage.class);
 
-            case ALREADYUSEDLEADERCARDERROR:
-                return gson.fromJson(jsonObj, AlreadyUsedLeaderCardErrorMessage.class);
-
             case REQUIREMENTSERROR:
                 return gson.fromJson(jsonObj, RequirementsErrorMessage.class);
 

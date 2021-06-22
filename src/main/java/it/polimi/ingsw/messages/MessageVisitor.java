@@ -14,7 +14,6 @@ public interface MessageVisitor {
     //Error messages
     void visit(AlreadyActivatedErrorMessage msg) throws IOException, InterruptedException;
     void visit(AlreadyExistingNickNameErrorMessage msg) throws IOException, InterruptedException;
-    void visit(AlreadyUsedLeaderCardErrorMessage msg) throws IOException, InterruptedException;
     void visit(CompleteRunningMatchErrorMessage msg);
     void visit(NoNicknameMessage msg) throws IOException, InterruptedException;
     void visit(NotAvailableResourcesErrorMessage msg) throws IOException, InterruptedException;

@@ -25,10 +25,6 @@ public class DiscardLeaderCardMessage extends Message {
         return cardNumber;
     }
 
-    public void setCardNumber(int cardNumber) {
-        this.cardNumber = cardNumber;
-    }
-
     @Override
     public void accept(MessageVisitor v) throws IOException, InterruptedException {
         v.visit(this);
