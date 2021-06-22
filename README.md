@@ -84,7 +84,7 @@ java -jar AM7.jar --client --cli
 oppure
 
 ```
-java -jar AM7.jar --c --cli
+java -jar AM7.jar -c --cli
 
 ```
 
@@ -98,7 +98,7 @@ java -jar AM7.jar --client --gui
 oppure
 
 ```
-java -jar AM7.jar --c --gui
+java -jar AM7.jar -c --gui
 
 ```
 
