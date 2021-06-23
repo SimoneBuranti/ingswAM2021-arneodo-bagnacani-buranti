@@ -364,6 +364,11 @@ public class MainFrameSinglePlayer extends MainFrame{
         this.lorenzoGameboardPanel.updateProductionSpaces(gameboardListNotification);
     }
 
+    @Override
+    public int howManyActivatedExceptBaseProduction() {
+        return (lorenzoGameboardPanel.howManyActivatedExceptBaseProduction() + leaderCardsPanel.howManyActivated());
+    }
+
 
     /**
      * This method sets the production deck number chosen by the player by calling the same method in the LorenzoGameboardPanel

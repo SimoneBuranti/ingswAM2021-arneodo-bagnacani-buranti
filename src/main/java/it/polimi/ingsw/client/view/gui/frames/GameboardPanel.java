@@ -491,13 +491,26 @@ public class GameboardPanel extends JPanel{
     }
 
     /**
-     * This method returns the number of activated leader cards in the gameboard of the player.
+     * This method returns the number of activated productions in the gameboard of the player.
      * @return
      */
     public int howManyActivated() {
         int cont = 0;
         if(!baseProductionPanel.getProductionButton().isToken())
             cont++;
+        for(int i = 0 ; i<3;i++){
+            if (!productionButtons[i].isToken())
+                cont++;
+        }
+        return cont;
+    }
+
+    /**
+     * This method returns the number of activated productions in the gameboard of the player.
+     * @return
+     */
+    public int howManyActivatedExceptBaseProduction() {
+        int cont = 0;
         for(int i = 0 ; i<3;i++){
             if (!productionButtons[i].isToken())
                 cont++;

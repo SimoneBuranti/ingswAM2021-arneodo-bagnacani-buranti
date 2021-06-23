@@ -469,11 +469,13 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
                 mainFrameOfGame.displayString(msg.toString());
 
                 if (msg instanceof NotAvailableResourcesErrorMessage) {
-                    enableAllAction();
+                    if(howManyActivated() <= 1)
+                        enableAllAction();
                 }
 
                 if (msg instanceof WrongColumnErrorMessage) {
-                    mainFrameOfGame.putCardMode();
+                    if(howManyActivated() <= 1)
+                        enableAllAction();
                 }
 
                 if (msg instanceof RequirementsErrorMessage) {
@@ -482,7 +484,7 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
                 if (msg instanceof BaseProductionErrorMessage) {
                     mainFrameOfGame.enableBaseProductionButton();
-                    if (howManyActivated() < 2)
+                    if (howManyActivatedExceptBaseProduction() == 0)
                         enableAllAction();
                 }
                 applyChangesTo(mainFrameOfGame);
@@ -699,7 +701,7 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
     @Override
     public void checkThreadRestart() {
         if (viewController.getGame().isInitResource() ||
-                (!viewController.getGame().isInitResource() && viewController.getGame().getPosition() == 1)){
+                (viewController.getGame().isInitLeader() && viewController.getGame().getPosition() <= 1)){
             isRestartMode = true;
         }
     }
@@ -1163,9 +1165,15 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
     /**
      * @return the number of productions activated
      */
-    public int howManyActivated() {
-        return mainFrameOfGame.howManyActivated();
+    public int howManyActivatedExceptBaseProduction() {
+        return mainFrameOfGame.howManyActivatedExceptBaseProduction();
     }
 
 
+    /**
+     * @return the number of productions activated
+     */
+    public int howManyActivated() {
+        return mainFrameOfGame.howManyActivated();
+    }
 }

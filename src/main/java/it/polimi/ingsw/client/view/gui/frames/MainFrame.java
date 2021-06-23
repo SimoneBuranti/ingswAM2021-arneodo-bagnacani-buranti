@@ -497,6 +497,8 @@ public abstract class MainFrame  extends JFrame {
 
     public abstract void updateProductionCard(GameboardListNotification gameboardListNotification);
 
+    public abstract  int howManyActivatedExceptBaseProduction();
+
 }
 
 
