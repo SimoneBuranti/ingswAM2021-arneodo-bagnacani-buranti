@@ -32,7 +32,25 @@ public class StorageExtraFirst extends Storage{
         this.firstResourceType = resourceType;
         storageExtraFirst[0] = 0;
         storageExtraFirst[1] = 0;
+
+        setExtraStorageFirst();
     }
+
+    private void setExtraStorageFirst() {
+        if(storageResource.get(firstResourceType) == 1){
+            storageExtraFirst[0] = 1;
+            storageResource.put(firstResourceType, 0);
+        }else if(storageResource.get(firstResourceType) == 2){
+            storageExtraFirst[0] = 1;
+            storageExtraFirst[1] = 1;
+            storageResource.put(firstResourceType, 0);
+        }else if(storageResource.get(firstResourceType) == 3){
+            storageExtraFirst[0] = 1;
+            storageExtraFirst[1] = 1;
+            storageResource.put(firstResourceType, 1);
+        }
+    }
+
 
     /**
      * this constructor calls the constructor of the super class with map parameter and
