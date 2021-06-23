@@ -42,7 +42,7 @@ public class LightGameSolitaire extends LightGame{
      * @param faithIndicator : the position of the black cross
      */
     @Override
-    public void setLorenzoTheMagnificent(int faithIndicator){
+    public synchronized void setLorenzoTheMagnificent(int faithIndicator){
         lorenzoTheMagnificent.setLightLorenzoTheMagnificent(faithIndicator);
         try {
             notifyObserver(new FaithPathNotification(faithIndicator, true).serialize());
@@ -56,7 +56,7 @@ public class LightGameSolitaire extends LightGame{
      * @param actionMarkerType : the type of action marker
      */
     @Override
-    public void actionMarkerEffect(String actionMarkerType) throws IOException, InterruptedException {
+    public synchronized void actionMarkerEffect(String actionMarkerType) throws IOException, InterruptedException {
         actionMarkerDeck.actionMarkerEffect(actionMarkerType, this);
     }
 
@@ -65,7 +65,7 @@ public class LightGameSolitaire extends LightGame{
      * this method calls the Lorenzo the magnificent method to move the black cross and notifies the observer
      */
     @Override
-    public void moveBlackCrossOnce(){
+    public synchronized void moveBlackCrossOnce(){
         lorenzoTheMagnificent.moveBlackCross();
         try {
             notifyObserver((new FaithPathNotification(lorenzoTheMagnificent.getFaithIndicator(),true).serialize()));
@@ -79,7 +79,7 @@ public class LightGameSolitaire extends LightGame{
      * this method calls the Lorenzo the magnificent method to move the black cross and notifies the observer
      */
     @Override
-    public void moveBlackCross(){
+    public synchronized void moveBlackCross(){
         lorenzoTheMagnificent.moveBlackCross();
         try {
             notifyObserver((new LorenzoNotification(lorenzoTheMagnificent.getFaithIndicator()).serialize()));
@@ -92,7 +92,7 @@ public class LightGameSolitaire extends LightGame{
     /**
      * this method calls the Lorenzo the magnificent method to move the black cross twice and notifies the observer
      */
-    public void moveBlackCrossDouble(){
+    public synchronized void moveBlackCrossDouble(){
         lorenzoTheMagnificent.moveBlackCrossDouble();
         try {
             notifyObserver((new FaithPathNotification(lorenzoTheMagnificent.getFaithIndicator(),true).serialize()));
@@ -106,7 +106,7 @@ public class LightGameSolitaire extends LightGame{
      * to the level three deck.
      * @param blue : the colour of the decks
      */
-    public void removeProductionCard(Blue blue) throws IOException, InterruptedException {
+    public synchronized void removeProductionCard(Blue blue) throws IOException, InterruptedException {
         for(int i = 0; i < 2; i++) {
             if (!deckProductionCardOneBlu.isEmpty())
                 deckProductionCardOneBlu.removeOneCard();
@@ -124,7 +124,7 @@ public class LightGameSolitaire extends LightGame{
      * to the level three deck.
      * @param yellow : the colour of the decks
      */
-    public void removeProductionCard(Yellow yellow) throws IOException, InterruptedException {
+    public synchronized void removeProductionCard(Yellow yellow) throws IOException, InterruptedException {
         for(int i = 0; i < 2; i++) {
             if (!deckProductionCardOneYellow.isEmpty())
                 deckProductionCardOneYellow.removeOneCard();
@@ -141,7 +141,7 @@ public class LightGameSolitaire extends LightGame{
      * to the level three deck.
      * @param green : the colour of the decks
      */
-    public void removeProductionCard(Green green) throws IOException, InterruptedException {
+    public synchronized void removeProductionCard(Green green) throws IOException, InterruptedException {
         for(int i = 0; i < 2; i++) {
             if (!deckProductionCardOneGreen.isEmpty())
                 deckProductionCardOneGreen.removeOneCard();
@@ -159,7 +159,7 @@ public class LightGameSolitaire extends LightGame{
      * to the level three deck.
      * @param violet : the colour of the decks
      */
-    public void removeProductionCard(Violet violet) throws IOException, InterruptedException {
+    public synchronized void removeProductionCard(Violet violet) throws IOException, InterruptedException {
         for(int i = 0; i < 2; i++) {
             if (!deckProductionCardOneViolet.isEmpty())
                 deckProductionCardOneViolet.removeOneCard();
@@ -177,7 +177,7 @@ public class LightGameSolitaire extends LightGame{
      * @return int : the black cross position
      */
     @Override
-    public int getLorenzoPosition(){
+    public synchronized int getLorenzoPosition(){
         return lorenzoTheMagnificent.getFaithIndicator();
     }
 }

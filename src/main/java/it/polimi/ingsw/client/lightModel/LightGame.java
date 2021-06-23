@@ -174,28 +174,28 @@ public class LightGame extends ViewObservable {
      /**
       * This method returns the value of the boolean actionToken
       */
-    public boolean isActionToken() {
+    public synchronized boolean isActionToken() {
         return actionToken;
     }
 
      /**
       * This method sets the value of the boolean actionToken with the value passed as a parameter
       */
-    public void setActionToken(boolean actionToken) {
+    public synchronized void setActionToken(boolean actionToken) {
         this.actionToken = actionToken;
     }
 
      /**
       * This method returns the value of the boolean in position n in the vector productionTokens
       */
-    public boolean isProductionToken(int n){
+    public synchronized boolean isProductionToken(int n){
         return productionTokens[n];
     }
 
      /**
       * This method sets the value of the boolean in position n in the vector productionTokens with the value passed as a parameter
       */
-    public void setProductionToken(int n,boolean token){
+    public synchronized void setProductionToken(int n,boolean token){
         this.productionTokens[n] = token;
         if(!token){
             lastProduction = n;
@@ -205,7 +205,7 @@ public class LightGame extends ViewObservable {
      /**
       * This method resets the value of all vector productionTokens booleans to true
       */
-    public void resetProductionTokens(){
+    public synchronized void resetProductionTokens(){
         for (int i = 0;i<6;i++){
             setProductionToken(i,true);
         }
@@ -213,7 +213,7 @@ public class LightGame extends ViewObservable {
      /**
       * @return true if at least one production has been activated, false otherwise
       */
-     public boolean isProductionMode() {
+     public synchronized boolean isProductionMode() {
          for(int i = 0; i < 6 ; i++){
              if(!productionTokens[i])
                  return true;
@@ -224,14 +224,14 @@ public class LightGame extends ViewObservable {
      /**
       * This method resets the value of the last production activated in the productionTokens vector
       */
-     public void resetLastProduction(){
+     public synchronized void resetLastProduction(){
          productionTokens[lastProduction] = true;
      }
 
      /**
       * This method returns the types of the resources with which to exchange the white marble
       */
-    public ArrayList<Resource> getWhiteMarbleResourceTypes(){
+    public synchronized ArrayList<Resource> getWhiteMarbleResourceTypes(){
         ArrayList<Resource> resourceTypes = new ArrayList<>();
         ArrayList<LeaderCard> leaderCards = getLeaderCardActivated();
         for(LeaderCard lc : leaderCards){
@@ -243,7 +243,7 @@ public class LightGame extends ViewObservable {
      /**
       * This method returns the game board columns where there is at least one production card
       */
-    public ArrayList<Integer> getAvailableProductionCards(){
+    public synchronized ArrayList<Integer> getAvailableProductionCards(){
         return gameBoardOfPlayer.getAvailableProductionCards();
     }
 
@@ -251,7 +251,7 @@ public class LightGame extends ViewObservable {
       * This method sets the initial order of the market and notifies the observer
       * @param list : the initial orders of the marbles
       */
-    public void setMarket(ArrayList<Marble> list) throws IOException, InterruptedException {
+    public synchronized void setMarket(ArrayList<Marble> list) throws IOException, InterruptedException {
         market = new LightMarket(list);
         notifyObserver(new MarketNotification(market.getGrid()).serialize());
         notifyObserver(new ExtraMarketNotification(market.getExtra()).serialize());
@@ -260,7 +260,7 @@ public class LightGame extends ViewObservable {
      /**
       * This method sets the initial values of the reserve and notifies the observer
       */
-    public void setReserve(Map<Resource,Integer> map) throws IOException, InterruptedException {
+    public synchronized void setReserve(Map<Resource,Integer> map) throws IOException, InterruptedException {
         reserve.setLightReserve(map);
         notifyObserver(new ReserveNotification(reserve.getReserve()).serialize());
     }
@@ -268,7 +268,7 @@ public class LightGame extends ViewObservable {
      /**
       * This method sets the initial production cards of the deck passed as a parameter and notifies the observer
       */
-    public void setDeckProductionCard(int deckNumber, ArrayList<Integer> list){
+    public synchronized void setDeckProductionCard(int deckNumber, ArrayList<Integer> list){
         for(LightDeckProductionCard deck : listOfDeck){
             if(deck.getNumberDeck() == deckNumber)
                 deck.setDeckProductionCard(list);
@@ -278,7 +278,7 @@ public class LightGame extends ViewObservable {
      /**
       * This method removes one card from the deck passed as a parameter and notifies the observer
       */
-    public void removeOneProductionCard(int deckNumber) throws IOException, InterruptedException {
+    public synchronized void removeOneProductionCard(int deckNumber) throws IOException, InterruptedException {
         for(LightDeckProductionCard deck : listOfDeck){
             if(deck.getNumberDeck() == deckNumber)
                 deck.removeOneCard();
@@ -290,7 +290,7 @@ public class LightGame extends ViewObservable {
      /**
       * This method calls the pushRow method of the market and notifies the observer
       */
-    public void pushRow(int chosenRow) throws IOException, InterruptedException {
+    public synchronized void pushRow(int chosenRow) throws IOException, InterruptedException {
         market.pushRow(chosenRow);
         notifyObserver(new MarketNotification(market.getGrid()).serialize());
         notifyObserver(new ExtraMarketNotification(market.getExtra()).serialize());
@@ -299,7 +299,7 @@ public class LightGame extends ViewObservable {
      /**
       * This method calls the pushColumn method of the market and notifies the observer
       */
-    public void pushColumn(int chosenColumn) throws IOException, InterruptedException {
+    public synchronized void pushColumn(int chosenColumn) throws IOException, InterruptedException {
         market.pushColumn(chosenColumn);
         notifyObserver(new MarketNotification(market.getGrid()).serialize());
         notifyObserver(new ExtraMarketNotification(market.getExtra()).serialize());
@@ -310,7 +310,7 @@ public class LightGame extends ViewObservable {
       * This method removes the resources passed as a parameter from the reserve and notifies the observer
       * @param list : the collection of resources to remove
       */
-    public void useResourceReserve(ArrayList<Resource> list) throws IOException, InterruptedException {
+    public synchronized void useResourceReserve(ArrayList<Resource> list) throws IOException, InterruptedException {
         reserve.useResource(list);
         notifyObserver(new ReserveNotification(reserve.getReserve()).serialize());
     }
@@ -321,7 +321,7 @@ public class LightGame extends ViewObservable {
       * @param resource : the resource type
       * @param quantity : the quantity to remove
       */
-    public void useResourceReserve(Resource resource, int quantity) throws IOException, InterruptedException {
+    public synchronized void useResourceReserve(Resource resource, int quantity) throws IOException, InterruptedException {
         reserve.useResource(resource, quantity);
         notifyObserver(new ReserveNotification(reserve.getReserve()).serialize());
     }
@@ -330,7 +330,7 @@ public class LightGame extends ViewObservable {
       * This method adds the resources passed as a parameter to the reserve and notifies the observer
       * @param list : the collection of resources to add
       */
-    public void addResourceReserve(ArrayList<Resource> list) throws IOException, InterruptedException {
+    public synchronized void addResourceReserve(ArrayList<Resource> list) throws IOException, InterruptedException {
         reserve.addResource(list);
         notifyObserver(new ReserveNotification(reserve.getReserve()).serialize());
     }
@@ -339,7 +339,7 @@ public class LightGame extends ViewObservable {
      * This method adds the resources to the storage and notifies the observer
      * @param map : the map of resources to add
      */
-    public void addStorage(Map<Resource, Integer> map) throws IOException, InterruptedException {
+    public synchronized void addStorage(Map<Resource, Integer> map) throws IOException, InterruptedException {
         gameBoardOfPlayer.addResourceStorage(map);
         notifyObserver(new StorageNotification(gameBoardOfPlayer.getStorage()).serialize());
     }
@@ -348,7 +348,7 @@ public class LightGame extends ViewObservable {
      * This method adds the resources to the storage and notifies the observer
      * @param list : the list of resources to add
      */
-    public void addStorage(ArrayList<Resource> list) throws IOException, InterruptedException {
+    public synchronized void addStorage(ArrayList<Resource> list) throws IOException, InterruptedException {
         gameBoardOfPlayer.addResourceStorage(list);
         notifyObserver(new StorageNotification(gameBoardOfPlayer.getStorage()).serialize());
     }
@@ -359,7 +359,7 @@ public class LightGame extends ViewObservable {
      * @param resource : the type of resource
      * @param quantity : the quantity to add
      */
-    public void addStorage(Resource resource, int quantity) throws IOException, InterruptedException {
+    public synchronized void addStorage(Resource resource, int quantity) throws IOException, InterruptedException {
         gameBoardOfPlayer.addResourceStorage(resource, quantity);
         notifyObserver(new StorageNotification(gameBoardOfPlayer.getStorage()).serialize());
     }
@@ -368,7 +368,7 @@ public class LightGame extends ViewObservable {
      * This method adds the resources to the strongbox and notifies the observer
      * @param map : the map of resources to add
      */
-    public void addStrongbox(Map<Resource, Integer> map) throws IOException, InterruptedException {
+    public synchronized void addStrongbox(Map<Resource, Integer> map) throws IOException, InterruptedException {
         gameBoardOfPlayer.addResourceStrongbox(map);
         notifyObserver(new StrongboxNotification(gameBoardOfPlayer.getStrongbox()).serialize());
     }
@@ -377,7 +377,7 @@ public class LightGame extends ViewObservable {
      * This method adds the resources to the strongbox and notifies the observer
      * @param list : the list of resources to add
      */
-    public void addStrongbox(ArrayList<Resource> list) throws IOException, InterruptedException {
+    public synchronized void addStrongbox(ArrayList<Resource> list) throws IOException, InterruptedException {
         gameBoardOfPlayer.addResourceStrongbox(list);
         notifyObserver(new StrongboxNotification(gameBoardOfPlayer.getStrongbox()).serialize());
     }
@@ -388,7 +388,7 @@ public class LightGame extends ViewObservable {
      * @param deckNumber : the deck number from which buy the card
      * @param chosenColumn : the column in which to put the purchased card
      */
-    public void buyProductionCard(int deckNumber, int chosenColumn) throws IOException, InterruptedException {
+    public synchronized void buyProductionCard(int deckNumber, int chosenColumn) throws IOException, InterruptedException {
         for (LightDeckProductionCard deck : listOfDeck) {
             if (deck.getNumberDeck() == deckNumber)
                 if(deck.getNumberDeck() == deckNumber) {
@@ -404,7 +404,7 @@ public class LightGame extends ViewObservable {
         notifyObserver((new ReserveNotification(reserve.getReserve())).serialize());
     }
 
-    public void buyProductionCardOpponent(int deckNumber) throws IOException, InterruptedException {
+    public synchronized void buyProductionCardOpponent(int deckNumber) throws IOException, InterruptedException {
         for(LightDeckProductionCard deck : listOfDeck){
             if(deck.getNumberDeck() == deckNumber)
                 reserve.addResource(deck.pickUpFirstCard().getCost());
@@ -416,7 +416,7 @@ public class LightGame extends ViewObservable {
      * This method pays the cost of the activated production and notifies the observer
      * @param list : the cost to be paid
      */
-    public void payResourcesProduction(ArrayList<Resource> list) throws IOException, InterruptedException {
+    public synchronized void payResourcesProduction(ArrayList<Resource> list) throws IOException, InterruptedException {
         gameBoardOfPlayer.payResourcesProduction(list);
         notifyObserver(new StorageNotification(gameBoardOfPlayer.getStorage()).serialize());
         notifyObserver(new StrongboxNotification(gameBoardOfPlayer.getStrongbox()).serialize());
@@ -427,7 +427,7 @@ public class LightGame extends ViewObservable {
      * @param faithIndicator : the position of player faith indicator
      * @param currCall : the current currCall value
      */
-    public void setFaithPath(int faithIndicator, int currCall) throws IOException, InterruptedException {
+    public synchronized void setFaithPath(int faithIndicator, int currCall) throws IOException, InterruptedException {
         gameBoardOfPlayer.setFaithPath(faithIndicator, currCall);
         notifyObserver(new FaithPathNotification(faithIndicator).serialize());
     }
@@ -435,7 +435,7 @@ public class LightGame extends ViewObservable {
     /**
      * This method sets the initial production cards of the player's game board and notifies the observer
      */
-    public void setProductionCardGameBoard(int[][] productionCards) throws IOException, InterruptedException {
+    public synchronized void setProductionCardGameBoard(int[][] productionCards) throws IOException, InterruptedException {
         gameBoardOfPlayer.setProductionCards(productionCards);
         notifyObserver(new GameboardListNotification(gameBoardOfPlayer.getProductionCards()).serialize());
     }
@@ -445,7 +445,7 @@ public class LightGame extends ViewObservable {
       * @param cardFirst : the position of the first leader card
       * @param cardSec : the position of the second leader card
       */
-    public void setLeaderPersonal(int cardFirst, int cardSec) throws IOException, InterruptedException {
+    public synchronized void setLeaderPersonal(int cardFirst, int cardSec) throws IOException, InterruptedException {
         gameBoardOfPlayer.setLeaderPersonal(cardFirst, cardSec);
         notifyObserver(new InitLeaderNotification(gameBoardOfPlayer.getLeaderCards(), false).serialize());
     }
@@ -455,7 +455,7 @@ public class LightGame extends ViewObservable {
      * This method initialises the initial leader cards of the player and notifies the observer
      * @param leaderCardKeys : the keys of the initial leader cards
      */
-    public void addLeaderCard(ArrayList<Integer> leaderCardKeys) throws IOException, InterruptedException {
+    public synchronized void addLeaderCard(ArrayList<Integer> leaderCardKeys) throws IOException, InterruptedException {
         gameBoardOfPlayer.addLeaderCard(leaderCardKeys);
         notifyObserver(new LeaderListCardNotification(gameBoardOfPlayer.getLeaderCards(),false).serialize());
         if(leaderCardKeys.size() < 3 && leaderCardKeys.size() > 0) {
@@ -467,7 +467,7 @@ public class LightGame extends ViewObservable {
      * This method initialises the initial activated leader cards of the player and notifies the observer
      * @param leaderCardKeys : the keys of the initial activated leader cards
      */
-    public void addLeaderCardActivated(ArrayList<Integer> leaderCardKeys) throws IOException, InterruptedException {
+    public synchronized void addLeaderCardActivated(ArrayList<Integer> leaderCardKeys) throws IOException, InterruptedException {
         gameBoardOfPlayer.addLeaderCardActivated(leaderCardKeys);
         notifyObserver(new LeaderListCardNotification(gameBoardOfPlayer.getLeaderCardsActivated(),true).serialize());
         if(leaderCardKeys.size() > 0) {
@@ -479,7 +479,7 @@ public class LightGame extends ViewObservable {
      * This method returns the player's leader cards
      * @return ArrayList<LeaderCard> : the player's leader cards
      */
-    public ArrayList<LeaderCard> getLeaderCards() {
+    public synchronized ArrayList<LeaderCard> getLeaderCards() {
         return gameBoardOfPlayer.getLeaderCards();
     }
 
@@ -487,7 +487,7 @@ public class LightGame extends ViewObservable {
      * This method activates the leader card in index position and notifies the observer
      * @param index : the position of the leader card to activate
      */
-    public void activateLeaderCard(int index) throws IOException, InterruptedException {
+    public synchronized void activateLeaderCard(int index) throws IOException, InterruptedException {
         int key = gameBoardOfPlayer.getLeaderCard(index).getKey();
         gameBoardOfPlayer.activateLeaderCard(index);
         notifyObserver(new LeaderListCardNotification(gameBoardOfPlayer.getLeaderCards(),false).serialize());
@@ -499,7 +499,7 @@ public class LightGame extends ViewObservable {
      * This method discards the leader card in index position and notifies the observer
      * @param index : the position of the leader card to discard
      */
-    public void discardLeaderCard(int index) throws IOException, InterruptedException {
+    public synchronized void discardLeaderCard(int index) throws IOException, InterruptedException {
         gameBoardOfPlayer.discardLeaderCard(index);
         notifyObserver(new LeaderListCardNotification(gameBoardOfPlayer.getLeaderCards(),false).serialize());
         notifyObserver(new DiscardLeaderNotification(index).serialize());
@@ -510,7 +510,7 @@ public class LightGame extends ViewObservable {
      * This method moves the player's faith indicator to pos positions and notifies the observer
      * @param pos : the number of positions to move forward the indicator
      */
-    public void faithMove(int pos) throws IOException, InterruptedException {
+    public synchronized void faithMove(int pos) throws IOException, InterruptedException {
         gameBoardOfPlayer.moveFaithIndicator(pos);
         notifyObserver(new FaithPathNotification(gameBoardOfPlayer.getIndicator()).serialize());
     }
@@ -519,7 +519,7 @@ public class LightGame extends ViewObservable {
      * This method sets the value of the papal card in the current position with the value passed as a parameter
      * @param papalCard : the value to set
      */
-    public void setPapalCard(int papalCard){
+    public synchronized void setPapalCard(int papalCard){
         gameBoardOfPlayer.setPapal(papalCard);
     }
 
@@ -527,7 +527,7 @@ public class LightGame extends ViewObservable {
      * This method sets the initial values of the player's papal cards and notifies the observer
      * @param papalCards : the initial values of the player's papal cards
      */
-    public void setPapalCards(int[] papalCards){
+    public synchronized void setPapalCards(int[] papalCards){
         gameBoardOfPlayer.setPapalCards(papalCards);
         try {
             notifyObserver(new PapalCardsConfigNotification(gameBoardOfPlayer.getPapalCards()).serialize());
@@ -541,7 +541,7 @@ public class LightGame extends ViewObservable {
      * @param currCall : the position of the papal card
      * @return int : the value of the papal card
      */
-    public int getPapalCard(int currCall){
+    public synchronized int getPapalCard(int currCall){
         return gameBoardOfPlayer.getPapalCard(currCall);
     }
 
@@ -549,14 +549,14 @@ public class LightGame extends ViewObservable {
      * This method returns the values of the player's papal cards
      * @return int[] : the values of the player's papal cards
      */
-    public int[] getPapalCards(){
+    public synchronized int[] getPapalCards(){
         return gameBoardOfPlayer.getPapalCards();
     }
 
      /**
       * This method returns an array containing the first production card of each deck or null if the deck is empty
       */
-    public ArrayList<ProductionCard> deckNotification(){
+    public synchronized ArrayList<ProductionCard> deckNotification(){
         ArrayList<ProductionCard> list = new ArrayList<>();
         if(!deckProductionCardOneBlu.isEmpty()) {
             list.add(deckProductionCardOneBlu.get(0));
@@ -631,7 +631,7 @@ public class LightGame extends ViewObservable {
      /**
       * This method returns the activated leader cards of the player
       */
-    public ArrayList<LeaderCard> getLeaderCardActivated(){
+    public synchronized ArrayList<LeaderCard> getLeaderCardActivated(){
         return gameBoardOfPlayer.getLeaderCardActivated();
     }
 
@@ -652,77 +652,77 @@ public class LightGame extends ViewObservable {
      /**
       * This method returns the player's position
       */
-    public int getPosition() {
+    public synchronized int getPosition() {
         return position;
     }
 
      /**
       * This method sets the player's position
       */
-    public void setPosition(int position) {
+    public synchronized void setPosition(int position) {
         this.position = position;
     }
 
      /**
       * This method returns the player's game board
       */
-    public LightGameBoard getGameBoardOfPlayer(){
+    public synchronized LightGameBoard getGameBoardOfPlayer(){
         return gameBoardOfPlayer;
     }
 
      /**
       * This method returns the player's faith indicator position
       */
-    public int getFaithIndicator() {
+    public synchronized int getFaithIndicator() {
         return gameBoardOfPlayer.getIndicator();
     }
 
      /**
       * This method returns the player's production cards
       */
-    public ProductionCard[][] getProductionCards() {
+    public synchronized ProductionCard[][] getProductionCards() {
         return gameBoardOfPlayer.getProductionCards();
     }
 
      /**
       * This method returns the player's storage
       */
-    public Map<Resource, Integer> getStorage() {
+    public synchronized Map<Resource, Integer> getStorage() {
         return gameBoardOfPlayer.getStorage();
     }
 
      /**
       * This method returns the player's strongbox
       */
-    public Map<Resource, Integer> getStrongbox() {
+    public synchronized Map<Resource, Integer> getStrongbox() {
         return gameBoardOfPlayer.getStrongbox();
     }
 
      /**
       * This method returns the game's reserve
       */
-    public Map<Resource, Integer> getReserve() {
+    public synchronized Map<Resource, Integer> getReserve() {
         return reserve.getReserve();
     }
 
      /**
       * This method returns the game's market grid
       */
-    public Marble[][] getMarketGrid() {
+    public synchronized Marble[][] getMarketGrid() {
         return market.getGrid();
     }
 
      /**
       * This method returns the game's market extra
       */
-    public Marble getMarketExtra() {
+    public synchronized Marble getMarketExtra() {
         return market.getExtra();
     }
 
      /**
       * This method return true if all decks have been set, false otherwise
       */
-    public boolean isEachDeckConfig() {
+    public synchronized boolean isEachDeckConfig() {
         for(LightDeckProductionCard deck : listOfDeck){
             if(!deck.isConfig()) {
                 return false;
@@ -735,15 +735,15 @@ public class LightGame extends ViewObservable {
      /**
       * These methods are implemented in the sub-class
       */
-    public void setLorenzoTheMagnificent(int faithIndicator){}
+    public synchronized void setLorenzoTheMagnificent(int faithIndicator){}
 
-    public void actionMarkerEffect(String actionMarkerType) throws IOException, InterruptedException {}
+    public synchronized void actionMarkerEffect(String actionMarkerType) throws IOException, InterruptedException {}
 
-    public void moveBlackCrossOnce(){}
+    public synchronized void moveBlackCrossOnce(){}
 
-    public void moveBlackCross(){}
+    public synchronized void moveBlackCross(){}
 
-    public int getLorenzoPosition(){
+    public synchronized int getLorenzoPosition(){
         return 0;
     }
 
