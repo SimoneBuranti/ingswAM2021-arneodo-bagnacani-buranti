@@ -347,6 +347,11 @@ public class ProductionOnTest {
         } catch (LastSpaceReachedException e) {
             System.out.println("Last space of faith path");
             gameBoard.setPapal();
+            e.setNickName(null);
+            e.getNickName();
+            e.setCurrCall(0);
+            e.getCurrCall();
+
         }
     }
 

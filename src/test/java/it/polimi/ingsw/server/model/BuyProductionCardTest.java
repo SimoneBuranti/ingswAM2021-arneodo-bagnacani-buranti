@@ -1,6 +1,10 @@
 package it.polimi.ingsw.server.model;
 
 import it.polimi.ingsw.server.controller.ClientController;
+import it.polimi.ingsw.server.model.exceptions.EmptyException;
+import it.polimi.ingsw.server.model.exceptions.FullColumnException;
+import it.polimi.ingsw.server.model.exceptions.LevelException;
+import it.polimi.ingsw.server.model.exceptions.NotEnoughResourcesException;
 import it.polimi.ingsw.server.model.gameBoard.GameBoardInterface;
 import it.polimi.ingsw.server.network.ClientHandler;
 import it.polimi.ingsw.server.network.Server;
@@ -37,6 +41,19 @@ public class BuyProductionCardTest {
 
         for(int i = 0; i < 20; i++)
             gameBoard.addToStrongbox(Resource.SHIELD);
+
+
+        try {
+            game.buyProductionCard(game.deckFromDeckNumber(4),1 );
+        } catch (EmptyException e) {
+            e.printStackTrace();
+        } catch (FullColumnException e) {
+            e.printStackTrace();
+        } catch (NotEnoughResourcesException e) {
+            e.printStackTrace();
+        } catch (LevelException e) {
+            e.printStackTrace();
+        }
         FileClass.FileDestroyer();
     }
 

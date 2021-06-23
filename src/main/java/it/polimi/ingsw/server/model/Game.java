@@ -589,53 +589,6 @@ public class Game extends Observable {
         ProductionCard[] deck;
         productionCardDecks = new ArrayList<>();
 
-      /*  reader = new InputStreamReader(this.getClass().getResourceAsStream("/fileConfiguration/DeckProductionCardOneBluLatest.json"), StandardCharsets.UTF_8);
-        deck = gson.fromJson(reader, ProductionCard[].class);
-        deckProductionCardOneBlu = new DeckProductionCardOneBlu(deck);
-
-        reader = new InputStreamReader(this.getClass().getResourceAsStream("/fileConfiguration/DeckProductionCardTwoBluLatest.json"), StandardCharsets.UTF_8);
-        deck = gson.fromJson(reader, ProductionCard[].class);
-        deckProductionCardTwoBlu = new DeckProductionCardTwoBlu(deck);
-
-        reader = new InputStreamReader(this.getClass().getResourceAsStream("/fileConfiguration/DeckProductionCardThreeBluLatest.json"), StandardCharsets.UTF_8);
-        deck = gson.fromJson(reader, ProductionCard[].class);
-        deckProductionCardThreeBlu = new DeckProductionCardThreeBlu(deck);
-
-        reader = new InputStreamReader(this.getClass().getResourceAsStream("/fileConfiguration/DeckProductionCardOneGreenLatest.json"), StandardCharsets.UTF_8);
-        deck = gson.fromJson(reader, ProductionCard[].class);
-        deckProductionCardOneGreen = new DeckProductionCardOneGreen(deck);
-
-        reader = new InputStreamReader(this.getClass().getResourceAsStream("/fileConfiguration/DeckProductionCardTwoGreenLatest.json"), StandardCharsets.UTF_8);
-        deck = gson.fromJson(reader, ProductionCard[].class);
-        deckProductionCardTwoGreen = new DeckProductionCardTwoGreen(deck);
-
-        reader = new InputStreamReader(this.getClass().getResourceAsStream("/fileConfiguration/DeckProductionCardThreeGreenLatest.json"), StandardCharsets.UTF_8);
-        deck = gson.fromJson(reader, ProductionCard[].class);
-        deckProductionCardThreeGreen = new DeckProductionCardThreeGreen(deck);
-
-        reader = new InputStreamReader(this.getClass().getResourceAsStream("/fileConfiguration/DeckProductionCardOneYellowLatest.json"), StandardCharsets.UTF_8);
-        deck = gson.fromJson(reader, ProductionCard[].class);
-        deckProductionCardOneYellow = new DeckProductionCardOneYellow(deck);
-
-        reader = new InputStreamReader(this.getClass().getResourceAsStream("/fileConfiguration/DeckProductionCardTwoYellowLatest.json"), StandardCharsets.UTF_8);
-        deck = gson.fromJson(reader, ProductionCard[].class);
-        deckProductionCardTwoYellow = new DeckProductionCardTwoYellow(deck);
-
-        reader = new InputStreamReader(this.getClass().getResourceAsStream("/fileConfiguration/DeckProductionCardThreeYellowLatest.json"), StandardCharsets.UTF_8);
-        deck = gson.fromJson(reader, ProductionCard[].class);
-        deckProductionCardThreeYellow = new DeckProductionCardThreeYellow(deck);
-
-        reader = new InputStreamReader(this.getClass().getResourceAsStream("/fileConfiguration/DeckProductionCardOneVioletLatest.json"), StandardCharsets.UTF_8);
-        deck = gson.fromJson(reader, ProductionCard[].class);
-        deckProductionCardOneViolet = new DeckProductionCardOneViolet(deck);
-
-        reader = new InputStreamReader(this.getClass().getResourceAsStream("/fileConfiguration/DeckProductionCardTwoVioletLatest.json"), StandardCharsets.UTF_8);
-        deck = gson.fromJson(reader, ProductionCard[].class);
-        deckProductionCardTwoViolet = new DeckProductionCardTwoViolet(deck);
-
-        reader = new InputStreamReader(this.getClass().getResourceAsStream("/fileConfiguration/DeckProductionCardThreeVioletLatest.json"), StandardCharsets.UTF_8);
-        deck = gson.fromJson(reader, ProductionCard[].class);
-        deckProductionCardThreeViolet = new DeckProductionCardThreeViolet(deck);*/
         try {
             deck = gson.fromJson(new FileReader("fileConfiguration/DeckProductionCardOneBluLatest.json"), ProductionCard[].class);
             deckProductionCardOneBlu = new DeckProductionCardOneBlu(deck);
