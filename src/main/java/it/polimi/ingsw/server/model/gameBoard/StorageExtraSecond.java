@@ -35,6 +35,23 @@ public class StorageExtraSecond extends StorageExtraFirst {
         this.secondResourceType = resourceSecondType;
         storageExtraSecond[0] = 0;
         storageExtraSecond[1] = 0;
+
+        setExtraStorageSecond();
+    }
+
+    private void setExtraStorageSecond() {
+        if(storageResource.get(secondResourceType) == 1){
+            storageExtraSecond[0] = 1;
+            storageResource.put(secondResourceType, 0);
+        }else if(storageResource.get(secondResourceType) == 2){
+            storageExtraSecond[0] = 1;
+            storageExtraSecond[1] = 1;
+            storageResource.put(secondResourceType, 0);
+        }else if(storageResource.get(secondResourceType) == 3){
+            storageExtraSecond[0] = 1;
+            storageExtraSecond[1] = 1;
+            storageResource.put(secondResourceType, 1);
+        }
     }
 
     /**

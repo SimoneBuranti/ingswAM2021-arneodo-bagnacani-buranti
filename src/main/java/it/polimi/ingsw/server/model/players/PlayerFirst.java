@@ -36,21 +36,7 @@ public class PlayerFirst extends Player{
     public PlayerFirst(String nickName, Game game, boolean newmatch,VirtualView virtualView){
         super(nickName,game,newmatch,virtualView);
         Gson gson=gsonForEveryone();
-      /*  Reader reader;
-
-        reader = new InputStreamReader(this.getClass().getResourceAsStream("/fileConfiguration/fileInformationPlayerFirst.json"), StandardCharsets.UTF_8);
-        this.gameBoardOfPlayer = gson.fromJson(reader, GameBoardInterface.class);
-
-        reader = new InputStreamReader(this.getClass().getResourceAsStream("/fileConfiguration/fileInformationLeaderInitLeaderPlayerFirst.json"), StandardCharsets.UTF_8);
-        this.leaderCard = gson.fromJson(reader, int[].class);
-        reverseAddPersonalLeaderCardAskey();
-        reader = new InputStreamReader(this.getClass().getResourceAsStream("/fileConfiguration/fileInformationInitOnLeaderPlayerFirst.json"), StandardCharsets.UTF_8);
-        this.initLeader = gson.fromJson(reader, boolean.class);
-
-        reader = new InputStreamReader(this.getClass().getResourceAsStream("/fileConfiguration/fileInformationInitOnResourcePlayerFirst.json"), StandardCharsets.UTF_8);
-        this.initResource = gson.fromJson(reader, boolean.class);*/
-
-       try {
+        try {
            this.gameBoardOfPlayer= gson.fromJson(new FileReader("fileConfiguration/fileInformationPlayerFirst.json"),GameBoardInterface.class);
         } catch (FileNotFoundException e) {
             e.printStackTrace();

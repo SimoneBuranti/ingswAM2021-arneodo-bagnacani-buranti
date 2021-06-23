@@ -58,20 +58,6 @@ public class PlayerFourth extends Player {
         super(nickName,game,newmatch,virtualView);
 
         Gson gson=gsonForEveryone();
-     /*   Reader reader;
-
-        reader = new InputStreamReader(this.getClass().getResourceAsStream("/fileConfiguration/fileInformationPlayerFourth.json"), StandardCharsets.UTF_8);
-        this.gameBoardOfPlayer = gson.fromJson(reader, GameBoardInterface.class);
-
-        reader = new InputStreamReader(this.getClass().getResourceAsStream("/fileConfiguration/fileInformationLeaderInitLeaderPlayerFourth.json"), StandardCharsets.UTF_8);
-        this.leaderCard = gson.fromJson(reader, int[].class);
-        reverseAddPersonalLeaderCardAskey();
-        reader = new InputStreamReader(this.getClass().getResourceAsStream("/fileConfiguration/fileInformationInitOnLeaderPlayerFourth.json"), StandardCharsets.UTF_8);
-        this.initLeader = gson.fromJson(reader, boolean.class);
-
-        reader = new InputStreamReader(this.getClass().getResourceAsStream("/fileConfiguration/fileInformationInitOnResourcePlayerFourth.json"), StandardCharsets.UTF_8);
-        this.initResource = gson.fromJson(reader, boolean.class);
-*/
         try {
             this.gameBoardOfPlayer= gson.fromJson(new FileReader("fileConfiguration/fileInformationPlayerFourth.json"),GameBoardInterface.class);
         } catch (FileNotFoundException e) {

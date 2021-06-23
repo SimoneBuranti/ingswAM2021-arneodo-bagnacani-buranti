@@ -1106,7 +1106,8 @@ class GameBoardTest {
         try {
             gameBoard.takeFromMarket(newResourcesList);
         } catch (NotEnoughSpaceInStorageException e) {
-            e.printStackTrace();
+            e.setResources(newResourcesList);
+            e.getResources();
         }
 
         available = gameBoard.availableResources();
@@ -1181,7 +1182,8 @@ class GameBoardTest {
             gameBoard.takeFromMarket(newResourcesList);
             assertTrue(false);
         } catch (NotEnoughSpaceInStorageException e) {
-
+            e.setResources(newResourcesList);
+            e.getResources();
         }
 
     }
@@ -1239,6 +1241,9 @@ class GameBoardTest {
             gameBoard.takeFromMarket(newResourcesList);
             assertTrue(false);
         } catch (NotEnoughSpaceInStorageException e) {
+            e.setResources(newResourcesList);
+            e.getResources();
+
 
         }
     }

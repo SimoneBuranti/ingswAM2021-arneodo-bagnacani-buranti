@@ -35,7 +35,7 @@ public class StorageExtraFirstTest {
         StorageExtraFirst storageExtra = new StorageExtraFirst(Resource.COIN, storage.getStorageResource());
 
         assertEquals(Resource.COIN, storageExtra.getFirstResourceType());
-        assertEquals(2, storageExtra.getNumExtraFirstAvailable());
+        assertEquals(0, storageExtra.getNumExtraFirstAvailable());
         assertEquals(2,storageExtra.getResource(Resource.COIN));
         assertEquals(2,storageExtra.getResource(Resource.ROCK));
         assertEquals(1,storageExtra.getResource(Resource.SERVANT));
@@ -72,7 +72,7 @@ public class StorageExtraFirstTest {
         storageExtra.addResource(Resource.COIN);
 
         assertEquals(3, storageExtra.getResource(Resource.COIN));
-        assertEquals(1, storageExtra.getNumExtraFirstAvailable());
+        assertEquals(0, storageExtra.getNumExtraFirstAvailable());
 
         storageExtra.addResource(Resource.COIN);
 
@@ -122,7 +122,7 @@ public class StorageExtraFirstTest {
             e.printStackTrace();
         }
         assertEquals(1,storageExtra.getResource(Resource.COIN));
-        assertEquals(2, storageExtra.getNumExtraFirstAvailable());
+        assertEquals(1, storageExtra.getNumExtraFirstAvailable());
 
         storageExtra.addResource(Resource.COIN);
         storageExtra.addResource(Resource.COIN);
@@ -183,7 +183,7 @@ public class StorageExtraFirstTest {
         assertTrue(storageExtra.check(list));
 
         list.add(Resource.SHIELD);
-        assertFalse(storageExtra.check(list));
+        assertTrue(storageExtra.check(list));
 
         list.remove(Resource.SHIELD);
         list.add(Resource.ROCK);
@@ -194,7 +194,7 @@ public class StorageExtraFirstTest {
 
         list.remove(Resource.ROCK);
         list.add(Resource.SERVANT);
-        assertFalse(storageExtra.check(list));
+        assertTrue(storageExtra.check(list));
 
         list.remove(Resource.SERVANT);
         list.add(Resource.COIN);
@@ -257,7 +257,7 @@ public class StorageExtraFirstTest {
 
         StorageExtraFirst storageExtra = new StorageExtraFirst(Resource.COIN, storage.getStorageResource());
 
-        assertEquals(2, storageExtra.getNumExtraFirstAvailable());
+        assertEquals(0, storageExtra.getNumExtraFirstAvailable());
         assertEquals(2, storageExtra.getResource(Resource.COIN));
         assertEquals(2, storageExtra.getResource(Resource.ROCK));
         assertEquals(1, storageExtra.getResource(Resource.SERVANT));
@@ -265,7 +265,7 @@ public class StorageExtraFirstTest {
 
         storageExtra.addResource(Resource.COIN);
         assertEquals(3, storageExtra.getResource(Resource.COIN));
-        assertEquals(1, storageExtra.getNumExtraFirstAvailable());
+        assertEquals(0, storageExtra.getNumExtraFirstAvailable());
 
         storageExtra.addResource(Resource.COIN);
         assertEquals(4, storageExtra.getResource(Resource.COIN));
@@ -298,19 +298,23 @@ public class StorageExtraFirstTest {
         StorageExtraFirst storageExtra = new StorageExtraFirst(Resource.COIN, storage.getStorageResource());
 
         assertEquals(5, storageExtra.resourceScore());
-        assertEquals(2, storageExtra.getNumExtraFirstAvailable());
+        assertEquals(0, storageExtra.getNumExtraFirstAvailable());
+        assertEquals(2, storageExtra.getResource(Resource.COIN));
 
         storageExtra.addResource(Resource.COIN);
         assertEquals(6, storageExtra.resourceScore());
-        assertEquals(1, storageExtra.getNumExtraFirstAvailable());
+        assertEquals(0, storageExtra.getNumExtraFirstAvailable());
+        assertEquals(3, storageExtra.getResource(Resource.COIN));
 
         storageExtra.addResource(Resource.COIN);
         assertEquals(7, storageExtra.resourceScore());
         assertEquals(0, storageExtra.getNumExtraFirstAvailable());
+        assertEquals(4, storageExtra.getResource(Resource.COIN));
 
         storageExtra.addResource(Resource.COIN);
         assertEquals(8, storageExtra.resourceScore());
         assertEquals(0, storageExtra.getNumExtraFirstAvailable());
+        assertEquals(5, storageExtra.getResource(Resource.COIN));
 
         storageExtra.addResource(Resource.SHIELD);
         storageExtra.addResource(Resource.SHIELD);

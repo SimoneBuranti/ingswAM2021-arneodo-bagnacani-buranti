@@ -15,7 +15,7 @@ public class Storage {
     /**
      * This attribute collects the current amount of resources of the storage
      */
-    private final Map<Resource,Integer> storageResource = new HashMap<>();
+    protected final Map<Resource,Integer> storageResource = new HashMap<>();
 
     /**
      *The constructor initialises the map with every type of resources to zero

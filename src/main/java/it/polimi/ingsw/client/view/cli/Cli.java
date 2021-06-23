@@ -434,7 +434,12 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
      */
     @Override
     public void showPlayerInfo(ShowAllOfPlayerMessage msg) {
-        System.out.println("Player" + msg.getNickname() + "game board information : ");
+        Map<Resource, Integer> map = msg.getStorage();
+        for(int i = 0; i < msg.getHowMany1(); i++)
+            map.put(msg.getResource1(), map.remove(msg.getResource1()) + 1);
+        for(int i = 0; i < msg.getHowMany2(); i++)
+            map.put(msg.getResource2(), map.remove(msg.getResource2()) + 1);
+        System.out.println(msg.getNickname() + "'s game board information : ");
         if(msg.isConnected())
             System.out.println("the player is connected to the game");
         else
@@ -461,7 +466,7 @@ public class Cli extends ViewControllerObservable implements View, NotificatorVi
         System.out.println("> strongbox : ");
         showResourceBox(msg.getStrongBox());
         System.out.println("> storage : ");
-        showResourceBox(msg.getStorage());
+        showResourceBox(map);
         System.out.println("> faith indicator : ");
         showFaithIndicator(msg.getFaithIndicator());
         for(int i = 0; i < 3; i++){

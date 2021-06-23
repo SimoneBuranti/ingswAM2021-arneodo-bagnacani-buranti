@@ -389,6 +389,14 @@ public class MainFrameMultiPlayer extends MainFrame {
         return (gameboardPanel.howManyActivated() + leaderCardsPanel.howManyActivated());
     }
 
+    /**
+     * This method returns the overall number of activated productions.
+     * @return
+     */
+    @Override
+    public int howManyActivatedExceptBaseProduction(){
+        return (gameboardPanel.howManyActivatedExceptBaseProduction() + leaderCardsPanel.howManyActivated());
+    }
 
     /**
      * Every time a player starts the turn it is notified on the turn panel.

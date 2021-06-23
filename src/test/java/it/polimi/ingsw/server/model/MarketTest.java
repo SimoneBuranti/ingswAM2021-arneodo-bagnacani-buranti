@@ -80,7 +80,7 @@ public class MarketTest {
         clientController2.setNickname("ale");
         GameMultiPlayer game = new GameMultiPlayer(2, nickname, true, clientControllers);
 
-        assertTrue(!(game.getExtraMarket() instanceof RedMarble) ||
+        assertTrue((game.getExtraMarket() instanceof RedMarble) ||
                 (game.getExtraMarket() instanceof YellowMarble) ||
                 (game.getExtraMarket() instanceof YellowMarble) ||
                 (game.getExtraMarket() instanceof BluMarble) ||
