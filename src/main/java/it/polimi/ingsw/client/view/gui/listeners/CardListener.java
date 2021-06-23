@@ -71,8 +71,8 @@ public class CardListener implements MouseListener {
      * This method adds the number corresponding to the leader card to be added
      */
     private void addPlayerCardToArrayListInt(LeaderCard card) {
-        for(int i=0; i<gui.getViewController().getGame().getGameBoardOfPlayer().getLeaderCards().size(); i++){
-            if (gui.getViewController().getGame().getGameBoardOfPlayer().getLeaderCards().get(i).equals(card)){
+        for(int i=0; i<gui.getViewController().getGame().getLeaderCards().size(); i++){
+            if (gui.getViewController().getGame().getLeaderCards().get(i).equals(card)){
                 if (sendableArrayInt.size()==1)
                     {
                         if (!(sendableArrayInt.get(0) ==i))

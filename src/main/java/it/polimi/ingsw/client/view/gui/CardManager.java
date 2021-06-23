@@ -95,7 +95,6 @@ public class CardManager {
             Image scaledImage = Paths.getLeaderImageFromKey(gui
                                                             .getViewController()
                                                             .getGame()
-                                                            .getGameBoardOfPlayer()
                                                             .getLeaderCard(i)
                                                             .getKey())
                                                             .getScaledInstance(150, 300, Image.SCALE_SMOOTH);
@@ -105,7 +104,6 @@ public class CardManager {
             cardButton.addMouseListener(new CardListener(gui
                                                                 .getViewController()
                                                                 .getGame()
-                                                                .getGameBoardOfPlayer()
                                                                 .getLeaderCard(i), this, selectable,gui));
         }
 

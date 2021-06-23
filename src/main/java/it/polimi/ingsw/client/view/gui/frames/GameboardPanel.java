@@ -419,7 +419,7 @@ public class GameboardPanel extends JPanel{
     public void enableProductionButtons(){
         for(int i = 0; i < 3; i++){
             productionButtons[i].setText("Activate");
-            if (gui.getViewController().getGame().getGameBoardOfPlayer().getProductionCard(i) != null){
+            if (gui.getViewController().getGame().getProductionCard(i) != null){
                 productionButtons[i].setEnabled(true);
             } else {
                 productionButtons[i].setEnabled(false);
@@ -467,7 +467,7 @@ public class GameboardPanel extends JPanel{
     public void putCardMode(){
         for(int i = 0; i<3 ; i++){
             productionButtons[i].setText("Put here");
-            ProductionCard card = gui.getViewController().getGame().getGameBoardOfPlayer().getProductionCard(i);
+            ProductionCard card = gui.getViewController().getGame().getProductionCard(i);
             if (card != null && card.getLevel() == 3){
                 setEnabled(false);
             } else {

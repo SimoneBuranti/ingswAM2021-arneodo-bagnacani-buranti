@@ -231,7 +231,7 @@ public class LightGame extends ViewObservable {
      /**
       * This method returns the types of the resources with which to exchange the white marble
       */
-    public synchronized ArrayList<Resource> getWhiteMarbleResourceTypes(){
+    public ArrayList<Resource> getWhiteMarbleResourceTypes(){
         ArrayList<Resource> resourceTypes = new ArrayList<>();
         ArrayList<LeaderCard> leaderCards = getLeaderCardActivated();
         for(LeaderCard lc : leaderCards){
@@ -663,12 +663,6 @@ public class LightGame extends ViewObservable {
         this.position = position;
     }
 
-     /**
-      * This method returns the player's game board
-      */
-    public synchronized LightGameBoard getGameBoardOfPlayer(){
-        return gameBoardOfPlayer;
-    }
 
      /**
       * This method returns the player's faith indicator position
@@ -728,7 +722,6 @@ public class LightGame extends ViewObservable {
                 return false;
             }
         }
-
         return true;
     }
 
@@ -747,4 +740,15 @@ public class LightGame extends ViewObservable {
         return 0;
     }
 
+    public synchronized  ProductionCard getProductionCard(int i) {
+        return this.gameBoardOfPlayer.getProductionCard(i);
+    }
+
+    public LeaderCard getLeaderCard(int i) {
+        return this.gameBoardOfPlayer.getLeaderCard(i);
+    }
+
+    public int getCurrCall() {
+       return this.getCurrCall();
+    }
  }

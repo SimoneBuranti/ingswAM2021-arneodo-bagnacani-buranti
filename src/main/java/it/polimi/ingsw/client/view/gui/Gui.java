@@ -571,9 +571,9 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
     public void showCallForCouncil(String nickname, int papalCard) {
         SwingUtilities.invokeLater(() -> {
             if (papalCard==1)
-                mainFrameOfGame.givePapalCard(viewController.getGame().getGameBoardOfPlayer().getCurrCall()-1);
+                mainFrameOfGame.givePapalCard(viewController.getGame().getCurrCall()-1);
             else
-                mainFrameOfGame.removePapalCard(viewController.getGame().getGameBoardOfPlayer().getCurrCall()-1);
+                mainFrameOfGame.removePapalCard(viewController.getGame().getCurrCall()-1);
             applyChangesTo(mainFrameOfGame);
 
         });

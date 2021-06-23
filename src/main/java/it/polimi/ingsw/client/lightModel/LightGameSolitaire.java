@@ -56,7 +56,7 @@ public class LightGameSolitaire extends LightGame{
      * @param actionMarkerType : the type of action marker
      */
     @Override
-    public synchronized void actionMarkerEffect(String actionMarkerType) throws IOException, InterruptedException {
+    public void actionMarkerEffect(String actionMarkerType) throws IOException, InterruptedException {
         actionMarkerDeck.actionMarkerEffect(actionMarkerType, this);
     }
 
