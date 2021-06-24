@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class LeaderCardTestActivation {
@@ -25,7 +26,7 @@ class LeaderCardTestActivation {
      * Check of the correct behavior of the action marker that discards two production cards from level one deck up to level three deck
      */
     @Test
-    @DisplayName("Action Marker Production Cards Test")
+    @DisplayName("Activate Test")
     public void activate() throws RequirementsException, LeaderCardsGameBoardEmptyException, IOException, InterruptedException, IOException {
         ArrayList<String> nickname = new ArrayList<>(2);
         nickname.add("aa");
@@ -120,7 +121,7 @@ class LeaderCardTestActivation {
      * Check of the correct behavior of the action marker that discards two production cards from level one deck up to level three deck
      */
     @Test
-    @DisplayName("Action Marker Production Cards Test")
+    @DisplayName("Activate Error Test")
     public void activateError() throws RequirementsException, LeaderCardsGameBoardEmptyException, IOException, InterruptedException, IOException {
         ArrayList<String> nickname = new ArrayList<>(2);
         nickname.add("aa");
@@ -212,6 +213,57 @@ class LeaderCardTestActivation {
 
 
 
+    /**
+     * Check of the correct behavior of the requirements classes
+     */
+    @Test
+    @DisplayName("Requirements Test")
+    public void RequirementsTest(){
+        Colour blue = new Blue();
+        Colour green = new Green();
+        Colour yellow = new Yellow();
+        Colour violet = new Violet();
 
+        Requirements requirementsOne= new ResourceRequirement(Resource.COIN);
+
+        Requirements requirementsTwo= new SecondLevelRequirement(blue);
+
+        Requirements requirementsThree= new ThreeFlagsTwoColourRequirement(violet,green);
+
+        Requirements requirementsFour= new TwoFlagsTwoColourRequirement(yellow,violet);
+
+        assertEquals(Resource.COIN, requirementsOne.getResourceRequirement());
+        assertEquals(null, requirementsOne.getColourDoubleRequirement());
+        assertEquals(null, requirementsOne.getColourFirstRequirement());
+        assertEquals(null, requirementsOne.getColourRequirement());
+        assertEquals(null, requirementsOne.getColourSecondRequirement());
+        assertEquals(null, requirementsOne.getColourSingleRequirement());
+        assertEquals("Requirements : 5 " + Resource.COIN, requirementsOne.toString());
+
+
+        assertEquals(null, requirementsTwo.getResourceRequirement());
+        assertEquals(null, requirementsTwo.getColourDoubleRequirement());
+        assertEquals(null, requirementsTwo.getColourFirstRequirement());
+        assertEquals(blue, requirementsTwo.getColourRequirement());
+        assertEquals(null, requirementsTwo.getColourSecondRequirement());
+        assertEquals(null, requirementsTwo.getColourSingleRequirement());
+        assertEquals("Requirements : 1 second level " + blue.getColour() + " production card", requirementsTwo.toString());
+
+        assertEquals(null, requirementsThree.getResourceRequirement());
+        assertEquals(violet, requirementsThree.getColourDoubleRequirement());
+        assertEquals(null, requirementsThree.getColourFirstRequirement());
+        assertEquals(null, requirementsThree.getColourRequirement());
+        assertEquals(null, requirementsThree.getColourSecondRequirement());
+        assertEquals(green, requirementsThree.getColourSingleRequirement());
+        assertEquals("Requirements : 1 " + green.getColour() + " and 2 " + violet.getColour() + " production cards", requirementsThree.toString());
+
+        assertEquals(null, requirementsFour.getResourceRequirement());
+        assertEquals(null, requirementsFour.getColourDoubleRequirement());
+        assertEquals(yellow, requirementsFour.getColourFirstRequirement());
+        assertEquals(null, requirementsFour.getColourRequirement());
+        assertEquals(violet, requirementsFour.getColourSecondRequirement());
+        assertEquals(null, requirementsFour.getColourSingleRequirement());
+        assertEquals("Requirements : 1 " + yellow.getColour() + " and 1 " + violet.getColour() + " production cards", requirementsFour.toString());
+    }
 
 }
