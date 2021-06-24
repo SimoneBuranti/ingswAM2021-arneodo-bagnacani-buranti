@@ -76,7 +76,7 @@ public class ClientController implements MessageVisitor {
      * ceck if the player is the current
      */
     public boolean turnCheck(){
-        return nickname.equals(game.getCurrentNickname());
+        return nickname.equals(server.getGame().getCurrentNickname());
     }
 
     /**

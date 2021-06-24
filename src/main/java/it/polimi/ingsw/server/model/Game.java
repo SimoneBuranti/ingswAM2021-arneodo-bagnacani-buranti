@@ -595,7 +595,6 @@ public class Game extends Observable {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        System.out.println("almeno il primo");
 
         try {
             deck = gson.fromJson(new FileReader("fileConfiguration/DeckProductionCardTwoBluLatest.json"), ProductionCard[].class);
@@ -680,7 +679,6 @@ public class Game extends Observable {
         productionCardDecks.add(deckProductionCardOneYellow);
         productionCardDecks.add(deckProductionCardTwoYellow);
         productionCardDecks.add(deckProductionCardThreeYellow);
-        System.out.println("qui ce laccio ce la faccio");
     }
 
 
@@ -703,7 +701,6 @@ public class Game extends Observable {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        System.out.println("market ce la faccio");
 
     }
 
@@ -832,5 +829,14 @@ public class Game extends Observable {
     public void notifyFaithPath() throws IOException, InterruptedException{
         notifyToOneObserver(new FaithPathMessage(1));
         notifyAllObserverLessOneByNickname(new FaithPathOpponentMessage(currentPlayer.getNickName(), 1),currentPlayer.getNickName());
+    }
+
+    /**
+     * Only test method
+     * @return the size of the deck
+     */
+    public int productionDeckSize(int index){
+        DeckProductionCard deck = productionCardDecks.get(index);
+        return deck.size();
     }
 }
