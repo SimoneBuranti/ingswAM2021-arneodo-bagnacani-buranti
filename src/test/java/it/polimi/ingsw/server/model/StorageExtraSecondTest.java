@@ -55,6 +55,15 @@ public class StorageExtraSecondTest {
         storage.addResource(Resource.ROCK);
         storage.addResource(Resource.SERVANT);
 
+        assertEquals(false, storage.isStorageExtraFirstFull());
+        assertEquals(false, storage.isStorageExtraFirstEmpty());
+        assertEquals(null, storage.getFirstResourceType());
+        assertEquals(0, storage.getNumExtraFirstAvailable());
+        assertEquals(false, storage.isStorageExtraSecondFull());
+        assertEquals(false, storage.isStorageExtraSecondEmpty());
+        assertEquals(null, storage.getSecondResourceType());
+        assertEquals(0, storage.getNUmExtraSecondAvailable());
+
         StorageExtraSecond storageExtra = new StorageExtraSecond(Resource.COIN, Resource.ROCK, storage.getStorageResource(), 0);
 
 
