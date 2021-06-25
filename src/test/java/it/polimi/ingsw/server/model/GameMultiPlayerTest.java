@@ -275,7 +275,7 @@ try{
 
 
     @Test
-    public void AskEndTurnTest() throws IOException, InterruptedException {
+    public void AskEndTurnLookingReferenceGameServerTest() throws IOException, InterruptedException {
         ArrayList<String> nickname = new ArrayList<>();
         nickname.add("Ali");
         nickname.add("Simo");
@@ -317,7 +317,31 @@ try{
                 game.disconnectPlayer("lillo");
                 assertTrue(game.numPlayersDisconnected()==1);
             }
+            else if("simo".equals(game.currentPlayer.getNickName()))
+            {
+                game.endOfTurn();
+                game.disconnectPlayerOption("simo");
+                game.disconnectPlayer("simo");
+                assertTrue(game.numPlayersDisconnected()==1);
+            }
+            else if("ale".equals(game.currentPlayer.getNickName()))
+            {
+                game.endOfTurn();
+                game.disconnectPlayerOption("ale");
+                game.disconnectPlayer("ale");
+                assertTrue(game.numPlayersDisconnected()==1);
+            }
+            else if("ali".equals(game.currentPlayer.getNickName()))
+            {
+                game.endOfTurn();
+                game.disconnectPlayerOption("ali");
+                game.disconnectPlayer("ali");
+                assertTrue(game.numPlayersDisconnected()==1);
+            }
+
         }
+
+
 
         FileClass.FileDestroyer();
 
@@ -356,8 +380,9 @@ try{
         clientController3.setNickname("ale");
         clientController4.setNickname("lillo");
         GameMultiPlayer game = new GameMultiPlayer(4, nickname, true, clientControllers);
-        if(game.checkNickname("ali"))
-            game.askInfoOnPlayer(1,"ali");
+        server.setGame(game);
+        if(!server.getGame().checkNickname("ali"))
+            server.getGame().askInfoOnPlayer(1,"ali");
         else
         {
             game.endOfLastTurn();
@@ -400,19 +425,96 @@ try{
         clientController3.setNickname("ale");
         clientController4.setNickname("lillo");
         GameMultiPlayer game = new GameMultiPlayer(4, nickname, true, clientControllers);
-        if(game.checkNickname("ali"))
-            game.askInfoOnPlayer(1,"ali");
+        server.setGame(game);
+        if(!server.getGame().checkNickname("ali"))
+            server.getGame().askInfoOnPlayer(1,"ali");
         else
         {
 
-            game.disconnectPlayerOption("lillo");
-            game.disconnectPlayer("lillo");
-            assertTrue(game.numPlayersDisconnected()==1);
+            server.getGame().disconnectPlayerOption("lillo");
+            server.getGame().disconnectPlayer("lillo");
+            assertTrue(server.getGame().numPlayersDisconnected()==1);
         }
 
         FileClass.FileDestroyer();
 
     }
+
+
+
+    @Test
+    public void AskEndTurnTest() throws IOException, InterruptedException {
+        ArrayList<String> nickname = new ArrayList<>();
+        nickname.add("Ali");
+        nickname.add("Simo");
+        nickname.add("Ale");
+        nickname.add("lillo");
+        ArrayList<ClientController> clientControllers = new ArrayList<>(4);
+        Server server= new Server();
+        ClientHandler clientHandler1= new ClientHandler(server);
+        ClientController clientController= new ClientController(server,clientHandler1) ;
+
+        ClientHandler clientHandler2= new ClientHandler(server);
+        ClientController clientController2= new ClientController(server,clientHandler2) ;
+
+        ClientHandler clientHandler3= new ClientHandler(server);
+        ClientController clientController3= new ClientController(server,clientHandler3) ;
+
+        ClientHandler clientHandler4= new ClientHandler(server);
+        ClientController clientController4= new ClientController(server,clientHandler4) ;
+
+        clientControllers.add(clientController);
+        clientControllers.add(clientController2);
+        clientControllers.add(clientController3);
+        clientControllers.add(clientController4);
+
+        clientController.setNickname("simo");
+        clientController2.setNickname("ali");
+        clientController3.setNickname("ale");
+        clientController4.setNickname("lillo");
+        GameMultiPlayer game = new GameMultiPlayer(4, nickname, true, clientControllers);
+        server.setGame(game);
+        if(server.getGame().checkNickname("ali"))
+            server.getGame().askInfoOnPlayer(1,"ali");
+        else
+        {
+            if("lillo".equals(server.getGame().getCurrentPlayer().getNickName()))
+            {
+                server.getGame().endOfTurn();
+                server.getGame().disconnectPlayerOption("lillo");
+                server.getGame().disconnectPlayer("lillo");
+                assertTrue(server.getGame().numPlayersDisconnected()==1);
+            }
+            else if("simo".equals(server.getGame().getCurrentPlayer().getNickName()))
+            {
+                server.getGame().endOfTurn();
+                server.getGame().disconnectPlayerOption("simo");
+                server.getGame().disconnectPlayer("simo");
+                assertTrue(server.getGame().numPlayersDisconnected()==1);
+            }
+            else if("ale".equals(server.getGame().getCurrentPlayer().getNickName()))
+            {
+                server.getGame().endOfTurn();
+                server.getGame().disconnectPlayerOption("ale");
+                server.getGame().disconnectPlayer("ale");
+                assertTrue(server.getGame().numPlayersDisconnected()==1);
+            }
+            else if("ali".equals(server.getGame().getCurrentPlayer().getNickName()))
+            {
+                server.getGame().endOfTurn();
+                server.getGame().disconnectPlayerOption("ali");
+                server.getGame().disconnectPlayer("ali");
+                assertTrue(server.getGame().numPlayersDisconnected()==1);
+            }
+
+        }
+
+
+
+        FileClass.FileDestroyer();
+
+    }
+
 
 
 

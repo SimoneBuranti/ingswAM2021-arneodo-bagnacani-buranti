@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class PlayerTest {
+/*class PlayerTest {
     /*
     Game game;
     VirtualView virtualView;
@@ -30,7 +30,7 @@ class PlayerTest {
         game = new GameSolitaire(playerNick,true,);
     }*/
 
-    @Test
+   /* @Test
     public void PlayerTest0(){
         Player player = new Player(null,null,null);
         int[] vec;
@@ -91,8 +91,7 @@ class PlayerTest {
         } catch (NotEnoughSpaceInStorageException | IOException | InterruptedException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 
 
 
-}
