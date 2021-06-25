@@ -52,10 +52,6 @@ public class LeaderCardProduction extends LeaderCard {
     }
 
 
-    public Resource getResourceProduction(){
-        return resourceEffect;
-    }
-
     public String toString(){
         return "Ability: extra production with input = 1 " + resourceEffect + ", output = 1 resource of your choice and 1 faith point";
     }

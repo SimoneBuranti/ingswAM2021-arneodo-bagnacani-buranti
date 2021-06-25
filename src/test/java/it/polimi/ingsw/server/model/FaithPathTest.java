@@ -231,6 +231,7 @@ class FaithPathTest {
             } catch (CallForCouncilException c) {
                 System.out.println("CallForCouncilException Thrown");
             } catch (LastSpaceReachedException e) {
+                assertEquals(2, e.getCurrCall());
                 System.out.println("Game Over");
             }
         }

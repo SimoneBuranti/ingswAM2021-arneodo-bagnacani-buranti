@@ -278,7 +278,12 @@ public class Server {
         this.restartAnswer = restartAnswer;
     }
 
-
+    /**
+     * Only test method
+     */
+    public void setGame(Game game){
+        this.game = game;
+    }
 
     /**
      * @param clientController add to temp lobby

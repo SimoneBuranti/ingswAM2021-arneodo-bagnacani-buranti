@@ -305,6 +305,7 @@ try{
         clientController3.setNickname("ale");
         clientController4.setNickname("lillo");
         GameMultiPlayer game = new GameMultiPlayer(4, nickname, true, clientControllers);
+        server.setGame(game);
         if(game.checkNickname("ali"))
             game.askInfoOnPlayer(1,"ali");
         else
