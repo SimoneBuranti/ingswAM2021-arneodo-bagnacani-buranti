@@ -65,16 +65,16 @@ public class LightLeaderCards {
 
 
         Requirements requirementsThirteen = new TwoFlagsTwoColourRequirement(blue, violet);
-        LeaderCard leaderCardThirteen = new LeaderCardReduction(requirementsThirteen, 3, Resource.SHIELD, 12);
+        LeaderCard leaderCardThirteen = new LeaderCardReduction(requirementsThirteen, 2, Resource.SHIELD, 12);
 
         Requirements requirementsFourteen = new TwoFlagsTwoColourRequirement(yellow, green);
-        LeaderCard leaderCardFourteen = new LeaderCardReduction(requirementsFourteen, 3, Resource.SERVANT, 13);
+        LeaderCard leaderCardFourteen = new LeaderCardReduction(requirementsFourteen, 2, Resource.SERVANT, 13);
 
         Requirements requirementsFifteen = new TwoFlagsTwoColourRequirement(yellow, violet);
-        LeaderCard leaderCardFifteen = new LeaderCardReduction(requirementsFifteen, 3, Resource.COIN, 14);
+        LeaderCard leaderCardFifteen = new LeaderCardReduction(requirementsFifteen, 2, Resource.COIN, 14);
 
         Requirements requirementsSixteen = new TwoFlagsTwoColourRequirement(green, blue);
-        LeaderCard leaderCardSixteen = new LeaderCardReduction(requirementsSixteen, 3, Resource.ROCK, 15);
+        LeaderCard leaderCardSixteen = new LeaderCardReduction(requirementsSixteen, 2, Resource.ROCK, 15);
 
 
         leaderCards.add(leaderCardOne);
