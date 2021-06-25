@@ -749,6 +749,6 @@ public class LightGame extends ViewObservable {
     }
 
     public int getCurrCall() {
-       return this.getCurrCall();
+       return gameBoardOfPlayer.getCurrCall();
     }
  }

@@ -69,7 +69,7 @@ public class DeckProductionCardOneYellow extends DeckProductionCard {
         Map<Resource,Integer> yellowThreeIn =new HashMap<>() ;
         yellowThreeIn.put(Resource.COIN, 0);
         yellowThreeIn.put(Resource.ROCK, 0);
-        yellowThreeIn.put(Resource.SERVANT, 2);
+        yellowThreeIn.put(Resource.SERVANT, 0);
         yellowThreeIn.put(Resource.SHIELD, 2);
         Map<Resource,Integer> yellowThreeOut =new HashMap<>();
         yellowThreeOut.put(Resource.COIN, 1);

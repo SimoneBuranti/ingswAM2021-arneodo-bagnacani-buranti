@@ -210,6 +210,8 @@ public class LeaderCardsPanel extends JPanel {
                 if(firstCard.getIndex() == 0) {
                     this.gui.notifyObserver(new ExtraProductionOnMessage(firstResourceProduction.getResource(), leaderCardResource(0)));
                 }
+                else if(firstCard.getIndex() == 1 && secondActivateButton == null )
+                    this.gui.notifyObserver(new ExtraProductionOnMessage(firstResourceProduction.getResource(), leaderCardResource(0)));
                 else
                     this.gui.notifyObserver(new DoubleProductionOnMessage(firstResourceProduction.getResource(), leaderCardResource(0)));
             } catch (IOException | InterruptedException ioException) {
@@ -240,6 +242,8 @@ public class LeaderCardsPanel extends JPanel {
         secondActivateButton.addActionListener( e -> {
             try {
                 if(secondCard.getIndex() == 0)
+                    this.gui.notifyObserver(new ExtraProductionOnMessage(secondResourceProduction.getResource(), leaderCardResource(1)));
+                else if(secondCard.getIndex() == 1 && firstActivateButton == null)
                     this.gui.notifyObserver(new ExtraProductionOnMessage(secondResourceProduction.getResource(), leaderCardResource(1)));
                 else
                     this.gui.notifyObserver(new DoubleProductionOnMessage(secondResourceProduction.getResource(), leaderCardResource(1)));
