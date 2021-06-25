@@ -393,9 +393,9 @@ public class LightProductionCards {
         greenNine.put(Resource.SERVANT, 0);
         greenNine.put(Resource.SHIELD, 6);
         Map<Resource,Integer> greenNineIn =new HashMap<>() ;
-        greenNineIn.put(Resource.COIN, 0);
+        greenNineIn.put(Resource.COIN, 2);
         greenNineIn.put(Resource.ROCK, 0);
-        greenNineIn.put(Resource.SERVANT, 2);
+        greenNineIn.put(Resource.SERVANT, 0);
         greenNineIn.put(Resource.SHIELD, 0);
         Map<Resource,Integer> greenNineOut =new HashMap<>();
         greenNineOut.put(Resource.COIN, 0);
@@ -719,7 +719,7 @@ public class LightProductionCards {
         Map<Resource,Integer> yellowThreeIn =new HashMap<>() ;
         yellowThreeIn.put(Resource.COIN, 0);
         yellowThreeIn.put(Resource.ROCK, 0);
-        yellowThreeIn.put(Resource.SERVANT, 2);
+        yellowThreeIn.put(Resource.SERVANT, 0);
         yellowThreeIn.put(Resource.SHIELD, 2);
         Map<Resource,Integer> yellowThreeOut =new HashMap<>();
         yellowThreeOut.put(Resource.COIN, 1);

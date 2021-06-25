@@ -68,7 +68,7 @@ public abstract class Paths {
             case 23 :
                 return Toolkit.getDefaultToolkit().createImage(srcPath+"Masters of Renaissance_Cards_FRONT_3mmBleed_1-41-1.png");
             case 24 :
-                return Toolkit.getDefaultToolkit().createImage(srcPath+"Masters of Renaissance_Cards_FRONT_3mmBleed_1-46-1.png");
+                return Toolkit.getDefaultToolkit().createImage(srcPath+"Masters of Renaissance_Cards_FRONT_3mmBleed_1-45-1.png");
             case 25 :
                 return Toolkit.getDefaultToolkit().createImage(srcPath+"Masters of Renaissance_Cards_FRONT_3mmBleed_1-2-1.png");
             case 26 :

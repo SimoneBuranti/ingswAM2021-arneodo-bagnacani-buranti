@@ -29,9 +29,9 @@ public class DeckProductionCardThreeGreen extends DeckProductionCard {
         greenNine.put(Resource.SERVANT, 0);
         greenNine.put(Resource.SHIELD, 6);
         Map<Resource,Integer> greenNineIn =new HashMap<>() ;
-        greenNineIn.put(Resource.COIN, 0);
+        greenNineIn.put(Resource.COIN, 2);
         greenNineIn.put(Resource.ROCK, 0);
-        greenNineIn.put(Resource.SERVANT, 2);
+        greenNineIn.put(Resource.SERVANT, 0);
         greenNineIn.put(Resource.SHIELD, 0);
         Map<Resource,Integer> greenNineOut =new HashMap<>();
         greenNineOut.put(Resource.COIN, 0);
