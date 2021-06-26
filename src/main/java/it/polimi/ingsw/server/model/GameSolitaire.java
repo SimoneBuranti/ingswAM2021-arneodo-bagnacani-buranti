@@ -660,6 +660,22 @@ public class GameSolitaire extends Game {
     public void endGame(){
         FileClass.FileDestroyer();
         setOver(true);
+        Gson gson = new Gson();
+        FileWriter config = null;
+        String jsonStrin = gson.toJson(null,ArrayList.class);
+        try {
+            config = new FileWriter("fileConfiguration/InformationAboutTurn.json");
+            config.write(jsonStrin);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                config.flush();
+                config.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override

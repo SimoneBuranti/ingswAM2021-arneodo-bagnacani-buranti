@@ -709,6 +709,22 @@ public class GameMultiPlayer extends Game {
         notifyObserver(new EndGamePlayerWinnerMessage(theWinnerIs().getNickName(), scoreOfPlayers));
         FileClass.FileDestroyer();
         setOver(true);
+        Gson gson = new Gson();
+        FileWriter config = null;
+        String jsonStrin = gson.toJson(null,ArrayList.class);
+        try {
+            config = new FileWriter("fileConfiguration/InformationAboutTurn.json");
+            config.write(jsonStrin);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                config.flush();
+                config.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 
