@@ -273,8 +273,19 @@ public class Market extends Observable {
     /**
      * @return initial marble list for configuration
      */
-    public ArrayList<Marble> getInitialMarbleList(){
-        return initialMarbleList;
+    protected ArrayList<Marble> getGridActual(){
+        ArrayList<Marble> actualGrid = new ArrayList<>(13);
+        int i;
+        int j;
+        int k = 0;
+        for(i=0;i<3;i++){
+            for (j=0;j<4;j++) {
+                actualGrid.add(getCellGrid(i,j));
+                k++;
+            }
+        }
+        actualGrid.add(getExtra());
+        return actualGrid;
     }
 
 
@@ -304,6 +315,22 @@ public class Market extends Observable {
 return gson;
 
 }
+
+
+
+
+
+    /**
+     * @return initial marble list for configuration
+     */
+    public ArrayList<Marble> getInitialMarbleList(){
+        return initialMarbleList;
+    }
+
+
+
+
+
 
 
     /**

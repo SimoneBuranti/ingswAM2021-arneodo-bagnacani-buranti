@@ -791,7 +791,7 @@ public class Game extends Observable {
         notifyOnlyOneSpecificObserver(new DeckProductionCardConfigMessage(deckProductionCardOneYellow.getDeckNumber(),deckProductionCardOneYellow.getDeck()), nickname);
         notifyOnlyOneSpecificObserver(new DeckProductionCardConfigMessage(deckProductionCardOneViolet.getDeckNumber(),deckProductionCardOneViolet.getDeck()), nickname);
 
-        notifyOnlyOneSpecificObserver(new ConfigurationMarketMessage(market.getInitialMarbleList()), nickname);
+        notifyOnlyOneSpecificObserver(new ConfigurationMarketMessage(market.getGridActual()), nickname);
 
     }
 
