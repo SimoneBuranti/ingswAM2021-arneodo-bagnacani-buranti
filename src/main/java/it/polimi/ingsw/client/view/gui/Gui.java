@@ -825,11 +825,11 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
     @Override
     public void visit(StorageNotification storageNotification) {
         SwingUtilities.invokeLater(() -> {
-            HashMap<Resource,Integer> resources;
+            Map<Resource,Integer> resources;
             ArrayList<LeaderCard> activated = viewController.getGame().getLeaderCardActivated();
             ArrayList<Resource> extraTypes = new ArrayList<>();
             ArrayList<Integer> cardPositions = new ArrayList<>();
-            resources = (HashMap<Resource, Integer>) storageNotification.getMap();
+            resources = storageNotification.getMap();
 
             for(int i = 0; i<activated.size();i++){
                 if (activated.get(i) instanceof LeaderCardStorage){
