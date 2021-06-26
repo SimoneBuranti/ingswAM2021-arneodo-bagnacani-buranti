@@ -825,11 +825,10 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
     @Override
     public void visit(StorageNotification storageNotification) {
         SwingUtilities.invokeLater(() -> {
-            Map<Resource,Integer> resources;
+            Map<Resource,Integer> resources = new HashMap<>();
             ArrayList<LeaderCard> activated = viewController.getGame().getLeaderCardActivated();
             ArrayList<Resource> extraTypes = new ArrayList<>();
             ArrayList<Integer> cardPositions = new ArrayList<>();
-            resources = storageNotification.getMap();
 
             for(int i = 0; i<activated.size();i++){
                 if (activated.get(i) instanceof LeaderCardStorage){
@@ -838,19 +837,31 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
                 }
             }
 
-            for(Resource r : resources.keySet()){
-                for (int i = 0; i<extraTypes.size();i++){
-                    if(extraTypes.get(i) == r){
-                        if (resources.get(r)>2){
-                            mainFrameOfGame.addToExtraStorage(cardPositions.get(i),r,2);
-                            resources.put(r,resources.remove(r)-2);
+            if(extraTypes.size() == 0){
+                resources = storageNotification.getMap();
+            }else if(extraTypes.size() >= 1){
+                for(Resource r : storageNotification.getMap().keySet()){
+                    if(extraTypes.get(0) == r){
+                        if (storageNotification.getMap().get(r)>2){
+                            mainFrameOfGame.addToExtraStorage(cardPositions.get(0),r,2);
+                            resources.put(r,storageNotification.getMap().get(r)-2);
                         } else {
-                            mainFrameOfGame.addToExtraStorage(cardPositions.get(i),r,resources.get(r));
+                            mainFrameOfGame.addToExtraStorage(cardPositions.get(0),r,storageNotification.getMap().get(r));
                             resources.put(r,0);
                         }
-                    }
+                    }else if(extraTypes.size() == 2 && extraTypes.get(1) == r) {
+                        if (storageNotification.getMap().get(r)>2){
+                            mainFrameOfGame.addToExtraStorage(cardPositions.get(1),r,2);
+                            resources.put(r,storageNotification.getMap().get(r)-2);
+                        } else {
+                            mainFrameOfGame.addToExtraStorage(cardPositions.get(1),r,storageNotification.getMap().get(r));
+                            resources.put(r,0);
+                        }
+                    }else
+                        resources.put(r, storageNotification.getMap().get(r));
                 }
             }
+
 
             mainFrameOfGame.updateStorage(resources);
             applyChangesTo(mainFrameOfGame);
