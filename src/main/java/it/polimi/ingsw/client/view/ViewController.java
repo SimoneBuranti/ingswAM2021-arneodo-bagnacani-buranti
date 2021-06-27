@@ -295,7 +295,6 @@ public class ViewController implements MessageVisitor, ViewObserver {
      */
     @Override
     public void visit(SetPapalsMessage msg) {
-
         game.setPapalCard(msg.getPapalCard());
         view.showCallForCouncil(msg.getNickname(), msg.getPapalCard());
     }
@@ -305,7 +304,6 @@ public class ViewController implements MessageVisitor, ViewObserver {
      */
     @Override
     public void visit(UpdateInitBooleanMessage msg) {
-        System.out.println(msg.isInitResource() + " " + msg.isInitLeader());
         game.setInitResource(msg.isInitResource());
         game.setInitLeader(msg.isInitLeader());
 

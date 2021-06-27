@@ -54,6 +54,7 @@ public class LorenzoTheMagnificent extends Observable {
         if (currCall < PAPAL_N-1 && faithIndicator == PAPAL_POS[currCall] ){
             CallForCouncilException callForCouncilException = new CallForCouncilException();
             callForCouncilException.setNickName("Lorenzo the Magnificent");
+            callForCouncilException.setCurrCall(currCall);
             throw callForCouncilException;
         }
         else if(currCall == PAPAL_N-1 && faithIndicator == PAPAL_POS[currCall])
