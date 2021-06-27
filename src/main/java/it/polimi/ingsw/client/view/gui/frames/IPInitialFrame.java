@@ -135,13 +135,16 @@ public class IPInitialFrame extends JFrame {
     public static boolean correctHostName(String hostName){
         String cha;
         int figure;
+        int dots =0;
 
         if(hostName.length() ==0)
             return false;
 
         for(int i=0,cont = 0;i<hostName.length();i++){
-            if (cont >0 && hostName.charAt(i) =='.')
+            if (cont >0 && hostName.charAt(i) =='.'){
                 cont = 0;
+                dots++;
+            }
             else if (cont == 0 && hostName.charAt(i)=='.')
                 return false;
             else if (cont>3 && hostName.charAt(i)!='.')
@@ -155,6 +158,10 @@ public class IPInitialFrame extends JFrame {
                     return false;
             }
         }
+
+        if (dots != 3)
+            return false;
+
         return true;
     }
 
