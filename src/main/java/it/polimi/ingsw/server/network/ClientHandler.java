@@ -142,7 +142,7 @@ public class ClientHandler implements Runnable {
                     pinger.shutdown();
 
 
-            },4000,4000,TimeUnit.MILLISECONDS);
+            },3000,2500,TimeUnit.MILLISECONDS);
 
             while(true){
 

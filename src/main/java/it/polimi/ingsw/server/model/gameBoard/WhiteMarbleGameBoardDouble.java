@@ -24,13 +24,6 @@ public class WhiteMarbleGameBoardDouble extends WhiteMarbleGameBoard{
         this.resourceTypeSecond = resourceTypeSecond;
     }
 
-    /**
-     * Getter for resource type of the second white marble-type leader card
-     * @return Resource : the second type of resource to be exchanged with the white marble
-     */
-    public Resource getResourceTypeSecond() {
-        return resourceTypeSecond;
-    }
 
     /**
      * Decorated game board method: it throws an WhiteMarbleException

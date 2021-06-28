@@ -65,6 +65,10 @@ public class Reserve extends Observable {
         throw new UnavailableResourceException();
     }
 
+
+    /**
+     * remove map of resource from reserve
+     */
     public void removeResources(Map<Resource,Integer> map){
         for(Resource resource : map.keySet()){
             reservePools.put(resource, reservePools.remove(resource) - map.get(resource));
@@ -81,13 +85,6 @@ public class Reserve extends Observable {
         return reservePools.get(resource);
     }
 
-
-    /**
-     * @return reservePools so reserve
-     */
-    public Map<Resource , Integer> getReservePool(){
-        return reservePools;
-    }
 
 }
 

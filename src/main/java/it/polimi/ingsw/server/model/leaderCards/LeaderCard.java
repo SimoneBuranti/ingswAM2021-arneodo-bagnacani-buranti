@@ -52,14 +52,23 @@ public class LeaderCard {
         return null;
     }
 
+    /**
+     * @return requirements of the card
+     */
     public Requirements getRequirements(){
         return requirements;
     }
 
+    /**
+     * @return card key
+     */
     public int getKey(){
         return key;
     }
 
+    /**
+     * @return effect in resource
+     */
     public Resource getResourceEffect(){
         return resourceEffect;
     }

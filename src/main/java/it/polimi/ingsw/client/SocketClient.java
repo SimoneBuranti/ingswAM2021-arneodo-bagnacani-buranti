@@ -68,7 +68,7 @@ public class SocketClient {
                 setCheckServer(false);
                 ack=0;
             }
-            },4000,4000, TimeUnit.MILLISECONDS);
+            },1500,2000, TimeUnit.MILLISECONDS);
 
         try {
             String msg;

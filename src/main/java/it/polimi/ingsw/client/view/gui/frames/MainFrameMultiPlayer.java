@@ -226,8 +226,6 @@ public class MainFrameMultiPlayer extends MainFrame {
         mainPanel.add(serverMessagePanel);
         leaderCardsPanel = new LeaderCardsPanel(gui);
         leaderCardsPanel.setBounds(805, 280, leaderWidth, leaderHeight);
-        //leaderCardsPanel.setBackground(Color.BLUE);
-        //leaderCardsPanel.setOpaque(true);
         mainPanel.add(leaderCardsPanel);
 
 
@@ -556,10 +554,6 @@ public class MainFrameMultiPlayer extends MainFrame {
         this.gameboardPanel.removePapalCard(i);
     }
 
-    /*public void showAllOfPlayer(ShowAllOfPlayerMessage msg){
-        gameboardPanel.showAllOfPlayer(msg);
-
-    }*/
 
 
 

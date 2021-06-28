@@ -136,6 +136,9 @@ public class ProductionCard {
         return faithPoint;
     }
 
+    /**
+     * @return deck key
+     */
     public int getKey() {
         return key;
     }

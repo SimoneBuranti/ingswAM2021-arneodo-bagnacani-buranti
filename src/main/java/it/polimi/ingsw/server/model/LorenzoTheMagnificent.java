@@ -117,13 +117,5 @@ public class LorenzoTheMagnificent extends Observable {
         faithIndicator=list[0];
         currCall=list[1];
     }
-
-
-
-
-
-
-
-
 }
 

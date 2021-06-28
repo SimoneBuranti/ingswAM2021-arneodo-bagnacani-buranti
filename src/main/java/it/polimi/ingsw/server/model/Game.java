@@ -690,11 +690,6 @@ public class Game extends Observable {
         Gson gson=Market.gsonForEveryoneMArket();
 
         Marble[] list;
-
-        /*Reader reader = new InputStreamReader(this.getClass().getResourceAsStream("/fileConfiguration/Market.json"), StandardCharsets.UTF_8);
-        list = gson.fromJson(reader, Marble[].class);
-        market= new Market(list);*/
-
         try {
             list = gson.fromJson(new FileReader("fileConfiguration/Market.json"),Marble[].class);
             market= new Market(list);
@@ -763,8 +758,6 @@ public class Game extends Observable {
 
         notifyObserver(new ConfigurationMarketMessage(market.getInitialMarbleList()));
 
-        //notifyObserver(new ReserveValueMessage(reserve.getReservePool()));
-
 
     }
 
@@ -795,7 +788,6 @@ public class Game extends Observable {
 
     }
 
-////
 
     /**
      * @return match is over or not

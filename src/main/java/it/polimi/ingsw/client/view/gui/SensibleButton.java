@@ -21,29 +21,5 @@ public class SensibleButton extends JButton {
         setBorderPainted(false);
     }
 
-    /**
-     * Constructor: build a colored button
-     *
-     * @param color The color of the button
-     */
-    public SensibleButton(Color color) {
-        super();
-        setBackground(color);
-        setOpaque(true);
-        setBorderPainted(false);
-    }
-
-    /**
-     * Constructor: build a colored button
-     *
-     * @param color The color of the button
-     * @param image The image of the button
-     */
-    public SensibleButton(Color color, Image image) {
-        super(new ImageIcon(image));
-        setBackground(color);
-        setOpaque(true);
-        setBorderPainted(false);
-    }
 
 }

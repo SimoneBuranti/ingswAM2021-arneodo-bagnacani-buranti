@@ -192,16 +192,6 @@ public class Market extends Observable {
         extra=initialMarbleList.get(12);
     }
 
-
-    /**
-     * Test only method : it returns the marble to the i position in the initialMarbleList
-     * @param i : the marble position in the list
-     * @return Marble : the marble in the position i in the list
-     */
-    public Marble getCellInitialMarbleList(int i) {
-        return initialMarbleList.get(i);
-    }
-
     /**
      * Getter method for the extra marble
      * @return Marble : the extra marble
@@ -312,13 +302,9 @@ public class Market extends Observable {
             .setPrettyPrinting()
             .create();
 
-return gson;
+        return gson;
 
-}
-
-
-
-
+    }
 
     /**
      * @return initial marble list for configuration
@@ -326,10 +312,6 @@ return gson;
     public ArrayList<Marble> getInitialMarbleList(){
         return initialMarbleList;
     }
-
-
-
-
 
 
 
