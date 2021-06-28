@@ -384,7 +384,7 @@ public class GameSolitaire extends Game {
      * @param e : the exception to handle
      */
     @Override
-    protected void exceptionHandler(CallForCouncilException e) throws IOException, InterruptedException {
+    public void exceptionHandler(CallForCouncilException e) throws IOException, InterruptedException {
         player.setPapal();
         lorenzoTheMagnificent.setCurrCall();
 
@@ -398,7 +398,7 @@ public class GameSolitaire extends Game {
      * @param e : the exception to handle
      */
     @Override
-    protected void exceptionHandler(LastSpaceReachedException e) throws IOException, InterruptedException {
+    public void exceptionHandler(LastSpaceReachedException e) throws IOException, InterruptedException {
         player.setPapal();
 
         notifyObserver(new SetPapalsMessage(player.getPapalCard(e.getCurrCall()), e.getNickName()));

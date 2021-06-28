@@ -675,6 +675,7 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
         SwingUtilities.invokeLater(() -> {
             mainFrameOfGame.marblePossibilityPopUp(n,whiteMarbleResourceTypes);
             mainFrameOfGame.disableEndTurnButton();
+            mainFrameOfGame.disableLeaderButtons();
             applyChangesTo(mainFrameOfGame);
 
         });
@@ -689,6 +690,7 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
         SwingUtilities.invokeLater(() -> {
             mainFrameOfGame.fullStoragePopUp(msg);
             mainFrameOfGame.disableEndTurnButton();
+            mainFrameOfGame.disableLeaderButtons();
             applyChangesTo(mainFrameOfGame);
 
         });

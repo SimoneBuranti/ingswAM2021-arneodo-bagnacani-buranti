@@ -317,14 +317,9 @@ public class GameMultiPlayer extends Game {
     public void moveEveryoneExcept(Player player) throws IOException, InterruptedException {
         for(Player p : playerList){
             if (p != player) {
-                try {
+
                     p.faithMove();
 
-                } catch (CallForCouncilException e1) {
-                    exceptionHandler(e1);
-                } catch (LastSpaceReachedException e2) {
-                    exceptionHandler(e2);
-                }
                 notifyOnlyOneSpecificObserver(new FaithPathMessage(1), p.getNickName());
 
                 notifyAllObserverLessOneByNickname(new FaithPathOpponentMessage(p.getNickName(), 1),p.getNickName());
@@ -403,7 +398,7 @@ public class GameMultiPlayer extends Game {
      * @param e : the exception to handle
      */
     @Override
-    protected void exceptionHandler(CallForCouncilException e) throws IOException, InterruptedException {
+    public void exceptionHandler(CallForCouncilException e) throws IOException, InterruptedException {
         for(Player p : playerList){
             p.setPapal();
             notifyOnlyOneSpecificObserver(new SetPapalsMessage(p.getPapalCard(e.getCurrCall()), e.getNickName()), p.getNickName());
@@ -417,7 +412,7 @@ public class GameMultiPlayer extends Game {
      * @param e : the exception to handle
      */
     @Override
-    protected void exceptionHandler(LastSpaceReachedException e) throws IOException, InterruptedException {
+    public void exceptionHandler(LastSpaceReachedException e) throws IOException, InterruptedException {
         for(Player p : playerList){
             p.setPapal();
             notifyOnlyOneSpecificObserver(new SetPapalsMessage(p.getPapalCard(e.getCurrCall()), e.getNickName()), p.getNickName());

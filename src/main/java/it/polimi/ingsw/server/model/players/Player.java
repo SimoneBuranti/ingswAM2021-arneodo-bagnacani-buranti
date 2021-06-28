@@ -117,17 +117,24 @@ public class Player {
      * @throws CallForCouncilException : the exception which is thrown when the faith indicator has reached the current papal space
      * @throws LastSpaceReachedException : the exception which is thrown when the faith indicator has reached the last papal space
      */
-    public void faithMove() throws CallForCouncilException, LastSpaceReachedException {
+    public void faithMove()  {
         try {
             getGameBoardOfPlayer().faithMove();
         } catch (CallForCouncilException e) {
-            e.setNickName(nickName);
-            throw e;
+            try {
+                e.setNickName(nickName);
+                game.exceptionHandler(e);
+            } catch (IOException | InterruptedException ioException) {
+                ioException.printStackTrace();
+            }
         } catch (LastSpaceReachedException e) {
-            e.setNickName(nickName);
-            throw e;
+            try {
+                e.setNickName(nickName);
+                game.exceptionHandler(e);
+            } catch (IOException | InterruptedException ioException) {
+                ioException.printStackTrace();
+            }
         }
-
     }
 
     /**

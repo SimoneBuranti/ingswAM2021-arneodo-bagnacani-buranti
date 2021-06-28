@@ -223,7 +223,7 @@ public class MarketTest {
 
         try {
             blueMarble.giveResource(player);
-        } catch (CallForCouncilException | LastSpaceReachedException | WhiteMarbleException ignored) {
+        } catch ( WhiteMarbleException ignored) {
         }
         int n = 0;
         for(int i = 0; i < player.getBuffer().size(); i++){
@@ -234,7 +234,7 @@ public class MarketTest {
 
         try {
             greyMarble.giveResource(player);
-        } catch (CallForCouncilException | LastSpaceReachedException | WhiteMarbleException ignored) {
+        } catch ( WhiteMarbleException ignored) {
         }
         int n1 = 0;
         for(int i = 0; i < player.getBuffer().size(); i++){
@@ -245,7 +245,7 @@ public class MarketTest {
 
         try {
             purpleMarble.giveResource(player);
-        } catch (CallForCouncilException | LastSpaceReachedException | WhiteMarbleException ignored) {
+        } catch ( WhiteMarbleException ignored) {
         }
         int n2 = 0;
         for(int i = 0; i < player.getBuffer().size(); i++){
@@ -256,7 +256,7 @@ public class MarketTest {
 
         try {
             yellowMarble.giveResource(player);
-        } catch (CallForCouncilException | LastSpaceReachedException | WhiteMarbleException ignored) {
+        } catch ( WhiteMarbleException ignored) {
         }
         int n3 = 0;
         for(int i = 0; i < player.getBuffer().size(); i++){

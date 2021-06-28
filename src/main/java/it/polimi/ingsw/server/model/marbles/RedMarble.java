@@ -21,7 +21,7 @@ public class RedMarble extends Marble{
      * @throws CallForCouncilException : the exception that is thrown when the player reaches a papal space in the faithPath
      * @throws LastSpaceReachedException :: the exception that is thrown when the player reaches the last papal space in the faithPath
      */
-    public void giveResource(Player player) throws CallForCouncilException, LastSpaceReachedException {
+    public void giveResource(Player player) {
         player.faithMove();
     }
 }

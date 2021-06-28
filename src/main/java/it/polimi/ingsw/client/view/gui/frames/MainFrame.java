@@ -245,6 +245,7 @@ public abstract class MainFrame  extends JFrame {
             ArrayList<WhiteMarbleLabel> whiteMarbleLabels = new ArrayList<>();
             ArrayList<Resource> buffer = new ArrayList<>();
             JDialog dialog =new JDialog();
+            dialog.setAlwaysOnTop(true);
             dialog.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             dialog.setLocation(600, 400);
             dialog.setSize(450, 200);
@@ -289,6 +290,7 @@ public abstract class MainFrame  extends JFrame {
                 })).start();
                 dialog.dispose();
                 enableEndTurnButton();
+                enableLeaderButtons();
             });
 
             dialog.setVisible(true);
@@ -304,6 +306,7 @@ public abstract class MainFrame  extends JFrame {
     public void  fullStoragePopUp(NotEnoughSpaceErrorMessage message){
             ArrayList<Resource> buffer = new ArrayList<>();
             JDialog dialog =new JDialog();
+            dialog.setAlwaysOnTop(true);
             dialog.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             dialog.setLocation(600, 400);
             dialog.setSize(550, 200);
@@ -349,6 +352,7 @@ public abstract class MainFrame  extends JFrame {
                 })).start();
                 dialog.dispose();
                 enableEndTurnButton();
+                enableLeaderButtons();
 
             });
 

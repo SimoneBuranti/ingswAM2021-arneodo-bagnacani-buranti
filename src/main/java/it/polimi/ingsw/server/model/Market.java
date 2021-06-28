@@ -104,7 +104,7 @@ public class Market extends Observable {
      * @throws LastSpaceReachedException : the exception which is thrown when the faith indicator has reached the last papal space
      * @throws WhiteMarbleException : the exception which is thrown when the player has activated two white marble-type leader cards
      */
-    public void pushRow(int chosenRow, Player player) throws CallForCouncilException, LastSpaceReachedException, WhiteMarbleException, NotEnoughSpaceInStorageException, IOException, InterruptedException {
+    public void pushRow(int chosenRow, Player player) throws WhiteMarbleException, NotEnoughSpaceInStorageException, IOException, InterruptedException {
         int j;
         WhiteMarbleException exception = new WhiteMarbleException(0);
         Marble temp;
@@ -143,7 +143,7 @@ public class Market extends Observable {
      * @throws LastSpaceReachedException : the exception which is thrown when the faith indicator has reached the last papal space
      * @throws WhiteMarbleException : the exception which is thrown when the player has activated two white marble-type leader cards
      */
-    public void pushColumn(int chosenColumn, Player player) throws CallForCouncilException, LastSpaceReachedException, WhiteMarbleException, NotEnoughSpaceInStorageException, IOException, InterruptedException {
+    public void pushColumn(int chosenColumn, Player player) throws WhiteMarbleException, NotEnoughSpaceInStorageException, IOException, InterruptedException {
         int i;
         WhiteMarbleException exception = new WhiteMarbleException(0);
         Marble temp;

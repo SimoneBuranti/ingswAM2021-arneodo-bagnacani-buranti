@@ -173,12 +173,12 @@ public class PlayerInformationFrames extends JFrame {
      * This method turns the frame visibility on.
      */
     public void visibilityOn(){
-        this.setVisible(true);
 
-        this.paintComponents(this.getGraphics());
+        this.setVisible(true);
+        this.repaint();
+        this.repaint();
         this.repaint();
 
-        this.setVisible(true);
     }
 
     /**

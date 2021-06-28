@@ -14,12 +14,10 @@ public class Marble {
     /**
      * not implemented method that gives the player the resource corresponding to the marble and spreads tre exception
      * @param player : the one that has bought from the market
-     * @throws CallForCouncilException : the exception that is thrown when the player reaches a papal space in the faithPath
-     * @throws LastSpaceReachedException : the exception that is thrown when the player reaches the last papal space in the faithPath
      * @throws WhiteMarbleException : the exception that is thrown when the player gets a white marble from the market
      *                                 having activated two white marble leader cards
      */
-    public void giveResource(Player player) throws CallForCouncilException, LastSpaceReachedException, WhiteMarbleException {}
+    public void giveResource(Player player) throws WhiteMarbleException {}
     /**
      * @return colour marble
      */

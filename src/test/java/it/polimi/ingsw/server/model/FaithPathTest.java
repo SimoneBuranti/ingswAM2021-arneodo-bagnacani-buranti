@@ -641,65 +641,17 @@ class FaithPathTest {
         RedMarble redMarble = new RedMarble();
 
         assertEquals(player.getIndicator(), 0);
-        try {
-            redMarble.giveResource(player);
-        } catch (CallForCouncilException c) {
-            System.out.println("CallForCouncilException Thrown");
-        } catch (LastSpaceReachedException e) {
-            System.out.println("Game Over");
-        }
+        redMarble.giveResource(player);
         assertEquals(player.getIndicator(), 1);
-        try {
-            redMarble.giveResource(player);
-        } catch (CallForCouncilException c) {
-            System.out.println("CallForCouncilException Thrown");
-        } catch (LastSpaceReachedException e) {
-            System.out.println("Game Over");
-        }
-        try {
-            redMarble.giveResource(player);
-        } catch (CallForCouncilException c) {
-            System.out.println("CallForCouncilException Thrown");
-        } catch (LastSpaceReachedException e) {
-            System.out.println("Game Over");
-        }
+        redMarble.giveResource(player);
+        redMarble.giveResource(player);
         assertEquals(player.getIndicator(), 3);
-        try {
-            redMarble.giveResource(player);
-        } catch (CallForCouncilException c) {
-            System.out.println("CallForCouncilException Thrown");
-        } catch (LastSpaceReachedException e) {
-            System.out.println("Game Over");
-        }
-        try {
-            redMarble.giveResource(player);
-        } catch (CallForCouncilException c) {
-            System.out.println("CallForCouncilException Thrown");
-        } catch (LastSpaceReachedException e) {
-            System.out.println("Game Over");
-        }
+        redMarble.giveResource(player);
+        redMarble.giveResource(player);
         assertEquals(player.getIndicator(), 5);
-        try {
-            redMarble.giveResource(player);
-        } catch (CallForCouncilException c) {
-            System.out.println("CallForCouncilException Thrown");
-        } catch (LastSpaceReachedException e) {
-            System.out.println("Game Over");
-        }
-        try {
-            redMarble.giveResource(player);
-        } catch (CallForCouncilException c) {
-            System.out.println("CallForCouncilException Thrown");
-        } catch (LastSpaceReachedException e) {
-            System.out.println("Game Over");
-        }
-        try {
-            redMarble.giveResource(player);
-        } catch (CallForCouncilException c) {
-            System.out.println("CallForCouncilException Thrown");
-        } catch (LastSpaceReachedException e) {
-            System.out.println("Game Over");
-        }
+        redMarble.giveResource(player);
+        redMarble.giveResource(player);
+        redMarble.giveResource(player);
         assertEquals(player.getIndicator(), 8);
       FileClass.FileDestroyer();
     }

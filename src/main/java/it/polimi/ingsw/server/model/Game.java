@@ -392,20 +392,14 @@ public class Game extends Observable {
      * @param chosenRow : the row chosen by the current player
      */
     public void pushRowInMarket(int chosenRow) throws NotEnoughSpaceInStorageException, WhiteMarbleException, IOException, InterruptedException {
-        try {
-            if (market.getRedInRow(chosenRow)){
-                notifyToOneObserver(new FaithPathMessage(1));
-                notifyAllObserverLessOneByNickname(new FaithPathOpponentMessage(currentPlayer.getNickName(), 1),currentPlayer.getNickName());
-            }
 
-            market.pushRow(chosenRow,currentPlayer);
-
-
-        } catch (CallForCouncilException e) {
-            exceptionHandler(e);
-        } catch (LastSpaceReachedException e) {
-            exceptionHandler(e);
+        if (market.getRedInRow(chosenRow)){
+            notifyToOneObserver(new FaithPathMessage(1));
+            notifyAllObserverLessOneByNickname(new FaithPathOpponentMessage(currentPlayer.getNickName(), 1),currentPlayer.getNickName());
         }
+
+        market.pushRow(chosenRow,currentPlayer);
+
         notifyObserver(new ChangeMarketMessageRow(chosenRow));
 
     }
@@ -417,17 +411,14 @@ public class Game extends Observable {
      * @param chosenColumn : the column chosen by the current player
      */
     public void pushColumnInMarket(int chosenColumn) throws NotEnoughSpaceInStorageException, WhiteMarbleException, IOException, InterruptedException {
-        try {
-            if (market.getRedInColumn(chosenColumn)){
-                notifyToOneObserver(new FaithPathMessage(1));
-                notifyAllObserverLessOneByNickname(new FaithPathOpponentMessage(currentPlayer.getNickName(), 1),currentPlayer.getNickName());
-            }
-            market.pushColumn(chosenColumn,currentPlayer);
-        } catch (CallForCouncilException e) {
-            exceptionHandler(e);
-        } catch (LastSpaceReachedException e) {
-            exceptionHandler(e);
+
+        if (market.getRedInColumn(chosenColumn)){
+            notifyToOneObserver(new FaithPathMessage(1));
+            notifyAllObserverLessOneByNickname(new FaithPathOpponentMessage(currentPlayer.getNickName(), 1),currentPlayer.getNickName());
         }
+
+        market.pushColumn(chosenColumn,currentPlayer);
+
         notifyObserver(new ChangeMarketMessageColumn(chosenColumn));
     }
 
@@ -489,10 +480,10 @@ public class Game extends Observable {
 
     protected void exceptionHandler(EndGameException e) throws IOException, InterruptedException {
     }
-    protected void exceptionHandler(CallForCouncilException e) throws IOException, InterruptedException {
+    public void exceptionHandler(CallForCouncilException e) throws IOException, InterruptedException {
     }
 
-    protected void exceptionHandler(LastSpaceReachedException e) throws IOException, InterruptedException {
+    public void exceptionHandler(LastSpaceReachedException e) throws IOException, InterruptedException {
     }
 
     protected void exceptionHandler(EndOfSolitaireGame e) throws IOException, InterruptedException {
