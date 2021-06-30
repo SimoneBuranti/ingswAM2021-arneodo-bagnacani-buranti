@@ -121,7 +121,6 @@ public class SocketClient {
         in.close();
         out.close();
         serverSocket.close();
-        System.exit(0);
     }
 
 

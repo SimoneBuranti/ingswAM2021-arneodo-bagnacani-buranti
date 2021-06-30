@@ -274,10 +274,12 @@ public class  GameBoard extends GameBoardInterface{
      */
     public void buyProductionCard(DeckProductionCard deck, int chosenColumn) throws LevelException, NotEnoughResourcesException, EmptyException, FullColumnException, EndGameException {
         ArrayList<Resource> availableResources = availableResources();
-        ArrayList<Resource> requiredResources = deck.requiredResources();
 
-        if(deck.size() == 0)
+        if(deck.size() == 0) {
             throw new EmptyException();
+        }
+
+        ArrayList<Resource> requiredResources = deck.requiredResources();
 
 
         for(Resource resource : requiredResources)
