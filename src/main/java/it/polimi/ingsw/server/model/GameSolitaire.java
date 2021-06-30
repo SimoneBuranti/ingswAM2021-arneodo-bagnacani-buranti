@@ -115,13 +115,15 @@ public class GameSolitaire extends Game {
         try {
             notifyObserver(new UseActionMarkerMessage(deckActionMarker.showFirst().getType()));
             deckActionMarker.pickUpFirstCard().actionMarkerEffect(this);
-            notifyObserver(new YourTurnMessage());
+
         } catch (EmptyException e) {
             exceptionHandler(e);
         } catch (EndOfSolitaireGame endOfSolitaireGame) {
             exceptionHandler(endOfSolitaireGame);
         }
 
+        if(!isOver)
+            notifyObserver(new YourTurnMessage());
     }
 
 
