@@ -55,10 +55,10 @@ public class ReductionGameBoard extends GameBoardDecorator{
     @Override
     public void buyProductionCard(DeckProductionCard deck, int chosenColumn) throws LevelException, NotEnoughResourcesException, EmptyException, FullColumnException, EndGameException {
         ArrayList<Resource> availableResources = availableResources();
-        ArrayList<Resource> requiredResources = costReduction(deck.requiredResources());
-
         if(deck.size() == 0)
             throw new EmptyException();
+        ArrayList<Resource> requiredResources = costReduction(deck.requiredResources());
+
         if(deck.getLevel()!=firstRowFree(chosenColumn)+1)
             throw new LevelException();
         for(Resource resource : requiredResources)
