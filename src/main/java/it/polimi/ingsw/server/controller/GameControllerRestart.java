@@ -1,9 +1,11 @@
 package it.polimi.ingsw.server.controller;
 
+import com.google.gson.Gson;
 import it.polimi.ingsw.messages.*;
 import it.polimi.ingsw.server.model.FileClass;
 import it.polimi.ingsw.server.network.Server;
 
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 /**
@@ -244,6 +246,23 @@ public class GameControllerRestart extends GameController {
             server.restartLobby();
             server.setGameController(new GameControllerEmpty(this.server, clientController));
             restartAnswerReceived = false;
+            FileClass.FileDestroyer();
+            Gson gson = new Gson();
+            FileWriter config = null;
+            String jsonStrin = gson.toJson(null,ArrayList.class);
+            try {
+                config = new FileWriter("fileConfiguration/InformationAboutTurn.json");
+                config.write(jsonStrin);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    config.flush();
+                    config.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
         else
             {
