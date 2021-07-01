@@ -24,6 +24,9 @@ I seguenti diagrammi delle classi rappresentano rispettivamente il modello inizi
 La seguente documentazione include una descrizione per la maggior parte delle classi e dei metodi utilizzati:
 [Javadoc](https://github.com/SimoneBuranti/ingswAM2021-arneodo-bagnacani-buranti/tree/master/JAVADOC)
 
+### Protocollo di rete
+Il seguente documento contiene tutti i messaggi scambiati nella rete e i relativi sequence diagrams: 
+[Protocol_Design](https://github.com/SimoneBuranti/ingswAM2021-arneodo-bagnacani-buranti/blob/master/Message_design_final.pdf)
 
 ### Librerie e Plugins
 |Libreria/Plugin|Descrizione|
