@@ -119,5 +119,5 @@ java -jar AM7.jar --server [--port <port_number>]
 
 ## Componenti del gruppo
 - [__Alice Arneodo__](https://github.com/AliceArni)
-- [__Simone Buranti__]()
-- [__Alessandro Bagnacani__]()
+- [__Simone Buranti__](https://github.com/SimoneBuranti)
+- [__Alessandro Bagnacani__](https://github.com/Bagnuz)
