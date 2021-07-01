@@ -49,9 +49,11 @@ Il seguente documento contiene tutti i messaggi scambiati nella rete e i relativ
 - 2 FA (Funzionalità Avanzate):
     - __Persistenza:__ Lo stato di una partita deve essere salvato su disco, 
     in modo che la partita possa riprendere anche a seguito dell’interruzione dell’esecuzione del server.
+    Nel momento in cui il server dovesse crashare, i client sono tenuti a chiudere la connessione e quindi riprovare a connettersi.
     
     - __Resilienza alle disconnessioni:__ I giocatori disconnessi possono ricollegarsi in seguito e continuare la partita. 
     Mentre un giocatore non è collegato, il gioco continua saltando i turni di quel giocatore.
+    
 
 
 ## Compilazione e packaging
@@ -59,7 +61,7 @@ Il jar è stato realizzato con l'ausilio di Maven Shade Plugin.
 Di seguito è fornito il jar precompilato.
 
 ### Jars
-Il Jar del progetto può essere scaricati al seguente link: [Jar]().
+Il Jar del progetto può essere scaricati al seguente link: [Jar](https://github.com/SimoneBuranti/ingswAM2021-arneodo-bagnacani-buranti/tree/master/shade).
 
 ################AVVERTENZE:
 -dopo aver effettuato il download del jar, eseguire questa procedura:
