@@ -23,7 +23,6 @@ public class MyTurnParser implements CommandParser {
         String prefix = "";
         String suffix = "";
 
-        //System.out.println(this+": "+commandText);
 
         for (int i = 0; i < commandText.length(); i++) {
             if (commandText.charAt(i) != ' ') {
@@ -34,7 +33,7 @@ public class MyTurnParser implements CommandParser {
             }
         }
 
-        //System.out.println(prefix);
+
 
         if (prefix.equals(""))
             throw new InvalidCommandException();
@@ -154,7 +153,6 @@ public class MyTurnParser implements CommandParser {
                 if (rc == 'r' && (n < 0 || n >2)) {
                     throw new InvalidCommandException();
                 }
-                //System.out.println(prefix + " " + suffix + " "+ rc+n);
                 return new MarketActionCommand(rc, n, viewController);
             }
             case "productionOn": {

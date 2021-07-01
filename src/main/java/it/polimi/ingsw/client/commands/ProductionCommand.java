@@ -48,7 +48,6 @@ public class ProductionCommand extends Command {
 
             while (!exitFlag) {
                 System.out.println("Insert column between : " + available);
-                //System.out.println(available);
                 input = in.nextLine();
                 choosenColumn = input.charAt(0) - '0';
                 for (Integer i : available)

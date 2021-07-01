@@ -33,7 +33,6 @@ public class StandardParser implements CommandParser{
             }
         }
 
-        //System.out.println(prefix);
 
         if (prefix.equals(""))
             throw new InvalidCommandException();

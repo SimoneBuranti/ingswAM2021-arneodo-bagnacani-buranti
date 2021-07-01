@@ -40,9 +40,7 @@ public class KeepResourcesCommand extends Command{
      * @throws NoMessageReturnException
      */
     public Message commandOn() throws SpentTokenException, InvalidCommandException, AlreadyActivatedProductionException, NoMessageReturnException {
-        //System.out.println("Sono qui a");
         this.cli.changeCommandParser(new MyTurnParser());
-        //System.out.println("Sono qui b, resources: "+resources);
         return new KeepResourcesMessage(resources);
     }
 

@@ -337,38 +337,6 @@ public class GameboardPanel extends JPanel{
         g.drawImage(backgroundImage, 0, 0, null);
 
     }
-
-    /*
-    @Override
-    public void actionPerformed(ActionEvent e) {
-
-    }
-
-    @Override
-    public void mouseClicked(MouseEvent e) {
-        System.out.println(e.getX()+" "+e.getY());
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-        //System.out.println("You pressed");
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-        //System.out.println("You released");
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-        //System.out.println("You entered");
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-        //System.out.println("You exited");
-    }*/
-
     /**
      * Updates production spaces.
      * @param gameboardListNotification

@@ -574,7 +574,6 @@ public class GameSolitaire extends Game {
      * save information for a possible restart game
      */
     public void RestoreActionMarker() throws IOException, InterruptedException {
-        System.out.println("qui restore ak 1");
         Gson gson= DeckActionMarker.DeckActionMarkerSaving();
         ActionMarker[] servList;
         try {
@@ -583,7 +582,6 @@ public class GameSolitaire extends Game {
         } catch (FileNotFoundException e) {
           e.printStackTrace();
         }
-        System.out.println("qui restore ak 2");
     }
     /**
      * this metod restore player after total disconnection or server crashing

@@ -100,7 +100,6 @@ public class KeepResourcesParser implements CommandParser{
 
             if (chosen.equals(picked))
                 throw new InvalidCommandException();
-            //System.out.println(this+": "+localResources);
             return new KeepResourcesCommand(localResources,cli);
         } else {
 

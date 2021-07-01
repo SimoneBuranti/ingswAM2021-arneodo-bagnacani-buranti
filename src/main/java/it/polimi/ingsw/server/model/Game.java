@@ -566,7 +566,6 @@ public class Game extends Observable {
     protected void restoreGame() throws IOException, InterruptedException {
         deckLeaderCard=new DeckLeaderCard();
         reserve=new Reserve();
-        System.out.println("qui restore market");
         restoreInformationOfMarket();
         restoreInformationOfProductionDeck();
 

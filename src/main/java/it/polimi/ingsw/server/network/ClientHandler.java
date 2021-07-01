@@ -127,7 +127,6 @@ public class ClientHandler implements Runnable {
                     if(ack==2){
                     try {
                             pingDisconnection();
-                        System.out.println("passo da qui " + ack);
                             pinger.shutdown();
 
                     } catch (IOException | InterruptedException e) {
@@ -161,7 +160,7 @@ public class ClientHandler implements Runnable {
      * @param msg the message to be read.
      */
     public synchronized void readMessageServer(String msg) throws IOException, InterruptedException {
-        System.out.println(clientController.getNickname()+"here in lettura"+msg);
+            System.out.println(clientController.getNickname()+"here in lettura"+msg);
             Message parsedMsg = Message.deserialize(msg);
             parsedMsg.accept(clientController);
 
@@ -216,7 +215,6 @@ public class ClientHandler implements Runnable {
      * @param pongo set for response to ping client
      */
     public void setPongo(Boolean pongo) {
-        System.out.println("Set pongo :" + pongo);
         this.pongo = pongo;
     }
 
