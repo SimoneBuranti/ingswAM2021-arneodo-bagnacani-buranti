@@ -26,7 +26,7 @@ La seguente documentazione include una descrizione per la maggior parte delle cl
 
 ### Protocollo di rete
 Il seguente documento contiene tutti i messaggi scambiati nella rete e i relativi sequence diagrams: 
-[Protocol_Design](https://github.com/SimoneBuranti/ingswAM2021-arneodo-bagnacani-buranti/blob/master/Message_design_final.pdf)
+[Protocol_Design](https://github.com/SimoneBuranti/ingswAM2021-arneodo-bagnacani-buranti/blob/master/deliveries/Message_design_final.pdf)
 
 ### Librerie e Plugins
 |Libreria/Plugin|Descrizione|
