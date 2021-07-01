@@ -61,7 +61,7 @@ Il jar è stato realizzato con l'ausilio di Maven Shade Plugin.
 Di seguito è fornito il jar precompilato.
 
 ### Jars
-Il Jar del progetto può essere scaricati al seguente link: [Jar](https://github.com/SimoneBuranti/ingswAM2021-arneodo-bagnacani-buranti/tree/master/shade).
+Il Jar del progetto può essere scaricato al seguente link: [Jar](https://github.com/SimoneBuranti/ingswAM2021-arneodo-bagnacani-buranti/tree/master/shade).
 
 ################AVVERTENZE:
 -dopo aver effettuato il download del jar, eseguire questa procedura:
