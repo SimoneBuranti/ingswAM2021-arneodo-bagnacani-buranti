@@ -17,15 +17,15 @@ Interazione e gameplay: linea di comando (CLI) e grafica (GUI).
 
 ### UML
 I seguenti diagrammi delle classi rappresentano rispettivamente il modello iniziale sviluppato durante la fase di progettazione e il diagramma del prodotto finale.
-- [UML Iniziali](https://github.com/SimoneBuranti/ingswAM2021-arneodo-bagnacani-buranti/blob/master/deliveries/initialUML.pdf)
-- [UML Finali](https://github.com/SimoneBuranti/ingswAM2021-arneodo-bagnacani-buranti/blob/master/deliveries/finalUML.pdf)
+- [UML Iniziale](https://github.com/SimoneBuranti/ingswAM2021-arneodo-bagnacani-buranti/blob/master/deliveries/initialUML.pdf)
+- [UML Finale](https://github.com/SimoneBuranti/ingswAM2021-arneodo-bagnacani-buranti/blob/master/deliveries/finalUML.pdf)
 
 ### JavaDoc
 La seguente documentazione include una descrizione per la maggior parte delle classi e dei metodi utilizzati:
 [Javadoc](https://github.com/SimoneBuranti/ingswAM2021-arneodo-bagnacani-buranti/tree/master/JAVADOC)
 
 ### Protocollo di rete
-Il seguente documento contiene tutti i messaggi scambiati nella rete e i relativi sequence diagrams: 
+Il seguente documento contiene tutti i messaggi scambiati nella rete e i relativi sequence diagrams (si consiglia di scaricare il documento se si vede una pagina bianca): 
 [Protocol_Design](https://github.com/SimoneBuranti/ingswAM2021-arneodo-bagnacani-buranti/blob/master/deliveries/Message_design_final.pdf)
 
 ### Librerie e Plugins
