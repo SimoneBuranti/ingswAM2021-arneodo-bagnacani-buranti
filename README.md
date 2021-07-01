@@ -118,6 +118,6 @@ java -jar AM7.jar --server [--port <port_number>]
 - `--port` o `-p` : permette di specificare la porta del server. Se non specificato il valore di default è quello salvato nel file defaultServer;
 
 ## Componenti del gruppo
-- [__Alice Arneodo__]()
+- [__Alice Arneodo__](https://github.com/AliceArni)
 - [__Simone Buranti__]()
 - [__Alessandro Bagnacani__]()
