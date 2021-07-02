@@ -131,7 +131,7 @@ public class GameboardPanel extends JPanel{
      * Initialization of gameboard panel components.
      */
     public void initGameboardPanel(){
-        Image image = Toolkit.getDefaultToolkit().createImage("/board/Masters of Renaissance_PlayerBoard (11_2020)-1.png");
+        Image image = Toolkit.getDefaultToolkit().createImage(getClass().getResource("/board/Masters of Renaissance_PlayerBoard (11_2020)-1.png"));
         this.backgroundImage = image.getScaledInstance(gameboardWidth,gameboardHeight,0);
 
         this.setSize(gameboardWidth,gameboardHeight);
