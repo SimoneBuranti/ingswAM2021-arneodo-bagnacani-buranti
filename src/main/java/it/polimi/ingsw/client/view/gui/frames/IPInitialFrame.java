@@ -72,13 +72,13 @@ public class IPInitialFrame extends JFrame {
         this.textLabel.setOpaque(false);
 
         this.textField = new JTextField(MainApp.defHostName);
-        this.textField.setForeground(Color.WHITE);
+        this.textField.setForeground(Color.GREEN);
         this.textField.setBounds(270,170,150,40);
         this.textField.setFont(new Font("Helvetica", Font.BOLD, 16));
         this.textField.setOpaque(false);
 
         this.portNumberField = new JTextField(Command.fromIntToString(MainApp.defPortNumber));
-        this.portNumberField.setForeground(Color.WHITE);
+        this.portNumberField.setForeground(Color.GREEN);
         this.portNumberField.setBounds(270,212,150,40);
         this.portNumberField.setFont(new Font("Helvetica", Font.BOLD, 14));
         this.portNumberField.setVisible(true);
