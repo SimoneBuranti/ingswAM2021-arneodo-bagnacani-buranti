@@ -185,7 +185,7 @@ public class PlayerInformationFrames extends JFrame {
      * Initial gameboard panel settings.
      */
     public void initGameboardPanel(){
-        Image image = Toolkit.getDefaultToolkit().createImage("src/main/resources/resources/board/opponent board.png");
+        Image image = Toolkit.getDefaultToolkit().createImage(getClass().getResource("/board/opponent board.png"));
         this.backgroundImage = image.getScaledInstance(gameboardWidth,gameboardHeight,0);
 
         this.mainPanel.setSize(800,gameboardHeight);

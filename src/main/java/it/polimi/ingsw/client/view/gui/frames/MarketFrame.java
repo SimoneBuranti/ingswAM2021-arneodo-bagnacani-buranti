@@ -119,7 +119,7 @@ public class MarketFrame extends JFrame{
     public void initMarket(){
             this.setSize(marketWidth, marketHeight);
             this.setResizable(false);
-            ImageIcon icon = new ImageIcon("src/main/resources/resources/punchboard/plancia portabiglie.png");
+            ImageIcon icon = new ImageIcon(getClass().getResource("/punchboard/plancia portabiglie.png"));
             Image image = icon.getImage();
             JPanel background = new PBackground(image);
             this.repaint();
@@ -309,42 +309,42 @@ public class MarketFrame extends JFrame{
     public JLabel getMarble(String color){
         switch (color) {
             case "white":
-                ImageIcon whiteMarbleImage = new ImageIcon("src/main/resources/resources/marbles/palline-04.png");
+                ImageIcon whiteMarbleImage = new ImageIcon(getClass().getResource("/marbles/palline-04.png"));
                 Image image = whiteMarbleImage.getImage();
                 image = image.getScaledInstance(marbleWidth, marbleHeight, 0);
                 whiteMarbleImage.setImage(image);
                 JLabel whiteMarble=new JLabel(whiteMarbleImage);
                 return whiteMarble;
             case "blue":
-                ImageIcon bluMarbleImage = new ImageIcon("src/main/resources/resources/marbles/palline-03.png");
+                ImageIcon bluMarbleImage = new ImageIcon(getClass().getResource("/marbles/palline-03.png"));
                 image = bluMarbleImage.getImage();
                 image = image.getScaledInstance(marbleWidth, marbleHeight, 0);
                 bluMarbleImage.setImage(image);
                 JLabel bluMarble=new JLabel(bluMarbleImage);
                 return bluMarble;
             case "grey":
-                ImageIcon greyMarbleImage = new ImageIcon("src/main/resources/resources/marbles/palline-05.png");
+                ImageIcon greyMarbleImage = new ImageIcon(getClass().getResource("/marbles/palline-05.png"));
                 image = greyMarbleImage.getImage();
                 image = image.getScaledInstance(marbleWidth, marbleHeight, 0);
                 greyMarbleImage.setImage(image);
                 JLabel greyMarble=new JLabel(greyMarbleImage);
                 return greyMarble;
             case "yellow":
-                ImageIcon yellowMarbleImage = new ImageIcon("src/main/resources/resources/marbles/palline-07.png");
+                ImageIcon yellowMarbleImage = new ImageIcon(getClass().getResource("/marbles/palline-07.png"));
                 image = yellowMarbleImage.getImage();
                 image = image.getScaledInstance(marbleWidth, marbleHeight, 0);
                 yellowMarbleImage.setImage(image);
                 JLabel yellowMarble=new JLabel(yellowMarbleImage);
                 return yellowMarble;
             case "purple":
-                ImageIcon violetMarbleImage = new ImageIcon("src/main/resources/resources/marbles/palline-06.png");
+                ImageIcon violetMarbleImage = new ImageIcon(getClass().getResource("/marbles/palline-06.png"));
                 image = violetMarbleImage.getImage();
                 image = image.getScaledInstance(marbleWidth, marbleHeight, 0);
                 violetMarbleImage.setImage(image);
                 JLabel violetMarble=new JLabel(violetMarbleImage);
                 return violetMarble;
             case "red":
-                ImageIcon redMarbleImage = new ImageIcon("src/main/resources/resources/marbles/palline-02.png");
+                ImageIcon redMarbleImage = new ImageIcon(getClass().getResource("/marbles/palline-02.png"));
                 image = redMarbleImage.getImage();
                 image = image.getScaledInstance(marbleWidth, marbleHeight, 0);
                 redMarbleImage.setImage(image);

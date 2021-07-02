@@ -39,7 +39,7 @@ public class ReservePanel extends JPanel {
         super();
 
         this.setLayout(new FlowLayout(SwingConstants.CENTER,30,15));
-        reserveImage = (Paths.getImageFromPath("src/main/resources/resources/punchboard/reserve.png"))
+        reserveImage = (Paths.getImageFromPath("/punchboard/reserve.png"))
                 .getScaledInstance(reserveWidth,reserveHeight,0);
 
 

@@ -14,7 +14,7 @@ public class PushColumnButton extends JButton{
      * Constructor of the class. It creates a button with the image of the arrow
      */
     public PushColumnButton(){
-        this.setIcon(new ImageIcon((Paths.getImageFromPath("src/main/resources/resources/punchboard/frecciaSu.png")).getScaledInstance(30,60,0)));
+        this.setIcon(new ImageIcon((Paths.getImageFromPath("/punchboard/frecciaSu.png")).getScaledInstance(30,60,0)));
         this.setSize(30,60);
     }
 

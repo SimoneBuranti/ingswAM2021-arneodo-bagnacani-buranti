@@ -106,7 +106,7 @@ public class IPInitialFrame extends JFrame {
 
 
         this.uniquePanel = new PBackground();
-        Image image = Toolkit.getDefaultToolkit().createImage("src/main/resources/resources/board/lory_magny.jpg");
+        Image image = Toolkit.getDefaultToolkit().createImage(getClass().getResource("/board/lory_magny.jpg"));
         this.background = image.getScaledInstance(Gui.initFrameWidth,Gui.initFrameHeight,0);
         this.uniquePanel.setSize(initFrameWidth,initFrameHeight);
         this.uniquePanel.setBounds(0,0,initFrameWidth,initFrameHeight);

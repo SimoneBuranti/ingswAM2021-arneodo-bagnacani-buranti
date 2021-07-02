@@ -92,7 +92,7 @@ public class MainFrameSinglePlayer extends MainFrame{
      */
     public void pregameMode(){
 
-        ImageIcon icon = new ImageIcon("src/main/resources/resources/title.jpg");
+        ImageIcon icon = new ImageIcon(getClass().getResource("/title.jpg"));
         Image image=icon.getImage();
         background = new PBackground(image);
         this.repaint();

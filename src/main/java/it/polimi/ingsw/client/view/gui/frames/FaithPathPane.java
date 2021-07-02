@@ -22,7 +22,7 @@ public class FaithPathPane extends JPanel {
     /**
      * Indicator image path.
      */
-    private String crossPath = "src/main/resources/resources/punchboard/croci-03.png";
+    private String crossPath = "/punchboard/croci-03.png";
     /**
      * Cross image attribute.
      */

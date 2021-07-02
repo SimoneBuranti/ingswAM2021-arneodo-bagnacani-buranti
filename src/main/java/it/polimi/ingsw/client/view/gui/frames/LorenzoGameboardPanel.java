@@ -21,7 +21,7 @@ public class LorenzoGameboardPanel extends GameboardPanel{
     /**
      * Black cross image path.
      */
-    private String blackCrossPath = "src/main/resources/resources/punchboard/croce.png";
+    private String blackCrossPath = "/punchboard/croce.png";
     /**
      * Lorenzo's indicator image.
      */

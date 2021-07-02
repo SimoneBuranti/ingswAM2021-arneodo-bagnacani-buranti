@@ -149,7 +149,7 @@ public class Gui extends ViewControllerObservable implements View, NotificatorVi
 
 
 
-            ImageIcon icon = new ImageIcon("src/main/resources/resources/title.jpg");
+            ImageIcon icon = new ImageIcon(getClass().getResource("/title.jpg"));
             Image image=icon.getImage();
             JPanel background = new PBackground(image);
             mainFrame.repaint();

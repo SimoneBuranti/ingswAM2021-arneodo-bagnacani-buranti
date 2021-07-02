@@ -14,7 +14,7 @@ public class PushRowButton extends JButton{
      */
     public PushRowButton(){
 
-        this.setIcon(new ImageIcon((Paths.getImageFromPath("src/main/resources/resources/punchboard/frecciaSx.png")).getScaledInstance(60,30,0)));
+        this.setIcon(new ImageIcon((Paths.getImageFromPath("/punchboard/frecciaSx.png")).getScaledInstance(60,30,0)));
         this.setSize(60,30);
     }
 

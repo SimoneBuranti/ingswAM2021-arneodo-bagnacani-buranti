@@ -18,7 +18,7 @@ public abstract class Paths {
      */
     public static Image getProdImageFromKey(int key){
 
-        String srcPath = "src/main/resources/resources/front/";
+        String srcPath = "/front/";
 
         switch(key) {
             case 1 :
@@ -128,7 +128,7 @@ public abstract class Paths {
      */
     public static Image getPapalCardBackImageFromCurrCall(int currCall){
 
-        String srcPath = "src/main/resources/resources/punchboard/";
+        String srcPath = "/punchboard/";
 
         switch(currCall) {
             case 0:
@@ -148,7 +148,7 @@ public abstract class Paths {
      */
     public static Image getPapalCardFrontImageFromCurrCall(int currCall){
 
-        String srcPath = "src/main/resources/resources/punchboard/";
+        String srcPath = "/punchboard/";
 
         switch(currCall) {
             case 0:
@@ -167,7 +167,7 @@ public abstract class Paths {
      */
     public static Image getLeaderImageFromKey(int key){
 
-        String srcPath = "src/main/resources/resources/front/";
+        String srcPath = "/front/";
 
         switch(key) {
             case 0:
@@ -232,19 +232,19 @@ public abstract class Paths {
 
         switch(selected) {
             case COIN: {
-                return Paths.getImageFromPath("src/main/resources/resources/punchboard/coin.png");
+                return Paths.getImageFromPath("/punchboard/coin.png");
             }
             case ROCK: {
-                return Paths.getImageFromPath("src/main/resources/resources/punchboard/stone.png");
+                return Paths.getImageFromPath("/punchboard/stone.png");
             }
             case SHIELD: {
-                return Paths.getImageFromPath("src/main/resources/resources/punchboard/shield.png");
+                return Paths.getImageFromPath("/punchboard/shield.png");
             }
             case SERVANT: {
-                return Paths.getImageFromPath("src/main/resources/resources/punchboard/servant.png");
+                return Paths.getImageFromPath("/punchboard/servant.png");
             }
         }
-        return Paths.getImageFromPath("src/main/resources/resources/punchboard/coin.png");
+        return Paths.getImageFromPath("/punchboard/coin.png");
     }
 
 
@@ -256,24 +256,24 @@ public abstract class Paths {
     public static Image getImageFromActionMarker(String actionMarker) {
         switch(actionMarker) {
             case "ActionMarkerProductionYellow" : {
-                return Paths.getImageFromPath("src/main/resources/resources/punchboard/cerchio4.png");
+                return Paths.getImageFromPath("/punchboard/cerchio4.png");
             }
             case "ActionMarkerProductionGreen" : {
-                return Paths.getImageFromPath("src/main/resources/resources/punchboard/cerchio2.png");
+                return Paths.getImageFromPath("/punchboard/cerchio2.png");
             }
             case "ActionMarkerProductionBlue" : {
-                return Paths.getImageFromPath("src/main/resources/resources/punchboard/cerchio1.png");
+                return Paths.getImageFromPath("/punchboard/cerchio1.png");
             }
             case "ActionMarkerProductionViolet" : {
-                return Paths.getImageFromPath("src/main/resources/resources/punchboard/cerchio3.png");
+                return Paths.getImageFromPath("/punchboard/cerchio3.png");
             }
             case "ActionMarkerForCrossOnce" : {
-                return Paths.getImageFromPath("src/main/resources/resources/punchboard/cerchio7.png");
+                return Paths.getImageFromPath("/punchboard/cerchio7.png");
             }
             case "ActionMarkerForCrossDouble" : {
-                return Paths.getImageFromPath("src/main/resources/resources/punchboard/cerchio6.png");
+                return Paths.getImageFromPath("/punchboard/cerchio6.png");
             }
         }
-        return Paths.getImageFromPath("src/main/resources/resources/punchboard/cerchio4.png");
+        return Paths.getImageFromPath("/punchboard/cerchio4.png");
     }
 }

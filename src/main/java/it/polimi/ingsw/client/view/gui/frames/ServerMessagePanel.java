@@ -42,7 +42,7 @@ public class ServerMessagePanel extends JPanel {
         this.add(lineBox);
         this.lineBox.setBackground(new Color(232,228,212));
 
-        this.backgroundImage = (Paths.getImageFromPath("src/main/resources/resources/board/pergamena.png")).getScaledInstance(messageWidth,messageHeight,0);
+        this.backgroundImage = (Paths.getImageFromPath("/board/pergamena.png")).getScaledInstance(messageWidth,messageHeight,0);
 
         this.setLayout(null);
 

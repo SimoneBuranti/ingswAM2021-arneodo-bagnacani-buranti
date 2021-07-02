@@ -87,7 +87,7 @@ public class ActionMarkerPanel extends JPanel {
     public void initBackIcon(){
 
         this.backIcon = new ImageIcon();
-        this.backIcon.setImage((Paths.getImageFromPath("src/main/resources/resources/punchboard/retro cerchi.png")).getScaledInstance(markerDimension,markerDimension,0));
+        this.backIcon.setImage((Paths.getImageFromPath("/punchboard/retro cerchi.png")).getScaledInstance(markerDimension,markerDimension,0));
 
     }
 
@@ -110,7 +110,7 @@ public class ActionMarkerPanel extends JPanel {
     }
 
     public void removeActionMarketDeck(){
-        this.backIcon.setImage((Paths.getImageFromPath("src/main/resources/resources/punchboard/EmptyMarker.png").getScaledInstance(markerDimension,markerDimension,0)));
+        this.backIcon.setImage((Paths.getImageFromPath("/punchboard/EmptyMarker.png").getScaledInstance(markerDimension,markerDimension,0)));
     }
 
     /**
